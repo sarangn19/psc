@@ -1,0 +1,280 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  ADMIN
+}
+
+enum NodeLevel {
+  EXAM
+  SUBJECT
+  DOMAIN
+  TOPIC
+  CONCEPT
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum ActivityType {
+  LOGIN
+  EXAM_SELECTED
+  CHAPTER_MARKED
+  QUESTION_ANSWERED
+  ADAPTIVE_SESSION_STARTED
+  ADAPTIVE_SESSION_ENDED
+  QUESTION_FLAGGED
+  NEWS_VIEWED
+}
+
+model User {
+  id            String   @id @default(cuid())
+  name          String
+  email         String   @unique
+  password      String
+  role          Role     @default(STUDENT)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  selectedExams     UserExam[]
+  learnedChapters   UserChapter[]
+  attempts          QuestionAttempt[]
+  adaptiveSessions  AdaptiveSession[]
+  activities        UserActivity[]
+  questionReports   QuestionReport[]
+  newsViews         NewsView[]
+
+  @@map("users")
+}
+
+model Exam {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  category    String
+  createdAt   DateTime @default(now())
+
+  subjects    Subject[]
+  userExams   UserExam[]
+
+  @@map("exams")
+}
+
+model Subject {
+  id       String @id @default(cuid())
+  name     String
+  examId   String
+  order    Int    @default(0)
+
+  exam     Exam      @relation(fields: [examId], references: [id])
+  chapters Chapter[]
+
+  @@unique([name, examId])
+  @@map("subjects")
+}
+
+model Chapter {
+  id        String @id @default(cuid())
+  name      String
+  subjectId String
+  order     Int    @default(0)
+
+  subject         Subject       @relation(fields: [subjectId], references: [id])
+  questions       Question[]
+  userChapters    UserChapter[]
+
+  @@unique([name, subjectId])
+  @@map("chapters")
+}
+
+model Question {
+  id             String        @id @default(cuid())
+  chapterId      String
+  conceptId      Int?
+  text           String
+  options        Json
+  correctOption  Int
+  explanation    String?
+  difficulty     Difficulty    @default(MEDIUM)
+  tags           String[]
+  isActive       Boolean       @default(true)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  chapter         Chapter           @relation(fields: [chapterId], references: [id])
+  concept         TaxonomyNode?     @relation(fields: [conceptId], references: [id])
+  attempts        QuestionAttempt[]
+  reports         QuestionReport[]
+  adaptiveItems   AdaptiveItem[]
+
+  @@index([conceptId])
+  @@map("questions")
+}
+
+model UserExam {
+  id        String   @id @default(cuid())
+  userId    String
+  examId    String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+  exam Exam @relation(fields: [examId], references: [id])
+
+  @@unique([userId, examId])
+  @@map("user_exams")
+}
+
+model UserChapter {
+  id          String   @id @default(cuid())
+  userId      String
+  chapterId   String
+  isLearned   Boolean  @default(true)
+  learnedAt   DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id])
+  chapter Chapter @relation(fields: [chapterId], references: [id])
+
+  @@unique([userId, chapterId])
+  @@map("user_chapters")
+}
+
+model QuestionAttempt {
+  id              String   @id @default(cuid())
+  userId          String
+  questionId      String
+  selectedOption  Int
+  isCorrect       Boolean
+  timeTaken       Int      @default(0)
+  sessionId       String?
+  createdAt       DateTime @default(now())
+
+  user     User            @relation(fields: [userId], references: [id])
+  question Question        @relation(fields: [questionId], references: [id])
+  session  AdaptiveSession? @relation(fields: [sessionId], references: [id])
+
+  @@map("question_attempts")
+}
+
+model AdaptiveSession {
+  id             String    @id @default(cuid())
+  userId         String
+  examId         String?
+  focusConceptId Int?
+  startedAt      DateTime  @default(now())
+  endedAt        DateTime?
+  totalQ         Int       @default(0)
+  correctQ       Int       @default(0)
+  score          Float     @default(0)
+
+  user      User              @relation(fields: [userId], references: [id])
+  attempts  QuestionAttempt[]
+  items     AdaptiveItem[]
+
+  @@index([focusConceptId])
+  @@map("adaptive_sessions")
+}
+
+model AdaptiveItem {
+  id         String @id @default(cuid())
+  sessionId  String
+  questionId String
+  order      Int
+
+  session  AdaptiveSession @relation(fields: [sessionId], references: [id])
+  question Question        @relation(fields: [questionId], references: [id])
+
+  @@map("adaptive_items")
+}
+
+model UserActivity {
+  id          String       @id @default(cuid())
+  userId      String
+  type        ActivityType
+  metadata    Json?
+  createdAt   DateTime     @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("user_activities")
+}
+
+model QuestionReport {
+  id          String   @id @default(cuid())
+  userId      String
+  questionId  String
+  reason      String
+  details     String?
+  isResolved  Boolean  @default(false)
+  resolvedAt  DateTime?
+  createdAt   DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id])
+  question Question @relation(fields: [questionId], references: [id])
+
+  @@map("question_reports")
+}
+
+model NewsItem {
+  id          String   @id @default(cuid())
+  title       String
+  content     String
+  category    String   @default("Current Affairs")
+  source      String?
+  publishedAt DateTime @default(now())
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  views NewsView[]
+
+  @@map("news_items")
+}
+
+model NewsView {
+  id         String   @id @default(cuid())
+  userId     String
+  newsItemId String
+  viewedAt   DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id])
+  newsItem NewsItem @relation(fields: [newsItemId], references: [id])
+
+  @@unique([userId, newsItemId])
+  @@map("news_views")
+}
+
+model TaxonomyNode {
+  id           Int       @id
+  parentId     Int?
+  level        NodeLevel
+  nameEnglish  String
+  nameMalayalam String?
+  nameHindi    String?
+  description  String?
+  aliases      String[]
+  slug         String    @unique
+  status       String    @default("draft")
+  importance   String    @default("medium")
+  difficulty   String    @default("beginner")
+  tags         String[]
+  metadata     Json?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  parent      TaxonomyNode?    @relation("NodeTree", fields: [parentId], references: [id])
+  children    TaxonomyNode[]   @relation("NodeTree")
+  questions   Question[]
+
+  @@index([parentId])
+  @@index([level])
+  @@map("taxonomy_nodes")
+}

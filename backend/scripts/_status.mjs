@@ -1,0 +1,12 @@
+import { PrismaClient } from '@prisma/client';
+const p = new PrismaClient();
+const subjects = (await p.taxonomyNode.findMany({ where: { level: 'SUBJECT' }, select: { id: true } })).map((x) => x.id);
+const total = await p.question.count();
+const subj = await p.question.count({ where: { conceptId: { in: subjects } } });
+const withAlias = await p.taxonomyNode.count({ where: { aliases: { isEmpty: false } } });
+const aliasesTotal = await p.taxonomyNode.aggregate({ _count: { _all: true } });
+const known = (await p.question.findMany({ where: { conceptId: { notIn: subjects } }, select: { id: true } })).length;
+console.log('total', total, '| subject-level', subj, '| specific', known, '| nodes-with-aliases', withAlias);
+const c614 = await p.question.count({ where: { conceptId: 614 } });
+console.log('concept614 exact', c614);
+await p.$disconnect();

@@ -1,0 +1,40 @@
+# dependencies
+node_modules/
+
+# builds
+backend/dist/
+frontend/dist/
+
+# env / secrets
+backend/.env
+.env
+
+# gems/gen files
+backend/scripts/_generated_proposals.jsonl
+backend/scripts/_generated_applied.jsonl
+backend/scripts/_gen_*.log
+backend/scripts/_gen_*.err
+backend/scripts/_*.jsonl
+backend/scripts/_locked_proposals.archive.jsonl
+backend/scripts/TEST.pid
+
+# working artifacts / logs
+backend/server.stdout.log
+backend/server.stderr.log
+backend/server.err
+backend/server.log
+backend/backend.log
+backend/_gen_err.txt
+backend/_gen_out.txt
+frontend/vite.stdout.log
+frontend/frontend.log
+frontend/dist/
+
+# docs / large files
+CONVERSATION_SUMMARY.md
+all_questions_answers.pdf
+
+# os / editor
+Desktop.ini
+Thumbs.db
+node_modules/.cache
