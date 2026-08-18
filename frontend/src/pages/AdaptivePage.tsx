@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { Brain, ChevronLeft, ChevronRight, Flag, CheckCircle, XCircle, History, X, Loader2 } from 'lucide-react';
+import { Brain, ChevronLeft, ChevronRight, Flag, CheckCircle, XCircle, History, X, Loader2, Zap } from 'lucide-react';
 import api from '../lib/api';
 
 interface ConceptInfo {
@@ -61,6 +61,7 @@ export default function AdaptivePage() {
   const [selected, setSelected] = useState<number | null>(null);
   const [result, setResult] = useState<{ isCorrect: boolean; correctOption: number; explanation?: string } | null>(null);
   const [loading, setLoading] = useState(false);
+  const [loadingNext, setLoadingNext] = useState(false);
   const [done, setDone] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const [history, setHistory] = useState<HistoryItem[]>([]);
@@ -81,14 +82,19 @@ export default function AdaptivePage() {
   const fetchNext = async (sid: string) => {
     setSelected(null);
     setResult(null);
+    setLoadingNext(true);
     setStartTime(Date.now());
-    const { data } = await api.get(`/adaptive/session/${sid}/next`);
-    if (data.done) {
-      setDone(true);
-    } else {
-      setQuestion(data.question);
-      setQuestionNumber(data.questionNumber);
-      setConcept(data.concept || null);
+    try {
+      const { data } = await api.get(`/adaptive/session/${sid}/next`);
+      if (data.done) {
+        setDone(true);
+      } else {
+        setQuestion(data.question);
+        setQuestionNumber(data.questionNumber);
+        setConcept(data.concept || null);
+      }
+    } finally {
+      setLoadingNext(false);
     }
   };
 
@@ -186,8 +192,19 @@ export default function AdaptivePage() {
   if (!question) {
     return (
       <div className="p-4 max-w-lg mx-auto flex flex-col items-center justify-center min-h-[60vh] text-center">
-        <Loader2 size={36} className="animate-spin text-green-600 mx-auto" />
-        <p className="text-gray-500 mt-3 text-sm">Loading your next question…</p>
+        <div className="relative mb-6">
+          <div className="w-20 h-20 rounded-full bg-green-50 flex items-center justify-center">
+            <Brain size={36} className="text-green-600" />
+          </div>
+          <Loader2 size={20} className="animate-spin text-green-600 absolute -bottom-1 -right-1" />
+        </div>
+        <h3 className="text-lg font-semibold text-gray-800 mb-2">Finding your next question</h3>
+        <p className="text-gray-500 text-sm">Analyzing your performance to pick the best question...</p>
+        <div className="flex gap-1 mt-4">
+          <span className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+          <span className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+          <span className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+        </div>
       </div>
     );
   }
@@ -220,7 +237,13 @@ export default function AdaptivePage() {
       {question && (
         <>
           {/* Question Card */}
-          <div className="card">
+          <div className="card relative">
+            {loadingNext && (
+              <div className="absolute inset-0 bg-white/80 rounded-xl z-10 flex flex-col items-center justify-center gap-2">
+                <Loader2 size={24} className="animate-spin text-green-600" />
+                <p className="text-sm text-gray-500">Fetching next question...</p>
+              </div>
+            )}
             <div className="flex items-center gap-2 mb-3">
               <span className="text-xs text-gray-400 truncate">
                 {concept && concept.path.length > 0
@@ -250,8 +273,8 @@ export default function AdaptivePage() {
                 <button
                   key={idx}
                   onClick={() => handleAnswer(idx)}
-                  disabled={!!result}
-                  className={`w-full text-left p-4 rounded-xl border-2 transition-all font-medium ${style}`}
+                  disabled={!!result || loadingNext}
+                  className={`w-full text-left p-4 rounded-xl border-2 transition-all font-medium ${style} ${loadingNext ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                   <span className="font-bold mr-2 text-sm">{['A', 'B', 'C', 'D'][idx]}.</span>
                   {option}
@@ -286,8 +309,21 @@ export default function AdaptivePage() {
               <Flag size={14} /> Report
             </button>
             {result && (
-              <button onClick={handleNext} className="btn-primary flex-1 flex items-center justify-center gap-2">
-                Next <ChevronRight size={16} />
+              <button
+                onClick={handleNext}
+                disabled={loadingNext}
+                className="btn-primary flex-1 flex items-center justify-center gap-2"
+              >
+                {loadingNext ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" />
+                    Loading...
+                  </>
+                ) : (
+                  <>
+                    Next <ChevronRight size={16} />
+                  </>
+                )}
               </button>
             )}
           </div>
