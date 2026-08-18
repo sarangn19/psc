@@ -85,8 +85,6 @@ export default function AdaptivePage() {
   const [sessionScore, setSessionScore] = useState(0);
   const [startTime, setStartTime] = useState(Date.now());
   const [factIndex, setFactIndex] = useState(() => Math.floor(Math.random() * LOADING_FACTS.length));
-  const prefetchedRef = useRef<{ question: Question; concept: ConceptInfo | null; questionNumber: number } | null>(null);
-  const prefetchingRef = useRef(false);
 
   useEffect(() => {
     if (!loadingNext && !loading) return;
@@ -95,9 +93,6 @@ export default function AdaptivePage() {
     }, 4000);
     return () => clearInterval(interval);
   }, [loadingNext, loading]);
-
-  const prefetchedRef = useRef<{ question: Question; concept: ConceptInfo | null; questionNumber: number } | null>(null);
-  const prefetchingRef = useRef(false);
 
   const prefetchNext = async (sid: string, currentSeenIds?: string[]) => {
     if (prefetchingRef.current) return;
@@ -135,16 +130,6 @@ export default function AdaptivePage() {
     setLoadingNext(true);
     setStartTime(Date.now());
     try {
-      // Use prefetched question if available
-      if (prefetchedRef.current) {
-        const prefetched = prefetchedRef.current;
-        prefetchedRef.current = null;
-        setQuestion(prefetched.question);
-        setQuestionNumber(prefetched.questionNumber);
-        setConcept(prefetched.concept);
-        setLoadingNext(false);
-        return;
-      }
       const { data } = await api.get(`/adaptive/session/${sid}/next`);
       if (data.done) {
         setDone(true);
@@ -169,8 +154,6 @@ export default function AdaptivePage() {
     });
     setResult(data);
     setSessionScore(data.isCorrect ? sessionScore + 1 : sessionScore);
-    // Start prefetching next question in background while user reads explanation
-    prefetchNext(sessionId);
   };
 
   const handleNext = () => {
