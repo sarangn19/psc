@@ -1,14 +1,13 @@
-import { Outlet, NavLink, useNavigate } from 'react-router-dom';
-import { Home, Brain, BookOpen, Newspaper, BarChart2, Target, LogOut } from 'lucide-react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { BookOpen, Newspaper, BarChart2, Target, LogOut, Home } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 
-const navItems = [
+const quickLinks = [
   { to: '/', icon: Home, label: 'Home' },
-  { to: '/adaptive', icon: Brain, label: 'Adaptive' },
-  { to: '/learning', icon: Target, label: 'Learn' },
   { to: '/chapters', icon: BookOpen, label: 'Chapters' },
+  { to: '/learning', icon: Target, label: 'Learn' },
   { to: '/news', icon: Newspaper, label: 'News' },
-  { to: '/performance', icon: BarChart2, label: 'Performance' },
+  { to: '/performance', icon: BarChart2, label: 'Stats' },
 ];
 
 export default function Layout() {
@@ -21,21 +20,32 @@ export default function Layout() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gray-50">
       {/* Header */}
-      <header className="bg-green-700 text-white px-4 py-3 flex items-center justify-between shadow-md">
-        <div className="flex items-center gap-2">
-          <span className="text-2xl">🏛️</span>
-          <div>
-            <h1 className="font-bold text-lg leading-none">Kerala PSC Prep</h1>
-            <p className="text-green-200 text-xs">Smart Study Platform</p>
+      <header className="bg-green-700 text-white px-3 py-2 shadow-md">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-xl">🏛️</span>
+            <h1 className="font-bold text-base leading-none">Kerala PSC Prep</h1>
           </div>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="text-sm text-green-100 hidden sm:block">{user?.name}</span>
-          <button onClick={handleLogout} className="p-1.5 rounded-lg hover:bg-green-600 transition-colors">
-            <LogOut size={18} />
-          </button>
+
+          {/* Quick nav icons */}
+          <div className="flex items-center gap-1">
+            {quickLinks.map(({ to, icon: Icon, label }) => (
+              <button
+                key={to}
+                onClick={() => navigate(to)}
+                title={label}
+                className="p-2 rounded-lg hover:bg-green-600 transition-colors text-green-100 hover:text-white"
+              >
+                <Icon size={18} />
+              </button>
+            ))}
+            <div className="w-px h-5 bg-green-500 mx-1" />
+            <button onClick={handleLogout} className="p-2 rounded-lg hover:bg-green-600 transition-colors text-green-100 hover:text-white" title="Logout">
+              <LogOut size={18} />
+            </button>
+          </div>
         </div>
       </header>
 
@@ -43,25 +53,6 @@ export default function Layout() {
       <main className="flex-1 overflow-auto">
         <Outlet />
       </main>
-
-      {/* Bottom nav */}
-      <nav className="bg-white border-t border-gray-200 px-2 py-1 flex justify-around sticky bottom-0 z-50">
-        {navItems.map(({ to, icon: Icon, label }) => (
-          <NavLink
-            key={to}
-            to={to}
-            end={to === '/'}
-            className={({ isActive }) =>
-              `flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-lg transition-colors ${
-                isActive ? 'text-green-600' : 'text-gray-500 hover:text-green-600'
-              }`
-            }
-          >
-            <Icon size={20} />
-            <span className="text-xs font-medium">{label}</span>
-          </NavLink>
-        ))}
-      </nav>
     </div>
   );
 }
