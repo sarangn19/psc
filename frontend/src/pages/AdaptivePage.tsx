@@ -102,7 +102,7 @@ export default function AdaptivePage() {
       timeTaken,
     });
     setResult(data);
-    setSessionScore(data.attempt ? (data.isCorrect ? sessionScore + 1 : sessionScore) : sessionScore);
+    setSessionScore(data.isCorrect ? sessionScore + 1 : sessionScore);
   };
 
   const handleNext = () => {

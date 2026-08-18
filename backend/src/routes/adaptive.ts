@@ -118,40 +118,42 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
   const userId = req.user!.id;
   const { sessionId } = req.params;
 
-  // Single raw SQL query: fetches session + seen items + learned chapters + attempt stats
-  // in ONE round-trip instead of 4 sequential Prisma queries
-  const rows: any[] = await prisma.$queryRaw`
-    SELECT
-      s.id AS "sessionId", s."focusConceptId", s."userId",
-      (SELECT json_agg(json_build_object('questionId', ai."questionId", 'text', q.text))
-        FROM adaptive_items ai JOIN questions q ON q.id = ai."questionId"
-        WHERE ai."sessionId" = ${sessionId}) AS "seenItems",
-      (SELECT json_agg(uc."chapterId")
-        FROM user_chapters uc WHERE uc."userId" = ${userId} AND uc."isLearned" = true) AS "learnedChapters",
-      (SELECT json_agg(json_build_object('questionId', qa."questionId", 'isCorrect', qa."isCorrect", 'conceptId', qq."conceptId", 'chapterId', qq."chapterId"))
-        FROM question_attempts qa JOIN questions qq ON qq.id = qa."questionId"
-        WHERE qa."userId" = ${userId}) AS "allAttempts"
-    FROM adaptive_sessions s WHERE s.id = ${sessionId} AND s."userId" = ${userId}
-  `;
-  if (!rows.length) return res.status(404).json({ message: 'Session not found' });
-  const row = rows[0];
+  // Phase 1: all independent reads in parallel
+  const [session, seenItems, learnedChapters, allAttempts] = await Promise.all([
+    prisma.adaptiveSession.findUnique({ where: { id: sessionId } }),
+    prisma.adaptiveItem.findMany({
+      where: { sessionId },
+      select: { questionId: true, question: { select: { text: true } } },
+    }),
+    prisma.userChapter.findMany({ where: { userId, isLearned: true }, select: { chapterId: true } }),
+    prisma.questionAttempt.findMany({
+      where: { userId },
+      select: {
+        questionId: true,
+        isCorrect: true,
+        question: { select: { conceptId: true, chapterId: true } },
+      },
+    }),
+  ]);
 
-  const seenIds = new Set<string>((row.seenItems || []).map((i: any) => i.questionId));
-  const seenTexts = new Set<string>((row.seenItems || []).map((i: any) => i.text));
+  if (!session || session.userId !== userId) return res.status(404).json({ message: 'Session not found' });
 
-  let chapterIds: string[] = (row.learnedChapters || []) as string[];
+  const seenIds = new Set(seenItems.map((si) => si.questionId));
+  const seenTexts = new Set(seenItems.map((si) => si.question.text));
+
+  let chapterIds = learnedChapters.map((lc) => lc.chapterId);
   if (chapterIds.length === 0) {
     const caChapter = await prisma.chapter.findFirst({ where: { name: 'Monthly Current Affairs' } });
     if (caChapter) chapterIds = [caChapter.id];
   }
 
-  // Fetch candidates (1 query)
-  const isFocused = row.focusConceptId !== null && row.focusConceptId !== undefined;
+  // Phase 2: fetch candidates
+  const isFocused = session.focusConceptId !== null && session.focusConceptId !== undefined;
   const [rawCandidates, rawAdjacent] = await Promise.all([
     isFocused
-      ? fetchCandidates({ conceptId: row.focusConceptId, isActive: true, id: { notIn: [...seenIds] } })
+      ? fetchCandidates({ conceptId: session.focusConceptId, isActive: true, id: { notIn: [...seenIds] } })
       : fetchCandidates({ chapterId: { in: chapterIds }, isActive: true, id: { notIn: [...seenIds] } }),
-    isFocused ? findAdjacentQuestions([row.focusConceptId], seenIds) : Promise.resolve([]),
+    isFocused ? findAdjacentQuestions([session.focusConceptId!], seenIds) : Promise.resolve([]),
   ]);
 
   let candidates: RichQuestion[];
@@ -171,11 +173,10 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     return res.json({ done: true, message: doneMessage });
   }
 
-  // Build stats from attempt data (already fetched in the raw SQL above)
-  const allAttempts = row.allAttempts || [];
+  // Build stats from attempts (already fetched in phase 1)
   const stats = new Map<string, { total: number; correct: number }>();
   for (const a of allAttempts) {
-    const key = a.conceptId !== null ? `concept:${a.conceptId}` : `chapter:${a.chapterId}`;
+    const key = a.question.conceptId !== null ? `concept:${a.question.conceptId}` : `chapter:${a.question.chapterId}`;
     const s = stats.get(key) || { total: 0, correct: 0 };
     s.total++;
     if (a.isCorrect) s.correct++;
@@ -277,8 +278,8 @@ if (!chosen) {
   return res.json({ done: true, message: 'All questions in learned chapters completed!' });
 }
 
-  // Track this question in session (use seenItems count from raw SQL)
-  const order = (row.seenItems || []).length + 1;
+  // Track this question in session
+  const order = seenItems.length + 1;
   await prisma.adaptiveItem.create({
     data: { sessionId, questionId: chosen.id, order },
   });
@@ -317,35 +318,33 @@ router.post('/session/:sessionId/answer', authenticate, async (req: AuthRequest,
 
   const isCorrect = selectedOption === question.correctOption;
 
-  const attempt = await prisma.questionAttempt.create({
-    data: { userId, questionId, selectedOption, isCorrect, timeTaken: timeTaken || 0, sessionId },
-  });
-
-  const session = await prisma.adaptiveSession.findUnique({ where: { id: sessionId } });
-  if (session) {
-    await prisma.adaptiveSession.update({
+  // Parallel writes: attempt + session update (fire-and-forget activity log)
+  const [, session] = await Promise.all([
+    prisma.questionAttempt.create({
+      data: { userId, questionId, selectedOption, isCorrect, timeTaken: timeTaken || 0, sessionId },
+    }),
+    prisma.adaptiveSession.update({
       where: { id: sessionId },
       data: {
-        totalQ: session.totalQ + 1,
-        correctQ: session.correctQ + (isCorrect ? 1 : 0),
-        score: ((session.correctQ + (isCorrect ? 1 : 0)) / (session.totalQ + 1)) * 100,
+        totalQ: { increment: 1 },
+        correctQ: isCorrect ? { increment: 1 } : undefined,
       },
-    });
-  }
+    }),
+  ]);
 
-  await prisma.userActivity.create({
+  // Fire-and-forget: log activity (don't block the response)
+  prisma.userActivity.create({
     data: {
       userId,
       type: 'QUESTION_ANSWERED',
       metadata: { questionId, isCorrect, selectedOption, timeTaken },
     },
-  });
+  }).catch(() => {});
 
   return res.json({
     isCorrect,
     correctOption: question.correctOption,
     explanation: question.explanation,
-    attempt,
   });
 });
 
