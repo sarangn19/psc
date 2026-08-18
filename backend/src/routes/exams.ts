@@ -84,6 +84,24 @@ router.post('/chapters/mark', authenticate, async (req: AuthRequest, res: Respon
   return res.json({ message: 'Chapter status updated' });
 });
 
+// Batch mark chapters as learned
+router.post('/chapters/mark-batch', authenticate, async (req: AuthRequest, res: Response) => {
+  const { chapterIds, isLearned } = req.body;
+  if (!Array.isArray(chapterIds)) return res.status(400).json({ message: 'chapterIds must be an array' });
+
+  const userId = req.user!.id;
+
+  const data = chapterIds.map((chapterId: string) => ({
+    userId,
+    chapterId,
+    isLearned: isLearned !== false,
+  }));
+
+  await prisma.userChapter.createMany({ data, skipDuplicates: true });
+
+  return res.json({ message: `${chapterIds.length} chapters marked` });
+});
+
 // Get user's learned chapters
 router.get('/chapters/learned', authenticate, async (req: AuthRequest, res: Response) => {
   const chapters = await prisma.userChapter.findMany({

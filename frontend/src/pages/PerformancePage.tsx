@@ -50,7 +50,7 @@ export default function PerformancePage() {
 
   const sessionChartData = sessions.slice(0, 10).reverse().map((s, i) => ({
     name: `S${i + 1}`,
-    score: Math.round(s.score),
+    score: s.totalQ > 0 ? Math.round((s.correctQ / s.totalQ) * 100) : 0,
     questions: s.totalQ,
   }));
 

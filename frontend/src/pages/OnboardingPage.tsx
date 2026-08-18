@@ -38,8 +38,8 @@ export default function OnboardingPage() {
     setLoading(true);
     try {
       await api.post('/exams/select', { examIds: selectedExams });
-      for (const chapterId of selectedChapters) {
-        await api.post('/exams/chapters/mark', { chapterId, isLearned: true });
+      if (selectedChapters.length > 0) {
+        await api.post('/exams/chapters/mark-batch', { chapterIds: selectedChapters, isLearned: true });
       }
       await fetchMe();
       navigate('/');
