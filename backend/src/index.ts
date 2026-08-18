@@ -31,9 +31,10 @@ app.use('/api/taxonomy', taxonomyRoutes);
 
 app.get('/api/health', (_req, res) => res.json({ status: 'OK', time: new Date() }));
 
-app.listen(PORT, async () => {
+app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
-  await warmTaxonomyCache();
+  // Pre-warm taxonomy cache so first /next request is fast
+  warmTaxonomyCache().catch((e) => console.error('Taxonomy cache warm failed:', e));
 });
 
 export default app;

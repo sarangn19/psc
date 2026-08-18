@@ -133,6 +133,8 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
         isCorrect: true,
         question: { select: { conceptId: true, chapterId: true } },
       },
+      orderBy: { createdAt: 'desc' },
+      take: 500,
     }),
   ]);
 
