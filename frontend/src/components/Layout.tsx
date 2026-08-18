@@ -45,7 +45,7 @@ export default function Layout() {
       </main>
 
       {/* Bottom nav */}
-      <nav className="bg-white border-t border-gray-200 px-2 py-1 flex justify-around">
+      <nav className="bg-white border-t border-gray-200 px-2 py-1 flex justify-around sticky bottom-0 z-50">
         {navItems.map(({ to, icon: Icon, label }) => (
           <NavLink
             key={to}
