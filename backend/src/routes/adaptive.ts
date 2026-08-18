@@ -3,6 +3,7 @@ import prisma from '../lib/prisma';
 import { normalizeOptions } from '../lib/options';
 import { authenticate, AuthRequest } from '../middleware/auth';
 import { Difficulty, NodeLevel, Prisma } from '@prisma/client';
+import { getCachedNodePath, getCachedNodePaths, warmTaxonomyCache } from '../lib/taxonomyCache';
 
 const router = Router();
 
@@ -48,29 +49,9 @@ interface ConceptInfo {
   zone: string;
 }
 
-// Resolve ancestor path: concept -> topic -> domain -> subject -> exam
+// Resolve ancestor path — uses in-memory cache (no DB queries)
 async function getNodePath(conceptId: number): Promise<{ level: string; name: string }[]> {
-  // Collect ancestor IDs by walking up (lightweight: only fetch parentId)
-  const ids: number[] = [];
-  let cur = await prisma.taxonomyNode.findUnique({ where: { id: conceptId }, select: { parentId: true } });
-  while (cur && cur.parentId !== null) {
-    ids.push(cur.parentId);
-    cur = await prisma.taxonomyNode.findUnique({ where: { id: cur.parentId }, select: { parentId: true } });
-  }
-  // Batch fetch all ancestors in one query
-  const nodes = await prisma.taxonomyNode.findMany({
-    where: { id: { in: [conceptId, ...ids] } },
-    select: { id: true, level: true, nameEnglish: true, parentId: true },
-  });
-  const nodeMap = new Map(nodes.map((n) => [n.id, n]));
-  const path: { level: string; name: string }[] = [];
-  let node = nodeMap.get(conceptId);
-  while (node) {
-    path.unshift({ level: node.level, name: node.nameEnglish });
-    if (node.parentId === null) break;
-    node = nodeMap.get(node.parentId);
-  }
-  return path;
+  return getCachedNodePath(conceptId);
 }
 
 async function buildConceptInfo(
@@ -137,81 +118,64 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
   const userId = req.user!.id;
   const { sessionId } = req.params;
 
-  const session = await prisma.adaptiveSession.findUnique({ where: { id: sessionId } });
-  if (!session || session.userId !== userId) return res.status(404).json({ message: 'Session not found' });
+  // Single raw SQL query: fetches session + seen items + learned chapters + attempt stats
+  // in ONE round-trip instead of 4 sequential Prisma queries
+  const rows: any[] = await prisma.$queryRaw`
+    SELECT
+      s.id AS "sessionId", s."focusConceptId", s."userId",
+      (SELECT json_agg(json_build_object('questionId', ai."questionId", 'text', q.text))
+        FROM adaptive_items ai JOIN questions q ON q.id = ai."questionId"
+        WHERE ai."sessionId" = ${sessionId}) AS "seenItems",
+      (SELECT json_agg(uc."chapterId")
+        FROM user_chapters uc WHERE uc."userId" = ${userId} AND uc."isLearned" = true) AS "learnedChapters",
+      (SELECT json_agg(json_build_object('questionId', qa."questionId", 'isCorrect', qa."isCorrect", 'conceptId', qq."conceptId", 'chapterId', qq."chapterId"))
+        FROM question_attempts qa JOIN questions qq ON qq.id = qa."questionId"
+        WHERE qa."userId" = ${userId}) AS "allAttempts"
+    FROM adaptive_sessions s WHERE s.id = ${sessionId} AND s."userId" = ${userId}
+  `;
+  if (!rows.length) return res.status(404).json({ message: 'Session not found' });
+  const row = rows[0];
 
-  // Questions already seen in this session
-  const seenItems = await prisma.adaptiveItem.findMany({
-    where: { sessionId },
-    select: { questionId: true },
-  });
-  const seenIds = new Set(seenItems.map((si) => si.questionId));
+  const seenIds = new Set<string>((row.seenItems || []).map((i: any) => i.questionId));
+  const seenTexts = new Set<string>((row.seenItems || []).map((i: any) => i.text));
 
-  // Deduplicate by text: per-exam chapter copies of the same question must not
-  // repeat within a session, so the user advances to the next concept instead.
-  const servedQuestions = await prisma.question.findMany({
-    where: { id: { in: [...seenIds] } },
-    select: { text: true },
-  });
-  const seenTexts = new Set(servedQuestions.map((q) => q.text));
+  let chapterIds: string[] = (row.learnedChapters || []) as string[];
+  if (chapterIds.length === 0) {
+    const caChapter = await prisma.chapter.findFirst({ where: { name: 'Monthly Current Affairs' } });
+    if (caChapter) chapterIds = [caChapter.id];
+  }
+
+  // Fetch candidates (1 query)
+  const isFocused = row.focusConceptId !== null && row.focusConceptId !== undefined;
+  const [rawCandidates, rawAdjacent] = await Promise.all([
+    isFocused
+      ? fetchCandidates({ conceptId: row.focusConceptId, isActive: true, id: { notIn: [...seenIds] } })
+      : fetchCandidates({ chapterId: { in: chapterIds }, isActive: true, id: { notIn: [...seenIds] } }),
+    isFocused ? findAdjacentQuestions([row.focusConceptId], seenIds) : Promise.resolve([]),
+  ]);
 
   let candidates: RichQuestion[];
   let doneMessage = 'All questions in learned chapters completed!';
 
-  if (session.focusConceptId !== null && session.focusConceptId !== undefined) {
-    // Focused practice: serve exactly this concept; when exhausted, expand
-    // to sibling concepts sharing the same topic.
-    candidates = (await fetchCandidates({
-      conceptId: session.focusConceptId,
-      isActive: true,
-      id: { notIn: [...seenIds] },
-    })).filter((q) => !seenTexts.has(q.text));
+  if (isFocused) {
+    candidates = rawCandidates.filter((q) => !seenTexts.has(q.text));
     if (candidates.length === 0) {
-      candidates = (await findAdjacentQuestions([session.focusConceptId], seenIds)).filter((q) => !seenTexts.has(q.text));
+      candidates = rawAdjacent.filter((q) => !seenTexts.has(q.text));
     }
     doneMessage = 'Focused practice complete! You have covered this concept and its related topics.';
   } else {
-    // Learned chapters gate (fallback to Current Affairs when none selected)
-    const learnedChapters = await prisma.userChapter.findMany({
-      where: { userId, isLearned: true },
-      select: { chapterId: true },
-    });
-
-    let chapterIds = learnedChapters.map((lc) => lc.chapterId);
-    if (chapterIds.length === 0) {
-      const caChapter = await prisma.chapter.findFirst({ where: { name: 'Monthly Current Affairs' } });
-      if (caChapter) chapterIds = [caChapter.id];
-    }
-
-    candidates = (await fetchCandidates({
-      chapterId: { in: chapterIds },
-      isActive: true,
-      id: { notIn: [...seenIds] },
-    })).filter((q) => !seenTexts.has(q.text));
+    candidates = rawCandidates.filter((q) => !seenTexts.has(q.text));
   }
 
   if (candidates.length === 0) {
     return res.json({ done: true, message: doneMessage });
   }
 
-  // All user attempts (fast with @@index([userId]))
-  const allAttempts = await prisma.questionAttempt.findMany({
-    where: { userId },
-    select: { questionId: true, isCorrect: true },
-  });
-
-  const attemptedIds = [...new Set(allAttempts.map((a) => a.questionId))];
-  const attemptedQuestions = await prisma.question.findMany({
-    where: { id: { in: attemptedIds } },
-    select: { id: true, chapterId: true, conceptId: true },
-  });
-  const qMeta = new Map(attemptedQuestions.map((q) => [q.id, q]));
-
+  // Build stats from attempt data (already fetched in the raw SQL above)
+  const allAttempts = row.allAttempts || [];
   const stats = new Map<string, { total: number; correct: number }>();
   for (const a of allAttempts) {
-    const meta = qMeta.get(a.questionId);
-    if (!meta) continue;
-    const key = meta.conceptId !== null ? `concept:${meta.conceptId}` : `chapter:${meta.chapterId}`;
+    const key = a.conceptId !== null ? `concept:${a.conceptId}` : `chapter:${a.chapterId}`;
     const s = stats.get(key) || { total: 0, correct: 0 };
     s.total++;
     if (a.isCorrect) s.correct++;
@@ -313,10 +277,10 @@ if (!chosen) {
   return res.json({ done: true, message: 'All questions in learned chapters completed!' });
 }
 
-  // Track this question in session
-  const itemCount = await prisma.adaptiveItem.count({ where: { sessionId } });
+  // Track this question in session (use seenItems count from raw SQL)
+  const order = (row.seenItems || []).length + 1;
   await prisma.adaptiveItem.create({
-    data: { sessionId, questionId: chosen.id, order: itemCount + 1 },
+    data: { sessionId, questionId: chosen.id, order },
   });
 
   const statsKey = chosen.conceptId !== null ? `concept:${chosen.conceptId}` : `chapter:${chosen.chapterId}`;
@@ -338,7 +302,7 @@ if (!chosen) {
   return res.json({
     question: safe,
     concept,
-    questionNumber: itemCount + 1,
+    questionNumber: order,
   });
 });
 
@@ -497,37 +461,8 @@ router.get('/weak-concepts', authenticate, async (req: AuthRequest, res: Respons
   const nodes = await prisma.taxonomyNode.findMany({ where: { id: { in: conceptIds } } });
   const nodeMap = new Map(nodes.map((n) => [n.id, n]));
 
-  // Batch-fetch ALL ancestor nodes in one query instead of N parallel getNodePath calls
-  const allAncestorIds = new Set<number>();
-  const ancestorFetches = await Promise.all(
-    conceptIds.map(async (cid) => {
-      const ids: number[] = [];
-      let cur = await prisma.taxonomyNode.findUnique({ where: { id: cid }, select: { parentId: true } });
-      while (cur && cur.parentId !== null) {
-        ids.push(cur.parentId);
-        cur = await prisma.taxonomyNode.findUnique({ where: { id: cur.parentId }, select: { parentId: true } });
-      }
-      return ids;
-    })
-  );
-  for (const ids of ancestorFetches) for (const id of ids) allAncestorIds.add(id);
-
-  const ancestorNodes = await prisma.taxonomyNode.findMany({
-    where: { id: { in: [...allAncestorIds, ...conceptIds] } },
-    select: { id: true, level: true, nameEnglish: true, parentId: true },
-  });
-  const ancestorMap = new Map(ancestorNodes.map((n) => [n.id, n]));
-
-  function buildPath(conceptId: number): { level: string; name: string }[] {
-    const path: { level: string; name: string }[] = [];
-    let node = ancestorMap.get(conceptId);
-    while (node) {
-      path.unshift({ level: node.level, name: node.nameEnglish });
-      if (node.parentId === null) break;
-      node = ancestorMap.get(node.parentId);
-    }
-    return path;
-  }
+  // Resolve all paths from in-memory cache (no DB queries)
+  const pathMap = await getCachedNodePaths(conceptIds);
 
   const questionCounts = await prisma.question.groupBy({
     by: ['conceptId'],
@@ -546,7 +481,7 @@ router.get('/weak-concepts', authenticate, async (req: AuthRequest, res: Respons
       level: node.level,
       slug: node.slug,
       description: node.description,
-      path: buildPath(conceptId),
+      path: pathMap.get(conceptId) || [],
       notesUrl: `${TAXONOMY_APP_URL}/node/${node.slug}`,
       total: s.total,
       correct: s.correct,

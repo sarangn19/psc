@@ -9,6 +9,7 @@ import userRoutes from './routes/users';
 import adminRoutes from './routes/admin';
 import newsRoutes from './routes/news';
 import taxonomyRoutes from './routes/taxonomy';
+import { warmTaxonomyCache } from './lib/taxonomyCache';
 
 dotenv.config();
 
@@ -30,6 +31,9 @@ app.use('/api/taxonomy', taxonomyRoutes);
 
 app.get('/api/health', (_req, res) => res.json({ status: 'OK', time: new Date() }));
 
-app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+app.listen(PORT, async () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  await warmTaxonomyCache();
+});
 
 export default app;
