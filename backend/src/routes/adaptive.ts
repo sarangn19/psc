@@ -50,12 +50,25 @@ interface ConceptInfo {
 
 // Resolve ancestor path: concept -> topic -> domain -> subject -> exam
 async function getNodePath(conceptId: number): Promise<{ level: string; name: string }[]> {
+  // Collect ancestor IDs by walking up (lightweight: only fetch parentId)
+  const ids: number[] = [];
+  let cur = await prisma.taxonomyNode.findUnique({ where: { id: conceptId }, select: { parentId: true } });
+  while (cur && cur.parentId !== null) {
+    ids.push(cur.parentId);
+    cur = await prisma.taxonomyNode.findUnique({ where: { id: cur.parentId }, select: { parentId: true } });
+  }
+  // Batch fetch all ancestors in one query
+  const nodes = await prisma.taxonomyNode.findMany({
+    where: { id: { in: [conceptId, ...ids] } },
+    select: { id: true, level: true, nameEnglish: true, parentId: true },
+  });
+  const nodeMap = new Map(nodes.map((n) => [n.id, n]));
   const path: { level: string; name: string }[] = [];
-  let node = await prisma.taxonomyNode.findUnique({ where: { id: conceptId } });
+  let node = nodeMap.get(conceptId);
   while (node) {
     path.unshift({ level: node.level, name: node.nameEnglish });
     if (node.parentId === null) break;
-    node = await prisma.taxonomyNode.findUnique({ where: { id: node.parentId } });
+    node = nodeMap.get(node.parentId);
   }
   return path;
 }
@@ -181,7 +194,7 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     return res.json({ done: true, message: doneMessage });
   }
 
-  // All user attempts, aggregated to concept/chapter accuracy
+  // All user attempts (fast with @@index([userId]))
   const allAttempts = await prisma.questionAttempt.findMany({
     where: { userId },
     select: { questionId: true, isCorrect: true },
@@ -195,17 +208,14 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
   const qMeta = new Map(attemptedQuestions.map((q) => [q.id, q]));
 
   const stats = new Map<string, { total: number; correct: number }>();
-  const bump = (key: string, isCorrect: boolean) => {
-    const s = stats.get(key) || { total: 0, correct: 0 };
-    s.total++;
-    if (isCorrect) s.correct++;
-    stats.set(key, s);
-  };
   for (const a of allAttempts) {
     const meta = qMeta.get(a.questionId);
     if (!meta) continue;
     const key = meta.conceptId !== null ? `concept:${meta.conceptId}` : `chapter:${meta.chapterId}`;
-    bump(key, a.isCorrect);
+    const s = stats.get(key) || { total: 0, correct: 0 };
+    s.total++;
+    if (a.isCorrect) s.correct++;
+    stats.set(key, s);
   }
 
   interface RankedGroup {
@@ -458,6 +468,7 @@ interface WeakConcept {
 router.get('/weak-concepts', authenticate, async (req: AuthRequest, res: Response) => {
   const userId = req.user!.id;
 
+  // All user attempts (fast with @@index([userId]))
   const attempts = await prisma.questionAttempt.findMany({
     where: { userId },
     select: { questionId: true, isCorrect: true },
@@ -486,6 +497,38 @@ router.get('/weak-concepts', authenticate, async (req: AuthRequest, res: Respons
   const nodes = await prisma.taxonomyNode.findMany({ where: { id: { in: conceptIds } } });
   const nodeMap = new Map(nodes.map((n) => [n.id, n]));
 
+  // Batch-fetch ALL ancestor nodes in one query instead of N parallel getNodePath calls
+  const allAncestorIds = new Set<number>();
+  const ancestorFetches = await Promise.all(
+    conceptIds.map(async (cid) => {
+      const ids: number[] = [];
+      let cur = await prisma.taxonomyNode.findUnique({ where: { id: cid }, select: { parentId: true } });
+      while (cur && cur.parentId !== null) {
+        ids.push(cur.parentId);
+        cur = await prisma.taxonomyNode.findUnique({ where: { id: cur.parentId }, select: { parentId: true } });
+      }
+      return ids;
+    })
+  );
+  for (const ids of ancestorFetches) for (const id of ids) allAncestorIds.add(id);
+
+  const ancestorNodes = await prisma.taxonomyNode.findMany({
+    where: { id: { in: [...allAncestorIds, ...conceptIds] } },
+    select: { id: true, level: true, nameEnglish: true, parentId: true },
+  });
+  const ancestorMap = new Map(ancestorNodes.map((n) => [n.id, n]));
+
+  function buildPath(conceptId: number): { level: string; name: string }[] {
+    const path: { level: string; name: string }[] = [];
+    let node = ancestorMap.get(conceptId);
+    while (node) {
+      path.unshift({ level: node.level, name: node.nameEnglish });
+      if (node.parentId === null) break;
+      node = ancestorMap.get(node.parentId);
+    }
+    return path;
+  }
+
   const questionCounts = await prisma.question.groupBy({
     by: ['conceptId'],
     where: { conceptId: { in: conceptIds }, isActive: true },
@@ -493,28 +536,26 @@ router.get('/weak-concepts', authenticate, async (req: AuthRequest, res: Respons
   });
   const countMap = new Map(questionCounts.map((c) => [c.conceptId, c._count._all]));
 
-  const items = await Promise.all(
-    [...stats.entries()].map(async ([conceptId, s]) => {
-      const node = nodeMap.get(conceptId);
-      if (!node) return null;
-      const accuracy = s.correct / s.total;
-      return {
-        conceptId,
-        name: node.nameEnglish,
-        level: node.level,
-        slug: node.slug,
-        description: node.description,
-        path: await getNodePath(conceptId),
-        notesUrl: `${TAXONOMY_APP_URL}/node/${node.slug}`,
-        total: s.total,
-        correct: s.correct,
-        accuracy: Math.round(accuracy * 100),
-        zone: zoneFor(accuracy, s.total),
-        mastery: s.total >= MIN_ATTEMPTS_FOR_MASTERY && accuracy >= MASTERY_ACCURACY,
-        questionCount: countMap.get(conceptId) || 0,
-      };
-    })
-  );
+  const items = [...stats.entries()].map(([conceptId, s]) => {
+    const node = nodeMap.get(conceptId);
+    if (!node) return null;
+    const accuracy = s.correct / s.total;
+    return {
+      conceptId,
+      name: node.nameEnglish,
+      level: node.level,
+      slug: node.slug,
+      description: node.description,
+      path: buildPath(conceptId),
+      notesUrl: `${TAXONOMY_APP_URL}/node/${node.slug}`,
+      total: s.total,
+      correct: s.correct,
+      accuracy: Math.round(accuracy * 100),
+      zone: zoneFor(accuracy, s.total),
+      mastery: s.total >= MIN_ATTEMPTS_FOR_MASTERY && accuracy >= MASTERY_ACCURACY,
+      questionCount: countMap.get(conceptId) || 0,
+    };
+  });
 
   const cleaned = items.filter((i): i is WeakConcept => i !== null);
   cleaned.sort((a, b) => a.accuracy - b.accuracy || a.total - b.total);

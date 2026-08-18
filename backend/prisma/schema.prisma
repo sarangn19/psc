@@ -162,6 +162,8 @@ model QuestionAttempt {
   question Question        @relation(fields: [questionId], references: [id])
   session  AdaptiveSession? @relation(fields: [sessionId], references: [id])
 
+  @@index([userId])
+  @@index([sessionId])
   @@map("question_attempts")
 }
 
@@ -193,6 +195,7 @@ model AdaptiveItem {
   session  AdaptiveSession @relation(fields: [sessionId], references: [id])
   question Question        @relation(fields: [questionId], references: [id])
 
+  @@index([sessionId])
   @@map("adaptive_items")
 }
 
