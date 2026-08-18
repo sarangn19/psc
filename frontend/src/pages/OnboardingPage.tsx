@@ -52,6 +52,21 @@ export default function OnboardingPage() {
 
   const selectedExamData = exams.filter((e) => selectedExams.includes(e.id));
 
+  // Deduplicate subjects across selected exams — merge chapters by subject name
+  const mergedSubjects = selectedExamData.flatMap((exam) => exam.subjects).reduce((acc, subject) => {
+    const existing = acc.find((s) => s.name === subject.name);
+    if (existing) {
+      for (const ch of subject.chapters) {
+        if (!existing.chapters.find((c) => c.name === ch.name)) {
+          existing.chapters.push(ch);
+        }
+      }
+    } else {
+      acc.push({ ...subject, chapters: [...subject.chapters] });
+    }
+    return acc;
+  }, [] as { id: string; name: string; chapters: { id: string; name: string; order: number }[] }[]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-700 to-green-900 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl">
@@ -110,29 +125,24 @@ export default function OnboardingPage() {
                 Mark chapters you've already covered. If you skip this, Current Affairs will be your starting point.
               </p>
               <div className="space-y-4 max-h-96 overflow-y-auto pr-1">
-                {selectedExamData.map((exam) => (
-                  <div key={exam.id}>
-                    <h3 className="font-semibold text-green-700 text-sm mb-2">{exam.name}</h3>
-                    {exam.subjects.map((subject) => (
-                      <div key={subject.id} className="mb-3">
-                        <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">{subject.name}</p>
-                        <div className="flex flex-wrap gap-2">
-                          {subject.chapters.map((chapter) => (
-                            <button
-                              key={chapter.id}
-                              onClick={() => toggleChapter(chapter.id)}
-                              className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
-                                selectedChapters.includes(chapter.id)
-                                  ? 'bg-green-100 border-green-400 text-green-700'
-                                  : 'bg-white border-gray-200 text-gray-600 hover:border-gray-400'
-                              }`}
-                            >
-                              {selectedChapters.includes(chapter.id) ? '✓ ' : ''}{chapter.name}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
+                {mergedSubjects.map((subject) => (
+                  <div key={subject.id}>
+                    <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">{subject.name}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {subject.chapters.map((chapter) => (
+                        <button
+                          key={chapter.id}
+                          onClick={() => toggleChapter(chapter.id)}
+                          className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
+                            selectedChapters.includes(chapter.id)
+                              ? 'bg-green-100 border-green-400 text-green-700'
+                              : 'bg-white border-gray-200 text-gray-600 hover:border-gray-400'
+                          }`}
+                        >
+                          {selectedChapters.includes(chapter.id) ? '✓ ' : ''}{chapter.name}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>
