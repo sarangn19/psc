@@ -1,6 +1,21 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { Brain, ChevronLeft, ChevronRight, Flag, CheckCircle, XCircle, History, X, Loader2, Zap } from 'lucide-react';
+import { Brain, ChevronLeft, ChevronRight, Flag, CheckCircle, XCircle, History, X, Loader2, Zap, Lightbulb } from 'lucide-react';
+
+const LOADING_FACTS = [
+  { title: 'PSC Exam Tip', text: 'Read the question twice before answering. Many mistakes happen from rushing.' },
+  { title: 'Did you know?', text: 'Kerala PSC conducts exams for over 500 different posts every year.' },
+  { title: 'Study Strategy', text: 'Revise weak topics right after studying them — it boosts retention by 60%.' },
+  { title: 'PSC Fact', text: 'The One Rank One Pension scheme was a major demand of Kerala PSC rank holders.' },
+  { title: 'Exam Tip', text: 'Eliminate two wrong options first. Even a guess among 2 choices has 50% odds.' },
+  { title: 'Did you know?', text: 'Current affairs from the last 6 months are the most frequently asked in PSC exams.' },
+  { title: 'Study Strategy', text: 'Practice previous year papers — patterns often repeat across exam cycles.' },
+  { title: 'PSC Fact', text: 'Kerala PSC uses negative marking only for OMR-based exams, not online tests.' },
+  { title: 'Exam Tip', text: 'Time management: aim for ~1 minute per question. Don\'t spend 5 minutes on one.' },
+  { title: 'Did you know?', text: 'The Secretariat is the most common PSC exam location in Kerala.' },
+  { title: 'Study Strategy', text: 'Group study helps — teaching a concept to someone else strengthens your own understanding.' },
+  { title: 'PSC Fact', text: 'Kerala PSC publishes rank lists that remain valid for 3 years from the date of approval.' },
+];
 import api from '../lib/api';
 
 interface ConceptInfo {
@@ -69,6 +84,15 @@ export default function AdaptivePage() {
   const [reportReason, setReportReason] = useState('');
   const [sessionScore, setSessionScore] = useState(0);
   const [startTime, setStartTime] = useState(Date.now());
+  const [factIndex, setFactIndex] = useState(() => Math.floor(Math.random() * LOADING_FACTS.length));
+
+  useEffect(() => {
+    if (!loadingNext && !loading) return;
+    const interval = setInterval(() => {
+      setFactIndex((i) => (i + 1) % LOADING_FACTS.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [loadingNext, loading]);
 
   const startSession = async () => {
     setSearchParams({}, { replace: true });
@@ -190,6 +214,7 @@ export default function AdaptivePage() {
   }
 
   if (!question) {
+    const fact = LOADING_FACTS[factIndex % LOADING_FACTS.length];
     return (
       <div className="p-4 max-w-lg mx-auto flex flex-col items-center justify-center min-h-[60vh] text-center">
         <div className="relative mb-6">
@@ -199,8 +224,17 @@ export default function AdaptivePage() {
           <Loader2 size={20} className="animate-spin text-green-600 absolute -bottom-1 -right-1" />
         </div>
         <h3 className="text-lg font-semibold text-gray-800 mb-2">Finding your next question</h3>
-        <p className="text-gray-500 text-sm">Analyzing your performance to pick the best question...</p>
-        <div className="flex gap-1 mt-4">
+        <p className="text-gray-500 text-sm mb-5">Analyzing your performance to pick the best question...</p>
+        <div className="card w-full text-left">
+          <div className="flex items-start gap-3">
+            <Lightbulb size={18} className="text-amber-500 mt-0.5 shrink-0" />
+            <div>
+              <p className="text-xs font-semibold text-amber-600 mb-1">{fact.title}</p>
+              <p className="text-sm text-gray-700 leading-relaxed">{fact.text}</p>
+            </div>
+          </div>
+        </div>
+        <div className="flex gap-1 mt-5">
           <span className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
           <span className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
           <span className="w-2 h-2 bg-green-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -239,9 +273,18 @@ export default function AdaptivePage() {
           {/* Question Card */}
           <div className="card relative">
             {loadingNext && (
-              <div className="absolute inset-0 bg-white/80 rounded-xl z-10 flex flex-col items-center justify-center gap-2">
+              <div className="absolute inset-0 bg-white/90 rounded-xl z-10 flex flex-col items-center justify-center gap-3 p-4">
                 <Loader2 size={24} className="animate-spin text-green-600" />
-                <p className="text-sm text-gray-500">Fetching next question...</p>
+                <p className="text-sm text-gray-500">Loading next question...</p>
+                <div className="w-full border-t border-gray-200 pt-3 mt-1">
+                  <div className="flex items-start gap-2">
+                    <Lightbulb size={14} className="text-amber-500 mt-0.5 shrink-0" />
+                    <div>
+                      <p className="text-xs font-semibold text-amber-600">{LOADING_FACTS[factIndex % LOADING_FACTS.length].title}</p>
+                      <p className="text-xs text-gray-600 leading-relaxed">{LOADING_FACTS[factIndex % LOADING_FACTS.length].text}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
             <div className="flex items-center gap-2 mb-3">
