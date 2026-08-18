@@ -273,14 +273,14 @@ export default function AdaptivePage() {
           {/* Question Card */}
           <div className="card relative">
             {loadingNext && (
-              <div className="absolute inset-0 bg-white/90 rounded-xl z-10 flex flex-col items-center justify-center gap-3 p-4">
-                <Loader2 size={24} className="animate-spin text-green-600" />
-                <p className="text-sm text-gray-500">Loading next question...</p>
-                <div className="w-full border-t border-gray-200 pt-3 mt-1">
+              <div className="absolute inset-0 bg-white rounded-xl z-10 flex flex-col items-center justify-center gap-3 p-6">
+                <Loader2 size={28} className="animate-spin text-green-600" />
+                <p className="text-sm font-medium text-gray-600">Loading next question...</p>
+                <div className="w-full border-t border-gray-100 pt-3 mt-1">
                   <div className="flex items-start gap-2">
-                    <Lightbulb size={14} className="text-amber-500 mt-0.5 shrink-0" />
+                    <Lightbulb size={15} className="text-amber-500 mt-0.5 shrink-0" />
                     <div>
-                      <p className="text-xs font-semibold text-amber-600">{LOADING_FACTS[factIndex % LOADING_FACTS.length].title}</p>
+                      <p className="text-xs font-semibold text-amber-600 mb-0.5">{LOADING_FACTS[factIndex % LOADING_FACTS.length].title}</p>
                       <p className="text-xs text-gray-600 leading-relaxed">{LOADING_FACTS[factIndex % LOADING_FACTS.length].text}</p>
                     </div>
                   </div>
