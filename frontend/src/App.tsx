@@ -50,7 +50,7 @@ export default function App() {
 
         {/* Student routes */}
         <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
-          <Route index element={<HomePage />} />
+          <Route index element={<AdaptivePage />} />
           <Route path="adaptive" element={<AdaptivePage />} />
           <Route path="learning" element={<LearningPage />} />
           <Route path="chapters" element={<ChaptersPage />} />
