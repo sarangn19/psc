@@ -119,22 +119,16 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
   const { sessionId } = req.params;
 
   // Phase 1: all independent reads in parallel
-  const [session, seenItems, learnedChapters, allAttempts] = await Promise.all([
+  const [session, seenItems, learnedChapters, conceptStats] = await Promise.all([
     prisma.adaptiveSession.findUnique({ where: { id: sessionId } }),
     prisma.adaptiveItem.findMany({
       where: { sessionId },
       select: { questionId: true, question: { select: { text: true } } },
     }),
     prisma.userChapter.findMany({ where: { userId, isLearned: true }, select: { chapterId: true } }),
-    prisma.questionAttempt.findMany({
+    prisma.userConceptStat.findMany({
       where: { userId },
-      select: {
-        questionId: true,
-        isCorrect: true,
-        question: { select: { conceptId: true, chapterId: true } },
-      },
-      orderBy: { createdAt: 'desc' },
-      take: 500,
+      select: { conceptId: true, chapterId: true, total: true, correct: true },
     }),
   ]);
 
@@ -175,14 +169,12 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     return res.json({ done: true, message: doneMessage });
   }
 
-  // Build stats from attempts (already fetched in phase 1)
+  // Build stats map directly from pre-aggregated UserConceptStat — O(n) over
+  // a small result set, accurate for all-time history, no scan of raw attempts.
   const stats = new Map<string, { total: number; correct: number }>();
-  for (const a of allAttempts) {
-    const key = a.question.conceptId !== null ? `concept:${a.question.conceptId}` : `chapter:${a.question.chapterId}`;
-    const s = stats.get(key) || { total: 0, correct: 0 };
-    s.total++;
-    if (a.isCorrect) s.correct++;
-    stats.set(key, s);
+  for (const s of conceptStats) {
+    const key = s.conceptId !== null ? `concept:${s.conceptId}` : `chapter:${s.chapterId}`;
+    stats.set(key, { total: s.total, correct: s.correct });
   }
 
   interface RankedGroup {
@@ -320,8 +312,25 @@ router.post('/session/:sessionId/answer', authenticate, async (req: AuthRequest,
 
   const isCorrect = selectedOption === question.correctOption;
 
-  // Parallel writes: attempt + session update (fire-and-forget activity log)
-  const [, session] = await Promise.all([
+  // Upsert aggregated stat using raw SQL (handles partial unique indexes on nullable columns)
+  const upsertStat = question.conceptId !== null
+    ? prisma.$executeRaw`
+        INSERT INTO user_concept_stats (id, "userId", "conceptId", total, correct, "updatedAt")
+        VALUES (gen_random_uuid()::text, ${userId}, ${question.conceptId}, 1, ${isCorrect ? 1 : 0}, now())
+        ON CONFLICT ("userId", "conceptId") WHERE "conceptId" IS NOT NULL
+        DO UPDATE SET total = user_concept_stats.total + 1,
+                      correct = user_concept_stats.correct + ${isCorrect ? 1 : 0},
+                      "updatedAt" = now()`
+    : prisma.$executeRaw`
+        INSERT INTO user_concept_stats (id, "userId", "chapterId", total, correct, "updatedAt")
+        VALUES (gen_random_uuid()::text, ${userId}, ${question.chapterId}, 1, ${isCorrect ? 1 : 0}, now())
+        ON CONFLICT ("userId", "chapterId") WHERE "chapterId" IS NOT NULL
+        DO UPDATE SET total = user_concept_stats.total + 1,
+                      correct = user_concept_stats.correct + ${isCorrect ? 1 : 0},
+                      "updatedAt" = now()`;
+
+  // Parallel writes: attempt + session update + stat upsert
+  await Promise.all([
     prisma.questionAttempt.create({
       data: { userId, questionId, selectedOption, isCorrect, timeTaken: timeTaken || 0, sessionId },
     }),
@@ -332,6 +341,7 @@ router.post('/session/:sessionId/answer', authenticate, async (req: AuthRequest,
         correctQ: isCorrect ? { increment: 1 } : undefined,
       },
     }),
+    upsertStat,
   ]);
 
   // Fire-and-forget: log activity (don't block the response)
@@ -433,43 +443,29 @@ interface WeakConcept {
 router.get('/weak-concepts', authenticate, async (req: AuthRequest, res: Response) => {
   const userId = req.user!.id;
 
-  // All user attempts (fast with @@index([userId]))
-  const attempts = await prisma.questionAttempt.findMany({
-    where: { userId },
-    select: { questionId: true, isCorrect: true },
+  // Read from pre-aggregated stats — fast, accurate, no attempt scan
+  const conceptStats = await prisma.userConceptStat.findMany({
+    where: { userId, conceptId: { not: null } },
+    select: { conceptId: true, total: true, correct: true },
   });
-  if (attempts.length === 0) return res.json([]);
+  if (conceptStats.length === 0) return res.json([]);
 
-  const attemptedIds = [...new Set(attempts.map((a) => a.questionId))];
-  const mapped = await prisma.question.findMany({
-    where: { id: { in: attemptedIds }, conceptId: { not: null } },
-    select: { id: true, conceptId: true },
-  });
-  if (mapped.length === 0) return res.json([]);
-
-  const qConcept = new Map(mapped.map((q) => [q.id, q.conceptId as number]));
-  const stats = new Map<number, { total: number; correct: number }>();
-  for (const a of attempts) {
-    const cid = qConcept.get(a.questionId);
-    if (cid === undefined) continue;
-    const s = stats.get(cid) || { total: 0, correct: 0 };
-    s.total++;
-    if (a.isCorrect) s.correct++;
-    stats.set(cid, s);
-  }
+  const stats = new Map<number, { total: number; correct: number }>(
+    conceptStats.map((s) => [s.conceptId!, { total: s.total, correct: s.correct }])
+  );
 
   const conceptIds = [...stats.keys()];
-  const nodes = await prisma.taxonomyNode.findMany({ where: { id: { in: conceptIds } } });
+  const [nodes, questionCounts, pathMap] = await Promise.all([
+    prisma.taxonomyNode.findMany({ where: { id: { in: conceptIds } } }),
+    prisma.question.groupBy({
+      by: ['conceptId'],
+      where: { conceptId: { in: conceptIds }, isActive: true },
+      _count: { _all: true },
+    }),
+    getCachedNodePaths(conceptIds),
+  ]);
+
   const nodeMap = new Map(nodes.map((n) => [n.id, n]));
-
-  // Resolve all paths from in-memory cache (no DB queries)
-  const pathMap = await getCachedNodePaths(conceptIds);
-
-  const questionCounts = await prisma.question.groupBy({
-    by: ['conceptId'],
-    where: { conceptId: { in: conceptIds }, isActive: true },
-    _count: { _all: true },
-  });
   const countMap = new Map(questionCounts.map((c) => [c.conceptId, c._count._all]));
 
   const items = [...stats.entries()].map(([conceptId, s]) => {

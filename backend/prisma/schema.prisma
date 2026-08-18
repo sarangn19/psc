@@ -53,6 +53,7 @@ model User {
   activities        UserActivity[]
   questionReports   QuestionReport[]
   newsViews         NewsView[]
+  conceptStats      UserConceptStat[]
 
   @@map("users")
 }
@@ -197,6 +198,27 @@ model AdaptiveItem {
 
   @@index([sessionId])
   @@map("adaptive_items")
+}
+
+// Pre-aggregated per-user per-concept stats — updated on every answer submission.
+// Used by the adaptive engine instead of scanning raw attempts, so accuracy
+// is always 100% correct regardless of how many total attempts the user has.
+// conceptId XOR chapterId is set (never both, never neither).
+model UserConceptStat {
+  id          String   @id @default(cuid())
+  userId      String
+  conceptId   Int?
+  chapterId   String?
+  total       Int      @default(0)
+  correct     Int      @default(0)
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, conceptId])
+  @@unique([userId, chapterId])
+  @@index([userId])
+  @@map("user_concept_stats")
 }
 
 model UserActivity {
