@@ -191,6 +191,15 @@ export default function AdaptivePage() {
         <button onClick={() => navigate('/chapters')} className="btn-primary px-8 py-3 text-base">
           Choose Chapters
         </button>
+        <div className="card w-full text-left mt-2">
+          <h3 className="font-semibold text-sm text-gray-800 mb-2">What is Adaptive Learning?</h3>
+          <ul className="text-xs text-gray-600 space-y-1.5 leading-relaxed">
+            <li>• Questions adapt to your <span className="font-medium text-green-700">weak areas</span> — topics you struggle with appear more often</li>
+            <li>• Correct answers unlock <span className="font-medium text-green-700">harder questions</span> to challenge you</li>
+            <li>• Each session builds on your <span className="font-medium text-green-700">performance history</span> — no two sessions are the same</li>
+            <li>• The more you practice, the <span className="font-medium text-green-700">smarter</span> the quiz gets</li>
+          </ul>
+        </div>
       </div>
     );
   }
@@ -205,6 +214,7 @@ export default function AdaptivePage() {
           <p className="text-3xl font-bold text-green-600">{questionNumber > 0 ? Math.round((sessionScore/questionNumber)*100) : 0}%</p>
           <p className="text-gray-500 text-sm mt-1">Session Score</p>
         </div>
+        <p className="text-xs text-gray-400 max-w-xs">Your performance has been recorded. Your next session will focus on areas where you need more practice.</p>
         <div className="flex gap-3">
           <button onClick={loadHistory} className="btn-secondary">View History</button>
           <button onClick={endSession} className="btn-primary">New Session</button>
