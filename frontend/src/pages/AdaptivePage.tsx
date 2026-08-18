@@ -94,27 +94,6 @@ export default function AdaptivePage() {
     return () => clearInterval(interval);
   }, [loadingNext, loading]);
 
-  const prefetchNext = async (sid: string, currentSeenIds?: string[]) => {
-    if (prefetchingRef.current) return;
-    prefetchingRef.current = true;
-    try {
-      const { data } = await api.get(`/adaptive/session/${sid}/next`);
-      if (!data.done) {
-        prefetchedRef.current = {
-          question: data.question,
-          concept: data.concept || null,
-          questionNumber: data.questionNumber,
-        };
-      } else {
-        prefetchedRef.current = null;
-      }
-    } catch {
-      prefetchedRef.current = null;
-    } finally {
-      prefetchingRef.current = false;
-    }
-  };
-
   const startSession = async () => {
     setSearchParams({}, { replace: true });
     setLoading(true);
