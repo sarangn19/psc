@@ -213,17 +213,6 @@ export default function AdaptivePage() {
   // Question view
   return (
     <div className="p-4 max-w-lg mx-auto space-y-4">
-      {/* Progress bar */}
-      <div className="flex items-center gap-3">
-        <span className="text-xs text-gray-400 shrink-0">Q{questionNumber}</span>
-        <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
-          <div className="h-full bg-green-500 rounded-full transition-all" style={{ width: `${Math.min(streak * 10, 100)}%` }} />
-        </div>
-        {streak >= 3 && (
-          <span className="text-xs font-medium text-orange-500 shrink-0">🔥 {streak}</span>
-        )}
-      </div>
-
       {/* Question card */}
       <div className="card relative">
         {loadingNext && (
@@ -281,7 +270,9 @@ export default function AdaptivePage() {
             <span className={`font-bold text-sm ${result.isCorrect ? 'text-green-700' : 'text-red-600'}`}>
               {result.isCorrect ? 'Correct!' : 'Incorrect'}
             </span>
-            <span className="text-xs text-gray-400 ml-auto">{sessionScore + (result.isCorrect ? 1 : 0) - (result.isCorrect ? 1 : 0)}/{totalQuestions + (result.isCorrect ? 0 : 0)} score</span>
+            {streak >= 3 && (
+              <span className="text-xs font-medium text-orange-500 ml-auto">🔥 {streak} streak</span>
+            )}
           </div>
           {result.explanation && (
             <p className="text-sm text-gray-700 mt-1">{result.explanation}</p>
