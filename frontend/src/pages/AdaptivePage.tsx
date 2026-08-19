@@ -210,12 +210,10 @@ export default function AdaptivePage() {
       <div className="flex items-center gap-3">
         <span className="text-xs text-gray-400 shrink-0">Q{questionNumber}</span>
         <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
-          <div className="h-full bg-green-500 rounded-full transition-all" style={{ width: `${Math.min((questionNumber / 20) * 100, 100)}%` }} />
+          <div className="h-full bg-green-500 rounded-full transition-all" style={{ width: `${totalQuestions > 0 ? (sessionScore / totalQuestions) * 100 : 0}%` }} />
         </div>
-        {concept && (
-          <span className={`text-xs px-2 py-0.5 rounded-full font-medium shrink-0 ${ZONE_COLORS[concept.zone] || 'bg-gray-100 text-gray-600'}`}>
-            {concept.accuracy}%
-          </span>
+        {totalQuestions > 0 && (
+          <span className="text-xs text-gray-400 shrink-0">{sessionScore}/{totalQuestions}</span>
         )}
       </div>
 
