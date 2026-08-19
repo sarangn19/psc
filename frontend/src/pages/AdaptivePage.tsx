@@ -66,6 +66,7 @@ export default function AdaptivePage() {
   const [done, setDone] = useState(false);
   const [sessionScore, setSessionScore] = useState(0);
   const [totalQuestions, setTotalQuestions] = useState(0);
+  const [streak, setStreak] = useState(0);
   const [startTime, setStartTime] = useState(Date.now());
   const [factIndex, setFactIndex] = useState(() => Math.floor(Math.random() * LOADING_FACTS.length));
 
@@ -101,6 +102,7 @@ export default function AdaptivePage() {
     setDone(false);
     setSessionScore(0);
     setTotalQuestions(0);
+    setStreak(0);
     setQuestionNumber(0);
     try {
       const { data } = await api.post('/adaptive/session/start');
@@ -122,7 +124,12 @@ export default function AdaptivePage() {
     });
     setResult(data);
     setTotalQuestions((t) => t + 1);
-    if (data.isCorrect) setSessionScore((s) => s + 1);
+    if (data.isCorrect) {
+      setSessionScore((s) => s + 1);
+      setStreak((s) => s + 1);
+    } else {
+      setStreak(0);
+    }
   };
 
   const handleNext = () => {
@@ -210,10 +217,10 @@ export default function AdaptivePage() {
       <div className="flex items-center gap-3">
         <span className="text-xs text-gray-400 shrink-0">Q{questionNumber}</span>
         <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
-          <div className="h-full bg-green-500 rounded-full transition-all" style={{ width: `${totalQuestions > 0 ? (sessionScore / totalQuestions) * 100 : 0}%` }} />
+          <div className="h-full bg-green-500 rounded-full transition-all" style={{ width: `${Math.min(streak * 10, 100)}%` }} />
         </div>
-        {totalQuestions > 0 && (
-          <span className="text-xs text-gray-400 shrink-0">{sessionScore}/{totalQuestions}</span>
+        {streak >= 3 && (
+          <span className="text-xs font-medium text-orange-500 shrink-0">🔥 {streak}</span>
         )}
       </div>
 
