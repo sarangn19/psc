@@ -64,6 +64,17 @@ function matchConcept(text, nodes) {
 
 const LETTER_TO_IDX = { A: 0, B: 1, C: 2, D: 3 };
 
+function shuffleOptions(options, correctIdx) {
+  const indexed = options.map((opt, i) => ({ opt, i }));
+  for (let i = indexed.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indexed[i], indexed[j]] = [indexed[j], indexed[i]];
+  }
+  const newOptions = indexed.map(x => x.opt);
+  const newCorrect = indexed.findIndex(x => x.i === correctIdx);
+  return { options: newOptions, correctOption: newCorrect };
+}
+
 async function main() {
   const filePath = path.resolve(__dirname, '../../qb.xlsx');
   console.log('Reading:', filePath);
@@ -149,13 +160,16 @@ async function main() {
     if (conceptId) conceptAssigned++;
 
     try {
+      const { options: shuffledOpts, correctOption: shuffledCorrect } = shuffleOptions(
+        [optionA, optionB, optionC, optionD], correctOption
+      );
       await prisma.question.create({
         data: {
           chapterId: mathChapter.id,
           conceptId,
           text,
-          options: [optionA, optionB, optionC, optionD],
-          correctOption,
+          options: shuffledOpts,
+          correctOption: shuffledCorrect,
           explanation,
           difficulty,
           tags: ['qb-import', `chapter:${chapterName}`],
