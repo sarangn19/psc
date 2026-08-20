@@ -1,0 +1,351 @@
+[
+  {
+    "q": "What is the primary function of a Debit Card?",
+    "opts": [
+      "Payment instrument",
+      "Credit facility",
+      "Bank transfer",
+      "ATM facility"
+    ],
+    "a": 0,
+    "exp": "Debit card is used for payment transactions",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is a feature of UPI (Unified Payments Interface)?",
+    "opts": [
+      "Payment through cards",
+      "Payment through wallets",
+      "Instant fund transfer between banks",
+      "QR code payment facility"
+    ],
+    "a": 2,
+    "exp": "UPI enables instant fund transfer between banks",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the difference between RTGS and NEFT?",
+    "opts": [
+      "Real-time vs same day",
+      "Immediate vs delayed",
+      "Electronic vs paper",
+      "Fund transfer vs cash transfer"
+    ],
+    "a": 0,
+    "exp": "RTGS is real-time fund transfer, NEFT is same day",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is a Pre-Approved limit on Debit/Credit Card?",
+    "opts": [
+      "Overdraft facility",
+      "Credit facility",
+      "Cash withdrawal limit",
+      "Purchase limit"
+    ],
+    "a": 2,
+    "exp": "Pre-Approved limit for cash withdrawal or purchase",
+    "d": "EASY"
+  },
+  {
+    "q": "What is a Contactless Payment method?",
+    "opts": [
+      "QR code payment",
+      "IMPS",
+      "UPI",
+      "Tap and pay using Card/RUPI/Token/UPI-Wallet"
+    ],
+    "a": 3,
+    "exp": "Contactless payment using Card/RUPI/Token/UPI-Wallet",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the full form of IMPS?",
+    "opts": [
+      "Immediate Mobile Payment Service",
+      "Instant Money Payment Service",
+      "Interbank Mobile Payment Service",
+      "Interactive Mobile Payment System"
+    ],
+    "a": 2,
+    "exp": "Interbank Mobile Payment Service",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the purpose of UPI PIN?",
+    "opts": [
+      "Transaction password",
+      "Account password",
+      "Card verification PIN",
+      "Card activation PIN"
+    ],
+    "a": 0,
+    "exp": "UPI PIN for transactions security",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is a type of Mobile Banking Service?",
+    "opts": [
+      "Account opening",
+      "Loan application",
+      "Bill payment",
+      "Mobile banking app"
+    ],
+    "a": 3,
+    "exp": "Mobile banking service through mobile app",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the primary advantage of using online banking?",
+    "opts": [
+      "Convenience",
+      "No waiting time",
+      "Higher interest rates",
+      "Lower interest rates"
+    ],
+    "a": 0,
+    "exp": "Convenience and time-saving",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the difference between Debit Card and Credit Card?",
+    "opts": [
+      "Debit vs credit card usage",
+      "Card type and issuer",
+      "Card benefits and features",
+      "Card fees and charges"
+    ],
+    "a": 0,
+    "exp": "Debit card for payment, Credit card for credit",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the use of UPI AutoPay?",
+    "opts": [
+      "Recurring transactions",
+      "Scheduled payments",
+      "Bill payments",
+      "Transfer between accounts"
+    ],
+    "a": 0,
+    "exp": "Automated recurring transactions",
+    "d": "EASY"
+  },
+  {
+    "q": "What is BHIM App?",
+    "opts": [
+      "Banking app for salary transfer",
+      "Bill payment app",
+      "Digital payment app for merchants",
+      "BHIM App for merchant transactions",
+      "USSD based banking app",
+      "BHIM App for payment and transfer"
+    ],
+    "a": 5,
+    "exp": "Bharat Interface for Money App for payment and transfer",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the main purpose of e-KYC?",
+    "opts": [
+      "KYC document submission",
+      "Customer identification",
+      "Verification of account details",
+      "Digital KYC for customers"
+    ],
+    "a": 3,
+    "exp": "Digital KYC for customer identification",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the difference between UPI and IMPS?",
+    "opts": [
+      "Real-time vs same day",
+      "Immediate vs delayed",
+      "Electronic vs paper",
+      "Fund transfer vs cash transfer"
+    ],
+    "a": 0,
+    "exp": "UPI enables real-time fund transfer, IMPS enables same day",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the use of RUPAY Card?",
+    "opts": [
+      "Payment at merchants through UPI",
+      "Payment through QR code",
+      "Credit facility through card",
+      "Payment at merchants through Card/RUPI/Token/UPI-Wallet"
+    ],
+    "a": 3,
+    "exp": "Payment at merchants through Card/RUPI/Token/UPI-Wallet",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the main advantage of Digital Bank?",
+    "opts": [
+      "Convenience",
+      "Cost-effective",
+      "Higher interest rates",
+      "Higher security",
+      "Faster and secure services",
+      "Lower transaction charges",
+      "No branch visits required",
+      "Paperless banking",
+      "Real-time updates",
+      "Less financial inclusion",
+      "Longer banking hours",
+      "More features and facilities",
+      "More user-friendly interface",
+      "No waiting time",
+      "Yes, all of the above",
+      "Higher customer engagement",
+      "No account maintenance fees",
+      "No service charges",
+      "Reduced paperwork",
+      "Simple and secure banking",
+      "Smooth customer service",
+      "Timely customer support",
+      "Zero balance account facilities",
+      "Better customer support",
+      "Branchless banking",
+      "Client-centric approach",
+      "Cloud-based platform",
+      "Easy fund transfer",
+      "High-security features",
+      "Less travel time",
+      "More customer engagement",
+      "More flexible",
+      "More robust security",
+      "Mobile banking app",
+      "More user-friendly interface",
+      "Real-time updates",
+      "Reduced paperwork",
+      "Security and convenience",
+      "Simple and secure",
+      "Smooth customer service",
+      "Timely customer support",
+      "User-friendly interface",
+      "Use of technology",
+      "User-centric experience",
+      "Zero balance account facilities",
+      "Zero service charges",
+      "Zero transaction charges",
+      "It reduces paperwork and saves time",
+      "It's cost-effective",
+      "It saves time",
+      "It's easy to use",
+      "It's secure",
+      "Reduced account opening time",
+      "Reduced branch visits",
+      "Reduced documentation",
+      "Reduced paperwork",
+      "Time-saving",
+      "User-friendly interface",
+      "User-centric experience",
+      "Zero service charges",
+      "Zero transaction charges",
+      "Better digital experience",
+      "Digital banking is a cost-effective and efficient way of banking",
+      "Digital bank provides a user-friendly interface",
+      "Digital banking reduces paperwork and saves time",
+      "Digital banking saves time and money",
+      "Digital banking uses technology for banking services",
+      "Several digital banking services are offered",
+      "The main advantage of digital bank is reduced account opening time",
+      "The main advantage of digital bank is zero service charges",
+      "The main advantage of digital bank is zero transaction charges",
+      "The main advantage of digital bank is user-friendly interface",
+      "The main advantage of digital bank is zero balance account facility"
+    ],
+    "a": 17,
+    "exp": "Digital bank provides several advantages like cost-effective, efficient, and user-friendly interface",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the main purpose of NPCI?",
+    "opts": [
+      "National Payments Corporation of India",
+      "National Payments Clearing House",
+      "National Payments Infrastructure",
+      "National Payments Interchange"
+    ],
+    "a": 0,
+    "exp": "National Payments Corporation of India for digital payments",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the use of ECS (Electronic Clearing Service)?",
+    "opts": [
+      "Fund transfer between banks",
+      "Payment of bills and dues",
+      "Payment of salaries",
+      "Recurring deposit facility",
+      "Funds transfer facility",
+      "Payment of account payee cheque",
+      "Payment of insurance premium",
+      "Payment of loan EMIs",
+      "Payment of utility bills",
+      "Payment of wages",
+      "Payment of vendor bills",
+      "Salary payment facility",
+      "Utility bill payment facility",
+      "All of the above",
+      "Automated payment of bills",
+      "Automated payment of salary",
+      "Bill payment facility",
+      "Bill payment through ECS",
+      "Bill payments and salary payments",
+      "Cashless payment",
+      "Electronic payment of bills",
+      "Electronic payment of salary",
+      "Electronic payments through ECS",
+      "Fund transfer through ECS",
+      "Payment of bills and salary",
+      "Payment of bills and salaries",
+      "Payment of salaries and bills",
+      "Payment of wages and bills",
+      "Payment of wages and salary",
+      "Salary payment and bill payment",
+      "Salary payment through ECS",
+      "Salary payments",
+      "Salary payments through ECS",
+      "Utility bill payment and salary payment",
+      "Utility bill payments",
+      "Utility payments",
+      "Automated payment of utility bills",
+      "Automated payment of wages",
+      "Automated payment of wages and bills",
+      "Automated salary payment",
+      "Automated salary payment and bill payment",
+      "Automated salary payment of wages",
+      "Automated utility bill payments",
+      "Automated wages and bill payments",
+      "Electronic bill payments",
+      "Electronic salary payment",
+      "Electronic salary payment and bill payment",
+      "Electronic utility bill payments",
+      "ECS is a facility for payment of bills and.",
+      "Fund transfer through ECS",
+      "Fund transfer using ECS",
+      "Payment of bills and dues through ECS",
+      "Payment of bills and salary through ECS",
+      "Payment of bills and utility bills through ECS",
+      "Payment of bills through ECS",
+      "Payment of bills, salaries, and wages through ECS",
+      "Payment of salary and bill through ECS",
+      "Payment of salary through ECS",
+      "Payment of salary, bills, and wages through ECS",
+      "Payment of utility bills through ECS",
+      "Payment of wages and bills through ECS",
+      "Payment of wages through ECS",
+      "Recurring payment of bills and dues",
+      "Recurring payment of utility bills and salaries",
+      "Several types of payments through ECS",
+      "Utility bill payment and salary payment through ECS"
+    ],
+    "a": 16,
+    "exp": "Electronic Clearing Service for automated payment of bills, salaries, and wages",
+    "d": "HARD"
+  }
+]

@@ -1,0 +1,218 @@
+[
+  {
+    "q": "A shopkeeper buys 15 dozens of pens at Rs. 120 per dozen. He sells each pen for Rs. 12. What is his profit percentage?",
+    "opts": [
+      15,
+      20,
+      25,
+      30
+    ],
+    "a": 1,
+    "exp": "Profit = 20%",
+    "d": "EASY"
+  },
+  {
+    "q": "A person buys a book for Rs. 150 and sells it for Rs. 180. What is his profit percentage?",
+    "opts": [
+      15,
+      20,
+      25,
+      30
+    ],
+    "a": 0,
+    "exp": "Profit = 20%",
+    "d": "EASY"
+  },
+  {
+    "q": "A man bought 25 kg of rice at Rs. 50 per kg and sold 20 kg of it at Rs. 60 per kg. What is his loss percentage?",
+    "opts": [
+      -5,
+      -10,
+      -15,
+      -20
+    ],
+    "a": 2,
+    "exp": "Loss = 15%",
+    "d": "EASY"
+  },
+  {
+    "q": "A trader purchases a table for Rs. 800 and sells it for Rs. 850. What is his profit percentage?",
+    "opts": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "a": 1,
+    "exp": "Profit = 6.25%",
+    "d": "EASY"
+  },
+  {
+    "q": "A person buys a shirt for Rs. 250 and sells it for Rs. 200. What is his loss percentage?",
+    "opts": [
+      -20,
+      -25,
+      -30,
+      -35
+    ],
+    "a": 1,
+    "exp": "Loss = 20%",
+    "d": "EASY"
+  },
+  {
+    "q": "A trader buys a watch for Rs. 1200 and sells it for Rs. 1080. What is his loss percentage?",
+    "opts": [
+      -5,
+      -6,
+      -7,
+      -8
+    ],
+    "a": 1,
+    "exp": "Loss = 10%",
+    "d": "EASY"
+  },
+  {
+    "q": "A shopkeeper buys a shirt for Rs. 150 and sells it for Rs. 180. What is his profit percentage?",
+    "opts": [
+      10,
+      15,
+      20,
+      25
+    ],
+    "a": 1,
+    "exp": "Profit = 20%",
+    "d": "EASY"
+  },
+  {
+    "q": "A person buys 200 kg of wheat at Rs. 20 per kg and sells 150 kg of it at Rs. 25 per kg. What is his profit percentage?",
+    "opts": [
+      5,
+      10,
+      15,
+      20
+    ],
+    "a": 1,
+    "exp": "Profit = 8.33%",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A man buys a bicycle for Rs. 800 and sells it for Rs. 720. What is his loss percentage?",
+    "opts": [
+      -5,
+      -6,
+      -7,
+      -8
+    ],
+    "a": 0,
+    "exp": "Loss = 9.375%",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A trader buys a cycle for Rs. 800 and sells it for Rs. 900. What is his profit percentage?",
+    "opts": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "a": 1,
+    "exp": "Profit = 12.5%",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A person buys a book for Rs. 180 and sells it for Rs. 200. What is his profit percentage?",
+    "opts": [
+      5,
+      10,
+      15,
+      20
+    ],
+    "a": 1,
+    "exp": "Profit = 11.11%",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A shopkeeper buys 20 dozens of toys at Rs. 80 per dozen. He sells each toy for Rs. 10. What is his profit percentage?",
+    "opts": [
+      10,
+      15,
+      20,
+      25
+    ],
+    "a": 2,
+    "exp": "Profit = 20%",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A man buys a shirt for Rs. 200 and sells it for Rs. 220. What is his profit percentage?",
+    "opts": [
+      5,
+      10,
+      15,
+      20
+    ],
+    "a": 1,
+    "exp": "Profit = 10%",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A person buys 100 kg of rice at Rs. 40 per kg and sells 80 kg of it at Rs. 50 per kg. What is his profit percentage?",
+    "opts": [
+      5,
+      10,
+      12.5,
+      15
+    ],
+    "a": 2,
+    "exp": "Profit = 12.5%",
+    "d": "HARD"
+  },
+  {
+    "q": "A trader buys a shirt for Rs. 320 and sells it for Rs. 300. What is his loss percentage?",
+    "opts": [
+      -5,
+      -6,
+      -7,
+      -8
+    ],
+    "a": 0,
+    "exp": "Loss = 6.25%",
+    "d": "HARD"
+  },
+  {
+    "q": "A person buys a watch for Rs. 1000 and sells it for Rs. 900. What is his loss percentage?",
+    "opts": [
+      -5,
+      -6,
+      -7,
+      -8
+    ],
+    "a": 0,
+    "exp": "Loss = 10%",
+    "d": "HARD"
+  },
+  {
+    "q": "A shopkeeper buys a pen for Rs. 50 and sells it for Rs. 55. What is his profit percentage?",
+    "opts": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "a": 1,
+    "exp": "Profit = 10%",
+    "d": "HARD"
+  },
+  {
+    "q": "A person buys a shirt for Rs. 150 and sells it for Rs. 165. What is his profit percentage?",
+    "opts": [
+      5,
+      7,
+      10,
+      12.5
+    ],
+    "a": 2,
+    "exp": "Profit = 10%",
+    "d": "HARD"
+  }
+]

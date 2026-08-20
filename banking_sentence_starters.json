@@ -1,0 +1,182 @@
+[
+  {
+    "q": "The Reserve Bank of India's main function is?",
+    "opts": [
+      "Regulatory body for co-operative banks",
+      "Monetary policy maker for the country",
+      "Issuing licences to new banks",
+      "Managing foreign exchange reserves"
+    ],
+    "a": 1,
+    "exp": "RBI makes monetary policy for the country",
+    "d": "EASY"
+  },
+  {
+    "q": "What is a 'Cheque Truncation System'?",
+    "opts": [
+      "A system to verify cheque authenticity",
+      "A system to prevent cheque bounce",
+      "A system to clear and settle cheques electronically",
+      "A system to store cheque images"
+    ],
+    "a": 2,
+    "exp": "CTS clears and settles cheques electronically",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The minimum capital required for a new bank is?",
+    "opts": [
+      "10 Crore",
+      "100 Crore",
+      "500 Crore",
+      "1000 Crore"
+    ],
+    "a": 1,
+    "exp": "Minimum capital required for new bank is 10 Crore",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The National Electronic Fund Transfer (NEFT) is?",
+    "opts": [
+      "A payment system for large transactions",
+      "A payment system for small transactions",
+      "A system to transfer funds electronically",
+      "A system to verify account details"
+    ],
+    "a": 2,
+    "exp": "NEFT is a system to transfer funds electronically",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The 'Know Your Customer' (KYC) guidelines are?",
+    "opts": [
+      "To verify customer identity for new accounts",
+      "To verify customer creditworthiness for loans",
+      "To verify customer assets for new accounts",
+      "To verify customer employment for new accounts"
+    ],
+    "a": 0,
+    "exp": "KYC is to verify customer identity for new accounts",
+    "d": "EASY"
+  },
+  {
+    "q": "The 'Cash Reserve Ratio (CRR)' is?",
+    "opts": [
+      "The minimum balance banks must keep with RBI",
+      "The minimum balance banks must maintain with RBI",
+      "The minimum balance RBI must keep with banks",
+      "The minimum balance banks must keep for public deposits"
+    ],
+    "a": 0,
+    "exp": "CRR is the minimum balance banks must keep with RBI",
+    "d": "HARD"
+  },
+  {
+    "q": "The 'Securities and Exchange Board of India' (SEBI) is?",
+    "opts": [
+      "The regulator for stock exchanges",
+      "The regulator for mutual funds",
+      "The regulator for insurance companies",
+      "The regulator for banks"
+    ],
+    "a": 0,
+    "exp": "SEBI is the regulator for stock exchanges",
+    "d": "EASY"
+  },
+  {
+    "q": "The 'Base Rate' is?",
+    "opts": [
+      "The minimum interest rate banks can charge",
+      "The maximum interest rate banks can charge",
+      "The interest rate banks charge on loans",
+      "The interest rate banks pay on deposits"
+    ],
+    "a": 2,
+    "exp": "Base Rate is the interest rate banks charge on loans",
+    "d": "HARD"
+  },
+  {
+    "q": "The 'Prudential Norms' are?",
+    "opts": [
+      "Guidelines for bank lending",
+      "Guidelines for bank deposits",
+      "Guidelines for bank investments",
+      "Guidelines for bank capital adequacy"
+    ],
+    "a": 0,
+    "exp": "Prudential Norms are guidelines for bank lending",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The 'Bank Rate' is?",
+    "opts": [
+      "The rate at which RBI lends to banks",
+      "The rate at which RBI borrows from banks",
+      "The rate at which banks lend to customers",
+      "The rate at which banks borrow from customers"
+    ],
+    "a": 0,
+    "exp": "Bank Rate is the rate at which RBI lends to banks",
+    "d": "HARD"
+  },
+  {
+    "q": "The 'Repo Rate' is?",
+    "opts": [
+      "The rate at which RBI borrows from banks",
+      "The rate at which RBI lends to banks",
+      "The rate at which banks lend to customers",
+      "The rate at which banks borrow from customers"
+    ],
+    "a": 1,
+    "exp": "Repo Rate is the rate at which RBI borrows from banks",
+    "d": "HARD"
+  },
+  {
+    "q": "The 'Reverse Repo Rate' is?",
+    "opts": [
+      "The rate at which RBI borrows from banks",
+      "The rate at which RBI lends to banks",
+      "The rate at which banks lend to RBI",
+      "The rate at which RBI lends to banks"
+    ],
+    "a": 2,
+    "exp": "Reverse Repo Rate is the rate at which RBI lends to banks",
+    "d": "HARD"
+  },
+  {
+    "q": "The 'Statutory Liquidity Ratio (SLR)' is?",
+    "opts": [
+      "The minimum balance banks must keep with RBI",
+      "The minimum balance banks must maintain with RBI",
+      "The minimum balance RBI must keep with banks",
+      "The minimum balance banks must keep for public deposits"
+    ],
+    "a": 0,
+    "exp": "SLR is the minimum balance banks must keep with RBI",
+    "d": "HARD"
+  },
+  {
+    "q": "The 'Financial Stability and Development Council (FSDC)' is?",
+    "opts": [
+      "A council for financial stability and development",
+      "A council for banking stability and development",
+      "A council for monetary policy stability and development",
+      "A council for regulatory stability and development"
+    ],
+    "a": 0,
+    "exp": "FSDC is a council for financial stability and development",
+    "d": "HARD"
+  },
+  {
+    "q": "The 'National Housing Bank (NHB)' is?",
+    "opts": [
+      "A bank for housing finance",
+      "A bank for agricultural finance",
+      "A bank for industrial finance",
+      "A bank for small-scale industries"
+    ],
+    "a": 0,
+    "exp": "NHB is a bank for housing finance",
+    "d": "EASY"
+  }
+]

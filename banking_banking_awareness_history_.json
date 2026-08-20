@@ -1,0 +1,206 @@
+[
+  {
+    "q": "When was the first Indian bank, the Bank of Hindustan, established?",
+    "opts": [
+      "1786",
+      "1806",
+      "1813",
+      "1860"
+    ],
+    "a": 2,
+    "exp": "Established in 1806 in Calcutta (now Kolkata)",
+    "d": "EASY"
+  },
+  {
+    "q": "Who founded the State Bank of India?",
+    "opts": [
+      "T. T. Krishnamachari",
+      "Sachin Pilot",
+      "JRD Tata",
+      "S. N. Diwan"
+    ],
+    "a": 0,
+    "exp": "T. T. Krishnamachari in 1955",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which bank introduced the concept of Automated Teller Machines (ATMs) in India?",
+    "opts": [
+      "State Bank of India",
+      "ICICI Bank",
+      "HDFC Bank",
+      "Canara Bank"
+    ],
+    "a": 1,
+    "exp": "ICICI Bank launched the first ATM in 1987",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the name of the first digital payment system launched by RBI in 2016?",
+    "opts": [
+      "Unified Payments Interface (UPI)",
+      "Real-Time Gross Settlement System (RTGS)",
+      "National Electronic Fund Transfer (NEFT)",
+      "Immediate Payment Service (IMPS)"
+    ],
+    "a": 0,
+    "exp": "Launched as a platform for real-time payments",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the founder of the Reserve Bank of India?",
+    "opts": [
+      "Sir James Wilson",
+      "Sir Osborne Smith",
+      "R. K. Shanmukham Chetty",
+      "R. N. Mookerjee"
+    ],
+    "a": 0,
+    "exp": "Founded by Sir James Wilson in 1935",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the name of the first merchant bank in India?",
+    "opts": [
+      "ICICI Bank",
+      "IDBI Bank",
+      "Bank of India",
+      "Standard Chartered Bank"
+    ],
+    "a": 0,
+    "exp": "ICICI Bank was the first merchant bank",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "When was the Reserve Bank of India (RBI) nationalized?",
+    "opts": [
+      "1948",
+      "1955",
+      "1949",
+      "1950"
+    ],
+    "a": 0,
+    "exp": "Nationalized in 1948 with effect from April 1st",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the name of the first Indian bank to be listed on the London Stock Exchange?",
+    "opts": [
+      "State Bank of India",
+      "ICICI Bank",
+      "HDFC Bank",
+      "Axis Bank"
+    ],
+    "a": 1,
+    "exp": "ICICI Bank listed in 1999",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the founder of the State Bank of India?",
+    "opts": [
+      "T. T. Krishnamachari",
+      "S. N. Diwan",
+      "Sachin Pilot",
+      "JRD Tata"
+    ],
+    "a": 1,
+    "exp": "Founded by S. N. Diwan in 1806",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the name of the RBI's policy rate?",
+    "opts": [
+      "Repo Rate",
+      "Reverse Repo Rate",
+      "Cash Reserve Ratio (CRR)",
+      "Statutory Liquidity Ratio (SLR)"
+    ],
+    "a": 0,
+    "exp": "RBI's key interest rate to control inflation",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which bank is known as the 'Banker's Bank'?",
+    "opts": [
+      "State Bank of India",
+      "Bank of Baroda",
+      "Canara Bank",
+      "Central Bank of India"
+    ],
+    "a": 0,
+    "exp": "Acts as a banker to all other banks",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "When did the Reserve Bank of India (RBI) begin operations?",
+    "opts": [
+      "1934",
+      "1935",
+      "1936",
+      "1937"
+    ],
+    "a": 1,
+    "exp": "Began operations on April 1, 1935",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the name of the RBI's regulatory framework for banks?",
+    "opts": [
+      "Basel II",
+      "Basel III",
+      "India's Basel Norms",
+      "RBI Act 1934"
+    ],
+    "a": 1,
+    "exp": "International banking regulation framework",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who introduced the concept of Direct Deposit (Neft) in India?",
+    "opts": [
+      "S. N. Diwan",
+      "T. T. Krishnamachari",
+      "Sachin Pilot",
+      "JRD Tata"
+    ],
+    "a": 0,
+    "exp": "Introduced by S. N. Diwan in 1959",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the name of the RBI's monetary policy framework?",
+    "opts": [
+      "Interest Rate Policy",
+      "Quantitative Policy",
+      "Monetary Policy Framework",
+      "Financial Stability Policy"
+    ],
+    "a": 2,
+    "exp": "Framework for setting monetary policy",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the name of the Indian banking sector regulator?",
+    "opts": [
+      "Reserve Bank of India (RBI)",
+      "Securities and Exchange Board of India (SEBI)",
+      "Insurance Regulatory and Development Authority (IRDA)",
+      "National Housing Bank (NHB)"
+    ],
+    "a": 0,
+    "exp": "Regulates the banking sector in India",
+    "d": "EASY"
+  },
+  {
+    "q": "Who is the founder of the National Housing Bank (NHB)?",
+    "opts": [
+      "T. T. Krishnamachari",
+      "S. N. Diwan",
+      "Sachin Pilot",
+      "JRD Tata"
+    ],
+    "a": 0,
+    "exp": "Founded in 1987 as a subsidiary of RBI",
+    "d": "MEDIUM"
+  }
+]

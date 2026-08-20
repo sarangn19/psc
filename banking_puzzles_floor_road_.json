@@ -1,0 +1,182 @@
+[
+  {
+    "q": "A man is 25 years older than his wife. If the sum of their ages is 120, what is the man's age?",
+    "opts": [
+      40,
+      45,
+      50,
+      55
+    ],
+    "a": 2,
+    "exp": "Let x be wife's age, then x+25+x=120",
+    "d": "EASY"
+  },
+  {
+    "q": "A car travels from city A to city B and then to city C. The distance from A to B is 300 km, and from B to C is 400 km. What is the average speed of the car?",
+    "opts": [
+      100,
+      200,
+      300,
+      400
+    ],
+    "a": 2,
+    "exp": "Avg speed = (300+400)/2",
+    "d": "EASY"
+  },
+  {
+    "q": "A train travels from city X to city Y at an average speed of 50 km/h. If the distance from X to Y is 600 km, how long does the journey take?",
+    "opts": [
+      6,
+      8,
+      10,
+      12
+    ],
+    "a": 1,
+    "exp": "Time = distance/speed",
+    "d": "EASY"
+  },
+  {
+    "q": "A woman is three times as old as her daughter. If the sum of their ages is 72, what is the woman's age?",
+    "opts": [
+      16,
+      20,
+      24,
+      28
+    ],
+    "a": 3,
+    "exp": "Let x be daughter's age, then x+3x=72",
+    "d": "EASY"
+  },
+  {
+    "q": "A man travels from city P to city Q. He travels 100 km in the first 2 hours and 200 km in the next 4 hours. What is his average speed?",
+    "opts": [
+      50,
+      60,
+      70,
+      80
+    ],
+    "a": 1,
+    "exp": "Avg speed = total distance/total time",
+    "d": "EASY"
+  },
+  {
+    "q": "A car travels from city M to city N at an average speed of 40 km/h. If the distance from M to N is 800 km, how long does the journey take?",
+    "opts": [
+      10,
+      12,
+      14,
+      16
+    ],
+    "a": 1,
+    "exp": "Time = distance/speed",
+    "d": "EASY"
+  },
+  {
+    "q": "A man is 10 years younger than his brother. If the sum of their ages is 120, what is the man's age?",
+    "opts": [
+      40,
+      45,
+      50,
+      55
+    ],
+    "a": 2,
+    "exp": "Let x be brother's age, then x-x=120",
+    "d": "EASY"
+  },
+  {
+    "q": "A train travels from city A to city B at an average speed of 60 km/h. If the distance from A to B is 900 km, how long does the journey take?",
+    "opts": [
+      7,
+      8,
+      9,
+      10
+    ],
+    "a": 2,
+    "exp": "Time = distance/speed",
+    "d": "EASY"
+  },
+  {
+    "q": "A woman is two times as old as her sister. If the sum of their ages is 56, what is the woman's age?",
+    "opts": [
+      14,
+      16,
+      18,
+      20
+    ],
+    "a": 3,
+    "exp": "Let x be sister's age, then x+2x=56",
+    "d": "EASY"
+  },
+  {
+    "q": "A car travels from city X to city Y. It travels 200 km in the first 4 hours and 300 km in the next 5 hours. What is its average speed?",
+    "opts": [
+      40,
+      50,
+      60,
+      70
+    ],
+    "a": 2,
+    "exp": "Avg speed = total distance/total time",
+    "d": "EASY"
+  },
+  {
+    "q": "A man is three times as old as his son. If the sum of their ages is 96, what is the man's age?",
+    "opts": [
+      24,
+      28,
+      32,
+      36
+    ],
+    "a": 3,
+    "exp": "Let x be son's age, then x+3x=96",
+    "d": "EASY"
+  },
+  {
+    "q": "A train travels from city A to city B at an average speed of 80 km/h. If the distance from A to B is 1200 km, how long does the journey take?",
+    "opts": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "a": 2,
+    "exp": "Time = distance/speed",
+    "d": "EASY"
+  },
+  {
+    "q": "A woman is four times as old as her daughter. If the sum of their ages is 48, what is the woman's age?",
+    "opts": [
+      8,
+      10,
+      12,
+      14
+    ],
+    "a": 3,
+    "exp": "Let x be daughter's age, then x+4x=48",
+    "d": "EASY"
+  },
+  {
+    "q": "A car travels from city M to city N at an average speed of 30 km/h. If the distance from M to N is 600 km, how long does the journey take?",
+    "opts": [
+      6,
+      8,
+      10,
+      12
+    ],
+    "a": 1,
+    "exp": "Time = distance/speed",
+    "d": "EASY"
+  },
+  {
+    "q": "A man is 20 years younger than his brother. If the sum of their ages is 140, what is the man's age?",
+    "opts": [
+      40,
+      45,
+      50,
+      55
+    ],
+    "a": 2,
+    "exp": "Let x be brother's age, then x-x=140",
+    "d": "EASY"
+  }
+]

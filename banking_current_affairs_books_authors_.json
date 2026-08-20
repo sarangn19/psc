@@ -1,0 +1,206 @@
+[
+  {
+    "q": "The author of the book 'The White Tiger' is?",
+    "opts": [
+      "Aravind Adiga",
+      "Aravind Adiga's friend",
+      "Amitav Ghosh",
+      "Amitav Ghosh's friend"
+    ],
+    "a": 0,
+    "exp": "Aravind Adiga won the Booker Prize for it",
+    "d": "EASY"
+  },
+  {
+    "q": "The book 'The Alchemist' is written by?",
+    "opts": [
+      "Paulo Coelho",
+      "Juan Pablo",
+      "Fyodor Dostoevsky",
+      "Jules Verne"
+    ],
+    "a": 0,
+    "exp": "Translated into 80 languages and sold over 65 million copies",
+    "d": "EASY"
+  },
+  {
+    "q": "Who wrote the book 'The God of Small Things'?",
+    "opts": [
+      "Amitav Ghosh",
+      "Arundhati Roy",
+      "Kiran Desai",
+      "Chetan Bhagat"
+    ],
+    "a": 1,
+    "exp": "Won the Booker Prize in 1997",
+    "d": "EASY"
+  },
+  {
+    "q": "The author of the book 'One Hundred Years of Solitude' is?",
+    "opts": [
+      "Gabriel Garcia Marquez",
+      "Isabel Allende",
+      "Mario Vargas Llosa",
+      "Mario Benedetti"
+    ],
+    "a": 0,
+    "exp": "Magical Realist novel set in Macondo",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The book 'The Kite Runner' is written by?",
+    "opts": [
+      "Khaled Hosseini",
+      "Nicholas Sparks",
+      "J.K. Rowling",
+      "John Green"
+    ],
+    "a": 0,
+    "exp": "Set in Afghanistan before and during the Taliban rule",
+    "d": "EASY"
+  },
+  {
+    "q": "Who wrote the book 'The Brief Wondrous Life of Oscar Wao'?",
+    "opts": [
+      "Junot Diaz",
+      "Salman Rushdie",
+      "Jhumpa Lahiri",
+      "Michael Ondaatje"
+    ],
+    "a": 0,
+    "exp": "Pulitzer Prize winner in 2008",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The author of the book 'The Joy Luck Club' is?",
+    "opts": [
+      "Amy Tan",
+      "Alice Walker",
+      "Jhumpa Lahiri",
+      "Amy Bloom"
+    ],
+    "a": 0,
+    "exp": "Explores the relationships between Chinese-American mothers and daughters",
+    "d": "EASY"
+  },
+  {
+    "q": "The book 'The Namesake' is written by?",
+    "opts": [
+      "Jhumpa Lahiri",
+      "Amy Tan",
+      "Salman Rushdie",
+      "Chetan Bhagat"
+    ],
+    "a": 0,
+    "exp": "Explores the experiences of an Indian-American family",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The author of the book 'The God of Small Things' is also known for writing?",
+    "opts": [
+      "The Ministry of Utmost Happiness",
+      "The Inheritance of Loss",
+      "The House on Mango Street",
+      "The Namesake"
+    ],
+    "a": 1,
+    "exp": "Novel set in the Himalayas",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The book 'The House on Mango Street' is written by?",
+    "opts": [
+      "Sandra Cisneros",
+      "Junot Diaz",
+      "Salman Rushdie",
+      "Amy Tan"
+    ],
+    "a": 0,
+    "exp": "Coming-of-age novel set in Chicago",
+    "d": "EASY"
+  },
+  {
+    "q": "The author of the book 'The Alchemist' also wrote?",
+    "opts": [
+      "Veronika Decides to Die",
+      "The Pilgrimage",
+      "Like the Flowing River",
+      "The Old Man and the Sea"
+    ],
+    "a": 2,
+    "exp": "A novel by Paulo Coelho",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The book 'The Brief Wondrous Life of Oscar Wao' is set in?",
+    "opts": [
+      "New York City, USA",
+      "Caracas, Venezuela",
+      "Santo Domingo, Dominican Republic",
+      "Cartagena, Colombia"
+    ],
+    "a": 2,
+    "exp": "Dominican-American family's struggles",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The author of the book 'The Joy Luck Club' also wrote?",
+    "opts": [
+      "The Valley of Amazement",
+      "The Hundred Secret Senses",
+      "The Kitchen God's Wife",
+      "The Bonesetter's Daughter"
+    ],
+    "a": 1,
+    "exp": "Historical fiction set in China and the USA",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The book 'The Namesake' explores the experiences of?",
+    "opts": [
+      "Indian-American family",
+      "Chinese-American family",
+      "Sri Lankan-American family",
+      "Pakistani-American family"
+    ],
+    "a": 0,
+    "exp": "Experiences of an Indian-American family",
+    "d": "EASY"
+  },
+  {
+    "q": "The author of the book 'One Hundred Years of Solitude' also wrote?",
+    "opts": [
+      "Autumn of the Patriarch",
+      "Love in the Time of Cholera",
+      "Chronicle of a Death Foretold",
+      "Gabriel Garcia Marquez's friend"
+    ],
+    "a": 1,
+    "exp": "Magical Realist novel set in a fictional town",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The book 'The Kite Runner' explores the experiences of?",
+    "opts": [
+      "Afghanistan",
+      "Pakistan",
+      "India",
+      "Iran"
+    ],
+    "a": 0,
+    "exp": "Afghan boy's relationship with his father",
+    "d": "EASY"
+  },
+  {
+    "q": "The author of the book 'The Alchemist' also wrote?",
+    "opts": [
+      "By the River Piedra I Sat Down and Wept",
+      "The Pilgrimage",
+      "The Valkyries",
+      "Like the Flowing River"
+    ],
+    "a": 1,
+    "exp": "A novel by Paulo Coelho",
+    "d": "MEDIUM"
+  }
+]

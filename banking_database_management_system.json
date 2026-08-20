@@ -1,0 +1,208 @@
+[
+  {
+    "q": "What is the primary function of a DBMS?",
+    "opts": [
+      "Data manipulation",
+      "Data modeling",
+      "Data integrity",
+      "Data security"
+    ],
+    "a": 2,
+    "exp": "DBMS ensures data organization and structure",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is an example of a database normalization rule?",
+    "opts": [
+      "1NF",
+      "2NF",
+      "3NF",
+      "BCNF"
+    ],
+    "a": 3,
+    "exp": "Avoids transitive dependency in tables",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the purpose of a database index?",
+    "opts": [
+      "Improves data security",
+      "Speeds up query execution",
+      "Reduces data redundancy",
+      "Increases data storage"
+    ],
+    "a": 1,
+    "exp": "Enhances query performance by locating data quickly",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the term for the process of creating a copy of a database?",
+    "opts": [
+      "Backup",
+      "Restore",
+      "Cloning",
+      "Mirroring"
+    ],
+    "a": 2,
+    "exp": "Making an exact replica of a database",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a type of database model?",
+    "opts": [
+      "Relational",
+      "Hierarchical",
+      "Network",
+      "Object-oriented"
+    ],
+    "a": 0,
+    "exp": "Organizes data using relationships between tables",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the purpose of a database schema?",
+    "opts": [
+      "Defines database structure",
+      "Stores database data",
+      "Maintains database security",
+      "Optimizes database performance"
+    ],
+    "a": 0,
+    "exp": "Describes the organization and structure of data",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a database management system software?",
+    "opts": [
+      "MySQL",
+      "Oracle",
+      "Microsoft Access",
+      "DB2"
+    ],
+    "a": 2,
+    "exp": "Microsoft's database management system software",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the term for the process of modifying a database design?",
+    "opts": [
+      "Refactoring",
+      "Normalization",
+      "Denormalization",
+      "Redesign"
+    ],
+    "a": 2,
+    "exp": "Removing redundancy and ensuring data integrity",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a database normalization technique?",
+    "opts": [
+      "1NF",
+      "2NF",
+      "3NF",
+      "BCNF",
+      "4NF",
+      "5NF"
+    ],
+    "a": 1,
+    "exp": "Eliminates repeating groups in a table",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the primary benefit of using a database?",
+    "opts": [
+      "Improved data security",
+      "Increased data storage",
+      "Faster data retrieval",
+      "Improved data integrity"
+    ],
+    "a": 3,
+    "exp": "Quick and efficient access to data",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is a type of database user?",
+    "opts": [
+      "Superuser",
+      "User",
+      "Guest",
+      "Admin"
+    ],
+    "a": 2,
+    "exp": "A normal user with limited privileges",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the term for the process of ensuring data consistency and accuracy?",
+    "opts": [
+      "Validation",
+      "Verification",
+      "Data normalization",
+      "Data validation"
+    ],
+    "a": 1,
+    "exp": "Ensuring data accuracy and consistency",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a database management system component?",
+    "opts": [
+      "Database",
+      "Query",
+      "Schema",
+      "Procedure"
+    ],
+    "a": 1,
+    "exp": "Request for data from the database",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the term for the process of recovering a database to its previous state?",
+    "opts": [
+      "Backup",
+      "Restore",
+      "Cloning",
+      "Mirroring"
+    ],
+    "a": 1,
+    "exp": "Recovering data from a previous backup",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a database model type?",
+    "opts": [
+      "Relational",
+      "Object-oriented",
+      "Hierarchical",
+      "Network"
+    ],
+    "a": 1,
+    "exp": "Organizes data using objects and classes",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the term for the process of converting an object-oriented database into a relational database?",
+    "opts": [
+      "Data mapping",
+      "Data modeling",
+      "Data transformation",
+      "Schema mapping"
+    ],
+    "a": 3,
+    "exp": "Converting OO database to relational database",
+    "d": "HARD"
+  },
+  {
+    "q": "Which of the following is a database security feature?",
+    "opts": [
+      "Authentication",
+      "Authorization",
+      "Encryption",
+      "Compression"
+    ],
+    "a": 0,
+    "exp": "Verifying user identity and access",
+    "d": "MEDIUM"
+  }
+]

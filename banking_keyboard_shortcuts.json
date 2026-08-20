@@ -1,0 +1,208 @@
+[
+  {
+    "q": "Ctrl + A selects all the cells in an Excel worksheet.",
+    "opts": [
+      "Alt + A",
+      "Ctrl + A",
+      "Ctrl + V",
+      "Ctrl + C"
+    ],
+    "a": 1,
+    "exp": "Ctrl + A shortcut selects all cells in Excel.",
+    "d": "EASY"
+  },
+  {
+    "q": "Which shortcut is used to copy a cell in MS Excel?",
+    "opts": [
+      "Ctrl + V",
+      "Ctrl + X",
+      "Ctrl + C",
+      "Ctrl + Z"
+    ],
+    "a": 2,
+    "exp": "Ctrl + C copies a cell in Excel.",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the shortcut to cut a selected text in MS Word?",
+    "opts": [
+      "Ctrl + V",
+      "Ctrl + X",
+      "Ctrl + C",
+      "Ctrl + Z"
+    ],
+    "a": 2,
+    "exp": "Ctrl + X cuts a selected text in MS Word.",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the shortcut to paste a copied text in MS Word?",
+    "opts": [
+      "Ctrl + V",
+      "Ctrl + X",
+      "Ctrl + C",
+      "Ctrl + Z"
+    ],
+    "a": 0,
+    "exp": "Ctrl + V pastes a copied text in MS Word.",
+    "d": "EASY"
+  },
+  {
+    "q": "Which shortcut is used to undo an action in MS Office software?",
+    "opts": [
+      "Ctrl + V",
+      "Ctrl + Z",
+      "Ctrl + X",
+      "Ctrl + C"
+    ],
+    "a": 1,
+    "exp": "Ctrl + Z undoes an action in MS Office.",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is a shortcut to open a new file in MS Word?",
+    "opts": [
+      "Ctrl + N",
+      "Ctrl + O",
+      "Ctrl + P",
+      "Ctrl + S"
+    ],
+    "a": 0,
+    "exp": "Ctrl + N opens a new file in MS Word.",
+    "d": "EASY"
+  },
+  {
+    "q": "How can you delete a selected sentence in MS Word?",
+    "opts": [
+      "Ctrl + V",
+      "Ctrl + X",
+      "Ctrl + C",
+      "Ctrl + Z",
+      "Ctrl + A",
+      "Alt + Backspace"
+    ],
+    "a": 3,
+    "exp": "Ctrl + Z is not correct, Alt + Backspace deletes a selected sentence in MS Word.",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the shortcut to open a saved file in MS Excel?",
+    "opts": [
+      "Ctrl + P",
+      "Ctrl + O",
+      "Ctrl + N",
+      "Ctrl + S"
+    ],
+    "a": 1,
+    "exp": "Ctrl + O opens a saved file in MS Excel.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a shortcut to print a document in MS Word?",
+    "opts": [
+      "Ctrl + P",
+      "Ctrl + O",
+      "Ctrl + N",
+      "Ctrl + S"
+    ],
+    "a": 0,
+    "exp": "Ctrl + P prints a document in MS Word.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the shortcut to save a file in MS Excel?",
+    "opts": [
+      "Ctrl + P",
+      "Ctrl + O",
+      "Ctrl + N",
+      "Ctrl + S"
+    ],
+    "a": 3,
+    "exp": "Ctrl + S saves a file in MS Excel.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "How can you undo a deletion in MS Office software?",
+    "opts": [
+      "Ctrl + V",
+      "Ctrl + Z",
+      "Ctrl + X",
+      "Ctrl + C"
+    ],
+    "a": 1,
+    "exp": "Ctrl + Z undoes a deletion in MS Office.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a shortcut to open a new Excel spreadsheet?",
+    "opts": [
+      "Ctrl + P",
+      "Ctrl + O",
+      "Ctrl + N",
+      "Ctrl + S"
+    ],
+    "a": 2,
+    "exp": "Ctrl + N opens a new Excel spreadsheet.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the shortcut to cut a cell in MS Excel?",
+    "opts": [
+      "Ctrl + V",
+      "Ctrl + X",
+      "Ctrl + C",
+      "Ctrl + Z"
+    ],
+    "a": 1,
+    "exp": "Ctrl + X cuts a cell in MS Excel.",
+    "d": "HARD"
+  },
+  {
+    "q": "Which of the following is a shortcut to paste a copied cell in MS Excel?",
+    "opts": [
+      "Ctrl + V",
+      "Ctrl + X",
+      "Ctrl + C",
+      "Ctrl + Z"
+    ],
+    "a": 0,
+    "exp": "Ctrl + V pastes a copied cell in MS Excel.",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the shortcut to open a new document in MS Word?",
+    "opts": [
+      "Ctrl + V",
+      "Ctrl + X",
+      "Ctrl + C",
+      "Ctrl + N"
+    ],
+    "a": 3,
+    "exp": "Ctrl + N opens a new document in MS Word.",
+    "d": "HARD"
+  },
+  {
+    "q": "How can you undo a formatting in MS Word?",
+    "opts": [
+      "Ctrl + V",
+      "Ctrl + Z",
+      "Ctrl + X",
+      "Ctrl + C"
+    ],
+    "a": 1,
+    "exp": "Ctrl + Z undoes a formatting in MS Word.",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the shortcut to open a saved database in MS Excel?",
+    "opts": [
+      "Ctrl + P",
+      "Ctrl + O",
+      "Ctrl + N",
+      "Ctrl + S"
+    ],
+    "a": 1,
+    "exp": "Ctrl + O opens a saved database in MS Excel.",
+    "d": "HARD"
+  }
+]

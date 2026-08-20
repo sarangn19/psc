@@ -1,0 +1,194 @@
+[
+  {
+    "q": "RBI raised repo rate by 0.25% in the last monetary policy.",
+    "opts": [
+      "0.25%",
+      "0.5%",
+      "0.75%",
+      "1%"
+    ],
+    "a": 0,
+    "exp": "Repo rate was increased by 0.25%.",
+    "d": "EASY"
+  },
+  {
+    "q": "The PSU bank's profit increased by 10% in the last year.",
+    "opts": [
+      "8%",
+      "10%",
+      "12%",
+      "15%"
+    ],
+    "a": 1,
+    "exp": "10% increase in profit was observed.",
+    "d": "EASY"
+  },
+  {
+    "q": "The currency in circulation in India is 8,500 crores.",
+    "opts": [
+      "8,000",
+      "8,500",
+      "9,000",
+      "9,500"
+    ],
+    "a": 1,
+    "exp": "Actual currency in circulation is 8,500 crores.",
+    "d": "EASY"
+  },
+  {
+    "q": "The bank's NPAs decreased by 5% in the last quarter.",
+    "opts": [
+      "3%",
+      "5%",
+      "7%",
+      "9%"
+    ],
+    "a": 1,
+    "exp": "5% decrease in NPAs was observed.",
+    "d": "EASY"
+  },
+  {
+    "q": "The government's fiscal deficit is 3.8% of the GDP.",
+    "opts": [
+      "3.5%",
+      "3.8%",
+      "4.1%",
+      "4.5%"
+    ],
+    "a": 1,
+    "exp": "Fiscal deficit is 3.8% of the GDP.",
+    "d": "EASY"
+  },
+  {
+    "q": "The bank's CRAR is 9% as per RBI norms.",
+    "opts": [
+      "8%",
+      "9%",
+      "10%",
+      "11%"
+    ],
+    "a": 1,
+    "exp": "CRAR is 9% as per RBI norms.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The bank's cash reserve ratio is 4.5%.",
+    "opts": [
+      "4%",
+      "4.5%",
+      "5%",
+      "5.5%"
+    ],
+    "a": 1,
+    "exp": "Cash reserve ratio is 4.5%.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The FDI inflow in India is 15 billion USD.",
+    "opts": [
+      "10",
+      "15",
+      "20",
+      "25"
+    ],
+    "a": 1,
+    "exp": "FDI inflow is 15 billion USD.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The bank's interest rate is 8% per annum.",
+    "opts": [
+      "7%",
+      "8%",
+      "9%",
+      "10%"
+    ],
+    "a": 1,
+    "exp": "Interest rate is 8% per annum.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The bank's claim ratio is 70% of the GDP.",
+    "opts": [
+      "60%",
+      "70%",
+      "80%",
+      "90%"
+    ],
+    "a": 1,
+    "exp": "Claim ratio is 70% of the GDP.",
+    "d": "HARD"
+  },
+  {
+    "q": "The RBI's economic growth forecast is 7.2%.",
+    "opts": [
+      "6.5%",
+      "7.2%",
+      "7.8%",
+      "8.5%"
+    ],
+    "a": 1,
+    "exp": "RBI forecasted economic growth of 7.2%.",
+    "d": "HARD"
+  },
+  {
+    "q": "The bank's CRR is 4.25% as per RBI.",
+    "opts": [
+      "4%",
+      "4.25%",
+      "4.5%",
+      "4.75%"
+    ],
+    "a": 1,
+    "exp": "CRR is 4.25% as per RBI.",
+    "d": "HARD"
+  },
+  {
+    "q": "The government's revenue is 15% of the GDP.",
+    "opts": [
+      "12%",
+      "15%",
+      "18%",
+      "20%"
+    ],
+    "a": 1,
+    "exp": "Government revenue is 15% of the GDP.",
+    "d": "HARD"
+  },
+  {
+    "q": "The bank's NPA ratio is 5.5%.",
+    "opts": [
+      "5%",
+      "5.5%",
+      "6%",
+      "6.5%"
+    ],
+    "a": 1,
+    "exp": "NPA ratio is 5.5%.",
+    "d": "HARD"
+  },
+  {
+    "q": "The RBI's liquidity ratio is 60%.",
+    "opts": [
+      "50%",
+      "60%",
+      "70%",
+      "80%"
+    ],
+    "a": 1,
+    "exp": "RBI's liquidity ratio is 60%.",
+    "d": "HARD"
+  },
+  {
+    "q": "The bank's EBITDA is 8% of the revenue.",
+    "opts": [
+      "6%",
+      "8%",
+      "10%",
+      "12%"
+    ],
+    "a": 1,
+    "exp": "EBITDA is 8% of the revenue.",
+    "d": "HARD"
+  }
+]

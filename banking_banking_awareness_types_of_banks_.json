@@ -1,0 +1,206 @@
+[
+  {
+    "q": "Which type of bank is owned and controlled by the Government of India?",
+    "opts": [
+      "Public Sector Bank",
+      "Private Sector Bank",
+      "Foreign Bank",
+      "Cooperative Bank"
+    ],
+    "a": 0,
+    "exp": "Public Sector Banks are owned by Government of India",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the type of bank which is owned and controlled by its customers?",
+    "opts": [
+      "Private Sector Bank",
+      "Cooperative Bank",
+      "Public Sector Bank",
+      "Foreign Bank"
+    ],
+    "a": 1,
+    "exp": "Cooperative Bank is owned and controlled by its customers",
+    "d": "EASY"
+  },
+  {
+    "q": "Which type of bank is owned and controlled by private investors?",
+    "opts": [
+      "Public Sector Bank",
+      "Private Sector Bank",
+      "Cooperative Bank",
+      "Foreign Bank"
+    ],
+    "a": 1,
+    "exp": "Private Sector Banks are owned by private investors",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the type of bank which has subsidiaries of foreign banks?",
+    "opts": [
+      "Foreign Bank",
+      "Private Sector Bank",
+      "Public Sector Bank",
+      "Cooperative Bank"
+    ],
+    "a": 0,
+    "exp": "Foreign Banks have subsidiaries in India",
+    "d": "EASY"
+  },
+  {
+    "q": "Which type of bank has branches in various states of the country?",
+    "opts": [
+      "Public Sector Bank",
+      "Private Sector Bank",
+      "Cooperative Bank",
+      "Nationalized Bank"
+    ],
+    "a": 0,
+    "exp": "Public Sector Banks have presence in various states",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the type of bank which is owned and controlled by a group of people in a village?",
+    "opts": [
+      "Cooperative Bank",
+      "Private Sector Bank",
+      "Public Sector Bank",
+      "Foreign Bank"
+    ],
+    "a": 0,
+    "exp": "Cooperative Bank is owned by village group",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which type of bank is owned and controlled by the Government of India after nationalization?",
+    "opts": [
+      "Nationalized Bank",
+      "Private Sector Bank",
+      "Cooperative Bank",
+      "Public Sector Bank"
+    ],
+    "a": 0,
+    "exp": "Nationalized Banks are owned by Government of India",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the type of bank which provides banking services to its shareholders only?",
+    "opts": [
+      "Private Sector Bank",
+      "Public Sector Bank",
+      "Cooperative Bank",
+      "Savings Bank"
+    ],
+    "a": 1,
+    "exp": "Private Sector Banks provide services to shareholders",
+    "d": "HARD"
+  },
+  {
+    "q": "Which type of bank is owned and controlled by a group of people in a specific area?",
+    "opts": [
+      "Cooperative Bank",
+      "Private Sector Bank",
+      "Public Sector Bank",
+      "Savings Bank"
+    ],
+    "a": 0,
+    "exp": "Cooperative Bank is owned by local group",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the type of bank which has its own equity capital?",
+    "opts": [
+      "Savings Bank",
+      "Private Sector Bank",
+      "Public Sector Bank",
+      "Nationalized Bank"
+    ],
+    "a": 1,
+    "exp": "Private Sector Banks have own equity capital",
+    "d": "HARD"
+  },
+  {
+    "q": "Which type of bank is owned and controlled by the Government of India and RBI?",
+    "opts": [
+      "Public Sector Bank",
+      "Private Sector Bank",
+      "Cooperative Bank",
+      "Public-Private Partnership Bank"
+    ],
+    "a": 0,
+    "exp": "Public Sector Banks are owned by Government and RBI",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the type of bank which has its own savings accounts?",
+    "opts": [
+      "Savings Bank",
+      "Private Sector Bank",
+      "Public Sector Bank",
+      "Cooperative Bank"
+    ],
+    "a": 0,
+    "exp": "Savings Bank provides its own savings accounts",
+    "d": "HARD"
+  },
+  {
+    "q": "Which type of bank is owned and controlled by RBI?",
+    "opts": [
+      "Public Sector Bank",
+      "Private Sector Bank",
+      "Cooperative Bank",
+      "Public-Private Partnership Bank"
+    ],
+    "a": 2,
+    "exp": "RBI controls and regulates Cooperative Banks",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the type of bank which has a mix of public and private ownership?",
+    "opts": [
+      "Public Sector Bank",
+      "Private Sector Bank",
+      "Cooperative Bank",
+      "Public-Private Partnership Bank"
+    ],
+    "a": 3,
+    "exp": "Public-Private Partnership Bank has mixed ownership",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which type of bank is owned and controlled by a group of villages?",
+    "opts": [
+      "Cooperative Bank",
+      "Private Sector Bank",
+      "Public Sector Bank",
+      "Foreign Bank"
+    ],
+    "a": 0,
+    "exp": "Cooperative Bank is owned by village group",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the type of bank which has its own deposits?",
+    "opts": [
+      "Savings Bank",
+      "Private Sector Bank",
+      "Public Sector Bank",
+      "Cooperative Bank"
+    ],
+    "a": 0,
+    "exp": "Savings Bank has its own deposits",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which type of bank is a foreign bank with Indian operations?",
+    "opts": [
+      "Foreign Bank",
+      "Public Sector Bank",
+      "Private Sector Bank",
+      "Cooperative Bank"
+    ],
+    "a": 0,
+    "exp": "Foreign Banks operate in India",
+    "d": "EASY"
+  }
+]

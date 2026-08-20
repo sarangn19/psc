@@ -4,6 +4,20 @@ import { authenticate, AuthRequest } from '../middleware/auth';
 
 const router = Router();
 
+// Toggle travel-friendly mode (hides math / pen-and-paper questions)
+router.post('/travel-mode', authenticate, async (req: AuthRequest, res: Response) => {
+  const { enabled } = req.body;
+  const userId = req.user!.id;
+
+  const user = await prisma.user.update({
+    where: { id: userId },
+    data: { travelMode: enabled === true },
+    select: { travelMode: true },
+  });
+
+  return res.json(user);
+});
+
 // Get user dashboard stats
 router.get('/stats', authenticate, async (req: AuthRequest, res: Response) => {
   const userId = req.user!.id;

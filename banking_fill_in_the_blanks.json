@@ -1,0 +1,194 @@
+[
+  {
+    "q": "The Reserve Bank of India's headquarters is located in ___________",
+    "opts": [
+      "Kolkata",
+      "Mumbai",
+      "New Delhi",
+      "Bangalore"
+    ],
+    "a": 1,
+    "exp": "RBI's headquarters is in Mumbai",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's ___________ is the difference between its total assets and total liabilities",
+    "opts": [
+      "equity",
+      "liability",
+      "asset",
+      "capital"
+    ],
+    "a": 0,
+    "exp": "Equity is total assets minus total liabilities",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The minimum balance required for a savings bank account is ___________",
+    "opts": [
+      "500",
+      "1000",
+      "2000",
+      "5000"
+    ],
+    "a": 0,
+    "exp": "Minimum balance for SB account is Rs. 500",
+    "d": "EASY"
+  },
+  {
+    "q": "The ___________ is a financial statement that shows a company's financial position at a specific date",
+    "opts": [
+      "Income Statement",
+      "Balance Sheet",
+      "Cash Flow Statement",
+      "Profit and Loss Statement"
+    ],
+    "a": 1,
+    "exp": "Balance sheet shows financial position at a date",
+    "d": "HARD"
+  },
+  {
+    "q": "A bank's ___________ is the amount of money deposited by its customers",
+    "opts": [
+      "reserve",
+      "deposit",
+      "credit",
+      "asset"
+    ],
+    "a": 2,
+    "exp": "Bank's credit is the amount deposited by customers",
+    "d": "EASY"
+  },
+  {
+    "q": "The RBI's monetary policy is implemented through ___________",
+    "opts": [
+      "open market operations",
+      "repo and reverse repo",
+      "cash reserve ratio",
+      "statutory liquidity ratio"
+    ],
+    "a": 0,
+    "exp": "RBI's monetary policy through open market operations",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A bank's ___________ is the ratio of its total deposits to its total advances",
+    "opts": [
+      "capital adequacy ratio",
+      "asset turnover ratio",
+      "debt equity ratio",
+      "liquidity ratio"
+    ],
+    "a": 3,
+    "exp": "Liquidity ratio is total deposits to total advances",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The ___________ is a type of loan that is secured by a mortgage on a property",
+    "opts": [
+      "overdraft",
+      "cash credit",
+      "personal loan",
+      "housing loan"
+    ],
+    "a": 3,
+    "exp": "Housing loan is secured by a mortgage on a property",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's ___________ is the process of verifying the identity of its customers",
+    "opts": [
+      "Know Your Customer",
+      "customer due diligence",
+      "anti-money laundering",
+      "credit scoring"
+    ],
+    "a": 0,
+    "exp": "Bank's KYC is the process of verifying customer identity",
+    "d": "EASY"
+  },
+  {
+    "q": "The ___________ is a type of bank account that is linked to a specific debit card",
+    "opts": [
+      "savings account",
+      "current account",
+      "overdraft account",
+      "ATM account"
+    ],
+    "a": 0,
+    "exp": "ATM account is linked to a debit card",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's ___________ is the process of evaluating the creditworthiness of its customers",
+    "opts": [
+      "credit scoring",
+      "risk assessment",
+      "lending criteria",
+      "portfolio management"
+    ],
+    "a": 0,
+    "exp": "Bank's credit scoring evaluates customer creditworthiness",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The ___________ is a type of financial instrument that represents a loan from a bank to a customer",
+    "opts": [
+      "demand draft",
+      "cheque",
+      "banker's acceptance",
+      "bill of exchange"
+    ],
+    "a": 3,
+    "exp": "Bill of exchange is a loan from bank to customer",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A bank's ___________ is the ratio of its net profits to its total assets",
+    "opts": [
+      "return on assets",
+      "return on equity",
+      "capital turnover ratio",
+      "debt equity ratio"
+    ],
+    "a": 0,
+    "exp": "Return on assets is net profits to total assets",
+    "d": "HARD"
+  },
+  {
+    "q": "The ___________ is a type of bank account that is held in a foreign currency",
+    "opts": [
+      "current account",
+      "savings account",
+      "fixed deposit account",
+      "NRE account"
+    ],
+    "a": 3,
+    "exp": "NRE account is held in a foreign currency",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A bank's ___________ is the process of managing its liquidity position",
+    "opts": [
+      "asset management",
+      "liability management",
+      "cash management",
+      "liquidity management"
+    ],
+    "a": 3,
+    "exp": "Bank's liquidity management manages liquidity position",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The ___________ is a type of financial instrument that represents a promise to pay a certain amount of money at a specific date",
+    "opts": [
+      "bill of exchange",
+      "banker's acceptance",
+      "cheque",
+      "demand draft"
+    ],
+    "a": 0,
+    "exp": "Bill of exchange is a promise to pay at a specific date",
+    "d": "MEDIUM"
+  }
+]

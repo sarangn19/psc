@@ -1,0 +1,182 @@
+[
+  {
+    "q": "Who is the Governor of Kerala?",
+    "opts": [
+      "P. Sathasivam",
+      "Keshari Nath Tripathi",
+      "Kalyan Singh",
+      "K. Sankaranarayanan"
+    ],
+    "a": 0,
+    "exp": "P. Sathasivam",
+    "d": "EASY"
+  },
+  {
+    "q": "Who is the Chief Minister of Kerala?",
+    "opts": [
+      "Pinarayi Vijayan",
+      "Oommen Chandy",
+      "V. S. Achuthanandan",
+      "A. K. Antony"
+    ],
+    "a": 0,
+    "exp": "Pinarayi Vijayan",
+    "d": "EASY"
+  },
+  {
+    "q": "Who is the Chairman of the National Green Tribunal?",
+    "opts": [
+      "Justice Adarsh Kumar Goel",
+      "Justice Swatanter Kumar",
+      "Justice Brijesh Kumar",
+      "Justice Dalip Singh"
+    ],
+    "a": 0,
+    "exp": "Justice Adarsh Kumar Goel",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the current Chairman of the Kerala Public Service Commission?",
+    "opts": [
+      "V. G. Seban",
+      "D. Muralidharan",
+      "P. Vijaya Kumar",
+      "T. P. Sudheer"
+    ],
+    "a": 2,
+    "exp": "P. Vijaya Kumar",
+    "d": "EASY"
+  },
+  {
+    "q": "Who is the President of the Indian National Congress?",
+    "opts": [
+      "Mallikarjun Kharge",
+      "Sonia Gandhi",
+      "Rahul Gandhi",
+      "Jyotiraditya Scindia"
+    ],
+    "a": 0,
+    "exp": "Mallikarjun Kharge",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the Governor of West Bengal?",
+    "opts": [
+      "C. V. Ananda Bose",
+      "Keshari Nath Tripathi",
+      "Kalyan Singh",
+      "La. Ganesan"
+    ],
+    "a": 0,
+    "exp": "La. Ganesan",
+    "d": "EASY"
+  },
+  {
+    "q": "Who is the MD of Indian Bank?",
+    "opts": [
+      "S. M. Das",
+      "P. N. Sankara Narayanan",
+      "S. S. Mallikarjuna Rao",
+      "N. Sivasailam"
+    ],
+    "a": 0,
+    "exp": "S. S. Mallikarjuna Rao",
+    "d": "EASY"
+  },
+  {
+    "q": "Who is the Chairman of the National Highways Authority of India?",
+    "opts": [
+      "D.V. Sadananda Gowda",
+      "Swaraj P. Chaturvedi",
+      "Sudhir Kumar Sharma",
+      "Subhash Chandra Garg"
+    ],
+    "a": 1,
+    "exp": "Swaraj P. Chaturvedi",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the Chief Minister of Madhya Pradesh?",
+    "opts": [
+      "Bhupesh Baghel",
+      "Sachin Pilot",
+      "Uddhav Thackeray",
+      "Shivraj Singh Chouhan"
+    ],
+    "a": 3,
+    "exp": "Shivraj Singh Chouhan",
+    "d": "EASY"
+  },
+  {
+    "q": "Who is the Ambassador of India to the United States?",
+    "opts": [
+      "Taranjit Singh Sandhu",
+      "Sanjay Kumar Verma",
+      "Sarvjit Singh Passey",
+      "Pradeep Kumar Rawat"
+    ],
+    "a": 0,
+    "exp": "Taranjit Singh Sandhu",
+    "d": "EASY"
+  },
+  {
+    "q": "Who is the Chairman of the Kerala State Electricity Board?",
+    "opts": [
+      "A. Shailaja",
+      "E. M. Najeeb",
+      "K. B. Ganesh Kumar",
+      "B. P. Acharya"
+    ],
+    "a": 2,
+    "exp": "K. B. Ganesh Kumar",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the CEO of Infosys?",
+    "opts": [
+      "Salil S. Parekh",
+      "Krishnan Raghavendra",
+      "Ravi Kumar S",
+      "Pravin Rao"
+    ],
+    "a": 0,
+    "exp": "Salil S. Parekh",
+    "d": "EASY"
+  },
+  {
+    "q": "Who is the Director-General of the Directorate-General of Hydrology?",
+    "opts": [
+      "Gauri Krupa Jena",
+      "K. V. R. Ravi",
+      "S. S. Mishra",
+      "K. S. S. Rao"
+    ],
+    "a": 0,
+    "exp": "Gauri Krupa Jena",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the CMD of Canara Bank?",
+    "opts": [
+      "L. K. Prasad",
+      "V. S. Jayakumar",
+      "K. S. Gopalakrishnan",
+      "T. N. Manoharan"
+    ],
+    "a": 0,
+    "exp": "T. N. Manoharan",
+    "d": "EASY"
+  },
+  {
+    "q": "Who is the Governor of Andhra Pradesh?",
+    "opts": [
+      "Sri Sateesh Babu",
+      "Tamilisai Soundararajan",
+      "Gangadhara Raju S",
+      "Biswa Bhusan Harichandan"
+    ],
+    "a": 2,
+    "exp": "Gangadhara Raju S",
+    "d": "MEDIUM"
+  }
+]

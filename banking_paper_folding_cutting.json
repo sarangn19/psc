@@ -1,0 +1,182 @@
+[
+  {
+    "q": "What is the cost of folding 1000 sheets of paper?",
+    "opts": [
+      "₹ 1000",
+      "₹ 500",
+      "₹ 2000",
+      "₹ 1500"
+    ],
+    "a": 1,
+    "exp": "Cost of folding 1000 sheets of paper is ₹ 500",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "How much does it cost to cut 500 sheets of paper?",
+    "opts": [
+      "₹ 250",
+      "₹ 500",
+      "₹ 1000",
+      "₹ 750"
+    ],
+    "a": 2,
+    "exp": "Cost of cutting 500 sheets of paper is ₹ 750",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the cost of folding 200 sheets of paper?",
+    "opts": [
+      "₹ 100",
+      "₹ 200",
+      "₹ 300",
+      "₹ 400"
+    ],
+    "a": 1,
+    "exp": "Cost of folding 200 sheets of paper is ₹ 200",
+    "d": "EASY"
+  },
+  {
+    "q": "How much does it cost to cut 800 sheets of paper?",
+    "opts": [
+      "₹ 800",
+      "₹ 1000",
+      "₹ 1200",
+      "₹ 1600"
+    ],
+    "a": 0,
+    "exp": "Cost of cutting 800 sheets of paper is ₹ 1000",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the cost of folding 300 sheets of paper?",
+    "opts": [
+      "₹ 150",
+      "₹ 300",
+      "₹ 450",
+      "₹ 600"
+    ],
+    "a": 1,
+    "exp": "Cost of folding 300 sheets of paper is ₹ 300",
+    "d": "EASY"
+  },
+  {
+    "q": "How much does it cost to cut 600 sheets of paper?",
+    "opts": [
+      "₹ 600",
+      "₹ 800",
+      "₹ 1000",
+      "₹ 1200"
+    ],
+    "a": 0,
+    "exp": "Cost of cutting 600 sheets of paper is ₹ 800",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the cost of folding 1200 sheets of paper?",
+    "opts": [
+      "₹ 1200",
+      "₹ 1500",
+      "₹ 1800",
+      "₹ 2000"
+    ],
+    "a": 0,
+    "exp": "Cost of folding 1200 sheets of paper is ₹ 1500",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "How much does it cost to cut 400 sheets of paper?",
+    "opts": [
+      "₹ 200",
+      "₹ 300",
+      "₹ 400",
+      "₹ 500"
+    ],
+    "a": 2,
+    "exp": "Cost of cutting 400 sheets of paper is ₹ 400",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the cost of folding 900 sheets of paper?",
+    "opts": [
+      "₹ 900",
+      "₹ 1000",
+      "₹ 1100",
+      "₹ 1200"
+    ],
+    "a": 0,
+    "exp": "Cost of folding 900 sheets of paper is ₹ 1100",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "How much does it cost to cut 700 sheets of paper?",
+    "opts": [
+      "₹ 700",
+      "₹ 800",
+      "₹ 900",
+      "₹ 1000"
+    ],
+    "a": 0,
+    "exp": "Cost of cutting 700 sheets of paper is ₹ 800",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the cost of folding 800 sheets of paper?",
+    "opts": [
+      "₹ 800",
+      "₹ 1000",
+      "₹ 1200",
+      "₹ 1500"
+    ],
+    "a": 1,
+    "exp": "Cost of folding 800 sheets of paper is ₹ 1200",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "How much does it cost to cut 1000 sheets of paper?",
+    "opts": [
+      "₹ 1000",
+      "₹ 1200",
+      "₹ 1500",
+      "₹ 2000"
+    ],
+    "a": 1,
+    "exp": "Cost of cutting 1000 sheets of paper is ₹ 1200",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the cost of folding 500 sheets of paper?",
+    "opts": [
+      "₹ 250",
+      "₹ 500",
+      "₹ 750",
+      "₹ 1000"
+    ],
+    "a": 1,
+    "exp": "Cost of folding 500 sheets of paper is ₹ 750",
+    "d": "EASY"
+  },
+  {
+    "q": "How much does it cost to cut 300 sheets of paper?",
+    "opts": [
+      "₹ 150",
+      "₹ 300",
+      "₹ 450",
+      "₹ 600"
+    ],
+    "a": 1,
+    "exp": "Cost of cutting 300 sheets of paper is ₹ 300",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the cost of folding 600 sheets of paper?",
+    "opts": [
+      "₹ 600",
+      "₹ 800",
+      "₹ 1000",
+      "₹ 1200"
+    ],
+    "a": 1,
+    "exp": "Cost of folding 600 sheets of paper is ₹ 1000",
+    "d": "MEDIUM"
+  }
+]

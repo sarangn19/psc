@@ -1,0 +1,194 @@
+[
+  {
+    "q": "What is the term for separating items into distinct categories based on common characteristics?",
+    "opts": [
+      "Sorting",
+      "Grouping",
+      "Classification",
+      "Prioritization"
+    ],
+    "a": 2,
+    "exp": "Separating items into distinct categories",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank customer is classified as a high-risk customer based on which of the following?",
+    "opts": [
+      "Annual income",
+      "Age",
+      "Occupation",
+      "Credit history"
+    ],
+    "a": 3,
+    "exp": "Credit history determines risk assessment",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the process of dividing people into groups based on demographic characteristics?",
+    "opts": [
+      "Segmentation",
+      "Targeting",
+      "Positioning",
+      "Market research"
+    ],
+    "a": 0,
+    "exp": "Dividing people into groups by demographic characteristics",
+    "d": "EASY"
+  },
+  {
+    "q": "A loan is classified as a short-term loan if its tenure is less than 5 years.",
+    "opts": [
+      "True",
+      "False",
+      "Short-term",
+      "Long-term"
+    ],
+    "a": 0,
+    "exp": "Short-term loans have tenure < 5 years",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank uses which classification method to categorize its customers based on their transaction history?",
+    "opts": [
+      "Analogous",
+      "Digital",
+      "Cluster analysis",
+      "Customer segmentation"
+    ],
+    "a": 3,
+    "exp": "Customer segmentation categorizes customers based on transactions",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the term for categorizing bank customers based on their geographical location?",
+    "opts": [
+      "Geographic segmentation",
+      "Demographic segmentation",
+      "Psychographic segmentation",
+      "Behavioral segmentation"
+    ],
+    "a": 0,
+    "exp": "Categorizing customers by geographical location",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank classifies its assets as current assets if they are expected to be sold or used within one year.",
+    "opts": [
+      "True",
+      "False",
+      "Current assets",
+      "Non-current assets"
+    ],
+    "a": 0,
+    "exp": "Current assets are sold or used within 1 year",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the process of dividing a market into distinct groups of buyers with similar needs?",
+    "opts": [
+      "Segmentation",
+      "Targeting",
+      "Positioning",
+      "Market research"
+    ],
+    "a": 0,
+    "exp": "Dividing market into groups with similar needs",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank customer is classified as a low-risk customer based on which of the following?",
+    "opts": [
+      "Annual income",
+      "Age",
+      "Occupation",
+      "Credit history"
+    ],
+    "a": 1,
+    "exp": "Credit history determines risk assessment",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A loan is classified as a long-term loan if its tenure is more than 5 years.",
+    "opts": [
+      "True",
+      "False",
+      "Short-term",
+      "Long-term"
+    ],
+    "a": 1,
+    "exp": "Long-term loans have tenure > 5 years",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the term for categorizing bank customers based on their lifestyle and personality?",
+    "opts": [
+      "Psychographic segmentation",
+      "Demographic segmentation",
+      "Geographic segmentation",
+      "Behavioral segmentation"
+    ],
+    "a": 0,
+    "exp": "Categorizing customers by lifestyle and personality",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank uses which classification method to group its customers based on their values and attitudes?",
+    "opts": [
+      "Demographic segmentation",
+      "Geographic segmentation",
+      "Psychographic segmentation",
+      "Customer segmentation"
+    ],
+    "a": 2,
+    "exp": "Psychographic segmentation categorizes customers by values and attitudes",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the process of categorizing bank customers based on their age and income?",
+    "opts": [
+      "Segmentation",
+      "Targeting",
+      "Positioning",
+      "Demographic segmentation"
+    ],
+    "a": 3,
+    "exp": "Categorizing customers by age and income",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank classifies its liabilities as non-current liabilities if they are not expected to be paid within one year.",
+    "opts": [
+      "True",
+      "False",
+      "Current liabilities",
+      "Non-current liabilities"
+    ],
+    "a": 0,
+    "exp": "Non-current liabilities are not paid within 1 year",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the term for categorizing bank customers based on their transaction behavior?",
+    "opts": [
+      "Behavioral segmentation",
+      "Demographic segmentation",
+      "Geographic segmentation",
+      "Psychographic segmentation"
+    ],
+    "a": 0,
+    "exp": "Categorizing customers by transaction behavior",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank uses which classification method to categorize its customers based on their occupation and income?",
+    "opts": [
+      "Analogous",
+      "Digital",
+      "Cluster analysis",
+      "Customer segmentation"
+    ],
+    "a": 3,
+    "exp": "Customer segmentation categorizes customers based on occupation and income",
+    "d": "MEDIUM"
+  }
+]

@@ -1,0 +1,206 @@
+[
+  {
+    "q": "The rates of interest on all deposits with the bank are same.",
+    "opts": [
+      "The rates of interest on all deposits with the bank are different.",
+      "The rates of interest on all deposits with the bank are same.",
+      "The rates of interest on all deposits with the bank are higher.",
+      "The rates of interest on all deposits with the bank are lower."
+    ],
+    "a": 3,
+    "exp": "Correct sentence",
+    "d": "EASY"
+  },
+  {
+    "q": "The customer is unable to withdraw his own money.",
+    "opts": [
+      "The customer can withdraw his own money.",
+      "The customer is unable to withdraw his own money.",
+      "The customer can withdraw others' money.",
+      "The customer cannot withdraw his own money."
+    ],
+    "a": 1,
+    "exp": "Correct sentence",
+    "d": "EASY"
+  },
+  {
+    "q": "This is the first time that the bank has made such a large profit.",
+    "opts": [
+      "This is the first time that the bank has made a large profit.",
+      "This is the first time that the bank has made such a large profit.",
+      "This is the first time that the bank has made a small profit.",
+      "This is the first time that the bank has made such a small profit."
+    ],
+    "a": 2,
+    "exp": "Correct sentence",
+    "d": "EASY"
+  },
+  {
+    "q": "The bank is open on all days of the week.",
+    "opts": [
+      "The bank is open on all days of the week.",
+      "The bank is open on only one day of the week.",
+      "The bank is not open on all days of the week.",
+      "The bank is open on only some days of the week."
+    ],
+    "a": 0,
+    "exp": "Correct sentence",
+    "d": "EASY"
+  },
+  {
+    "q": "The customer's account will be closed after six months of inactivity.",
+    "opts": [
+      "The customer's account will be closed after six months of inactivity.",
+      "The customer's account will be closed after six months of activity.",
+      "The customer's account will not be closed after six months of inactivity.",
+      "The customer's account will be closed after six months of inactivity."
+    ],
+    "a": 0,
+    "exp": "Correct sentence",
+    "d": "EASY"
+  },
+  {
+    "q": "The bank will provide the customer with a loan of Rs. 50,000.",
+    "opts": [
+      "The bank will provide the customer with a loan of Rs. 25,000.",
+      "The bank will provide the customer with a loan of Rs. 50,000.",
+      "The bank will not provide the customer with a loan of Rs. 50,000.",
+      "The bank will provide the customer with a loan of Rs. 75,000."
+    ],
+    "a": 2,
+    "exp": "Correct sentence",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The bank's policy is to provide loans to customers at a low interest rate.",
+    "opts": [
+      "The bank's policy is to provide loans to customers at a low interest rate.",
+      "The bank's policy is to provide loans to customers at a high interest rate.",
+      "The bank's policy is to provide loans to customers at a very low interest rate.",
+      "The bank's policy is to provide loans to customers at a very high interest rate."
+    ],
+    "a": 0,
+    "exp": "Correct sentence",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The bank will deduct the interest on loan from the customer's account.",
+    "opts": [
+      "The bank will deduct the interest on loan from the customer's account.",
+      "The bank will not deduct the interest on loan from the customer's account.",
+      "The bank will deduct the interest on deposit from the customer's account.",
+      "The bank will deduct the interest on loan from the customer's account."
+    ],
+    "a": 0,
+    "exp": "Correct sentence",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The bank's policy is to provide loans to customers who have a good credit history.",
+    "opts": [
+      "The bank's policy is to provide loans to customers who have a good credit history.",
+      "The bank's policy is to provide loans to customers who have a bad credit history.",
+      "The bank's policy is to provide loans to customers who have no credit history.",
+      "The bank's policy is to provide loans to customers who have a very bad credit history."
+    ],
+    "a": 0,
+    "exp": "Correct sentence",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The bank will provide the customer with a loan of Rs. 25,000 at 10% interest.",
+    "opts": [
+      "The bank will provide the customer with a loan of Rs. 25,000 at 10% interest.",
+      "The bank will provide the customer with a loan of Rs. 25,000 at 5% interest.",
+      "The bank will provide the customer with a loan of Rs. 25,000 at 15% interest.",
+      "The bank will provide the customer with a loan of Rs. 25,000 at 20% interest."
+    ],
+    "a": 0,
+    "exp": "Correct sentence",
+    "d": "HARD"
+  },
+  {
+    "q": "The bank will deduct the interest on loan from the customer's account at the end of the month.",
+    "opts": [
+      "The bank will deduct the interest on loan from the customer's account at the end of the month.",
+      "The bank will deduct the interest on loan from the customer's account at the beginning of the month.",
+      "The bank will deduct the interest on deposit from the customer's account at the end of the month.",
+      "The bank will deduct the interest on loan from the customer's account at the beginning of the month."
+    ],
+    "a": 0,
+    "exp": "Correct sentence",
+    "d": "HARD"
+  },
+  {
+    "q": "The bank's policy is to provide loans to customers who have a bad credit history.",
+    "opts": [
+      "The bank's policy is to provide loans to customers who have a bad credit history.",
+      "The bank's policy is to provide loans to customers who have a good credit history.",
+      "The bank's policy is to provide loans to customers who have no credit history.",
+      "The bank's policy is to provide loans to customers who have a very bad credit history."
+    ],
+    "a": 1,
+    "exp": "Correct sentence",
+    "d": "HARD"
+  },
+  {
+    "q": "The bank will provide the customer with a loan of Rs. 50,000 at 12% interest.",
+    "opts": [
+      "The bank will provide the customer with a loan of Rs. 50,000 at 10% interest.",
+      "The bank will provide the customer with a loan of Rs. 50,000 at 12% interest.",
+      "The bank will provide the customer with a loan of Rs. 50,000 at 15% interest.",
+      "The bank will provide the customer with a loan of Rs. 50,000 at 20% interest."
+    ],
+    "a": 2,
+    "exp": "Correct sentence",
+    "d": "HARD"
+  },
+  {
+    "q": "The bank will deduct the interest on loan from the customer's account at the beginning of the month.",
+    "opts": [
+      "The bank will deduct the interest on loan from the customer's account at the beginning of the month.",
+      "The bank will deduct the interest on loan from the customer's account at the end of the month.",
+      "The bank will deduct the interest on deposit from the customer's account at the beginning of the month.",
+      "The bank will deduct the interest on loan from the customer's account at the end of the month."
+    ],
+    "a": 0,
+    "exp": "Correct sentence",
+    "d": "HARD"
+  },
+  {
+    "q": "The bank's policy is to provide loans to customers who have no credit history.",
+    "opts": [
+      "The bank's policy is to provide loans to customers who have a good credit history.",
+      "The bank's policy is to provide loans to customers who have a bad credit history.",
+      "The bank's policy is to provide loans to customers who have no credit history.",
+      "The bank's policy is to provide loans to customers who have a very bad credit history."
+    ],
+    "a": 3,
+    "exp": "Correct sentence",
+    "d": "HARD"
+  },
+  {
+    "q": "The bank will provide the customer with a loan of Rs. 25,000 at 15% interest.",
+    "opts": [
+      "The bank will provide the customer with a loan of Rs. 25,000 at 10% interest.",
+      "The bank will provide the customer with a loan of Rs. 25,000 at 12% interest.",
+      "The bank will provide the customer with a loan of Rs. 25,000 at 15% interest.",
+      "The bank will provide the customer with a loan of Rs. 25,000 at 20% interest."
+    ],
+    "a": 2,
+    "exp": "Correct sentence",
+    "d": "HARD"
+  },
+  {
+    "q": "The bank will deduct the interest on deposit from the customer's account at the beginning of the month.",
+    "opts": [
+      "The bank will deduct the interest on deposit from the customer's account at the beginning of the month.",
+      "The bank will deduct the interest on loan from the customer's account at the end of the month.",
+      "The bank will deduct the interest on deposit from the customer's account at the end of the month.",
+      "The bank will deduct the interest on loan from the customer's account at the beginning of the month."
+    ],
+    "a": 0,
+    "exp": "Correct sentence",
+    "d": "HARD"
+  }
+]

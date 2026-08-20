@@ -1,0 +1,182 @@
+[
+  {
+    "q": "What is 20% of 500?",
+    "opts": [
+      "80",
+      "100",
+      "120",
+      "150"
+    ],
+    "a": 1,
+    "exp": "20% of 500 = 100",
+    "d": "EASY"
+  },
+  {
+    "q": "Find the odd one out: Car, Bus, Rickshaw, Scooter",
+    "opts": [
+      "Auto, Scooter, Rickshaw, Bus",
+      "Bus, Car, Rickshaw, Scooter",
+      "Car, Bus, Rickshaw, Scooter",
+      "Scooter, Rickshaw, Bus, Auto"
+    ],
+    "a": 0,
+    "exp": "Auto is the odd one out",
+    "d": "EASY"
+  },
+  {
+    "q": "A batsman hits 4 boundary balls in a row. What is the total number of runs he scored?",
+    "opts": [
+      "4",
+      "8",
+      "16",
+      "32"
+    ],
+    "a": 2,
+    "exp": "Each boundary is 4 runs",
+    "d": "EASY"
+  },
+  {
+    "q": "In a class of 40 students, 3/5 of the students are boys. How many girls are there?",
+    "opts": [
+      "12",
+      "16",
+      "20",
+      "24"
+    ],
+    "a": 3,
+    "exp": "3/5 of 40 is 24",
+    "d": "EASY"
+  },
+  {
+    "q": "A bat weighs 1.5 kg. What is the weight of 8 such bats?",
+    "opts": [
+      "8",
+      "9.6",
+      "10",
+      "12"
+    ],
+    "a": 1,
+    "exp": "8 * 1.5 = 12",
+    "d": "EASY"
+  },
+  {
+    "q": "Find the next number in the series: 1, 2, 4, 8, 16, ?",
+    "opts": [
+      "32",
+      "64",
+      "28",
+      "16"
+    ],
+    "a": 0,
+    "exp": "Series is double the previous number",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A snail is at the bottom of a 20-foot well. Each day, it climbs 4 feet and slips back 2 feet. How many days will it take to climb out of the well?",
+    "opts": [
+      "9",
+      "10",
+      "11",
+      "12"
+    ],
+    "a": 0,
+    "exp": "Climbs 4, slips back 2 each day",
+    "d": "HARD"
+  },
+  {
+    "q": "A boy has 15 red balls, 20 blue balls, and 25 green balls. How many balls does he have in total?",
+    "opts": [
+      "10",
+      "15",
+      "20",
+      "60"
+    ],
+    "a": 2,
+    "exp": "15 + 20 + 25 = 60",
+    "d": "EASY"
+  },
+  {
+    "q": "A man is 40 years old. He will be twice as old as his son in 10 years. How old is his son now?",
+    "opts": [
+      "10",
+      "15",
+      "20",
+      "30"
+    ],
+    "a": 2,
+    "exp": "Let son's age be x, then 40 + 10 = 2(x + 10)",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A car travels 240 km in 4 hours. How much distance will it travel in 6 hours at the same speed?",
+    "opts": [
+      "240",
+      "360",
+      "480",
+      "600"
+    ],
+    "a": 1,
+    "exp": "Speed = 240/4 = 60 kmph, distance in 6 hours = 60 * 6 = 360",
+    "d": "EASY"
+  },
+  {
+    "q": "A water tank has 5 taps. Each tap can fill 10 buckets per hour. How many buckets can 3 such taps fill in 4 hours?",
+    "opts": [
+      "120",
+      "150",
+      "200",
+      "300"
+    ],
+    "a": 2,
+    "exp": "3 taps can fill 30 buckets per hour, 30 * 4 = 120",
+    "d": "EASY"
+  },
+  {
+    "q": "A car travels 400 km in 5 hours. How much distance will it travel in 8 hours at the same speed?",
+    "opts": [
+      "400",
+      "800",
+      "600",
+      "640"
+    ],
+    "a": 0,
+    "exp": "Speed = 400/5 = 80 kmph, distance in 8 hours = 80 * 8 = 640",
+    "d": "EASY"
+  },
+  {
+    "q": "A boy has 15 marbles in a bag. He draws 5 marbles from the bag. How many marbles are left in the bag?",
+    "opts": [
+      "5",
+      "10",
+      "15",
+      "20"
+    ],
+    "a": 2,
+    "exp": "15 - 5 = 10 marbles left",
+    "d": "EASY"
+  },
+  {
+    "q": "A man has 2 sons and 1 daughter. The product of the age of the sons is 70. What is the age of the daughter?",
+    "opts": [
+      "5",
+      "7",
+      "10",
+      "14"
+    ],
+    "a": 2,
+    "exp": "Let age of one son be x, then x * (x + 5) = 70, x = 5, daughter's age = 7",
+    "d": "HARD"
+  },
+  {
+    "q": "A car travels 360 km in 6 hours. How much distance will it travel in 9 hours at the same speed?",
+    "opts": [
+      "540",
+      "360",
+      "720",
+      "540"
+    ],
+    "a": 0,
+    "exp": "Speed = 360/6 = 60 kmph, distance in 9 hours = 60 * 9 = 540",
+    "d": "EASY"
+  }
+]

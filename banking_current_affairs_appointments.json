@@ -1,0 +1,206 @@
+[
+  {
+    "q": "Who is the current President of RBI?",
+    "opts": [
+      "Shaktikanta Das",
+      "Urjit Patel",
+      "Raghuram Rajan",
+      "K.V. Kamath"
+    ],
+    "a": 0,
+    "exp": "He is the 25th Governor of the Reserve Bank of India",
+    "d": "HARD"
+  },
+  {
+    "q": "Who is the current CEO of ICICI Bank?",
+    "opts": [
+      "Sandesh Bakhshi",
+      "Anup Bagchi",
+      "Rohit Jain",
+      "Nitin Chugh"
+    ],
+    "a": 2,
+    "exp": "He is the Managing Director and CEO of ICICI Bank",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the current Chairman of SEBI?",
+    "opts": [
+      "Madhabi Puri Buch",
+      "Ajay Tyagi",
+      "S. R. Bansal",
+      "T. Venkat Subramaniam"
+    ],
+    "a": 0,
+    "exp": "She is the Chairperson of Securities and Exchange Board of India",
+    "d": "HARD"
+  },
+  {
+    "q": "Who is the current MD of SBI?",
+    "opts": [
+      "Dinesh Khara",
+      "Arijit Basu",
+      "Krishnan Srinivasan",
+      "Sanjay Cantharia"
+    ],
+    "a": 0,
+    "exp": "He is the Managing Director of State Bank of India",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the current Governor of Reserve Bank of India?",
+    "opts": [
+      "Shaktikanta Das",
+      "RBI Deputy Governors",
+      "Raghuram Rajan",
+      "K.V. Kamath"
+    ],
+    "a": 0,
+    "exp": "He is the 25th Governor of the Reserve Bank of India",
+    "d": "HARD"
+  },
+  {
+    "q": "Who is the current CMD of Bank of Baroda?",
+    "opts": [
+      "Sanjiv Chadha",
+      "Sanjiv Chadha",
+      "P. S. Jayakumar",
+      "Padmaja Chunduru"
+    ],
+    "a": 2,
+    "exp": "He is the Managing Director and CEO of Bank of Baroda",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the current MD of Axis Bank?",
+    "opts": [
+      "Amitabh Chaudhry",
+      "Rohit Pai",
+      "Arun Alagappan",
+      "Amitabh Chaudhry"
+    ],
+    "a": 0,
+    "exp": "He is the Managing Director and CEO of Axis Bank",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the current CMD of Canara Bank?",
+    "opts": [
+      "L. Madhavi Dasari",
+      "Shishir Saraf",
+      "L. Madhavi Dasari",
+      "T.H. Narasimham"
+    ],
+    "a": 0,
+    "exp": "She is the Managing Director and CEO of Canara Bank",
+    "d": "EASY"
+  },
+  {
+    "q": "Who is the current Chairman of NABARD?",
+    "opts": [
+      "G.R. Chintala",
+      "Shyamal Misra",
+      "G.R. Chintala",
+      "H. K. Bhan"
+    ],
+    "a": 0,
+    "exp": "He is the Chairman of National Bank for Agriculture and Rural Development",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the current CEO of NPCI?",
+    "opts": [
+      "A.P. Hota",
+      "A.P. Hota",
+      "Sundararaman Govindarajan",
+      "Dinesh Khara"
+    ],
+    "a": 1,
+    "exp": "He is the former Managing Director and CEO of National Payments Corporation of India",
+    "d": "HARD"
+  },
+  {
+    "q": "Who is the current MD of IDBI Bank?",
+    "opts": [
+      "Gagan Dixit",
+      "Rakesh Sharma",
+      "Gagan Dixit",
+      "B. Sriram"
+    ],
+    "a": 0,
+    "exp": "He is the Managing Director of IDBI Bank",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the current CMD of Indian Overseas Bank?",
+    "opts": [
+      "Atul Kumar Goel",
+      "Atul Kumar Goel",
+      "R. Subramanian",
+      "Vipul Aggarwal"
+    ],
+    "a": 0,
+    "exp": "He is the Managing Director and CEO of Indian Overseas Bank",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the current Chairman of IIM Bangalore?",
+    "opts": [
+      "Janat Shah",
+      "M. P. Birla",
+      "Janat Shah",
+      "R. C. Bhargava"
+    ],
+    "a": 0,
+    "exp": "He is the Director of Indian Institute of Management Bangalore",
+    "d": "HARD"
+  },
+  {
+    "q": "Who is the current CEO of RBI's Payments System National Payments Corporation of India?",
+    "opts": [
+      "Hardayal Puri",
+      "Sandeep Bakhshi",
+      "Hardayal Puri",
+      "A.P. Hota"
+    ],
+    "a": 2,
+    "exp": "He is the CEO of National Payments Corporation of India",
+    "d": "HARD"
+  },
+  {
+    "q": "Who is the current Chairman of NABARD Consultative Committee?",
+    "opts": [
+      "V. G. Kannan",
+      "G. Padmanabhan",
+      "V. G. Kannan",
+      "S. S. Tarapore"
+    ],
+    "a": 0,
+    "exp": "He is the Chairman of NABARD Consultative Committee",
+    "d": "HARD"
+  },
+  {
+    "q": "Who is the current Managing Director of UCO Bank?",
+    "opts": [
+      "Saurav Saha",
+      "A.K. Goel",
+      "A.K. Goel",
+      "Saurav Saha"
+    ],
+    "a": 1,
+    "exp": "He is the Managing Director and CEO of UCO Bank",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the current CMD of Central Bank of India?",
+    "opts": [
+      "Rakesh Sharma",
+      "P. Udaya Kumar",
+      "Rakesh Sharma",
+      "S. Sankarshan"
+    ],
+    "a": 0,
+    "exp": "He is the Managing Director and CEO of Central Bank of India",
+    "d": "MEDIUM"
+  }
+]

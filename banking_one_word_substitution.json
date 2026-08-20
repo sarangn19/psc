@@ -1,0 +1,195 @@
+[
+  {
+    "q": "What is 20% of 500?",
+    "opts": [
+      "80",
+      "100",
+      "120",
+      "150"
+    ],
+    "a": 1,
+    "exp": "20% of 500 = 100",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the opposite of 'Heavy'?",
+    "opts": [
+      "Big",
+      "Light",
+      "Small",
+      "Tiny"
+    ],
+    "a": 2,
+    "exp": "Opposite of Heavy is Light",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the synonym of 'Honest'?",
+    "opts": [
+      "Cheater",
+      "Liar",
+      "Truthful",
+      "Fair"
+    ],
+    "a": 3,
+    "exp": "Synonym of Honest is Truthful",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the antonym of 'Fast'?",
+    "opts": [
+      "Slow",
+      "Quick",
+      "Fastest",
+      "Rapid"
+    ],
+    "a": 1,
+    "exp": "Antonym of Fast is Slow",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the meaning of 'Salary'?",
+    "opts": [
+      "Wages",
+      "Allowance",
+      "Bonus",
+      "Wage",
+      ""
+    ],
+    "a": 1,
+    "exp": "Salary is Wages or Allowance",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the opposite of 'Sad'?",
+    "opts": [
+      "Angry",
+      "Happy",
+      "Unhappy",
+      "Cheerful"
+    ],
+    "a": 3,
+    "exp": "Opposite of Sad is Happy",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the synonym of 'Bank'?",
+    "opts": [
+      "Post",
+      "Office",
+      "Store",
+      "Vault"
+    ],
+    "a": 3,
+    "exp": "Synonym of Bank is Vault",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the antonym of 'Dark'?",
+    "opts": [
+      "Light",
+      "Bright",
+      "Day",
+      "Dawn"
+    ],
+    "a": 1,
+    "exp": "Antonym of Dark is Light",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the meaning of 'Commission'?",
+    "opts": [
+      "Allowance",
+      "Bonus",
+      "Wages",
+      "Profit"
+    ],
+    "a": 3,
+    "exp": "Commission is Profit or Allowance",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the opposite of 'Sharp'?",
+    "opts": [
+      "Dull",
+      "Flat",
+      "Round",
+      "Blunt"
+    ],
+    "a": 1,
+    "exp": "Opposite of Sharp is Dull",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the synonym of 'Security'?",
+    "opts": [
+      "Risk",
+      "Guarantee",
+      "Safety",
+      "Protection"
+    ],
+    "a": 4,
+    "exp": "Synonym of Security is Protection",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the antonym of 'Tiny'?",
+    "opts": [
+      "Small",
+      "Large",
+      "Big",
+      "Huge"
+    ],
+    "a": 2,
+    "exp": "Antonym of Tiny is Large",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the meaning of 'Deposit'?",
+    "opts": [
+      "Withdrawal",
+      "Withdraw",
+      "Deposit",
+      "Save"
+    ],
+    "a": 3,
+    "exp": "Deposit means Save or Deposit",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the opposite of 'Expensive'?",
+    "opts": [
+      "Cheap",
+      "Affordable",
+      "Inexpensive",
+      "Costly"
+    ],
+    "a": 2,
+    "exp": "Opposite of Expensive is Inexpensive",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the synonym of 'Account'?",
+    "opts": [
+      "Record",
+      "File",
+      "Statement",
+      "Ledger"
+    ],
+    "a": 3,
+    "exp": "Synonym of Account is Ledger",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the antonym of 'Fast'?",
+    "opts": [
+      "Slow",
+      "Quick",
+      "Fastest",
+      "Rapid"
+    ],
+    "a": 1,
+    "exp": "Antonym of Fast is Slow",
+    "d": "HARD"
+  }
+]

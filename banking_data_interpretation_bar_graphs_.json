@@ -1,0 +1,182 @@
+[
+  {
+    "q": "A bank's deposits for the past 5 years show a consistent growth. In 2015, the deposits were 12000, in 2016, 15000, in 2017, 18000, in 2018, 20000, and in 2019, 22000. What is the percentage increase in deposits from 2015 to 2019?",
+    "opts": [
+      "8",
+      "12",
+      "15",
+      "20"
+    ],
+    "a": 0,
+    "exp": "(22000-12000)/12000 = 83.33%",
+    "d": "EASY"
+  },
+  {
+    "q": "The number of customers of a bank for the past 4 quarters show a fluctuation. In Q1, the customers were 15000, in Q2, 16000, in Q3, 17000, and in Q4, 18000. What is the percentage increase in customers from Q1 to Q4?",
+    "opts": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "a": 3,
+    "exp": "(18000-15000)/15000 = 20%",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's profit for the past 3 years show a steady increase. In 2017, the profit was 50000, in 2018, 55000, and in 2019, 60000. What is the percentage increase in profit from 2017 to 2019?",
+    "opts": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "a": 3,
+    "exp": "(60000-50000)/50000 = 20%",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's loans for the past 5 years show a fluctuation. In 2015, the loans were 12000, in 2016, 15000, in 2017, 18000, in 2018, 20000, and in 2019, 22000. What is the percentage increase in loans from 2015 to 2019?",
+    "opts": [
+      "8",
+      "12",
+      "15",
+      "20"
+    ],
+    "a": 0,
+    "exp": "(22000-12000)/12000 = 83.33%",
+    "d": "EASY"
+  },
+  {
+    "q": "The number of employees of a bank for the past 4 quarters show a fluctuation. In Q1, the employees were 15000, in Q2, 16000, in Q3, 17000, and in Q4, 18000. What is the percentage increase in employees from Q1 to Q4?",
+    "opts": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "a": 3,
+    "exp": "(18000-15000)/15000 = 20%",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's deposits for the past 5 years show a steady increase. In 2015, the deposits were 12000, in 2016, 15000, in 2017, 18000, in 2018, 20000, and in 2019, 22000. What is the percentage increase in deposits from 2015 to 2019?",
+    "opts": [
+      "8",
+      "12",
+      "15",
+      "20"
+    ],
+    "a": 0,
+    "exp": "(22000-12000)/12000 = 83.33%",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's loans for the past 3 years show a fluctuation. In 2017, the loans were 50000, in 2018, 55000, and in 2019, 60000. What is the percentage increase in loans from 2017 to 2019?",
+    "opts": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "a": 3,
+    "exp": "(60000-50000)/50000 = 20%",
+    "d": "EASY"
+  },
+  {
+    "q": "The number of customers of a bank for the past 4 quarters show a fluctuation. In Q1, the customers were 15000, in Q2, 16000, in Q3, 17000, and in Q4, 18000. What is the percentage increase in customers from Q1 to Q4?",
+    "opts": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "a": 3,
+    "exp": "(18000-15000)/15000 = 20%",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's profit for the past 5 years show a fluctuation. In 2015, the profit was 12000, in 2016, 15000, in 2017, 18000, in 2018, 20000, and in 2019, 22000. What is the percentage increase in profit from 2015 to 2019?",
+    "opts": [
+      "8",
+      "12",
+      "15",
+      "20"
+    ],
+    "a": 0,
+    "exp": "(22000-12000)/12000 = 83.33%",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's deposits for the past 3 years show a steady increase. In 2017, the deposits were 50000, in 2018, 55000, and in 2019, 60000. What is the percentage increase in deposits from 2017 to 2019?",
+    "opts": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "a": 3,
+    "exp": "(60000-50000)/50000 = 20%",
+    "d": "EASY"
+  },
+  {
+    "q": "The number of employees of a bank for the past 5 years show a fluctuation. In 2015, the employees were 12000, in 2016, 15000, in 2017, 18000, in 2018, 20000, and in 2019, 22000. What is the percentage increase in employees from 2015 to 2019?",
+    "opts": [
+      "8",
+      "12",
+      "15",
+      "20"
+    ],
+    "a": 0,
+    "exp": "(22000-12000)/12000 = 83.33%",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's loans for the past 4 quarters show a fluctuation. In Q1, the loans were 15000, in Q2, 16000, in Q3, 17000, and in Q4, 18000. What is the percentage increase in loans from Q1 to Q4?",
+    "opts": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "a": 3,
+    "exp": "(18000-15000)/15000 = 20%",
+    "d": "EASY"
+  },
+  {
+    "q": "The number of customers of a bank for the past 3 years show a steady increase. In 2017, the customers were 15000, in 2018, 16000, and in 2019, 17000. What is the percentage increase in customers from 2017 to 2019?",
+    "opts": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "a": 3,
+    "exp": "(17000-15000)/15000 = 13.33%",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's profit for the past 4 quarters show a fluctuation. In Q1, the profit was 50000, in Q2, 55000, in Q3, 60000, and in Q4, 65000. What is the percentage increase in profit from Q1 to Q4?",
+    "opts": [
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "a": 3,
+    "exp": "(65000-50000)/50000 = 30%",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's deposits for the past 5 years show a fluctuation. In 2015, the deposits were 12000, in 2016, 15000, in 2017, 18000, in 2018, 20000, and in 2019, 22000. What is the percentage increase in deposits from 2015 to 2019?",
+    "opts": [
+      "8",
+      "12",
+      "15",
+      "20"
+    ],
+    "a": 0,
+    "exp": "(22000-12000)/12000 = 83.33%",
+    "d": "EASY"
+  }
+]

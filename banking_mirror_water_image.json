@@ -1,0 +1,182 @@
+[
+  {
+    "q": "What is the reflection of the word 'Mirror' in a still water?",
+    "opts": [
+      "Mirror",
+      "Water",
+      "Image",
+      "Reflection"
+    ],
+    "a": 3,
+    "exp": "Reflection of the word 'Mirror' is 'Image'",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the image formed when an object is placed in front of a still water?",
+    "opts": [
+      "Object",
+      "Image",
+      "Reflection",
+      "Water"
+    ],
+    "a": 2,
+    "exp": "Image formed is the reflection of the object",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the name of the phenomenon where light falls on a mirror and bounces back?",
+    "opts": [
+      "Reflection",
+      "Refraction",
+      "Diffraction",
+      "Luminescence"
+    ],
+    "a": 0,
+    "exp": "The phenomenon is called 'Reflection'",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the effect of a still water on a moving object?",
+    "opts": [
+      "Speed",
+      "Velocity",
+      "Acceleration",
+      "Reflection"
+    ],
+    "a": 3,
+    "exp": "Still water reflects the moving object",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the image formed when a man looks into a still water?",
+    "opts": [
+      "Man",
+      "Image",
+      "Reflection",
+      "Water"
+    ],
+    "a": 1,
+    "exp": "The image formed is the reflection of the man",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the phenomenon where light falls on a mirror and passes through it?",
+    "opts": [
+      "Reflection",
+      "Refraction",
+      "Diffraction",
+      "Luminescence"
+    ],
+    "a": 1,
+    "exp": "The phenomenon is called 'Refraction'",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the effect of a still water on a sound wave?",
+    "opts": [
+      "Amplitude",
+      "Frequency",
+      "Reflection",
+      "Diffraction"
+    ],
+    "a": 2,
+    "exp": "Still water reflects the sound wave",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the name of the phenomenon where light falls on a water surface and passes through it?",
+    "opts": [
+      "Reflection",
+      "Refraction",
+      "Diffraction",
+      "Luminescence"
+    ],
+    "a": 1,
+    "exp": "The phenomenon is called 'Refraction'",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the image formed when a boat sails across a still water?",
+    "opts": [
+      "Boat",
+      "Image",
+      "Reflection",
+      "Water"
+    ],
+    "a": 1,
+    "exp": "The image formed is the reflection of the boat",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the effect of a still water on a light ray?",
+    "opts": [
+      "Speed",
+      "Velocity",
+      "Acceleration",
+      "Reflection"
+    ],
+    "a": 3,
+    "exp": "Still water reflects the light ray",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the name of the phenomenon where light falls on a mirror and bounces back? (MEDIUM)",
+    "opts": [
+      "Reflection",
+      "Refraction",
+      "Diffraction",
+      "Luminescence"
+    ],
+    "a": 0,
+    "exp": "The phenomenon is called 'Reflection'",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the image formed when a tree falls into a still water?",
+    "opts": [
+      "Tree",
+      "Image",
+      "Reflection",
+      "Water"
+    ],
+    "a": 1,
+    "exp": "The image formed is the reflection of the tree",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the effect of a still water on a sound wave (MEDIUM) ?",
+    "opts": [
+      "Amplitude",
+      "Frequency",
+      "Reflection",
+      "Diffraction"
+    ],
+    "a": 2,
+    "exp": "Still water reflects the sound wave",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the name of the phenomenon where light falls on a water surface and passes through it (HARD) ?",
+    "opts": [
+      "Reflection",
+      "Refraction",
+      "Diffraction",
+      "Luminescence"
+    ],
+    "a": 1,
+    "exp": "The phenomenon is called 'Refraction'",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the image formed when a car drives across a still water (HARD) ?",
+    "opts": [
+      "Car",
+      "Image",
+      "Reflection",
+      "Water"
+    ],
+    "a": 1,
+    "exp": "The image formed is the reflection of the car",
+    "d": "HARD"
+  }
+]

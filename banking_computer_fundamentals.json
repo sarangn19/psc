@@ -1,0 +1,206 @@
+[
+  {
+    "q": "A binary digit is a",
+    "opts": [
+      "8-bit word",
+      "16-bit word",
+      "1-bit word",
+      "8-bit byte"
+    ],
+    "a": 2,
+    "exp": "Basic unit of information in computing",
+    "d": "EASY"
+  },
+  {
+    "q": "The full form of CPU is",
+    "opts": [
+      "Central Processing Unit",
+      "Computer Peripheral Unit",
+      "Central Power Unit",
+      "Computer Power Unit"
+    ],
+    "a": 0,
+    "exp": "Central Processing Unit of a computer",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the primary function of RAM?",
+    "opts": [
+      "To store data permanently",
+      "To store data temporarily",
+      "To store data in cloud",
+      "To store data in external hard drive"
+    ],
+    "a": 1,
+    "exp": "Temporary data storage in computer",
+    "d": "EASY"
+  },
+  {
+    "q": "What does BIOS stand for?",
+    "opts": [
+      "Basic Input/Output System",
+      "Basic Input/Output Switch",
+      "Basic Input/Output Software",
+      "Basic Input/Output System"
+    ],
+    "a": 0,
+    "exp": "Basic Input/Output System of computer",
+    "d": "EASY"
+  },
+  {
+    "q": "Which programming language is used for mobile app development?",
+    "opts": [
+      "Python",
+      "Java",
+      "C++",
+      "Swift"
+    ],
+    "a": 3,
+    "exp": "Programming language used for iOS app development",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the purpose of a firewall?",
+    "opts": [
+      "To increase internet speed",
+      "To block malicious activities",
+      "To increase storage capacity",
+      "To enhance battery life"
+    ],
+    "a": 1,
+    "exp": "Protect computer network from unauthorized access",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the full form of GUI?",
+    "opts": [
+      "Graphical User Interface",
+      "Graphical User Input",
+      "Graphical User Interface",
+      "Graphical User Interface"
+    ],
+    "a": 0,
+    "exp": "Graphical User Interface of a computer",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the process of converting data from one format to another called?",
+    "opts": [
+      "Encryption",
+      "Decryption",
+      "Data Conversion",
+      "Data Compression"
+    ],
+    "a": 2,
+    "exp": "Conversion of data from one format to another",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is a virus in computer terms?",
+    "opts": [
+      "A type of malware",
+      "A type of antivirus software",
+      "A type of firewall",
+      "A type of ransomware"
+    ],
+    "a": 0,
+    "exp": "Malicious software that replicates itself",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the primary function of a router?",
+    "opts": [
+      "To increase internet speed",
+      "To block malicious activities",
+      "To connect multiple devices",
+      "To enhance storage capacity"
+    ],
+    "a": 2,
+    "exp": "Connect multiple devices to a network",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is a Trojan horse in computer terms?",
+    "opts": [
+      "A type of antivirus software",
+      "A type of malware",
+      "A type of firewall",
+      "A type of ransomware"
+    ],
+    "a": 1,
+    "exp": "Malicious software disguising as legitimate software",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the full form of ISP?",
+    "opts": [
+      "Internet Service Provider",
+      "Information Service Provider",
+      "Industrial Service Provider",
+      "Intellectual Service Provider"
+    ],
+    "a": 0,
+    "exp": "Provides internet access to users",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the primary function of a database?",
+    "opts": [
+      "To store data temporarily",
+      "To store data permanently",
+      "To store data in cloud",
+      "To retrieve data quickly"
+    ],
+    "a": 3,
+    "exp": "To manage and retrieve data efficiently",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the difference between RAM and ROM?",
+    "opts": [
+      "RAM is volatile, ROM is non-volatile",
+      "RAM is non-volatile, ROM is volatile",
+      "RAM is permanent, ROM is temporary",
+      "RAM is temporary, ROM is permanent"
+    ],
+    "a": 0,
+    "exp": "RAM is volatile, ROM is non-volatile memory",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the purpose of a checksum?",
+    "opts": [
+      "To increase internet speed",
+      "To verify data integrity",
+      "To enhance storage capacity",
+      "To block malicious activities"
+    ],
+    "a": 1,
+    "exp": "Verifies data accuracy and integrity",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the full form of URL?",
+    "opts": [
+      "Uniform Resource Locator",
+      "Uniform Resource Language",
+      "Uniform Resource Link",
+      "Uniform Resource Logo"
+    ],
+    "a": 0,
+    "exp": "Address of a resource on the internet",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the primary function of a hub in computer networking?",
+    "opts": [
+      "To connect multiple devices",
+      "To block malicious activities",
+      "To increase internet speed",
+      "To enhance storage capacity"
+    ],
+    "a": 0,
+    "exp": "Connect multiple devices in a network",
+    "d": "HARD"
+  }
+]

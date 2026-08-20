@@ -1,0 +1,1010 @@
+[
+  {
+    "q": "Which organ is primarily responsible for detoxification of harmful substances in the human body?",
+    "opts": [
+      "Liver",
+      "Kidney",
+      "Heart",
+      "Lung"
+    ],
+    "a": "A",
+    "exp": "The liver metabolizes and neutralizes toxins, drugs, and metabolic waste products.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The functional unit of the kidney is called:",
+    "opts": [
+      "Nephron",
+      "Alveolus",
+      "Neuron",
+      "Villus"
+    ],
+    "a": "A",
+    "exp": "Each nephron filters blood to form urine and regulates fluid and electrolyte balance.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which vitamin is essential for blood clotting?",
+    "opts": [
+      "Vitamin A",
+      "Vitamin C",
+      "Vitamin K",
+      "Vitamin D"
+    ],
+    "a": "C",
+    "exp": "Vitamin K is required for the synthesis of clotting factors II, VII, IX, and X.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The disease caused by deficiency of iodine is:",
+    "opts": [
+      "Goitre",
+      "Scurvy",
+      "Rickets",
+      "Beriberi"
+    ],
+    "a": "A",
+    "exp": "Iodine deficiency leads to reduced thyroid hormone production and thyroid enlargement (goitre).",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which system is responsible for transporting oxygen and nutrients to cells?",
+    "opts": [
+      "Digestive system",
+      "Circulatory system",
+      "Nervous system",
+      "Respiratory system"
+    ],
+    "a": "B",
+    "exp": "The circulatory system, via blood, delivers oxygen from the lungs and nutrients from the digestive tract to all body cells.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The enzyme that breaks down starch in the mouth is:",
+    "opts": [
+      "Pepsin",
+      "Amylase",
+      "Lipase",
+      "Trypsin"
+    ],
+    "a": "B",
+    "exp": "Salivary amylase (ptyalin) initiates carbohydrate digestion by hydrolyzing starch into maltose.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a water‑soluble vitamin?",
+    "opts": [
+      "Vitamin D",
+      "Vitamin E",
+      "Vitamin B12",
+      "Vitamin A"
+    ],
+    "a": "C",
+    "exp": "Vitamin B12 (cobalamin) dissolves in water and is not stored in large amounts in the body.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The condition characterized by high blood sugar levels is:",
+    "opts": [
+      "Hypoglycemia",
+      "Hyperglycemia",
+      "Hypertension",
+      "Anemia"
+    ],
+    "a": "B",
+    "exp": "Hyperglycemia refers to elevated glucose concentration in the blood, a hallmark of diabetes mellitus.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which part of the brain controls voluntary movements?",
+    "opts": [
+      "Cerebellum",
+      "Medulla oblongata",
+      "Cerebral cortex",
+      "Pons"
+    ],
+    "a": "C",
+    "exp": "The primary motor cortex located in the frontal lobe of the cerebral cortex initiates voluntary muscle contractions.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The nutrient that provides the most energy per gram is:",
+    "opts": [
+      "Carbohydrate",
+      "Protein",
+      "Fat",
+      "Vitamin"
+    ],
+    "a": "C",
+    "exp": "Fats yield approximately 9 kcal/g, whereas carbohydrates and proteins provide about 4 kcal/g each.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which organ is primarily responsible for pumping blood throughout the body?",
+    "opts": [
+      "Liver",
+      "Heart",
+      "Lungs",
+      "Kidney"
+    ],
+    "a": "B",
+    "exp": "The heart acts as a muscular pump that circulates blood via the circulatory system.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The process of gas exchange (oxygen and carbon dioxide) occurs in which part of the respiratory system?",
+    "opts": [
+      "Trachea",
+      "Bronchi",
+      "Alveoli",
+      "Pharynx"
+    ],
+    "a": "C",
+    "exp": "Alveoli are tiny air sacs in the lungs where oxygen enters the blood and carbon dioxide leaves.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which vitamin deficiency leads to scurvy?",
+    "opts": [
+      "Vitamin A",
+      "Vitamin B12",
+      "Vitamin C",
+      "Vitamin D"
+    ],
+    "a": "C",
+    "exp": "Scurvy results from lack of vitamin C, needed for collagen synthesis.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The functional unit of the kidney is called?",
+    "opts": [
+      "Neuron",
+      "Nephron",
+      "Hepatocyte",
+      "Alveolus"
+    ],
+    "a": "B",
+    "exp": "Each nephron filters blood to form urine.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a symptom of anemia?",
+    "opts": [
+      "High blood pressure",
+      "Pale skin",
+      "Increased appetite",
+      "Fever"
+    ],
+    "a": "B",
+    "exp": "Anemia reduces red blood cells, causing pallor due to low hemoglobin.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The hormone insulin is secreted by which organ?",
+    "opts": [
+      "Pancreas",
+      "Thyroid",
+      "Adrenal gland",
+      "Pituitary"
+    ],
+    "a": "A",
+    "exp": "Insulin is produced by the beta cells of the pancreas to regulate blood glucose.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which nutrient is essential for the formation of hemoglobin?",
+    "opts": [
+      "Calcium",
+      "Iron",
+      "Vitamin D",
+      "Fiber"
+    ],
+    "a": "B",
+    "exp": "Iron is a core component of heme in hemoglobin, enabling oxygen transport.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The largest part of the human brain is?",
+    "opts": [
+      "Cerebellum",
+      "Medulla oblongata",
+      "Cerebrum",
+      "Pons"
+    ],
+    "a": "C",
+    "exp": "The cerebrum constitutes about 85% of brain weight and controls higher functions.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which disease is caused by the deficiency of iodine?",
+    "opts": [
+      "Goiter",
+      "Rickets",
+      "Scurvy",
+      "Beriberi"
+    ],
+    "a": "A",
+    "exp": "Iodine deficiency impairs thyroid hormone production, leading to goiter.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The process of breaking down food into smaller molecules for absorption is called?",
+    "opts": [
+      "Respiration",
+      "Circulation",
+      "Digestion",
+      "Excretion"
+    ],
+    "a": "C",
+    "exp": "Digestion involves mechanical and chemical breakdown of food into absorbable nutrients.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which organ is responsible for pumping blood throughout the body?",
+    "opts": [
+      "Heart",
+      "Lungs",
+      "Liver",
+      "Kidney"
+    ],
+    "a": "A",
+    "exp": "The heart is a muscular organ that pumps blood to all parts of the body.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The process of gas exchange occurs in which part of the respiratory system?",
+    "opts": [
+      "Trachea",
+      "Bronchi",
+      "Alveoli",
+      "Pharynx"
+    ],
+    "a": "C",
+    "exp": "Alveoli are tiny air sacs where oxygen and carbon dioxide are exchanged between air and blood.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which vitamin deficiency causes scurvy?",
+    "opts": [
+      "Vitamin A",
+      "Vitamin C",
+      "Vitamin D",
+      "Vitamin K"
+    ],
+    "a": "B",
+    "exp": "Scurvy results from lack of vitamin C, essential for collagen synthesis.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The longest bone in the human body is?",
+    "opts": [
+      "Femur",
+      "Tibia",
+      "Humerus",
+      "Radius"
+    ],
+    "a": "A",
+    "exp": "The femur, or thigh bone, is the longest and strongest bone.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which system is responsible for removing waste products and regulating fluid balance?",
+    "opts": [
+      "Digestive",
+      "Excretory",
+      "Nervous",
+      "Endocrine"
+    ],
+    "a": "B",
+    "exp": "The excretory (urinary) system, mainly kidneys, filters waste and regulates fluid.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which nutrient is primarily responsible for building and repairing tissues?",
+    "opts": [
+      "Carbohydrates",
+      "Fats",
+      "Proteins",
+      "Vitamins"
+    ],
+    "a": "C",
+    "exp": "Proteins provide amino acids needed for tissue growth and repair.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The condition characterized by high blood sugar levels is known as?",
+    "opts": [
+      "Hypertension",
+      "Hyperglycemia",
+      "Hypoglycemia",
+      "Anemia"
+    ],
+    "a": "B",
+    "exp": "Hyperglycemia refers to elevated glucose concentration in the blood.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which vitamin is synthesized by the skin upon exposure to sunlight?",
+    "opts": [
+      "Vitamin A",
+      "Vitamin B12",
+      "Vitamin C",
+      "Vitamin D"
+    ],
+    "a": "D",
+    "exp": "UVB radiation converts 7-dehydrocholesterol in the skin to vitamin D3.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which organ is primarily responsible for the detoxification of chemicals and metabolism of drugs?",
+    "opts": [
+      "Heart",
+      "Liver",
+      "Kidney",
+      "Lungs"
+    ],
+    "a": "B",
+    "exp": "The liver performs detoxification and drug metabolism through enzymatic pathways.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The functional unit of the kidney that filters blood to form urine is called:",
+    "opts": [
+      "Nephron",
+      "Alveolus",
+      "Villus",
+      "Sarcomere"
+    ],
+    "a": "A",
+    "exp": "Each kidney contains about a million nephrons, which are the functional filtration units.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which vitamin deficiency leads to night blindness?",
+    "opts": [
+      "Vitamin A",
+      "Vitamin C",
+      "Vitamin D",
+      "Vitamin K"
+    ],
+    "a": "A",
+    "exp": "Vitamin A is essential for rhodopsin synthesis in retinal rods; its deficiency causes night blindness.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The hormone that regulates blood glucose levels by promoting cellular uptake of glucose is:",
+    "opts": [
+      "Glucagon",
+      "Insulin",
+      "Adrenaline",
+      "Thyroxine"
+    ],
+    "a": "B",
+    "exp": "Insulin, secreted by pancreatic beta cells, facilitates glucose transport into cells.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The disease 'rickets' in children is caused by deficiency of:",
+    "opts": [
+      "Iron",
+      "Calcium",
+      "Vitamin D",
+      "Protein"
+    ],
+    "a": "C",
+    "exp": "Vitamin D deficiency impairs calcium absorption, leading to defective bone mineralization (rickets).",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which part of the brain controls vital autonomic functions such as heart rate and respiration?",
+    "opts": [
+      "Cerebrum",
+      "Cerebellum",
+      "Medulla oblongata",
+      "Thalamus"
+    ],
+    "a": "C",
+    "exp": "The medulla oblongata in the brainstem regulates heartbeat, breathing, and blood pressure.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The primary site of nutrient absorption in the human digestive system is the:",
+    "opts": [
+      "Stomach",
+      "Duodenum",
+      "Jejunum",
+      "Colon"
+    ],
+    "a": "C",
+    "exp": "Most digested nutrients (carbohydrates, proteins, fats, vitamins, minerals) are absorbed in the jejunum of the small intestine.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which blood component is responsible for clotting?",
+    "opts": [
+      "Red blood cells",
+      "White blood cells",
+      "Platelets",
+      "Plasma"
+    ],
+    "a": "C",
+    "exp": "Platelets (thrombocytes) aggregate at injury sites and initiate the coagulation cascade.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Excessive intake of which nutrient can lead to hypertension?",
+    "opts": [
+      "Potassium",
+      "Sodium",
+      "Magnesium",
+      "Fiber"
+    ],
+    "a": "B",
+    "exp": "High sodium intake increases extracellular fluid volume, raising blood pressure.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The process of gas exchange in lungs occurs in which structure?",
+    "opts": [
+      "Bronchi",
+      "Alveoli",
+      "Trachea",
+      "Diaphragm"
+    ],
+    "a": "B",
+    "exp": "Alveoli are tiny air sacs where oxygen and carbon dioxide are exchanged between air and blood.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The hormone insulin is produced by which organ?",
+    "opts": [
+      "Pancreas",
+      "Thyroid",
+      "Adrenal gland",
+      "Pituitary"
+    ],
+    "a": "A",
+    "exp": "Beta cells of the pancreas secrete insulin to regulate blood glucose levels.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which disease is caused by deficiency of iodine?",
+    "opts": [
+      "Goitre",
+      "Scurvy",
+      "Rickets",
+      "Anaemia"
+    ],
+    "a": "A",
+    "exp": "Iodine deficiency leads to enlarged thyroid gland, known as goitre.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The largest gland in the human body is?",
+    "opts": [
+      "Liver",
+      "Pancreas",
+      "Thyroid",
+      "Salivary gland"
+    ],
+    "a": "A",
+    "exp": "The liver is the largest internal organ and performs numerous metabolic functions.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which nutrient provides the most energy per gram?",
+    "opts": [
+      "Carbohydrate",
+      "Protein",
+      "Fat",
+      "Vitamin"
+    ],
+    "a": "C",
+    "exp": "Fats yield about 9 kcal/g, more than double the energy provided by carbohydrates or proteins.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The part of the brain responsible for coordinating voluntary movements and balance is?",
+    "opts": [
+      "Cerebrum",
+      "Cerebellum",
+      "Medulla oblongata",
+      "Hippocampus"
+    ],
+    "a": "B",
+    "exp": "The cerebellum fine‑tunes motor activity and maintains posture and equilibrium.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which organ is primarily responsible for detoxification of chemicals and metabolism of drugs?",
+    "opts": [
+      "Kidney",
+      "Liver",
+      "Spleen",
+      "Pancreas"
+    ],
+    "a": "B",
+    "exp": "The liver metabolizes drugs and detoxifies harmful substances through enzymatic pathways.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The hormone that lowers blood glucose level is:",
+    "opts": [
+      "Glucagon",
+      "Insulin",
+      "Epinephrine",
+      "Cortisol"
+    ],
+    "a": "B",
+    "exp": "Insulin facilitates cellular uptake of glucose, reducing blood sugar levels.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which part of the brain controls autonomic functions like heart rate and respiration?",
+    "opts": [
+      "Cerebrum",
+      "Cerebellum",
+      "Medulla oblongata",
+      "Thalamus"
+    ],
+    "a": "C",
+    "exp": "The medulla oblongata regulates vital autonomic functions including cardiac and respiratory centers.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Iron deficiency leads to which condition?",
+    "opts": [
+      "Scurvy",
+      "Rickets",
+      "Anemia",
+      "Goiter"
+    ],
+    "a": "C",
+    "exp": "Iron is a key component of hemoglobin; its deficiency causes iron‑deficiency anemia.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The process of gas exchange in lungs occurs in:",
+    "opts": [
+      "Bronchi",
+      "Trachea",
+      "Alveoli",
+      "Larynx"
+    ],
+    "a": "C",
+    "exp": "Alveoli are tiny air sacs where oxygen diffuses into blood and carbon dioxide diffuses out.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which nutrient is classified as a macronutrient and provides 9 kcal per gram?",
+    "opts": [
+      "Carbohydrate",
+      "Protein",
+      "Fat",
+      "Vitamin"
+    ],
+    "a": "C",
+    "exp": "Fats yield approximately 9 kilocalories per gram, more than carbs or protein.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is NOT a part of the human digestive system?",
+    "opts": [
+      "Stomach",
+      "Liver",
+      "Lung",
+      "Small intestine"
+    ],
+    "a": "C",
+    "exp": "The lung belongs to the respiratory system, not the digestive tract.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which organ is responsible for pumping blood?",
+    "opts": [
+      "Heart",
+      "Liver",
+      "Kidney",
+      "Lungs"
+    ],
+    "a": "A",
+    "exp": "The heart is a muscular organ that contracts to pump blood throughout the circulatory system.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The functional unit of the kidney is the?",
+    "opts": [
+      "Neuron",
+      "Nephron",
+      "Alveolus",
+      "Hepatocyte"
+    ],
+    "a": "B",
+    "exp": "Each nephron filters blood to produce urine, making it the kidney's functional unit.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The largest gland in the human body is the?",
+    "opts": [
+      "Liver",
+      "Pancreas",
+      "Thyroid",
+      "Adrenal"
+    ],
+    "a": "A",
+    "exp": "The liver is the largest internal organ and gland, performing many metabolic functions.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which system is responsible for gas exchange?",
+    "opts": [
+      "Digestive",
+      "Respiratory",
+      "Nervous",
+      "Skeletal"
+    ],
+    "a": "B",
+    "exp": "The respiratory system (lungs and airways) exchanges oxygen and carbon dioxide with the blood.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Deficiency of iodine leads to?",
+    "opts": [
+      "Goiter",
+      "Scurvy",
+      "Rickets",
+      "Anemia"
+    ],
+    "a": "A",
+    "exp": "Iodine deficiency impairs thyroid hormone production, causing enlargement of the thyroid gland (goiter).",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The hormone that regulates blood sugar level is?",
+    "opts": [
+      "Insulin",
+      "Adrenaline",
+      "Thyroxine",
+      "Growth hormone"
+    ],
+    "a": "A",
+    "exp": "Insulin lowers blood glucose by facilitating cellular uptake; its deficiency causes diabetes.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The part of the brain responsible for coordination and balance is the?",
+    "opts": [
+      "Cerebrum",
+      "Cerebellum",
+      "Medulla",
+      "Thalamus"
+    ],
+    "a": "B",
+    "exp": "The cerebellum fine‑tunes motor activity, maintaining posture and equilibrium.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which disease is caused by deficiency of vitamin C?",
+    "opts": [
+      "Beriberi",
+      "Pellagra",
+      "Scurvy",
+      "Night blindness"
+    ],
+    "a": "C",
+    "exp": "Vitamin C deficiency impairs collagen synthesis, leading to scurvy characterized by bleeding gums and poor wound healing.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which system is primarily involved in the exchange of gases (oxygen and carbon dioxide) in the human body?",
+    "opts": [
+      "Digestive",
+      "Nervous",
+      "Respiratory",
+      "Endocrine"
+    ],
+    "a": "C",
+    "exp": "The respiratory system, comprising lungs and airways, facilitates inhalation of oxygen and exhalation of carbon dioxide.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Deficiency of which vitamin leads to the disease scurvy?",
+    "opts": [
+      "Vitamin A",
+      "Vitamin B1",
+      "Vitamin C",
+      "Vitamin D"
+    ],
+    "a": "C",
+    "exp": "Scurvy results from insufficient vitamin C, which is essential for collagen synthesis and wound healing.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which nutrient is the body's main source of immediate energy?",
+    "opts": [
+      "Proteins",
+      "Fats",
+      "Carbohydrates",
+      "Vitamins"
+    ],
+    "a": "C",
+    "exp": "Carbohydrates are broken down into glucose, which cells use as a primary energy source.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which organ filters waste products from the blood to form urine?",
+    "opts": [
+      "Liver",
+      "Spleen",
+      "Kidney",
+      "Pancreas"
+    ],
+    "a": "C",
+    "exp": "Kidneys filter blood, removing urea and excess salts, and produce urine for excretion.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Deficiency of which mineral causes goitre (enlargement of the thyroid gland)?",
+    "opts": [
+      "Iron",
+      "Calcium",
+      "Iodine",
+      "Zinc"
+    ],
+    "a": "C",
+    "exp": "Iodine is required for thyroid hormone synthesis; its deficiency leads to compensatory thyroid enlargement known as goitre.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which is the longest bone in the human body?",
+    "opts": [
+      "Humerus",
+      "Tibia",
+      "Femur",
+      "Radius"
+    ],
+    "a": "C",
+    "exp": "The femur (thigh bone) extends from the hip to the knee and is the longest and strongest bone.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which part of the brain is mainly responsible for maintaining balance and coordination?",
+    "opts": [
+      "Cerebrum",
+      "Cerebellum",
+      "Medulla oblongata",
+      "Thalamus"
+    ],
+    "a": "B",
+    "exp": "The cerebellum coordinates voluntary movements, posture, and equilibrium.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which vitamin is synthesized in the skin upon exposure to sunlight?",
+    "opts": [
+      "Vitamin A",
+      "Vitamin C",
+      "Vitamin D",
+      "Vitamin K"
+    ],
+    "a": "C",
+    "exp": "UVB radiation converts 7-dehydrocholesterol in the skin to previtamin D3, which then becomes vitamin D3.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which system transports hormones from their glands to target organs throughout the body?",
+    "opts": [
+      "Nervous",
+      "Digestive",
+      "Circulatory",
+      "Lymphatic"
+    ],
+    "a": "C",
+    "exp": "Hormones are secreted into the bloodstream by endocrine glands and carried via the circulatory system to their target tissues.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which organ is primarily responsible for detoxification of chemicals and metabolism in the human body?",
+    "opts": [
+      "Heart",
+      "Liver",
+      "Lung",
+      "Kidney"
+    ],
+    "a": "B",
+    "exp": "The liver processes toxins, drugs, and metabolic waste, making it the main detoxifying organ.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which vitamin is essential for the synthesis of clotting factors in the blood?",
+    "opts": [
+      "Vitamin A",
+      "Vitamin C",
+      "Vitamin D",
+      "Vitamin K"
+    ],
+    "a": "D",
+    "exp": "Vitamin K acts as a cofactor for the carboxylation of clotting factors II, VII, IX, and X.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Deficiency of which nutrient leads to the development of goiter?",
+    "opts": [
+      "Iodine",
+      "Iron",
+      "Vitamin C",
+      "Calcium"
+    ],
+    "a": "A",
+    "exp": "Iodine is required for thyroid hormone synthesis; its deficiency causes thyroid enlargement (goiter).",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which system is responsible for the exchange of gases (oxygen and carbon dioxide) in the body?",
+    "opts": [
+      "Digestive",
+      "Respiratory",
+      "Circulatory",
+      "Nervous"
+    ],
+    "a": "B",
+    "exp": "The respiratory system, comprising lungs and airways, facilitates gas exchange with the blood.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The metal ion at the center of hemoglobin that binds oxygen is:",
+    "opts": [
+      "Calcium",
+      "Iron",
+      "Zinc",
+      "Copper"
+    ],
+    "a": "B",
+    "exp": "Iron (Fe2+) in the heme group of hemoglobin reversibly binds O2 for transport.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The pancreas secretes digestive enzymes that act on:",
+    "opts": [
+      "Carbohydrates only",
+      "Proteins only",
+      "Fats only",
+      "All three macronutrients"
+    ],
+    "a": "D",
+    "exp": "Pancreatic enzymes include amylase (carbs), proteases (proteins), and lipase (fats).",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following vitamins is water‑soluble?",
+    "opts": [
+      "Vitamin A",
+      "Vitamin D",
+      "Vitamin E",
+      "Vitamin C"
+    ],
+    "a": "D",
+    "exp": "Vitamin C (ascorbic acid) dissolves in water and is not stored in large amounts in the body.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Hypertension is a disorder primarily affecting which system?",
+    "opts": [
+      "Endocrine",
+      "Nervous",
+      "Cardiovascular",
+      "Digestive"
+    ],
+    "a": "C",
+    "exp": "High blood pressure reflects increased force of blood against artery walls, a cardiovascular issue.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Osteoporosis results from a long‑term deficiency of which nutrient?",
+    "opts": [
+      "Vitamin C",
+      "Calcium",
+      "Iron",
+      "Protein"
+    ],
+    "a": "B",
+    "exp": "Calcium is a major mineral of bone; insufficient intake leads to reduced bone density and osteoporosis.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Deficiency of which vitamin leads to scurvy?",
+    "opts": [
+      "Vitamin A",
+      "Vitamin C",
+      "Vitamin D",
+      "Vitamin K"
+    ],
+    "a": "B",
+    "exp": "Vitamin C is essential for collagen synthesis; its deficiency causes scurvy, characterized by bleeding gums and poor wound healing.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which is the largest gland in the human body?",
+    "opts": [
+      "Liver",
+      "Pancreas",
+      "Thyroid",
+      "Pituitary"
+    ],
+    "a": "A",
+    "exp": "The liver is the largest internal gland, performing metabolism, detoxification, and bile production.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which system is primarily responsible for gas exchange in the body?",
+    "opts": [
+      "Digestive",
+      "Respiratory",
+      "Circulatory",
+      "Nervous"
+    ],
+    "a": "B",
+    "exp": "The respiratory system, comprising lungs and airways, exchanges oxygen and carbon dioxide with the blood.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Insulin is secreted by which organ?",
+    "opts": [
+      "Pancreas",
+      "Adrenal gland",
+      "Thyroid",
+      "Pituitary"
+    ],
+    "a": "A",
+    "exp": "Beta cells of the pancreatic islets produce insulin, regulating blood glucose levels.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which nutrient is mainly used for building and repairing body tissues?",
+    "opts": [
+      "Carbohydrates",
+      "Fats",
+      "Proteins",
+      "Vitamins"
+    ],
+    "a": "C",
+    "exp": "Proteins provide amino acids that are the building blocks for muscle, enzymes, and tissue repair.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Anemia most commonly results from deficiency of which mineral?",
+    "opts": [
+      "Calcium",
+      "Iron",
+      "Sodium",
+      "Potassium"
+    ],
+    "a": "B",
+    "exp": "Iron is essential for hemoglobin synthesis; its deficiency reduces oxygen‑carrying capacity of blood, causing anemia.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The brain is surrounded by three protective layers known as?",
+    "opts": [
+      "Meninges",
+      "Peritoneum",
+      "Pleura",
+      "Pericardium"
+    ],
+    "a": "A",
+    "exp": "The meninges (dura mater, arachnoid mater, pia mater) envelop and protect the central nervous system.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which part of the digestive tract absorbs the majority of water?",
+    "opts": [
+      "Stomach",
+      "Small intestine",
+      "Large intestine",
+      "Esophagus"
+    ],
+    "a": "C",
+    "exp": "The large intestine (colon) reabsorbs water and electrolytes from indigestible food matter, forming solid feces.",
+    "d": "MEDIUM"
+  }
+]

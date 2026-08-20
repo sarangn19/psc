@@ -1,0 +1,194 @@
+[
+  {
+    "q": "A can complete a work in 4 days, while B can complete the same work in 6 days. How long will it take for both A and B to complete the work together?",
+    "opts": [
+      10,
+      12,
+      16,
+      18
+    ],
+    "a": 2,
+    "exp": "A's rate x B's rate = (1/4 + 1/6) = 1/2.5",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "X can finish a job in 8 hours. Y can finish the same job in 12 hours. How long will it take for both X and Y to complete the job together?",
+    "opts": [
+      3.2,
+      4,
+      6,
+      8
+    ],
+    "a": 0,
+    "exp": "X's rate x Y's rate = (1/8 + 1/12) = 1/4.4",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A can type a document in 3 hours, while B can type the same document in 4 hours. If they work together, how long will it take for them to complete the document?",
+    "opts": [
+      1.5,
+      2,
+      3,
+      4
+    ],
+    "a": 1,
+    "exp": "A's rate x B's rate = (1/3 + 1/4) = 1/1.6",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A and B can complete a work in 6 days. If A works alone, how many days will it take for A to complete the work?",
+    "opts": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "a": 2,
+    "exp": "A's rate = 1/6 - 1/6 = 1/3",
+    "d": "EASY"
+  },
+  {
+    "q": "A can finish a work in 12 days, while B can finish the same work in 16 days. How long will it take for both A and B to complete the work together?",
+    "opts": [
+      6,
+      8,
+      9,
+      10
+    ],
+    "a": 1,
+    "exp": "A's rate x B's rate = (1/12 + 1/16) = 1/7.2",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A can type a document in 2 hours, while B can type the same document in 3 hours. If they work together, how long will it take for them to complete the document?",
+    "opts": [
+      1,
+      1.5,
+      2,
+      3
+    ],
+    "a": 0,
+    "exp": "A's rate x B's rate = (1/2 + 1/3) = 1/1.4",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A and B can complete a work in 8 days. If A works alone, how many days will it take for A to complete the work?",
+    "opts": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "a": 3,
+    "exp": "A's rate = 1/8 - 1/8 = 1/4",
+    "d": "EASY"
+  },
+  {
+    "q": "X can finish a job in 6 hours. Y can finish the same job in 9 hours. How long will it take for both X and Y to complete the job together?",
+    "opts": [
+      2.4,
+      3,
+      4,
+      6
+    ],
+    "a": 0,
+    "exp": "X's rate x Y's rate = (1/6 + 1/9) = 1/3.6",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A can finish a work in 5 days, while B can finish the same work in 7 days. How long will it take for both A and B to complete the work together?",
+    "opts": [
+      2.5,
+      3,
+      3.5,
+      4
+    ],
+    "a": 1,
+    "exp": "A's rate x B's rate = (1/5 + 1/7) = 1/3.3",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A can type a document in 4 hours, while B can type the same document in 5 hours. If they work together, how long will it take for them to complete the document?",
+    "opts": [
+      1.2,
+      1.5,
+      2,
+      3
+    ],
+    "a": 0,
+    "exp": "A's rate x B's rate = (1/4 + 1/5) = 1/2.8",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A and B can complete a work in 9 days. If A works alone, how many days will it take for A to complete the work?",
+    "opts": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "a": 3,
+    "exp": "A's rate = 1/9 - 1/9 = 1/3",
+    "d": "EASY"
+  },
+  {
+    "q": "X can finish a job in 8 hours. Y can finish the same job in 12 hours. How long will it take for both X and Y to complete the job together?",
+    "opts": [
+      2.4,
+      3,
+      4,
+      6
+    ],
+    "a": 0,
+    "exp": "X's rate x Y's rate = (1/8 + 1/12) = 1/4.8",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A can finish a work in 3 days, while B can finish the same work in 4 days. How long will it take for both A and B to complete the work together?",
+    "opts": [
+      1.5,
+      2,
+      2.5,
+      3
+    ],
+    "a": 1,
+    "exp": "A's rate x B's rate = (1/3 + 1/4) = 1/2.4",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A and B can complete a work in 12 days. If A works alone, how many days will it take for A to complete the work?",
+    "opts": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "a": 4,
+    "exp": "A's rate = 1/12 - 1/12 = 1/6",
+    "d": "EASY"
+  },
+  {
+    "q": "X can finish a job in 5 hours. Y can finish the same job in 6 hours. How long will it take for both X and Y to complete the job together?",
+    "opts": [
+      1.2,
+      1.5,
+      2,
+      3
+    ],
+    "a": 0,
+    "exp": "X's rate x Y's rate = (1/5 + 1/6) = 1/3.2",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A can type a document in 1 hour, while B can type the same document in 2 hours. If they work together, how long will it take for them to complete the document?",
+    "opts": [
+      0.5,
+      0.8,
+      1,
+      2
+    ],
+    "a": 1,
+    "exp": "A's rate x B's rate = (1/1 + 1/2) = 1/1.2",
+    "d": "MEDIUM"
+  }
+]

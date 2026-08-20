@@ -1,0 +1,302 @@
+[
+  {
+    "q": "A person who does not know the value of rice is of no use.",
+    "opts": [
+      "A rich man",
+      "A poor man",
+      "A person who does not know the value of rice",
+      "An educated person"
+    ],
+    "a": 2,
+    "exp": "Kerala proverb highlighting knowledge importance",
+    "d": "EASY"
+  },
+  {
+    "q": "The wind does not blow in the hollow of the reeds.",
+    "opts": [
+      "People should not follow the crowd",
+      "The wind blows everywhere",
+      "The wind follows its own path",
+      "The wind is always strong"
+    ],
+    "a": 2,
+    "exp": "Kerala proverb emphasizing individuality",
+    "d": "EASY"
+  },
+  {
+    "q": "A tree is known by its fruits.",
+    "opts": [
+      "A tree is known by its leaves",
+      "A tree is known by its roots",
+      "A tree is known by its fruits",
+      "A tree is known by its branches"
+    ],
+    "a": 2,
+    "exp": "Kerala proverb highlighting character judgment",
+    "d": "EASY"
+  },
+  {
+    "q": "The nail that sticks out is the first to be hammered.",
+    "opts": [
+      "Being different is a strength",
+      "Being different is a weakness",
+      "The nail that sticks out is the first to be hammered",
+      "Different people have different opinions"
+    ],
+    "a": 2,
+    "exp": "Kerala proverb emphasizing conformity",
+    "d": "EASY"
+  },
+  {
+    "q": "The fish in the pond is not aware of the water.",
+    "opts": [
+      "The fish is aware of the water",
+      "The fish in the pond is not aware of the water",
+      "The pond is not aware of the fish",
+      "The water is not aware of the fish"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb highlighting ignorance",
+    "d": "EASY"
+  },
+  {
+    "q": "The wind blows wherever it pleases.",
+    "opts": [
+      "The wind blows only in one place",
+      "The wind blows only in the mountains",
+      "The wind blows wherever it pleases",
+      "The wind blows only in the plains"
+    ],
+    "a": 2,
+    "exp": "Kerala proverb emphasizing unpredictability",
+    "d": "EASY"
+  },
+  {
+    "q": "The tree that bends is the one that survives the storm.",
+    "opts": [
+      "The tree that is straight survives the storm",
+      "The tree that is weak bends",
+      "The tree that bends is the one that survives the storm",
+      "The tree that is straight bends"
+    ],
+    "a": 2,
+    "exp": "Kerala proverb highlighting resilience",
+    "d": "EASY"
+  },
+  {
+    "q": "A bird does not sing because it has an answer.",
+    "opts": [
+      "A bird sings because it has an answer",
+      "A bird does not sing because it has an answer",
+      "A bird sings because it is happy",
+      "A bird sings because it is sad"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb highlighting joy of singing",
+    "d": "EASY"
+  },
+  {
+    "q": "Don't go to the forest to catch a fish.",
+    "opts": [
+      "Go to the forest to catch a fish",
+      "Don't go to the forest to catch a fish",
+      "Go to the river to catch a fish",
+      "Go to the sea to catch a fish"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb advising against unnecessary effort",
+    "d": "EASY"
+  },
+  {
+    "q": "The forest is not the same as the jungle.",
+    "opts": [
+      "The forest and the jungle are the same",
+      "The jungle is not the same as the forest",
+      "The forest is not the same as the jungle",
+      "The jungle is a type of forest"
+    ],
+    "a": 2,
+    "exp": "Kerala proverb highlighting differences",
+    "d": "EASY"
+  },
+  {
+    "q": "A person who does not know the value of money is a fool.",
+    "opts": [
+      "A person who does not know the value of money is a king",
+      "A person who does not know the value of money is a fool",
+      "A person who does not know the value of money is a wise person",
+      "A person who does not know the value of money is a rich person"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb emphasizing financial awareness",
+    "d": "EASY"
+  },
+  {
+    "q": "The snake does not cast a shadow in the forest.",
+    "opts": [
+      "The snake casts a shadow in the forest",
+      "The snake does not cast a shadow in the forest",
+      "The forest does not have shadows",
+      "The snake is invisible in the forest"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb highlighting adaptability",
+    "d": "EASY"
+  },
+  {
+    "q": "The wind does not blow in the desert.",
+    "opts": [
+      "The wind blows in the desert",
+      "The wind does not blow in the desert",
+      "The desert has no wind",
+      "The wind is always strong in the desert"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb highlighting environmental factors",
+    "d": "EASY"
+  },
+  {
+    "q": "A person who does not know the value of time is a fool.",
+    "opts": [
+      "A person who does not know the value of time is a king",
+      "A person who does not know the value of time is a fool",
+      "A person who does not know the value of time is a wise person",
+      "A person who does not know the value of time is a rich person"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb emphasizing time management",
+    "d": "EASY"
+  },
+  {
+    "q": "The tree that falls in the forest makes a sound.",
+    "opts": [
+      "The tree that falls in the forest makes no sound",
+      "The tree that falls in the forest makes a sound",
+      "The forest has no sound",
+      "The tree does not fall in the forest"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb highlighting physical consequences",
+    "d": "EASY"
+  },
+  {
+    "q": "A person who does not know the value of education is a fool.",
+    "opts": [
+      "A person who does not know the value of education is a king",
+      "A person who does not know the value of education is a fool",
+      "A person who does not know the value of education is a wise person",
+      "A person who does not know the value of education is a rich person"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb emphasizing education importance",
+    "d": "EASY"
+  },
+  {
+    "q": "The river does not flow back into the sea.",
+    "opts": [
+      "The river flows back into the sea",
+      "The river does not flow back into the sea",
+      "The sea has no river",
+      "The river flows into the mountains"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb highlighting natural flow",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A person who does not know the value of hard work is a loser.",
+    "opts": [
+      "A person who does not know the value of hard work is a winner",
+      "A person who does not know the value of hard work is a loser",
+      "A person who does not know the value of hard work is a wise person",
+      "A person who does not know the value of hard work is a rich person"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb emphasizing work ethic",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The fish in the river is not the same as the fish in the sea.",
+    "opts": [
+      "The fish in the river is the same as the fish in the sea",
+      "The fish in the river is not the same as the fish in the sea",
+      "The fish in the river is a type of fish",
+      "The fish in the sea is a type of fish"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb highlighting diversity",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A person who does not know the value of honesty is a thief.",
+    "opts": [
+      "A person who does not know the value of honesty is a king",
+      "A person who does not know the value of honesty is a thief",
+      "A person who does not know the value of honesty is a wise person",
+      "A person who does not know the value of honesty is a rich person"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb emphasizing honesty importance",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The tree that grows in the shade does not grow strong.",
+    "opts": [
+      "The tree that grows in the shade grows strong",
+      "The tree that grows in the shade does not grow strong",
+      "The tree that grows in the sun grows strong",
+      "The tree that grows in the mountains grows strong"
+    ],
+    "a": 2,
+    "exp": "Kerala proverb highlighting environmental factors",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A person who does not know the value of kindness is a monster.",
+    "opts": [
+      "A person who does not know the value of kindness is a king",
+      "A person who does not know the value of kindness is a monster",
+      "A person who does not know the value of kindness is a wise person",
+      "A person who does not know the value of kindness is a rich person"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb emphasizing kindness importance",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The river that flows through the mountains is not the same as the river that flows through the plains.",
+    "opts": [
+      "The river that flows through the mountains is the same as the river that flows through the plains",
+      "The river that flows through the mountains is not the same as the river that flows through the plains",
+      "The river that flows through the mountains is a type of river",
+      "The river that flows through the plains is a type of river"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb highlighting diversity",
+    "d": "HARD"
+  },
+  {
+    "q": "A person who does not know the value of patience is a fool.",
+    "opts": [
+      "A person who does not know the value of patience is a king",
+      "A person who does not know the value of patience is a fool",
+      "A person who does not know the value of patience is a wise person",
+      "A person who does not know the value of patience is a rich person"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb emphasizing patience importance",
+    "d": "HARD"
+  },
+  {
+    "q": "The tree that grows in the desert is not the same as the tree that grows in the forest.",
+    "opts": [
+      "The tree that grows in the desert is the same as the tree that grows in the forest",
+      "The tree that grows in the desert is not the same as the tree that grows in the forest",
+      "The tree that grows in the desert is a type of tree",
+      "The tree that grows in the forest is a type of tree"
+    ],
+    "a": 1,
+    "exp": "Kerala proverb highlighting diversity",
+    "d": "HARD"
+  }
+]

@@ -1,0 +1,206 @@
+[
+  {
+    "q": "What is the purpose of the 'Styles' group in the 'Home' tab of MS Word?",
+    "opts": [
+      "Text formatting",
+      "Page layout",
+      "Table management",
+      "Paragraph alignment"
+    ],
+    "a": 0,
+    "exp": "Used for font, alignment, and paragraph settings",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the formula to calculate the average of numbers in a column in Excel?",
+    "opts": [
+      "=AVERAGE(A1:A10)",
+      "=SUM(A1:A10)/10",
+      "=A1+A2+A3",
+      "=SUM(A1:A10)/COUNT(A1:A10)"
+    ],
+    "a": 0,
+    "exp": "AVERAGE function returns the average of a range of cells",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the function of the 'Find and Replace' feature in MS Word?",
+    "opts": [
+      "Searching for specific text in a document",
+      "Replacing text in a document",
+      "Inserting pages into a document",
+      "Deleting a document"
+    ],
+    "a": 1,
+    "exp": "Replace existing text with new text in a document",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the purpose of the 'PivotTable' feature in Excel?",
+    "opts": [
+      "To create charts",
+      "To analyze large datasets",
+      "To insert formulas",
+      "To create tables"
+    ],
+    "a": 1,
+    "exp": "To summarize and analyze large datasets",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the function of the 'Track Changes' feature in MS Word?",
+    "opts": [
+      "To insert comments in a document",
+      "To track changes made to a document",
+      "To delete a document",
+      "To print a document"
+    ],
+    "a": 1,
+    "exp": "To track changes made by multiple authors",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the shortcut key to save a file in MS Word?",
+    "opts": [
+      "Ctrl + S",
+      "Ctrl + P",
+      "Ctrl + Z",
+      "Ctrl + A"
+    ],
+    "a": 0,
+    "exp": "Saves the current file",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the formula to calculate the sum of a range of cells in Excel?",
+    "opts": [
+      "=SUM(A1:A10)",
+      "=A1+A2+A3",
+      "=AVERAGE(A1:A10)",
+      "=MAX(A1:A10)"
+    ],
+    "a": 0,
+    "exp": "SUM function returns the sum of a range of cells",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the purpose of the 'Encrypt with Password' feature in MS Word?",
+    "opts": [
+      "To password-protect a document",
+      "To watermark a document",
+      "To lock a document",
+      "To print a document"
+    ],
+    "a": 0,
+    "exp": "To secure a document with a password",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the shortcut key to undo an action in MS Word?",
+    "opts": [
+      "Ctrl + Z",
+      "Ctrl + Y",
+      "Ctrl + A",
+      "Ctrl + S"
+    ],
+    "a": 0,
+    "exp": "Reverses the last action performed",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the function of the 'Conditional Formatting' feature in Excel?",
+    "opts": [
+      "To format cells based on conditions",
+      "To insert formulas",
+      "To create charts",
+      "To insert tables"
+    ],
+    "a": 0,
+    "exp": "Formats cells based on conditions",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the shortcut key to insert a hyperlink in MS Word?",
+    "opts": [
+      "Ctrl + K",
+      "Ctrl + C",
+      "Ctrl + V",
+      "Ctrl + Z"
+    ],
+    "a": 0,
+    "exp": "Inserts a hyperlink in the document",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the purpose of the 'Protect Workbook' feature in Excel?",
+    "opts": [
+      "To password-protect a workbook",
+      "To lock a workbook",
+      "To encrypt a workbook",
+      "To compress a workbook"
+    ],
+    "a": 0,
+    "exp": "To secure a workbook with a password",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the formula to calculate the maximum value in a range of cells in Excel?",
+    "opts": [
+      "=MAX(A1:A10)",
+      "=AVERAGE(A1:A10",
+      "=SUM(A1:A10)",
+      "=MIN(A1:A10)"
+    ],
+    "a": 0,
+    "exp": "Returns the largest value in a range of cells",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the function of the 'Customize Quick Access Toolbar' feature in MS Word?",
+    "opts": [
+      "To add frequently used commands to the toolbar",
+      "To remove commands from the toolbar",
+      "To insert a table",
+      "To insert a chart"
+    ],
+    "a": 0,
+    "exp": "Adds frequently used commands to the toolbar",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the shortcut key to change the font in MS Word?",
+    "opts": [
+      "Ctrl + F",
+      "Ctrl + A",
+      "Ctrl + C",
+      "Ctrl + Shift + F"
+    ],
+    "a": 3,
+    "exp": "Changes the font of selected text",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the purpose of the 'Group similar objects' feature in MS Word?",
+    "opts": [
+      "To arrange objects in a document",
+      "To insert objects in a document",
+      "To delete objects in a document",
+      "To group similar objects together"
+    ],
+    "a": 3,
+    "exp": "Groups similar objects in a document",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the formula to calculate the minimum value in a range of cells in Excel?",
+    "opts": [
+      "=MIN(A1:A10)",
+      "=MAX(A1:A10)",
+      "=AVERAGE(A1:A10)",
+      "=SUM(A1:A10)"
+    ],
+    "a": 0,
+    "exp": "Returns the smallest value in a range of cells",
+    "d": "EASY"
+  }
+]

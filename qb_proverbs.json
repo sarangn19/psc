@@ -1,0 +1,122 @@
+[
+  {
+    "q": "പഴമൊഴി: അമ്മയുടെ കൈകളിൽ പെട്ടു - এর അർത്ഥം എന്ത്?",
+    "opts": [
+      "ജനനം പലവളര്‍ത്തിയുള്ളതില്‍",
+      "മാതാവിന്റെ കൈകളിൽ ജനനം (മാതാവിന്റെ പരിചരണം)",
+      "ഭാഗ്യവാനായുള്ള Janmam",
+      "ധനവാനായ കുടുംബത്തില്‍ Janmam"
+    ],
+    "a": "B",
+    "exp": "ഈ പഴമൊഴി പുതുതായി ജനിച്ച குழവന്‍ മാതാവിന്റെ സ്നേഹത്തില്‍ വളര്‍ന്നെന്ന് സൂചിപ്പിക്കുന്നു – ‘born and brought up in mother’s care’.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "പഴമൊഴി: പാല്‍ കുട്ടി പാല്‍ കുട്ടി - এর ഇംഗ്ലീഷ് സമതുല്യം എന്ത്?",
+    "opts": [
+      "Like father, like son",
+      "Like mother, like daughter",
+      "Like teacher, like student",
+      "Like master, like servant"
+    ],
+    "a": "A",
+    "exp": "മകന്‍ പിതാവിന്റെ സ്വഭാവം یا qualités അനുസരിച്ച് വളര്‍ന്നെന്ന് സൂചിക്കുന്ന പഴമൊഴിയായി, ഇംഗ്ലീഷിൽ Like father, like son എന്നതാണ് സമതുല്യം.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "പഴമൊഴി: മൃഗം കണ്ടു പെറുക്കുക - এর അർത്ഥം എന്ത്?",
+    "opts": [
+      "Don't count your chickens before they hatch",
+      "Don't cry over spilled milk",
+      "Look before you leap",
+      "A bird in hand is worth two in the bush"
+    ],
+    "a": "A",
+    "exp": "ഈ പഴമൊഴി ഭവിഷ്യৎ ലഭിക്കുമെന്ന് ഉम्मതിയുള്ള പ്രഖ്യാപനങ്ങൾ ചെയ്യരുത് – ‘don’t count your chickens before they hatch’ എന്ന അർത്ഥം.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "പഴമൊഴി: പാതിരി കെട്ടിയാൽ പാതിരി കെട്ടിയാൽ - এর ഇംഗ്ലീഷ് ಸಮതുല്യം എന്ത്?",
+    "opts": [
+      "Closing the stable door after the horse has bolted",
+      "Making hay while the sun shines",
+      "A stitch in time saves nine",
+      "Don't burn your bridges"
+    ],
+    "a": "A",
+    "exp": "പശുപാലनaml quelconque സുരക്ഷാ നടപടി കഴിഞ്ഞ് ശേഷം നടത്തുന്നത് – ‘closing the stable door after the horse has bolted’.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "പഴമൊഴി: അകല്‍വെളിച്ചം - এর അർത്ഥം എന്ത്?",
+    "opts": [
+      "Absence makes the heart grow fonder",
+      "Out of sight, out of mind",
+      "Distance lends enchantment to the view",
+      "Far away eyes see more"
+    ],
+    "a": "A",
+    "exp": "വิบജ്ജനം പ്രേമം বা ബന്ധത്തെ 강화시키는താണ് – ‘absence makes the heart grow fonder’.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "പഴമൊഴി: വെള്ളം കെട്ടിയാൽ വെള്ളം കെട്ടിയാൽ - এর അർത്ഥം എന്ത്?",
+    "opts": [
+      "Water finds its level",
+      "Still waters run deep",
+      "You can lead a horse to water but you can't make it drink",
+      "A rolling stone gathers no moss"
+    ],
+    "a": "A",
+    "exp": "വെള്ളം തനതിന്റെ സ്വഭാവനുസരിച്ച് സമതുല്യമേത്തുന്നു – ‘water finds its level’.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "പഴമൊഴി: തേന്‍ കെട്ടിയാൽ തേന്‍ കെട്ടിയാൽ - এর അർത്ഥം എന്ത്?",
+    "opts": [
+      "Sweet as honey",
+      "Honey catches more flies more than vinegar",
+      "The proof of the pudding is in the eating",
+      "Sweet words butter no parsnips"
+    ],
+    "a": "A",
+    "exp": "തേന്‍ എന്ന് സ്വാഭാവികമായി മധുരം – ‘sweet as honey’.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "പഴമൊഴി: പുളി കെട്ടിയാൽ പുളി കെട്ടിയാൽ - এর ഇംഗ്ലീഷ് സമതുല്യം എന്ത്?",
+    "opts": [
+      "Sour grapes",
+      "When life gives you lemons, make lemonade",
+      "The apple doesn't fall far from the tree",
+      "Easy come, easy go"
+    ],
+    "a": "A",
+    "exp": "ഒരു דבר ലഭിക്കാതെ ‘ഇത് ചൊല്ലിയാണ്’ എന്ന് പറയുന്നത് – ‘sour grapes’.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "പഴമൊഴി: അവന്‍ കണ്ടു പകര്‍ത്തു - এর അർത്ഥം എന്ത്?",
+    "opts": [
+      "Seeing is believing",
+      "Hear no evil, see no evil",
+      "Eyes are the window to the soul",
+      "Appearances can be deceptive"
+    ],
+    "a": "A",
+    "exp": "പ്രതീക്ഷയോ ശ്രമയോ ഉനര്‍ത്താതെ, നയനങ്ങള്‍ കണ്ടെന്നാൽ മാത്രം വിശ്വസിക്കുക – ‘seeing is believing’.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "പഴമൊഴി: കുറവ് കണ്ടു പറ്റിയാൽ - এর അർത്ഥം എന്ത്?",
+    "opts": [
+      "A stitch in time saves nine",
+      "Better late than never",
+      "Look before you leap",
+      "Don't judge a book by its cover"
+    ],
+    "a": "A",
+    "exp": "സമയത്തില്‍ ചെറിയ പരിഹാരം ചെയ്യundosdě büyük問題を防ぐことができる – ‘a stitch in time saves nine’.",
+    "d": "MEDIUM"
+  }
+]

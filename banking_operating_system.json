@@ -1,0 +1,194 @@
+[
+  {
+    "q": "What is the primary function of the operating system?",
+    "opts": [
+      "Managing hardware resources",
+      "Managing software resources",
+      "Managing network resources",
+      "Managing user resources"
+    ],
+    "a": 0,
+    "exp": "OS manages hardware resources",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is a type of operating system?",
+    "opts": [
+      "Cloud",
+      "Database",
+      "Network",
+      "Application"
+    ],
+    "a": 0,
+    "exp": "Cloud is a type of OS",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the purpose of a process scheduler?",
+    "opts": [
+      "To allocate memory to processes",
+      "To schedule process execution",
+      "To manage I/O operations",
+      "To handle interrupts"
+    ],
+    "a": 1,
+    "exp": "Process scheduler schedules process execution",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is a type of file system?",
+    "opts": [
+      "NTFS",
+      "FAT",
+      "MAC",
+      "HFS"
+    ],
+    "a": 0,
+    "exp": "NTFS is a type of file system",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the function of a device driver?",
+    "opts": [
+      "To manage I/O operations",
+      "To allocate memory to processes",
+      "To schedule process execution",
+      "To handle interrupts"
+    ],
+    "a": 0,
+    "exp": "Device driver manages I/O operations",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the purpose of a virtual memory?",
+    "opts": [
+      "To allocate memory to processes",
+      "To schedule process execution",
+      "To manage I/O operations",
+      "To handle interrupts"
+    ],
+    "a": 0,
+    "exp": "Virtual memory manages I/O operations",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is a type of operating system?",
+    "opts": [
+      "Batch processing",
+      "Real-time",
+      "Cloud",
+      "Distributed"
+    ],
+    "a": 0,
+    "exp": "Cloud is a type of OS",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the function of a system call?",
+    "opts": [
+      "To manage I/O operations",
+      "To allocate memory to processes",
+      "To schedule process execution",
+      "To handle interrupts"
+    ],
+    "a": 1,
+    "exp": "System call manages I/O operations",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the purpose of a interrupt handler?",
+    "opts": [
+      "To manage I/O operations",
+      "To allocate memory to processes",
+      "To schedule process execution",
+      "To handle interrupts"
+    ],
+    "a": 3,
+    "exp": "Interrupt handler handles interrupts",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a type of operating system?",
+    "opts": [
+      "Client-server",
+      "Distributed",
+      "Cloud",
+      "Real-time"
+    ],
+    "a": 0,
+    "exp": "Cloud is a type of OS",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the function of a job scheduler?",
+    "opts": [
+      "To allocate memory to processes",
+      "To schedule process execution",
+      "To manage I/O operations",
+      "To handle interrupts"
+    ],
+    "a": 1,
+    "exp": "Job scheduler schedules process execution",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the purpose of a memory manager?",
+    "opts": [
+      "To allocate memory to processes",
+      "To schedule process execution",
+      "To manage I/O operations",
+      "To handle interrupts"
+    ],
+    "a": 0,
+    "exp": "Memory manager allocates memory to processes",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a type of operating system?",
+    "opts": [
+      "Single-user",
+      "Multi-user",
+      "Cloud",
+      "Distributed"
+    ],
+    "a": 1,
+    "exp": "Cloud is a type of OS",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the function of a process manager?",
+    "opts": [
+      "To manage I/O operations",
+      "To allocate memory to processes",
+      "To schedule process execution",
+      "To handle interrupts"
+    ],
+    "a": 2,
+    "exp": "Process manager schedules process execution",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the purpose of a resource allocator?",
+    "opts": [
+      "To allocate memory to processes",
+      "To schedule process execution",
+      "To manage I/O operations",
+      "To handle interrupts"
+    ],
+    "a": 0,
+    "exp": "Resource allocator allocates memory to processes",
+    "d": "HARD"
+  },
+  {
+    "q": "Which of the following is a type of operating system?",
+    "opts": [
+      "Real-time",
+      "Cloud",
+      "Distributed",
+      "Client-server"
+    ],
+    "a": 0,
+    "exp": "Cloud is a type of OS",
+    "d": "HARD"
+  }
+]

@@ -1,0 +1,194 @@
+[
+  {
+    "q": "Who is credited with inventing the first computer?",
+    "opts": [
+      "Charles Babbage",
+      "Alan Turing",
+      "John Atanasoff",
+      "Blaise Pascal"
+    ],
+    "a": 0,
+    "exp": "Charles Babbage is credited with inventing the first computer.",
+    "d": "HARD"
+  },
+  {
+    "q": "What was the name of the first commercial computer?",
+    "opts": [
+      "UNIVAC 1",
+      "ENIAC",
+      "Harvard Mark I",
+      "EDVAC"
+    ],
+    "a": 0,
+    "exp": "UNIVAC 1 was the first commercial computer.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who developed the first electronic computer?",
+    "opts": [
+      "John Mauchly",
+      "John Atanasoff",
+      "Charles Babbage",
+      "Alan Turing"
+    ],
+    "a": 0,
+    "exp": "John Mauchly and Presper Eckert developed the first electronic computer.",
+    "d": "HARD"
+  },
+  {
+    "q": "What was the first computer programming language?",
+    "opts": [
+      "Fortran",
+      "COBOL",
+      "PL/1",
+      "Machine Code"
+    ],
+    "a": 3,
+    "exp": "Machine Code was the first computer programming language.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who developed the first high-level programming language?",
+    "opts": [
+      "Alan Kay",
+      "John Backus",
+      "John McCarthy",
+      "Alan Turing"
+    ],
+    "a": 2,
+    "exp": "John Backus developed the first high-level programming language.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What was the name of the first computer that used a stored-program concept?",
+    "opts": [
+      "EDVAC",
+      "ENIAC",
+      "UNIVAC 1",
+      "Harvard Mark I"
+    ],
+    "a": 0,
+    "exp": "EDVAC was the first computer that used a stored-program concept.",
+    "d": "HARD"
+  },
+  {
+    "q": "Who developed the first computer with a magnetic drum memory?",
+    "opts": [
+      "John Atanasoff",
+      "John Mauchly",
+      "Presper Eckert",
+      "John Backus"
+    ],
+    "a": 0,
+    "exp": "John Atanasoff developed the first computer with a magnetic drum memory.",
+    "d": "HARD"
+  },
+  {
+    "q": "What was the name of the first computer with a commercial success?",
+    "opts": [
+      "UNIVAC 1",
+      "ENIAC",
+      "EDVAC",
+      "Harvard Mark I"
+    ],
+    "a": 0,
+    "exp": "UNIVAC 1 was the first computer with a commercial success.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is credited with developing the first computer with a graphical user interface?",
+    "opts": [
+      "Alan Kay",
+      "John Mauchly",
+      "John Atanasoff",
+      "Douglas Engelbart"
+    ],
+    "a": 3,
+    "exp": "Douglas Engelbart is credited with developing the first computer with a graphical user interface.",
+    "d": "HARD"
+  },
+  {
+    "q": "What was the name of the first computer that used a keyboard as the primary input device?",
+    "opts": [
+      "ENIAC",
+      "UNIVAC 1",
+      "EDVAC",
+      "Harvard Mark I"
+    ],
+    "a": 0,
+    "exp": "ENIAC was the first computer that used a keyboard as the primary input device.",
+    "d": "HARD"
+  },
+  {
+    "q": "Who developed the first computer that used a vacuum tube?",
+    "opts": [
+      "John Mauchly",
+      "John Atanasoff",
+      "Charles Babbage",
+      "Alan Turing"
+    ],
+    "a": 0,
+    "exp": "John Mauchly developed the first computer that used a vacuum tube.",
+    "d": "HARD"
+  },
+  {
+    "q": "What was the name of the first computer that used a transistor?",
+    "opts": [
+      "UNIVAC 1",
+      "ENIAC",
+      "EDVAC",
+      "Harvard Mark I"
+    ],
+    "a": 0,
+    "exp": "UNIVAC 1 was the first computer that used a transistor.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who developed the first computer with a floppy disk drive?",
+    "opts": [
+      "John Mauchly",
+      "John Atanasoff",
+      "Presper Eckert",
+      "Alan Kay"
+    ],
+    "a": 0,
+    "exp": "John Mauchly developed the first computer with a floppy disk drive.",
+    "d": "HARD"
+  },
+  {
+    "q": "What was the name of the first computer that used a mouse as an input device?",
+    "opts": [
+      "ENIAC",
+      "UNIVAC 1",
+      "EDVAC",
+      "Harvard Mark I"
+    ],
+    "a": 0,
+    "exp": "ENIAC was the first computer that used a mouse as an input device.",
+    "d": "HARD"
+  },
+  {
+    "q": "Who developed the first computer with a touch screen interface?",
+    "opts": [
+      "Douglas Engelbart",
+      "John Mauchly",
+      "John Atanasoff",
+      "Alan Kay"
+    ],
+    "a": 0,
+    "exp": "Douglas Engelbart developed the first computer with a touch screen interface.",
+    "d": "HARD"
+  },
+  {
+    "q": "What was the name of the first computer that used a CD-ROM drive?",
+    "opts": [
+      "UNIVAC 1",
+      "ENIAC",
+      "EDVAC",
+      "Harvard Mark I"
+    ],
+    "a": 0,
+    "exp": "UNIVAC 1 was the first computer that used a CD-ROM drive.",
+    "d": "MEDIUM"
+  }
+]

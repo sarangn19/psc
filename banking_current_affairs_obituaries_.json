@@ -1,0 +1,218 @@
+[
+  {
+    "q": "Renowned poet and songwriter, Leonard Cohen, passed away in 2016 at the age of 82.",
+    "opts": [
+      "2015",
+      "2016",
+      "2017",
+      "2018"
+    ],
+    "a": 1,
+    "exp": "Leonard Cohen died in 2016",
+    "d": "EASY"
+  },
+  {
+    "q": "Malaysian actor and film producer, Tan Sri P. Ramasamy, passed away in 2019.",
+    "opts": [
+      "2018",
+      "2019",
+      "2020",
+      "2021"
+    ],
+    "a": 1,
+    "exp": "Tan Sri P. Ramasamy died in 2019",
+    "d": "EASY"
+  },
+  {
+    "q": "Indian businesswoman and former chairperson of Tata Group, J.R.D. Tata, passed away in 1993.",
+    "opts": [
+      "1992",
+      "1993",
+      "1994",
+      "1995"
+    ],
+    "a": 1,
+    "exp": "J.R.D. Tata died in 1993",
+    "d": "EASY"
+  },
+  {
+    "q": "Former US Secretary of Defense, James Forrestal, passed away in 1949.",
+    "opts": [
+      "1948",
+      "1949",
+      "1950",
+      "1951"
+    ],
+    "a": 2,
+    "exp": "James Forrestal died in 1949",
+    "d": "EASY"
+  },
+  {
+    "q": "Indian cricketer, Vinoo Mankad, passed away in 1972.",
+    "opts": [
+      "1971",
+      "1972",
+      "1973",
+      "1974"
+    ],
+    "a": 1,
+    "exp": "Vinoo Mankad died in 1972",
+    "d": "EASY"
+  },
+  {
+    "q": "American singer and songwriter, Aretha Franklin, passed away in 2018.",
+    "opts": [
+      "2017",
+      "2018",
+      "2019",
+      "2020"
+    ],
+    "a": 1,
+    "exp": "Aretha Franklin died in 2018",
+    "d": "EASY"
+  },
+  {
+    "q": "Indian politician and former Chief Minister of Maharashtra, V.P. Singh, passed away in 2011.",
+    "opts": [
+      "2010",
+      "2011",
+      "2012",
+      "2013"
+    ],
+    "a": 1,
+    "exp": "V.P. Singh died in 2011",
+    "d": "EASY"
+  },
+  {
+    "q": "Indian novelist and writer, P. Lankesh, passed away in 2017.",
+    "opts": [
+      "2016",
+      "2017",
+      "2018",
+      "2019"
+    ],
+    "a": 1,
+    "exp": "P. Lankesh died in 2017",
+    "d": "EASY"
+  },
+  {
+    "q": "Indian cricketer, Bapu Nadkarni, passed away in 2020.",
+    "opts": [
+      "2019",
+      "2020",
+      "2021",
+      "2022"
+    ],
+    "a": 2,
+    "exp": "Bapu Nadkarni died in 2020",
+    "d": "EASY"
+  },
+  {
+    "q": "Indian environmentalist, Sunderlal Bahuguna, passed away in 2021.",
+    "opts": [
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+    ],
+    "a": 1,
+    "exp": "Sunderlal Bahuguna died in 2021",
+    "d": "EASY"
+  },
+  {
+    "q": "Indian film director, K Balachander, passed away in 2019.",
+    "opts": [
+      "2018",
+      "2019",
+      "2020",
+      "2021"
+    ],
+    "a": 1,
+    "exp": "K Balachander died in 2019",
+    "d": "EASY"
+  },
+  {
+    "q": "Indian politician, Madhavrao Scindia, passed away in 2001.",
+    "opts": [
+      "2000",
+      "2001",
+      "2002",
+      "2003"
+    ],
+    "a": 1,
+    "exp": "Madhavrao Scindia died in 2001",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Indian cricketer, Ravi Shastri, passed away in 1996.",
+    "opts": [
+      "1995",
+      "1996",
+      "1997",
+      "1998"
+    ],
+    "a": 2,
+    "exp": "Ravi Shastri died in 1996",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Former US President, Warren G. Harding, passed away in 1923.",
+    "opts": [
+      "1922",
+      "1923",
+      "1924",
+      "1925"
+    ],
+    "a": 1,
+    "exp": "Warren G. Harding died in 1923",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Indian writer and journalist, Kuldip Nayar, passed away in 2018.",
+    "opts": [
+      "2017",
+      "2018",
+      "2019",
+      "2020"
+    ],
+    "a": 1,
+    "exp": "Kuldip Nayar died in 2018",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Indian field hockey player and former captain, Ashok Kumar, passed away in 2020.",
+    "opts": [
+      "2019",
+      "2020",
+      "2021",
+      "2022"
+    ],
+    "a": 2,
+    "exp": "Ashok Kumar died in 2020",
+    "d": "HARD"
+  },
+  {
+    "q": "Indian cricketer, Ajit Wadekar, passed away in 2020.",
+    "opts": [
+      "2019",
+      "2020",
+      "2021",
+      "2022"
+    ],
+    "a": 1,
+    "exp": "Ajit Wadekar died in 2020",
+    "d": "HARD"
+  },
+  {
+    "q": "Indian cardiologist and academic, Anil B. Rao, passed away in 2018.",
+    "opts": [
+      "2017",
+      "2018",
+      "2019",
+      "2020"
+    ],
+    "a": 1,
+    "exp": "Anil B. Rao died in 2018",
+    "d": "HARD"
+  }
+]

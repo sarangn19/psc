@@ -1,0 +1,194 @@
+[
+  {
+    "q": "What is 20% of 500?",
+    "opts": [
+      "80",
+      "100",
+      "120",
+      "150"
+    ],
+    "a": 1,
+    "exp": "20% of 500 = 100",
+    "d": "EASY"
+  },
+  {
+    "q": "A cheque is drawn on which bank?",
+    "opts": [
+      "State Bank of India",
+      "Punjab National Bank",
+      "Indian Overseas Bank",
+      "Canara Bank"
+    ],
+    "a": 3,
+    "exp": "Cheque drawn on IOB",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the minimum amount to open a savings account?",
+    "opts": [
+      "100",
+      "500",
+      "1000",
+      "2000"
+    ],
+    "a": 2,
+    "exp": "Minimum amount to open a savings account",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A customer wants to deposit a sum of money in a bank. What is the first step?",
+    "opts": [
+      "Verify the customer's identity",
+      "Check the account balance",
+      "Fill the deposit slip",
+      "Count the money"
+    ],
+    "a": 0,
+    "exp": "Verify the customer's identity first",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank customer has a savings account with a balance of Rs. 10,000. What is the interest earned on this balance if the interest rate is 5% per annum?",
+    "opts": [
+      "500",
+      "495",
+      "490",
+      "485"
+    ],
+    "a": 3,
+    "exp": "Interest earned on Rs. 10,000 at 5%",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the main purpose of a Padyam?",
+    "opts": [
+      "To verify customer's identity",
+      "To deposit money",
+      "To withdraw money",
+      "To get loan"
+    ],
+    "a": 0,
+    "exp": "To verify customer's identity",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank customer has a current account with a balance of Rs. 20,000. What is the interest earned on this balance if the interest rate is 4% per annum?",
+    "opts": [
+      "800",
+      "820",
+      "800",
+      "800"
+    ],
+    "a": 0,
+    "exp": "Interest earned on Rs. 20,000 at 4%",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the next step after a Padyam is verified?",
+    "opts": [
+      "Deposit the money",
+      "Withdraw the money",
+      "Fill the deposit slip",
+      "Count the money"
+    ],
+    "a": 1,
+    "exp": "Deposit the money after Padyam verification",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A bank customer wants to withdraw a sum of money. What is the first step?",
+    "opts": [
+      "Fill the withdrawal slip",
+      "Count the money",
+      "Verify the customer's identity",
+      "Check the account balance"
+    ],
+    "a": 0,
+    "exp": "Verify the customer's identity first",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the minimum balance required in a savings account to avoid penalty?",
+    "opts": [
+      "500",
+      "1000",
+      "2000",
+      "3000"
+    ],
+    "a": 2,
+    "exp": "Minimum balance to avoid penalty in savings account",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A customer wants to deposit a sum of money in a bank. What is the next step after verifying the customer's identity?",
+    "opts": [
+      "Fill the deposit slip",
+      "Count the money",
+      "Withdraw the money",
+      "Deposit the money"
+    ],
+    "a": 0,
+    "exp": "Fill the deposit slip after verification",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank customer has a savings account with a balance of Rs. 15,000. What is the interest earned on this balance if the interest rate is 6% per annum?",
+    "opts": [
+      "900",
+      "950",
+      "900",
+      "950"
+    ],
+    "a": 1,
+    "exp": "Interest earned on Rs. 15,000 at 6%",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the main function of a Padyam?",
+    "opts": [
+      "To deposit money",
+      "To withdraw money",
+      "To verify customer's identity",
+      "To get loan"
+    ],
+    "a": 2,
+    "exp": "To verify customer's identity",
+    "d": "EASY"
+  },
+  {
+    "q": "A customer wants to withdraw a sum of money from a bank. What is the first step?",
+    "opts": [
+      "Fill the withdrawal slip",
+      "Count the money",
+      "Verify the customer's identity",
+      "Check the account balance"
+    ],
+    "a": 0,
+    "exp": "Verify the customer's identity first",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank customer has a current account with a balance of Rs. 12,000. What is the interest earned on this balance if the interest rate is 3% per annum?",
+    "opts": [
+      "360",
+      "370",
+      "360",
+      "370"
+    ],
+    "a": 0,
+    "exp": "Interest earned on Rs. 12,000 at 3%",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the final step after a Padyam is verified and the deposit slip is filled?",
+    "opts": [
+      "Count the money",
+      "Deposit the money",
+      "Withdraw the money",
+      "Get loan"
+    ],
+    "a": 1,
+    "exp": "Deposit the money after Padyam verification",
+    "d": "MEDIUM"
+  }
+]

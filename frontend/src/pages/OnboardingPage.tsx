@@ -79,7 +79,7 @@ export default function OnboardingPage() {
                   step >= s ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-400'
                 }`}>{s}</div>
                 <span className={`text-sm font-medium ${step >= s ? 'text-gray-900' : 'text-gray-400'}`}>
-                  {s === 1 ? 'Select Exams' : 'Mark Chapters'}
+                  {s === 1 ? 'Select Exams' : 'Select Chapters'}
                 </span>
                 {s < 2 && <ChevronRight size={16} className="text-gray-300" />}
               </div>
@@ -120,9 +120,9 @@ export default function OnboardingPage() {
 
           {step === 2 && (
             <div>
-              <h2 className="text-xl font-bold text-gray-900 mb-1">What have you already studied?</h2>
+              <h2 className="text-xl font-bold text-gray-900 mb-1">Which chapters do you want to practice now?</h2>
               <p className="text-gray-500 text-sm mb-5">
-                Mark chapters you've already covered. If you skip this, Current Affairs will be your starting point.
+                Mark the chapters you want to practice with adaptive questions. If you skip this, Current Affairs will be your starting point.
               </p>
               <div className="space-y-4 max-h-96 overflow-y-auto pr-1">
                 {mergedSubjects.map((subject) => (

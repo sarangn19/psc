@@ -1,0 +1,194 @@
+[
+  {
+    "q": "Firm",
+    "opts": [
+      "Weak",
+      "Strong",
+      "Stable",
+      "Flexible"
+    ],
+    "a": 1,
+    "exp": "Opposite of stable and firm is weak",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Rise",
+    "opts": [
+      "Increase",
+      "Decrease",
+      "Fall",
+      "Grow"
+    ],
+    "a": 2,
+    "exp": "Rise is opposite of decrease",
+    "d": "EASY"
+  },
+  {
+    "q": "Homogeneous",
+    "opts": [
+      "Diverse",
+      "Heterogeneous",
+      "Similar",
+      "Unique"
+    ],
+    "a": 1,
+    "exp": "Homogeneous means uniform or similar",
+    "d": "HARD"
+  },
+  {
+    "q": "Cheap",
+    "opts": [
+      "Expensive",
+      "Costly",
+      "Affordable",
+      "Free"
+    ],
+    "a": 2,
+    "exp": "Cheap is opposite of costly",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Hurry",
+    "opts": [
+      "Slow",
+      "Fast",
+      "Swift",
+      "Quick"
+    ],
+    "a": 0,
+    "exp": "Hurry means to hurry or rush",
+    "d": "EASY"
+  },
+  {
+    "q": "Simplify",
+    "opts": [
+      "Complicate",
+      "Complexify",
+      "Embellish",
+      "Change"
+    ],
+    "a": 0,
+    "exp": "Simplify means to make something easier to understand",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Ponder",
+    "opts": [
+      "Reason",
+      "Think",
+      "Reflect",
+      "Doubt"
+    ],
+    "a": 3,
+    "exp": "Ponder is opposite of doubt",
+    "d": "HARD"
+  },
+  {
+    "q": "Order",
+    "opts": [
+      "Disorder",
+      "Chaos",
+      "Mess",
+      "Clutter"
+    ],
+    "a": 0,
+    "exp": "Order is opposite of disorder or chaos",
+    "d": "HARD"
+  },
+  {
+    "q": "Freeze",
+    "opts": [
+      "Thaw",
+      "Melt",
+      "Boil",
+      "Bake"
+    ],
+    "a": 0,
+    "exp": "Freeze is opposite of thaw",
+    "d": "EASY"
+  },
+  {
+    "q": "Stable",
+    "opts": [
+      "Unstable",
+      "Unpredictable",
+      "Unreliable",
+      "Untrustworthy"
+    ],
+    "a": 0,
+    "exp": "Stable means firm or secure",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Abundance",
+    "opts": [
+      "Deficiency",
+      "Shortage",
+      "Scarcity",
+      "Shortage"
+    ],
+    "a": 0,
+    "exp": "Abundance means having enough or plenty",
+    "d": "HARD"
+  },
+  {
+    "q": "Content",
+    "opts": [
+      "Dissatisfied",
+      "Unhappy",
+      "Displeased",
+      "Unfulfilled"
+    ],
+    "a": 0,
+    "exp": "Content means being satisfied or pleased",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Maximum",
+    "opts": [
+      "Minimum",
+      "Least",
+      "Optimum",
+      "Average"
+    ],
+    "a": 0,
+    "exp": "Maximum is opposite of minimum",
+    "d": "HARD"
+  },
+  {
+    "q": "Layoff",
+    "opts": [
+      "Hire",
+      "Promote",
+      "Recruit",
+      "Retain"
+    ],
+    "a": 0,
+    "exp": "Layoff is opposite of hire or recruit",
+    "d": "HARD"
+  },
+  {
+    "q": "Synchronize",
+    "opts": [
+      "Disrupt",
+      "Destroy",
+      "Interfere",
+      "Interrupt"
+    ],
+    "a": 0,
+    "exp": "Synchronize means to coordinate or time",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Punish",
+    "opts": [
+      "Reward",
+      "Praise",
+      "Thank",
+      "Appreciate"
+    ],
+    "a": 0,
+    "exp": "Punish is opposite of reward or praise",
+    "d": "HARD"
+  }
+]

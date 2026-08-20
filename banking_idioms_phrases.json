@@ -1,0 +1,194 @@
+[
+  {
+    "q": "Bite the bullet",
+    "opts": [
+      "accept the unpleasant situation",
+      "accept the challenge",
+      "be brave",
+      "be patient"
+    ],
+    "a": 0,
+    "exp": "Bite the bullet means accept the unpleasant situation",
+    "d": "EASY"
+  },
+  {
+    "q": "Burn the midnight oil",
+    "opts": [
+      "work late at night",
+      "be lazy",
+      "be careful",
+      "be slow"
+    ],
+    "a": 0,
+    "exp": "Burn the midnight oil means work late at night",
+    "d": "EASY"
+  },
+  {
+    "q": "Cost an arm and a leg",
+    "opts": [
+      "be cheap",
+      "be expensive",
+      "be free",
+      "be happy"
+    ],
+    "a": 1,
+    "exp": "Cost an arm and a leg means be expensive",
+    "d": "EASY"
+  },
+  {
+    "q": "Cut to the chase",
+    "opts": [
+      "get to the point",
+      "be slow",
+      "be patient",
+      "be careful"
+    ],
+    "a": 0,
+    "exp": "Cut to the chase means get to the point",
+    "d": "EASY"
+  },
+  {
+    "q": "Cry over spilt milk",
+    "opts": [
+      "be sad about what happened",
+      "be happy about what happened",
+      "be brave",
+      "be patient"
+    ],
+    "a": 0,
+    "exp": "Cry over spilt milk means be sad about what happened",
+    "d": "EASY"
+  },
+  {
+    "q": "Give someone the cold shoulder",
+    "opts": [
+      "be friendly",
+      "be cold",
+      "be happy",
+      "be sad"
+    ],
+    "a": 1,
+    "exp": "Give someone the cold shoulder means be cold",
+    "d": "EASY"
+  },
+  {
+    "q": "In a nutshell",
+    "opts": [
+      "in a few words",
+      "in a long time",
+      "in a short time",
+      "in a big way"
+    ],
+    "a": 0,
+    "exp": "In a nutshell means in a few words",
+    "d": "EASY"
+  },
+  {
+    "q": "Let sleeping dogs lie",
+    "opts": [
+      "be brave",
+      "be patient",
+      "be careful",
+      "be happy"
+    ],
+    "a": 0,
+    "exp": "Let sleeping dogs lie means be patient",
+    "d": "EASY"
+  },
+  {
+    "q": "Make a mountain out of a molehill",
+    "opts": [
+      "be brave",
+      "be patient",
+      "be careful",
+      "be too serious about a small issue"
+    ],
+    "a": 3,
+    "exp": "Make a mountain out of a molehill means be too serious about a small issue",
+    "d": "EASY"
+  },
+  {
+    "q": "Rain on someone's parade",
+    "opts": [
+      "be happy",
+      "be sad",
+      "be brave",
+      "be a hindrance to someone's plans"
+    ],
+    "a": 3,
+    "exp": "Rain on someone's parade means be a hindrance to someone's plans",
+    "d": "EASY"
+  },
+  {
+    "q": "Take it with a grain of salt",
+    "opts": [
+      "be happy",
+      "be sad",
+      "be careful",
+      "be skeptical about something"
+    ],
+    "a": 3,
+    "exp": "Take it with a grain of salt means be skeptical about something",
+    "d": "EASY"
+  },
+  {
+    "q": "The pot calling the kettle black",
+    "opts": [
+      "be brave",
+      "be patient",
+      "be careful",
+      "be hypocritical and accuse someone of something you yourself are guilty of"
+    ],
+    "a": 3,
+    "exp": "The pot calling the kettle black means be hypocritical and accuse someone of something you yourself are guilty of",
+    "d": "EASY"
+  },
+  {
+    "q": "A shot in the dark",
+    "opts": [
+      "a good opportunity",
+      "a bad decision",
+      "a new idea",
+      "a guess"
+    ],
+    "a": 3,
+    "exp": "A shot in the dark means a guess",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Bite off more than you can chew",
+    "opts": [
+      "be brave",
+      "be patient",
+      "be careful",
+      "take on more responsibility than you can handle"
+    ],
+    "a": 3,
+    "exp": "Bite off more than you can chew means take on more responsibility than you can handle",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Cut corners",
+    "opts": [
+      "be lazy",
+      "be careful",
+      "be slow",
+      "be efficient"
+    ],
+    "a": 3,
+    "exp": "Cut corners means be efficient",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "On the same page",
+    "opts": [
+      "be on the same level",
+      "be on the same team",
+      "be in agreement",
+      "be on the same wavelength"
+    ],
+    "a": 3,
+    "exp": "On the same page means be in agreement",
+    "d": "MEDIUM"
+  }
+]

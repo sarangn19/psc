@@ -1,0 +1,194 @@
+[
+  {
+    "q": "What is the full form of OS?",
+    "opts": [
+      "Operating System",
+      "Object System",
+      "Open System",
+      "Online System"
+    ],
+    "a": 0,
+    "exp": "OS stands for Operating System",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is a type of computer software?",
+    "opts": [
+      "Hardware",
+      "Firmware",
+      "Software",
+      "Application"
+    ],
+    "a": 3,
+    "exp": "Software is a type of computer software",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the primary function of a compiler?",
+    "opts": [
+      "To translate source code into machine code",
+      "To run a program on a computer",
+      "To create a database",
+      "To encrypt data"
+    ],
+    "a": 0,
+    "exp": "Compiler translates source code into machine code",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is an example of system software?",
+    "opts": [
+      "Microsoft Word",
+      "Google Chrome",
+      "Windows Operating System",
+      "Adobe Photoshop"
+    ],
+    "a": 2,
+    "exp": "Windows OS is an example of system software",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the purpose of a database management system?",
+    "opts": [
+      "To store data in a structured format",
+      "To run a program on a computer",
+      "To translate source code into machine code",
+      "To create a report"
+    ],
+    "a": 0,
+    "exp": "DBMS stores data in a structured format",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the difference between a virus and a worm?",
+    "opts": [
+      "A virus is a type of malware that replicates itself",
+      "A worm is a type of malware that replicates itself",
+      "A virus is a type of malware that can be removed by an antivirus program",
+      "A worm is a type of malware that can be removed by an antivirus program"
+    ],
+    "a": 1,
+    "exp": "Worm replicates itself without a host program",
+    "d": "HARD"
+  },
+  {
+    "q": "Which of the following is an example of a software as a service (SaaS) model?",
+    "opts": [
+      "Microsoft Office",
+      "Google Drive",
+      "Amazon Web Services",
+      "IBM Cloud"
+    ],
+    "a": 1,
+    "exp": "Google Drive is an example of SaaS model",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the purpose of a firewall?",
+    "opts": [
+      "To translate source code into machine code",
+      "To run a program on a computer",
+      "To encrypt data",
+      "To block unauthorized access to a network"
+    ],
+    "a": 3,
+    "exp": "Firewall blocks unauthorized access to a network",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a type of malware?",
+    "opts": [
+      "Trojan",
+      "Spyware",
+      "Adware",
+      "Rootkit"
+    ],
+    "a": 0,
+    "exp": "Trojan is a type of malware",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the full form of API?",
+    "opts": [
+      "Application Programming Interface",
+      "Active Programming Interface",
+      "Advanced Programming Interface",
+      "Artificial Programming Interface"
+    ],
+    "a": 0,
+    "exp": "API stands for Application Programming Interface",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is an example of a computer software?",
+    "opts": [
+      "Printer",
+      "Monitor",
+      "Keyboard",
+      "Microsoft Office"
+    ],
+    "a": 3,
+    "exp": "Microsoft Office is an example of computer software",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the purpose of a backup?",
+    "opts": [
+      "To restore data in case of a disaster",
+      "To translate source code into machine code",
+      "To run a program on a computer",
+      "To create a report"
+    ],
+    "a": 0,
+    "exp": "Backup restores data in case of a disaster",
+    "d": "HARD"
+  },
+  {
+    "q": "Which of the following is a type of malware that can steal sensitive information?",
+    "opts": [
+      "Ransomware",
+      "Trojan",
+      "Spyware",
+      "Adware"
+    ],
+    "a": 2,
+    "exp": "Spyware steals sensitive information",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the full form of GUI?",
+    "opts": [
+      "Graphical User Interface",
+      "Game User Interface",
+      "General User Interface",
+      "Graphic User Interface"
+    ],
+    "a": 0,
+    "exp": "GUI stands for Graphical User Interface",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is an example of a computer software development model?",
+    "opts": [
+      "Agile",
+      "Scrum",
+      "Waterfall",
+      "Kanban"
+    ],
+    "a": 0,
+    "exp": "Agile is an example of software development model",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the purpose of a patch?",
+    "opts": [
+      "To translate source code into machine code",
+      "To run a program on a computer",
+      "To fix a bug",
+      "To create a report"
+    ],
+    "a": 2,
+    "exp": "Patch fixes a bug in software",
+    "d": "HARD"
+  }
+]

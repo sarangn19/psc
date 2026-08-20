@@ -1,0 +1,206 @@
+[
+  {
+    "q": "What is the primary function of a keyboard?",
+    "opts": [
+      "Inputting data",
+      "Displaying data",
+      "Printing documents",
+      "Saving data"
+    ],
+    "a": 0,
+    "exp": "Keyboard is used for inputting data",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is an example of a graphical input device?",
+    "opts": [
+      "Mouse",
+      "Scanner",
+      "Printer",
+      "Webcam"
+    ],
+    "a": 0,
+    "exp": "Mouse is a graphical input device",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the purpose of a monitor?",
+    "opts": [
+      "Printing documents",
+      "Saving data",
+      "Displaying data",
+      "Inputting data"
+    ],
+    "a": 2,
+    "exp": "Monitor is used for displaying data",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is an example of an output device?",
+    "opts": [
+      "Keyboard",
+      "Mouse",
+      "Monitor",
+      "Speaker"
+    ],
+    "a": 2,
+    "exp": "Monitor is an example of an output device",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the function of a scanner?",
+    "opts": [
+      "Inputting data",
+      "Displaying data",
+      "Printing documents",
+      "Saving data"
+    ],
+    "a": 0,
+    "exp": "Scanner is used for inputting data",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is a type of input device?",
+    "opts": [
+      "Monitor",
+      "Printer",
+      "Webcam",
+      "Mouse"
+    ],
+    "a": 3,
+    "exp": "Mouse is a type of input device",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the purpose of a printer?",
+    "opts": [
+      "Inputting data",
+      "Displaying data",
+      "Saving data",
+      "Printing documents"
+    ],
+    "a": 3,
+    "exp": "Printer is used for printing documents",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is an example of a multimedia device?",
+    "opts": [
+      "Keyboard",
+      "Mouse",
+      "Speaker",
+      "Webcam"
+    ],
+    "a": 3,
+    "exp": "Webcam is a multimedia device",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the function of a speaker?",
+    "opts": [
+      "Inputting data",
+      "Displaying data",
+      "Saving data",
+      "Outputting sound"
+    ],
+    "a": 3,
+    "exp": "Speaker is used for outputting sound",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a type of output device?",
+    "opts": [
+      "Keyboard",
+      "Mouse",
+      "Scanner",
+      "Speaker"
+    ],
+    "a": 3,
+    "exp": "Speaker is a type of output device",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the purpose of a webcam?",
+    "opts": [
+      "Inputting data",
+      "Displaying data",
+      "Printing documents",
+      "Conferencing remotely"
+    ],
+    "a": 3,
+    "exp": "Webcam is used for conferencing remotely",
+    "d": "HARD"
+  },
+  {
+    "q": "Which of the following is an example of a graphical output device?",
+    "opts": [
+      "Printer",
+      "Scanner",
+      "Monitor",
+      "Webcam"
+    ],
+    "a": 2,
+    "exp": "Monitor is a graphical output device",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the function of a mouse?",
+    "opts": [
+      "Inputting data",
+      "Displaying data",
+      "Saving data",
+      "Printing documents"
+    ],
+    "a": 0,
+    "exp": "Mouse is used for inputting data",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is a type of input/output device?",
+    "opts": [
+      "Keyboard",
+      "Mouse",
+      "Monitor",
+      "Printer"
+    ],
+    "a": 0,
+    "exp": "Keyboard is an input/output device",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the purpose of a joystick?",
+    "opts": [
+      "Inputting data",
+      "Displaying data",
+      "Saving data",
+      "Gaming"
+    ],
+    "a": 3,
+    "exp": "Joystick is used for gaming",
+    "d": "HARD"
+  },
+  {
+    "q": "Which of the following is an example of a multimedia input device?",
+    "opts": [
+      "Keyboard",
+      "Mouse",
+      "Scanner",
+      "Joystick"
+    ],
+    "a": 3,
+    "exp": "Joystick is a multimedia input device",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the function of a touch screen?",
+    "opts": [
+      "Inputting data",
+      "Displaying data",
+      "Saving data",
+      "Conferencing remotely"
+    ],
+    "a": 0,
+    "exp": "Touch screen is used for inputting data",
+    "d": "HARD"
+  }
+]

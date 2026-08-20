@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from 'react-router-dom';
-import { BookOpen, Newspaper, BarChart2, Target, LogOut, Home } from 'lucide-react';
+import { BookOpen, Newspaper, BarChart2, Target, LogOut, Home, Plane, Gamepad2 } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 
 const quickLinks = [
@@ -11,12 +11,21 @@ const quickLinks = [
 ];
 
 export default function Layout() {
-  const { user, logout } = useAuthStore();
+  const { user, logout, toggleTravelMode } = useAuthStore();
   const navigate = useNavigate();
+  const travelMode = user?.travelMode === true;
 
   const handleLogout = () => {
     logout();
     navigate('/login');
+  };
+
+  const handleTravelToggle = async () => {
+    try {
+      await toggleTravelMode();
+    } catch {
+      alert('Failed to update travel mode');
+    }
   };
 
   return (
@@ -31,6 +40,13 @@ export default function Layout() {
 
           {/* Quick nav icons */}
           <div className="flex items-center gap-1">
+            <button
+              onClick={handleTravelToggle}
+              title={travelMode ? 'Travel Mode ON — pen & paper questions hidden' : 'Travel Mode OFF — tap to enable'}
+              className={`p-2 rounded-lg transition-colors ${travelMode ? 'bg-yellow-400 text-green-900' : 'hover:bg-green-600 text-green-100 hover:text-white'}`}
+            >
+              {travelMode ? <Gamepad2 size={18} /> : <Plane size={18} />}
+            </button>
             {quickLinks.map(({ to, icon: Icon, label }) => (
               <button
                 key={to}

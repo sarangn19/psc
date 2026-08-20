@@ -27,7 +27,7 @@ router.post('/register', async (req: Request, res: Response) => {
     const hashed = await bcrypt.hash(password, 10);
     const user = await prisma.user.create({
       data: { name, email, password: hashed },
-      select: { id: true, name: true, email: true, role: true, createdAt: true },
+      select: { id: true, name: true, email: true, role: true, travelMode: true, createdAt: true },
     });
 
     await prisma.userActivity.create({
@@ -71,6 +71,7 @@ router.post('/login', async (req: Request, res: Response) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        travelMode: user.travelMode,
         createdAt: user.createdAt,
         hasExams: examCount > 0,
       },
@@ -89,6 +90,7 @@ router.get('/me', authenticate, async (req: AuthRequest, res: Response) => {
       name: true,
       email: true,
       role: true,
+      travelMode: true,
       createdAt: true,
       _count: { select: { selectedExams: true } },
     },

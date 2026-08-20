@@ -1,0 +1,218 @@
+[
+  {
+    "q": "Which of the following poetry forms originated from the royal court of Kerala?",
+    "opts": [
+      "Kilippattu",
+      "Manasollasa",
+      "Enadupura Bhanam",
+      "Kunchithapuranam"
+    ],
+    "a": 1,
+    "exp": "Manasollasa",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following poets was known as the master of the Sanskrit song or Sandesha Kavya?",
+    "opts": [
+      "Puliyannoor Rama Panikkar",
+      "Madhava Panikkar",
+      "Poonthanam Namboothirippad",
+      "Kunchan Nambiar"
+    ],
+    "a": 3,
+    "exp": "Poonthanam Namboothirippad",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which poetry form is a combination of five languages- Malayalam, Sanskrit, and three other languages?",
+    "opts": [
+      "Manipravalam",
+      "Enadupura Bhanam",
+      "Kunchithapuranam",
+      "Kilippattu"
+    ],
+    "a": 0,
+    "exp": "Manipravalam",
+    "d": "EASY"
+  },
+  {
+    "q": "Who was the author of the famous work Thuthuka?",
+    "opts": [
+      "Madhava Panikkar",
+      "Puliyannoor Rama Panikkar",
+      "Ezhuthachan",
+      "Ulloor S. Parameswara Iyer"
+    ],
+    "a": 2,
+    "exp": "Ezhuthachan",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following poetry forms is an in verse-letter?",
+    "opts": [
+      "Sandesha Kavyam",
+      "Enadupura Bhanam",
+      "Kunchithapuranam",
+      "Champus"
+    ],
+    "a": 1,
+    "exp": "Enadupura Bhanam",
+    "d": "EASY"
+  },
+  {
+    "q": "Who was the author of the Mahakavyam 'Chirakkadan Nambudiri'?",
+    "opts": [
+      "Ulloor S. Parameswara Iyer",
+      "Poonthanam Namboothirippad",
+      "Thunchaththu Ezhuthachan",
+      "Puliyannoor Rama Panikkar"
+    ],
+    "a": 1,
+    "exp": "Ulloor S. Parameswara Iyer",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following ancient texts contains the description of Draupadi Vastrapaharanam?",
+    "opts": [
+      "Mahabharatam",
+      "Adhyatma Ramayanam",
+      "Mrichchchhakatika",
+      "Soubhayabhadrakavyam"
+    ],
+    "a": 1,
+    "exp": "Mahabharatam",
+    "d": "EASY"
+  },
+  {
+    "q": "Which poet composed the Sanskrit treatise on poetics called Kavya Sangraha?",
+    "opts": [
+      "Madhava Panikkar",
+      "Puliyannoor Rama Panikkar",
+      "Krishnan Namboothirippad",
+      "Thirunalloor Narayanan Nambudiri"
+    ],
+    "a": 0,
+    "exp": "Madhava Panikkar",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Enadupura Bhanam is a type of which of the following poetry forms?",
+    "opts": [
+      "Sandesha Kavyam",
+      "Kilippattu",
+      "Champus",
+      "Poem.DEFINE"
+    ],
+    "a": 1,
+    "exp": "Sandesha Kavyam",
+    "d": "EASY"
+  },
+  {
+    "q": "Who wrote the Kunchithapuranam?",
+    "opts": [
+      "Puliyannoor Rama Panikkar",
+      "Madhava Panikkar",
+      "Krishnan Namboothirippad",
+      "Krishnakumar Smaraka Kunchithapuranam"
+    ],
+    "a": 3,
+    "exp": "Krishnan Namboothirippad",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the name of the famous Manipravalam text composed by Madhava Panikkar?",
+    "opts": [
+      "Manasollasa",
+      "Krishnanjali",
+      "Kuntala Kavyam",
+      "Kunchithapuranam"
+    ],
+    "a": 2,
+    "exp": "Krishnanjali",
+    "d": "EASY"
+  },
+  {
+    "q": "The Sanskrit poet who was a court poet under Hyder Ali and Tipu Sultan was?",
+    "opts": [
+      "Krishnan Namboothirippad",
+      "Puliyannoor Rama Panikkar",
+      "Thunchaththu Ezhuthachan",
+      "Madhava Panikkar"
+    ],
+    "a": 2,
+    "exp": "Thunchaththu Ezhuthachan",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The poetry form that is a type of folk poetry is?",
+    "opts": [
+      "Kilippattu",
+      "Champus",
+      "Sandesha Kavyam",
+      "Manipravalam"
+    ],
+    "a": 0,
+    "exp": "Kilippattu",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following Sanskrit poets was a master of four languages?",
+    "opts": [
+      "Krishnan Namboothirippad",
+      "Puliyannoor Rama Panikkar",
+      "Madhava Panikkar",
+      "Chuzu Viruthachalathu"
+    ],
+    "a": 2,
+    "exp": "Madhava Panikkar",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The poet, who composed a commentary of sections of KanchiKavyam, was?",
+    "opts": [
+      "Madhava Panikkar",
+      "Krishnan Namboothirippad",
+      "Puliyannoor Rama Panikkar",
+      "Ulloor S. Parameswara Iyer"
+    ],
+    "a": 1,
+    "exp": "Krishnan Namboothirippad",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which Cheramaanikavu Kalyanam was composed by?",
+    "opts": [
+      "Krishnan Namboothirippad",
+      "Thunchaththu Ezhuthachan",
+      "Madhava Panikkar",
+      "Krishnan Kuttananda Kurup"
+    ],
+    "a": 1,
+    "exp": "Thunchaththu Ezhuthachan",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following Sanskrit poets wrote the Manipravalam text called Krisparambhanum?",
+    "opts": [
+      "Krishnan Namboothirippad",
+      "Madhava Panikkar",
+      "Puliyannoor Rama Panikkar",
+      "Krishnan Kutty Raman"
+    ],
+    "a": 2,
+    "exp": "Madhava Panikkar",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the name of the Sanskrit literary work that is the first poem of Champus form?",
+    "opts": [
+      "Krishnanjali",
+      "Kuntala Kavyam",
+      "Champa",
+      "Sandesha Kavyam"
+    ],
+    "a": 3,
+    "exp": "Champa",
+    "d": "MEDIUM"
+  }
+]

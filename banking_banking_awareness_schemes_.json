@@ -1,0 +1,182 @@
+[
+  {
+    "q": "What is the main objective of Pradhan Mantri Jan Dhan Yojana (PMJDY)?",
+    "opts": [
+      "To provide banking services to rural areas",
+      "To increase financial inclusion",
+      "To reduce poverty by providing employment",
+      "To provide microfinance to small businesses"
+    ],
+    "a": 1,
+    "exp": "PMJDY aims to increase financial inclusion",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the purpose of the National Credit Card Guarantee Scheme?",
+    "opts": [
+      "To provide credit cards to all citizens",
+      "To guarantee credit card transactions",
+      "To increase credit card usage",
+      "To provide credit cards to small businesses"
+    ],
+    "a": 2,
+    "exp": "Scheme guarantees credit card transactions",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the main benefit of the Pradhan Mantri Mudra Yojana (PMMY)?",
+    "opts": [
+      "To provide loans to small businesses",
+      "To provide loans to MSMEs",
+      "To provide loans to individuals",
+      "To provide loans to farmers"
+    ],
+    "a": 1,
+    "exp": "PMMY provides loans to small businesses",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the objective of the Atal Pension Yojana (APY)?",
+    "opts": [
+      "To provide pension to all citizens",
+      "To provide pension to small businesses",
+      "To provide a minimum guaranteed pension",
+      "To provide pension to individuals"
+    ],
+    "a": 2,
+    "exp": "APY provides a minimum guaranteed pension",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the main feature of the Sukanya Smridhi Yojana?",
+    "opts": [
+      "It is a savings scheme for girls",
+      "It is a loan scheme for girls",
+      "It is a pension scheme for girls",
+      "It is a deposit scheme for girls"
+    ],
+    "a": 0,
+    "exp": "Sukanya Smridhi is a savings scheme for girls",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the purpose of the Pradhan Mantri Awas Yojana (PMAY)?",
+    "opts": [
+      "To provide housing loans to all citizens",
+      "To provide housing loans to small businesses",
+      "To provide housing loans to individuals",
+      "To provide affordable housing"
+    ],
+    "a": 3,
+    "exp": "PMAY provides affordable housing",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the main benefit of the Pradhan Mantri Suraksha Bima Yojana (PMSBY)?",
+    "opts": [
+      "To provide life insurance to all citizens",
+      "To provide life insurance to small businesses",
+      "To provide accident insurance to individuals",
+      "To provide life insurance to individuals"
+    ],
+    "a": 2,
+    "exp": "PMSBY provides accident insurance to individuals",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the objective of the Pradhan Mantri Jeevan Jyoti Bima Yojana (PMJJBY)?",
+    "opts": [
+      "To provide life insurance to all citizens",
+      "To provide life insurance to small businesses",
+      "To provide life insurance to individuals",
+      "To provide a minimum guaranteed life insurance"
+    ],
+    "a": 3,
+    "exp": "PMJJBY provides a minimum guaranteed life insurance",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the main feature of the Kisan Credit Card Scheme?",
+    "opts": [
+      "It provides credit to farmers",
+      "It provides insurance to farmers",
+      "It provides loans to farmers",
+      "It provides pension to farmers"
+    ],
+    "a": 2,
+    "exp": "Kisan Credit Card Scheme provides loans to farmers",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the purpose of the Pradhan Mantri Garib Kalyan Yojana (PMGKY)?",
+    "opts": [
+      "To provide financial assistance to all citizens",
+      "To provide financial assistance to small businesses",
+      "To provide financial assistance to individuals",
+      "To provide financial assistance to farmers"
+    ],
+    "a": 0,
+    "exp": "PMGKY provides financial assistance to all citizens",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the main benefit of the Atal Bihari Vajpayee Smriti Gram Sinchay Yojana?",
+    "opts": [
+      "To provide financial assistance to all citizens",
+      "To provide financial assistance to small businesses",
+      "To provide financial assistance to individuals",
+      "To provide financial assistance to farmers"
+    ],
+    "a": 3,
+    "exp": "Atal Bihari Vajpayee Smriti provides financial assistance to farmers",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the objective of the Pradhan Mantri Awas Yojana (Urban) (PMAY(U))? ",
+    "opts": [
+      "To provide housing loans to all citizens",
+      "To provide housing loans to small businesses",
+      "To provide housing loans to individuals",
+      "To provide affordable housing"
+    ],
+    "a": 3,
+    "exp": "PMAY(U) provides affordable housing",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the main feature of the Pradhan Mantri Saaksharta Yojana?",
+    "opts": [
+      "It provides financial assistance to all citizens",
+      "It provides financial assistance to small businesses",
+      "It provides financial assistance to individuals",
+      "It provides financial assistance to persons with disabilities"
+    ],
+    "a": 3,
+    "exp": "PMJDY provides financial assistance to persons with disabilities",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the purpose of the Pradhan Mantri Kaushal Vikas Yojana (PMKVY)?",
+    "opts": [
+      "To provide skill training to all citizens",
+      "To provide skill training to small businesses",
+      "To provide skill training to individuals",
+      "To provide skill training to youth"
+    ],
+    "a": 3,
+    "exp": "PMKVY provides skill training to youth",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the main benefit of the Pradhan Mantri Jeevan Jyoti Bima Yojana (PMJJBY)?",
+    "opts": [
+      "To provide life insurance to all citizens",
+      "To provide life insurance to small businesses",
+      "To provide life insurance to individuals",
+      "To provide a minimum guaranteed life insurance"
+    ],
+    "a": 3,
+    "exp": "PMJJBY provides a minimum guaranteed life insurance",
+    "d": "EASY"
+  }
+]

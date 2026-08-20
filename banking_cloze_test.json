@@ -1,0 +1,182 @@
+[
+  {
+    "q": "A person invested Rs. 50000 in a fixed deposit. What is the interest earned if the rate of interest is 8% per annum for 3 years?",
+    "opts": [
+      "1600",
+      "1800",
+      "2000",
+      "2400"
+    ],
+    "a": 1,
+    "exp": "Interest = 8% of 50000 for 3 years = 2000",
+    "d": "EASY"
+  },
+  {
+    "q": "A man bought 10 shirts at Rs. 50 each. What is the total cost of the shirts?",
+    "opts": [
+      "400",
+      "500",
+      "600",
+      "700"
+    ],
+    "a": 1,
+    "exp": "Total cost = 10 shirts * Rs. 50 = 500",
+    "d": "EASY"
+  },
+  {
+    "q": "A woman saved Rs. 2000 per month for 6 months. What is the total amount saved?",
+    "opts": [
+      "12000",
+      "14000",
+      "16000",
+      "18000"
+    ],
+    "a": 1,
+    "exp": "Total savings = 2000 * 6 = 12000",
+    "d": "EASY"
+  },
+  {
+    "q": "A group of friends shared some money among themselves in the ratio 3:5:8. If the total amount shared was Rs. 12000, what was the share of the person who received the smallest amount?",
+    "opts": [
+      "3000",
+      "3600",
+      "4200",
+      "4800"
+    ],
+    "a": 0,
+    "exp": "Share of person with smallest amount = (3/16) * 12000 = 3000",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A person deposited Rs. 500 into a savings account that earns a 6% interest rate. What is the interest earned after 1 year?",
+    "opts": [
+      "30",
+      "35",
+      "40",
+      "45"
+    ],
+    "a": 2,
+    "exp": "Interest = 6% of 500 = 30",
+    "d": "EASY"
+  },
+  {
+    "q": "A car costs Rs. 80000. If a 10% discount is applied, what is the amount paid by the customer?",
+    "opts": [
+      "64000",
+      "72000",
+      "80000",
+      "88000"
+    ],
+    "a": 0,
+    "exp": "Amount paid = 80000 - (80000 * 10/100) = 72000",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A woman bought 5 notebooks at Rs. 20 each. What is the total cost of the notebooks?",
+    "opts": [
+      "100",
+      "150",
+      "200",
+      "250"
+    ],
+    "a": 1,
+    "exp": "Total cost = 5 notebooks * Rs. 20 = 100",
+    "d": "EASY"
+  },
+  {
+    "q": "A person borrowed Rs. 10000 at a 12% interest rate. What is the interest paid after 2 years?",
+    "opts": [
+      "2400",
+      "24000",
+      "240000",
+      "2400.01"
+    ],
+    "a": 0,
+    "exp": "Interest = 12% of 10000 for 2 years = 2400",
+    "d": "EASY"
+  },
+  {
+    "q": "A group of friends started a business with an initial investment of Rs. 50000. If the profit is shared in the ratio 2:3:5, what is the share of the person who received the largest amount?",
+    "opts": [
+      "15000",
+      "18000",
+      "20000",
+      "25000"
+    ],
+    "a": 2,
+    "exp": "Share of person with largest amount = (5/10) * 50000 = 25000",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A man bought a shirt for Rs. 250 and sold it for Rs. 300. What is the profit made?",
+    "opts": [
+      "25",
+      "50",
+      "75",
+      "100"
+    ],
+    "a": 0,
+    "exp": "Profit = 300 - 250 = 50",
+    "d": "EASY"
+  },
+  {
+    "q": "A person invested Rs. 75000 in a fixed deposit. What is the interest earned if the rate of interest is 9% per annum for 1 year?",
+    "opts": [
+      "6750",
+      "67500",
+      "675000",
+      "6757500"
+    ],
+    "a": 0,
+    "exp": "Interest = 9% of 75000 = 6750",
+    "d": "EASY"
+  },
+  {
+    "q": "A woman bought 3 books at Rs. 80 each. What is the total cost of the books?",
+    "opts": [
+      "240",
+      "300",
+      "360",
+      "480"
+    ],
+    "a": 0,
+    "exp": "Total cost = 3 books * Rs. 80 = 240",
+    "d": "EASY"
+  },
+  {
+    "q": "A group of friends started a business with an initial investment of Rs. 30000. If the profit is shared in the ratio 3:5:7, what is the share of the person who received the smallest amount?",
+    "opts": [
+      "9000",
+      "12000",
+      "15000",
+      "18000"
+    ],
+    "a": 0,
+    "exp": "Share of person with smallest amount = (3/15) * 30000 = 6000",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A man bought 2 shirts at Rs. 50 each. What is the total cost of the shirts?",
+    "opts": [
+      "100",
+      "150",
+      "200",
+      "250"
+    ],
+    "a": 1,
+    "exp": "Total cost = 2 shirts * Rs. 50 = 100",
+    "d": "EASY"
+  },
+  {
+    "q": "A person borrowed Rs. 5000 at a 10% interest rate. What is the interest paid after 1 year?",
+    "opts": [
+      "500",
+      "5000",
+      "50000",
+      "500000"
+    ],
+    "a": 0,
+    "exp": "Interest = 10% of 5000 = 500",
+    "d": "EASY"
+  }
+]

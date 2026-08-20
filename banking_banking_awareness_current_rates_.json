@@ -1,0 +1,194 @@
+[
+  {
+    "q": "What is 20% of 500?",
+    "opts": [
+      "80",
+      "100",
+      "120",
+      "150"
+    ],
+    "a": 1,
+    "exp": "20% of 500 = 100",
+    "d": "EASY"
+  },
+  {
+    "q": "Interest on Rs. 2000 for 2 years at 10% p.a. is:",
+    "opts": [
+      "20",
+      "40",
+      "60",
+      "80"
+    ],
+    "a": 1,
+    "exp": "Interest = 40",
+    "d": "EASY"
+  },
+  {
+    "q": "If a bank offers 8% interest on its deposits, what is the interest on Rs. 750 for 3 years?",
+    "opts": [
+      "60",
+      "80",
+      "120",
+      "160"
+    ],
+    "a": 0,
+    "exp": "Interest = 60",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank pays an interest of 15% per annum. What is the interest on Rs. 5000 for 2 years?",
+    "opts": [
+      "750",
+      "1000",
+      "1500",
+      "2000"
+    ],
+    "a": 1,
+    "exp": "Interest = 1000",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the rate of interest on a fixed deposit of Rs. 2000 for 6 months at 12% p.a.?",
+    "opts": [
+      "3",
+      "6",
+      "9",
+      "12"
+    ],
+    "a": 2,
+    "exp": "Interest = 6",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank offers an interest rate of 8% p.a. What is the interest on Rs. 1500 for 1 year?",
+    "opts": [
+      "120",
+      "150",
+      "180",
+      "200"
+    ],
+    "a": 1,
+    "exp": "Interest = 120",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank pays an interest of 10% per annum. What is the interest on Rs. 3000 for 4 years?",
+    "opts": [
+      "1200",
+      "1500",
+      "1800",
+      "2000"
+    ],
+    "a": 0,
+    "exp": "Interest = 1200",
+    "d": "EASY"
+  },
+  {
+    "q": "What is 15% of 400?",
+    "opts": [
+      "60",
+      "80",
+      "100",
+      "120"
+    ],
+    "a": 1,
+    "exp": "15% of 400 = 60",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank offers an interest rate of 12% p.a. What is the interest on Rs. 2000 for 2 years?",
+    "opts": [
+      "240",
+      "300",
+      "360",
+      "480"
+    ],
+    "a": 1,
+    "exp": "Interest = 240",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the rate of interest on a fixed deposit of Rs. 1000 for 3 months at 18% p.a.?",
+    "opts": [
+      "3",
+      "6",
+      "9",
+      "12"
+    ],
+    "a": 1,
+    "exp": "Interest = 6",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank pays an interest of 18% per annum. What is the interest on Rs. 2500 for 1 year?",
+    "opts": [
+      "450",
+      "500",
+      "550",
+      "600"
+    ],
+    "a": 1,
+    "exp": "Interest = 450",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank offers an interest rate of 10% p.a. What is the interest on Rs. 2000 for 6 months?",
+    "opts": [
+      "50",
+      "60",
+      "80",
+      "100"
+    ],
+    "a": 1,
+    "exp": "Interest = 60",
+    "d": "EASY"
+  },
+  {
+    "q": "What is 20% of 800?",
+    "opts": [
+      "160",
+      "180",
+      "200",
+      "220"
+    ],
+    "a": 1,
+    "exp": "20% of 800 = 160",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank pays an interest of 15% per annum. What is the interest on Rs. 3000 for 2 years?",
+    "opts": [
+      "450",
+      "500",
+      "600",
+      "750"
+    ],
+    "a": 1,
+    "exp": "Interest = 450",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank offers an interest rate of 12% p.a. What is the interest on Rs. 1500 for 1 year?",
+    "opts": [
+      "180",
+      "200",
+      "220",
+      "240"
+    ],
+    "a": 1,
+    "exp": "Interest = 180",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the rate of interest on a fixed deposit of Rs. 5000 for 6 months at 10% p.a.?",
+    "opts": [
+      "50",
+      "60",
+      "80",
+      "100"
+    ],
+    "a": 2,
+    "exp": "Interest = 60",
+    "d": "EASY"
+  }
+]

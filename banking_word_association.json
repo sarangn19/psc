@@ -1,0 +1,206 @@
+[
+  {
+    "q": "What is the opposite of 'Deposit' in banking?",
+    "opts": [
+      "Withdrawal",
+      "Deposit",
+      "Transfer",
+      "Investment"
+    ],
+    "a": 0,
+    "exp": "Withdrawal is the opposite of deposit",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is a type of loan?",
+    "opts": [
+      "Savings Account",
+      "Current Account",
+      "Fixed Deposit",
+      "Personal Loan"
+    ],
+    "a": 3,
+    "exp": "Personal loan is a type of loan",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the process of checking the credentials of a customer?",
+    "opts": [
+      "KYC",
+      "AML",
+      "CIBIL",
+      "Background Check"
+    ],
+    "a": 0,
+    "exp": "KYC checks customer credentials",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the interest rate offered on a savings account?",
+    "opts": [
+      "6%",
+      "8%",
+      "10%",
+      "12%"
+    ],
+    "a": 1,
+    "exp": "Typical interest rate on savings account is 8%",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the time period for a short-term loan?",
+    "opts": [
+      "1 year",
+      "5 years",
+      "10 years",
+      "20 years"
+    ],
+    "a": 0,
+    "exp": "Short-term loan is 1 year",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a type of Risk Management technique?",
+    "opts": [
+      "Hedging",
+      "Diversification",
+      "Leverage",
+      "Risk Aversion"
+    ],
+    "a": 0,
+    "exp": "Hedging is a risk management technique",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the minimum balance required in a savings account?",
+    "opts": [
+      "500",
+      "1000",
+      "2000",
+      "5000"
+    ],
+    "a": 1,
+    "exp": "Typical minimum balance is 1000",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the process of verifying the identity of a customer?",
+    "opts": [
+      "AML",
+      "CIBIL",
+      "KYC",
+      "Verification Process"
+    ],
+    "a": 2,
+    "exp": "KYC verifies customer identity",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the interest rate offered on a fixed deposit?",
+    "opts": [
+      "5%",
+      "7%",
+      "9%",
+      "11%"
+    ],
+    "a": 2,
+    "exp": "Typical interest rate on FD is 9%",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the type of account that allows multiple withdrawals?",
+    "opts": [
+      "Current Account",
+      "Savings Account",
+      "Fixed Deposit",
+      "Recurring Deposit"
+    ],
+    "a": 0,
+    "exp": "Current account allows multiple withdrawals",
+    "d": "HARD"
+  },
+  {
+    "q": "Which of the following is a type of investment?",
+    "opts": [
+      "FD",
+      "RD",
+      "PPF",
+      "SIP"
+    ],
+    "a": 3,
+    "exp": "SIP is a type of investment",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the process of checking the creditworthiness of a customer?",
+    "opts": [
+      "CIBIL",
+      "KYC",
+      "AML",
+      "Background Check"
+    ],
+    "a": 0,
+    "exp": "CIBIL checks creditworthiness",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the minimum deposit required for a Recurring Deposit?",
+    "opts": [
+      "100",
+      "500",
+      "1000",
+      "2000"
+    ],
+    "a": 2,
+    "exp": "Typical minimum deposit is 1000",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the time period for a long-term loan?",
+    "opts": [
+      "1 year",
+      "5 years",
+      "10 years",
+      "20 years"
+    ],
+    "a": 2,
+    "exp": "Long-term loan is 10 years",
+    "d": "HARD"
+  },
+  {
+    "q": "Which of the following is a type of credit facility?",
+    "opts": [
+      "Standing Instruction",
+      "Cheque Book",
+      "Passbook",
+      "Overdraft Facility"
+    ],
+    "a": 3,
+    "exp": "Overdraft facility is a credit facility",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the process of checking the income of a customer?",
+    "opts": [
+      "AML",
+      "KYC",
+      "CIBIL",
+      "Income Verification"
+    ],
+    "a": 3,
+    "exp": "Income verification checks customer income",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the interest rate offered on a Current Account?",
+    "opts": [
+      "1%",
+      "2%",
+      "4%",
+      "6%"
+    ],
+    "a": 2,
+    "exp": "Typical interest rate on current account is 4%",
+    "d": "HARD"
+  }
+]

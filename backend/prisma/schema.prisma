@@ -43,6 +43,7 @@ model User {
   email         String   @unique
   password      String
   role          Role     @default(STUDENT)
+  travelMode    Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 

@@ -1,0 +1,182 @@
+[
+  {
+    "q": "What is the primary function of a firewall?",
+    "opts": [
+      "Network traffic filtering",
+      "Malware detection",
+      "Encryption",
+      "Password management"
+    ],
+    "a": 0,
+    "exp": "Firewall filters network traffic to prevent unauthorized access",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is an example of a phishing attack?",
+    "opts": [
+      "Social engineering",
+      "SQL injection",
+      "Cross-site scripting",
+      "Buffer overflow"
+    ],
+    "a": 0,
+    "exp": "Phishing attack tricks users into revealing sensitive information",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the purpose of a honeypot in computer security?",
+    "opts": [
+      "To deceive attackers into revealing their identity",
+      "To detect and prevent network attacks",
+      "To encrypt sensitive data",
+      "To monitor system performance"
+    ],
+    "a": 1,
+    "exp": "Honeypot deceives attackers into revealing their identity",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is an example of a zero-day exploit?",
+    "opts": [
+      "Malware that exploits a previously unknown vulnerability",
+      "A firewall that filters all incoming traffic",
+      "A password manager that stores sensitive data",
+      "A secure protocol that encrypts data"
+    ],
+    "a": 0,
+    "exp": "Zero-day exploit takes advantage of previously unknown vulnerability",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the term for the process of verifying the identity of a user or system?",
+    "opts": [
+      "Authentication",
+      "Authorization",
+      "Encryption",
+      "Decryption"
+    ],
+    "a": 0,
+    "exp": "Authentication verifies the identity of a user or system",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is an example of a denial-of-service (DoS) attack?",
+    "opts": [
+      "Malware that steals sensitive data",
+      "A network attack that overwhelms a system with traffic",
+      "A password manager that stores sensitive data",
+      "A secure protocol that encrypts data"
+    ],
+    "a": 1,
+    "exp": "DoS attack overwhelms a system with traffic",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the purpose of a digital signature in computer security?",
+    "opts": [
+      "To encrypt sensitive data",
+      "To authenticate the sender of a message",
+      "To verify the integrity of a message",
+      "To detect and prevent network attacks"
+    ],
+    "a": 2,
+    "exp": "Digital signature verifies the integrity of a message",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is an example of a man-in-the-middle (MitM) attack?",
+    "opts": [
+      "Malware that steals sensitive data",
+      "A network attack that intercepts communication between two parties",
+      "A password manager that stores sensitive data",
+      "A secure protocol that encrypts data"
+    ],
+    "a": 1,
+    "exp": "MitM attack intercepts communication between two parties",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the term for the process of encrypting data to protect it from unauthorized access?",
+    "opts": [
+      "Encryption",
+      "Decryption",
+      "Authentication",
+      "Authorization"
+    ],
+    "a": 0,
+    "exp": "Encryption protects data from unauthorized access",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is an example of a Trojan horse in computer security?",
+    "opts": [
+      "Malware that steals sensitive data",
+      "A network attack that overwhelms a system with traffic",
+      "A program that appears harmless but contains malicious code",
+      "A secure protocol that encrypts data"
+    ],
+    "a": 2,
+    "exp": "Trojan horse contains malicious code that appears harmless",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the purpose of a secure socket layer (SSL) certificate?",
+    "opts": [
+      "To encrypt sensitive data",
+      "To authenticate the sender of a message",
+      "To verify the integrity of a message",
+      "To detect and prevent network attacks"
+    ],
+    "a": 0,
+    "exp": "SSL certificate encrypts sensitive data",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is an example of a buffer overflow attack?",
+    "opts": [
+      "Malware that steals sensitive data",
+      "A network attack that overwhelms a system with traffic",
+      "A program that appears harmless but contains malicious code",
+      "A secure protocol that encrypts data"
+    ],
+    "a": 2,
+    "exp": "Buffer overflow attack overflows a system's memory",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the term for the process of detecting and preventing network attacks?",
+    "opts": [
+      "Intrusion detection",
+      "Intrusion prevention",
+      "Encryption",
+      "Decryption"
+    ],
+    "a": 1,
+    "exp": "Intrusion prevention detects and prevents network attacks",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is an example of a cross-site scripting (XSS) attack?",
+    "opts": [
+      "Malware that steals sensitive data",
+      "A network attack that intercepts communication between two parties",
+      "A program that appears harmless but contains malicious code",
+      "A secure protocol that encrypts data"
+    ],
+    "a": 0,
+    "exp": "XSS attack injects malicious code into a website",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the purpose of a key exchange protocol in computer security?",
+    "opts": [
+      "To encrypt sensitive data",
+      "To authenticate the sender of a message",
+      "To verify the integrity of a message",
+      "To establish a secure connection between two parties"
+    ],
+    "a": 3,
+    "exp": "Key exchange protocol establishes a secure connection between two parties",
+    "d": "MEDIUM"
+  }
+]

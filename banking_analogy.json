@@ -1,0 +1,194 @@
+[
+  {
+    "q": "A bank's profit is to its assets as a student's marks are to their attendance.",
+    "opts": [
+      "Assets to Profit Ratio",
+      "Profit to Assets Ratio",
+      "Marks to Attendance Ratio",
+      "Attendance to Marks Ratio"
+    ],
+    "a": 1,
+    "exp": "Both are proportions or ratios.",
+    "d": "EASY"
+  },
+  {
+    "q": "A cheque is to a banker as a draft is to a",
+    "opts": [
+      "Customer",
+      "Banker",
+      "Drawer",
+      "Payee"
+    ],
+    "a": 1,
+    "exp": "A cheque is a banker's order to pay",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's overdraft is to its deposit as a loan is to",
+    "opts": [
+      "Cash",
+      "Asset",
+      "Credit",
+      "Capital"
+    ],
+    "a": 1,
+    "exp": "Both are forms of credit.",
+    "d": "EASY"
+  },
+  {
+    "q": "A banker's gain on a transaction is to his profit as a customer's deposit is to his",
+    "opts": [
+      "Assets",
+      "Liabilities",
+      "Capital",
+      "Income"
+    ],
+    "a": 2,
+    "exp": "Both are bank's income.",
+    "d": "EASY"
+  },
+  {
+    "q": "A banker's customer is to his bank as an employee is to his",
+    "opts": [
+      "Company",
+      "Office",
+      "Manager",
+      "Account"
+    ],
+    "a": 1,
+    "exp": "Both have a working relationship.",
+    "d": "EASY"
+  },
+  {
+    "q": "A banker's bank is to his customer as a company's branch is to its",
+    "opts": [
+      "Employee",
+      "Customer",
+      "Director",
+      "Supplier"
+    ],
+    "a": 2,
+    "exp": "Both have a business relationship.",
+    "d": "EASY"
+  },
+  {
+    "q": "A banker's deposit is to his customer as a company's share is to its",
+    "opts": [
+      "Employee",
+      "Director",
+      "Customer",
+      "Supplier"
+    ],
+    "a": 3,
+    "exp": "Both represent ownership.",
+    "d": "EASY"
+  },
+  {
+    "q": "A banker's gain is to his profit as a customer's income is to his",
+    "opts": [
+      "Expense",
+      "Asset",
+      "Liability",
+      "Capital"
+    ],
+    "a": 1,
+    "exp": "Both increase the income.",
+    "d": "EASY"
+  },
+  {
+    "q": "A banker's loan is to his customer as a company's investment is to its",
+    "opts": [
+      "Employee",
+      "Director",
+      "Customer",
+      "Supplier"
+    ],
+    "a": 2,
+    "exp": "Both are forms of investment.",
+    "d": "EASY"
+  },
+  {
+    "q": "A banker's profit is to his income as a company's profit is to its",
+    "opts": [
+      "Expense",
+      "Asset",
+      "Liability",
+      "Capital"
+    ],
+    "a": 1,
+    "exp": "Both are measures of income.",
+    "d": "EASY"
+  },
+  {
+    "q": "Bank's interest is to a customer's deposit as a company's dividend is to its",
+    "opts": [
+      "Assets",
+      "Liabilities",
+      "Capital",
+      "Share"
+    ],
+    "a": 3,
+    "exp": "Both are forms of distribution.",
+    "d": "EASY"
+  },
+  {
+    "q": "Bank's overdraft is to a customer's account as a loan is to a",
+    "opts": [
+      "Customer",
+      "Banker",
+      "Drawer",
+      "Payee"
+    ],
+    "a": 1,
+    "exp": "Both are forms of credit.",
+    "d": "EASY"
+  },
+  {
+    "q": "Current account is to a businessman as a savings account is to",
+    "opts": [
+      "Employee",
+      "Retiree",
+      "Businessman",
+      "Student"
+    ],
+    "a": 2,
+    "exp": "Both are personal accounts.",
+    "d": "EASY"
+  },
+  {
+    "q": "Demand draft is to a banker as a cheque is to a",
+    "opts": [
+      "Customer",
+      "Banker",
+      "Drawer",
+      "Payee"
+    ],
+    "a": 1,
+    "exp": "A demand draft is a banker's order to pay",
+    "d": "EASY"
+  },
+  {
+    "q": "Overdraft facility is to a banker as a credit card is to a",
+    "opts": [
+      "Customer",
+      "Banker",
+      "Drawer",
+      "Payee"
+    ],
+    "a": 1,
+    "exp": "Both are forms of credit.",
+    "d": "EASY"
+  },
+  {
+    "q": "Saving bank account is to a customer as a current account is to",
+    "opts": [
+      "Businessman",
+      "Employee",
+      "Retiree",
+      "Student"
+    ],
+    "a": 1,
+    "exp": "Both are forms of transaction accounts.",
+    "d": "EASY"
+  }
+]

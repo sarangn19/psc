@@ -1,0 +1,182 @@
+[
+  {
+    "q": "What is the percentage of 25% of 1200 in the pie chart below?\n\nPie Chart:\n\nSegment A: 20%\nSegment B: 25%\nSegment C: 30%\nSegment D: 25%",
+    "opts": [
+      20,
+      25,
+      30,
+      35
+    ],
+    "a": 1,
+    "exp": "25% of 1200 = 300",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the total value of all segments in the pie chart below?\n\nPie Chart:\n\nSegment A: 30%\nSegment B: 20%\nSegment C: 20%\nSegment D: 30%",
+    "opts": [
+      30,
+      60,
+      70,
+      90
+    ],
+    "a": 0,
+    "exp": "Total value = 100",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the value of segment B in the pie chart below?\n\nPie Chart:\n\nSegment A: 40%\nSegment B: 30%\nSegment C: 15%\nSegment D: 15%",
+    "opts": [
+      12,
+      20,
+      30,
+      40
+    ],
+    "a": 1,
+    "exp": "30% of 100 = 30",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the value of segment D in the pie chart below?\n\nPie Chart:\n\nSegment A: 25%\nSegment B: 25%\nSegment C: 20%\nSegment D: 30%",
+    "opts": [
+      25,
+      30,
+      35,
+      40
+    ],
+    "a": 0,
+    "exp": "30% of 100 = 30",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the value of segment C in the pie chart below?\n\nPie Chart:\n\nSegment A: 35%\nSegment B: 20%\nSegment C: 15%\nSegment D: 30%",
+    "opts": [
+      14,
+      16,
+      18,
+      20
+    ],
+    "a": 2,
+    "exp": "15% of 120 = 18",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the total percentage of all segments in the pie chart below?\n\nPie Chart:\n\nSegment A: 25%\nSegment B: 20%\nSegment C: 20%\nSegment D: 25%",
+    "opts": [
+      90,
+      95,
+      100,
+      105
+    ],
+    "a": 0,
+    "exp": "Total percentage = 100",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the value of segment A in the pie chart below?\n\nPie Chart:\n\nSegment A: 30%\nSegment B: 25%\nSegment C: 20%\nSegment D: 25%",
+    "opts": [
+      30,
+      35,
+      40,
+      45
+    ],
+    "a": 0,
+    "exp": "30% of 100 = 30",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the percentage of 20% of 1500 in the pie chart below?\n\nPie Chart:\n\nSegment A: 20%\nSegment B: 25%\nSegment C: 30%\nSegment D: 25%",
+    "opts": [
+      30,
+      35,
+      40,
+      50
+    ],
+    "a": 0,
+    "exp": "20% of 1500 = 300",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the value of segment B in the pie chart below?\n\nPie Chart:\n\nSegment A: 25%\nSegment B: 30%\nSegment C: 20%\nSegment D: 25%",
+    "opts": [
+      45,
+      50,
+      55,
+      60
+    ],
+    "a": 0,
+    "exp": "30% of 150 = 45",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the value of segment D in the pie chart below?\n\nPie Chart:\n\nSegment A: 20%\nSegment B: 25%\nSegment C: 20%\nSegment D: 35%",
+    "opts": [
+      35,
+      40,
+      45,
+      50
+    ],
+    "a": 0,
+    "exp": "35% of 100 = 35",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the total value of all segments in the pie chart below?\n\nPie Chart:\n\nSegment A: 20%\nSegment B: 25%\nSegment C: 20%\nSegment D: 35%",
+    "opts": [
+      90,
+      100,
+      110,
+      120
+    ],
+    "a": 0,
+    "exp": "Total value = 100",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the value of segment A in the pie chart below?\n\nPie Chart:\n\nSegment A: 25%\nSegment B: 20%\nSegment C: 25%\nSegment D: 30%",
+    "opts": [
+      25,
+      30,
+      35,
+      40
+    ],
+    "a": 0,
+    "exp": "25% of 100 = 25",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the value of segment C in the pie chart below?\n\nPie Chart:\n\nSegment A: 35%\nSegment B: 20%\nSegment C: 15%\nSegment D: 30%",
+    "opts": [
+      17,
+      18,
+      19,
+      20
+    ],
+    "a": 0,
+    "exp": "15% of 120 = 18",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the value of segment D in the pie chart below?\n\nPie Chart:\n\nSegment A: 25%\nSegment B: 25%\nSegment C: 20%\nSegment D: 30%",
+    "opts": [
+      30,
+      35,
+      40,
+      45
+    ],
+    "a": 0,
+    "exp": "30% of 100 = 30",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the percentage of 15% of 800 in the pie chart below?\n\nPie Chart:\n\nSegment A: 20%\nSegment B: 25%\nSegment C: 30%\nSegment D: 25%",
+    "opts": [
+      12,
+      15,
+      18,
+      20
+    ],
+    "a": 1,
+    "exp": "15% of 800 = 120",
+    "d": "MEDIUM"
+  }
+]

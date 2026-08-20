@@ -1,0 +1,194 @@
+[
+  {
+    "q": "What is the primary function of RBI?",
+    "opts": [
+      "Monetary Policy",
+      "Fiscal Policy",
+      "Interest Rate Control",
+      "Currency Management"
+    ],
+    "a": 2,
+    "exp": "RBI controls interest rates",
+    "d": "EASY"
+  },
+  {
+    "q": "Which RBI department deals with banking regulation?",
+    "opts": [
+      "Department of Banking Regulation",
+      "Department of Currency and Credit",
+      "Department of Economic and Policy Research",
+      "Department of Statistics and Dissemination"
+    ],
+    "a": 0,
+    "exp": "Regulates banking operations",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the name of RBI's flagship banking programme?",
+    "opts": [
+      "Pradhan Mantri Jan-Dhan Yojana",
+      "Pradhan Mantri Mudra Yojana",
+      "Pradhan Mantri Awas Yojana",
+      "Pradhan Mantri Jan-Sadhan Yojana"
+    ],
+    "a": 0,
+    "exp": "Launched in 2014",
+    "d": "HARD"
+  },
+  {
+    "q": "Who is the chairman of the Monetary Policy Committee (MPC)?",
+    "opts": [
+      "Governor of RBI",
+      "Deputy Governor of RBI",
+      "Member of RBI",
+      "Finance Minister of India"
+    ],
+    "a": 0,
+    "exp": "Sets interest rates",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the name of RBI's digital banking platform?",
+    "opts": [
+      "RBI Pay",
+      "RBI Wallet",
+      "RBI Bank",
+      "RBI Digital Payments"
+    ],
+    "a": 0,
+    "exp": "Launched in 2020",
+    "d": "EASY"
+  },
+  {
+    "q": "Which RBI department deals with foreign exchange?",
+    "opts": [
+      "Department of Currency and Credit",
+      "Department of Banking Regulation",
+      "Department of Economic and Policy Research",
+      "Department of Statistics and Dissemination"
+    ],
+    "a": 0,
+    "exp": "Regulates forex transactions",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the name of RBI's rural banking programme?",
+    "opts": [
+      "Pradhan Mantri Gramin Yojana",
+      "Pradhan Mantri Kisan Yojana",
+      "Pradhan Mantri Deen Dayal Upadhyaya Yojana",
+      "Pradhan Mantri Jan-Dhan Yojana"
+    ],
+    "a": 0,
+    "exp": "Launched in 2013",
+    "d": "HARD"
+  },
+  {
+    "q": "Who is the head of RBI's Department of Economic and Policy Research?",
+    "opts": [
+      "Deputy Governor of RBI",
+      "Member of RBI",
+      "Chief Economist of RBI",
+      "Director of RBI"
+    ],
+    "a": 2,
+    "exp": "Provides economic research",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the name of RBI's credit rating agency?",
+    "opts": [
+      "CRISIL",
+      "CARE Ratings",
+      "ICRA",
+      "Brickwork Ratings"
+    ],
+    "a": 2,
+    "exp": "Assigns credit ratings",
+    "d": "HARD"
+  },
+  {
+    "q": "Which RBI department deals with financial inclusion?",
+    "opts": [
+      "Department of Banking Regulation",
+      "Department of Currency and Credit",
+      "Department of Economic and Policy Research",
+      "Department of Statistics and Dissemination"
+    ],
+    "a": 0,
+    "exp": "Promotes financial inclusion",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the name of RBI's financial literacy programme?",
+    "opts": [
+      "RBI Financial Literacy Programme",
+      "Pradhan Mantri Jan-Dhan Yojana",
+      "Pradhan Mantri Mudra Yojana",
+      "Pradhan Mantri Awas Yojana"
+    ],
+    "a": 0,
+    "exp": "Launched in 2011",
+    "d": "EASY"
+  },
+  {
+    "q": "Who is the chief executive of RBI?",
+    "opts": [
+      "Governor of RBI",
+      "Deputy Governor of RBI",
+      "Member of RBI",
+      "Director of RBI"
+    ],
+    "a": 0,
+    "exp": "Sets monetary policy",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the name of RBI's payment system?",
+    "opts": [
+      "National Payments Corporation of India (NPCI)",
+      "RBI Pay",
+      "RBI Wallet",
+      "RBI Bank"
+    ],
+    "a": 0,
+    "exp": "Manages payment systems",
+    "d": "HARD"
+  },
+  {
+    "q": "Which RBI department deals with banking supervision?",
+    "opts": [
+      "Department of Banking Regulation",
+      "Department of Currency and Credit",
+      "Department of Economic and Policy Research",
+      "Department of Statistics and Dissemination"
+    ],
+    "a": 0,
+    "exp": "Regulates banking operations",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the name of RBI's microfinance programme?",
+    "opts": [
+      "Pradhan Mantri Jan-Dhan Yojana",
+      "Pradhan Mantri Mudra Yojana",
+      "Pradhan Mantri Awas Yojana",
+      "Pradhan Mantri Kisan Yojana"
+    ],
+    "a": 1,
+    "exp": "Launched in 2015",
+    "d": "HARD"
+  },
+  {
+    "q": "Who is the head of RBI's Department of Statistics and Dissemination?",
+    "opts": [
+      "Deputy Governor of RBI",
+      "Member of RBI",
+      "Chief Economist of RBI",
+      "Director of RBI"
+    ],
+    "a": 1,
+    "exp": "Provides statistical data",
+    "d": "MEDIUM"
+  }
+]

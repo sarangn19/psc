@@ -1,0 +1,206 @@
+[
+  {
+    "q": "Meaning of 'Kavitha' in Malayalam Padyam is",
+    "opts": [
+      "Poem",
+      "Song",
+      "Hymn",
+      "Psalms"
+    ],
+    "a": 0,
+    "exp": "Refers to a short poem or verse in Malayalam Padyam",
+    "d": "EASY"
+  },
+  {
+    "q": "Author of famous Malayalam Padyam 'Kunchan Nair'",
+    "opts": [
+      "Kunchan Nair",
+      "Vailoppilli Sreedhara Menon",
+      "Edappally Raghavan Pillai",
+      "T. K. Madhavan"
+    ],
+    "a": 0,
+    "exp": "Malayalam poet and satirist from Kerala",
+    "d": "EASY"
+  },
+  {
+    "q": "Malayalam Padyam is a form of",
+    "opts": [
+      "Prose",
+      "Poetry",
+      "Drama",
+      "Novel"
+    ],
+    "a": 1,
+    "exp": "A traditional form of Malayalam verse",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is an example of a Malayalam Padyam?",
+    "opts": [
+      "Nalukettu",
+      "Attakatha",
+      "Kunchan Nair's poems",
+      "Changampuzha Krishna Pillai's poems"
+    ],
+    "a": 2,
+    "exp": "A notable poet of Malayalam Padyam",
+    "d": "EASY"
+  },
+  {
+    "q": "Malayalam Padyam is an adaptation of",
+    "opts": [
+      "English Ballad",
+      "Tamil Padyam",
+      "Arabic Masnavi",
+      "Persian Ghazal"
+    ],
+    "a": 1,
+    "exp": "Influenced by Tamil Padyam",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Malayalam Padyam is a genre of",
+    "opts": [
+      "Folk literature",
+      "Classical literature",
+      "Drama",
+      "Short stories"
+    ],
+    "a": 0,
+    "exp": "Traditional or folk literature of Kerala",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is NOT a characteristic of Malayalam Padyam?",
+    "opts": [
+      "Rhyming couplets",
+      "Use of folk idioms",
+      "Use of simple language",
+      "Tells a moral lesson"
+    ],
+    "a": 0,
+    "exp": "Malayalam Padyam may not always rhyme",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Malayalam Padyam is a form of",
+    "opts": [
+      "Folk song",
+      "Classical music",
+      "Instrumental music",
+      "Dance"
+    ],
+    "a": 0,
+    "exp": "Traditional folk art form of Kerala",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Malayalam Padyam is a part of",
+    "opts": [
+      "Literature",
+      "Music",
+      "Dance",
+      "Theatre"
+    ],
+    "a": 0,
+    "exp": "Malayalam language and literature",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Malayalam Padyam is often set to",
+    "opts": [
+      "Carnatic music",
+      "Hindustani music",
+      "Western classical music",
+      "Folk music"
+    ],
+    "a": 0,
+    "exp": "Folk music of Kerala and South India",
+    "d": "HARD"
+  },
+  {
+    "q": "Malayalam Padyam is often performed during",
+    "opts": [
+      "Onam festival",
+      "Vishu festival",
+      "Thiruvonam festival",
+      "Saraswati Puja"
+    ],
+    "a": 2,
+    "exp": "A Hindu festival celebrated in Kerala",
+    "d": "HARD"
+  },
+  {
+    "q": "Malayalam Padyam is a form of",
+    "opts": [
+      "Folk theatre",
+      "Puppet show",
+      "Shadow puppetry",
+      "Dance drama"
+    ],
+    "a": 0,
+    "exp": "Traditional folk art of Kerala",
+    "d": "HARD"
+  },
+  {
+    "q": "Malayalam Padyam is a characteristic of",
+    "opts": [
+      "Kerala's cultural heritage",
+      "Indian classical music",
+      "Folk dance of Kerala",
+      "Malayalam language"
+    ],
+    "a": 0,
+    "exp": "Malayalam language and culture",
+    "d": "HARD"
+  },
+  {
+    "q": "Malayalam Padyam is often associated with",
+    "opts": [
+      "Sankirtan",
+      "Devotional songs",
+      "Folk songs",
+      "Classical music"
+    ],
+    "a": 1,
+    "exp": "Spiritual and devotional themes",
+    "d": "HARD"
+  },
+  {
+    "q": "Malayalam Padyam is an example of",
+    "opts": [
+      "Epic poetry",
+      "Lyric poetry",
+      "Narrative poetry",
+      "Poetic drama"
+    ],
+    "a": 1,
+    "exp": "Short, lyrical verse form of poetry",
+    "d": "HARD"
+  },
+  {
+    "q": "Malayalam Padyam is a part of",
+    "opts": [
+      "Kerala's intangible heritage",
+      "Indian classical music",
+      "Folk music of India",
+      "Dance forms of India"
+    ],
+    "a": 0,
+    "exp": "Cultural heritage of Kerala",
+    "d": "HARD"
+  },
+  {
+    "q": "Malayalam Padyam is often accompanied by",
+    "opts": [
+      "Veena",
+      "Gita",
+      "Thavil",
+      "Chenda"
+    ],
+    "a": 3,
+    "exp": "Traditional percussion instrument of Kerala",
+    "d": "HARD"
+  }
+]

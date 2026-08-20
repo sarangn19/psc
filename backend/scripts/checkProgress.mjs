@@ -1,0 +1,11 @@
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
+const examCount = await prisma.exam.count();
+const subjectCount = await prisma.subject.count();
+const chapterCount = await prisma.chapter.count();
+const nodeCount = await prisma.taxonomyNode.count();
+const nullConcept = await prisma.question.count({ where: { conceptId: null } });
+console.log(`Exams: ${examCount}, Subjects: ${subjectCount}, Chapters: ${chapterCount}, TaxonomyNodes: ${nodeCount}, Questions:`, (await prisma.question.count()), `nullConcept: ${nullConcept}`);
+const exams = await prisma.exam.findMany({ select: { name: true, category: true } });
+for (const e of exams) console.log(`${e.name} [${e.category}]`);
+await prisma.$disconnect();

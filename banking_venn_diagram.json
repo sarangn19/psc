@@ -1,0 +1,182 @@
+[
+  {
+    "q": "A Venn diagram has 3 circles. What is the maximum number of regions?",
+    "opts": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "a": 2,
+    "exp": "3 circles can form max 5 regions",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the minimum number of circles required to form 6 regions?",
+    "opts": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "a": 1,
+    "exp": "3 circles are min required",
+    "d": "EASY"
+  },
+  {
+    "q": "A Venn diagram has 2 circles. How many regions are formed?",
+    "opts": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "a": 1,
+    "exp": "2 circles form 3 regions",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the maximum number of circles that can form 8 regions?",
+    "opts": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "a": 2,
+    "exp": "4 circles can form max 8 regions",
+    "d": "EASY"
+  },
+  {
+    "q": "A Venn diagram has 5 circles. What is the minimum number of regions?",
+    "opts": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "a": 1,
+    "exp": "5 circles form 7 regions",
+    "d": "EASY"
+  },
+  {
+    "q": "How many regions are formed by 4 circles in a Venn diagram?",
+    "opts": [
+      7,
+      8,
+      9,
+      10
+    ],
+    "a": 2,
+    "exp": "4 circles form 7 regions",
+    "d": "EASY"
+  },
+  {
+    "q": "A Venn diagram has 3 circles. What is the maximum number of regions if one circle is overlapping?",
+    "opts": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "a": 3,
+    "exp": "3 circles with overlap form 6 regions",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A Venn diagram has 2 circles. How many regions are formed if one circle is overlapping?",
+    "opts": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "a": 2,
+    "exp": "2 circles with overlap form 3 regions",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A Venn diagram has 4 circles. What is the minimum number of regions if one circle is not overlapping?",
+    "opts": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "a": 1,
+    "exp": "4 circles without overlap form 6 regions",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A Venn diagram has 5 circles. What is the maximum number of regions if all circles are overlapping?",
+    "opts": [
+      10,
+      11,
+      12,
+      13
+    ],
+    "a": 1,
+    "exp": "5 circles with overlap form 10 regions",
+    "d": "HARD"
+  },
+  {
+    "q": "A Venn diagram has 3 circles. What is the maximum number of regions if two circles are overlapping?",
+    "opts": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "a": 2,
+    "exp": "3 circles with 2 overlap form 5 regions",
+    "d": "HARD"
+  },
+  {
+    "q": "A Venn diagram has 2 circles. How many regions are formed if both circles are not overlapping?",
+    "opts": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "a": 1,
+    "exp": "2 circles without overlap form 1 region",
+    "d": "HARD"
+  },
+  {
+    "q": "A Venn diagram has 4 circles. What is the minimum number of regions if one circle is not overlapping and one circle is overlapping?",
+    "opts": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "a": 1,
+    "exp": "4 circles with 1 overlap form 4 regions",
+    "d": "HARD"
+  },
+  {
+    "q": "A Venn diagram has 5 circles. What is the maximum number of regions if three circles are overlapping?",
+    "opts": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "a": 2,
+    "exp": "5 circles with 3 overlap form 8 regions",
+    "d": "HARD"
+  },
+  {
+    "q": "A Venn diagram has 3 circles. What is the minimum number of regions if one circle is not overlapping and two circles are overlapping?",
+    "opts": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "a": 2,
+    "exp": "3 circles with 2 overlap form 4 regions",
+    "d": "HARD"
+  }
+]

@@ -1,0 +1,182 @@
+[
+  {
+    "q": "Which Indian cricketer won the ICC Cricketer of the Year award in 2018?",
+    "opts": [
+      "Virat Kohli",
+      "Rohit Sharma",
+      "MS Dhoni",
+      "Ravindra Jadeja"
+    ],
+    "a": 0,
+    "exp": "Virat Kohli received the award in 2018.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who won the Nobel Peace Prize in 2014?",
+    "opts": [
+      "Malala Yousafzai",
+      "Kailash Satyarthi",
+      "Mother Teresa",
+      "Nelson Mandela"
+    ],
+    "a": 1,
+    "exp": "Kailash Satyarthi was awarded in 2014.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which Indian scientist won the 2019 Nobel Prize in Physics?",
+    "opts": [
+      "Subrahmanyan Chandrasekhar",
+      "Kamalini Bhattacharya",
+      "Priyanka Hivarekar",
+      "Arvind Gupta"
+    ],
+    "a": 1,
+    "exp": "Kamalini Bhattacharya won the 2019 Nobel Prize.",
+    "d": "HARD"
+  },
+  {
+    "q": "Who won the Khel Ratna award in 2016?",
+    "opts": [
+      "Virat Kohli",
+      "Saina Nehwal",
+      "Sakshi Malik",
+      "PV Sindhu"
+    ],
+    "a": 2,
+    "exp": "Sakshi Malik won the Khel Ratna award in 2016.",
+    "d": "EASY"
+  },
+  {
+    "q": "Which Indian athlete won the Asian Games gold medal in 2018?",
+    "opts": [
+      "Saina Nehwal",
+      "Kidambi Srikanth",
+      "PV Sindhu",
+      "Mary Kom"
+    ],
+    "a": 2,
+    "exp": "PV Sindhu won the gold medal in 2018.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who won the Ramon Magsaysay Award in 2019?",
+    "opts": [
+      "Gitanjali Rao",
+      "Sanjiv Chaturvedi",
+      "Irom Sharmila",
+      "Arunachalam Muruganantham"
+    ],
+    "a": 3,
+    "exp": "Arunachalam Muruganantham won the Ramon Magsaysay Award.",
+    "d": "HARD"
+  },
+  {
+    "q": "Which Indian won the Pulitzer Prize in 2016?",
+    "opts": [
+      "Aravind Adiga",
+      "Amitav Ghosh",
+      "Vikram Seth",
+      "Shekhar Kapur"
+    ],
+    "a": 0,
+    "exp": "Aravind Adiga won the Pulitzer Prize in 2016.",
+    "d": "HARD"
+  },
+  {
+    "q": "Who won the Oscar for Best Director in 2019?",
+    "opts": [
+      "Alfonso Cuarón",
+      "Christopher Nolan",
+      "Quentin Tarantino",
+      "Danai Gurira"
+    ],
+    "a": 0,
+    "exp": "Alfonso Cuarón won the Oscar in 2019.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which Indian won the Man Booker Prize in 2019?",
+    "opts": [
+      "Salman Rushdie",
+      "Aravind Adiga",
+      "Anuja Chauhan",
+      "Geetanjali Shree"
+    ],
+    "a": 3,
+    "exp": "Geetanjali Shree won the Man Booker Prize in 2019.",
+    "d": "HARD"
+  },
+  {
+    "q": "Who won the Padma Vibhushan award in 2019?",
+    "opts": [
+      "Nina Lekhi",
+      "R.N. Malhotra",
+      "Rakesh Jhunjhunwala",
+      "Mata Saheb Savitribai Phule"
+    ],
+    "a": 3,
+    "exp": "Mata Saheb Savitribai Phule won the award in 2019.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which Indian won the CNN-IBN Indian of the Year award in 2019?",
+    "opts": [
+      "Smriti Irani",
+      "Kailash Satyarthi",
+      "Nagaland Chief Minister Pema Khandu",
+      "Rahul Gandhi"
+    ],
+    "a": 0,
+    "exp": "Smriti Irani won the CNN-IBN award in 2019.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who won the Bharat Ratna award in 2019?",
+    "opts": [
+      "Bhagwan Das",
+      "Nanaji Deshmukh",
+      "Vashistha Narayan Singh",
+      "C. N. R. Rao"
+    ],
+    "a": 0,
+    "exp": "Bhagwan Das won the Bharat Ratna in 2019.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which Indian won the National Film Award for Best Director in 2020?",
+    "opts": [
+      "Dahan",
+      "Sanjay Leela Bhansali",
+      "Vidya Balan",
+      "Amit V Masurkar"
+    ],
+    "a": 1,
+    "exp": "Sanjay Leela Bhansali won the National Film Award in 2020.",
+    "d": "HARD"
+  },
+  {
+    "q": "Who won the Field Marshal Sam Manekshaw Award in 2019?",
+    "opts": [
+      "General Bipin Rawat",
+      "General Manoj Mukund Naravane",
+      "General P K M Thimmaya",
+      "General D Anbu"
+    ],
+    "a": 1,
+    "exp": "General Manoj Mukund Naravane won the Field Marshal Sam Manekshaw Award.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which Indian won the Green Oscar award in 2019?",
+    "opts": [
+      "Ravi Agarwal",
+      "Chandra Bhushan",
+      "Rajendra Singh",
+      "Chintan Upadhyay"
+    ],
+    "a": 2,
+    "exp": "Rajendra Singh won the Green Oscar award in 2019.",
+    "d": "MEDIUM"
+  }
+]

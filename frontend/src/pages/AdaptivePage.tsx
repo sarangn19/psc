@@ -222,11 +222,6 @@ export default function AdaptivePage() {
           </div>
         )}
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-xs text-gray-400 truncate">
-            {concept && concept.path.length > 0
-              ? concept.path.map((p) => p.name).join(' › ')
-              : `${question.chapter.subject.name} › ${question.chapter.name}`}
-          </span>
           <span className={`ml-auto text-xs font-medium shrink-0 ${DIFFICULTY_COLORS[question.difficulty]}`}>
             {question.difficulty}
           </span>

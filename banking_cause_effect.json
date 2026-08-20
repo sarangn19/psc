@@ -1,0 +1,218 @@
+[
+  {
+    "q": "If RBI increases the repo rate, what happens to bank lending rates?",
+    "opts": [
+      "Increases",
+      "Decreases",
+      "Remains Unchanged",
+      "Stays Same"
+    ],
+    "a": 1,
+    "exp": "Higher repo rate increases lending rates for banks",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the effect of bank credit card interest rate hike on consumer spending?",
+    "opts": [
+      "Increases",
+      "Decreases",
+      "Remains Unchanged",
+      "Has No Impact"
+    ],
+    "a": 0,
+    "exp": "Higher rates reduce consumer spending and debt",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "If a bank's capital adequacy ratio is low, what happens to its risk profile?",
+    "opts": [
+      "Decreases",
+      "Increases",
+      "Remains Unchanged",
+      "Has No Impact"
+    ],
+    "a": 1,
+    "exp": "Low CAR increases bank's risk profile and vulnerability",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the effect of government's monetarist policy on inflation?",
+    "opts": [
+      "Increases",
+      "Decreases",
+      "Remains Unchanged",
+      "Has No Impact"
+    ],
+    "a": 0,
+    "exp": "Monetarist policy reduces inflation by controlling money supply",
+    "d": "HARD"
+  },
+  {
+    "q": "If a bank's cash reserve ratio is high, what happens to its lending capacity?",
+    "opts": [
+      "Increases",
+      "Decreases",
+      "Remains Unchanged",
+      "Stays Same"
+    ],
+    "a": 1,
+    "exp": "Higher CRR reduces bank's lending capacity",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the effect of a recession on a bank's non-performing assets?",
+    "opts": [
+      "Increases",
+      "Decreases",
+      "Remains Unchanged",
+      "Has No Impact"
+    ],
+    "a": 0,
+    "exp": "Recession increases NPA due to business failures",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "If a bank's liquidity ratio is low, what happens to its ability to meet short-term obligations?",
+    "opts": [
+      "Increases",
+      "Decreases",
+      "Remains Unchanged",
+      "Stays Same"
+    ],
+    "a": 1,
+    "exp": "Low liquidity ratio reduces bank's ability to meet short-term obligations",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the effect of a country's high inflation on foreign investment?",
+    "opts": [
+      "Increases",
+      "Decreases",
+      "Remains Unchanged",
+      "Has No Impact"
+    ],
+    "a": 1,
+    "exp": "High inflation reduces foreign investment due to reduced returns",
+    "d": "HARD"
+  },
+  {
+    "q": "If a bank's credit scoring system is not robust, what happens to its lending decisions?",
+    "opts": [
+      "Improves",
+      "Decreases",
+      "Remains Unchanged",
+      "Stays Same"
+    ],
+    "a": 1,
+    "exp": "Weak credit scoring system increases lending risks",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the effect of a central bank's quantitative easing policy on interest rates?",
+    "opts": [
+      "Increases",
+      "Decreases",
+      "Remains Unchanged",
+      "Stays Same"
+    ],
+    "a": 0,
+    "exp": "Quantitative easing decreases interest rates to stimulate economy",
+    "d": "HARD"
+  },
+  {
+    "q": "If a bank's risk management system is weak, what happens to its overall risk profile?",
+    "opts": [
+      "Decreases",
+      "Increases",
+      "Remains Unchanged",
+      "Stays Same"
+    ],
+    "a": 1,
+    "exp": "Weak risk management increases bank's overall risk profile",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the effect of a country's GDP growth rate on bank lending?",
+    "opts": [
+      "Increases",
+      "Decreases",
+      "Remains Unchanged",
+      "Stays Same"
+    ],
+    "a": 0,
+    "exp": "Higher GDP growth increases demand and bank lending",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "If a bank's asset liability management is not effective, what happens to its liquidity ratio?",
+    "opts": [
+      "Increases",
+      "Decreases",
+      "Remains Unchanged",
+      "Stays Same"
+    ],
+    "a": 1,
+    "exp": "Ineffective ALM reduces bank's liquidity ratio",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the effect of a country's exchange rate appreciation on exports?",
+    "opts": [
+      "Increases",
+      "Decreases",
+      "Remains Unchanged",
+      "Has No Impact"
+    ],
+    "a": 1,
+    "exp": "Appreciation of currency reduces exports due to reduced competitiveness",
+    "d": "HARD"
+  },
+  {
+    "q": "If a bank's provisioning norms are not adequate, what happens to its profits?",
+    "opts": [
+      "Increases",
+      "Decreases",
+      "Remains Unchanged",
+      "Stays Same"
+    ],
+    "a": 1,
+    "exp": "Inadequate provisioning reduces bank's profits",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the effect of a central bank's open market operations on interest rates?",
+    "opts": [
+      "Increases",
+      "Decreases",
+      "Remains Unchanged",
+      "Stays Same"
+    ],
+    "a": 0,
+    "exp": "Open market operations decrease interest rates to stimulate economy",
+    "d": "HARD"
+  },
+  {
+    "q": "If a bank's credit culture is weak, what happens to its lending practices?",
+    "opts": [
+      "Improves",
+      "Decreases",
+      "Remains Unchanged",
+      "Stays Same"
+    ],
+    "a": 1,
+    "exp": "Weak credit culture increases lending risks and irregularities",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the effect of a country's fiscal policy on government debt?",
+    "opts": [
+      "Increases",
+      "Decreases",
+      "Remains Unchanged",
+      "Stays Same"
+    ],
+    "a": 0,
+    "exp": "Expansionary fiscal policy increases government debt",
+    "d": "HARD"
+  }
+]

@@ -1,0 +1,194 @@
+[
+  {
+    "q": "What is the meaning of 'CASA' in banking?",
+    "opts": [
+      "Current Accounts Savings Accounts",
+      "Cash Accounts Savings Accounts",
+      "Cash and Accounts Savings Accounts",
+      "Current Accounts Short-term Accounts"
+    ],
+    "a": 0,
+    "exp": "CASA: Current and Savings Accounts",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the abbreviation for 'Securities and Exchange Board of India'?",
+    "opts": [
+      "SEBI",
+      "SBI",
+      "SEDA",
+      "SEBA"
+    ],
+    "a": 0,
+    "exp": "SEBI: Securities and Exchange Board of India",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the term for a bank's excess reserves held at the central bank?",
+    "opts": [
+      "Bank Reserve Ratio",
+      "Cash Reserve Ratio",
+      "Bank Deposit Ratio",
+      "Cash Deposit Ratio"
+    ],
+    "a": 1,
+    "exp": "Bank's excess reserves held at central bank",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the meaning of 'Liquidity Ratio' in banking?",
+    "opts": [
+      "Current Ratio",
+      "Quick Ratio",
+      "Debt Ratio",
+      "Liquidity Ratio"
+    ],
+    "a": 3,
+    "exp": "Liquidity Ratio: Bank's ability to meet short-term obligations",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the term for a bank's holding company?",
+    "opts": [
+      "Bank Holding Company",
+      "Financial Holding Company",
+      "Investment Holding Company",
+      "Bank Holding Corporation"
+    ],
+    "a": 0,
+    "exp": "Bank's holding company",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the abbreviation for 'Risk Management Association'?",
+    "opts": [
+      "RMA",
+      "RMAI",
+      "RMAM",
+      "RMAF"
+    ],
+    "a": 0,
+    "exp": "RMA: Risk Management Association",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the term for a bank's reserve requirement?",
+    "opts": [
+      "Reserve Requirement Ratio",
+      "Cash Reserve Requirement",
+      "Bank Reserve Requirement",
+      "Liquidity Reserve Requirement"
+    ],
+    "a": 0,
+    "exp": "Bank's reserve requirement",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the meaning of 'Non-Performing Assets' in banking?",
+    "opts": [
+      "NPAs",
+      "NPRs",
+      "NPS",
+      "NPLs"
+    ],
+    "a": 0,
+    "exp": "Non-Performing Assets: Loans with payments overdue",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the term for a bank's minimum capital requirement?",
+    "opts": [
+      "Capital Adequacy Ratio",
+      "Minimum Capital Requirement",
+      "Bank Capital Requirement",
+      "Capital Maintenance Requirement"
+    ],
+    "a": 1,
+    "exp": "Bank's minimum capital requirement",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the abbreviation for 'Basel Committee on Banking Supervision'?",
+    "opts": [
+      "BCBS",
+      "BIS",
+      "BACS",
+      "BCAS"
+    ],
+    "a": 0,
+    "exp": "BCBS: Basel Committee on Banking Supervision",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the term for a bank's surplus funds?",
+    "opts": [
+      "Surplus Funds",
+      "Excess Funds",
+      "Idle Funds",
+      "Cash Surplus"
+    ],
+    "a": 0,
+    "exp": "Bank's surplus funds",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the meaning of 'Branch Banking' in banking?",
+    "opts": [
+      "Branch Banking",
+      "Bank Branching",
+      "Branch Banking System",
+      "Branch Banking System Model"
+    ],
+    "a": 0,
+    "exp": "Branch Banking: Banking services at multiple locations",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the term for a bank's minimum capital adequacy ratio?",
+    "opts": [
+      "Capital Adequacy Ratio",
+      "Minimum Capital Requirement",
+      "Bank Capital Requirement",
+      "Capital Maintenance Requirement"
+    ],
+    "a": 0,
+    "exp": "Bank's minimum capital adequacy ratio",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the abbreviation for 'International Monetary Fund'?",
+    "opts": [
+      "IMF",
+      "IBF",
+      "ICF",
+      "IDF"
+    ],
+    "a": 0,
+    "exp": "IMF: International Monetary Fund",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the term for a bank's holding of government securities?",
+    "opts": [
+      "Government Securities Holding",
+      "Bank Securities Holding",
+      "Government Bond Holding",
+      "Government Debt Holding"
+    ],
+    "a": 0,
+    "exp": "Bank's holding of government securities",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the meaning of 'Deregulation' in banking?",
+    "opts": [
+      "Deregulation",
+      "Regulation",
+      "De-Regulation",
+      "De-Regulatory Measures"
+    ],
+    "a": 0,
+    "exp": "Deregulation: Reducing regulatory controls on banking",
+    "d": "HARD"
+  }
+]

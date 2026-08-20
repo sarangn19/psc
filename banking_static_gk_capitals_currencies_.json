@@ -1,0 +1,182 @@
+[
+  {
+    "q": "Capital of Australia",
+    "opts": [
+      "Wellington",
+      "Canberra",
+      "Melbourne",
+      "Sydney"
+    ],
+    "a": 2,
+    "exp": "Capital of Australia is Canberra",
+    "d": "EASY"
+  },
+  {
+    "q": "Currency of India",
+    "opts": [
+      "USD",
+      "EUR",
+      "INR",
+      "GBP"
+    ],
+    "a": 2,
+    "exp": "Currency of India is INR",
+    "d": "EASY"
+  },
+  {
+    "q": "Capital of Japan",
+    "opts": [
+      "Beijing",
+      "Tokyo",
+      "Seoul",
+      "Singapore"
+    ],
+    "a": 1,
+    "exp": "Capital of Japan is Tokyo",
+    "d": "EASY"
+  },
+  {
+    "q": "Currency of China",
+    "opts": [
+      "CNY",
+      "USD",
+      "EUR",
+      "GBP"
+    ],
+    "a": 0,
+    "exp": "Currency of China is CNY",
+    "d": "EASY"
+  },
+  {
+    "q": "Capital of France",
+    "opts": [
+      "Paris",
+      "Berlin",
+      "Rome",
+      "Madrid"
+    ],
+    "a": 0,
+    "exp": "Capital of France is Paris",
+    "d": "EASY"
+  },
+  {
+    "q": "Currency of Germany",
+    "opts": [
+      "EUR",
+      "USD",
+      "GBP",
+      "CHF"
+    ],
+    "a": 0,
+    "exp": "Currency of Germany is EUR",
+    "d": "EASY"
+  },
+  {
+    "q": "Capital of Brazil",
+    "opts": [
+      "Lagos",
+      "Cairo",
+      "Santiago",
+      "Brasilia"
+    ],
+    "a": 3,
+    "exp": "Capital of Brazil is Brasilia",
+    "d": "EASY"
+  },
+  {
+    "q": "Currency of South Africa",
+    "opts": [
+      "USD",
+      "EUR",
+      "ZAR",
+      "GBP"
+    ],
+    "a": 2,
+    "exp": "Currency of South Africa is ZAR",
+    "d": "EASY"
+  },
+  {
+    "q": "Capital of Russia",
+    "opts": [
+      "Moscow",
+      "Kiev",
+      "Tbilisi",
+      "Astana"
+    ],
+    "a": 0,
+    "exp": "Capital of Russia is Moscow",
+    "d": "EASY"
+  },
+  {
+    "q": "Currency of UK",
+    "opts": [
+      "INR",
+      "EUR",
+      "GBP",
+      "JPY"
+    ],
+    "a": 2,
+    "exp": "Currency of UK is GBP",
+    "d": "EASY"
+  },
+  {
+    "q": "Capital of Canada",
+    "opts": [
+      "Mexico City",
+      "Ottawa",
+      "Montreal",
+      "Vancouver"
+    ],
+    "a": 1,
+    "exp": "Capital of Canada is Ottawa",
+    "d": "EASY"
+  },
+  {
+    "q": "Currency of South Korea",
+    "opts": [
+      "JPY",
+      "CNY",
+      "KRW",
+      "USD"
+    ],
+    "a": 2,
+    "exp": "Currency of South Korea is KRW",
+    "d": "EASY"
+  },
+  {
+    "q": "Capital of Italy",
+    "opts": [
+      "Rome",
+      "Athens",
+      "Berlin",
+      "Madrid"
+    ],
+    "a": 0,
+    "exp": "Capital of Italy is Rome",
+    "d": "EASY"
+  },
+  {
+    "q": "Currency of Brazil",
+    "opts": [
+      "ZAR",
+      "BRL",
+      "ARS",
+      "CLP"
+    ],
+    "a": 1,
+    "exp": "Currency of Brazil is BRL",
+    "d": "EASY"
+  },
+  {
+    "q": "Capital of Sweden",
+    "opts": [
+      "Stockholm",
+      "Copenhagen",
+      "Helsinki",
+      "Oslo"
+    ],
+    "a": 0,
+    "exp": "Capital of Sweden is Stockholm",
+    "d": "EASY"
+  }
+]

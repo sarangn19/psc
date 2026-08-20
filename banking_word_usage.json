@@ -1,0 +1,206 @@
+[
+  {
+    "q": "The bank's ______________ is Rs. 500 million.",
+    "opts": [
+      "capital",
+      "assets",
+      "liabilities",
+      "equity"
+    ],
+    "a": 0,
+    "exp": "Bank's capital is its initial amount of money.",
+    "d": "EASY"
+  },
+  {
+    "q": "The customer's ______________ was debited by Rs. 1000.",
+    "opts": [
+      "account",
+      "balance",
+      "credit",
+      "cheque"
+    ],
+    "a": 0,
+    "exp": "Account is the customer's financial record.",
+    "d": "EASY"
+  },
+  {
+    "q": "The bank's ______________ is 1,000,000 shares.",
+    "opts": [
+      "equity",
+      "capital",
+      "assets",
+      "stocks"
+    ],
+    "a": 0,
+    "exp": "Equity is the bank's total ownership.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The credit score is a measure of an individual's ______________.",
+    "opts": [
+      "income",
+      "expenses",
+      "credit history",
+      "debt"
+    ],
+    "a": 2,
+    "exp": "Credit history shows the individual's borrowing habits.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The bank's ______________ is its ability to lend money.",
+    "opts": [
+      "liquidity",
+      "solvency",
+      "creditworthiness",
+      "capital adequacy"
+    ],
+    "a": 2,
+    "exp": "Creditworthiness is the bank's ability to lend.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The customer's ______________ was blocked temporarily.",
+    "opts": [
+      "account",
+      "card",
+      "cheque",
+      "password"
+    ],
+    "a": 0,
+    "exp": "Account is the customer's financial record.",
+    "d": "EASY"
+  },
+  {
+    "q": "The bank's ______________ is Rs. 10,000 per month.",
+    "opts": [
+      "interest",
+      "commission",
+      "fee",
+      "bonus"
+    ],
+    "a": 1,
+    "exp": "Commission is the bank's earnings.",
+    "d": "EASY"
+  },
+  {
+    "q": "The loan's ______________ is 10% per annum.",
+    "opts": [
+      "interest rate",
+      "tenure",
+      "EMI",
+      "loan amount"
+    ],
+    "a": 0,
+    "exp": "Interest rate is the loan's cost.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The bank's ______________ is its ability to pay debts.",
+    "opts": [
+      "liquidity",
+      "solvency",
+      "creditworthiness",
+      "capital adequacy"
+    ],
+    "a": 1,
+    "exp": "Solvency is the bank's ability to pay debts.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The customer's ______________ was credited by Rs. 500.",
+    "opts": [
+      "account",
+      "balance",
+      "credit",
+      "cheque"
+    ],
+    "a": 0,
+    "exp": "Account is the customer's financial record.",
+    "d": "EASY"
+  },
+  {
+    "q": "The bank's ______________ is Rs. 500 million in cash.",
+    "opts": [
+      "capital",
+      "assets",
+      "liabilities",
+      "equity"
+    ],
+    "a": 2,
+    "exp": "Assets are the bank's valuable items.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The ______________ is the bank's profit after taxes.",
+    "opts": [
+      "net income",
+      "gross income",
+      "interest income",
+      "profit"
+    ],
+    "a": 0,
+    "exp": "Net income is the bank's profit after taxes.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The bank's ______________ is to provide loans to customers.",
+    "opts": [
+      "mission",
+      "vision",
+      "objectives",
+      "goals"
+    ],
+    "a": 0,
+    "exp": "Mission is the bank's purpose.",
+    "d": "EASY"
+  },
+  {
+    "q": "The customer's ______________ was used to make a payment.",
+    "opts": [
+      "cheque",
+      "draft",
+      "pay order",
+      "credit card"
+    ],
+    "a": 0,
+    "exp": "Cheque is a written order to pay.",
+    "d": "EASY"
+  },
+  {
+    "q": "The bank's ______________ is to increase its market share.",
+    "opts": [
+      "mission",
+      "vision",
+      "objectives",
+      "goals"
+    ],
+    "a": 1,
+    "exp": "Vision is the bank's long-term goal.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The loan ______________ is 2 years.",
+    "opts": [
+      "tenure",
+      "interest rate",
+      "EMI",
+      "loan amount"
+    ],
+    "a": 0,
+    "exp": "Tenure is the loan's duration.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The bank's ______________ is its financial record.",
+    "opts": [
+      "account",
+      "balance",
+      "credit",
+      "cheque"
+    ],
+    "a": 0,
+    "exp": "Account is the bank's financial record.",
+    "d": "EASY"
+  }
+]

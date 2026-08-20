@@ -20,6 +20,19 @@ const RICH_QUESTION_SELECT: Prisma.QuestionInclude = {
 
 type RichQuestion = Prisma.QuestionGetPayload<{ include: typeof RICH_QUESTION_SELECT }>;
 
+// Subjects that require math / pen-and-paper — hidden in travel-friendly mode
+const PEN_PAPER_SUBJECTS = [
+  'Mathematics', 'Algebra', 'Calculus', 'Coordinate Geometry', 'Numerical Methods',
+  'Quantitative Aptitude', 'Statistics', 'Statistics & Probability', 'Logic',
+  'Reasoning', 'Reasoning Ability',
+  'Mechanics', 'Thermodynamics', 'Fluid Mechanics', 'Circuit Theory',
+  'Control Systems', 'Electrical Machines', 'Power Electronics', 'Power Systems',
+  'Structural Engineering', 'Geotechnical Engineering', 'Transportation Engineering',
+  'Surveying', 'Water Resources', 'Industrial Engineering', 'Manufacturing',
+  'Physical Chemistry', 'Analytical Chemistry',
+  'Accountancy', 'Financial Management', 'Public Finance',
+];
+
 async function fetchCandidates(where: Prisma.QuestionWhereInput): Promise<RichQuestion[]> {
   return prisma.question.findMany({ where, include: RICH_QUESTION_SELECT });
 }
@@ -119,7 +132,7 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
   const { sessionId } = req.params;
 
   // Phase 1: all independent reads in parallel
-  const [session, seenItems, learnedChapters, conceptStats] = await Promise.all([
+  const [session, seenItems, learnedChapters, conceptStats, user] = await Promise.all([
     prisma.adaptiveSession.findUnique({ where: { id: sessionId } }),
     prisma.adaptiveItem.findMany({
       where: { sessionId },
@@ -130,6 +143,7 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
       where: { userId },
       select: { conceptId: true, chapterId: true, total: true, correct: true },
     }),
+    prisma.user.findUnique({ where: { id: userId }, select: { travelMode: true } }),
   ]);
 
   if (!session || session.userId !== userId) return res.status(404).json({ message: 'Session not found' });
@@ -145,11 +159,14 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
 
   // Phase 2: fetch candidates
   const isFocused = session.focusConceptId !== null && session.focusConceptId !== undefined;
+  const penPaperFilter: Prisma.QuestionWhereInput = user?.travelMode
+    ? { chapter: { subject: { name: { notIn: PEN_PAPER_SUBJECTS } } } }
+    : {};
   const [rawCandidates, rawAdjacent] = await Promise.all([
     isFocused
-      ? fetchCandidates({ conceptId: session.focusConceptId, isActive: true, id: { notIn: [...seenIds] } })
-      : fetchCandidates({ chapterId: { in: chapterIds }, isActive: true, id: { notIn: [...seenIds] } }),
-    isFocused ? findAdjacentQuestions([session.focusConceptId!], seenIds) : Promise.resolve([]),
+      ? fetchCandidates({ conceptId: session.focusConceptId, isActive: true, id: { notIn: [...seenIds] }, ...penPaperFilter })
+      : fetchCandidates({ chapterId: { in: chapterIds }, isActive: true, id: { notIn: [...seenIds] }, ...penPaperFilter }),
+    isFocused ? findAdjacentQuestions([session.focusConceptId!], seenIds, penPaperFilter) : Promise.resolve([]),
   ]);
 
   let candidates: RichQuestion[];
@@ -223,7 +240,8 @@ function rankGroups(
 // mastered concept, so the user advances along the taxonomy graph.
 async function findAdjacentQuestions(
   masteredConceptIds: number[],
-  seenIds: Set<string>
+  seenIds: Set<string>,
+  penPaperFilter: Prisma.QuestionWhereInput = {}
 ): Promise<RichQuestion[]> {
   if (masteredConceptIds.length === 0) return [];
 
@@ -245,6 +263,7 @@ async function findAdjacentQuestions(
     conceptId: { in: siblings.map((s) => s.id) },
     isActive: true,
     id: { notIn: [...seenIds] },
+    ...penPaperFilter,
   });
 }
 

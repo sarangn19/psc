@@ -1,0 +1,218 @@
+[
+  {
+    "q": "The primary function of a CPU is to execute instructions?",
+    "opts": [
+      "Input, Process, Output",
+      "Input, Storage, Output",
+      "Store, Execute, Output",
+      "Input, Execute, Output"
+    ],
+    "a": 2,
+    "exp": "CPU executes instructions from the operating system",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is not a type of memory?",
+    "opts": [
+      "RAM, ROM, Cache",
+      "Main memory, Secondary memory, Input/Output",
+      "Primary memory, Secondary memory, Auxiliary memory",
+      "CPU, GPU, Motherboard"
+    ],
+    "a": 3,
+    "exp": "CPU is a processing unit, not a memory type",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the full form of BIOS?",
+    "opts": [
+      "Basic Input/Output System",
+      "Basic Input/Output Supervisor",
+      "Booting Interface Operating System",
+      "Bootable Input/Output System"
+    ],
+    "a": 0,
+    "exp": "Basic Input/Output System is the firmware that controls hardware",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is an example of a peripheral device?",
+    "opts": [
+      "CPU, Motherboard, Power Supply",
+      "Keyboard, Mouse, Monitor",
+      "RAM, ROM, Hard Disk",
+      "Operating System, Application Software, Utility Software"
+    ],
+    "a": 1,
+    "exp": "Peripherals are external devices connected to the computer",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the primary function of a Hard Disk Drive?",
+    "opts": [
+      "To process data",
+      "To store data",
+      "To input data",
+      "To output data"
+    ],
+    "a": 1,
+    "exp": "Hard Disk Drives store data and programs",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is a type of network cable?",
+    "opts": [
+      "Coaxial, Twisted Pair, Fiber Optic",
+      "USB, HDMI, DisplayPort",
+      "DVI, VGA, HDMI",
+      "Ethernet, Wi-Fi, Bluetooth"
+    ],
+    "a": 0,
+    "exp": "Coaxial, Twisted Pair, and Fiber Optic are types of network cables",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the full form of USB?",
+    "opts": [
+      "Universal Serial Bus",
+      "Universal System Bus",
+      "Universal Security Bus",
+      "Universal Storage Bus"
+    ],
+    "a": 0,
+    "exp": "USB stands for Universal Serial Bus",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is a type of storage device that uses flash memory?",
+    "opts": [
+      "Hard Disk Drive, Solid State Drive, CD Drive",
+      "CD Drive, DVD Drive, Blu-ray Drive",
+      "Floppy Disk, Hard Disk Drive, SSD",
+      "RAM, ROM, Flash Drive"
+    ],
+    "a": 3,
+    "exp": "SSD uses flash memory for storage",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the primary function of a Power Supply?",
+    "opts": [
+      "To process data",
+      "To store data",
+      "To provide power to the computer",
+      "To output data"
+    ],
+    "a": 2,
+    "exp": "Power Supply provides power to the computer components",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is a type of CPU cache?",
+    "opts": [
+      "Level 1, Level 2, Level 3 cache",
+      "Main memory, Secondary memory, Auxiliary memory",
+      "Primary memory, Secondary memory, Input/Output cache",
+      "Input/Output, Processor cache, Memory cache"
+    ],
+    "a": 0,
+    "exp": "Level 1, Level 2, and Level 3 are types of CPU cache",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the full form of IDE?",
+    "opts": [
+      "Integrated Drive Electronics",
+      "Integrated Data Expert",
+      "Input/Output Device Expert",
+      "Input/Output Device Electronics"
+    ],
+    "a": 0,
+    "exp": "IDE stands for Integrated Drive Electronics",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a type of network architecture?",
+    "opts": [
+      "Client-Server, Peer-to-Peer, Centralized",
+      "Input/Output, Processing, Storage",
+      "Data Link, Network, Transport",
+      "LAN, WAN, MAN"
+    ],
+    "a": 2,
+    "exp": "Data Link, Network, and Transport are layers of network architecture",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the primary function of a Motherboard?",
+    "opts": [
+      "To store data",
+      "To process data",
+      "To connect all hardware components",
+      "To output data"
+    ],
+    "a": 2,
+    "exp": "Motherboard connects all hardware components together",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a type of data storage device?",
+    "opts": [
+      "Input/Output, Processing, Storage",
+      "Floppy Disk, Hard Disk, CD Drive",
+      "CPU, Motherboard, Power Supply",
+      "Operating System, Application Software, Utility Software"
+    ],
+    "a": 1,
+    "exp": "Floppy Disk, Hard Disk, and CD Drive are types of data storage devices",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the full form of RAM?",
+    "opts": [
+      "Random Access Memory",
+      "Read-Only Memory",
+      "Read-Write Memory",
+      "Random Access Drive"
+    ],
+    "a": 0,
+    "exp": "RAM stands for Random Access Memory",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a type of Input Device?",
+    "opts": [
+      "Monitor, Keyboard, Mouse",
+      "CPU, Motherboard, Power Supply",
+      "Operating System, Application Software, Utility Software",
+      "Scanner, Printer, Plotter"
+    ],
+    "a": 2,
+    "exp": "Scanner, Printer, and Plotter are types of Input Devices",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the primary function of a Network Interface Card?",
+    "opts": [
+      "To process data",
+      "To store data",
+      "To connect to a network",
+      "To output data"
+    ],
+    "a": 2,
+    "exp": "NIC connects the computer to a network",
+    "d": "HARD"
+  },
+  {
+    "q": "Which of the following is a type of Network Topology?",
+    "opts": [
+      "Bus, Star, Ring",
+      "Mesh, Hybrid, Wireless",
+      "Client-Server, Peer-to-Peer, Centralized",
+      "LAN, WAN, MAN"
+    ],
+    "a": 0,
+    "exp": "Bus, Star, and Ring are types of Network Topology",
+    "d": "HARD"
+  }
+]

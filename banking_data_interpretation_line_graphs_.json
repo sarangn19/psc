@@ -1,0 +1,194 @@
+[
+  {
+    "q": "What is the total amount of deposits made in the first half of 2020?",
+    "opts": [
+      24000,
+      25000,
+      26000,
+      27000
+    ],
+    "a": 1,
+    "exp": "Total deposits = 25000",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the average salary of employees in 2018?",
+    "opts": [
+      50000,
+      55000,
+      60000,
+      65000
+    ],
+    "a": 2,
+    "exp": "Average salary = 57500",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the ratio of sales in 2019 to sales in 2020?",
+    "opts": [
+      110,
+      120,
+      130,
+      140
+    ],
+    "a": 3,
+    "exp": "Ratio = 120",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the percentage increase in sales from 2018 to 2019?",
+    "opts": [
+      5,
+      10,
+      15,
+      20
+    ],
+    "a": 0,
+    "exp": "Percentage increase = 15",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the total amount of loans disbursed in the second quarter of 2020?",
+    "opts": [
+      15000,
+      16000,
+      17000,
+      18000
+    ],
+    "a": 1,
+    "exp": "Total loans = 16000",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the total amount of savings deposits in 2019?",
+    "opts": [
+      80000,
+      85000,
+      90000,
+      95000
+    ],
+    "a": 3,
+    "exp": "Total savings = 95000",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the average current account balance in 2020?",
+    "opts": [
+      1200,
+      1300,
+      1400,
+      1500
+    ],
+    "a": 0,
+    "exp": "Average balance = 1300",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the total amount of time deposits in 2018?",
+    "opts": [
+      40000,
+      45000,
+      50000,
+      55000
+    ],
+    "a": 2,
+    "exp": "Total time deposits = 50000",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the ratio of non-performing assets to total assets in 2019?",
+    "opts": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "a": 1,
+    "exp": "Ratio = 3",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the percentage decrease in advances from 2018 to 2019?",
+    "opts": [
+      -5,
+      -10,
+      -15,
+      -20
+    ],
+    "a": 2,
+    "exp": "Percentage decrease = -10",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the average yield on investments in 2020?",
+    "opts": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "a": 2,
+    "exp": "Average yield = 9",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the total amount of short-term deposits in 2017?",
+    "opts": [
+      10000,
+      11000,
+      12000,
+      13000
+    ],
+    "a": 2,
+    "exp": "Total short-term deposits = 12000",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the ratio of provisions to total expenses in 2018?",
+    "opts": [
+      0.2,
+      0.3,
+      0.4,
+      0.5
+    ],
+    "a": 1,
+    "exp": "Ratio = 0.3",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the percentage increase in revenue from 2018 to 2019?",
+    "opts": [
+      5,
+      10,
+      15,
+      20
+    ],
+    "a": 1,
+    "exp": "Percentage increase = 10",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the total amount of fixed deposits in 2016?",
+    "opts": [
+      30000,
+      32000,
+      34000,
+      36000
+    ],
+    "a": 2,
+    "exp": "Total fixed deposits = 34000",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the average age of employees in 2019?",
+    "opts": [
+      28,
+      30,
+      32,
+      35
+    ],
+    "a": 1,
+    "exp": "Average age = 30",
+    "d": "HARD"
+  }
+]

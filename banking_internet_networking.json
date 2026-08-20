@@ -1,0 +1,194 @@
+[
+  {
+    "q": "What is the full form of HTTP?",
+    "opts": [
+      "Hyper Text Transfer Protocol",
+      "Hyper Text Preprocessor",
+      "Hyper Text Program",
+      "Hyper Text Processing"
+    ],
+    "a": 0,
+    "exp": "HTTP stands for Hyper Text Transfer Protocol",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the primary function of a router in a network?",
+    "opts": [
+      "To connect multiple computers to the internet",
+      "To connect multiple networks together",
+      "To provide internet access to a single computer",
+      "To block malicious traffic"
+    ],
+    "a": 1,
+    "exp": "Routers connect multiple networks together",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the process of sending a message to multiple recipients at once?",
+    "opts": [
+      "Multicasting",
+      "Unicasting",
+      "Broadcasting",
+      "Multithreading"
+    ],
+    "a": 2,
+    "exp": "Broadcasting sends a message to multiple recipients at once",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the difference between FTP and SFTP?",
+    "opts": [
+      "FTP uses port 20, SFTP uses port 21",
+      "FTP uses port 21, SFTP uses port 20",
+      "FTP is a secure protocol, SFTP is not",
+      "SFTP is a secure protocol, FTP is not"
+    ],
+    "a": 3,
+    "exp": "SFTP is a secure protocol, FTP is not",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the term for a network that connects multiple personal computers?",
+    "opts": [
+      "Local Area Network",
+      "Wide Area Network",
+      " Metropolitan Area Network",
+      "Personal Area Network"
+    ],
+    "a": 4,
+    "exp": "PAN connects multiple personal computers",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the function of a firewall in a network?",
+    "opts": [
+      "To block malicious traffic",
+      "To allow all traffic",
+      "To connect multiple networks together",
+      "To provide internet access to a single computer"
+    ],
+    "a": 0,
+    "exp": "Firewalls block malicious traffic",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the term for a network that covers a city or a building?",
+    "opts": [
+      "Wide Area Network",
+      "Local Area Network",
+      "Metropolitan Area Network",
+      "Personal Area Network"
+    ],
+    "a": 2,
+    "exp": "MAN covers a city or a building",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the purpose of a proxy server in a network?",
+    "opts": [
+      "To cache frequently accessed websites",
+      "To block malicious traffic",
+      "To provide internet access to a single computer",
+      "To connect multiple networks together"
+    ],
+    "a": 0,
+    "exp": "Proxies cache frequently accessed websites",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the term for a network that connects multiple computers in a small area?",
+    "opts": [
+      "Wide Area Network",
+      "Local Area Network",
+      "Metropolitan Area Network",
+      "Personal Area Network"
+    ],
+    "a": 1,
+    "exp": "LAN connects multiple computers in a small area",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the device that connects multiple networks together?",
+    "opts": [
+      "Hub",
+      "Switch",
+      "Router",
+      "Bridge"
+    ],
+    "a": 2,
+    "exp": "Routers connect multiple networks together",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the term for a network that covers a large geographical area?",
+    "opts": [
+      "Local Area Network",
+      "Wide Area Network",
+      "Metropolitan Area Network",
+      "Personal Area Network"
+    ],
+    "a": 1,
+    "exp": "WAN covers a large geographical area",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the function of a switch in a network?",
+    "opts": [
+      "To connect multiple networks together",
+      "To block malicious traffic",
+      "To cache frequently accessed websites",
+      "To provide internet access to a single computer"
+    ],
+    "a": 0,
+    "exp": "Switches connect multiple devices together",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the term for a network that connects multiple devices wirelessly?",
+    "opts": [
+      "Wired Network",
+      "Wireless Network",
+      "Local Area Network",
+      "Wide Area Network"
+    ],
+    "a": 1,
+    "exp": "Wireless networks connect devices wirelessly",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the protocol used for secure file transfer?",
+    "opts": [
+      "FTPS",
+      "HTTP",
+      "HTTPS",
+      "SFTP"
+    ],
+    "a": 3,
+    "exp": "SFTP is a secure file transfer protocol",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the term for a network that covers a small area like a home or an office?",
+    "opts": [
+      "Wide Area Network",
+      "Local Area Network",
+      "Metropolitan Area Network",
+      "Personal Area Network"
+    ],
+    "a": 1,
+    "exp": "LAN covers a small area like a home or office",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the device that connects multiple computers and devices in a network?",
+    "opts": [
+      "Hub",
+      "Switch",
+      "Router",
+      "Bridge"
+    ],
+    "a": 1,
+    "exp": "Switches connect multiple devices together",
+    "d": "MEDIUM"
+  }
+]

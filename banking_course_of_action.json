@@ -1,0 +1,194 @@
+[
+  {
+    "q": "A bank customer is facing difficulties in settling his account due to overdrawn accounts. What should be the course of action?",
+    "opts": [
+      "Send a formal notice to the customer",
+      "Suspend his account",
+      "Close the account",
+      "Issue a warning letter"
+    ],
+    "a": 0,
+    "exp": "Immediate rectification is required",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank employee has been involved in a scandalous activity. What should be the course of action?",
+    "opts": [
+      "Transfer him to a different branch",
+      "Suspend his salary for 6 months",
+      "Terminate his services",
+      "Conduct an internal inquiry"
+    ],
+    "a": 3,
+    "exp": "Maintain bank's integrity and image",
+    "d": "HARD"
+  },
+  {
+    "q": "A customer's cheque has been dishonoured. What should be the course of action?",
+    "opts": [
+      "Return the cheque to the customer",
+      "Charge a penalty on the customer",
+      "Inform the customer about the reason",
+      "Provide a duplicate cheque"
+    ],
+    "a": 2,
+    "exp": "Transparency and customer service",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's IT system has been hacked and customer data is compromised. What should be the course of action?",
+    "opts": [
+      "Inform all customers immediately",
+      "Conduct an internal investigation",
+      "Suspend online transactions",
+      "Notify RBI immediately"
+    ],
+    "a": 3,
+    "exp": "Ensure customer trust and security",
+    "d": "HARD"
+  },
+  {
+    "q": "A customer has approached for a loan with a low credit score. What should be the course of action?",
+    "opts": [
+      "Approve the loan with a higher interest rate",
+      "Deny the loan application",
+      "Approve the loan with a guarantee",
+      "Offer a loan with additional conditions"
+    ],
+    "a": 2,
+    "exp": "Maintain bank's lending standards",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A bank's employees are not adhering to KYC norms. What should be the course of action?",
+    "opts": [
+      "Provide additional training to employees",
+      "Suspend employees involved",
+      "Conduct a thorough audit",
+      "Close the branch"
+    ],
+    "a": 2,
+    "exp": "Ensure compliance and regulatory norms",
+    "d": "HARD"
+  },
+  {
+    "q": "A customer's card has been stolen. What should be the course of action?",
+    "opts": [
+      "Replace the card immediately",
+      "Charge a cancellation fee",
+      "Suspend the card for 3 months",
+      "Inform the customer about the process"
+    ],
+    "a": 0,
+    "exp": "Ensure customer convenience and security",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's liquidity is low. What should be the course of action?",
+    "opts": [
+      "Increase short-term loans",
+      "Sell high-value assets",
+      "Reduce lending rates",
+      "Increase long-term deposits"
+    ],
+    "a": 1,
+    "exp": "Maintain liquidity and financial stability",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A customer's account has been compromised due to phishing. What should be the course of action?",
+    "opts": [
+      "Conduct a thorough investigation",
+      "Suspend the account temporarily",
+      "Inform the customer about the breach",
+      "Provide the customer with a new account"
+    ],
+    "a": 2,
+    "exp": "Ensure customer protection and security",
+    "d": "HARD"
+  },
+  {
+    "q": "A bank's cash credit account has a high overdraft. What should be the course of action?",
+    "opts": [
+      "Increase the overdraft limit",
+      "Charge a penalty on the customer",
+      "Provide additional working capital",
+      "Reduce the overdraft limit"
+    ],
+    "a": 3,
+    "exp": "Maintain cash flow and creditworthiness",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A customer has not updated their KYC documents. What should be the course of action?",
+    "opts": [
+      "Suspend their account temporarily",
+      "Request updated documents",
+      "Close their account",
+      "Inform them about the process"
+    ],
+    "a": 1,
+    "exp": "Maintain regulatory compliance and customer service",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's ATM has been out of order. What should be the course of action?",
+    "opts": [
+      "Replace the ATM immediately",
+      "Suspend ATM services for 24 hours",
+      "Provide a temporary ATM",
+      "Inform customers about the issue"
+    ],
+    "a": 3,
+    "exp": "Ensure customer convenience and accessibility",
+    "d": "EASY"
+  },
+  {
+    "q": "A customer has been involved in a counterfeiting activity. What should be the course of action?",
+    "opts": [
+      "Terminate their services",
+      "Suspend their account temporarily",
+      "Conduct a thorough investigation",
+      "Provide a warning letter"
+    ],
+    "a": 2,
+    "exp": "Maintain bank's integrity and reputation",
+    "d": "HARD"
+  },
+  {
+    "q": "A bank's internal audit has revealed a discrepancy. What should be the course of action?",
+    "opts": [
+      "Conduct a thorough investigation",
+      "Provide additional training to staff",
+      "Suspend the audit team",
+      "Close the branch"
+    ],
+    "a": 0,
+    "exp": "Ensure transparency and accountability",
+    "d": "HARD"
+  },
+  {
+    "q": "A customer has a low balance in their account. What should be the course of action?",
+    "opts": [
+      "Charge a penalty on the customer",
+      "Suspend their account temporarily",
+      "Provide a loan to the customer",
+      "Inform them about the low balance"
+    ],
+    "a": 3,
+    "exp": "Maintain customer service and transparency",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's ATM and online services are down due to technical issues. What should be the course of action?",
+    "opts": [
+      "Suspend ATM and online services for 24 hours",
+      "Provide a temporary ATM",
+      "Replace the ATM immediately",
+      "Inform customers about the issue"
+    ],
+    "a": 3,
+    "exp": "Ensure customer convenience and accessibility",
+    "d": "EASY"
+  }
+]

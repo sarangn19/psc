@@ -1,0 +1,194 @@
+[
+  {
+    "q": "The RBI has a statutory right to inspect any bank.",
+    "opts": [
+      "True",
+      "False",
+      "It depends on the bank type",
+      "None of the above"
+    ],
+    "a": 1,
+    "exp": "RBI has the right to inspect any bank under the Banking Regulation Act.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A banker's first duty is to preserve the bank's assets.",
+    "opts": [
+      "True",
+      "False",
+      "It depends on the situation",
+      "None of the above"
+    ],
+    "a": 0,
+    "exp": "Bankers have a fiduciary duty to preserve the bank's assets.",
+    "d": "EASY"
+  },
+  {
+    "q": "The minimum capital requirement for a commercial bank in India is ₹50 crores.",
+    "opts": [
+      "₹50 crores",
+      "₹100 crores",
+      "₹200 crores",
+      "₹300 crores"
+    ],
+    "a": 0,
+    "exp": "The minimum capital requirement for a commercial bank in India is ₹200 crores.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A bank can lend up to 90% of the property's value under the mortgage policy.",
+    "opts": [
+      "80%",
+      "90%",
+      "100%",
+      "None of the above"
+    ],
+    "a": 1,
+    "exp": "Banks can lend up to 80% of the property's value under the mortgage policy.",
+    "d": "EASY"
+  },
+  {
+    "q": "The RBI's Monetary Policy Committee (MPC) meets every month.",
+    "opts": [
+      "Every 2 weeks",
+      "Every month",
+      "Every quarter",
+      "None of the above"
+    ],
+    "a": 2,
+    "exp": "The RBI's MPC meets every quarter to set monetary policy.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A bank's net worth is the difference between its assets and liabilities.",
+    "opts": [
+      "True",
+      "False",
+      "It depends on the bank type",
+      "None of the above"
+    ],
+    "a": 0,
+    "exp": "A bank's net worth is the difference between its equity and liabilities.",
+    "d": "EASY"
+  },
+  {
+    "q": "The RBI's Open Market Operation (OMO) involves buying and selling government securities.",
+    "opts": [
+      "Buying only",
+      "Selling only",
+      "Both buying and selling",
+      "None of the above"
+    ],
+    "a": 2,
+    "exp": "The RBI's OMO involves both buying and selling government securities.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A bank's reserve requirement ratio is 4% of its deposits.",
+    "opts": [
+      "3%",
+      "4%",
+      "5%",
+      "None of the above"
+    ],
+    "a": 1,
+    "exp": "A bank's reserve requirement ratio is 4% of its deposits in India.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The Basel III Accord sets a minimum capital requirement of 10% for banks.",
+    "opts": [
+      "5%",
+      "7%",
+      "10%",
+      "12%"
+    ],
+    "a": 2,
+    "exp": "The Basel III Accord sets a minimum capital requirement of 7% for banks.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A bank can lend to a customer up to 2 times their net worth.",
+    "opts": [
+      "1 time",
+      "2 times",
+      "3 times",
+      "None of the above"
+    ],
+    "a": 1,
+    "exp": "A bank can lend to a customer up to 2 times their net worth.",
+    "d": "EASY"
+  },
+  {
+    "q": "The RBI's Liquidity Adjustment Facility (LAF) is used to inject liquidity into the market.",
+    "opts": [
+      "True",
+      "False",
+      "It depends on the market conditions",
+      "None of the above"
+    ],
+    "a": 0,
+    "exp": "The RBI's LAF is used to inject liquidity into the market.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A bank's credit rating is a measure of its creditworthiness.",
+    "opts": [
+      "True",
+      "False",
+      "It depends on the bank's history",
+      "None of the above"
+    ],
+    "a": 0,
+    "exp": "A bank's credit rating is a measure of its creditworthiness.",
+    "d": "EASY"
+  },
+  {
+    "q": "The RBI's Deposit Insurance Scheme (DIS) insures up to ₹1 lakh of deposits.",
+    "opts": [
+      "₹50,000",
+      "₹75,000",
+      "₹1 lakh",
+      "₹2 lakh"
+    ],
+    "a": 2,
+    "exp": "The RBI's DIS insures up to ₹1 lakh of deposits.",
+    "d": "EASY"
+  },
+  {
+    "q": "A bank's capital adequacy ratio is calculated as net worth divided by total assets.",
+    "opts": [
+      "Net worth divided by total assets",
+      "Net worth divided by total deposits",
+      "Total assets divided by net worth",
+      "None of the above"
+    ],
+    "a": 0,
+    "exp": "A bank's capital adequacy ratio is calculated as net worth divided by total risk-weighted assets.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The RBI's Single Seller Window (SSW) allows banks to sell securities to the RBI.",
+    "opts": [
+      "True",
+      "False",
+      "It depends on the bank type",
+      "None of the above"
+    ],
+    "a": 0,
+    "exp": "The RBI's SSW allows banks to sell securities to the RBI.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A bank's Return on Equity (ROE) is a measure of its profitability.",
+    "opts": [
+      "True",
+      "False",
+      "It depends on the bank's growth",
+      "None of the above"
+    ],
+    "a": 0,
+    "exp": "A bank's ROE is a measure of its profitability.",
+    "d": "EASY"
+  }
+]

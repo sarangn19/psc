@@ -64,22 +64,15 @@ router.post('/chapters/mark', authenticate, async (req: AuthRequest, res: Respon
   const { chapterId, isLearned } = req.body;
   const userId = req.user!.id;
 
-  const existing = await prisma.userChapter.findUnique({
+  await prisma.userChapter.upsert({
     where: { userId_chapterId: { userId, chapterId } },
+    update: { isLearned },
+    create: { userId, chapterId, isLearned },
   });
 
-  if (existing) {
-    await prisma.userChapter.update({
-      where: { userId_chapterId: { userId, chapterId } },
-      data: { isLearned },
-    });
-  } else {
-    await prisma.userChapter.create({ data: { userId, chapterId, isLearned } });
-  }
-
-  await prisma.userActivity.create({
+  prisma.userActivity.create({
     data: { userId, type: 'CHAPTER_MARKED', metadata: { chapterId, isLearned } },
-  });
+  }).catch(() => {});
 
   return res.json({ message: 'Chapter status updated' });
 });

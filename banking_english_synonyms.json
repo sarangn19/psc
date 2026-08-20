@@ -1,0 +1,17 @@
+[
+{"q":"Choose the word most similar in meaning to 'ABUNDANT'.","opts":["Scarce","Plentiful","Weak","Empty"],"a":1,"exp":"Abundant means available in large quantities, so 'Plentiful' is the correct synonym.","d":"EASY"},
+{"q":"Choose the word most similar in meaning to 'BRAVE'.","opts":["Cowardly","Courageous","Weak","Timid"],"a":1,"exp":"Brave means courageous or fearless. Hence 'Courageous' is correct.","d":"EASY"},
+{"q":"Choose the word most similar in meaning to 'DILIGENT'.","opts":["Lazy","Careless","Hardworking","Uncertain"],"a":2,"exp":"Diligent means hardworking and careful in one's efforts.","d":"EASY"},
+{"q":"Choose the word most similar in meaning to 'HOSTILE'.","opts":["Friendly","Aggressive","Helpful","Gentle"],"a":1,"exp":"Hostile means unfriendly or aggressive.","d":"EASY"},
+{"q":"Choose the word opposite in meaning to 'ANCIENT'.","opts":["Old","Historic","Modern","Traditional"],"a":2,"exp":"Ancient means very old; its opposite is 'Modern'.","d":"EASY"},
+{"q":"Choose the word opposite in meaning to 'EXPAND'.","opts":["Increase","Extend","Contract","Develop"],"a":2,"exp":"Expand means to increase in size; the opposite is 'Contract'.","d":"EASY"},
+{"q":"Choose the word opposite in meaning to 'OPTIMISTIC'.","opts":["Hopeful","Positive","Pessimistic","Confident"],"a":2,"exp":"Optimistic means hopeful about the future; its opposite is 'Pessimistic'.","d":"EASY"},
+{"q":"Choose the word opposite in meaning to 'VICTORY'.","opts":["Success","Triumph","Defeat","Achievement"],"a":2,"exp":"Victory means success in a contest; its opposite is 'Defeat'.","d":"EASY"},
+{"q":"One who cannot read or write is called:","opts":["Literate","Illiterate","Scholar","Orator"],"a":1,"exp":"A person who cannot read or write is called an 'Illiterate'.","d":"EASY"},
+{"q":"A person who loves mankind is called a:","opts":["Misanthrope","Philanthropist","Patriot","Pessimist"],"a":1,"exp":"A philanthropist is a person who promotes the welfare of others or mankind.","d":"EASY"},
+{"q":"One who speaks many languages is called a:","opts":["Linguist","Monarch","Novice","Vegetarian"],"a":0,"exp":"A linguist is a person knowledgeable about languages, and the term is commonly used for someone skilled in multiple languages.","d":"EASY"},
+{"q":"Choose the correct meaning of the idiom 'A blessing in disguise'.","opts":["A hidden enemy","Something that seems bad but turns out good","A public celebration","A secret reward"],"a":1,"exp":"The idiom refers to something that appears harmful at first but eventually proves beneficial.","d":"EASY"},
+{"q":"Choose the correct meaning of the idiom 'Hit the nail on the head'.","opts":["To hurt someone","To miss an opportunity","To say or do exactly the right thing","To work very slowly"],"a":2,"exp":"The idiom means to identify or state something exactly correctly.","d":"EASY"},
+{"q":"Choose the correct meaning of the idiom 'Once in a blue moon'.","opts":["Very frequently","Very rarely","Immediately","Unexpectedly"],"a":1,"exp":"The idiom means something that happens very rarely.","d":"EASY"},
+{"q":"Choose the correct meaning of the idiom 'Break the ice'.","opts":["To damage something","To start a friendly conversation","To end a relationship","To create confusion"],"a":1,"exp":"Break the ice means to begin a conversation or interaction and make people feel more comfortable.","d":"EASY"}
+]

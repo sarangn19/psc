@@ -1,0 +1,170 @@
+[
+  {
+    "q": "What is 20% of 500?",
+    "opts": [
+      "80",
+      "100",
+      "120",
+      "150"
+    ],
+    "a": 1,
+    "exp": "20% of 500 = 100",
+    "d": "EASY"
+  },
+  {
+    "q": "A person saves ₹15,000 in 12 months. How much does he save per month?",
+    "opts": [
+      "500",
+      "1000",
+      "1250",
+      "1500"
+    ],
+    "a": 3,
+    "exp": "₹15,000 in 12 months = ₹1250 per month",
+    "d": "EASY"
+  },
+  {
+    "q": "A car travels 240 km in 4 hours. What is its speed?",
+    "opts": [
+      "40",
+      "45",
+      "50",
+      "60"
+    ],
+    "a": 1,
+    "exp": "Speed = Distance / Time = 60 km/h",
+    "d": "EASY"
+  },
+  {
+    "q": "A shopkeeper offers a discount of 15% on an item. If the marked price is ₹120, what is the discount amount?",
+    "opts": [
+      "10",
+      "12",
+      "15",
+      "18"
+    ],
+    "a": 1,
+    "exp": "15% of ₹120 = ₹18",
+    "d": "EASY"
+  },
+  {
+    "q": "A man has ₹18,000 in his account. He withdraws ₹2,000 and then deposits ₹1,000. What is the final amount in his account?",
+    "opts": [
+      "16000",
+      "17000",
+      "18000",
+      "19000"
+    ],
+    "a": 2,
+    "exp": "Final amount = ₹18000",
+    "d": "EASY"
+  },
+  {
+    "q": "A water tank has 2400 liters of water. If 1/4 of the water is drawn out, how much water is left?",
+    "opts": [
+      "1200",
+      "1800",
+      "2400",
+      "600"
+    ],
+    "a": 2,
+    "exp": "1/4 of 2400 = 600 liters",
+    "d": "EASY"
+  },
+  {
+    "q": "A box contains 12 red, 15 blue, and 20 yellow balls. What is the ratio of red to blue balls?",
+    "opts": [
+      "1:1",
+      "1:1.25",
+      "1:2",
+      "1:3"
+    ],
+    "a": 1,
+    "exp": "Ratio = 12:15 = 1:1.25",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A group of friends want to share some chocolates equally. If they have 480 chocolates and there are 8 friends, how many chocolates will each friend get?",
+    "opts": [
+      "30",
+      "40",
+      "60",
+      "80"
+    ],
+    "a": 0,
+    "exp": "480 chocolates / 8 friends = 60 chocolates per friend",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A bakery sells 240 pastries on a certain day. They sell 1/3 of the pastries in the morning and 1/4 of the pastries in the afternoon. How many pastries are left?",
+    "opts": [
+      "160",
+      "180",
+      "200",
+      "240"
+    ],
+    "a": 2,
+    "exp": "1/3 of 240 = 80 pastries; 1/4 of 240 = 60 pastries",
+    "d": "HARD"
+  },
+  {
+    "q": "A farmer has 480 meters of fencing. He wants to make a rectangular pen with a length that is 3 times the width. What is the area of the pen?",
+    "opts": [
+      "320",
+      "400",
+      "480",
+      "600"
+    ],
+    "a": 1,
+    "exp": "Area = length * width = 400 * 0.8 = 320",
+    "d": "HARD"
+  },
+  {
+    "q": "A company has 480 employees. If 1/4 of the employees are on leave and 1/6 of the employees are on training, how many employees are not on leave or training?",
+    "opts": [
+      "320",
+      "400",
+      "480",
+      "600"
+    ],
+    "a": 0,
+    "exp": "1/4 of 480 = 120 employees; 1/6 of 480 = 80 employees",
+    "d": "HARD"
+  },
+  {
+    "q": "A person has 1200 hours of work in a month. He works 8 hours a day. How many days will he work in a month?",
+    "opts": [
+      "120",
+      "140",
+      "150",
+      "160"
+    ],
+    "a": 0,
+    "exp": "1200 hours / 8 hours per day = 150 days",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "A bookshelf has 480 books. If 1/4 of the books are on the top shelf and 1/3 of the books are on the middle shelf, how many books are on the bottom shelf?",
+    "opts": [
+      "160",
+      "180",
+      "200",
+      "240"
+    ],
+    "a": 2,
+    "exp": "1/4 of 480 = 120 books; 1/3 of 480 = 160 books",
+    "d": "HARD"
+  },
+  {
+    "q": "A car travels 480 kilometers in 8 hours. If it travels at a constant speed, how many kilometers does it travel per hour?",
+    "opts": [
+      "60",
+      "80",
+      "90",
+      "100"
+    ],
+    "a": 0,
+    "exp": "Speed = 480 km / 8 hours = 60 km/h",
+    "d": "MEDIUM"
+  }
+]

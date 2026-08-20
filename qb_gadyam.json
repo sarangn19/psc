@@ -1,0 +1,1166 @@
+[
+  {
+    "q": "Which of the following is the debut novel of Vaikom Muhammad Basheer?",
+    "opts": [
+      "Balyakalasakhi",
+      "Pathummayude Aadu",
+      "Ntuppuppakkoranendarnnu",
+      "Premalekhanam"
+    ],
+    "a": "B",
+    "exp": "Pathummayude Aadu (1942) is considered Basheer's first novel, marking the start of his literary career.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Thakazhi Sivasankara Pillai's novel Chemmeen won which prestigious award in 1956?",
+    "opts": [
+      "Sahitya Akademi Award",
+      "Jnanpith Award",
+      "Kerala Sahitya Akademi Award",
+      "Vayalar Award"
+    ],
+    "a": "A",
+    "exp": "Chemmeen received the Sahitya Akademi Award for Malayalam in 1956.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O.V. Vijayan's famous novel Khasakkinte Itihasam was originally written in which language?",
+    "opts": [
+      "Malayalam",
+      "English",
+      "Tamil",
+      "Hindi"
+    ],
+    "a": "A",
+    "exp": "Khasakkinte Itihasam was first published in Malayalam in 1969 and later translated into several languages.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "In Basheer's novel Balyakalasakhi, who is the protagonist?",
+    "opts": [
+      "Majeed",
+      "Suhra",
+      "Keshavan",
+      "Abu"
+    ],
+    "a": "A",
+    "exp": "The story revolves around Majeed, a young man whose love for Suhra forms the core of the narrative.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which work by Thakazhi Sivasankara Pillai is set against the backdrop of the 1946 Punnapra-Vayalar uprising?",
+    "opts": [
+      "Chemmeen",
+      "Thottiyude Makan",
+      "Randidangazhi",
+      "Kayar"
+    ],
+    "a": "C",
+    "exp": "Randidangazhi (Two Measures) depicts the agrarian struggle and the Punnapra-Vayalar revolt of 1946.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O.V. Vijayan received the Sahitya Akademi Award for Malayalam for which of his works?",
+    "opts": [
+      "Gurusahayam",
+      "Khasakkinte Itihasam",
+      "Dharmapuranam",
+      "Padamudra"
+    ],
+    "a": "A",
+    "exp": "The novel Gurusahayam won the Sahitya Akademi Award in 1989.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is NOT a work of Vaikom Muhammad Basheer?",
+    "opts": [
+      "Balyakalasakhi",
+      "Chemmeen",
+      "Mathilukal",
+      "Pathummayude Aadu"
+    ],
+    "a": "B",
+    "exp": "Chemmeen is a novel by Thakazhi Sivasankara Pillai, not by Basheer.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Thakazhi Sivasankara Pillai was honoured with the Ezhuthachan Puraskaram in which year for his lifetime contribution to Malayalam literature?",
+    "opts": [
+      "1978",
+      "1984",
+      "1990",
+      "1995"
+    ],
+    "a": "B",
+    "exp": "The Ezhuthachan Puraskaram, Kerala's highest literary award, was conferred on Thakazhi in 1984.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O.V. Vijayan's The Legends of Khasak is the English translation of which Malayalam work?",
+    "opts": [
+      "Khasakkinte Itihasam",
+      "Dharmapuranam",
+      "Gurusahayam",
+      "Padamudra"
+    ],
+    "a": "A",
+    "exp": "The Legends of Khasak is the English version of Vijayan's Malayalam novel Khasakkinte Itihasam.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "In Basheer's autobiographical work Mathilukal, which female character represents the imprisoned woman with whom the narrator communicates through signs?",
+    "opts": [
+      "Narayani",
+      "Keshavan",
+      "Basheer himself",
+      "Sulekha"
+    ],
+    "a": "A",
+    "exp": "Narayani is the female prisoner whose silent love story with the narrator forms the heart of Mathilukal.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a novel by Vaikom Muhammad Basheer?",
+    "opts": [
+      "Chemmeen",
+      "Pathummayude Aadu",
+      "Khasakkinte Itihasam",
+      "Randamoozham"
+    ],
+    "a": "B",
+    "exp": "Pathummayude Aadu is a well-known novel written by Vaikom Muhammad Basheer, first published in 1959.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Thakazhi Sivasankara Pillai's novel 'Chemmeen' won which national award in 1958?",
+    "opts": [
+      "Kerala Sahitya Akademi Award",
+      "Sahitya Akademi Award",
+      "Jnanpith Award",
+      "Vayalar Award"
+    ],
+    "a": "B",
+    "exp": "Chemmeen received the Sahitya Akademi Award in 1958, recognizing its literary excellence.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "In which year was O. V. Vijayan's novel 'Khasakkinte Itihasam' first published as a book?",
+    "opts": [
+      "1965",
+      "1969",
+      "1971",
+      "1975"
+    ],
+    "a": "C",
+    "exp": "Although serialized in 1969, the book version of Khasakkinte Itihasam appeared in 1971.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the male protagonist in Vaikom Muhammad Basheer's novel 'Balyakalasakhi'?",
+    "opts": [
+      "Majeed",
+      "Kunjunni",
+      "Ahmad",
+      "Zahir"
+    ],
+    "a": "A",
+    "exp": "The story centers on Majeed, whose love for Suhra drives the narrative of Balyakalasakhi.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which Indian literary award did Thakazhi Sivasankara Pillai receive in 1984?",
+    "opts": [
+      "Sahitya Akademi Award",
+      "Jnanpith Award",
+      "Kerala Sahitya Akademi Award",
+      "Vayalar Award"
+    ],
+    "a": "B",
+    "exp": "Thakazhi was honored with the Jnanpith Award in 1984 for his outstanding contribution to Indian literature.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the central character in O. V. Vijayan's novel 'Khasakkinte Itihasam'?",
+    "opts": [
+      "Ravi",
+      "Kunjunni",
+      "Appu",
+      "Sankaran"
+    ],
+    "a": "A",
+    "exp": "The narrative follows a young man named Ravi who arrives in the village of Khasak and transforms the lives of its inhabitants.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following works is NOT authored by Vaikom Muhammad Basheer?",
+    "opts": [
+      "Balyakalasakhi",
+      "Ntuppuppakkoranendarnnu",
+      "Randamoozham",
+      "Mathilukal"
+    ],
+    "a": "C",
+    "exp": "Randamoozham is a novel by M. T. Vasudevan Nair, not by Basheer.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Thakazhi Sivasankara Pillai's novel 'Kayar' received which award?",
+    "opts": [
+      "Kerala Sahitya Akademi Award",
+      "Sahitya Akademi Award",
+      "Jnanpith Award",
+      "Vayalar Award"
+    ],
+    "a": "B",
+    "exp": "Kayar was awarded the Sahitya Akademi Award in 1978 for its depiction of coir workers' lives.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O. V. Vijayan won the Sahitya Akademi Award in 1973 for which work?",
+    "opts": [
+      "Khasakkinte Itihasam",
+      "Gurusagaram",
+      "Dharmapuranam",
+      "Pravaham"
+    ],
+    "a": "A",
+    "exp": "The Sahitya Akademi Award 1973 was given to O. V. Vijayan for his novel Khasakkinte Itihasam.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "In Vaikom Muhammad Basheer's 'Mathilukal', who serves as the narrator/protagonist?",
+    "opts": [
+      "Basheer",
+      "Majeed",
+      "Kunjunni",
+      "Zahir"
+    ],
+    "a": "A",
+    "exp": "The novel is autobiographical; Basheer himself narrates his experiences of love and imprisonment.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which work of Vaikom Muhammad Basheer won the Sahitya Akademi Award in 1970?",
+    "opts": [
+      "Pathummayude Aadu",
+      "Balyakalasakhi",
+      "Mathilukal",
+      "Shabdangal"
+    ],
+    "a": "B",
+    "exp": "Balyakalasakhi (Childhood Friend) earned Basheer the Sahitya Akademi Award in 1970.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "In Basheer's novel Mathilukal, the female protagonist is named:",
+    "opts": [
+      "Suhra",
+      "Karuthamma",
+      "Narayani",
+      "Pathumma"
+    ],
+    "a": "C",
+    "exp": "The novel depicts the love between the narrator (Basheer) and Narayani, a female prisoner.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a short story collection by Vaikom Muhammad Basheer?",
+    "opts": [
+      "Kayar",
+      "Shabdangal",
+      "Chemmeen",
+      "Thottiyude Makan"
+    ],
+    "a": "B",
+    "exp": "Shabdangal is a well‑known collection of Basheer’s short stories.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Thakazhi Sivasankara Pillai received the Jnanpith Award for which work?",
+    "opts": [
+      "Chemmeen",
+      "Kayar",
+      "Thottiyude Makan",
+      "Randidangazhi"
+    ],
+    "a": "B",
+    "exp": "He was honoured with the Jnanpith Award in 1984 for his novel Kayar.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The novel Chemmeen by Thakazhi features which female lead?",
+    "opts": [
+      "Karuthamma",
+      "Narayani",
+      "Suhra",
+      "Pathumma"
+    ],
+    "a": "A",
+    "exp": "Karuthamma is the central female character in the tragic love story Chemmeen.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O. V. Vijayan's seminal novel Khasakkinte Itihasam is set in which fictional village?",
+    "opts": [
+      "Khasak",
+      "Thalassery",
+      "Kozhikode",
+      "Kottayam"
+    ],
+    "a": "A",
+    "exp": "The narrative unfolds in the imagined village of Khasak, central to the novel’s theme.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which award did O. V. Vijayan receive in 1990?",
+    "opts": [
+      "Padma Bhushan",
+      "Padma Shri",
+      "Jnanpith",
+      "Sahitya Akademi Fellowship"
+    ],
+    "a": "B",
+    "exp": "He was conferred the Padma Shri by the Government of India in 1990.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "In Thakazhi's Thottiyude Makan, the protagonist is the son of which character?",
+    "opts": [
+      "Thotti",
+      "Karuthamma",
+      "Kunjunni",
+      "Pareekkutty"
+    ],
+    "a": "A",
+    "exp": "The title translates to Son of Thotti, indicating the protagonist’s lineage.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following works is NOT by Vaikom Muhammad Basheer?",
+    "opts": [
+      "Balyakalasakhi",
+      "Mathilukal",
+      "Kayar",
+      "Shabdangal"
+    ],
+    "a": "C",
+    "exp": "Kayar is a novel by Thakazhi Sivasankara Pillai, not by Basheer.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The Vayalar Award 1974 was given to O. V. Vijayan for which work?",
+    "opts": [
+      "Khasakkinte Itihasam",
+      "Dharmapuranam",
+      "Gurusahayam",
+      "Madhavikkutty"
+    ],
+    "a": "B",
+    "exp": "He received the Vayalar Award in 1974 for his novel Dharmapuranam.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "In Basheer's novel Pathummayude Aadu, the central animal character is:",
+    "opts": [
+      "a cow",
+      "a goat",
+      "a buffalo",
+      "a dog"
+    ],
+    "a": "B",
+    "exp": "The title itself refers to Pathumma, a goat that becomes the focus of the narrator's affection.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which work of Thakazhi Sivasankara Pillai won the Jnanpith Award in 1984?",
+    "opts": [
+      "Chemmeen",
+      "Thotiyude Makan",
+      "Kayar",
+      "Randidangazhi"
+    ],
+    "a": "C",
+    "exp": "Kayar (Coir) received the Jnanpith Award in 1984, recognizing its epic portrayal of rural life.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The protagonist of Thakazhi's novel Chemmeen is:",
+    "opts": [
+      "Karuthamma",
+      "Pareekkutty",
+      "Kunjunni",
+      "Velayudhan"
+    ],
+    "a": "A",
+    "exp": "Karuthamma is the central female character whose love and tragedy drive the narrative of Chemmeen.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O.V. Vijayan's novel Khasakkinte Itihasam is set in which fictional village?",
+    "opts": [
+      "Khasak",
+      "Kumarakom",
+      "Kavalam",
+      "Kuttanad"
+    ],
+    "a": "A",
+    "exp": "The novel takes place in the imagined village of Khasak, where the protagonist Ravi arrives as a school teacher.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which award did Vaikom Muhammad Basheer receive in 1982?",
+    "opts": [
+      "Padma Bhushan",
+      "Padma Shri",
+      "Padma Vibhushan",
+      "Sahitya Akademi Award"
+    ],
+    "a": "B",
+    "exp": "Basheer was honoured with the Padma Shri, India's fourth-highest civilian award, in 1982.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The short story Anargha Nimisham is authored by:",
+    "opts": [
+      "Thakazhi Sivasankara Pillai",
+      "O.V. Vijayan",
+      "Vaikom Muhammad Basheer",
+      "M.T. Vasudevan Nair"
+    ],
+    "a": "C",
+    "exp": "Anargha Nimisham (An Unrepeatable Moment) is a well‑known short story by Vaikom Muhammad Basheer.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "In O.V. Vijayan's Khasakkinte Itihasam, the school teacher who comes to the village is named:",
+    "opts": [
+      "Ravi",
+      "Sreedhar",
+      "Madhavan",
+      "Govindan"
+    ],
+    "a": "A",
+    "exp": "The protagonist, a young school teacher named Ravi, narrates his experiences in the village of Khasak.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following works is NOT written by Thakazhi Sivasankara Pillai?",
+    "opts": [
+      "Chemmeen",
+      "Kayar",
+      "Khasakkinte Itihasam",
+      "Thotiyude Makan"
+    ],
+    "a": "C",
+    "exp": "Khasakkinte Itihasam is a novel by O.V. Vijayan, not by Thakazhi Sivasankara Pillai.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The character Narayani appears in which work of Vaikom Muhammad Basheer?",
+    "opts": [
+      "Balyakalasakhi",
+      "Pathummayude Aadu",
+      "Mathilukal",
+      "Shabdangal"
+    ],
+    "a": "C",
+    "exp": "In Mathilukal (The Walls), Narayani is the woman with whom the narrator communicates through a prison wall.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which novel by Vaikom Muhammad Basheer is titled 'Balyakalasakhi'?",
+    "opts": [
+      "Ntuppuppakkoranendarnnu",
+      "Balyakalasakhi",
+      "Pathummayude Aadu",
+      "Mathilukal"
+    ],
+    "a": "B",
+    "exp": "Balyakalasakhi is a well-known romantic novel written by Vaikom Muhammad Basheer, first published in 1944.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which work of Thakazhi Sivasankara Pillai won the Sahitya Akademi Award in 1961?",
+    "opts": [
+      "Chemmeen",
+      "Kayar",
+      "Thottiyude Makan",
+      "Randidangazhi"
+    ],
+    "a": "A",
+    "exp": "Thakazhi's novel 'Chemmeen' received the Sahitya Akademi Award in 1961 for its outstanding contribution to Malayalam literature.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O.V. Vijayan's famous novel 'Khasakkinte Itihasam' was first published in which year?",
+    "opts": [
+      "1965",
+      "1969",
+      "1973",
+      "1977"
+    ],
+    "a": "B",
+    "exp": "'Khasakkinte Itihasam' was first published in 1969 and is considered a masterpiece of modern Malayalam fiction.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "In Basheer's novel 'Pathummayude Aadu', who is the central female character?",
+    "opts": [
+      "Pathumma",
+      "Sulekha",
+      "Kunjumol",
+      "Amina"
+    ],
+    "a": "A",
+    "exp": "The novel revolves around the life and experiences of Pathumma, the titular character, and her goat.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which award did Thakazhi Sivasankara Pillai receive in 1984 for his lifetime contribution to Malayalam literature?",
+    "opts": [
+      "Ezhuthachan Puraskaram",
+      "Vayalar Award",
+      "Kerala Sahitya Akademi Fellowship",
+      "Jnanpith Award"
+    ],
+    "a": "A",
+    "exp": "Thakazhi was honoured with the Ezhuthachan Puraskaram, the highest literary award of the Kerala government, in 1984.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O.V. Vijayan's short story collection 'Gurusahayam' deals primarily with which theme?",
+    "opts": [
+      "Rural life",
+      "Urban alienation",
+      "Political satire",
+      "Mythology"
+    ],
+    "a": "C",
+    "exp": "Vijayan's 'Gurusahayam' is known for its sharp political satire, reflecting the socio-political climate of Kerala.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which character from Thakazhi's novel 'Chemmeen' is the lover of Karuthamma?",
+    "opts": [
+      "Pareekutti",
+      "Kunjikuttan",
+      "Palani",
+      "Sekhar"
+    ],
+    "a": "A",
+    "exp": "In 'Chemmeen', Karuthamma's lover is Pareekutti, a Muslim fisherman, whose relationship drives the tragic plot.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Basheer's autobiographical work 'Janmadinam' is written in which form?",
+    "opts": [
+      "Poem",
+      "Diary",
+      "Play",
+      "Letter"
+    ],
+    "a": "B",
+    "exp": "'Janmadinam' (Birthday) is a diary-style autobiographical piece where Basheer reflects on his life and thoughts.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O.V. Vijayan received the Padma Shri in which year?",
+    "opts": [
+      "1998",
+      "2003",
+      "2007",
+      "2011"
+    ],
+    "a": "B",
+    "exp": "O.V. Vijayan was conferred the Padma Shri, India's fourth-highest civilian award, in 2003 for his contributions to literature and art.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which Malayalam writer authored the novel Pathummayude Aadu?",
+    "opts": [
+      "Vaikom Muhammad Basheer",
+      "Thakazhi Sivasankara Pillai",
+      "O.V. Vijayan",
+      "M.T. Vasudevan Nair"
+    ],
+    "a": "A",
+    "exp": "Pathummayude Aadu is a classic work by Vaikom Muhammad Basheer, first published in 1959.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Thakazhi Sivasankara Pillai's novel Chemmeen primarily depicts the life of which community?",
+    "opts": [
+      "Plantation workers",
+      "Fishermen",
+      "Tribal hunters",
+      "Urban traders"
+    ],
+    "a": "B",
+    "exp": "Chemmeen (1956) portrays the struggles and traditions of the fishing community along the Kerala coast.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which work is considered O.V. Vijayan's magnum opus?",
+    "opts": [
+      "Gurusahayam",
+      "Khasakkinte Itihasam",
+      "Dharmapuranam",
+      "Pravasam"
+    ],
+    "a": "B",
+    "exp": "Khasakkinte Itihasam (1969) is widely regarded as O.V. Vijayan's masterpiece in Malayalam literature.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "In Basheer's novel Balyakalasakhi, who is the male protagonist?",
+    "opts": [
+      "Majeed",
+      "Suleiman",
+      "Karim",
+      "Ahmed"
+    ],
+    "a": "A",
+    "exp": "The story revolves around Majeed and his childhood love Suhra, making Majeed the protagonist.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which Malayalam writer received the Jnanpith Award in 1984?",
+    "opts": [
+      "Thakazhi Sivasankara Pillai",
+      "O.V. Vijayan",
+      "Vaikom Muhammad Basheer",
+      "M.T. Vasudevan Nair"
+    ],
+    "a": "A",
+    "exp": "Thakazhi Sivasankara Pillai was honoured with the Jnanpith Award in 1984 for his contributions to Malayalam literature.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O.V. Vijayan was conferred the Padma Bhushan in which year?",
+    "opts": [
+      "2005",
+      "2010",
+      "2015",
+      "2020"
+    ],
+    "a": "A",
+    "exp": "The Government of India awarded O.V. Vijayan the Padma Bhushan in 2005 for his literary achievements.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "For which work did Vaikom Muhammad Basheer win the Sahitya Akademi Award in 1967?",
+    "opts": [
+      "Ntuppuppakkoranendarnnu",
+      "Balyakalasakhi",
+      "Shabdangal",
+      "Anargha Nimisham"
+    ],
+    "a": "A",
+    "exp": "Basheer received the 1967 Sahitya Akademi Award for his novel Ntuppuppakkoranendarnnu.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The novel Kayar by Thakazhi Sivasankara Pillai mainly focuses on which theme?",
+    "opts": [
+      "Caste discrimination",
+      "Land reforms and peasant life",
+      "Urban migration",
+      "Women's emancipation"
+    ],
+    "a": "B",
+    "exp": "Kayar (1978) depicts the agrarian struggles and land reform movements in the Kuttanad region of Kerala.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the central character in O.V. Vijayan's Khasakkinte Itihasam?",
+    "opts": [
+      "Ravi",
+      "Appu",
+      "Kunhikuttan",
+      "Raghunath"
+    ],
+    "a": "D",
+    "exp": "The protagonist of Khasakkinte Itihasam is Raghunath, a young man who arrives in the village of Khasak.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following Malayalam writers has NOT been awarded the Jnanpith Award?",
+    "opts": [
+      "Thakazhi Sivasankara Pillai",
+      "O.V. Vijayan",
+      "G. Sankara Kurup",
+      "M.T. Vasudevan Nair"
+    ],
+    "a": "B",
+    "exp": "O.V. Vijayan, despite his literary acclaim, has not received the Jnanpith Award, unlike the other three listed.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which work is the first novel of Vaikom Muhammad Basheer?",
+    "opts": [
+      "Balyakalasakhi",
+      "Pathummayude Aadu",
+      "Mathilukal",
+      "Ntuppuppakkoranendarnnu"
+    ],
+    "a": "A",
+    "exp": "Balyakalasakhi, published in 1944, is regarded as Basheer's first novel.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Thakazhi Sivasankara Pillai's novel Chemmeen won which award?",
+    "opts": [
+      "Sahitya Akademi Award (1958)",
+      "Jnanpith Award (1965)",
+      "Kerala Sahitya Akademi Award (1957)",
+      "Vayalar Award (1960)"
+    ],
+    "a": "A",
+    "exp": "Chemmeen received the Sahitya Akademi Award in 1958.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O.V. Vijayan's famous novel Khasakkinte Itihasam was first published in which year?",
+    "opts": [
+      "1969",
+      "1971",
+      "1973",
+      "1975"
+    ],
+    "a": "A",
+    "exp": "Khasakkinte Itihasam appeared first in 1969 (serialized) and was published as a book the same year.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which work earned Vaikom Muhammad Basheer the Sahitya Akademi Award?",
+    "opts": [
+      "Balyakalasakhi",
+      "Pathummayude Aadu",
+      "Mathilukal",
+      "Ntuppuppakkoranendarnnu"
+    ],
+    "a": "C",
+    "exp": "Basheer received the Sahitya Akademi Award in 1982 for his novel Mathilukal.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Thakazhi's novel Kayar (Coir) won which award?",
+    "opts": [
+      "Jnanpith Award (1984)",
+      "Sahitya Akademi Award (1975)",
+      "Kerala Sahitya Akademi Award (1973)",
+      "Vayalar Award (1970)"
+    ],
+    "a": "A",
+    "exp": "Kayar was honoured with the Jnanpith Award in 1984.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O.V. Vijayan won which award for his novel Khasakkinte Itihasam?",
+    "opts": [
+      "Vayalar Award (1970)",
+      "Kerala Sahitya Akademi Award (1971)",
+      "Sahitya Akademi Award (1972)",
+      "Jnanpith Award (1973)"
+    ],
+    "a": "A",
+    "exp": "He received the Vayalar Award in 1970 for Khasakkinte Itihasam.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "In Thakazhi's novel Chemmeen, the character Karuthamma belongs to which community?",
+    "opts": [
+      "Nair",
+      "Ezhava",
+      "Muslim",
+      "Christian"
+    ],
+    "a": "A",
+    "exp": "Karuthamma is portrayed as a Hindu Nair woman in the novel.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Basheer's story Anargha Nimisham primarily deals with which theme?",
+    "opts": [
+      "love",
+      "freedom",
+      "jail",
+      "poverty"
+    ],
+    "a": "B",
+    "exp": "The story depicts a fleeting moment of freedom experienced by a jail inmate.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Thakazhi Sivasankara Pillai was honoured with the Padma Shri in which year?",
+    "opts": [
+      "1965",
+      "1971",
+      "1977",
+      "1983"
+    ],
+    "a": "B",
+    "exp": "He received the Padma Shri from the Government of India in 1971.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Basheer's work Ntuppuppakkoranendarnnu (My Grandad Had an Elephant) is a:",
+    "opts": [
+      "novel",
+      "autobiography",
+      "travelogue",
+      "children's story"
+    ],
+    "a": "A",
+    "exp": "Ntuppuppakkoranendarnnu is a humorous novel published in 1951.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a famous novel by Vaikom Muhammad Basheer?",
+    "opts": [
+      "Chemmeen",
+      "Pathummayude Aadu",
+      "Nalukettu",
+      "Khasakkinte Itihasam"
+    ],
+    "a": "B",
+    "exp": "Pathummayude Aadu is a well-known short novel/novella by Basheer, while Chemmeen is by Thakazhi, Nalukettu by M.T. Vasudevan Nair, and Khasakkinte Itihasam by O.V. Vijayan.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The character 'Kunjunni' appears in which work of Thakazhi Sivasankara Pillai?",
+    "opts": [
+      "Chemmeen",
+      "Thottiyude Makan",
+      "Randidangazhi",
+      "Kayar"
+    ],
+    "a": "C",
+    "exp": "Kunjunni is a young boy character in Thakazhi's novel Randidangazhi (Two Measures).",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O. V. Vijayan's novel 'Khasakkinte Itihasam' was first published in which year?",
+    "opts": [
+      "1969",
+      "1971",
+      "1973",
+      "1975"
+    ],
+    "a": "A",
+    "exp": "Khasakkinte Itihasam was first serialized in Mathrubhumi weekly in 1969 and later published as a book.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following works is NOT by Thakazhi Sivasankara Pillai?",
+    "opts": [
+      "Chemmeen",
+      "Thottiyude Makan",
+      "Randidangazhi",
+      "Bhargavinilayam"
+    ],
+    "a": "D",
+    "exp": "Bhargavinilayam is a novel by O. V. Vijayan, whereas the other three are works of Thakazhi.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "The character 'Korappan' appears in which novel by O. V. Vijayan?",
+    "opts": [
+      "Khasakkinte Itihasam",
+      "Dharmapuranam",
+      "Gurusagaram",
+      "Bhargavinilayam"
+    ],
+    "a": "B",
+    "exp": "Korappan is the protagonist of O. V. Vijayan's novel Dharmapuranam.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which award did Thakazhi Sivasankara Pillai receive in 1984?",
+    "opts": [
+      "Jnanpith Award",
+      "Sahitya Akademi Award",
+      "Padma Bhushan",
+      "Ezhuthachan Puraskaram"
+    ],
+    "a": "A",
+    "exp": "Thakazhi was awarded the Jnanpith Award in 1984 for his literary contributions, notably Chemmeen.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a short story by Vaikom Muhammad Basheer?",
+    "opts": [
+      "Bhargavinilayam",
+      "Anargha Nimisham",
+      "Mathilukal",
+      "Nalukettu"
+    ],
+    "a": "C",
+    "exp": "Mathilukal is an autobiographical novel/short story by Basheer; Bhargavinilayam is by O.V. Vijayan, Anargha Nimisham is a novel by Basheer, and Nalukettu is by M.T. Vasudevan Nair.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O. V. Vijayan received the Padma Bhushan in which year?",
+    "opts": [
+      "2003",
+      "2005",
+      "2007",
+      "2009"
+    ],
+    "a": "B",
+    "exp": "O. V. Vijayan was honoured with the Padma Bhushan in 2005 for his contributions to literature.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O. V. Vijayan won the Vayalar Award in 1991 for which work?",
+    "opts": [
+      "Khasakkinte Itihasam",
+      "Dharmapuranam",
+      "Gurusagaram",
+      "Bhargavinilayam"
+    ],
+    "a": "B",
+    "exp": "The Vayalar Award for 1991 was given to O. V. Vijayan for his novel Dharmapuranam.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the female protagonist in Vaikom Muhammad Basheer's novel Balyakalasakhi?",
+    "opts": [
+      "Suhra",
+      "Amina",
+      "Fathima",
+      "Zainab"
+    ],
+    "a": "A",
+    "exp": "The novel revolves around the love story of Majeed and Suhra, making Suhra the female protagonist.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which award did Thakazhi Sivasankara Pillai's novel Chemmeen receive in 1958?",
+    "opts": [
+      "Jnanpith Award",
+      "Sahitya Akademi Award",
+      "Kerala Sahitya Akademi Award",
+      "Vayalar Award"
+    ],
+    "a": "B",
+    "exp": "Chemmeen won the Sahitya Akademi Award for Malayalam literature in 1958.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O.V. Vijayan's novel Khasakkinte Itihasam was first published in which year?",
+    "opts": [
+      "1969",
+      "1975",
+      "1982",
+      "1990"
+    ],
+    "a": "A",
+    "exp": "The novel appeared in serial form in 1969 and was later published as a book.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the heroine of Thakazhi's novel Chemmeen?",
+    "opts": [
+      "Karuthamma",
+      "Kunjumon",
+      "Pareekkutty",
+      "Cheriya"
+    ],
+    "a": "A",
+    "exp": "Karuthamma is the central female character whose love and tragedy drive the plot of Chemmeen.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O.V. Vijayan received the Sahitya Akademi Award in 1989 for which of his works?",
+    "opts": [
+      "Gurusahayam",
+      "Khasakkinte Itihasam",
+      "Dhwani",
+      "Lila"
+    ],
+    "a": "A",
+    "exp": "He was honored the Sahitya Akademi Award for his novel Gurusahayam in 1989.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Basheer's work Anargha Nimisham belongs to which literary genre?",
+    "opts": [
+      "Novel",
+      "Poetry",
+      "Short stories",
+      "Drama"
+    ],
+    "a": "C",
+    "exp": "Anargha Nimisham is a collection of short stories by Vaikom Muhammad Basheer.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Thakazhi Sivasankara Pillai was conferred the Jnanpith Award in which year?",
+    "opts": [
+      "1982",
+      "1984",
+      "1986",
+      "1988"
+    ],
+    "a": "B",
+    "exp": "He received the Jnanpith Award in 1984 for his overall contribution to Malayalam literature.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "In O.V. Vijayan's Khasakkinte Itihasam, what is the profession of the protagonist Ravi?",
+    "opts": [
+      "Farmer",
+      "Doctor",
+      "School teacher",
+      "Lawyer"
+    ],
+    "a": "C",
+    "exp": "Ravi arrives in Khasak as a school teacher, which forms the backdrop of the narrative.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Basheer's Ntuppuppakkoranendarnnu is best classified as:",
+    "opts": [
+      "Poetry",
+      "Drama",
+      "Novel",
+      "Essay"
+    ],
+    "a": "C",
+    "exp": "The work is a humorous autobiographical novel by Basheer.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Thakazhi's novel Kayar received the Sahitya Akademi Award in which year?",
+    "opts": [
+      "1965",
+      "1967",
+      "1969",
+      "1971"
+    ],
+    "a": "B",
+    "exp": "Kayar was honored with the Sahitya Akademi Award for Malayalam in 1967.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which is Vaikom Muhammad Basheer's first novel?",
+    "opts": [
+      "Balyakalasakhi",
+      "Ntuppuppakkoranendarnnu",
+      "Pathummayude Aadu",
+      "Mathilukal"
+    ],
+    "a": "A",
+    "exp": "Balyakalasakhi, published in 1944, is considered Basheer's debut novel.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which novel earned Thakazhi Sivasankara Pillai the Jnanpith Award?",
+    "opts": [
+      "Chemmeen",
+      "Thottiyude Makan",
+      "Kayar",
+      "Randidangazhi"
+    ],
+    "a": "C",
+    "exp": "Thakazhi received the Jnanpith Award in 1984 for his novel Kayar.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which work is regarded as O.V. Vijayan's magnum opus?",
+    "opts": [
+      "Khasakkinte Itihasam",
+      "Dharmapuranam",
+      "Gurusagaram",
+      "Madhya Vyayoga"
+    ],
+    "a": "A",
+    "exp": "Khasakkinte Itihasam (1969) is widely considered Vijayan's masterpiece.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "In Basheer's Balyakalasakhi, what is the name of the female lead?",
+    "opts": [
+      "Suhr",
+      "Kunjumol",
+      "Amina",
+      "Mariam"
+    ],
+    "a": "A",
+    "exp": "The female protagonist in Balyakalasakhi is named Suhra.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Who is the male protagonist in Thakazhi's Chemmeen?",
+    "opts": [
+      "Karuthamma",
+      "Pareekkutty",
+      "Chakki",
+      "Kunju"
+    ],
+    "a": "B",
+    "exp": "Pareekkutty is the male lead, while Karuthamma is the female lead in Chemmeen.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "O.V. Vijayan's novel Gurusagaram primarily deals with:",
+    "opts": [
+      "The life of a fisherman",
+      "The struggles of a school teacher",
+      "The saga of a Nair joint family",
+      "The exile of a political activist"
+    ],
+    "a": "C",
+    "exp": "Gurusagaram portrays the fortunes and travails of a Nair joint family across generations.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which prestigious award did Vaikom Muhammad Basheer receive in 1992?",
+    "opts": [
+      "Sahitya Akademi Award",
+      "Kerala Sahitya Akademi Award",
+      "Ezhuthachan Puraskaram",
+      "Vayalar Award"
+    ],
+    "a": "C",
+    "exp": "Basheer was honoured with the Ezhuthachan Puraskaram, Kerala's highest literary award, in 1992.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "In which year did Thakazhi Sivasankara Pillai receive the Jnanpith Award?",
+    "opts": [
+      "1978",
+      "1984",
+      "1990",
+      "1995"
+    ],
+    "a": "B",
+    "exp": "He was awarded the Jnanpith in 1984 for his novel Kayar.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "For which work did O.V. Vijayan win the Kerala Sahitya Akademi Award?",
+    "opts": [
+      "Khasakkinte Itihasam",
+      "Dharmapuranam",
+      "Gurusagaram",
+      "Madhya Vyayoga"
+    ],
+    "a": "A",
+    "exp": "Vijayan received the Kerala Sahitya Akademi Award in 1969 for Khasakkinte Itihasam.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "In Basheer's Mathilukal, who is the female protagonist?",
+    "opts": [
+      "Sharifa",
+      "Amina",
+      "Fathima",
+      "Zeenat"
+    ],
+    "a": "A",
+    "exp": "The female lead in Mathilukal is named Sharifa, with whom Basheer shares a prison‑wall romance.",
+    "d": "MEDIUM"
+  }
+]

@@ -1,0 +1,182 @@
+[
+  {
+    "q": "What is the synonym of 'Fast'?",
+    "opts": [
+      "Quick",
+      "Slow",
+      "Fast",
+      "Speedy"
+    ],
+    "a": 0,
+    "exp": "Fast is equivalent to Quick",
+    "d": "EASY"
+  },
+  {
+    "q": "What is another word for 'Large'?",
+    "opts": [
+      "Big",
+      "Small",
+      "Large",
+      "Tiny"
+    ],
+    "a": 2,
+    "exp": "Large is synonymous with Big",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the synonym of 'Happy'?",
+    "opts": [
+      "Sad",
+      "Joyful",
+      "Happy",
+      "Unhappy"
+    ],
+    "a": 2,
+    "exp": "Happy is equivalent to Joyful",
+    "d": "EASY"
+  },
+  {
+    "q": "What is another word for 'Simple'?",
+    "opts": [
+      "Complicated",
+      "Easy",
+      "Simple",
+      "Difficult"
+    ],
+    "a": 2,
+    "exp": "Simple is synonymous with Easy",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the synonym of 'Success'?",
+    "opts": [
+      "Failure",
+      "Success",
+      "Achievement",
+      "Accomplishment"
+    ],
+    "a": 1,
+    "exp": "Success is equivalent to Achievement",
+    "d": "EASY"
+  },
+  {
+    "q": "What is another word for 'Love'?",
+    "opts": [
+      "Hate",
+      "Love",
+      "Affection",
+      "Anger"
+    ],
+    "a": 2,
+    "exp": "Love is synonymous with Affection",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the synonym of 'Quiet'?",
+    "opts": [
+      "Loud",
+      "Quiet",
+      "Silent",
+      "Noisy"
+    ],
+    "a": 2,
+    "exp": "Quiet is equivalent to Silent",
+    "d": "EASY"
+  },
+  {
+    "q": "What is another word for 'Easy'?",
+    "opts": [
+      "Difficult",
+      "Easy",
+      "Simple",
+      "Hard"
+    ],
+    "a": 2,
+    "exp": "Easy is synonymous with Simple",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the synonym of 'Rich'?",
+    "opts": [
+      "Poor",
+      "Rich",
+      "Wealthy",
+      "Affluent"
+    ],
+    "a": 2,
+    "exp": "Rich is equivalent to Wealthy",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is another word for 'Slow'?",
+    "opts": [
+      "Fast",
+      "Slow",
+      "Quick",
+      "Prompt"
+    ],
+    "a": 2,
+    "exp": "Slow is synonymous with Quick",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the synonym of 'Big'?",
+    "opts": [
+      "Small",
+      "Big",
+      "Large",
+      "Huge"
+    ],
+    "a": 2,
+    "exp": "Big is equivalent to Large",
+    "d": "EASY"
+  },
+  {
+    "q": "What is another word for 'Free'?",
+    "opts": [
+      "Paid",
+      "Free",
+      "Expensive",
+      "Costly"
+    ],
+    "a": 2,
+    "exp": "Free is synonymous with Paid",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the synonym of 'Old'?",
+    "opts": [
+      "New",
+      "Old",
+      "Young",
+      "Vintage"
+    ],
+    "a": 2,
+    "exp": "Old is equivalent to Young",
+    "d": "EASY"
+  },
+  {
+    "q": "What is another word for 'Bright'?",
+    "opts": [
+      "Dark",
+      "Bright",
+      "Dim",
+      "Faint"
+    ],
+    "a": 2,
+    "exp": "Bright is synonymous with Dim",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the synonym of 'Strong'?",
+    "opts": [
+      "Weak",
+      "Strong",
+      "Powerful",
+      "Weakness"
+    ],
+    "a": 2,
+    "exp": "Strong is equivalent to Powerful",
+    "d": "MEDIUM"
+  }
+]

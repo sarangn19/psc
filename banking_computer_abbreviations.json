@@ -1,0 +1,182 @@
+[
+  {
+    "q": "What is the abbreviation for 'Computer-Aided Design'?",
+    "opts": [
+      "CAD",
+      "CAT",
+      "CAE",
+      "CAM"
+    ],
+    "a": 0,
+    "exp": "CAD is an abbreviation for Computer-Aided Design.",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the abbreviation for 'Credit Card'?",
+    "opts": [
+      "CC",
+      "CB",
+      "CD",
+      "CP"
+    ],
+    "a": 0,
+    "exp": "CC is an abbreviation for Credit Card.",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the abbreviation for 'Data Communication'?",
+    "opts": [
+      "DC",
+      "DM",
+      "DA",
+      "DB"
+    ],
+    "a": 0,
+    "exp": "DC is an abbreviation for Data Communication.",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the abbreviation for 'Electronic Fund Transfer'?",
+    "opts": [
+      "EFT",
+      "ETF",
+      "ETC",
+      "ETP"
+    ],
+    "a": 0,
+    "exp": "EFT is an abbreviation for Electronic Fund Transfer.",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the abbreviation for 'Integrated Services Digital Network'?",
+    "opts": [
+      "ISDN",
+      "ISDC",
+      "ISDP",
+      "ISDR"
+    ],
+    "a": 0,
+    "exp": "ISDN is an abbreviation for Integrated Services Digital Network.",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the abbreviation for 'Magnetic Ink Character Recognition'?",
+    "opts": [
+      "MICR",
+      "MIR",
+      "MRI",
+      "MRC"
+    ],
+    "a": 0,
+    "exp": "MICR is an abbreviation for Magnetic Ink Character Recognition.",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the abbreviation for 'Online Transaction Processing'?",
+    "opts": [
+      "OTP",
+      "OPT",
+      "OTC",
+      "OTS"
+    ],
+    "a": 0,
+    "exp": "OTP is an abbreviation for Online Transaction Processing.",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the abbreviation for 'Remote Authentication Dial-In User Service'?",
+    "opts": [
+      "RADIUS",
+      "RADIA",
+      "RAIDS",
+      "RAID"
+    ],
+    "a": 0,
+    "exp": "RADIUS is an abbreviation for Remote Authentication Dial-In User Service.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the abbreviation for 'Secure Electronic Transaction'?",
+    "opts": [
+      "SET",
+      "SETA",
+      "SEDA",
+      "SETE"
+    ],
+    "a": 0,
+    "exp": "SET is an abbreviation for Secure Electronic Transaction.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the abbreviation for 'Switched Telephony'?",
+    "opts": [
+      "ST",
+      "SD",
+      "SG",
+      "SH"
+    ],
+    "a": 0,
+    "exp": "ST is an abbreviation for Switched Telephony.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the abbreviation for 'Virtual Private Network'?",
+    "opts": [
+      "VPN",
+      "VPA",
+      "VPI",
+      "VPS"
+    ],
+    "a": 0,
+    "exp": "VPN is an abbreviation for Virtual Private Network.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the abbreviation for 'Wide Area Network'?",
+    "opts": [
+      "WAN",
+      "WAD",
+      "WAS",
+      "WAR"
+    ],
+    "a": 0,
+    "exp": "WAN is an abbreviation for Wide Area Network.",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the abbreviation for 'X.25 protocol'?",
+    "opts": [
+      "X25",
+      "X24",
+      "X23",
+      "X22"
+    ],
+    "a": 0,
+    "exp": "X25 is an abbreviation for X.25 protocol.",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the abbreviation for 'ZigBee protocol'?",
+    "opts": [
+      "ZB",
+      "ZA",
+      "ZC",
+      "ZD"
+    ],
+    "a": 0,
+    "exp": "ZB is an abbreviation for ZigBee protocol.",
+    "d": "HARD"
+  },
+  {
+    "q": "What is the abbreviation for 'Computer-Aided Manufacturing'?",
+    "opts": [
+      "CAM",
+      "CAP",
+      "CAR",
+      "CAS"
+    ],
+    "a": 0,
+    "exp": "CAM is an abbreviation for Computer-Aided Manufacturing.",
+    "d": "HARD"
+  }
+]

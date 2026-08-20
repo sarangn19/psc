@@ -1,0 +1,206 @@
+[
+  {
+    "q": "What is the main objective of Pradhan Mantri Jan-Dhan Yojana?",
+    "opts": [
+      "Financial Inclusion",
+      "Financial Literacy",
+      "Digital Payment",
+      "Social Security"
+    ],
+    "a": 0,
+    "exp": "Financial Inclusion for all citizens",
+    "d": "EASY"
+  },
+  {
+    "q": "Which of the following is a key benefit of Aadhaar-enabled payment system?",
+    "opts": [
+      "Faster Transaction",
+      "Increased Security",
+      "Reduced Cost",
+      "All of the above"
+    ],
+    "a": 3,
+    "exp": "All of the above benefits",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the primary aim of Microfinance?",
+    "opts": [
+      "Economic Growth",
+      "Financial Inclusion",
+      "Poverty Reduction",
+      "Employment Generation"
+    ],
+    "a": 1,
+    "exp": "Financial Inclusion through small loans",
+    "d": "EASY"
+  },
+  {
+    "q": "Which bank has launched the RuPay Debit Card for Jan Dhan Yojana account holders?",
+    "opts": [
+      "State Bank of India",
+      "ICICI Bank",
+      "HDFC Bank",
+      "SBI"
+    ],
+    "a": 4,
+    "exp": "State Bank of India launched Rupay Card",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the main feature of a Business Correspondent (BC) model?",
+    "opts": [
+      "Agent Banking",
+      "E-Banking",
+      "Mobile Banking",
+      "ATM Network"
+    ],
+    "a": 0,
+    "exp": "Agent Banking through BC model",
+    "d": "HARD"
+  },
+  {
+    "q": "Which of the following is a key component of financial inclusion?",
+    "opts": [
+      "Banking Services",
+      "Microfinance",
+      "Insurance Services",
+      "Credit Facilities"
+    ],
+    "a": 0,
+    "exp": "Banking Services for all citizens",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the purpose of the National Pension System (NPS)?",
+    "opts": [
+      "Retirement Planning",
+      "Social Security",
+      "Wealth Creation",
+      "Investment Option"
+    ],
+    "a": 0,
+    "exp": "Retirement planning through NPS",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which of the following is a type of Microfinance?",
+    "opts": [
+      "Small Business Loan",
+      "Consumer Loan",
+      "Micro Credit",
+      "All of the above"
+    ],
+    "a": 3,
+    "exp": "All of the above types",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the main advantage of Digital Banking?",
+    "opts": [
+      "Convenience",
+      "Security",
+      "Reduced Cost",
+      "All of the above"
+    ],
+    "a": 3,
+    "exp": "Convenience, Security, Reduced Cost",
+    "d": "HARD"
+  },
+  {
+    "q": "Which bank has launched the 'Lakshmi Scheme' for women empowerment?",
+    "opts": [
+      "State Bank of India",
+      "ICICI Bank",
+      "HDFC Bank",
+      "Axis Bank"
+    ],
+    "a": 3,
+    "exp": "Axis Bank launched Lakshmi Scheme",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the primary goal of the Financial Literacy and Counseling Services (FLCS) program?",
+    "opts": [
+      "Financial Awareness",
+      "Financial Inclusion",
+      "Financial Literacy",
+      "All of the above"
+    ],
+    "a": 3,
+    "exp": "Financial Literacy and Awareness",
+    "d": "HARD"
+  },
+  {
+    "q": "Which of the following is a feature of the Pradhan Mantri Jan Dhan Yojana (PMJDY) account?",
+    "opts": [
+      "Zero Balance Requirement",
+      "No Minimum Balance",
+      "Free ATM Transactions",
+      "All of the above"
+    ],
+    "a": 3,
+    "exp": "All of the above features",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the main benefit of the M-Pesa mobile banking service?",
+    "opts": [
+      "Convenience",
+      "Security",
+      "Reduced Cost",
+      "All of the above"
+    ],
+    "a": 3,
+    "exp": "Convenience, Security, Reduced Cost",
+    "d": "HARD"
+  },
+  {
+    "q": "Which of the following is a key principle of financial inclusion?",
+    "opts": [
+      "Universal Access",
+      "Financial Literacy",
+      "Social Security",
+      "Financial Independence"
+    ],
+    "a": 0,
+    "exp": "Universal Access to financial services",
+    "d": "EASY"
+  },
+  {
+    "q": "What is the objective of the National Digital Literacy Mission (NDLM)?",
+    "opts": [
+      "Digital Literacy for All",
+      "Financial Literacy",
+      "Digital Payment",
+      "All of the above"
+    ],
+    "a": 3,
+    "exp": "Digital Literacy for All",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "Which bank has launched the 'Jan Suraksha' scheme for financial security?",
+    "opts": [
+      "State Bank of India",
+      "ICICI Bank",
+      "HDFC Bank",
+      "Axis Bank"
+    ],
+    "a": 3,
+    "exp": "Axis Bank launched Jan Suraksha Scheme",
+    "d": "MEDIUM"
+  },
+  {
+    "q": "What is the main aim of the Swachh Bharat Abhiyan (SBA) initiative?",
+    "opts": [
+      "Financial Inclusion",
+      "Digital Payment",
+      "Financial Literacy",
+      "Sanitation and Hygiene"
+    ],
+    "a": 4,
+    "exp": "Sanitation and Hygiene through SBA",
+    "d": "HARD"
+  }
+]

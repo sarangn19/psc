@@ -28,15 +28,21 @@ export default function ChaptersPage() {
 
   const toggleChapter = async (chapterId: string) => {
     const isCurrentlyLearned = learnedIds.has(chapterId);
+    setLearnedIds((prev) => {
+      const next = new Set(prev);
+      if (isCurrentlyLearned) next.delete(chapterId);
+      else next.add(chapterId);
+      return next;
+    });
     try {
       await api.post('/exams/chapters/mark', { chapterId, isLearned: !isCurrentlyLearned });
+    } catch {
       setLearnedIds((prev) => {
         const next = new Set(prev);
-        if (isCurrentlyLearned) next.delete(chapterId);
-        else next.add(chapterId);
+        if (isCurrentlyLearned) next.add(chapterId);
+        else next.delete(chapterId);
         return next;
       });
-    } catch {
       alert('Failed to update chapter status');
     }
   };
@@ -71,7 +77,7 @@ export default function ChaptersPage() {
     <div className="p-4 max-w-lg mx-auto space-y-4">
       <div>
         <h2 className="text-xl font-bold text-gray-900">Your Chapters</h2>
-        <p className="text-gray-500 text-sm">Mark chapters you've studied to improve adaptive learning</p>
+        <p className="text-gray-500 text-sm">Mark the chapters you want to practice now to improve adaptive learning</p>
       </div>
 
       {exams.map((exam) => {
