@@ -76,6 +76,7 @@ export default function AdaptivePage() {
   const fetchNext = async (sid: string) => {
     setSelected(null);
     setResult(null);
+    setQuestion(null);
     setLoadingNext(true);
     setStartTime(Date.now());
     try {
