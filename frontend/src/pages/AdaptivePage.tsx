@@ -212,9 +212,6 @@ export default function AdaptivePage() {
       {/* Question Header */}
       <div className="px-5 pt-4 pb-6 bg-[#13072b] text-white flex flex-col relative border-b border-violet-900/40">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-violet-300">
-            Question {questionNumber}
-          </span>
           {streak >= 3 && (
             <span className="text-xs font-medium text-amber-400">🔥 {streak} streak</span>
           )}
