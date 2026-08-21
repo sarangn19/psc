@@ -34,7 +34,7 @@ const PEN_PAPER_SUBJECTS = [
 ];
 
 async function fetchCandidates(where: Prisma.QuestionWhereInput): Promise<RichQuestion[]> {
-  return prisma.question.findMany({ where, include: RICH_QUESTION_SELECT, take: 100 });
+  return prisma.question.findMany({ where, include: RICH_QUESTION_SELECT, take: 50 });
 }
 
 // Mastery thresholds
@@ -166,8 +166,8 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     : {};
   const [rawCandidates, rawAdjacent] = await Promise.all([
     isFocused
-      ? fetchCandidates({ conceptId: session.focusConceptId, isActive: true, id: { notIn: [...seenIds] }, ...penPaperFilter })
-      : fetchCandidates({ chapterId: { in: chapterIds }, isActive: true, id: { notIn: [...seenIds] }, ...penPaperFilter }),
+      ? fetchCandidates({ conceptId: session.focusConceptId, isActive: true, ...penPaperFilter })
+      : fetchCandidates({ chapterId: { in: chapterIds }, isActive: true, ...penPaperFilter }),
     isFocused ? findAdjacentQuestions([session.focusConceptId!], seenIds, penPaperFilter) : Promise.resolve([]),
   ]);
 
@@ -175,13 +175,13 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
   let doneMessage = 'All questions in learned chapters completed!';
 
   if (isFocused) {
-    candidates = rawCandidates.filter((q) => !seenTexts.has(q.text));
+    candidates = rawCandidates.filter((q) => !seenIds.has(q.id) && !seenTexts.has(q.text));
     if (candidates.length === 0) {
-      candidates = rawAdjacent.filter((q) => !seenTexts.has(q.text));
+      candidates = rawAdjacent.filter((q) => !seenIds.has(q.id) && !seenTexts.has(q.text));
     }
     doneMessage = 'Focused practice complete! You have covered this concept and its related topics.';
   } else {
-    candidates = rawCandidates.filter((q) => !seenTexts.has(q.text));
+    candidates = rawCandidates.filter((q) => !seenIds.has(q.id) && !seenTexts.has(q.text));
   }
 
   if (candidates.length === 0) {
@@ -264,7 +264,6 @@ async function findAdjacentQuestions(
   return fetchCandidates({
     conceptId: { in: siblings.map((s) => s.id) },
     isActive: true,
-    id: { notIn: [...seenIds] },
     ...penPaperFilter,
   });
 }
@@ -284,7 +283,8 @@ if (ranked.length > 0 && ranked.every((g) => g.mastery)) {
   ];
   const adjacent = await findAdjacentQuestions(masteredConceptIds, seenIds);
   if (adjacent.length > 0) {
-    const adjacentRanked = rankGroups(adjacent, stats);
+    const filteredAdjacent = adjacent.filter((q) => !seenIds.has(q.id) && !seenTexts.has(q.text));
+    const adjacentRanked = rankGroups(filteredAdjacent, stats);
     if (adjacentRanked.length) chosen = adjacentRanked[0].questions[0];
   }
 }
