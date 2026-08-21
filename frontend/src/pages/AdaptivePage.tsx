@@ -225,8 +225,8 @@ export default function AdaptivePage() {
       </div>
 
       {/* Options Area */}
-      <div className="flex-1 bg-slate-50 p-5 flex flex-col overflow-y-auto custom-scrollbar">
-        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-3">
+      <div className="flex-1 bg-app-bg p-5 flex flex-col overflow-y-auto custom-scrollbar">
+        <span className="text-[11px] font-bold uppercase tracking-wider text-app-textMuted mb-3">
           Select the correct answer
         </span>
 
@@ -234,23 +234,23 @@ export default function AdaptivePage() {
           {question.options.map((option, idx) => {
             const isSelected = selected === idx;
             const letter = LETTER_LABELS[idx];
-            let cardStyle = 'bg-white border-slate-200 text-slate-900 hover:border-violet-300 hover:bg-violet-50/30';
-            let badgeStyle = 'bg-slate-100 text-slate-700 border-slate-200';
+            let cardStyle = 'bg-app-card border-app-border text-app-text hover:border-app-accent hover:bg-app-surface';
+            let badgeStyle = 'bg-app-surface text-app-textSecondary border-app-border';
 
             if (isSelected && !result) {
-              cardStyle = 'bg-violet-50/90 border-2 border-violet-600 text-violet-950 shadow-sm';
-              badgeStyle = 'bg-violet-700 text-white border-transparent';
+              cardStyle = 'bg-violet-500/10 border-2 border-app-accent text-app-text shadow-sm';
+              badgeStyle = 'bg-app-accent text-white border-transparent';
             }
 
             if (result) {
               if (idx === result.correctOption) {
-                cardStyle = 'bg-emerald-50 border-2 border-emerald-600 text-emerald-950 shadow-sm';
-                badgeStyle = 'bg-emerald-700 text-white border-transparent';
+                cardStyle = 'bg-emerald-500/10 border-2 border-emerald-500 text-app-text shadow-sm';
+                badgeStyle = 'bg-emerald-500 text-white border-transparent';
               } else if (isSelected && !result.isCorrect) {
-                cardStyle = 'bg-rose-50 border-2 border-rose-500 text-rose-950';
-                badgeStyle = 'bg-rose-600 text-white border-transparent';
+                cardStyle = 'bg-rose-500/10 border-2 border-rose-500 text-app-text';
+                badgeStyle = 'bg-rose-500 text-white border-transparent';
               } else {
-                cardStyle = 'opacity-45 bg-slate-100 border-slate-200 text-slate-500';
+                cardStyle = 'opacity-45 bg-app-surface border-app-border text-app-textMuted';
               }
             }
 
@@ -259,7 +259,7 @@ export default function AdaptivePage() {
                 key={idx}
                 onClick={() => handleAnswer(idx)}
                 disabled={!!result || loadingNext}
-                className={`w-full text-left p-3.5 rounded-2xl flex items-center justify-between border transition-all duration-150 ${cardStyle} min-h-[56px] active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-offset-1`}
+                className={`w-full text-left p-3.5 rounded-2xl flex items-center justify-between border transition-all duration-150 ${cardStyle} min-h-[56px] active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-app-accent focus:ring-offset-1`}
               >
                 <div className="flex items-center gap-3.5 pr-2">
                   <span className={`w-8 h-8 rounded-xl font-bold text-xs flex items-center justify-center border shrink-0 transition-colors ${badgeStyle}`}>
@@ -270,8 +270,8 @@ export default function AdaptivePage() {
                   </span>
                 </div>
 
-                {result && idx === result.correctOption && <CheckCircle size={20} className="text-emerald-600 shrink-0" />}
-                {result && isSelected && !result.isCorrect && <XCircle size={20} className="text-rose-600 shrink-0" />}
+                {result && idx === result.correctOption && <CheckCircle size={20} className="text-emerald-400 shrink-0" />}
+                {result && isSelected && !result.isCorrect && <XCircle size={20} className="text-rose-400 shrink-0" />}
               </button>
             );
           })}
@@ -280,13 +280,13 @@ export default function AdaptivePage() {
           {result && result.explanation && (
             <div className={`p-4 rounded-2xl text-xs space-y-1.5 transition-all ${
               result.isCorrect
-                ? 'bg-violet-50 border border-violet-200 text-violet-950'
-                : 'bg-amber-50 border border-amber-200 text-amber-950'
+                ? 'bg-app-accent/10 border border-app-accent/30 text-app-text'
+                : 'bg-amber-500/10 border border-amber-500/30 text-app-text'
             }`}>
               <div className="font-bold">
                 {result.isCorrect ? '🎉 Correct!' : '💡 Solution'}
               </div>
-              <p className="leading-relaxed text-slate-700">
+              <p className="leading-relaxed text-app-textSecondary">
                 {result.explanation}
               </p>
             </div>
@@ -299,14 +299,14 @@ export default function AdaptivePage() {
             <button
               onClick={handleNext}
               disabled={loadingNext}
-              className="w-full py-3.5 px-4 rounded-2xl font-bold text-sm bg-violet-700 text-white flex items-center justify-center gap-1 shadow-md hover:bg-violet-800 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3.5 px-4 rounded-2xl font-bold text-sm bg-app-accent text-white flex items-center justify-center gap-1 shadow-md hover:opacity-90 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loadingNext ? 'Loading...' : 'Next Question →'}
             </button>
           ) : (
             <button
               disabled
-              className="w-full py-3.5 px-4 rounded-2xl font-bold text-sm bg-slate-200 text-slate-400 cursor-not-allowed"
+              className="w-full py-3.5 px-4 rounded-2xl font-bold text-sm bg-app-surface text-app-textMuted cursor-not-allowed"
             >
               Select an answer
             </button>
