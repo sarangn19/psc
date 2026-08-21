@@ -34,7 +34,7 @@ const PEN_PAPER_SUBJECTS = [
 ];
 
 async function fetchCandidates(where: Prisma.QuestionWhereInput): Promise<RichQuestion[]> {
-  return prisma.question.findMany({ where, include: RICH_QUESTION_SELECT });
+  return prisma.question.findMany({ where, include: RICH_QUESTION_SELECT, take: 100 });
 }
 
 // Mastery thresholds
@@ -137,11 +137,13 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     prisma.adaptiveItem.findMany({
       where: { sessionId },
       select: { questionId: true, question: { select: { text: true } } },
+      take: 200,
     }),
     prisma.userChapter.findMany({ where: { userId, isLearned: true }, select: { chapterId: true } }),
     prisma.userConceptStat.findMany({
       where: { userId },
       select: { conceptId: true, chapterId: true, total: true, correct: true },
+      take: 500,
     }),
     prisma.user.findUnique({ where: { id: userId }, select: { travelMode: true } }),
   ]);

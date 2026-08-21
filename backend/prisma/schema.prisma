@@ -120,6 +120,7 @@ model Question {
   adaptiveItems   AdaptiveItem[]
 
   @@index([conceptId])
+  @@index([chapterId, isActive])
   @@map("questions")
 }
 
