@@ -205,21 +205,11 @@ export default function AdaptivePage() {
     );
   }
 
-  const progressPercent = totalQuestions > 0 ? Math.min((questionNumber / Math.max(totalQuestions, 1)) * 100, 100) : 10;
-
   // Question view
   return (
     <div className="max-w-lg mx-auto flex flex-col h-full">
       {/* Question Header */}
       <div className="px-5 pt-4 pb-6 bg-[#13072b] text-white flex flex-col relative border-b border-violet-900/40">
-        {/* Progress bar */}
-        <div className="w-full h-1.5 rounded-full bg-violet-900/80 overflow-hidden mb-4 border border-violet-800/40">
-          <div
-            className="h-full bg-violet-400 rounded-full transition-all duration-300 ease-out shadow-sm"
-            style={{ width: `${progressPercent}%` }}
-          />
-        </div>
-
         <div className="flex items-center justify-between mb-2">
           <span className="text-[11px] font-bold uppercase tracking-wider text-violet-300">
             Question {questionNumber}

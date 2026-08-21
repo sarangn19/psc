@@ -39,7 +39,7 @@ export default function HomePage() {
   return (
     <div className="p-4 max-w-lg mx-auto space-y-5">
       {/* Welcome */}
-      <div className="bg-gradient-to-r from-app-accent to-app-accentDark rounded-3xl p-5 text-white">
+      <div className="bg-app-accent rounded-3xl p-5 text-white">
         <p className="text-app-textMuted text-sm">Good day,</p>
         <h2 className="text-2xl font-bold mt-0.5">{user?.name} 👋</h2>
         <p className="text-app-textSecondary text-sm mt-1">Keep up your preparation streak!</p>
@@ -67,7 +67,7 @@ export default function HomePage() {
       <div className="space-y-3">
         <button
           onClick={() => navigate('/adaptive')}
-          className="w-full bg-gradient-to-r from-app-accent to-emerald-600 text-white rounded-3xl p-5 flex items-center gap-4 hover:opacity-90 transition-all shadow-lg"
+          className="w-full bg-app-accent text-white rounded-3xl p-5 flex items-center gap-4 hover:opacity-90 transition-all shadow-lg"
         >
           <div className="bg-white/20 rounded-xl p-3">
             <Brain size={28} />
