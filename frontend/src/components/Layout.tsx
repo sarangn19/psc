@@ -32,34 +32,34 @@ export default function Layout() {
     <div className="min-h-screen flex flex-col bg-gray-50">
       {/* Header */}
       <header className="bg-green-700 text-white px-3 py-2 shadow-md">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-xl">🏛️</span>
-            <h1 className="font-bold text-base leading-none">Kerala PSC Prep</h1>
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 shrink-0">
+            <span className="text-lg">🏛️</span>
+            <h1 className="font-bold text-sm leading-tight whitespace-nowrap">Kerala PSC Prep</h1>
           </div>
 
           {/* Quick nav icons */}
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-0.5">
             <button
               onClick={handleTravelToggle}
-              title={travelMode ? 'Travel Mode ON — pen & paper questions hidden' : 'Travel Mode OFF — tap to enable'}
-              className={`p-2 rounded-lg transition-colors ${travelMode ? 'bg-yellow-400 text-green-900' : 'hover:bg-green-600 text-green-100 hover:text-white'}`}
+              title={travelMode ? 'Travel Mode ON' : 'Travel Mode OFF'}
+              className={`p-1.5 rounded-lg transition-colors ${travelMode ? 'bg-yellow-400 text-green-900' : 'hover:bg-green-600 text-green-100 hover:text-white'}`}
             >
-              {travelMode ? <Gamepad2 size={18} /> : <Plane size={18} />}
+              {travelMode ? <Gamepad2 size={17} /> : <Plane size={17} />}
             </button>
             {quickLinks.map(({ to, icon: Icon, label }) => (
               <button
                 key={to}
                 onClick={() => navigate(to)}
                 title={label}
-                className="p-2 rounded-lg hover:bg-green-600 transition-colors text-green-100 hover:text-white"
+                className="p-1.5 rounded-lg hover:bg-green-600 transition-colors text-green-100 hover:text-white"
               >
-                <Icon size={18} />
+                <Icon size={17} />
               </button>
             ))}
-            <div className="w-px h-5 bg-green-500 mx-1" />
-            <button onClick={handleLogout} className="p-2 rounded-lg hover:bg-green-600 transition-colors text-green-100 hover:text-white" title="Logout">
-              <LogOut size={18} />
+            <div className="w-px h-4 bg-green-500 mx-0.5" />
+            <button onClick={handleLogout} className="p-1.5 rounded-lg hover:bg-green-600 transition-colors text-green-100 hover:text-white" title="Logout">
+              <LogOut size={17} />
             </button>
           </div>
         </div>
