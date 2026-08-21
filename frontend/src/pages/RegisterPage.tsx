@@ -26,21 +26,21 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-700 to-green-900 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
+    <div className="min-h-screen bg-app-bg flex items-center justify-center p-4">
+      <div className="bg-app-card rounded-3xl shadow-2xl w-full max-w-md p-8 border border-app-border">
         <div className="text-center mb-8">
           <span className="text-5xl">🏛️</span>
-          <h1 className="text-2xl font-bold text-gray-900 mt-3">Create Account</h1>
-          <p className="text-gray-500 mt-1">Start your Kerala PSC preparation</p>
+          <h1 className="text-2xl font-bold text-app-text mt-3">Create Account</h1>
+          <p className="text-app-textMuted mt-1">Start your Kerala PSC preparation</p>
         </div>
 
         {error && (
-          <div className="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-lg mb-4">{error}</div>
+          <div className="bg-rose-500/10 text-rose-400 text-sm px-4 py-3 rounded-2xl mb-4 border border-rose-500/20">{error}</div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <label className="block text-sm font-medium text-app-textSecondary mb-1">Full Name</label>
             <input
               type="text"
               value={name}
@@ -52,7 +52,7 @@ export default function RegisterPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label className="block text-sm font-medium text-app-textSecondary mb-1">Email</label>
             <input
               type="email"
               value={email}
@@ -63,7 +63,7 @@ export default function RegisterPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <label className="block text-sm font-medium text-app-textSecondary mb-1">Password</label>
             <input
               type="password"
               value={password}
@@ -74,14 +74,14 @@ export default function RegisterPage() {
               minLength={6}
             />
           </div>
-          <button type="submit" disabled={loading} className="btn-primary w-full py-3 text-base">
+          <button type="submit" disabled={loading} className="btn-primary w-full py-3.5 text-base">
             {loading ? 'Creating account...' : 'Create Account'}
           </button>
         </form>
 
-        <p className="text-center text-sm text-gray-500 mt-6">
+        <p className="text-center text-sm text-app-textMuted mt-6">
           Already have an account?{' '}
-          <Link to="/login" className="text-green-600 font-medium hover:underline">
+          <Link to="/login" className="text-app-accentLight font-medium hover:underline">
             Sign in
           </Link>
         </p>

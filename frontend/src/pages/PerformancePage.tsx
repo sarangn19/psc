@@ -14,10 +14,10 @@ interface ChapterPerformance {
 }
 
 const ZONE_CONFIG = {
-  STRONG: { color: 'text-green-600', bg: 'bg-green-50', border: 'border-green-200', icon: TrendingUp, label: 'Strong' },
-  MEDIUM: { color: 'text-yellow-600', bg: 'bg-yellow-50', border: 'border-yellow-200', icon: Minus, label: 'Medium' },
-  WEAK: { color: 'text-red-600', bg: 'bg-red-50', border: 'border-red-200', icon: TrendingDown, label: 'Weak' },
-  UNTESTED: { color: 'text-gray-400', bg: 'bg-gray-50', border: 'border-gray-200', icon: Minus, label: 'Untested' },
+  STRONG: { color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/30', icon: TrendingUp, label: 'Strong' },
+  MEDIUM: { color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/30', icon: Minus, label: 'Medium' },
+  WEAK: { color: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/30', icon: TrendingDown, label: 'Weak' },
+  UNTESTED: { color: 'text-app-textMuted', bg: 'bg-app-surface', border: 'border-app-border', icon: Minus, label: 'Untested' },
 };
 
 export default function PerformancePage() {
@@ -39,7 +39,6 @@ export default function PerformancePage() {
   const weak = performance.filter((p) => p.zone === 'WEAK');
   const medium = performance.filter((p) => p.zone === 'MEDIUM');
   const strong = performance.filter((p) => p.zone === 'STRONG');
-  const untested = performance.filter((p) => p.zone === 'UNTESTED');
 
   const filtered = activeZone === 'ALL' ? performance.filter((p) => p.zone !== 'UNTESTED') : performance.filter((p) => p.zone === activeZone);
 
@@ -57,8 +56,8 @@ export default function PerformancePage() {
   return (
     <div className="p-4 max-w-lg mx-auto space-y-5">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">Your Performance</h2>
-        <p className="text-gray-500 text-sm">Track your progress and identify improvement areas</p>
+        <h2 className="text-xl font-bold text-app-text">Your Performance</h2>
+        <p className="text-app-textMuted text-sm">Track your progress and identify improvement areas</p>
       </div>
 
       {/* Zone Summary Cards */}
@@ -80,7 +79,7 @@ export default function PerformancePage() {
             >
               <Icon size={18} className={`${cfg.color} mx-auto mb-1`} />
               <p className={`text-xl font-bold ${cfg.color}`}>{count}</p>
-              <p className="text-xs text-gray-500">{cfg.label}</p>
+              <p className="text-xs text-app-textMuted">{cfg.label}</p>
             </button>
           );
         })}
@@ -89,18 +88,18 @@ export default function PerformancePage() {
       {/* Bar Chart */}
       {chartData.length > 0 && (
         <div className="card">
-          <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-            <BarChart2 size={18} className="text-green-600" />
+          <h3 className="font-semibold text-app-text mb-4 flex items-center gap-2">
+            <BarChart2 size={18} className="text-app-accentLight" />
             Chapter Accuracy
           </h3>
           <ResponsiveContainer width="100%" height={180}>
             <BarChart data={chartData} margin={{ top: 0, right: 0, bottom: 20, left: -20 }}>
-              <XAxis dataKey="name" tick={{ fontSize: 10 }} angle={-30} textAnchor="end" />
-              <YAxis tick={{ fontSize: 10 }} domain={[0, 100]} />
-              <Tooltip formatter={(v) => `${v}%`} />
+              <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#94a3b8' }} angle={-30} textAnchor="end" />
+              <YAxis tick={{ fontSize: 10, fill: '#94a3b8' }} domain={[0, 100]} />
+              <Tooltip formatter={(v) => `${v}%`} contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 12 }} />
               <Bar dataKey="accuracy" radius={[4, 4, 0, 0]}>
                 {chartData.map((entry, i) => (
-                  <Cell key={i} fill={entry.accuracy >= 70 ? '#22c55e' : entry.accuracy >= 40 ? '#eab308' : '#ef4444'} />
+                  <Cell key={i} fill={entry.accuracy >= 70 ? '#34d399' : entry.accuracy >= 40 ? '#fbbf24' : '#f87171'} />
                 ))}
               </Bar>
             </BarChart>
@@ -111,13 +110,13 @@ export default function PerformancePage() {
       {/* Session Score Trend */}
       {sessionChartData.length > 0 && (
         <div className="card">
-          <h3 className="font-semibold text-gray-900 mb-4">Session Score Trend</h3>
+          <h3 className="font-semibold text-app-text mb-4">Session Score Trend</h3>
           <ResponsiveContainer width="100%" height={140}>
             <BarChart data={sessionChartData}>
-              <XAxis dataKey="name" tick={{ fontSize: 11 }} />
-              <YAxis tick={{ fontSize: 11 }} domain={[0, 100]} />
-              <Tooltip formatter={(v) => `${v}%`} />
-              <Bar dataKey="score" fill="#22c55e" radius={[4, 4, 0, 0]} />
+              <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#94a3b8' }} />
+              <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} domain={[0, 100]} />
+              <Tooltip formatter={(v) => `${v}%`} contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 12 }} />
+              <Bar dataKey="score" fill="#8b5cf6" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -126,8 +125,8 @@ export default function PerformancePage() {
       {/* Chapter List */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="font-semibold text-gray-900">Chapters</h3>
-          <button onClick={() => setActiveZone('ALL')} className="text-xs text-green-600">Show All</button>
+          <h3 className="font-semibold text-app-text">Chapters</h3>
+          <button onClick={() => setActiveZone('ALL')} className="text-xs text-app-accentLight">Show All</button>
         </div>
         <div className="space-y-2">
           {filtered.map((p) => {
@@ -137,18 +136,18 @@ export default function PerformancePage() {
               <div key={p.chapterId} className={`flex items-center gap-3 p-3 rounded-xl border ${cfg.bg} ${cfg.border}`}>
                 <Icon size={16} className={cfg.color} />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate">{p.name}</p>
-                  <p className="text-xs text-gray-500">{p.subjectName} · {p.total} questions</p>
+                  <p className="text-sm font-medium text-app-text truncate">{p.name}</p>
+                  <p className="text-xs text-app-textMuted">{p.subjectName} · {p.total} questions</p>
                 </div>
                 <div className="text-right">
                   <p className={`font-bold text-sm ${cfg.color}`}>{p.accuracy}%</p>
-                  <p className="text-xs text-gray-400">{p.correct}/{p.total}</p>
+                  <p className="text-xs text-app-textMuted">{p.correct}/{p.total}</p>
                 </div>
               </div>
             );
           })}
           {filtered.length === 0 && (
-            <div className="text-center py-8 text-gray-400">
+            <div className="text-center py-8 text-app-textMuted">
               <BarChart2 size={32} className="mx-auto mb-2 opacity-40" />
               <p className="text-sm">Practice more questions to see performance</p>
             </div>

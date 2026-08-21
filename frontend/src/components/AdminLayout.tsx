@@ -15,15 +15,15 @@ export default function AdminLayout() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex bg-app-bg">
       {/* Sidebar */}
-      <aside className="w-56 bg-gray-900 text-white flex flex-col">
-        <div className="p-5 border-b border-gray-700">
+      <aside className="w-56 bg-app-card border-r border-app-border flex flex-col">
+        <div className="p-5 border-b border-app-border">
           <div className="flex items-center gap-2">
             <span className="text-2xl">🏛️</span>
             <div>
-              <h1 className="font-bold text-sm">Kerala PSC</h1>
-              <p className="text-gray-400 text-xs">Admin Panel</p>
+              <h1 className="font-bold text-sm text-app-text">Kerala PSC</h1>
+              <p className="text-app-textMuted text-xs">Admin Panel</p>
             </div>
           </div>
         </div>
@@ -34,8 +34,8 @@ export default function AdminLayout() {
               to={to}
               end={to === '/admin'}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
-                  isActive ? 'bg-green-600 text-white' : 'text-gray-300 hover:bg-gray-800'
+                `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors ${
+                  isActive ? 'bg-app-accent text-white' : 'text-app-textSecondary hover:bg-app-surface'
                 }`
               }
             >
@@ -44,10 +44,10 @@ export default function AdminLayout() {
             </NavLink>
           ))}
         </nav>
-        <div className="p-3 border-t border-gray-700">
+        <div className="p-3 border-t border-app-border">
           <button
             onClick={() => { logout(); navigate('/login'); }}
-            className="flex items-center gap-3 px-3 py-2.5 w-full text-gray-300 hover:bg-gray-800 rounded-lg text-sm transition-colors"
+            className="flex items-center gap-3 px-3 py-2.5 w-full text-app-textSecondary hover:bg-app-surface rounded-xl text-sm transition-colors"
           >
             <LogOut size={16} />
             Logout
@@ -56,7 +56,7 @@ export default function AdminLayout() {
       </aside>
 
       {/* Content */}
-      <main className="flex-1 overflow-auto bg-gray-50">
+      <main className="flex-1 overflow-auto custom-scrollbar">
         <Outlet />
       </main>
     </div>

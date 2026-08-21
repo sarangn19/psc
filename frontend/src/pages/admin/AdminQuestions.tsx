@@ -14,11 +14,11 @@ interface QuestionItem {
 
 const LEVELS = ['', 'SUBJECT', 'DOMAIN', 'TOPIC', 'CONCEPT'];
 const LEVEL_COLORS: Record<string, string> = {
-  EXAM: 'bg-purple-100 text-purple-700', SUBJECT: 'bg-blue-100 text-blue-700',
-  DOMAIN: 'bg-cyan-100 text-cyan-700', TOPIC: 'bg-green-100 text-green-700', CONCEPT: 'bg-amber-100 text-amber-700',
+  EXAM: 'bg-violet-500/10 text-violet-400', SUBJECT: 'bg-blue-500/10 text-blue-400',
+  DOMAIN: 'bg-cyan-500/10 text-cyan-400', TOPIC: 'bg-emerald-500/10 text-emerald-400', CONCEPT: 'bg-amber-500/10 text-amber-400',
 };
 const DIFF_COLORS: Record<string, string> = {
-  EASY: 'bg-green-100 text-green-700', MEDIUM: 'bg-amber-100 text-amber-700', HARD: 'bg-red-100 text-red-700',
+  EASY: 'bg-emerald-500/10 text-emerald-400', MEDIUM: 'bg-amber-500/10 text-amber-400', HARD: 'bg-rose-500/10 text-rose-400',
 };
 
 function ConceptPicker({ value, onSelect }: { value: { id: number | null; label: string }; onSelect: (id: number | null, label: string) => void }) {
@@ -42,17 +42,17 @@ function ConceptPicker({ value, onSelect }: { value: { id: number | null; label:
           onChange={(e) => { setQuery(e.target.value); setTyping(true); }}
           onFocus={() => setTyping(true)}
           onBlur={() => setTimeout(() => setTyping(false), 150)}
-          className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="input w-full"
           placeholder="Search taxonomy concept, e.g. Travancore, Constitution..."
         />
         {results.length > 0 && (
-          <ul className="absolute z-20 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-48 overflow-y-auto">
+          <ul className="absolute z-20 w-full mt-1 bg-app-card border border-app-border rounded-xl shadow-xl max-h-48 overflow-y-auto custom-scrollbar">
             {results.map((n) => (
               <li key={n.id}>
                 <button type="button" onMouseDown={() => { onSelect(n.id, `${n.nameEnglish} (${n.level})`); setTyping(false); setQuery(''); setResults([]); }}
-                  className="w-full text-left px-3 py-2 text-sm hover:bg-green-50">
+                  className="w-full text-left px-3 py-2 text-sm hover:bg-app-surface text-app-text">
                   <span className="font-medium">{n.nameEnglish}</span>
-                  <span className="ml-2 text-xs text-gray-400 uppercase">{n.level}</span>
+                  <span className="ml-2 text-xs text-app-textMuted uppercase">{n.level}</span>
                 </button>
               </li>
             ))}
@@ -60,9 +60,9 @@ function ConceptPicker({ value, onSelect }: { value: { id: number | null; label:
         )}
       </div>
       <div className="flex items-center gap-2 mt-1">
-        <p className="text-xs text-gray-400">Concept maps the question to the knowledge graph.</p>
+        <p className="text-xs text-app-textMuted">Concept maps the question to the knowledge graph.</p>
         {value.id != null && (
-          <button type="button" onClick={() => onSelect(null, '')} className="text-xs text-red-500 hover:underline">clear</button>
+          <button type="button" onClick={() => onSelect(null, '')} className="text-xs text-rose-400 hover:underline">clear</button>
         )}
       </div>
     </div>
@@ -118,16 +118,16 @@ function QuestionForm({ chapters, editing, onClose, onSaved }: {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        <div className="p-5 border-b flex items-center justify-between sticky top-0 bg-white">
-          <h2 className="font-bold text-lg">{editing ? 'Edit Question' : 'Add New Question'}</h2>
-          <button onClick={onClose}><X size={20} /></button>
+    <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+      <div className="bg-app-card rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
+        <div className="p-5 border-b border-app-border flex items-center justify-between sticky top-0 bg-app-card">
+          <h2 className="font-bold text-lg text-app-text">{editing ? 'Edit Question' : 'Add New Question'}</h2>
+          <button onClick={onClose} className="text-app-textMuted hover:text-app-text"><X size={20} /></button>
         </div>
         <form onSubmit={submit} className="p-5 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Chapter</label>
-            <select value={form.chapterId} onChange={(e) => setForm({ ...form, chapterId: e.target.value })} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500" required>
+            <label className="block text-sm font-medium text-app-textSecondary mb-1">Chapter</label>
+            <select value={form.chapterId} onChange={(e) => setForm({ ...form, chapterId: e.target.value })} className="input w-full" required>
               <option value="">Select chapter...</option>
               {chapters.map((c) => (
                 <option key={c.id} value={c.id}>{c.subject.exam.name} › {c.subject.name} › {c.name}</option>
@@ -136,53 +136,53 @@ function QuestionForm({ chapters, editing, onClose, onSaved }: {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Question Text</label>
+            <label className="block text-sm font-medium text-app-textSecondary mb-1">Question Text</label>
             <textarea value={form.text} onChange={(e) => setForm({ ...form, text: e.target.value })} rows={3} required
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500" />
+              className="input w-full" />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             {(['A', 'B', 'C', 'D'] as const).map((letter, idx) => (
               <div key={letter}>
-                <label className="block text-xs font-medium text-gray-600 mb-1">Option {letter}</label>
+                <label className="block text-xs font-medium text-app-textMuted mb-1">Option {letter}</label>
                 <input value={form[`option${letter}` as 'optionA']} onChange={(e) => setForm({ ...form, [`option${letter}`]: e.target.value })}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500" required />
+                  className="input w-full" required />
               </div>
             ))}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Correct Answer</label>
+            <label className="block text-sm font-medium text-app-textSecondary mb-1">Correct Answer</label>
             <select value={form.correctOption} onChange={(e) => setForm({ ...form, correctOption: e.target.value })}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+              className="input w-full">
               {['A (0)', 'B (1)', 'C (2)', 'D (3)'].map((o, i) => <option key={i} value={i}>{o}</option>)}
             </select>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Concept (taxonomy)</label>
+            <label className="block text-sm font-medium text-app-textSecondary mb-1">Concept (taxonomy)</label>
             <ConceptPicker value={form.concept} onSelect={(id, label) => setForm({ ...form, concept: { id, label } })} />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Difficulty</label>
+              <label className="block text-sm font-medium text-app-textSecondary mb-1">Difficulty</label>
               <select value={form.difficulty} onChange={(e) => setForm({ ...form, difficulty: e.target.value })}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500">
+                className="input w-full">
                 {['EASY', 'MEDIUM', 'HARD'].map((d) => <option key={d} value={d}>{d}</option>)}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Tags (comma separated)</label>
+              <label className="block text-sm font-medium text-app-textSecondary mb-1">Tags (comma separated)</label>
               <input value={form.tags} onChange={(e) => setForm({ ...form, tags: e.target.value })}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="history, kerala" />
+                className="input w-full" placeholder="history, kerala" />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Explanation</label>
+            <label className="block text-sm font-medium text-app-textSecondary mb-1">Explanation</label>
             <textarea value={form.explanation} onChange={(e) => setForm({ ...form, explanation: e.target.value })} rows={2}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500" />
+              className="input w-full" />
           </div>
 
           <div className="flex gap-3 pt-2">
@@ -256,47 +256,46 @@ export default function AdminQuestions() {
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
   return (
-    <div className="p-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="p-6 max-w-6xl mx-auto space-y-5">
+      <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Question Bank</h1>
-          <p className="text-gray-500 text-sm mt-1">Review, edit, flag or delete questions and their taxonomy mapping</p>
+          <h1 className="text-2xl font-bold text-app-text">Question Bank</h1>
+          <p className="text-app-textMuted text-sm mt-1">Review, edit, flag or delete questions and their taxonomy mapping</p>
         </div>
-        <button onClick={() => { setEditing(null); setShowForm(true); }} className="flex items-center gap-2 bg-green-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-green-700 transition-colors">
+        <button onClick={() => { setEditing(null); setShowForm(true); }} className="btn-primary flex items-center gap-2">
           <Plus size={16} /> Add Question
         </button>
       </div>
 
-      {/* Filters */}
-      <div className="bg-white rounded-xl border border-gray-200 p-4 mb-4 flex flex-wrap items-center gap-3">
+      <div className="card p-4 flex flex-wrap items-center gap-3">
         <div className="relative flex-1 min-w-[220px]">
-          <Search size={16} className="absolute left-3 top-2.5 text-gray-400" />
+          <Search size={16} className="absolute left-3 top-2.5 text-app-textMuted" />
           <input value={search} onChange={changeFilter(setSearch)} placeholder="Search text or explanation..."
-            className="w-full border border-gray-300 rounded-lg pl-9 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500" />
+            className="input w-full pl-9" />
         </div>
-        <select value={chapterId} onChange={changeFilter(setChapterId)} className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white">
+        <select value={chapterId} onChange={changeFilter(setChapterId)} className="input">
           <option value="">All chapters</option>
           {chapters.map((c) => <option key={c.id} value={c.id}>{c.subject.exam.name} › {c.subject.name} › {c.name}</option>)}
         </select>
-        <select value={level} onChange={changeFilter(setLevel)} className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white">
+        <select value={level} onChange={changeFilter(setLevel)} className="input">
           <option value="">All taxonomy levels</option>
           {LEVELS.filter(Boolean).map((l) => <option key={l} value={l}>{l}</option>)}
         </select>
-        <select value={status} onChange={changeFilter(setStatus)} className="border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white">
+        <select value={status} onChange={changeFilter(setStatus)} className="input">
           <option value="">All status</option>
           <option value="active">Active</option>
           <option value="inactive">Flagged / hidden</option>
         </select>
       </div>
 
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-        <div className="px-4 py-3 border-b text-sm text-gray-500">
-          {loading ? 'Loading...' : `${total} questions`} {level === 'SUBJECT' && <span className="ml-2 text-xs text-blue-600">(subject-level only — needs taxonomy review)</span>}
+      <div className="card overflow-hidden">
+        <div className="px-4 py-3 border-b border-app-border text-sm text-app-textMuted">
+          {loading ? 'Loading...' : `${total} questions`} {level === 'SUBJECT' && <span className="ml-2 text-xs text-blue-400">(subject-level only — needs taxonomy review)</span>}
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-xs uppercase text-gray-400 border-b bg-gray-50">
+              <tr className="text-left text-xs uppercase text-app-textMuted border-b border-app-border bg-app-surface">
                 <th className="px-4 py-3 font-medium">Question</th>
                 <th className="px-4 py-3 font-medium">Chapter</th>
                 <th className="px-4 py-3 font-medium">Taxonomy / Concept</th>
@@ -307,61 +306,61 @@ export default function AdminQuestions() {
             </thead>
             <tbody>
               {items.map((q) => (
-                <tr key={q.id} className="border-b last:border-0 hover:bg-gray-50 align-top">
+                <tr key={q.id} className="border-b border-app-border last:border-0 hover:bg-app-surface/50 align-top">
                   <td className="px-4 py-3 max-w-md">
-                    <div className="line-clamp-2 text-gray-900">{q.text}</div>
-                    <div className="mt-1 text-xs text-gray-400 flex gap-2 flex-wrap">
+                    <div className="line-clamp-2 text-app-text">{q.text}</div>
+                    <div className="mt-1 text-xs flex gap-2 flex-wrap">
                       <span className={`px-1.5 py-0.5 rounded ${DIFF_COLORS[q.difficulty] || ''}`}>{q.difficulty}</span>
-                      {(q.tags || []).slice(0, 4).map((t) => <span key={t} className="text-gray-400">#{t}</span>)}
+                      {(q.tags || []).slice(0, 4).map((t) => <span key={t} className="text-app-textMuted">#{t}</span>)}
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-gray-600">{q.chapter.exam} › {q.chapter.subject}<div className="text-gray-400 text-xs">{q.chapter.name}</div></td>
+                  <td className="px-4 py-3 text-app-textSecondary">{q.chapter.exam} › {q.chapter.subject}<div className="text-app-textMuted text-xs">{q.chapter.name}</div></td>
                   <td className="px-4 py-3">
                     {q.concept ? (
                       <>
                         <span className={`inline-block px-1.5 py-0.5 rounded text-[10px] uppercase ${LEVEL_COLORS[q.concept.level] || ''}`}>{q.concept.level}</span>{' '}
-                        <span className="text-gray-900 font-medium">{q.concept.nameEnglish}</span>
-                        <div className="text-xs text-gray-400 mt-0.5">
+                        <span className="text-app-text font-medium">{q.concept.nameEnglish}</span>
+                        <div className="text-xs text-app-textMuted mt-0.5">
                           {q.conceptPath.slice(0, -1).map((p) => p.nameEnglish).join(' › ')}
                         </div>
                       </>
-                    ) : <span className="text-gray-300">— no concept —</span>}
+                    ) : <span className="text-app-textMuted opacity-40">— no concept —</span>}
                   </td>
-                  <td className="px-4 py-3 text-gray-700">
-                    <span className="font-semibold text-green-600">{String.fromCharCode(65 + q.correctOption)}</span>
-                    <span className="text-gray-300"> · {String.fromCharCode(65 + q.correctOption)}. {q.options[q.correctOption]?.slice(0, 40)}</span>
+                  <td className="px-4 py-3 text-app-textSecondary">
+                    <span className="font-semibold text-emerald-400">{String.fromCharCode(65 + q.correctOption)}</span>
+                    <span className="text-app-textMuted"> · {String.fromCharCode(65 + q.correctOption)}. {q.options[q.correctOption]?.slice(0, 40)}</span>
                   </td>
                   <td className="px-4 py-3">
                     {q.isActive
-                      ? <span className="px-2 py-0.5 rounded-full text-xs bg-green-100 text-green-700">Active</span>
-                      : <span className="px-2 py-0.5 rounded-full text-xs bg-red-100 text-red-700">Flagged</span>}
+                      ? <span className="px-2 py-0.5 rounded-full text-xs bg-emerald-500/10 text-emerald-400">Active</span>
+                      : <span className="px-2 py-0.5 rounded-full text-xs bg-rose-500/10 text-rose-400">Flagged</span>}
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex justify-end gap-1">
                       <button onClick={() => { setEditing(q); setShowForm(true); }} title="Edit"
-                        className="p-2 rounded-lg text-gray-500 hover:bg-blue-50 hover:text-blue-600 transition-colors"><Pencil size={16} /></button>
+                        className="p-2 rounded-xl text-app-textMuted hover:bg-blue-500/10 hover:text-blue-400 transition-colors"><Pencil size={16} /></button>
                       <button onClick={() => toggleActive(q)} title={q.isActive ? 'Flag / hide' : 'Unflag / show'}
-                        className="p-2 rounded-lg text-gray-500 hover:bg-amber-50 hover:text-amber-600 transition-colors"><Flag size={16} /></button>
+                        className="p-2 rounded-xl text-app-textMuted hover:bg-amber-500/10 hover:text-amber-400 transition-colors"><Flag size={16} /></button>
                       <button onClick={() => remove(q)} title="Delete"
-                        className="p-2 rounded-lg text-gray-500 hover:bg-red-50 hover:text-red-600 transition-colors"><Trash2 size={16} /></button>
+                        className="p-2 rounded-xl text-app-textMuted hover:bg-rose-500/10 hover:text-rose-400 transition-colors"><Trash2 size={16} /></button>
                     </div>
                   </td>
                 </tr>
               ))}
               {!loading && items.length === 0 && (
-                <tr><td colSpan={6} className="px-4 py-10 text-center text-gray-400">No questions match these filters.</td></tr>
+                <tr><td colSpan={6} className="px-4 py-10 text-center text-app-textMuted">No questions match these filters.</td></tr>
               )}
             </tbody>
           </table>
         </div>
 
-        <div className="px-4 py-3 border-t flex items-center justify-between text-sm text-gray-500">
+        <div className="px-4 py-3 border-t border-app-border flex items-center justify-between text-sm text-app-textMuted">
           <span>Page {page} of {totalPages}</span>
           <div className="flex gap-2">
             <button onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page <= 1}
-              className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-40"><ChevronLeft size={15} /> Prev</button>
+              className="flex items-center gap-1 px-3 py-1.5 rounded-xl border border-app-border hover:bg-app-surface disabled:opacity-40"><ChevronLeft size={15} /> Prev</button>
             <button onClick={() => setPage((p) => Math.min(totalPages, p + 1))} disabled={page >= totalPages}
-              className="flex items-center gap-1 px-3 py-1.5 rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-40">Next <ChevronRight size={15} /></button>
+              className="flex items-center gap-1 px-3 py-1.5 rounded-xl border border-app-border hover:bg-app-surface disabled:opacity-40">Next <ChevronRight size={15} /></button>
           </div>
         </div>
       </div>

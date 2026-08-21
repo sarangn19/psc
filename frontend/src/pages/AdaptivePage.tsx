@@ -39,17 +39,12 @@ interface Question {
   concept: { id: number; level: string; nameEnglish: string } | null;
 }
 
-const ZONE_COLORS: Record<string, string> = {
-  STRONG: 'bg-green-100 text-green-700',
-  MEDIUM: 'bg-yellow-100 text-yellow-700',
-  WEAK: 'bg-red-100 text-red-700',
-  UNTESTED: 'bg-gray-100 text-gray-600',
-};
+const LETTER_LABELS = ['A', 'B', 'C', 'D'];
 
 const DIFFICULTY_COLORS: Record<string, string> = {
-  EASY: 'text-green-600',
-  MEDIUM: 'text-yellow-600',
-  HARD: 'text-red-600',
+  EASY: 'text-emerald-400',
+  MEDIUM: 'text-amber-400',
+  HARD: 'text-rose-400',
 };
 
 export default function AdaptivePage() {
@@ -156,14 +151,14 @@ export default function AdaptivePage() {
     const fact = LOADING_FACTS[factIndex % LOADING_FACTS.length];
     return (
       <div className="p-4 max-w-lg mx-auto flex flex-col items-center justify-center min-h-[70vh] text-center">
-        <Loader2 size={32} className="animate-spin text-green-600 mb-4" />
-        <p className="text-sm text-gray-500 mb-4">Finding your first question...</p>
+        <Loader2 size={32} className="animate-spin text-app-accent mb-4" />
+        <p className="text-sm text-app-textMuted mb-4">Finding your first question...</p>
         <div className="card w-full text-left">
           <div className="flex items-start gap-2">
-            <Lightbulb size={16} className="text-amber-500 mt-0.5 shrink-0" />
+            <Lightbulb size={16} className="text-app-accentLight mt-0.5 shrink-0" />
             <div>
-              <p className="text-xs font-semibold text-amber-600 mb-0.5">{fact.title}</p>
-              <p className="text-xs text-gray-600 leading-relaxed">{fact.text}</p>
+              <p className="text-xs font-semibold text-app-accentLight mb-0.5">{fact.title}</p>
+              <p className="text-xs text-app-textMuted leading-relaxed">{fact.text}</p>
             </div>
           </div>
         </div>
@@ -176,13 +171,13 @@ export default function AdaptivePage() {
     const pct = totalQuestions > 0 ? Math.round((sessionScore / totalQuestions) * 100) : 0;
     return (
       <div className="p-4 max-w-lg mx-auto flex flex-col items-center justify-center min-h-[70vh] text-center space-y-4">
-        <Trophy size={48} className={pct >= 70 ? 'text-green-500' : pct >= 40 ? 'text-yellow-500' : 'text-red-400'} />
-        <h2 className="text-2xl font-bold">Session Complete!</h2>
+        <Trophy size={48} className={pct >= 70 ? 'text-emerald-400' : pct >= 40 ? 'text-amber-400' : 'text-rose-400'} />
+        <h2 className="text-2xl font-bold text-app-text">Session Complete!</h2>
         <div className="card w-full text-center py-6">
-          <p className="text-4xl font-bold text-green-600">{pct}%</p>
-          <p className="text-gray-500 text-sm mt-1">{sessionScore}/{totalQuestions} correct</p>
+          <p className="text-4xl font-bold text-app-accentLight">{pct}%</p>
+          <p className="text-app-textMuted text-sm mt-1">{sessionScore}/{totalQuestions} correct</p>
         </div>
-        <p className="text-xs text-gray-400 max-w-xs">Your performance has been recorded. Next session will focus on your weak areas.</p>
+        <p className="text-xs text-app-textMuted max-w-xs">Your performance has been recorded. Next session will focus on your weak areas.</p>
         <button onClick={startSession} className="btn-primary px-8 py-3 flex items-center gap-2">
           <RotateCcw size={16} /> New Session
         </button>
@@ -195,14 +190,14 @@ export default function AdaptivePage() {
     const fact = LOADING_FACTS[factIndex % LOADING_FACTS.length];
     return (
       <div className="p-4 max-w-lg mx-auto flex flex-col items-center justify-center min-h-[70vh] text-center">
-        <Loader2 size={32} className="animate-spin text-green-600 mb-4" />
-        <p className="text-sm text-gray-500 mb-4">Loading next question...</p>
+        <Loader2 size={32} className="animate-spin text-app-accent mb-4" />
+        <p className="text-sm text-app-textMuted mb-4">Loading next question...</p>
         <div className="card w-full text-left">
           <div className="flex items-start gap-2">
-            <Lightbulb size={16} className="text-amber-500 mt-0.5 shrink-0" />
+            <Lightbulb size={16} className="text-app-accentLight mt-0.5 shrink-0" />
             <div>
-              <p className="text-xs font-semibold text-amber-600 mb-0.5">{fact.title}</p>
-              <p className="text-xs text-gray-600 leading-relaxed">{fact.text}</p>
+              <p className="text-xs font-semibold text-app-accentLight mb-0.5">{fact.title}</p>
+              <p className="text-xs text-app-textMuted leading-relaxed">{fact.text}</p>
             </div>
           </div>
         </div>
@@ -210,81 +205,126 @@ export default function AdaptivePage() {
     );
   }
 
+  const progressPercent = totalQuestions > 0 ? Math.min((questionNumber / Math.max(totalQuestions, 1)) * 100, 100) : 10;
+
   // Question view
   return (
-    <div className="p-4 max-w-lg mx-auto space-y-4">
-      {/* Question card */}
-      <div className="card relative">
-        {loadingNext && (
-          <div className="absolute inset-0 bg-white/90 rounded-xl z-10 flex flex-col items-center justify-center gap-2 p-4">
-            <Loader2 size={24} className="animate-spin text-green-600" />
-            <p className="text-sm text-gray-500">Loading...</p>
-          </div>
-        )}
-        <div className="flex items-center gap-2 mb-2">
-          <span className={`ml-auto text-xs font-medium shrink-0 ${DIFFICULTY_COLORS[question.difficulty]}`}>
-            {question.difficulty}
-          </span>
+    <div className="max-w-lg mx-auto flex flex-col h-full">
+      {/* Question Header */}
+      <div className="px-5 pt-4 pb-6 bg-[#13072b] text-white flex flex-col relative border-b border-violet-900/40">
+        {/* Progress bar */}
+        <div className="w-full h-1.5 rounded-full bg-violet-900/80 overflow-hidden mb-4 border border-violet-800/40">
+          <div
+            className="h-full bg-violet-400 rounded-full transition-all duration-300 ease-out shadow-sm"
+            style={{ width: `${progressPercent}%` }}
+          />
         </div>
-        <p className="text-gray-900 font-medium leading-relaxed">{question.text}</p>
-      </div>
 
-      {/* Options */}
-      <div className="space-y-2">
-        {question.options.map((option, idx) => {
-          let style = 'bg-white border-gray-200 text-gray-700 hover:border-green-300';
-          if (result) {
-            if (idx === result.correctOption) style = 'bg-green-50 border-green-500 text-green-800';
-            else if (idx === selected && !result.isCorrect) style = 'bg-red-50 border-red-400 text-red-700';
-            else style = 'bg-white border-gray-200 text-gray-400';
-          } else if (selected === idx) {
-            style = 'bg-green-50 border-green-400 text-green-800';
-          }
-
-          return (
-            <button
-              key={idx}
-              onClick={() => handleAnswer(idx)}
-              disabled={!!result || loadingNext}
-              className={`w-full text-left p-4 rounded-xl border-2 transition-all font-medium ${style} ${loadingNext ? 'opacity-50 cursor-not-allowed' : ''}`}
-            >
-              <span className="font-bold mr-2 text-sm">{['A', 'B', 'C', 'D'][idx]}.</span>
-              {option}
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Result */}
-      {result && (
-        <div className={`card border-l-4 ${result.isCorrect ? 'border-green-500 bg-green-50' : 'border-red-400 bg-red-50'}`}>
-          <div className="flex items-center gap-2 mb-1">
-            {result.isCorrect
-              ? <CheckCircle size={16} className="text-green-600" />
-              : <XCircle size={16} className="text-red-500" />}
-            <span className={`font-bold text-sm ${result.isCorrect ? 'text-green-700' : 'text-red-600'}`}>
-              {result.isCorrect ? 'Correct!' : 'Incorrect'}
-            </span>
-            {streak >= 3 && (
-              <span className="text-xs font-medium text-orange-500 ml-auto">🔥 {streak} streak</span>
-            )}
-          </div>
-          {result.explanation && (
-            <p className="text-sm text-gray-700 mt-1">{result.explanation}</p>
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-violet-300">
+            Question {questionNumber}
+          </span>
+          {streak >= 3 && (
+            <span className="text-xs font-medium text-amber-400">🔥 {streak} streak</span>
           )}
         </div>
-      )}
 
-      {/* Next button */}
-      {result && (
-        <button
-          onClick={handleNext}
-          disabled={loadingNext}
-          className="btn-primary w-full py-3 text-base"
-        >
-          {loadingNext ? 'Loading...' : 'Next Question →'}
-        </button>
-      )}
+        <h1 className="text-lg font-bold leading-snug text-white min-h-[56px]">
+          {question.text}
+        </h1>
+
+        <div className="absolute -bottom-8 right-0 w-36 h-36 bg-violet-500/15 rounded-full blur-2xl pointer-events-none" />
+      </div>
+
+      {/* Options Area */}
+      <div className="flex-1 bg-slate-50 p-5 flex flex-col overflow-y-auto custom-scrollbar">
+        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-3">
+          Select the correct answer
+        </span>
+
+        <div className="space-y-3">
+          {question.options.map((option, idx) => {
+            const isSelected = selected === idx;
+            const letter = LETTER_LABELS[idx];
+            let cardStyle = 'bg-white border-slate-200 text-slate-900 hover:border-violet-300 hover:bg-violet-50/30';
+            let badgeStyle = 'bg-slate-100 text-slate-700 border-slate-200';
+
+            if (isSelected && !result) {
+              cardStyle = 'bg-violet-50/90 border-2 border-violet-600 text-violet-950 shadow-sm';
+              badgeStyle = 'bg-violet-700 text-white border-transparent';
+            }
+
+            if (result) {
+              if (idx === result.correctOption) {
+                cardStyle = 'bg-emerald-50 border-2 border-emerald-600 text-emerald-950 shadow-sm';
+                badgeStyle = 'bg-emerald-700 text-white border-transparent';
+              } else if (isSelected && !result.isCorrect) {
+                cardStyle = 'bg-rose-50 border-2 border-rose-500 text-rose-950';
+                badgeStyle = 'bg-rose-600 text-white border-transparent';
+              } else {
+                cardStyle = 'opacity-45 bg-slate-100 border-slate-200 text-slate-500';
+              }
+            }
+
+            return (
+              <button
+                key={idx}
+                onClick={() => handleAnswer(idx)}
+                disabled={!!result || loadingNext}
+                className={`w-full text-left p-3.5 rounded-2xl flex items-center justify-between border transition-all duration-150 ${cardStyle} min-h-[56px] active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-offset-1`}
+              >
+                <div className="flex items-center gap-3.5 pr-2">
+                  <span className={`w-8 h-8 rounded-xl font-bold text-xs flex items-center justify-center border shrink-0 transition-colors ${badgeStyle}`}>
+                    {letter}
+                  </span>
+                  <span className="font-semibold text-sm tracking-tight leading-snug">
+                    {option}
+                  </span>
+                </div>
+
+                {result && idx === result.correctOption && <CheckCircle size={20} className="text-emerald-600 shrink-0" />}
+                {result && isSelected && !result.isCorrect && <XCircle size={20} className="text-rose-600 shrink-0" />}
+              </button>
+            );
+          })}
+
+          {/* Explanation */}
+          {result && result.explanation && (
+            <div className={`p-4 rounded-2xl text-xs space-y-1.5 transition-all ${
+              result.isCorrect
+                ? 'bg-violet-50 border border-violet-200 text-violet-950'
+                : 'bg-amber-50 border border-amber-200 text-amber-950'
+            }`}>
+              <div className="font-bold">
+                {result.isCorrect ? '🎉 Correct!' : '💡 Solution'}
+              </div>
+              <p className="leading-relaxed text-slate-700">
+                {result.explanation}
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Action */}
+        <div className="pt-4 mt-auto">
+          {result ? (
+            <button
+              onClick={handleNext}
+              disabled={loadingNext}
+              className="w-full py-3.5 px-4 rounded-2xl font-bold text-sm bg-violet-700 text-white flex items-center justify-center gap-1 shadow-md hover:bg-violet-800 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loadingNext ? 'Loading...' : 'Next Question →'}
+            </button>
+          ) : (
+            <button
+              disabled
+              className="w-full py-3.5 px-4 rounded-2xl font-bold text-sm bg-slate-200 text-slate-400 cursor-not-allowed"
+            >
+              Select an answer
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

@@ -7,7 +7,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login, user } = useAuthStore();
+  const { login } = useAuthStore();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -16,7 +16,6 @@ export default function LoginPage() {
     setLoading(true);
     try {
       await login(email, password);
-      // Navigate based on role (fetchMe will set it)
       setTimeout(() => {
         const u = useAuthStore.getState().user;
         navigate(u?.role === 'ADMIN' ? '/admin' : '/');
@@ -29,21 +28,21 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-700 to-green-900 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
+    <div className="min-h-screen bg-app-bg flex items-center justify-center p-4">
+      <div className="bg-app-card rounded-3xl shadow-2xl w-full max-w-md p-8 border border-app-border">
         <div className="text-center mb-8">
           <span className="text-5xl">🏛️</span>
-          <h1 className="text-2xl font-bold text-gray-900 mt-3">Kerala PSC Prep</h1>
-          <p className="text-gray-500 mt-1">Sign in to continue your preparation</p>
+          <h1 className="text-2xl font-bold text-app-text mt-3">Kerala PSC Prep</h1>
+          <p className="text-app-textMuted mt-1">Sign in to continue your preparation</p>
         </div>
 
         {error && (
-          <div className="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-lg mb-4">{error}</div>
+          <div className="bg-rose-500/10 text-rose-400 text-sm px-4 py-3 rounded-2xl mb-4 border border-rose-500/20">{error}</div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label className="block text-sm font-medium text-app-textSecondary mb-1">Email</label>
             <input
               type="email"
               value={email}
@@ -54,7 +53,7 @@ export default function LoginPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <label className="block text-sm font-medium text-app-textSecondary mb-1">Password</label>
             <input
               type="password"
               value={password}
@@ -64,20 +63,20 @@ export default function LoginPage() {
               required
             />
           </div>
-          <button type="submit" disabled={loading} className="btn-primary w-full py-3 text-base">
+          <button type="submit" disabled={loading} className="btn-primary w-full py-3.5 text-base">
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
 
-        <p className="text-center text-sm text-gray-500 mt-6">
+        <p className="text-center text-sm text-app-textMuted mt-6">
           New here?{' '}
-          <Link to="/register" className="text-green-600 font-medium hover:underline">
+          <Link to="/register" className="text-app-accentLight font-medium hover:underline">
             Create account
           </Link>
         </p>
 
-        <div className="mt-6 p-3 bg-gray-50 rounded-lg text-xs text-gray-500">
-          <p className="font-medium mb-1">Demo credentials:</p>
+        <div className="mt-6 p-3 bg-app-surface rounded-2xl text-xs text-app-textMuted border border-app-border">
+          <p className="font-medium mb-1 text-app-textSecondary">Demo credentials:</p>
           <p>Student: demo@student.com / student123</p>
           <p>Admin: admin@keralapsc.com / admin123</p>
         </div>

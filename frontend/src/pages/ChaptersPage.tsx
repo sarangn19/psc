@@ -19,7 +19,6 @@ export default function ChaptersPage() {
     ]).then(([examsRes, learnedRes]) => {
       setExams(examsRes.data);
       setLearnedIds(new Set(learnedRes.data.map((lc: any) => lc.chapterId)));
-      // Expand first exam by default
       if (examsRes.data.length > 0) {
         setExpanded(new Set([examsRes.data[0].id]));
       }
@@ -66,8 +65,8 @@ export default function ChaptersPage() {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto mb-3"></div>
-          <p className="text-gray-500">Loading chapters...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-app-accent mx-auto mb-3"></div>
+          <p className="text-app-textMuted">Loading chapters...</p>
         </div>
       </div>
     );
@@ -76,8 +75,8 @@ export default function ChaptersPage() {
   return (
     <div className="p-4 max-w-lg mx-auto space-y-4">
       <div>
-        <h2 className="text-xl font-bold text-gray-900">Your Chapters</h2>
-        <p className="text-gray-500 text-sm">Mark the chapters you want to practice now to improve adaptive learning</p>
+        <h2 className="text-xl font-bold text-app-text">Your Chapters</h2>
+        <p className="text-app-textMuted text-sm">Mark the chapters you want to practice now to improve adaptive learning</p>
       </div>
 
       {exams.map((exam) => {
@@ -89,30 +88,30 @@ export default function ChaptersPage() {
           <div key={exam.id} className="card p-0 overflow-hidden">
             <button
               onClick={() => toggleExam(exam.id)}
-              className="w-full p-4 flex items-center gap-3 hover:bg-gray-50 transition-colors"
+              className="w-full p-4 flex items-center gap-3 hover:bg-app-surface/50 transition-colors"
             >
-              <BookOpen size={18} className="text-green-600 shrink-0" />
+              <BookOpen size={18} className="text-app-accentLight shrink-0" />
               <div className="flex-1 text-left">
-                <p className="font-semibold text-gray-900 text-sm">{exam.name}</p>
+                <p className="font-semibold text-app-text text-sm">{exam.name}</p>
                 <div className="flex items-center gap-2 mt-1">
-                  <div className="flex-1 bg-gray-100 rounded-full h-1.5">
-                    <div className="bg-green-500 h-1.5 rounded-full transition-all" style={{ width: `${pct}%` }} />
+                  <div className="flex-1 bg-app-border rounded-full h-1.5">
+                    <div className="bg-app-accent h-1.5 rounded-full transition-all" style={{ width: `${pct}%` }} />
                   </div>
-                  <span className="text-xs text-gray-500">{learned}/{total}</span>
+                  <span className="text-xs text-app-textMuted">{learned}/{total}</span>
                 </div>
               </div>
-              {isExpanded ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}
+              {isExpanded ? <ChevronUp size={16} className="text-app-textMuted" /> : <ChevronDown size={16} className="text-app-textMuted" />}
             </button>
 
             {isExpanded && (
-              <div className="border-t border-gray-100">
+              <div className="border-t border-app-border">
                 {exam.subjects.map((subject) => {
                   const learnedInSubject = subject.chapters.filter((c) => learnedIds.has(c.id)).length;
                   return (
-                    <div key={subject.id} className="p-4 border-b border-gray-50 last:border-0">
+                    <div key={subject.id} className="p-4 border-b border-app-border/50 last:border-0">
                       <div className="flex items-center justify-between mb-3">
-                        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">{subject.name}</p>
-                        <span className="text-xs text-gray-400">{learnedInSubject}/{subject.chapters.length}</span>
+                        <p className="text-xs font-semibold text-app-textMuted uppercase tracking-wide">{subject.name}</p>
+                        <span className="text-xs text-app-textMuted">{learnedInSubject}/{subject.chapters.length}</span>
                       </div>
                       <div className="space-y-2">
                         {subject.chapters.map((chapter) => {
@@ -121,18 +120,18 @@ export default function ChaptersPage() {
                             <button
                               key={chapter.id}
                               onClick={() => toggleChapter(chapter.id)}
-                              className={`w-full flex items-center gap-3 p-2.5 rounded-lg transition-all ${
-                                isLearned ? 'bg-green-50 border border-green-200' : 'bg-gray-50 border border-transparent hover:bg-gray-100'
+                              className={`w-full flex items-center gap-3 p-2.5 rounded-xl transition-all ${
+                                isLearned ? 'bg-app-accent/10 border border-app-accent/30' : 'bg-app-surface border border-transparent hover:bg-app-surface/80'
                               }`}
                             >
                               {isLearned
-                                ? <CheckCircle size={18} className="text-green-500 shrink-0" />
-                                : <Circle size={18} className="text-gray-300 shrink-0" />}
-                              <span className={`text-sm font-medium ${isLearned ? 'text-green-700' : 'text-gray-600'}`}>
+                                ? <CheckCircle size={18} className="text-app-accentLight shrink-0" />
+                                : <Circle size={18} className="text-app-textMuted shrink-0" />}
+                              <span className={`text-sm font-medium ${isLearned ? 'text-app-accentLight' : 'text-app-textSecondary'}`}>
                                 {chapter.name}
                               </span>
                               {isLearned && (
-                                <span className="ml-auto text-xs text-green-600 bg-green-100 px-2 py-0.5 rounded-full">Learned</span>
+                                <span className="ml-auto text-xs text-app-accentLight bg-app-accent/20 px-2 py-0.5 rounded-full">Learned</span>
                               )}
                             </button>
                           );
@@ -148,10 +147,10 @@ export default function ChaptersPage() {
       })}
 
       {exams.length === 0 && (
-        <div className="text-center py-12 text-gray-400">
+        <div className="text-center py-12 text-app-textMuted">
           <BookOpen size={40} className="mx-auto mb-3 opacity-40" />
           <p>No exams selected.</p>
-          <a href="/onboarding" className="text-green-600 text-sm font-medium hover:underline">Set up your profile</a>
+          <a href="/onboarding" className="text-app-accentLight text-sm font-medium hover:underline">Set up your profile</a>
         </div>
       )}
     </div>

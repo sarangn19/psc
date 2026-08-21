@@ -39,26 +39,26 @@ export default function HomePage() {
   return (
     <div className="p-4 max-w-lg mx-auto space-y-5">
       {/* Welcome */}
-      <div className="bg-gradient-to-r from-green-600 to-green-700 rounded-2xl p-5 text-white">
-        <p className="text-green-200 text-sm">Good day,</p>
+      <div className="bg-gradient-to-r from-app-accent to-app-accentDark rounded-3xl p-5 text-white">
+        <p className="text-app-textMuted text-sm">Good day,</p>
         <h2 className="text-2xl font-bold mt-0.5">{user?.name} 👋</h2>
-        <p className="text-green-100 text-sm mt-1">Keep up your preparation streak!</p>
+        <p className="text-app-textSecondary text-sm mt-1">Keep up your preparation streak!</p>
       </div>
 
       {/* Quick Stats */}
       {stats && (
         <div className="grid grid-cols-3 gap-3">
           <div className="card text-center p-4">
-            <p className="text-2xl font-bold text-green-600">{stats.accuracy}%</p>
-            <p className="text-xs text-gray-500 mt-1">Accuracy</p>
+            <p className="text-2xl font-bold text-app-accentLight">{stats.accuracy}%</p>
+            <p className="text-xs text-app-textMuted mt-1">Accuracy</p>
           </div>
           <div className="card text-center p-4">
-            <p className="text-2xl font-bold text-blue-600">{stats.totalAttempts}</p>
-            <p className="text-xs text-gray-500 mt-1">Questions</p>
+            <p className="text-2xl font-bold text-emerald-400">{stats.totalAttempts}</p>
+            <p className="text-xs text-app-textMuted mt-1">Questions</p>
           </div>
           <div className="card text-center p-4">
-            <p className="text-2xl font-bold text-purple-600">{stats.learnedChapters}</p>
-            <p className="text-xs text-gray-500 mt-1">Chapters</p>
+            <p className="text-2xl font-bold text-violet-400">{stats.learnedChapters}</p>
+            <p className="text-xs text-app-textMuted mt-1">Chapters</p>
           </div>
         </div>
       )}
@@ -67,28 +67,28 @@ export default function HomePage() {
       <div className="space-y-3">
         <button
           onClick={() => navigate('/adaptive')}
-          className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-2xl p-5 flex items-center gap-4 hover:from-green-700 hover:to-emerald-700 transition-all shadow-md"
+          className="w-full bg-gradient-to-r from-app-accent to-emerald-600 text-white rounded-3xl p-5 flex items-center gap-4 hover:opacity-90 transition-all shadow-lg"
         >
           <div className="bg-white/20 rounded-xl p-3">
             <Brain size={28} />
           </div>
           <div className="text-left">
             <p className="font-bold text-lg">Adaptive Learning</p>
-            <p className="text-green-100 text-sm">AI-powered questions based on your knowledge gaps</p>
+            <p className="text-app-textSecondary text-sm">AI-powered questions based on your knowledge gaps</p>
           </div>
           <Zap size={20} className="ml-auto text-yellow-300" />
         </button>
 
         <button
           onClick={() => navigate('/chapters')}
-          className="w-full bg-white rounded-2xl p-5 flex items-center gap-4 border-2 border-gray-100 hover:border-green-200 transition-all shadow-sm"
+          className="w-full bg-app-card rounded-3xl p-5 flex items-center gap-4 border border-app-border hover:border-app-accent/50 transition-all"
         >
-          <div className="bg-green-50 rounded-xl p-3">
-            <BookOpen size={28} className="text-green-600" />
+          <div className="bg-app-accent/10 rounded-xl p-3">
+            <BookOpen size={28} className="text-app-accentLight" />
           </div>
           <div className="text-left">
-            <p className="font-bold text-lg text-gray-900">Mark Chapters</p>
-            <p className="text-gray-500 text-sm">Update your learned chapters</p>
+            <p className="font-bold text-lg text-app-text">Mark Chapters</p>
+            <p className="text-app-textMuted text-sm">Update your learned chapters</p>
           </div>
         </button>
       </div>
@@ -99,14 +99,14 @@ export default function HomePage() {
           {stats.weakZones.length > 0 && (
             <div className="card">
               <div className="flex items-center gap-2 mb-3">
-                <TrendingDown size={18} className="text-red-500" />
-                <h3 className="font-semibold text-gray-900">Weak Zones — Focus Here</h3>
+                <TrendingDown size={18} className="text-rose-400" />
+                <h3 className="font-semibold text-app-text">Weak Zones — Focus Here</h3>
               </div>
               <div className="space-y-2">
                 {stats.weakZones.map((z) => (
                   <div key={z.name} className="flex items-center justify-between">
-                    <span className="text-sm text-gray-700">{z.name}</span>
-                    <span className="text-xs font-medium text-red-600 bg-red-50 px-2 py-0.5 rounded-full">
+                    <span className="text-sm text-app-textSecondary">{z.name}</span>
+                    <span className="text-xs font-medium text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded-full">
                       {z.accuracy}%
                     </span>
                   </div>
@@ -118,14 +118,14 @@ export default function HomePage() {
           {stats.strongZones.length > 0 && (
             <div className="card">
               <div className="flex items-center gap-2 mb-3">
-                <TrendingUp size={18} className="text-green-500" />
-                <h3 className="font-semibold text-gray-900">Strong Zones — Keep it up!</h3>
+                <TrendingUp size={18} className="text-emerald-400" />
+                <h3 className="font-semibold text-app-text">Strong Zones — Keep it up!</h3>
               </div>
               <div className="space-y-2">
                 {stats.strongZones.map((z) => (
                   <div key={z.name} className="flex items-center justify-between">
-                    <span className="text-sm text-gray-700">{z.name}</span>
-                    <span className="text-xs font-medium text-green-600 bg-green-50 px-2 py-0.5 rounded-full">
+                    <span className="text-sm text-app-textSecondary">{z.name}</span>
+                    <span className="text-xs font-medium text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">
                       {z.accuracy}%
                     </span>
                   </div>
@@ -138,17 +138,17 @@ export default function HomePage() {
 
       {stats && stats.totalSessions > 0 && (
         <div className="card flex items-center gap-3">
-          <Clock size={20} className="text-gray-400" />
+          <Clock size={20} className="text-app-textMuted" />
           <div>
-            <p className="text-sm text-gray-600">Last session score</p>
-            <p className="font-bold text-gray-900">{stats.lastSessionScore.toFixed(1)}%</p>
+            <p className="text-sm text-app-textMuted">Last session score</p>
+            <p className="font-bold text-app-text">{stats.lastSessionScore.toFixed(1)}%</p>
           </div>
           <div className="ml-auto">
-            <Target size={20} className="text-gray-400" />
+            <Target size={20} className="text-app-textMuted" />
           </div>
           <div className="text-right">
-            <p className="text-sm text-gray-600">Total sessions</p>
-            <p className="font-bold text-gray-900">{stats.totalSessions}</p>
+            <p className="text-sm text-app-textMuted">Total sessions</p>
+            <p className="font-bold text-app-text">{stats.totalSessions}</p>
           </div>
         </div>
       )}
