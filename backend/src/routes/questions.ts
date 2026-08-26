@@ -74,4 +74,68 @@ router.get('/performance', authenticate, async (req: AuthRequest, res: Response)
   return res.json(performance);
 });
 
+// Flag a question (bookmark for later review)
+router.post('/:questionId/flag', authenticate, async (req: AuthRequest, res: Response) => {
+  const userId = req.user!.id;
+  const { questionId } = req.params;
+
+  const existing = await prisma.flaggedQuestion.findUnique({
+    where: { userId_questionId: { userId, questionId } },
+  });
+
+  if (existing) {
+    return res.json({ flagged: true });
+  }
+
+  await prisma.flaggedQuestion.create({
+    data: { userId, questionId },
+  });
+
+  return res.json({ flagged: true });
+});
+
+// Unflag a question
+router.delete('/:questionId/flag', authenticate, async (req: AuthRequest, res: Response) => {
+  const userId = req.user!.id;
+  const { questionId } = req.params;
+
+  await prisma.flaggedQuestion.deleteMany({
+    where: { userId, questionId },
+  });
+
+  return res.json({ flagged: false });
+});
+
+// Get all flagged questions for user
+router.get('/flagged', authenticate, async (req: AuthRequest, res: Response) => {
+  const userId = req.user!.id;
+
+  const flagged = await prisma.flaggedQuestion.findMany({
+    where: { userId },
+    include: {
+      question: {
+        include: {
+          chapter: { include: { subject: { include: { exam: true } } } },
+          concept: { select: { id: true, nameEnglish: true } },
+        },
+      },
+    },
+    orderBy: { createdAt: 'desc' },
+  });
+
+  return res.json(flagged.map((f) => ({
+    id: f.question.id,
+    text: f.question.text,
+    options: normalizeOptions(f.question.options),
+    correctOption: f.question.correctOption,
+    explanation: f.question.explanation,
+    difficulty: f.question.difficulty,
+    chapter: f.question.chapter.name,
+    subject: f.question.chapter.subject.name,
+    exam: f.question.chapter.subject.exam.name,
+    concept: f.question.concept,
+    flaggedAt: f.createdAt,
+  })));
+});
+
 export default router;

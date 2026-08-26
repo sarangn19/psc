@@ -55,6 +55,7 @@ model User {
   questionReports   QuestionReport[]
   newsViews         NewsView[]
   conceptStats      UserConceptStat[]
+  flaggedQuestions  FlaggedQuestion[]
 
   @@map("users")
 }
@@ -118,6 +119,7 @@ model Question {
   attempts        QuestionAttempt[]
   reports         QuestionReport[]
   adaptiveItems   AdaptiveItem[]
+  flaggedBy       FlaggedQuestion[]
 
   @@index([conceptId])
   @@index([chapterId, isActive])
@@ -304,4 +306,17 @@ model TaxonomyNode {
   @@index([parentId])
   @@index([level])
   @@map("taxonomy_nodes")
+}
+
+model FlaggedQuestion {
+  id         String   @id @default(cuid())
+  userId     String
+  questionId String
+  createdAt  DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id])
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, questionId])
+  @@map("flagged_questions")
 }

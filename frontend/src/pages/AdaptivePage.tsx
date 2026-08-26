@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { CheckCircle, XCircle, Loader2, Lightbulb, Trophy, RotateCcw } from 'lucide-react';
+import { CheckCircle, XCircle, Loader2, Lightbulb, Trophy, RotateCcw, Flag } from 'lucide-react';
 import api from '../lib/api';
 
 const LOADING_FACTS = [
@@ -64,6 +64,7 @@ export default function AdaptivePage() {
   const [streak, setStreak] = useState(0);
   const [startTime, setStartTime] = useState(Date.now());
   const [factIndex, setFactIndex] = useState(() => Math.floor(Math.random() * LOADING_FACTS.length));
+  const [flagged, setFlagged] = useState(false);
 
   useEffect(() => {
     if (!loadingNext && !loading) return;
@@ -77,6 +78,7 @@ export default function AdaptivePage() {
     setSelected(null);
     setResult(null);
     setQuestion(null);
+    setFlagged(false);
     setLoadingNext(true);
     setStartTime(Date.now());
     try {
@@ -130,6 +132,19 @@ export default function AdaptivePage() {
 
   const handleNext = () => {
     if (sessionId) fetchNext(sessionId);
+  };
+
+  const toggleFlag = async () => {
+    if (!question) return;
+    try {
+      if (flagged) {
+        await api.delete(`/questions/${question.id}/flag`);
+        setFlagged(false);
+      } else {
+        await api.post(`/questions/${question.id}/flag`);
+        setFlagged(true);
+      }
+    } catch {}
   };
 
   const startedRef = useRef(false);
@@ -215,6 +230,13 @@ export default function AdaptivePage() {
           {streak >= 3 && (
             <span className="text-xs font-medium text-amber-400">🔥 {streak} streak</span>
           )}
+          <button
+            onClick={toggleFlag}
+            className="ml-auto p-1.5 rounded-lg transition-colors"
+            title={flagged ? 'Unflag' : 'Flag for review'}
+          >
+            <Flag size={16} className={flagged ? 'fill-amber-400 text-amber-400' : 'text-violet-400 hover:text-violet-300'} />
+          </button>
         </div>
 
         <h1 className="text-lg font-bold leading-snug text-white min-h-[56px]">
