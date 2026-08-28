@@ -334,4 +334,76 @@ router.post('/news', async (req, res: Response) => {
   return res.status(201).json(news);
 });
 
+// Generate daily current affairs via AI
+router.post('/news/generate-daily', async (req: AuthRequest, res: Response) => {
+  const OPENROUTER_KEY = process.env.OPENROUTER_API_KEY;
+  if (!OPENROUTER_KEY) return res.status(500).json({ error: 'No API key configured' });
+
+  const today = new Date().toISOString().split('T')[0];
+
+  // Check existing count for today
+  const todayCount = await prisma.newsItem.count({
+    where: {
+      publishedAt: { gte: new Date(today), lt: new Date(new Date(today).getTime() + 86400000) },
+    },
+  });
+  if (todayCount >= 10) {
+    return res.json({ message: `Already have ${todayCount} items for today`, inserted: 0 });
+  }
+
+  const CATEGORIES = ['Current Affairs', 'Kerala State News', 'National News', 'International News', 'PSC Notifications', 'Education', 'Awards & Recognition', 'Government Schemes'];
+
+  const prompt = `Generate 15 current affairs news items relevant for Kerala PSC exam preparation for today ${today}.
+
+Return ONLY a JSON array. Each element:
+{"title":"headline","content":"2-3 sentence detail","category":"Current Affairs","source":"Source Name"}
+
+Categories: Current Affairs, Kerala State News, National News, International News, PSC Notifications, Education, Awards & Recognition, Government Schemes.
+
+Rules: unique titles, factual, exam-relevant, specific names/dates/facts, no markdown, mix categories.`;
+
+  const aiRes = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${OPENROUTER_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'meta-llama/llama-3.1-8b-instruct',
+      messages: [{ role: 'user', content: prompt }],
+      temperature: 0.7,
+      max_tokens: 4096,
+    }),
+  });
+
+  if (!aiRes.ok) return res.status(500).json({ error: 'AI request failed' });
+
+  const data: any = await aiRes.json();
+  const raw = data.choices?.[0]?.message?.content || '';
+  const start = raw.indexOf('[');
+  const end = raw.lastIndexOf(']');
+  if (start === -1 || end === -1) return res.status(500).json({ error: 'Invalid AI response' });
+
+  const items = JSON.parse(raw.substring(start, end + 1));
+  const valid = items.filter((item: any) => item.title && item.content && CATEGORIES.includes(item.category));
+
+  let inserted = 0;
+  for (const item of valid) {
+    try {
+      await prisma.newsItem.create({
+        data: {
+          title: String(item.title).slice(0, 500),
+          content: String(item.content).slice(0, 2000),
+          category: item.category,
+          source: String(item.source || 'Daily Current Affairs'),
+          publishedAt: new Date(),
+          isActive: true,
+        },
+      });
+      inserted++;
+    } catch (e: any) {
+      if (e.code === 'P2002') continue;
+    }
+  }
+
+  return res.json({ message: `Inserted ${inserted} news items`, inserted });
+});
+
 export default router;

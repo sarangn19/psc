@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Plus, Newspaper } from 'lucide-react';
+import { Plus, Newspaper, Sparkles } from 'lucide-react';
 import api from '../../lib/api';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -23,6 +23,7 @@ export default function AdminNews() {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [generating, setGenerating] = useState(false);
   const [form, setForm] = useState({ title: '', content: '', category: 'Current Affairs', source: '' });
 
   useEffect(() => {
@@ -44,6 +45,22 @@ export default function AdminNews() {
     }
   };
 
+  const handleGenerateDaily = async () => {
+    setGenerating(true);
+    try {
+      const { data } = await api.post('/admin/news/generate-daily');
+      alert(data.message);
+      if (data.inserted > 0) {
+        const res = await api.get('/news');
+        setNews(res.data);
+      }
+    } catch {
+      alert('Failed to generate daily news');
+    } finally {
+      setGenerating(false);
+    }
+  };
+
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
@@ -51,12 +68,22 @@ export default function AdminNews() {
           <h1 className="text-2xl font-bold text-app-text">News & Current Affairs</h1>
           <p className="text-app-textMuted text-sm mt-1">Manage content visible to students</p>
         </div>
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="btn-primary flex items-center gap-2"
-        >
-          <Plus size={16} /> Post News
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleGenerateDaily}
+            disabled={generating}
+            className="btn-secondary flex items-center gap-2"
+          >
+            <Sparkles size={16} className={generating ? 'animate-spin' : ''} />
+            {generating ? 'Generating...' : 'Generate Daily'}
+          </button>
+          <button
+            onClick={() => setShowForm(!showForm)}
+            className="btn-primary flex items-center gap-2"
+          >
+            <Plus size={16} /> Post News
+          </button>
+        </div>
       </div>
 
       {showForm && (
