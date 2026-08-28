@@ -70,4 +70,82 @@ router.get('/stats', authenticate, async (req: AuthRequest, res: Response) => {
   });
 });
 
+// Get user streak (consecutive days with activity)
+router.get('/streak', authenticate, async (req: AuthRequest, res: Response) => {
+  const userId = req.user!.id;
+
+  const activities = await prisma.userActivity.findMany({
+    where: { userId, type: 'QUESTION_ANSWERED' },
+    select: { createdAt: true },
+    orderBy: { createdAt: 'desc' },
+  });
+
+  if (activities.length === 0) return res.json({ streak: 0, todayCount: 0 });
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const days = new Set(
+    activities.map((a) => {
+      const d = new Date(a.createdAt);
+      d.setHours(0, 0, 0, 0);
+      return d.getTime();
+    })
+  );
+
+  const todayMs = today.getTime();
+  const todayCount = activities.filter((a) => {
+    const d = new Date(a.createdAt);
+    return d.getTime() >= todayMs;
+  }).length;
+
+  let streak = 0;
+  let check = todayMs;
+  if (!days.has(todayMs)) {
+    check -= 86400000;
+  }
+
+  while (days.has(check)) {
+    streak++;
+    check -= 86400000;
+  }
+
+  return res.json({ streak, todayCount });
+});
+
+// Get weekly comparison (this week vs last week)
+router.get('/weekly', authenticate, async (req: AuthRequest, res: Response) => {
+  const userId = req.user!.id;
+
+  const now = new Date();
+  const startOfThisWeek = new Date(now);
+  startOfThisWeek.setDate(now.getDate() - now.getDay());
+  startOfThisWeek.setHours(0, 0, 0, 0);
+
+  const startOfLastWeek = new Date(startOfThisWeek);
+  startOfLastWeek.setDate(startOfLastWeek.getDate() - 7);
+
+  const [thisWeekAttempts, lastWeekAttempts] = await Promise.all([
+    prisma.questionAttempt.findMany({
+      where: { userId, createdAt: { gte: startOfThisWeek } },
+      select: { isCorrect: true },
+    }),
+    prisma.questionAttempt.findMany({
+      where: { userId, createdAt: { gte: startOfLastWeek, lt: startOfThisWeek } },
+      select: { isCorrect: true },
+    }),
+  ]);
+
+  const summarize = (attempts: { isCorrect: boolean }[]) => ({
+    total: attempts.length,
+    correct: attempts.filter((a) => a.isCorrect).length,
+    accuracy: attempts.length > 0 ? Math.round((attempts.filter((a) => a.isCorrect).length / attempts.length) * 100) : 0,
+  });
+
+  return res.json({
+    thisWeek: summarize(thisWeekAttempts),
+    lastWeek: summarize(lastWeekAttempts),
+  });
+});
+
 export default router;
