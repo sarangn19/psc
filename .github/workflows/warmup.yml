@@ -1,0 +1,13 @@
+name: Keep Backend Warm
+on:
+  schedule:
+    - cron: '*/4 * * * *'
+  workflow_dispatch:
+
+jobs:
+  warmup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping backend health
+        run: |
+          curl -s --max-time 10 "https://psc-frontend-roxc.vercel.app/api/health" || true
