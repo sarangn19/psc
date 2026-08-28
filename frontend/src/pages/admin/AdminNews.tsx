@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Plus, Newspaper, Sparkles } from 'lucide-react';
+import { Plus, Newspaper, Sparkles, HelpCircle } from 'lucide-react';
 import api from '../../lib/api';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -24,6 +24,7 @@ export default function AdminNews() {
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(false);
   const [generating, setGenerating] = useState(false);
+  const [generatingMCQs, setGeneratingMCQs] = useState(false);
   const [form, setForm] = useState({ title: '', content: '', category: 'Current Affairs', source: '' });
 
   useEffect(() => {
@@ -61,6 +62,18 @@ export default function AdminNews() {
     }
   };
 
+  const handleGenerateMCQs = async () => {
+    setGeneratingMCQs(true);
+    try {
+      const { data } = await api.post('/admin/news/generate-mcqs');
+      alert(data.message);
+    } catch {
+      alert('Failed to generate MCQs. Generate news first.');
+    } finally {
+      setGeneratingMCQs(false);
+    }
+  };
+
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
@@ -76,6 +89,14 @@ export default function AdminNews() {
           >
             <Sparkles size={16} className={generating ? 'animate-spin' : ''} />
             {generating ? 'Generating...' : 'Generate Daily'}
+          </button>
+          <button
+            onClick={handleGenerateMCQs}
+            disabled={generatingMCQs}
+            className="btn-secondary flex items-center gap-2"
+          >
+            <HelpCircle size={16} className={generatingMCQs ? 'animate-spin' : ''} />
+            {generatingMCQs ? 'Generating...' : 'Generate MCQs'}
           </button>
           <button
             onClick={() => setShowForm(!showForm)}

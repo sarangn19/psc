@@ -10,16 +10,26 @@ jobs:
   generate-news:
     runs-on: ubuntu-latest
     steps:
-      - name: Generate Daily Current Affairs
+      - name: Generate Daily News + MCQs
         run: |
-          # Login first to get token
+          # Login to get token
           TOKEN=$(curl -s -X POST "${{ secrets.BACKEND_URL }}/api/auth/login" \
             -H "Content-Type: application/json" \
             -d '{"email":"admin@keralapsc.com","password":"${{ secrets.ADMIN_PASSWORD }}"}' | jq -r '.token')
 
           # Generate daily news
-          RESULT=$(curl -s -X POST "${{ secrets.BACKEND_URL }}/api/admin/news/generate-daily" \
+          echo "Generating news..."
+          NEWS_RESULT=$(curl -s -X POST "${{ secrets.BACKEND_URL }}/api/admin/news/generate-daily" \
             -H "Authorization: Bearer $TOKEN" \
             -H "Content-Type: application/json")
+          echo "News: $NEWS_RESULT"
 
-          echo "Result: $RESULT"
+          # Wait 5 seconds for DB to settle
+          sleep 5
+
+          # Generate MCQs from news
+          echo "Generating MCQs..."
+          MCQ_RESULT=$(curl -s -X POST "${{ secrets.BACKEND_URL }}/api/admin/news/generate-mcqs" \
+            -H "Authorization: Bearer $TOKEN" \
+            -H "Content-Type: application/json")
+          echo "MCQs: $MCQ_RESULT"

@@ -406,4 +406,83 @@ Rules: unique titles, factual, exam-relevant, specific names/dates/facts, no mar
   return res.json({ message: `Inserted ${inserted} news items`, inserted });
 });
 
+// Generate MCQs from today's current affairs
+router.post('/news/generate-mcqs', async (req: AuthRequest, res: Response) => {
+  const OPENROUTER_KEY = process.env.OPENROUTER_API_KEY;
+  if (!OPENROUTER_KEY) return res.status(500).json({ error: 'No API key configured' });
+
+  const today = new Date().toISOString().split('T')[0];
+  const dateTag = `current-affairs-${today}`;
+
+  // Check if MCQs already generated
+  const existing = await prisma.question.count({ where: { tags: { has: dateTag } } });
+  if (existing > 0) return res.json({ message: `Already have ${existing} MCQs for today`, inserted: 0 });
+
+  // Get today's news
+  const newsItems = await prisma.newsItem.findMany({
+    where: { publishedAt: { gte: new Date(today), lt: new Date(new Date(today).getTime() + 86400000) } },
+    orderBy: { publishedAt: 'desc' },
+  });
+  if (newsItems.length === 0) return res.status(400).json({ error: 'No news items for today. Generate news first.' });
+
+  const newsContext = newsItems.map((n, i) => `${i + 1}. [${n.category}] ${n.title}: ${n.content}`).join('\n');
+
+  const prompt = `Based on these current affairs from ${today}, generate 20 MCQ questions for Kerala PSC exam preparation.
+
+NEWS:
+${newsContext}
+
+Return ONLY a JSON array. Each element:
+{"text":"question","options":["A","B","C","D"],"correctOption":0,"explanation":"brief","difficulty":"MEDIUM"}
+
+Rules: directly based on news facts, specific names/dates/places, 4 options, 1 correct, mix difficulties, no markdown.`;
+
+  const aiRes = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${OPENROUTER_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ model: 'meta-llama/llama-3.1-8b-instruct', messages: [{ role: 'user', content: prompt }], temperature: 0.7, max_tokens: 4096 }),
+  });
+  if (!aiRes.ok) return res.status(500).json({ error: 'AI request failed' });
+
+  const data: any = await aiRes.json();
+  const raw = data.choices?.[0]?.message?.content || '';
+  const start = raw.indexOf('[');
+  const end = raw.lastIndexOf(']');
+  if (start === -1 || end === -1) return res.status(500).json({ error: 'Invalid AI response' });
+
+  const items = JSON.parse(raw.substring(start, end + 1));
+  const valid = items.filter((item: any) => item.text && item.options?.length === 4 && typeof item.correctOption === 'number');
+
+  // Find or create Current Affairs chapter
+  let chapter = await prisma.chapter.findFirst({ where: { name: 'Daily Current Affairs' } });
+  if (!chapter) {
+    let subject = await prisma.subject.findFirst({ where: { name: 'Current Affairs' } });
+    if (!subject) {
+      const exam = await prisma.exam.findFirst({ where: { name: { contains: 'PSC' } } });
+      subject = await prisma.subject.create({ data: { name: 'Current Affairs', examId: exam?.id || '' } });
+    }
+    chapter = await prisma.chapter.create({ data: { name: 'Daily Current Affairs', subjectId: subject.id } });
+  }
+
+  const batch = valid.map((item: any) => ({
+    chapterId: chapter!.id,
+    text: String(item.text).slice(0, 2000),
+    options: item.options.map((o: string) => String(o).slice(0, 500)),
+    correctOption: item.correctOption,
+    explanation: String(item.explanation || '').slice(0, 1000),
+    difficulty: ['EASY', 'MEDIUM', 'HARD'].includes(item.difficulty) ? item.difficulty : 'MEDIUM',
+    tags: [dateTag, 'current-affairs', today],
+    isActive: true,
+  }));
+
+  let inserted = 0;
+  for (let i = 0; i < batch.length; i += 50) {
+    const chunk = batch.slice(i, i + 50);
+    await prisma.question.createMany({ data: chunk, skipDuplicates: true });
+    inserted += chunk.length;
+  }
+
+  return res.json({ message: `Inserted ${inserted} current affairs MCQs`, inserted });
+});
+
 export default router;
