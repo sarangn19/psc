@@ -1,0 +1,25 @@
+name: Daily Current Affairs
+
+on:
+  schedule:
+    # Runs at 6:00 AM IST (00:30 UTC)
+    - cron: '30 0 * * *'
+  workflow_dispatch: # Manual trigger button
+
+jobs:
+  generate-news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Daily Current Affairs
+        run: |
+          # Login first to get token
+          TOKEN=$(curl -s -X POST "${{ secrets.BACKEND_URL }}/api/auth/login" \
+            -H "Content-Type: application/json" \
+            -d '{"email":"admin@keralapsc.com","password":"${{ secrets.ADMIN_PASSWORD }}"}' | jq -r '.token')
+
+          # Generate daily news
+          RESULT=$(curl -s -X POST "${{ secrets.BACKEND_URL }}/api/admin/news/generate-daily" \
+            -H "Authorization: Bearer $TOKEN" \
+            -H "Content-Type: application/json")
+
+          echo "Result: $RESULT"
