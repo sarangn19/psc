@@ -43,6 +43,74 @@ const MIN_ATTEMPTS_FOR_MASTERY = 5;
 const MIN_ATTEMPTS_FOR_ZONE = 5;
 const SIBLING_QUERY_LIMIT = 30;
 
+interface RankedGroup {
+  key: string;
+  questions: RichQuestion[];
+  accuracy: number;
+  total: number;
+  mastery: boolean;
+  sortKey: number;
+}
+
+function rankGroups(
+  questionsList: RichQuestion[],
+  stats: Map<string, { total: number; correct: number }>
+): RankedGroup[] {
+  const groups = new Map<string, RichQuestion[]>();
+  for (const c of questionsList) {
+    const key = c.conceptId !== null ? `concept:${c.conceptId}` : `chapter:${c.chapterId}`;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key)!.push(c);
+  }
+
+  return [...groups.entries()].map(([key, questions]) => {
+    const s = stats.get(key) || { total: 0, correct: 0 };
+    const accuracy = s.total > 0 ? s.correct / s.total : 0;
+    questions.sort((a, b) => DIFFICULTY_ORDER[a.difficulty] - DIFFICULTY_ORDER[b.difficulty]);
+    return {
+      key,
+      questions,
+      accuracy,
+      total: s.total,
+      mastery: s.total >= MIN_ATTEMPTS_FOR_MASTERY && accuracy >= MASTERY_ACCURACY,
+      sortKey: questions[0].conceptId !== null ? questions[0].conceptId : Infinity,
+    };
+  }).sort((a, b) => {
+    if (a.mastery !== b.mastery) return Number(a.mastery) - Number(b.mastery);
+    if (a.accuracy !== b.accuracy) return a.accuracy - b.accuracy;
+    if (a.total !== b.total) return a.total - b.total;
+    return a.sortKey - b.sortKey;
+  });
+}
+
+async function findAdjacentQuestions(
+  masteredConceptIds: number[],
+  seenIds: Set<string>,
+  penPaperFilter: Prisma.QuestionWhereInput = {}
+): Promise<RichQuestion[]> {
+  if (masteredConceptIds.length === 0) return [];
+
+  const nodes = await prisma.taxonomyNode.findMany({
+    where: { id: { in: masteredConceptIds } },
+    select: { parentId: true },
+  });
+  const topicIds = [...new Set(nodes.map((n) => n.parentId).filter((id): id is number => id !== null))];
+  if (topicIds.length === 0) return [];
+
+  const siblings = await prisma.taxonomyNode.findMany({
+    where: { parentId: { in: topicIds }, id: { notIn: masteredConceptIds } },
+    select: { id: true },
+    take: SIBLING_QUERY_LIMIT,
+  });
+  if (siblings.length === 0) return [];
+
+  return fetchCandidates({
+    conceptId: { in: siblings.map((s) => s.id) },
+    isActive: true,
+    ...penPaperFilter,
+  });
+}
+
 function zoneFor(accuracy: number, total: number): string {
   if (total < MIN_ATTEMPTS_FOR_ZONE) return 'UNTESTED';
   if (accuracy >= 0.7) return 'STRONG';
@@ -212,14 +280,12 @@ router.post('/session/start', authenticate, async (req: AuthRequest, res: Respon
   });
 });
 
-// Get next question for adaptive session
-router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, res: Response) => {
-  const userId = req.user!.id;
-  const { sessionId } = req.params;
-
-  // Phase 1: all independent reads in parallel
-  const [session, seenItems, learnedChapters, conceptStats, user] = await Promise.all([
-    prisma.adaptiveSession.findUnique({ where: { id: sessionId } }),
+async function fetchNextQuestion(
+  userId: string,
+  sessionId: string,
+  session: { focusConceptId: number | null }
+): Promise<{ done: boolean; message?: string; question?: any; concept?: ConceptInfo; questionNumber?: number }> {
+  const [seenItems, learnedChapters, conceptStats, user] = await Promise.all([
     prisma.adaptiveItem.findMany({
       where: { sessionId },
       select: { questionId: true, question: { select: { text: true } } },
@@ -234,8 +300,6 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     prisma.user.findUnique({ where: { id: userId }, select: { travelMode: true } }),
   ]);
 
-  if (!session || session.userId !== userId) return res.status(404).json({ message: 'Session not found' });
-
   const seenIds = new Set(seenItems.map((si) => si.questionId));
   const seenTexts = new Set(seenItems.map((si) => si.question.text));
 
@@ -245,7 +309,6 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     if (caChapter) chapterIds = [caChapter.id];
   }
 
-  // Phase 2: fetch candidates
   const isFocused = session.focusConceptId !== null && session.focusConceptId !== undefined;
   const penPaperFilter: Prisma.QuestionWhereInput = user?.travelMode
     ? { chapter: { subject: { name: { notIn: PEN_PAPER_SUBJECTS } } } }
@@ -262,131 +325,40 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
 
   if (isFocused) {
     candidates = rawCandidates.filter((q) => !seenIds.has(q.id) && !seenTexts.has(q.text));
-    if (candidates.length === 0) {
-      candidates = rawAdjacent.filter((q) => !seenIds.has(q.id) && !seenTexts.has(q.text));
-    }
+    if (candidates.length === 0) candidates = rawAdjacent.filter((q) => !seenIds.has(q.id) && !seenTexts.has(q.text));
     doneMessage = 'Focused practice complete! You have covered this concept and its related topics.';
   } else {
     candidates = rawCandidates.filter((q) => !seenIds.has(q.id) && !seenTexts.has(q.text));
   }
 
-  if (candidates.length === 0) {
-    return res.json({ done: true, message: doneMessage });
-  }
+  if (candidates.length === 0) return { done: true, message: doneMessage };
 
-  // Build stats map directly from pre-aggregated UserConceptStat — O(n) over
-  // a small result set, accurate for all-time history, no scan of raw attempts.
   const stats = new Map<string, { total: number; correct: number }>();
   for (const s of conceptStats) {
     const key = s.conceptId !== null ? `concept:${s.conceptId}` : `chapter:${s.chapterId}`;
     stats.set(key, { total: s.total, correct: s.correct });
   }
 
-  interface RankedGroup {
-  key: string;
-  questions: RichQuestion[];
-  accuracy: number;
-  total: number;
-  mastery: boolean;
-  sortKey: number;
-}
+  const ranked = rankGroups(candidates, stats);
+  let chosen: RichQuestion | null = ranked.length ? ranked[0].questions[0] : null;
 
-// Group candidates by concept (or chapter), sort groups so unmastered/weakest
-// concepts come first, and ramp EASY -> HARD within each group.
-function rankGroups(
-  questionsList: RichQuestion[],
-  stats: Map<string, { total: number; correct: number }>
-): RankedGroup[] {
-  const groups = new Map<string, RichQuestion[]>();
-  for (const c of questionsList) {
-    const key = c.conceptId !== null ? `concept:${c.conceptId}` : `chapter:${c.chapterId}`;
-    if (!groups.has(key)) groups.set(key, []);
-    groups.get(key)!.push(c);
+  if (ranked.length > 0 && ranked.every((g) => g.mastery)) {
+    const masteredConceptIds = [...new Set(ranked.flatMap((g) => g.questions).map((q) => q.conceptId).filter((id): id is number => id !== null))];
+    const adjacent = await findAdjacentQuestions(masteredConceptIds, seenIds);
+    if (adjacent.length > 0) {
+      const filteredAdjacent = adjacent.filter((q) => !seenIds.has(q.id) && !seenTexts.has(q.text));
+      const adjacentRanked = rankGroups(filteredAdjacent, stats);
+      if (adjacentRanked.length) chosen = adjacentRanked[0].questions[0];
+    }
   }
 
-  return [...groups.entries()].map(([key, questions]) => {
-    const s = stats.get(key) || { total: 0, correct: 0 };
-    const accuracy = s.total > 0 ? s.correct / s.total : 0;
-    questions.sort((a, b) => DIFFICULTY_ORDER[a.difficulty] - DIFFICULTY_ORDER[b.difficulty]);
-    return {
-      key,
-      questions,
-      accuracy,
-      total: s.total,
-      mastery: s.total >= MIN_ATTEMPTS_FOR_MASTERY && accuracy >= MASTERY_ACCURACY,
-      sortKey: questions[0].conceptId !== null ? questions[0].conceptId : Infinity,
-    };
-  }).sort((a, b) => {
-    if (a.mastery !== b.mastery) return Number(a.mastery) - Number(b.mastery);
-    if (a.accuracy !== b.accuracy) return a.accuracy - b.accuracy;
-    if (a.total !== b.total) return a.total - b.total;
-    return a.sortKey - b.sortKey;
-  });
-}
+  if (!chosen) return { done: true, message: 'All questions in learned chapters completed!' };
 
-// Pull questions from adjacent (sibling) concepts sharing a topic with a
-// mastered concept, so the user advances along the taxonomy graph.
-async function findAdjacentQuestions(
-  masteredConceptIds: number[],
-  seenIds: Set<string>,
-  penPaperFilter: Prisma.QuestionWhereInput = {}
-): Promise<RichQuestion[]> {
-  if (masteredConceptIds.length === 0) return [];
-
-  const nodes = await prisma.taxonomyNode.findMany({
-    where: { id: { in: masteredConceptIds } },
-    select: { parentId: true },
-  });
-  const topicIds = [...new Set(nodes.map((n) => n.parentId).filter((id): id is number => id !== null))];
-  if (topicIds.length === 0) return [];
-
-  const siblings = await prisma.taxonomyNode.findMany({
-    where: { parentId: { in: topicIds }, id: { notIn: masteredConceptIds } },
-    select: { id: true },
-    take: SIBLING_QUERY_LIMIT,
-  });
-  if (siblings.length === 0) return [];
-
-  return fetchCandidates({
-    conceptId: { in: siblings.map((s) => s.id) },
-    isActive: true,
-    ...penPaperFilter,
-  });
-}
-
-// Order concepts weakest-first; advance through the taxonomy as mastery grows.
-const ranked = rankGroups(candidates, stats);
-let chosen: RichQuestion | null = null;
-if (ranked.length) chosen = ranked[0].questions[0];
-
-// Every concept in the learned pool is mastered -> advance to adjacent,
-// unmastered concepts from the same topic.
-if (ranked.length > 0 && ranked.every((g) => g.mastery)) {
-  const masteredConceptIds = [
-    ...new Set(
-      ranked.flatMap((g) => g.questions).map((q) => q.conceptId).filter((id): id is number => id !== null)
-    ),
-  ];
-  const adjacent = await findAdjacentQuestions(masteredConceptIds, seenIds);
-  if (adjacent.length > 0) {
-    const filteredAdjacent = adjacent.filter((q) => !seenIds.has(q.id) && !seenTexts.has(q.text));
-    const adjacentRanked = rankGroups(filteredAdjacent, stats);
-    if (adjacentRanked.length) chosen = adjacentRanked[0].questions[0];
-  }
-}
-
-if (!chosen) {
-  return res.json({ done: true, message: 'All questions in learned chapters completed!' });
-}
-
-  // Track this question in session
   const order = seenItems.length + 1;
-  await prisma.adaptiveItem.create({
-    data: { sessionId, questionId: chosen.id, order },
-  });
+  await prisma.adaptiveItem.create({ data: { sessionId, questionId: chosen.id, order } });
 
   const statsKey = chosen.conceptId !== null ? `concept:${chosen.conceptId}` : `chapter:${chosen.chapterId}`;
-  const concept = await buildConceptInfo(chosen.conceptId, statsKey, chosen.chapter.name, stats);
+  const conceptInfo = await buildConceptInfo(chosen.conceptId, statsKey, chosen.chapter.name, stats);
 
   const { correctOption, ...safeQuestion } = chosen;
   const safe = {
@@ -401,11 +373,19 @@ if (!chosen) {
       : null,
   };
 
-  return res.json({
-    question: safe,
-    concept,
-    questionNumber: order,
-  });
+  return { done: false, question: safe, concept: conceptInfo, questionNumber: order };
+}
+
+// Get next question for adaptive session
+router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, res: Response) => {
+  const userId = req.user!.id;
+  const { sessionId } = req.params;
+
+  const session = await prisma.adaptiveSession.findUnique({ where: { id: sessionId } });
+  if (!session || session.userId !== userId) return res.status(404).json({ message: 'Session not found' });
+
+  const result = await fetchNextQuestion(userId, sessionId, session);
+  return res.json(result);
 });
 
 // Submit answer
@@ -460,10 +440,15 @@ router.post('/session/:sessionId/answer', authenticate, async (req: AuthRequest,
     },
   }).catch(() => {});
 
+  // Fetch next question in parallel — returns pre-loaded next question with the answer
+  const session = await prisma.adaptiveSession.findUnique({ where: { id: sessionId } });
+  const nextData = session ? await fetchNextQuestion(userId, sessionId, session) : { done: true };
+
   return res.json({
     isCorrect,
     correctOption: question.correctOption,
     explanation: question.explanation,
+    next: nextData,
   });
 });
 

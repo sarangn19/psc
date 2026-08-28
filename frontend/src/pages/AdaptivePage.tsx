@@ -134,10 +134,32 @@ export default function AdaptivePage() {
     } else {
       setStreak(0);
     }
+
+    // Pre-loaded next question from answer response — no separate fetch needed
+    if (data.next) {
+      setNextQuestion(data.next);
+    }
   };
 
+  const [nextQuestion, setNextQuestion] = useState<any>(null);
+
   const handleNext = () => {
-    if (sessionId) fetchNext(sessionId);
+    if (nextQuestion) {
+      if (nextQuestion.done) {
+        setDone(true);
+      } else {
+        setSelected(null);
+        setResult(null);
+        setQuestion(nextQuestion.question);
+        setQuestionNumber(nextQuestion.questionNumber);
+        setConcept(nextQuestion.concept || null);
+        setFlagged(false);
+        setStartTime(Date.now());
+      }
+      setNextQuestion(null);
+    } else if (sessionId) {
+      fetchNext(sessionId);
+    }
   };
 
   const toggleFlag = async () => {
