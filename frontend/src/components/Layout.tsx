@@ -1,13 +1,13 @@
 import { Outlet, useNavigate } from 'react-router-dom';
-import { Gamepad2 } from 'lucide-react';
+import { BookOpen, Newspaper, BarChart2, Target, LogOut, Home, Plane, Gamepad2 } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
 
 const quickLinks = [
-  { to: '/', icon: '/icons/home.svg', label: 'Home' },
-  { to: '/chapters', icon: '/icons/book-open.svg', label: 'Chapters' },
-  { to: '/learning', icon: '/icons/target-01-stroke-rounded.svg', label: 'Learn' },
-  { to: '/news', icon: '/icons/newspaper-stroke-rounded.svg', label: 'News' },
-  { to: '/performance', icon: '/icons/presentation-bar-chart-01-stroke-rounded.svg', label: 'Stats' },
+  { to: '/', icon: Home, label: 'Home' },
+  { to: '/chapters', icon: BookOpen, label: 'Chapters' },
+  { to: '/learning', icon: Target, label: 'Learn' },
+  { to: '/news', icon: Newspaper, label: 'News' },
+  { to: '/performance', icon: BarChart2, label: 'Stats' },
 ];
 
 export default function Layout() {
@@ -48,19 +48,19 @@ export default function Layout() {
                   : 'text-app-textMuted hover:text-app-textSecondary hover:bg-app-surface'
               }`}
             >
-              {travelMode ? <Gamepad2 size={16} /> : <img src="/icons/plane-stroke-rounded.svg" className="w-4 h-4" alt="" />}
+              {travelMode ? <Gamepad2 size={16} /> : <Plane size={16} />}
             </button>
 
             <div className="w-px h-5 bg-app-borderLight mx-0.5" />
 
-            {quickLinks.map(({ to, icon, label }) => (
+            {quickLinks.map(({ to, icon: Icon, label }) => (
               <button
                 key={to}
                 onClick={() => navigate(to)}
                 title={label}
                 className="p-2 rounded-xl text-app-textMuted hover:text-app-textSecondary hover:bg-app-surface transition-all"
               >
-                <img src={icon} className="w-4 h-4" alt="" />
+                <Icon size={16} />
               </button>
             ))}
 
@@ -71,7 +71,7 @@ export default function Layout() {
               className="p-2 rounded-xl text-app-textMuted hover:text-app-textSecondary hover:bg-app-surface transition-all"
               title="Logout"
             >
-              <img src="/icons/logout-01-stroke-rounded.svg" className="w-4 h-4" alt="" />
+              <LogOut size={16} />
             </button>
           </div>
         </div>
