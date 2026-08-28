@@ -10,6 +10,7 @@ import userRoutes from '../backend/src/routes/users';
 import adminRoutes from '../backend/src/routes/admin';
 import newsRoutes from '../backend/src/routes/news';
 import taxonomyRoutes from '../backend/src/routes/taxonomy';
+import prisma from '../backend/src/lib/prisma';
 
 dotenv.config();
 
@@ -39,6 +40,13 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/news', newsRoutes);
 app.use('/api/taxonomy', taxonomyRoutes);
 
-app.get('/api/health', (_req, res) => res.json({ status: 'OK', time: new Date() }));
+app.get('/api/health', async (_req, res) => {
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+    res.json({ status: 'OK', db: 'connected', time: new Date() });
+  } catch (err: any) {
+    res.status(500).json({ status: 'ERROR', db: 'disconnected', error: err?.message });
+  }
+});
 
 export default app;
