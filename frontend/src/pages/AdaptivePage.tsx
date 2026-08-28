@@ -34,6 +34,7 @@ interface Question {
   id: string;
   text: string;
   options: string[];
+  correctOption: number;
   difficulty: string;
   chapter: { name: string; subject: { name: string } };
   concept: { id: number; level: string; nameEnglish: string } | null;
@@ -120,25 +121,30 @@ export default function AdaptivePage() {
   const handleAnswer = async (option: number) => {
     if (!sessionId || !question || result) return;
     setSelected(option);
-    const timeTaken = Math.round((Date.now() - startTime) / 1000);
-    const { data } = await api.post(`/adaptive/session/${sessionId}/answer`, {
-      questionId: question.id,
-      selectedOption: option,
-      timeTaken,
-    });
-    setResult(data);
+
+    // Instant feedback from client-side data — no waiting for server
+    const isCorrect = option === question.correctOption;
+    setResult({ isCorrect, correctOption: question.correctOption, explanation: undefined });
     setTotalQuestions((t) => t + 1);
-    if (data.isCorrect) {
+    if (isCorrect) {
       setSessionScore((s) => s + 1);
       setStreak((s) => s + 1);
     } else {
       setStreak(0);
     }
 
-    // Pre-loaded next question from answer response — no separate fetch needed
-    if (data.next) {
-      setNextQuestion(data.next);
-    }
+    // Fire-and-forget: save answer to server in background (also pre-fetches next question)
+    const timeTaken = Math.round((Date.now() - startTime) / 1000);
+    api.post(`/adaptive/session/${sessionId}/answer`, {
+      questionId: question.id,
+      selectedOption: option,
+      timeTaken,
+    }).then(({ data }) => {
+      if (data.explanation) {
+        setResult((prev) => prev ? { ...prev, explanation: data.explanation } : prev);
+      }
+      if (data.next) setNextQuestion(data.next);
+    }).catch(() => {});
   };
 
   const [nextQuestion, setNextQuestion] = useState<any>(null);
@@ -328,19 +334,31 @@ export default function AdaptivePage() {
           })}
 
           {/* Explanation */}
-          {result && result.explanation && (
-            <div className={`p-4 rounded-2xl text-xs space-y-1.5 transition-all ${
-              result.isCorrect
-                ? 'bg-app-accent/10 border border-app-accent/30 text-app-text'
-                : 'bg-amber-500/10 border border-amber-500/30 text-app-text'
-            }`}>
-              <div className="font-bold">
-                {result.isCorrect ? '🎉 Correct!' : '💡 Solution'}
+          {result && (
+            result.explanation ? (
+              <div className={`p-4 rounded-2xl text-xs space-y-1.5 transition-all ${
+                result.isCorrect
+                  ? 'bg-app-accent/10 border border-app-accent/30 text-app-text'
+                  : 'bg-amber-500/10 border border-amber-500/30 text-app-text'
+              }`}>
+                <div className="font-bold">
+                  {result.isCorrect ? '🎉 Correct!' : '💡 Solution'}
+                </div>
+                <p className="leading-relaxed text-app-textSecondary">
+                  {result.explanation}
+                </p>
               </div>
-              <p className="leading-relaxed text-app-textSecondary">
-                {result.explanation}
-              </p>
-            </div>
+            ) : (
+              <div className={`p-4 rounded-2xl text-xs transition-all ${
+                result.isCorrect
+                  ? 'bg-app-accent/10 border border-app-accent/30 text-app-text'
+                  : 'bg-amber-500/10 border border-amber-500/30 text-app-text'
+              }`}>
+                <div className="font-bold">
+                  {result.isCorrect ? '🎉 Correct!' : '💡 Loading explanation...'}
+                </div>
+              </div>
+            )
           )}
         </div>
 
