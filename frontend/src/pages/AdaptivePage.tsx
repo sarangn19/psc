@@ -105,14 +105,8 @@ export default function AdaptivePage() {
     setQuestionNumber(0);
     try {
       const { data } = await api.post('/adaptive/session/start');
-      setSessionId(data.session.id);
-      if (data.done) {
-        setDone(true);
-      } else {
-        setQuestion(data.question);
-        setQuestionNumber(data.questionNumber);
-        setConcept(data.concept || null);
-      }
+      setSessionId(data.id);
+      await fetchNext(data.id);
     } finally {
       setLoading(false);
     }
@@ -188,8 +182,7 @@ export default function AdaptivePage() {
     if (sid) {
       setSessionId(sid);
       startedRef.current = true;
-      setLoading(true);
-      fetchNext(sid).then(() => setLoading(false));
+      fetchNext(sid);
     } else {
       startedRef.current = true;
       startSession();
