@@ -10,6 +10,7 @@ import adminRoutes from './routes/admin';
 import newsRoutes from './routes/news';
 import taxonomyRoutes from './routes/taxonomy';
 import { warmTaxonomyCache } from './lib/taxonomyCache';
+import prisma from './lib/prisma';
 
 dotenv.config();
 
@@ -29,11 +30,17 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/news', newsRoutes);
 app.use('/api/taxonomy', taxonomyRoutes);
 
-app.get('/api/health', (_req, res) => res.json({ status: 'OK', time: new Date() }));
+app.get('/api/health', async (_req, res) => {
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+    res.json({ status: 'OK', db: 'connected', time: new Date() });
+  } catch (err: any) {
+    res.status(500).json({ status: 'ERROR', db: 'disconnected', error: err?.message });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
-  // Pre-warm taxonomy cache so first /next request is fast
   warmTaxonomyCache().catch((e) => console.error('Taxonomy cache warm failed:', e));
 });
 
