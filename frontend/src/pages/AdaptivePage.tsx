@@ -127,7 +127,7 @@ export default function AdaptivePage() {
       setStreak(0);
     }
 
-    // Fire-and-forget: save answer to server in background (also pre-fetches next question)
+    // Fire-and-forget: save answer to server in background
     const timeTaken = Math.round((Date.now() - startTime) / 1000);
     api.post(`/adaptive/session/${sessionId}/answer`, {
       questionId: question.id,
@@ -137,29 +137,11 @@ export default function AdaptivePage() {
       if (data.explanation) {
         setResult((prev) => prev ? { ...prev, explanation: data.explanation } : prev);
       }
-      if (data.next) setNextQuestion(data.next);
     }).catch(() => {});
   };
 
-  const [nextQuestion, setNextQuestion] = useState<any>(null);
-
   const handleNext = () => {
-    if (nextQuestion) {
-      if (nextQuestion.done) {
-        setDone(true);
-      } else {
-        setSelected(null);
-        setResult(null);
-        setQuestion(nextQuestion.question);
-        setQuestionNumber(nextQuestion.questionNumber);
-        setConcept(nextQuestion.concept || null);
-        setFlagged(false);
-        setStartTime(Date.now());
-      }
-      setNextQuestion(null);
-    } else if (sessionId) {
-      fetchNext(sessionId);
-    }
+    if (sessionId) fetchNext(sessionId);
   };
 
   const toggleFlag = async () => {

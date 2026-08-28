@@ -357,15 +357,10 @@ router.post('/session/:sessionId/answer', authenticate, async (req: AuthRequest,
     },
   }).catch(() => {});
 
-  // Fetch next question in parallel — returns pre-loaded next question with the answer
-  const session = await prisma.adaptiveSession.findUnique({ where: { id: sessionId } });
-  const nextData = session ? await fetchNextQuestion(userId, sessionId, session) : { done: true };
-
   return res.json({
     isCorrect,
     correctOption: question.correctOption,
     explanation: question.explanation,
-    next: nextData,
   });
 });
 
