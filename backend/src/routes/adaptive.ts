@@ -205,7 +205,7 @@ async function fetchNextQuestion(
   const [seenItems, learnedChapters, conceptStats, user] = await Promise.all([
     prisma.adaptiveItem.findMany({
       where: { sessionId },
-      select: { questionId: true, question: { select: { text: true } } },
+      select: { questionId: true },
     }),
     prisma.userChapter.findMany({ where: { userId, isLearned: true }, select: { chapterId: true } }),
     prisma.userConceptStat.findMany({
@@ -217,7 +217,6 @@ async function fetchNextQuestion(
   ]);
 
   const seenIds = new Set(seenItems.map((si) => si.questionId));
-  const seenTexts = new Set(seenItems.map((si) => si.question.text));
 
   let chapterIds = learnedChapters.map((lc) => lc.chapterId);
   if (chapterIds.length === 0) {
@@ -241,11 +240,11 @@ async function fetchNextQuestion(
   let doneMessage = 'All questions in learned chapters completed!';
 
   if (isFocused) {
-    candidates = rawCandidates.filter((q) => !seenTexts.has(q.text));
-    if (candidates.length === 0) candidates = rawAdjacent.filter((q) => !seenTexts.has(q.text));
+    candidates = rawCandidates;
+    if (candidates.length === 0) candidates = rawAdjacent;
     doneMessage = 'Focused practice complete! You have covered this concept and its related topics.';
   } else {
-    candidates = rawCandidates.filter((q) => !seenTexts.has(q.text));
+    candidates = rawCandidates;
   }
 
   if (candidates.length === 0) return { done: true, message: doneMessage };
