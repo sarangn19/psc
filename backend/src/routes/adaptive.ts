@@ -33,8 +33,11 @@ const PEN_PAPER_SUBJECTS = [
   'Accountancy', 'Financial Management', 'Public Finance',
 ];
 
-async function fetchCandidates(where: Prisma.QuestionWhereInput): Promise<RichQuestion[]> {
-  return prisma.question.findMany({ where, include: RICH_QUESTION_SELECT, take: 50 });
+async function fetchCandidates(where: Prisma.QuestionWhereInput, excludeIds: string[] = []): Promise<RichQuestion[]> {
+  const finalWhere = excludeIds.length > 0
+    ? { ...where, id: { notIn: excludeIds } }
+    : where;
+  return prisma.question.findMany({ where: finalWhere, include: RICH_QUESTION_SELECT, take: 50 });
 }
 
 // Mastery thresholds
@@ -108,7 +111,7 @@ async function findAdjacentQuestions(
     conceptId: { in: siblings.map((s) => s.id) },
     isActive: true,
     ...penPaperFilter,
-  });
+  }, [...seenIds]);
 }
 
 function zoneFor(accuracy: number, total: number): string {
@@ -203,7 +206,6 @@ async function fetchNextQuestion(
     prisma.adaptiveItem.findMany({
       where: { sessionId },
       select: { questionId: true, question: { select: { text: true } } },
-      take: 200,
     }),
     prisma.userChapter.findMany({ where: { userId, isLearned: true }, select: { chapterId: true } }),
     prisma.userConceptStat.findMany({
@@ -227,10 +229,11 @@ async function fetchNextQuestion(
   const penPaperFilter: Prisma.QuestionWhereInput = user?.travelMode
     ? { chapter: { subject: { name: { notIn: PEN_PAPER_SUBJECTS } } } }
     : {};
+  const excludeIds = [...seenIds];
   const [rawCandidates, rawAdjacent] = await Promise.all([
     isFocused
-      ? fetchCandidates({ conceptId: session.focusConceptId, isActive: true, ...penPaperFilter })
-      : fetchCandidates({ chapterId: { in: chapterIds }, isActive: true, ...penPaperFilter }),
+      ? fetchCandidates({ conceptId: session.focusConceptId, isActive: true, ...penPaperFilter }, excludeIds)
+      : fetchCandidates({ chapterId: { in: chapterIds }, isActive: true, ...penPaperFilter }, excludeIds),
     isFocused ? findAdjacentQuestions([session.focusConceptId!], seenIds, penPaperFilter) : Promise.resolve([]),
   ]);
 
@@ -238,11 +241,11 @@ async function fetchNextQuestion(
   let doneMessage = 'All questions in learned chapters completed!';
 
   if (isFocused) {
-    candidates = rawCandidates.filter((q) => !seenIds.has(q.id) && !seenTexts.has(q.text));
-    if (candidates.length === 0) candidates = rawAdjacent.filter((q) => !seenIds.has(q.id) && !seenTexts.has(q.text));
+    candidates = rawCandidates.filter((q) => !seenTexts.has(q.text));
+    if (candidates.length === 0) candidates = rawAdjacent.filter((q) => !seenTexts.has(q.text));
     doneMessage = 'Focused practice complete! You have covered this concept and its related topics.';
   } else {
-    candidates = rawCandidates.filter((q) => !seenIds.has(q.id) && !seenTexts.has(q.text));
+    candidates = rawCandidates.filter((q) => !seenTexts.has(q.text));
   }
 
   if (candidates.length === 0) return { done: true, message: doneMessage };
