@@ -2,7 +2,7 @@
   "framework": null,
   "installCommand": "npm install",
   "buildCommand": "npm install && npm run build",
-  "outputDirectory": "dist",
+  "outputDirectory": "../dist",
   "functions": {
     "api/index.ts": {
       "memory": 1024,
