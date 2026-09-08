@@ -259,7 +259,7 @@ async function fetchNextQuestion(
     const masteredConceptIds = [...new Set(ranked.flatMap((g) => g.questions).map((q) => q.conceptId).filter((id): id is number => id !== null))];
     const adjacent = await findAdjacentQuestions(masteredConceptIds, seenIds);
     if (adjacent.length > 0) {
-      const filteredAdjacent = adjacent.filter((q) => !seenIds.has(q.id) && !seenTexts.has(q.text));
+      const filteredAdjacent = adjacent.filter((q) => !seenIds.has(q.id));
       const adjacentRanked = rankGroups(filteredAdjacent, stats);
       if (adjacentRanked.length) chosen = adjacentRanked[0].questions[0];
     }
