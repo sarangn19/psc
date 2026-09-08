@@ -1,6 +1,7 @@
 {
   "framework": null,
-  "installCommand": "npm install && npm --prefix .. install",
+  "installCommand": "npm install",
+  "buildCommand": "npm install --prefix frontend && cd frontend && npx tsc && npx vite build",
   "outputDirectory": "dist",
   "functions": {
     "api/index.ts": {
