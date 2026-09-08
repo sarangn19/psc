@@ -40,8 +40,9 @@ router.post('/register', async (req: Request, res: Response) => {
 
     return res.status(201).json({ token, user: { ...user, hasExams: false } });
   } catch (err: any) {
+    console.error('REGISTER ERROR:', err?.message, err?.stack);
     if (err.errors) return res.status(400).json({ message: err.errors[0].message });
-    return res.status(500).json({ message: 'Server error' });
+    return res.status(500).json({ message: 'Server error', detail: err?.message });
   }
 });
 
