@@ -3,7 +3,7 @@
   "installCommand": "npm install && cd .. && npm install",
   "outputDirectory": "../dist",
   "functions": {
-    "api/index.ts": {
+    "../api/index.ts": {
       "memory": 1024,
       "maxDuration": 30
     }
