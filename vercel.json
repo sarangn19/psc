@@ -1,7 +1,6 @@
 {
   "framework": null,
-  "installCommand": "npm install && npm install --prefix frontend",
-  "buildCommand": "npm run build --prefix frontend",
+  "installCommand": "npm install",
   "outputDirectory": "frontend/dist",
   "functions": {
     "api/index.ts": {

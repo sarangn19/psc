@@ -19,6 +19,7 @@ const app = express();
 const allowedOrigins = [
   process.env.FRONTEND_URL || 'http://localhost:5173',
   'https://psc-frontend-roxc.vercel.app',
+  'https://psc-frontend-two.vercel.app',
 ];
 
 app.use(cors({
