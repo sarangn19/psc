@@ -39,3 +39,6 @@ all_questions_answers.pdf
 Desktop.ini
 Thumbs.db
 node_modules/.cache
+
+# unrelated files
+icons/
