@@ -2,7 +2,8 @@
   "name": "kerala-psc",
   "version": "1.0.0",
   "scripts": {
-    "postinstall": "prisma generate --schema=backend/prisma/schema.prisma"
+    "postinstall": "prisma generate --schema=backend/prisma/schema.prisma",
+    "vercel:build": "node -e \"require('child_process').execSync('npm install && npm run build',{cwd:'frontend',stdio:'inherit'})\""
   },
   "dependencies": {
     "@prisma/client": "^5.10.0",
