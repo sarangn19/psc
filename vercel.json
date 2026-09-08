@@ -1,6 +1,6 @@
 {
   "framework": null,
-  "installCommand": "npm install",
+  "installCommand": "npm install && npx prisma generate --schema=backend/prisma/schema.prisma",
   "buildCommand": "npm install --prefix frontend && cd frontend && npx tsc && npx vite build",
   "outputDirectory": "dist",
   "functions": {
