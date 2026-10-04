@@ -43,11 +43,11 @@ async function generate(ch, retries = 2) {
 Chapter: "${ch.chapterName}" | Subject: "${ch.subjectName}"
 
 Return ONLY a JSON array. Each element:
-{"text":"question text here","options":["option text 1","option text 2","option text 3","option text 4"],"correctOption":0,"explanation":"brief explanation","difficulty":"EASY"}
+{"text":"question text here","options":["option text 1","option text 2","option text 3","option text 4"],"correctOption":<0-3>,"explanation":"brief explanation","difficulty":"EASY"}
 
 CRITICAL RULES:
 - Each option MUST be the full answer text, NOT letters like "A" or "B"
-- correctOption is an integer 0-3 (0=first option, 3=fourth option)
+- correctOption is an integer 0-3 (0=first option, 3=fourth option) — RANDOMIZE across all values, do NOT always use 0
 - Mix difficulties: EASY, MEDIUM, HARD
 - No markdown formatting, just raw JSON`;
 

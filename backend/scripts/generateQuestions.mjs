@@ -205,7 +205,9 @@ const chapterByName = await loadChapterNameMap(prisma);
 - a difficulty of EASY (basic recall) or MEDIUM (standard PSC level) or HARD (tricky/advanced, applied)
 - a chapter from this exact list: ${themes}
 Return ONLY a JSON array of ${need} objects, no commentary, shape:
-[{"q":"question text","o":["a","b","c","d"],"a":2,"e":"why correct","chapter":"Chapter Theme","d":"MEDIUM"}, ...]`
+[{"q":"question text","o":["a","b","c","d"],"a":<0-3>,"e":"why correct","chapter":"Chapter Theme","d":"MEDIUM"}, ...]
+
+CRITICAL: Randomize "a" (correctOption index) across 0, 1, 2, 3 — do NOT always use the same value.`
       let arr = [];
       try { arr = extractJsonArray(await callLLM(prompt)); } catch (e) { console.error('  call failed:', e.message.slice(0, 100)); await sleep(PACE); continue; }
       batchIdx++;

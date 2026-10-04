@@ -20,32 +20,48 @@ const RICH_QUESTION_SELECT: Prisma.QuestionInclude = {
 
 type RichQuestion = Prisma.QuestionGetPayload<{ include: typeof RICH_QUESTION_SELECT }>;
 
-// Subjects that require math / pen-and-paper — hidden in travel-friendly mode
-const PEN_PAPER_SUBJECTS = [
-  'Mathematics', 'Algebra', 'Calculus', 'Coordinate Geometry', 'Numerical Methods',
-  'Quantitative Aptitude', 'Statistics', 'Statistics & Probability', 'Logic',
-  'Reasoning', 'Reasoning Ability',
-  'Mechanics', 'Thermodynamics', 'Fluid Mechanics', 'Circuit Theory',
-  'Control Systems', 'Electrical Machines', 'Power Electronics', 'Power Systems',
-  'Structural Engineering', 'Geotechnical Engineering', 'Transportation Engineering',
-  'Surveying', 'Water Resources', 'Industrial Engineering', 'Manufacturing',
-  'Physical Chemistry', 'Analytical Chemistry',
-  'Accountancy', 'Financial Management', 'Public Finance',
-];
-
 async function fetchCandidates(where: Prisma.QuestionWhereInput): Promise<RichQuestion[]> {
-  return prisma.question.findMany({ where, include: RICH_QUESTION_SELECT, take: 100 });
+  const ids = await prisma.question.findMany({
+    where,
+    select: { id: true },
+    take: 30,
+  });
+  if (ids.length === 0) return [];
+  return prisma.question.findMany({
+    where: { id: { in: ids.map((q) => q.id) } },
+    include: RICH_QUESTION_SELECT,
+  });
+}
+
+async function fetchCandidateIds(where: Prisma.QuestionWhereInput): Promise<string[]> {
+  const ids = await prisma.question.findMany({
+    where,
+    select: { id: true, conceptId: true, chapterId: true, difficulty: true },
+    take: 30,
+  });
+  return ids;
+}
+
+async function fetchQuestionById(id: string): Promise<RichQuestion | null> {
+  return prisma.question.findUnique({ where: { id }, include: RICH_QUESTION_SELECT });
 }
 
 // Mastery thresholds
 const MASTERY_ACCURACY = 0.8;
 const MIN_ATTEMPTS_FOR_MASTERY = 5;
 const MIN_ATTEMPTS_FOR_ZONE = 5;
-const SIBLING_QUERY_LIMIT = 30;
+const SIBLING_QUERY_LIMIT = 15;
+
+interface CandidateQuestion {
+  id: string;
+  conceptId: number | null;
+  chapterId: string;
+  difficulty: Difficulty;
+}
 
 interface RankedGroup {
   key: string;
-  questions: RichQuestion[];
+  questions: CandidateQuestion[];
   accuracy: number;
   total: number;
   mastery: boolean;
@@ -53,10 +69,10 @@ interface RankedGroup {
 }
 
 function rankGroups(
-  questionsList: RichQuestion[],
+  questionsList: CandidateQuestion[],
   stats: Map<string, { total: number; correct: number }>
 ): RankedGroup[] {
-  const groups = new Map<string, RichQuestion[]>();
+  const groups = new Map<string, CandidateQuestion[]>();
   for (const c of questionsList) {
     const key = c.conceptId !== null ? `concept:${c.conceptId}` : `chapter:${c.chapterId}`;
     if (!groups.has(key)) groups.set(key, []);
@@ -86,7 +102,6 @@ function rankGroups(
 async function findAdjacentQuestions(
   masteredConceptIds: number[],
   seenIds: Set<string>,
-  penPaperFilter: Prisma.QuestionWhereInput = {}
 ): Promise<RichQuestion[]> {
   if (masteredConceptIds.length === 0) return [];
 
@@ -107,7 +122,32 @@ async function findAdjacentQuestions(
   return fetchCandidates({
     conceptId: { in: siblings.map((s) => s.id) },
     isActive: true,
-    ...penPaperFilter,
+  });
+}
+
+async function findAdjacentQuestionIds(
+  masteredConceptIds: number[],
+  seenIds: Set<string>,
+): Promise<{ id: string; conceptId: number | null; chapterId: string; difficulty: Difficulty }[]> {
+  if (masteredConceptIds.length === 0) return [];
+
+  const nodes = await prisma.taxonomyNode.findMany({
+    where: { id: { in: masteredConceptIds } },
+    select: { parentId: true },
+  });
+  const topicIds = [...new Set(nodes.map((n) => n.parentId).filter((id): id is number => id !== null))];
+  if (topicIds.length === 0) return [];
+
+  const siblings = await prisma.taxonomyNode.findMany({
+    where: { parentId: { in: topicIds }, id: { notIn: masteredConceptIds } },
+    select: { id: true },
+    take: SIBLING_QUERY_LIMIT,
+  });
+  if (siblings.length === 0) return [];
+
+  return fetchCandidateIds({
+    conceptId: { in: siblings.map((s) => s.id) },
+    isActive: true,
   });
 }
 
@@ -199,52 +239,41 @@ async function fetchNextQuestion(
   sessionId: string,
   session: { focusConceptId: number | null }
 ): Promise<{ done: boolean; message?: string; question?: any; concept?: ConceptInfo; questionNumber?: number }> {
-  const [seenItems, learnedChapters, conceptStats, user] = await Promise.all([
-    prisma.adaptiveItem.findMany({
-      where: { sessionId },
-      select: { questionId: true },
-      take: 500,
-    }),
+  const isFocused = session.focusConceptId !== null && session.focusConceptId !== undefined;
+
+  const seenItems = await prisma.adaptiveItem.findMany({
+    where: { sessionId },
+    select: { questionId: true },
+    take: 200,
+  });
+  const seenIds = new Set(seenItems.map((si) => si.questionId));
+
+  const [learnedChapters, conceptStats, candidatesRaw] = await Promise.all([
     prisma.userChapter.findMany({ where: { userId, isLearned: true }, select: { chapterId: true } }),
     prisma.userConceptStat.findMany({
       where: { userId },
       select: { conceptId: true, chapterId: true, total: true, correct: true },
-      take: 500,
+      take: 200,
     }),
-    prisma.user.findUnique({ where: { id: userId }, select: { travelMode: true } }),
+    prisma.$queryRaw`
+      SELECT q.id, q."conceptId", q."chapterId", q.difficulty
+      FROM questions q
+      WHERE q."isActive" = true
+      ${isFocused ? Prisma.sql`AND q."conceptId" = ${session.focusConceptId}` : Prisma.sql`AND q."chapterId" IN (SELECT "chapterId" FROM user_chapters WHERE "userId" = ${userId} AND "isLearned" = true)`}
+      LIMIT 30
+    ` as Promise<{ id: string; conceptId: number | null; chapterId: string; difficulty: Difficulty }[]>,
   ]);
 
-  const seenIds = new Set(seenItems.map((si) => si.questionId));
+  let candidateIds = candidatesRaw.filter((q) => !seenIds.has(q.id));
 
-  let chapterIds = learnedChapters.map((lc) => lc.chapterId);
-  if (chapterIds.length === 0) {
-    const caChapter = await prisma.chapter.findFirst({ where: { name: 'Monthly Current Affairs' } });
-    if (caChapter) chapterIds = [caChapter.id];
+  if (candidateIds.length === 0 && isFocused) {
+    const adjacent = await findAdjacentQuestionIds([session.focusConceptId!], seenIds);
+    candidateIds = adjacent.filter((q) => !seenIds.has(q.id));
   }
 
-  const isFocused = session.focusConceptId !== null && session.focusConceptId !== undefined;
-  const penPaperFilter: Prisma.QuestionWhereInput = user?.travelMode
-    ? { chapter: { subject: { name: { notIn: PEN_PAPER_SUBJECTS } } } }
-    : {};
-  const [rawCandidates, rawAdjacent] = await Promise.all([
-    isFocused
-      ? fetchCandidates({ conceptId: session.focusConceptId, isActive: true, ...penPaperFilter })
-      : fetchCandidates({ chapterId: { in: chapterIds }, isActive: true, ...penPaperFilter }),
-    isFocused ? findAdjacentQuestions([session.focusConceptId!], seenIds, penPaperFilter) : Promise.resolve([]),
-  ]);
-
-  let candidates: RichQuestion[];
-  let doneMessage = 'All questions in learned chapters completed!';
-
-  if (isFocused) {
-    candidates = rawCandidates.filter((q) => !seenIds.has(q.id));
-    if (candidates.length === 0) candidates = rawAdjacent.filter((q) => !seenIds.has(q.id));
-    doneMessage = 'Focused practice complete! You have covered this concept and its related topics.';
-  } else {
-    candidates = rawCandidates.filter((q) => !seenIds.has(q.id));
+  if (candidateIds.length === 0) {
+    return { done: true, message: isFocused ? 'Focused practice complete!' : 'All questions in learned chapters completed!' };
   }
-
-  if (candidates.length === 0) return { done: true, message: doneMessage };
 
   const stats = new Map<string, { total: number; correct: number }>();
   for (const s of conceptStats) {
@@ -252,23 +281,26 @@ async function fetchNextQuestion(
     stats.set(key, { total: s.total, correct: s.correct });
   }
 
-  const ranked = rankGroups(candidates, stats);
-  let chosen: RichQuestion | null = ranked.length ? ranked[0].questions[0] : null;
+  const ranked = rankGroups(candidateIds, stats);
+  let chosenId: string | null = ranked.length ? ranked[0].questions[0].id : null;
 
   if (ranked.length > 0 && ranked.every((g) => g.mastery)) {
     const masteredConceptIds = [...new Set(ranked.flatMap((g) => g.questions).map((q) => q.conceptId).filter((id): id is number => id !== null))];
-    const adjacent = await findAdjacentQuestions(masteredConceptIds, seenIds);
+    const adjacent = await findAdjacentQuestionIds(masteredConceptIds, seenIds);
     if (adjacent.length > 0) {
       const filteredAdjacent = adjacent.filter((q) => !seenIds.has(q.id));
       const adjacentRanked = rankGroups(filteredAdjacent, stats);
-      if (adjacentRanked.length) chosen = adjacentRanked[0].questions[0];
+      if (adjacentRanked.length) chosenId = adjacentRanked[0].questions[0].id;
     }
   }
 
-  if (!chosen) return { done: true, message: 'All questions in learned chapters completed!' };
+  if (!chosenId) return { done: true, message: 'All questions in learned chapters completed!' };
 
-  const order = seenItems.length + 1;
-  await prisma.adaptiveItem.create({ data: { sessionId, questionId: chosen.id, order } });
+  const [chosen] = await Promise.all([
+    fetchQuestionById(chosenId),
+    prisma.adaptiveItem.create({ data: { sessionId, questionId: chosenId, order: seenItems.length + 1 } }),
+  ]);
+  if (!chosen) return { done: true, message: 'All questions in learned chapters completed!' };
 
   const statsKey = chosen.conceptId !== null ? `concept:${chosen.conceptId}` : `chapter:${chosen.chapterId}`;
   const conceptInfo = await buildConceptInfo(chosen.conceptId, statsKey, chosen.chapter.name, stats);
@@ -287,7 +319,7 @@ async function fetchNextQuestion(
       : null,
   };
 
-  return { done: false, question: safe, concept: conceptInfo, questionNumber: order };
+  return { done: false, question: safe, concept: conceptInfo, questionNumber: seenItems.length + 1 };
 }
 
 // Get next question for adaptive session

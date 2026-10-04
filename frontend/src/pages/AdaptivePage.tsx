@@ -66,6 +66,7 @@ export default function AdaptivePage() {
   const [startTime, setStartTime] = useState(Date.now());
   const [factIndex, setFactIndex] = useState(() => Math.floor(Math.random() * LOADING_FACTS.length));
   const [flagged, setFlagged] = useState(false);
+  const prefetchedRef = useRef<{ data: any; sid: string } | null>(null);
 
   useEffect(() => {
     if (!loadingNext && !loading) return;
@@ -75,21 +76,53 @@ export default function AdaptivePage() {
     return () => clearInterval(interval);
   }, [loadingNext, loading]);
 
+  const doFetch = async (sid: string) => {
+    const { data } = await api.get(`/adaptive/session/${sid}/next`);
+    return data;
+  };
+
+  const prefetchNext = (sid: string) => {
+    doFetch(sid).then((data) => {
+      prefetchedRef.current = { data, sid };
+    }).catch((err) => {
+      console.error('Prefetch failed:', err?.response?.status, err?.message);
+    });
+  };
+
   const fetchNext = async (sid: string) => {
     setSelected(null);
     setResult(null);
-    setQuestion(null);
     setFlagged(false);
-    setLoadingNext(true);
-    setStartTime(Date.now());
-    try {
-      const { data } = await api.get(`/adaptive/session/${sid}/next`);
+
+    if (prefetchedRef.current && prefetchedRef.current.sid === sid) {
+      const data = prefetchedRef.current.data;
+      prefetchedRef.current = null;
+      setLoadingNext(true);
       if (data.done) {
         setDone(true);
       } else {
         setQuestion(data.question);
         setQuestionNumber(data.questionNumber);
         setConcept(data.concept || null);
+        setStartTime(Date.now());
+        prefetchNext(sid);
+      }
+      setLoadingNext(false);
+      return;
+    }
+
+    prefetchedRef.current = null;
+    setLoadingNext(true);
+    setStartTime(Date.now());
+    try {
+      const data = await doFetch(sid);
+      if (data.done) {
+        setDone(true);
+      } else {
+        setQuestion(data.question);
+        setQuestionNumber(data.questionNumber);
+        setConcept(data.concept || null);
+        prefetchNext(sid);
       }
     } finally {
       setLoadingNext(false);
@@ -106,6 +139,7 @@ export default function AdaptivePage() {
     try {
       const { data } = await api.post('/adaptive/session/start');
       setSessionId(data.id);
+      localStorage.setItem('adaptiveSessionId', data.id);
       await fetchNext(data.id);
     } finally {
       setLoading(false);
@@ -160,7 +194,7 @@ export default function AdaptivePage() {
   const startedRef = useRef(false);
   useEffect(() => {
     if (startedRef.current) return;
-    const sid = searchParams.get('sessionId');
+    const sid = searchParams.get('sessionId') || localStorage.getItem('adaptiveSessionId');
     if (sid) {
       setSessionId(sid);
       startedRef.current = true;

@@ -143,7 +143,7 @@ async function generateChapter(chapter) {
   for (let batch = 1; batch <= batchesNeeded; batch++) {
     if (allQuestions.length >= chapter.count) break;
 
-    const prompt = `${chapter.prompt}\n\nReturn JSON array of ${BATCH_SIZE} objects: [{"q":"question","opts":["a","b","c","d"],"a":0,"exp":"why","d":"MEDIUM"}]`;
+    const prompt = `${chapter.prompt}\n\nReturn JSON array of ${BATCH_SIZE} objects: [{"q":"question","opts":["a","b","c","d"],"a":<0-3>,"exp":"why","d":"MEDIUM"}]\n\nCRITICAL: Randomize "a" (correctOption index) across 0, 1, 2, 3 — do NOT always use 0.`;
 
     try {
       const response = await callOpenRouter(prompt);

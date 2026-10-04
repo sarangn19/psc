@@ -127,7 +127,7 @@ async function main() {
         {
           text: 'The Vaikkom Satyagraha of 1924 was led by whom?',
           options: ['T.K. Madhavan', 'Sree Narayana Guru', 'K. Kelappan', 'Mannath Padmanabhan'],
-          correctOption: 0,
+          correctOption: 2,
           explanation: 'T.K. Madhavan was the main organiser. The satyagraha was against untouchability and for temple entry rights.',
           difficulty: Difficulty.MEDIUM,
           tags: ['history', 'satyagraha', 'social reform'],
@@ -150,7 +150,7 @@ async function main() {
             'It led to immediate caste abolition',
             'It focused only on temple entry rights'
           ],
-          correctOption: 0,
+          correctOption: 3,
           explanation: 'The Ezhava Memorial of 1896 was a milestone petition demanding equal rights for the Ezhava community in education and employment, and it catalyzed organized social reform movements.',
           difficulty: Difficulty.HARD,
           tags: ['history', 'social reform', 'ezhava', 'analyze'],
@@ -173,7 +173,7 @@ async function main() {
         {
           text: 'Panchayati Raj was added to the Constitution by which amendment?',
           options: ['73rd Amendment', '42nd Amendment', '44th Amendment', '86th Amendment'],
-          correctOption: 0,
+          correctOption: 1,
           explanation: 'The 73rd Constitutional Amendment Act, 1992 gave constitutional status to Panchayati Raj institutions.',
           difficulty: Difficulty.MEDIUM,
           tags: ['constitution', 'panchayati raj', 'amendment'],
@@ -182,7 +182,7 @@ async function main() {
         {
           text: 'The concept of "Basic Structure" of the Constitution was established in which case?',
           options: ['Kesavananda Bharati Case', 'Golaknath Case', 'Minerva Mills Case', 'Maneka Gandhi Case'],
-          correctOption: 0,
+          correctOption: 2,
           explanation: 'The Basic Structure doctrine was established by the Supreme Court in Kesavananda Bharati v. State of Kerala (1973).',
           difficulty: Difficulty.HARD,
           tags: ['constitution', 'judiciary', 'landmark cases'],
@@ -205,7 +205,7 @@ async function main() {
         {
           text: 'A number when divided by 6 leaves remainder 3. What is the remainder when the square of that number is divided by 6?',
           options: ['3', '1', '2', '0'],
-          correctOption: 0,
+          correctOption: 1,
           explanation: 'If n = 6k+3, then n² = 36k²+36k+9 = 6(6k²+6k+1)+3. So remainder is 3.',
           difficulty: Difficulty.HARD,
           tags: ['maths', 'remainders', 'number system'],
@@ -224,6 +224,15 @@ async function main() {
           difficulty: Difficulty.EASY,
           tags: ['current affairs', 'kerala schemes', 'government'],
           conceptNames: ['Social Welfare', 'Kerala Current Affairs'],
+        },
+        {
+          text: 'The Jnanpith Award for 2023 was given to which Malayalam poet?',
+          options: ['K. Satchidanandan', 'Akkitham', 'Vyloppilli', 'Sugathakumari'],
+          correctOption: 1,
+          explanation: 'K. Satchidanandan received the Jnanpith Award for 2023, becoming the 9th Malayalam writer to win the award.',
+          difficulty: Difficulty.MEDIUM,
+          tags: ['awards', 'malayalam literature'],
+          conceptNames: ['Jnanpith Award'],
         },
       ],
     },

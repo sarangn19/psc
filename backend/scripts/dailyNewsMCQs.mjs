@@ -43,7 +43,7 @@ NEWS:
 ${newsContext}
 
 Return ONLY a JSON array. Each element:
-{"text":"question","options":["A","B","C","D"],"correctOption":0,"explanation":"brief","difficulty":"MEDIUM"}
+{"text":"question","options":["A","B","C","D"],"correctOption":<0-3>,"explanation":"brief","difficulty":"MEDIUM"}
 
 Rules:
 - Questions must be directly based on the news facts

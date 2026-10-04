@@ -8,15 +8,22 @@ const router = Router();
 // Get questions by chapter
 router.get('/chapter/:chapterId', authenticate, async (req: AuthRequest, res: Response) => {
   const { chapterId } = req.params;
-  const questions = await prisma.question.findMany({
-    where: { chapterId, isActive: true },
-    select: {
-      id: true, text: true, options: true,
-      difficulty: true, tags: true, chapter: { select: { name: true } },
-      concept: { select: { id: true, level: true, nameEnglish: true } },
-    },
-  });
-  return res.json(questions.map((q) => ({ ...q, options: normalizeOptions(q.options) })));
+  const page = Math.max(1, Number(req.query.page) || 1);
+  const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 50));
+  const [total, questions] = await Promise.all([
+    prisma.question.count({ where: { chapterId, isActive: true } }),
+    prisma.question.findMany({
+      where: { chapterId, isActive: true },
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+      select: {
+        id: true, text: true, options: true, correctOption: true,
+        difficulty: true, tags: true, chapter: { select: { name: true } },
+        concept: { select: { id: true, level: true, nameEnglish: true } },
+      },
+    }),
+  ]);
+  return res.json({ items: questions.map((q) => ({ ...q, options: normalizeOptions(q.options) })), total, page, pageSize });
 });
 
 // Report a question error

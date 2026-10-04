@@ -251,7 +251,8 @@ router.get('/questions', async (req: AuthRequest, res: Response) => {
     }),
   ]);
 
-  const nodes = await prisma.taxonomyNode.findMany({ select: { id: true, parentId: true, level: true, nameEnglish: true } });
+  const conceptIdsOnPage = [...new Set(raw.filter((q) => q.concept).map((q) => q.concept!.id))];
+  const nodes = await prisma.taxonomyNode.findMany({ where: { id: { in: conceptIdsOnPage } }, select: { id: true, parentId: true, level: true, nameEnglish: true } });
   const nodeById = new Map(nodes.map((n) => [n.id, n]));
   const pathOf = (id: number) => {
     const path: { id: number; level: string; nameEnglish: string }[] = [];
@@ -433,9 +434,9 @@ NEWS:
 ${newsContext}
 
 Return ONLY a JSON array. Each element:
-{"text":"question","options":["A","B","C","D"],"correctOption":0,"explanation":"brief","difficulty":"MEDIUM"}
+{"text":"question","options":["A","B","C","D"],"correctOption":<0-3>,"explanation":"brief","difficulty":"MEDIUM"}
 
-Rules: directly based on news facts, specific names/dates/places, 4 options, 1 correct, mix difficulties, no markdown.`;
+Rules: directly based on news facts, specific names/dates/places, 4 options, 1 correct, mix difficulties, no markdown. IMPORTANT: Randomize correctOption across all values 0, 1, 2, 3 — do NOT always use 0.`;
 
   const aiRes = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
