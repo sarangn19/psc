@@ -33,7 +33,7 @@ async function fetchCandidates(where: Prisma.QuestionWhereInput): Promise<RichQu
   });
 }
 
-async function fetchCandidateIds(where: Prisma.QuestionWhereInput): Promise<string[]> {
+async function fetchCandidateIds(where: Prisma.QuestionWhereInput): Promise<{ id: string; conceptId: number | null; chapterId: string; difficulty: Difficulty }[]> {
   const ids = await prisma.question.findMany({
     where,
     select: { id: true, conceptId: true, chapterId: true, difficulty: true },

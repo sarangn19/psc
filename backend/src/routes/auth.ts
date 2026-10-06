@@ -27,7 +27,7 @@ router.post('/register', async (req: Request, res: Response) => {
     const hashed = await bcrypt.hash(password, 10);
     const user = await prisma.user.create({
       data: { name, email, password: hashed },
-      select: { id: true, name: true, email: true, role: true, travelMode: true, createdAt: true },
+      select: { id: true, name: true, email: true, role: true, createdAt: true },
     });
 
     await prisma.userActivity.create({
@@ -72,7 +72,6 @@ router.post('/login', async (req: Request, res: Response) => {
         name: user.name,
         email: user.email,
         role: user.role,
-        travelMode: user.travelMode,
         createdAt: user.createdAt,
         hasExams: examCount > 0,
       },
@@ -92,13 +91,15 @@ router.get('/me', authenticate, async (req: AuthRequest, res: Response) => {
       name: true,
       email: true,
       role: true,
-      travelMode: true,
       createdAt: true,
-      _count: { select: { selectedExams: true } },
     },
   });
-  const { _count, ...rest } = user!;
-  return res.json({ ...rest, hasExams: _count.selectedExams > 0 });
+
+  if (!user) return res.status(401).json({ message: 'Unauthenticated' });
+
+  const examCount = await prisma.userExam.count({ where: { userId: user.id } });
+
+  return res.json({ ...user, hasExams: examCount > 0 });
 });
 
 export default router;
