@@ -28,14 +28,26 @@ app.use(cors({
 
 app.use(express.json());
 
+// TEMPORARY: remove or protect before production
 app.get('/api/health', async (_req, res) => {
+  const start = Date.now();
+  const env = {
+    DATABASE_URL: !!process.env.DATABASE_URL,
+    DIRECT_URL: !!process.env.DIRECT_URL,
+    JWT_SECRET: !!process.env.JWT_SECRET,
+    JWT_EXPIRES_IN: !!process.env.JWT_EXPIRES_IN,
+    FRONTEND_URL: !!process.env.FRONTEND_URL,
+    OPENROUTER_API_KEY: !!process.env.OPENROUTER_API_KEY,
+    CRON_SECRET: !!process.env.CRON_SECRET,
+    TAXONOMY_APP_URL: !!process.env.TAXONOMY_APP_URL,
+  };
   try {
     const { default: prisma } = await import('../backend/src/lib/prisma');
     await prisma.$queryRaw`SELECT 1`;
-    res.json({ status: 'OK', db: 'connected', time: new Date() });
+    res.json({ status: 'OK', db: 'connected', env, ms: Date.now() - start, time: new Date() });
   } catch (err: any) {
     console.error('HEALTH CHECK ERROR:', err);
-    res.status(500).json({ status: 'ERROR', db: 'disconnected', error: err?.message, stack: err?.stack });
+    res.status(500).json({ status: 'ERROR', db: 'disconnected', error: err?.message?.replace(/[^\s]*\.supabase\.co[^\s]*/g, '[REDACTED]'), env, ms: Date.now() - start, time: new Date() });
   }
 });
 
