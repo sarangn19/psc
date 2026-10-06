@@ -3,33 +3,23 @@
   "installCommand": "npm install && npx prisma generate --schema=backend/prisma/schema.prisma",
   "buildCommand": "npm install --prefix frontend && cd frontend && npx tsc && npx vite build",
   "outputDirectory": "dist",
-  "regions": ["bom1"],
+  "regions": [
+    "bom1"
+  ],
   "functions": {
     "api/index.ts": {
       "memory": 1024,
       "maxDuration": 30
-    },
-    "api/cron/daily-current-affairs.ts": {
-      "memory": 1024,
-      "maxDuration": 60
-    },
-    "api/cron/daily-current-affairs-mcqs.ts": {
-      "memory": 1024,
-      "maxDuration": 60
     }
   },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index" },
-    { "source": "/(.*)", "destination": "/index.html" }
-  ],
-  "crons": [
     {
-      "path": "/api/cron/daily-current-affairs",
-      "schedule": "0 6 * * *"
+      "source": "/api/(.*)",
+      "destination": "/api/index"
     },
     {
-      "path": "/api/cron/daily-current-affairs-mcqs",
-      "schedule": "0 8 * * *"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
