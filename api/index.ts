@@ -41,13 +41,82 @@ app.get('/api/health', async (_req, res) => {
     CRON_SECRET: !!process.env.CRON_SECRET,
     TAXONOMY_APP_URL: !!process.env.TAXONOMY_APP_URL,
   };
+  // Parse DATABASE_URL for diagnostics (never print password/username)
+  let dbTarget = null;
+  let dnsFamilies = null;
+  let tcpStatus = null;
+  let prismaErrorCode = null;
+  try {
+    const url = new URL(process.env.DATABASE_URL || '');
+    const dbHost = url.hostname;
+    const dbPort = url.port || (url.protocol === 'postgres:' ? '5432' : undefined);
+    const dbUser = url.username;
+    const dbUserHasProjectRef = dbUser?.startsWith('postgres.gnnfplcsfnddqhuekmmp');
+    const params = [];
+    if (url.search) {
+      for (const [key] of url.searchParams) {
+        params.push(key);
+      }
+    }
+    dbTarget = {
+      host: dbHost,
+      port: dbPort,
+      userHasProjectRef: dbUserHasProjectRef,
+      params: params,
+      parsed: true,
+    };
+    // DNS lookup
+    const dns = await import('dns/promises');
+    try {
+      const addresses = await dns.default.lookup(dbHost, { all: true });
+      const families = [];
+      for (const addr of addresses) {
+        if (addr.family === 4 || addr.family === 6) {
+          families.push(addr.family);
+        }
+      }
+      if (families.length > 0) {
+        dnsFamilies = families;
+      } else {
+        dnsFamilies = 'no-ipv4-or-ipv6';
+      }
+    } catch (dnsErr) {
+      dnsFamilies = (dnsErr as Error).code || 'EHOSTUNREACH';
+    }
+    // TCP check
+    const net = await import('net');
+    const tcpCheck = new Promise<string>((resolve) => {
+      const timeout = setTimeout(() => {
+        net.default.destroy(socket);
+        resolve('ETIMEDOUT');
+      }, 3000);
+      const socket = net.default.connect({ host: dbHost, port: Number(dbPort) || 5432 }, () => {
+        clearTimeout(timeout);
+        resolve('connected');
+      });
+      socket.on('error', (err: Error) => {
+        clearTimeout(timeout);
+        resolve(err.code || 'ECONNREFUSED');
+      });
+    });
+    tcpStatus = await tcpCheck;
+    // Prisma error code
+    if (err?.code) {
+      prismaErrorCode = err.code;
+    } else if (err?.errorCode) {
+      prismaErrorCode = err.errorCode;
+    }
+  } catch (parseErr) {
+    // If URL parsing fails, dbTarget stays null
+  }
   try {
     const { default: prisma } = await import('../backend/src/lib/prisma');
     await prisma.$queryRaw`SELECT 1`;
-    res.json({ status: 'OK', db: 'connected', env, ms: Date.now() - start, time: new Date() });
+    res.json({ status: 'OK', db: 'connected', env, ms: Date.now() - start, time: new Date(), dbTarget, dns: dnsFamilies, tcp: tcpStatus, prismaErrorCode });
   } catch (err: any) {
     console.error('HEALTH CHECK ERROR:', err);
-    res.status(500).json({ status: 'ERROR', db: 'disconnected', error: err?.message?.replace(/[^\s]*\.supabase\.co[^\s]*/g, '[REDACTED]'), env, ms: Date.now() - start, time: new Date() });
+    const prismaErrCode = err.code || err.errorCode || null;
+    res.status(500).json({ status: 'ERROR', db: 'disconnected', error: err?.message?.replace(/[^\s]*\.supabase\.co[^\s]*/g, '[REDACTED]'), env, ms: Date.now() - start, time: new Date(), dbTarget, dns: dnsFamilies, tcp: tcpStatus, prismaErrorCode: prismaErrCode });
   }
 });
 
