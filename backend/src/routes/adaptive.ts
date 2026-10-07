@@ -244,12 +244,23 @@ async function fetchNextQuestion(
   const seenItems = await prisma.adaptiveItem.findMany({
     where: { sessionId },
     select: { questionId: true },
-    take: 200,
   });
   const seenIds = new Set(seenItems.map((si) => si.questionId));
+  const seenIdList = [...seenIds];
 
-  const [learnedChapters, conceptStats, candidatesRaw] = await Promise.all([
-    prisma.userChapter.findMany({ where: { userId, isLearned: true }, select: { chapterId: true } }),
+  // Chapter scope. Learned chapters are preferred, but a user without any
+  // (e.g. a fresh account that skipped chapter selection) must still get
+  // Practice questions — fall back to the whole active bank in that case.
+  const learnedChapters = await prisma.userChapter.findMany({ where: { userId, isLearned: true }, select: { chapterId: true } });
+  const learnedChapterIds = learnedChapters.map((l) => l.chapterId);
+  const restrictToLearned = !isFocused && learnedChapterIds.length > 0;
+  const doneMessage = isFocused
+    ? 'Focused practice complete!'
+    : restrictToLearned
+      ? 'All questions in learned chapters completed!'
+      : 'No more questions available right now!';
+
+  const [conceptStats, candidatesRaw] = await Promise.all([
     prisma.userConceptStat.findMany({
       where: { userId },
       select: { conceptId: true, chapterId: true, total: true, correct: true },
@@ -259,7 +270,13 @@ async function fetchNextQuestion(
       SELECT q.id, q."conceptId", q."chapterId", q.difficulty
       FROM questions q
       WHERE q."isActive" = true
-      ${isFocused ? Prisma.sql`AND q."conceptId" = ${session.focusConceptId}` : Prisma.sql`AND q."chapterId" IN (SELECT "chapterId" FROM user_chapters WHERE "userId" = ${userId} AND "isLearned" = true)`}
+      ${isFocused
+        ? Prisma.sql`AND q."conceptId" = ${session.focusConceptId}`
+        : restrictToLearned
+          ? Prisma.sql`AND q."chapterId" IN (${Prisma.join(learnedChapterIds)})`
+          : Prisma.empty}
+      ${seenIdList.length > 0 ? Prisma.sql`AND q."id" NOT IN (${Prisma.join(seenIdList)})` : Prisma.empty}
+      ORDER BY RANDOM()
       LIMIT 30
     ` as Promise<{ id: string; conceptId: number | null; chapterId: string; difficulty: Difficulty }[]>,
   ]);
@@ -272,7 +289,7 @@ async function fetchNextQuestion(
   }
 
   if (candidateIds.length === 0) {
-    return { done: true, message: isFocused ? 'Focused practice complete!' : 'All questions in learned chapters completed!' };
+    return { done: true, message: doneMessage };
   }
 
   const stats = new Map<string, { total: number; correct: number }>();
@@ -294,13 +311,13 @@ async function fetchNextQuestion(
     }
   }
 
-  if (!chosenId) return { done: true, message: 'All questions in learned chapters completed!' };
+  if (!chosenId) return { done: true, message: doneMessage };
 
   const [chosen] = await Promise.all([
     fetchQuestionById(chosenId),
     prisma.adaptiveItem.create({ data: { sessionId, questionId: chosenId, order: seenItems.length + 1 } }),
   ]);
-  if (!chosen) return { done: true, message: 'All questions in learned chapters completed!' };
+  if (!chosen) return { done: true, message: doneMessage };
 
   const statsKey = chosen.conceptId !== null ? `concept:${chosen.conceptId}` : `chapter:${chosen.chapterId}`;
   const conceptInfo = await buildConceptInfo(chosen.conceptId, statsKey, chosen.chapter.name, stats);

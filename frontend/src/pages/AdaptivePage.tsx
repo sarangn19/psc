@@ -67,6 +67,7 @@ export default function AdaptivePage() {
   const [factIndex, setFactIndex] = useState(() => Math.floor(Math.random() * LOADING_FACTS.length));
   const [flagged, setFlagged] = useState(false);
   const prefetchedRef = useRef<{ data: any; sid: string } | null>(null);
+  const recoveringRef = useRef(false);
 
   useEffect(() => {
     if (!loadingNext && !loading) return;
@@ -124,6 +125,21 @@ export default function AdaptivePage() {
         setConcept(data.concept || null);
         prefetchNext(sid);
       }
+    } catch (err) {
+      // Stale/unknown session id in localStorage (or a deleted session) would
+      // otherwise leave the user stuck on "Loading next question..." forever.
+      // Recover by dropping it and starting a fresh session — once only.
+      if (recoveringRef.current) throw err;
+      recoveringRef.current = true;
+      console.error('Session fetch failed, starting a fresh session:', (err as any)?.response?.status, (err as any)?.message);
+      localStorage.removeItem('adaptiveSessionId');
+      prefetchedRef.current = null;
+      try {
+        await startSession();
+      } catch (e) {
+        console.error('Session recovery failed:', e);
+      }
+      return;
     } finally {
       setLoadingNext(false);
     }
@@ -198,6 +214,7 @@ export default function AdaptivePage() {
     if (sid) {
       setSessionId(sid);
       startedRef.current = true;
+      setLoading(false);
       fetchNext(sid);
     } else {
       startedRef.current = true;
