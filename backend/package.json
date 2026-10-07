@@ -8,7 +8,8 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:seed": "ts-node prisma/seed.ts",
-    "taxonomy:import": "ts-node prisma/import-taxonomy.ts"
+    "taxonomy:import": "ts-node prisma/import-taxonomy.ts",
+    "test": "vitest run"
   },
   "dependencies": {
     "@prisma/client": "^5.10.0",
@@ -29,6 +30,7 @@
     "prisma": "^5.10.0",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vitest": "^3.2.0"
   }
 }
