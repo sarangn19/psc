@@ -165,12 +165,12 @@ export default function AdminNews() {
         {news.map((item) => (
           <div key={item.id} className="card p-4">
             <div className="flex items-start gap-3">
-              <div className="bg-app-accent/10 rounded-xl p-2 shrink-0">
-                <Newspaper size={16} className="text-app-accentLight" />
+              <div className="bg-app-accentMuted rounded-xl p-2 shrink-0">
+                <Newspaper size={16} className="text-app-accent" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 flex-wrap mb-1">
-                  <span className="text-xs bg-app-accent/10 text-app-accentLight px-2 py-0.5 rounded-full">{item.category}</span>
+                  <span className="text-xs bg-app-accentMuted text-app-accentDark px-2 py-0.5 rounded-full">{item.category}</span>
                   {item.source && <span className="text-xs text-app-textMuted">{item.source}</span>}
                 </div>
                 <h3 className="font-semibold text-app-text text-sm">{item.title}</h3>

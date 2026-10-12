@@ -42,7 +42,7 @@ export default function OnboardingPage() {
         await api.post('/exams/chapters/mark-batch', { chapterIds: selectedChapters, isLearned: true });
       }
       await fetchMe();
-      navigate('/');
+      navigate('/adaptive');
     } catch {
       alert('Something went wrong. Please try again.');
     } finally {
@@ -68,7 +68,7 @@ export default function OnboardingPage() {
 
   return (
     <div className="min-h-screen bg-app-bg flex items-center justify-center p-4">
-      <div className="bg-app-card rounded-3xl shadow-2xl w-full max-w-2xl border border-app-border">
+      <div className="bg-white rounded-3xl shadow-md w-full max-w-2xl border border-app-border">
         {/* Progress */}
         <div className="p-6 border-b border-app-border">
           <div className="flex items-center gap-4">
@@ -80,7 +80,7 @@ export default function OnboardingPage() {
                 <span className={`text-sm font-medium ${step >= s ? 'text-app-text' : 'text-app-textMuted'}`}>
                   {s === 1 ? 'Select Exams' : 'Select Chapters'}
                 </span>
-                {s < 2 && <ChevronRight size={16} className="text-app-borderLight" />}
+                {s < 2 && <ChevronRight size={16} className="text-app-border" />}
               </div>
             ))}
           </div>
@@ -98,13 +98,13 @@ export default function OnboardingPage() {
                     onClick={() => toggleExam(exam.id)}
                     className={`text-left p-4 rounded-2xl border-2 transition-all ${
                       selectedExams.includes(exam.id)
-                        ? 'border-app-accent bg-app-accent/10'
-                        : 'border-app-border hover:border-app-borderLight'
+                        ? 'border-app-accent bg-app-accentMuted'
+                        : 'border-app-border hover:border-app-accent'
                     }`}
                   >
                     <div className="flex items-start gap-3">
                       {selectedExams.includes(exam.id)
-                        ? <CheckCircle size={20} className="text-app-accentLight mt-0.5 shrink-0" />
+                        ? <CheckCircle size={20} className="text-app-accent mt-0.5 shrink-0" />
                         : <Circle size={20} className="text-app-textMuted mt-0.5 shrink-0" />}
                       <div>
                         <p className="font-medium text-sm text-app-text">{exam.name}</p>
@@ -134,8 +134,8 @@ export default function OnboardingPage() {
                           onClick={() => toggleChapter(chapter.id)}
                           className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${
                             selectedChapters.includes(chapter.id)
-                              ? 'bg-app-accent/20 border-app-accent text-app-accentLight'
-                              : 'bg-app-surface border-app-borderLight text-app-textSecondary hover:border-app-accent/50'
+                              ? 'bg-app-accentMuted border-app-accent text-app-accentDark font-medium'
+                              : 'bg-white border-app-border text-app-textSecondary hover:border-app-accent'
                           }`}
                         >
                           {selectedChapters.includes(chapter.id) ? '✓ ' : ''}{chapter.name}
@@ -146,7 +146,7 @@ export default function OnboardingPage() {
                 ))}
               </div>
               {selectedChapters.length === 0 && (
-                <div className="mt-4 bg-amber-500/10 border border-amber-500/20 rounded-2xl p-3 text-sm text-amber-400">
+                <div className="mt-4 bg-amber-50 border border-amber-200 rounded-2xl p-3 text-sm text-amber-700">
                   No chapters selected — we'll start you with Current Affairs questions.
                 </div>
               )}

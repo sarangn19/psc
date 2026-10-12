@@ -56,7 +56,7 @@ export default function AdaptivePage() {
   const [questionNumber, setQuestionNumber] = useState(0);
   const [concept, setConcept] = useState<ConceptInfo | null>(null);
   const [selected, setSelected] = useState<number | null>(null);
-  const [result, setResult] = useState<{ isCorrect: boolean; correctOption: number; explanation?: string } | null>(null);
+  const [result, setResult] = useState<{ isCorrect: boolean; correctOption: number; explanation?: string; explanationLoaded?: boolean } | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadingNext, setLoadingNext] = useState(false);
   const [done, setDone] = useState(false);
@@ -168,7 +168,7 @@ export default function AdaptivePage() {
 
     // Instant feedback from client-side data — no waiting for server
     const isCorrect = option === question.correctOption;
-    setResult({ isCorrect, correctOption: question.correctOption, explanation: undefined });
+    setResult({ isCorrect, correctOption: question.correctOption, explanation: undefined, explanationLoaded: false });
     setTotalQuestions((t) => t + 1);
     if (isCorrect) {
       setSessionScore((s) => s + 1);
@@ -184,10 +184,10 @@ export default function AdaptivePage() {
       selectedOption: option,
       timeTaken,
     }).then(({ data }) => {
-      if (data.explanation) {
-        setResult((prev) => prev ? { ...prev, explanation: data.explanation } : prev);
-      }
-    }).catch(() => {});
+      setResult((prev) => prev ? { ...prev, explanation: data.explanation || undefined, explanationLoaded: true } : prev);
+    }).catch(() => {
+      setResult((prev) => prev ? { ...prev, explanationLoaded: true } : prev);
+    });
   };
 
   const handleNext = () => {
@@ -232,9 +232,9 @@ export default function AdaptivePage() {
         <p className="text-sm text-app-textMuted mb-4">Finding your first question...</p>
         <div className="card w-full text-left">
           <div className="flex items-start gap-2">
-            <Lightbulb size={16} className="text-app-accentLight mt-0.5 shrink-0" />
+            <Lightbulb size={16} className="text-app-accent mt-0.5 shrink-0" />
             <div>
-              <p className="text-xs font-semibold text-app-accentLight mb-0.5">{fact.title}</p>
+              <p className="text-xs font-semibold text-app-accent mb-0.5">{fact.title}</p>
               <p className="text-xs text-app-textMuted leading-relaxed">{fact.text}</p>
             </div>
           </div>
@@ -251,7 +251,7 @@ export default function AdaptivePage() {
         <Trophy size={48} className={pct >= 70 ? 'text-emerald-400' : pct >= 40 ? 'text-amber-400' : 'text-rose-400'} />
         <h2 className="text-2xl font-bold text-app-text">Session Complete!</h2>
         <div className="card w-full text-center py-6">
-          <p className="text-4xl font-bold text-app-accentLight">{pct}%</p>
+          <p className="text-4xl font-bold text-app-accent">{pct}%</p>
           <p className="text-app-textMuted text-sm mt-1">{sessionScore}/{totalQuestions} correct</p>
         </div>
         <p className="text-xs text-app-textMuted max-w-xs">Your performance has been recorded. Next session will focus on your weak areas.</p>
@@ -271,9 +271,9 @@ export default function AdaptivePage() {
         <p className="text-sm text-app-textMuted mb-4">Loading next question...</p>
         <div className="card w-full text-left">
           <div className="flex items-start gap-2">
-            <Lightbulb size={16} className="text-app-accentLight mt-0.5 shrink-0" />
+            <Lightbulb size={16} className="text-app-accent mt-0.5 shrink-0" />
             <div>
-              <p className="text-xs font-semibold text-app-accentLight mb-0.5">{fact.title}</p>
+              <p className="text-xs font-semibold text-app-accent mb-0.5">{fact.title}</p>
               <p className="text-xs text-app-textMuted leading-relaxed">{fact.text}</p>
             </div>
           </div>
@@ -286,17 +286,17 @@ export default function AdaptivePage() {
   return (
     <div className="max-w-lg mx-auto flex flex-col h-full">
       {/* Question Header */}
-      <div className="px-5 pt-4 pb-6 bg-[#13072b] text-white flex flex-col relative border-b border-violet-900/40">
+      <div className="px-5 pt-4 pb-6 bg-app-accent text-white flex flex-col relative border-b border-app-accentDark/40">
         <div className="flex items-center justify-between mb-2">
           {streak >= 3 && (
-            <span className="text-xs font-medium text-amber-400">🔥 {streak} streak</span>
+            <span className="text-xs font-medium text-amber-300">🔥 {streak} streak</span>
           )}
           <button
             onClick={toggleFlag}
             className="ml-auto p-1.5 rounded-lg transition-colors"
             title={flagged ? 'Unflag' : 'Flag for review'}
           >
-            <Flag size={16} className={flagged ? 'fill-amber-400 text-amber-400' : 'text-violet-400 hover:text-violet-300'} />
+            <Flag size={16} className={flagged ? 'fill-amber-300 text-amber-300' : 'text-white/60 hover:text-white'} />
           </button>
         </div>
 
@@ -304,7 +304,7 @@ export default function AdaptivePage() {
           {question.text}
         </h1>
 
-        <div className="absolute -bottom-8 right-0 w-36 h-36 bg-violet-500/15 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute -bottom-8 right-0 w-36 h-36 bg-white/20 rounded-full blur-2xl pointer-events-none" />
       </div>
 
       {/* Options Area */}
@@ -317,20 +317,20 @@ export default function AdaptivePage() {
           {question.options.map((option, idx) => {
             const isSelected = selected === idx;
             const letter = LETTER_LABELS[idx];
-            let cardStyle = 'bg-app-card border-app-border text-app-text hover:border-app-accent hover:bg-app-surface';
+            let cardStyle = 'bg-white border-app-border text-app-text hover:border-app-accent hover:bg-app-surface';
             let badgeStyle = 'bg-app-surface text-app-textSecondary border-app-border';
 
             if (isSelected && !result) {
-              cardStyle = 'bg-violet-500/10 border-2 border-app-accent text-app-text shadow-sm';
+              cardStyle = 'bg-app-accentMuted border-2 border-app-accent text-app-text shadow-sm';
               badgeStyle = 'bg-app-accent text-white border-transparent';
             }
 
             if (result) {
               if (idx === result.correctOption) {
-                cardStyle = 'bg-emerald-500/10 border-2 border-emerald-500 text-app-text shadow-sm';
+                cardStyle = 'bg-emerald-50 border-2 border-emerald-500 text-app-text shadow-sm';
                 badgeStyle = 'bg-emerald-500 text-white border-transparent';
               } else if (isSelected && !result.isCorrect) {
-                cardStyle = 'bg-rose-500/10 border-2 border-rose-500 text-app-text';
+                cardStyle = 'bg-rose-50 border-2 border-rose-500 text-app-text';
                 badgeStyle = 'bg-rose-500 text-white border-transparent';
               } else {
                 cardStyle = 'opacity-45 bg-app-surface border-app-border text-app-textMuted';
@@ -364,8 +364,8 @@ export default function AdaptivePage() {
             result.explanation ? (
               <div className={`p-4 rounded-2xl text-xs space-y-1.5 transition-all ${
                 result.isCorrect
-                  ? 'bg-app-accent/10 border border-app-accent/30 text-app-text'
-                  : 'bg-amber-500/10 border border-amber-500/30 text-app-text'
+                  ? 'bg-emerald-50 border border-emerald-200 text-app-text'
+                  : 'bg-amber-50 border border-amber-200 text-app-text'
               }`}>
                 <div className="font-bold">
                   {result.isCorrect ? '🎉 Correct!' : '💡 Solution'}
@@ -374,11 +374,26 @@ export default function AdaptivePage() {
                   {result.explanation}
                 </p>
               </div>
+            ) : result.explanationLoaded ? (
+              <div className={`p-4 rounded-2xl text-xs transition-all ${
+                result.isCorrect
+                  ? 'bg-emerald-50 border border-emerald-200 text-app-text'
+                  : 'bg-amber-50 border border-amber-200 text-app-text'
+              }`}>
+                <div className="font-bold">
+                  {result.isCorrect ? '🎉 Correct!' : '💡 Solution'}
+                </div>
+                {!result.isCorrect && (
+                  <p className="mt-1 leading-relaxed text-app-textSecondary">
+                    No explanation available for this question yet. Use the flag button if it needs review.
+                  </p>
+                )}
+              </div>
             ) : (
               <div className={`p-4 rounded-2xl text-xs transition-all ${
                 result.isCorrect
-                  ? 'bg-app-accent/10 border border-app-accent/30 text-app-text'
-                  : 'bg-amber-500/10 border border-amber-500/30 text-app-text'
+                  ? 'bg-emerald-50 border border-emerald-200 text-app-text'
+                  : 'bg-amber-50 border border-amber-200 text-app-text'
               }`}>
                 <div className="font-bold">
                   {result.isCorrect ? '🎉 Correct!' : '💡 Loading explanation...'}

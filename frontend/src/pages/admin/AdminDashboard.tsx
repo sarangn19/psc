@@ -19,19 +19,19 @@ export default function AdminDashboard() {
   }, []);
 
   const cards = stats ? [
-    { label: 'Total Students', value: stats.totalUsers, icon: Users, color: 'text-blue-400', bg: 'bg-blue-500/10' },
-    { label: 'Active Today', value: stats.activeTodayCount, icon: Activity, color: 'text-emerald-400', bg: 'bg-emerald-500/10' },
-    { label: 'Questions', value: stats.totalQuestions, icon: HelpCircle, color: 'text-violet-400', bg: 'bg-violet-500/10' },
-    { label: 'Total Attempts', value: stats.totalAttempts, icon: CheckSquare, color: 'text-amber-400', bg: 'bg-amber-500/10' },
-    { label: 'Sessions', value: stats.totalSessions, icon: Brain, color: 'text-cyan-400', bg: 'bg-cyan-500/10' },
-    { label: 'Pending Reports', value: stats.pendingReports, icon: Flag, color: 'text-rose-400', bg: 'bg-rose-500/10' },
+    { label: 'Total Students', value: stats.totalUsers, icon: Users, color: 'text-blue-600', bg: 'bg-blue-100' },
+    { label: 'Active Today', value: stats.activeTodayCount, icon: Activity, color: 'text-emerald-600', bg: 'bg-emerald-100' },
+    { label: 'Questions', value: stats.totalQuestions, icon: HelpCircle, color: 'text-violet-600', bg: 'bg-violet-100' },
+    { label: 'Total Attempts', value: stats.totalAttempts, icon: CheckSquare, color: 'text-amber-600', bg: 'bg-amber-100' },
+    { label: 'Sessions', value: stats.totalSessions, icon: Brain, color: 'text-cyan-600', bg: 'bg-cyan-100' },
+    { label: 'Pending Reports', value: stats.pendingReports, icon: Flag, color: 'text-rose-600', bg: 'bg-rose-100' },
   ] : [];
 
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-app-text">Admin Dashboard</h1>
-        <p className="text-app-textMuted text-sm mt-1">Kerala PSC Prep — Overview</p>
+        <p className="text-app-textMuted text-sm mt-1">Cognix — Overview</p>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from './store/authStore';
+import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import OnboardingPage from './pages/OnboardingPage';
@@ -30,7 +31,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 function AdminRoute({ children }: { children: React.ReactNode }) {
   const { token, user } = useAuthStore();
   if (!token) return <Navigate to="/login" replace />;
-  if (user && user.role !== 'ADMIN') return <Navigate to="/" replace />;
+  if (user && user.role !== 'ADMIN') return <Navigate to="/adaptive" replace />;
   return <>{children}</>;
 }
 
@@ -44,18 +45,20 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Public landing page */}
+        <Route path="/" element={<LandingPage />} />
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
 
         {/* Student routes */}
-        <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
-          <Route index element={<AdaptivePage />} />
-          <Route path="adaptive" element={<AdaptivePage />} />
-          <Route path="learning" element={<LearningPage />} />
-          <Route path="chapters" element={<ChaptersPage />} />
-          <Route path="news" element={<NewsPage />} />
-          <Route path="performance" element={<PerformancePage />} />
+        <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
+          <Route path="/adaptive" element={<AdaptivePage />} />
+          <Route path="/learning" element={<LearningPage />} />
+          <Route path="/chapters" element={<ChaptersPage />} />
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/performance" element={<PerformancePage />} />
         </Route>
 
         {/* Admin routes */}

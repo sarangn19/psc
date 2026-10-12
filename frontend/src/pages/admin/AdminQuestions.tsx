@@ -14,11 +14,11 @@ interface QuestionItem {
 
 const LEVELS = ['', 'SUBJECT', 'DOMAIN', 'TOPIC', 'CONCEPT'];
 const LEVEL_COLORS: Record<string, string> = {
-  EXAM: 'bg-violet-500/10 text-violet-400', SUBJECT: 'bg-blue-500/10 text-blue-400',
-  DOMAIN: 'bg-cyan-500/10 text-cyan-400', TOPIC: 'bg-emerald-500/10 text-emerald-400', CONCEPT: 'bg-amber-500/10 text-amber-400',
+  EXAM: 'bg-violet-100 text-violet-700', SUBJECT: 'bg-blue-100 text-blue-700',
+  DOMAIN: 'bg-cyan-100 text-cyan-700', TOPIC: 'bg-emerald-100 text-emerald-700', CONCEPT: 'bg-amber-100 text-amber-700',
 };
 const DIFF_COLORS: Record<string, string> = {
-  EASY: 'bg-emerald-500/10 text-emerald-400', MEDIUM: 'bg-amber-500/10 text-amber-400', HARD: 'bg-rose-500/10 text-rose-400',
+  EASY: 'bg-emerald-100 text-emerald-700', MEDIUM: 'bg-amber-100 text-amber-700', HARD: 'bg-rose-100 text-rose-700',
 };
 
 function ConceptPicker({ value, onSelect }: { value: { id: number | null; label: string }; onSelect: (id: number | null, label: string) => void }) {
@@ -46,7 +46,7 @@ function ConceptPicker({ value, onSelect }: { value: { id: number | null; label:
           placeholder="Search taxonomy concept, e.g. Travancore, Constitution..."
         />
         {results.length > 0 && (
-          <ul className="absolute z-20 w-full mt-1 bg-app-card border border-app-border rounded-xl shadow-xl max-h-48 overflow-y-auto custom-scrollbar">
+          <ul className="absolute z-20 w-full mt-1 bg-white border border-app-border rounded-xl shadow-xl max-h-48 overflow-y-auto custom-scrollbar">
             {results.map((n) => (
               <li key={n.id}>
                 <button type="button" onMouseDown={() => { onSelect(n.id, `${n.nameEnglish} (${n.level})`); setTyping(false); setQuery(''); setResults([]); }}
@@ -119,8 +119,8 @@ function QuestionForm({ chapters, editing, onClose, onSaved }: {
 
   return (
     <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
-      <div className="bg-app-card rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
-        <div className="p-5 border-b border-app-border flex items-center justify-between sticky top-0 bg-app-card">
+      <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto custom-scrollbar">
+        <div className="p-5 border-b border-app-border flex items-center justify-between sticky top-0 bg-white">
           <h2 className="font-bold text-lg text-app-text">{editing ? 'Edit Question' : 'Add New Question'}</h2>
           <button onClick={onClose} className="text-app-textMuted hover:text-app-text"><X size={20} /></button>
         </div>
@@ -332,17 +332,17 @@ export default function AdminQuestions() {
                   </td>
                   <td className="px-4 py-3">
                     {q.isActive
-                      ? <span className="px-2 py-0.5 rounded-full text-xs bg-emerald-500/10 text-emerald-400">Active</span>
-                      : <span className="px-2 py-0.5 rounded-full text-xs bg-rose-500/10 text-rose-400">Flagged</span>}
+                      ? <span className="px-2 py-0.5 rounded-full text-xs bg-emerald-100 text-emerald-700">Active</span>
+                      : <span className="px-2 py-0.5 rounded-full text-xs bg-rose-100 text-rose-700">Flagged</span>}
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex justify-end gap-1">
                       <button onClick={() => { setEditing(q); setShowForm(true); }} title="Edit"
-                        className="p-2 rounded-xl text-app-textMuted hover:bg-blue-500/10 hover:text-blue-400 transition-colors"><Pencil size={16} /></button>
+                        className="p-2 rounded-xl text-app-textMuted hover:bg-blue-50 hover:text-blue-600 transition-colors"><Pencil size={16} /></button>
                       <button onClick={() => toggleActive(q)} title={q.isActive ? 'Flag / hide' : 'Unflag / show'}
-                        className="p-2 rounded-xl text-app-textMuted hover:bg-amber-500/10 hover:text-amber-400 transition-colors"><Flag size={16} /></button>
+                        className="p-2 rounded-xl text-app-textMuted hover:bg-amber-50 hover:text-amber-600 transition-colors"><Flag size={16} /></button>
                       <button onClick={() => remove(q)} title="Delete"
-                        className="p-2 rounded-xl text-app-textMuted hover:bg-rose-500/10 hover:text-rose-400 transition-colors"><Trash2 size={16} /></button>
+                        className="p-2 rounded-xl text-app-textMuted hover:bg-rose-50 hover:text-rose-600 transition-colors"><Trash2 size={16} /></button>
                     </div>
                   </td>
                 </tr>

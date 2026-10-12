@@ -19,18 +19,18 @@ interface WeakConcept {
 }
 
 const ZONE_BADGE: Record<string, string> = {
-  STRONG: 'bg-emerald-500/10 text-emerald-400',
-  MEDIUM: 'bg-amber-500/10 text-amber-400',
-  WEAK: 'bg-rose-500/10 text-rose-400',
+  STRONG: 'bg-emerald-100 text-emerald-700',
+  MEDIUM: 'bg-amber-100 text-amber-700',
+  WEAK: 'bg-rose-100 text-rose-700',
   UNTESTED: 'bg-app-surface text-app-textMuted',
 };
 
 const LEVEL_BADGE: Record<string, string> = {
-  CONCEPT: 'bg-blue-500/10 text-blue-400',
-  TOPIC: 'bg-violet-500/10 text-violet-400',
-  DOMAIN: 'bg-orange-500/10 text-orange-400',
-  SUBJECT: 'bg-teal-500/10 text-teal-400',
-  EXAM: 'bg-indigo-500/10 text-indigo-400',
+  CONCEPT: 'bg-blue-100 text-blue-700',
+  TOPIC: 'bg-violet-100 text-violet-700',
+  DOMAIN: 'bg-orange-100 text-orange-700',
+  SUBJECT: 'bg-teal-100 text-teal-700',
+  EXAM: 'bg-indigo-100 text-indigo-700',
 };
 
 export default function LearningPage() {
@@ -61,7 +61,7 @@ export default function LearningPage() {
     <div className="p-4 max-w-lg mx-auto space-y-5">
       <div>
         <h2 className="text-xl font-bold text-app-text flex items-center gap-2">
-          <Target size={20} className="text-app-accentLight" /> Learning
+          <Target size={20} className="text-app-accent" /> Learning
         </h2>
         <p className="text-app-textMuted text-sm">Focus on your weakest concepts — read the notes, then practice exactly that topic.</p>
       </div>

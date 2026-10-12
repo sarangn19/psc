@@ -9,6 +9,8 @@ dist/
 # env / secrets
 backend/.env
 .env
+.env.*
+!.env.example
 
 # gems/gen files
 backend/scripts/_generated_proposals.jsonl
@@ -21,6 +23,7 @@ backend/scripts/TEST.pid
 
 # working artifacts / logs
 backend/server.stdout.log
+backend/dev.log
 backend/server.stderr.log
 backend/server.err
 backend/server.log
@@ -32,6 +35,9 @@ frontend/frontend.log
 frontend/dist/
 
 # docs / large files
+backend/backups/
+banking_*.json
+qb_*.csv
 CONVERSATION_SUMMARY.md
 all_questions_answers.pdf
 
@@ -42,3 +48,4 @@ node_modules/.cache
 
 # unrelated files
 icons/
+.vercel

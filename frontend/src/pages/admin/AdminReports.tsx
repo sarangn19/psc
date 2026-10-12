@@ -75,10 +75,10 @@ export default function AdminReports() {
         ) : filtered.map((report) => (
           <div
             key={report.id}
-            className={`card p-5 ${report.isResolved ? 'opacity-60' : 'border-rose-500/30'}`}
+            className={`card p-5 ${report.isResolved ? 'opacity-60' : 'border-rose-300'}`}
           >
             <div className="flex items-start gap-3">
-              <div className={`rounded-xl p-2 ${report.isResolved ? 'bg-emerald-500/10' : 'bg-rose-500/10'}`}>
+              <div className={`rounded-xl p-2 ${report.isResolved ? 'bg-emerald-100' : 'bg-rose-100'}`}>
                 {report.isResolved
                   ? <CheckCircle size={18} className="text-emerald-400" />
                   : <Flag size={18} className="text-rose-400" />}
@@ -87,7 +87,7 @@ export default function AdminReports() {
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="font-semibold text-sm text-app-text">{report.reason}</span>
                   <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                    report.isResolved ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'
+                    report.isResolved ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'
                   }`}>
                     {report.isResolved ? 'Resolved' : 'Pending'}
                   </span>
@@ -113,7 +113,7 @@ export default function AdminReports() {
                     <div className="flex gap-2">
                       <button
                         onClick={() => handleToggleQuestion(report.question.id)}
-                        className="text-xs px-3 py-1.5 bg-rose-500/10 text-rose-400 rounded-xl hover:bg-rose-500/20 transition-colors"
+                        className="text-xs px-3 py-1.5 bg-rose-100 text-rose-700 rounded-xl hover:bg-rose-200 transition-colors"
                       >
                         Deactivate Q
                       </button>

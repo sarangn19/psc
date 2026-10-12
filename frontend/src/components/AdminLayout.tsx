@@ -17,12 +17,17 @@ export default function AdminLayout() {
   return (
     <div className="min-h-screen flex bg-app-bg">
       {/* Sidebar */}
-      <aside className="w-56 bg-app-card border-r border-app-border flex flex-col">
+      <aside className="w-56 bg-white border-r border-app-border flex flex-col">
         <div className="p-5 border-b border-app-border">
           <div className="flex items-center gap-2">
-            <span className="text-2xl">🏛️</span>
+            <span
+              aria-hidden="true"
+              className="w-9 h-9 rounded-xl bg-app-accent text-white text-sm font-bold grid place-items-center"
+            >
+              C
+            </span>
             <div>
-              <h1 className="font-bold text-sm text-app-text">Kerala PSC</h1>
+              <h1 className="font-bold text-sm text-app-text">Cognix</h1>
               <p className="text-app-textMuted text-xs">Admin Panel</p>
             </div>
           </div>

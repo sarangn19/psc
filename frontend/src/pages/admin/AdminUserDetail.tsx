@@ -90,7 +90,7 @@ export default function AdminUserDetail() {
             <h3 className="font-semibold text-app-text mb-3">Selected Exams</h3>
             <div className="flex flex-wrap gap-2">
               {selectedExams.map((e) => (
-                <span key={e.id} className="bg-app-accent/10 text-app-accentLight text-xs px-3 py-1.5 rounded-full">{e.name}</span>
+                <span key={e.id} className="bg-app-accentMuted text-app-accentDark text-xs px-3 py-1.5 rounded-full">{e.name}</span>
               ))}
               {selectedExams.length === 0 && <p className="text-sm text-app-textMuted">No exams selected</p>}
             </div>
@@ -178,10 +178,10 @@ export default function AdminUserDetail() {
                   <p className="text-xs text-app-textMuted">{c.correct}/{c.total}</p>
                 </div>
                 <span className={`text-xs px-2 py-1 rounded-full font-medium ${
-                  c.zone === 'STRONG' ? 'bg-emerald-500/10 text-emerald-400' :
-                  c.zone === 'WEAK' ? 'bg-rose-500/10 text-rose-400' :
+                  c.zone === 'STRONG' ? 'bg-emerald-100 text-emerald-700' :
+                  c.zone === 'WEAK' ? 'bg-rose-100 text-rose-700' :
                   c.zone === 'UNTESTED' ? 'bg-app-surface text-app-textMuted' :
-                  'bg-amber-500/10 text-amber-400'
+                  'bg-amber-100 text-amber-700'
                 }`}>{c.zone}</span>
               </div>
             );

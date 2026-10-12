@@ -36,9 +36,9 @@ interface WeeklyData {
 }
 
 const ZONE_CONFIG = {
-  STRONG: { color: 'text-emerald-400', bg: 'bg-emerald-500/10', border: 'border-emerald-500/30', icon: TrendingUp, label: 'Strong' },
-  MEDIUM: { color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/30', icon: Minus, label: 'Medium' },
-  WEAK: { color: 'text-rose-400', bg: 'bg-rose-500/10', border: 'border-rose-500/30', icon: TrendingDown, label: 'Weak' },
+  STRONG: { color: 'text-emerald-700', bg: 'bg-emerald-50', border: 'border-emerald-300', icon: TrendingUp, label: 'Strong' },
+  MEDIUM: { color: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-300', icon: Minus, label: 'Medium' },
+  WEAK: { color: 'text-rose-700', bg: 'bg-rose-50', border: 'border-rose-300', icon: TrendingDown, label: 'Weak' },
   UNTESTED: { color: 'text-app-textMuted', bg: 'bg-app-surface', border: 'border-app-border', icon: Minus, label: 'Untested' },
 };
 
@@ -150,22 +150,22 @@ export default function PerformancePage() {
       {stats && (
         <div className="grid grid-cols-4 gap-2">
           <div className="card p-3 text-center">
-            <p className="text-xl font-bold text-app-accentLight">{stats.totalAttempts}</p>
+            <p className="text-xl font-bold text-app-accent">{stats.totalAttempts}</p>
             <p className="text-[10px] text-app-textMuted uppercase tracking-wide">Total Qs</p>
           </div>
           <div className="card p-3 text-center">
-            <p className="text-xl font-bold text-emerald-400">{stats.accuracy}%</p>
+            <p className="text-xl font-bold text-emerald-600">{stats.accuracy}%</p>
             <p className="text-[10px] text-app-textMuted uppercase tracking-wide">Accuracy</p>
           </div>
           <div className="card p-3 text-center">
             <div className="flex items-center justify-center gap-1">
-              <Flame size={14} className="text-amber-400" />
-              <p className="text-xl font-bold text-amber-400">{streak.streak}</p>
+              <Flame size={14} className="text-amber-500" />
+              <p className="text-xl font-bold text-amber-600">{streak.streak}</p>
             </div>
             <p className="text-[10px] text-app-textMuted uppercase tracking-wide">Streak</p>
           </div>
           <div className="card p-3 text-center">
-            <p className="text-xl font-bold text-sky-400">{streak.todayCount}</p>
+            <p className="text-xl font-bold text-sky-600">{streak.todayCount}</p>
             <p className="text-[10px] text-app-textMuted uppercase tracking-wide">Today</p>
           </div>
         </div>
@@ -176,7 +176,7 @@ export default function PerformancePage() {
         <div className="card p-4">
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-semibold text-app-text text-sm">This Week vs Last Week</h3>
-            <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${weekDelta >= 0 ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'}`}>
+            <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${weekDelta >= 0 ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
               {weekDelta >= 0 ? '+' : ''}{weekDelta}%
             </span>
           </div>
@@ -188,7 +188,7 @@ export default function PerformancePage() {
             </div>
             <div className="bg-app-surface rounded-xl p-3">
               <p className="text-xs text-app-textMuted mb-1">Last Week</p>
-              <p className="text-lg font-bold text-app-textMuted">{weekly.lastWeek.total} Qs</p>
+              <p className="text-lg font-bold text-app-textSecondary">{weekly.lastWeek.total} Qs</p>
               <p className="text-xs text-app-textMuted">{weekly.lastWeek.accuracy}% accuracy</p>
             </div>
           </div>
@@ -224,16 +224,16 @@ export default function PerformancePage() {
       {weak.length > 0 && (
         <button
           onClick={() => navigate('/chapters')}
-          className="w-full card p-3 flex items-center gap-3 border-2 border-rose-500/30 bg-rose-500/5 hover:bg-rose-500/10 transition-all"
+          className="w-full card p-3 flex items-center gap-3 border-2 border-rose-300 bg-rose-50 hover:bg-rose-100 transition-all"
         >
-          <div className="p-2 rounded-xl bg-rose-500/10">
-            <Zap size={18} className="text-rose-400" />
+          <div className="p-2 rounded-xl bg-rose-100">
+            <Zap size={18} className="text-rose-600" />
           </div>
           <div className="text-left flex-1">
             <p className="text-sm font-medium text-app-text">{weak.length} weak {weak.length === 1 ? 'area' : 'areas'} found</p>
             <p className="text-xs text-app-textMuted">Tap to practice weak chapters</p>
           </div>
-          <TrendingUp size={16} className="text-rose-400" />
+          <TrendingUp size={16} className="text-rose-600" />
         </button>
       )}
 
@@ -241,7 +241,7 @@ export default function PerformancePage() {
       {subjectData.length > 0 && (
         <div className="card">
           <h3 className="font-semibold text-app-text mb-3 flex items-center gap-2">
-            <BarChart2 size={16} className="text-app-accentLight" />
+            <BarChart2 size={16} className="text-app-accent" />
             By Subject
           </h3>
           <div className="space-y-2">
@@ -272,14 +272,14 @@ export default function PerformancePage() {
       {chartData.length > 0 && (
         <div className="card">
           <h3 className="font-semibold text-app-text mb-4 flex items-center gap-2">
-            <BarChart2 size={16} className="text-app-accentLight" />
+            <BarChart2 size={16} className="text-app-accent" />
             Chapter Accuracy
           </h3>
           <ResponsiveContainer width="100%" height={180}>
             <BarChart data={chartData} margin={{ top: 0, right: 0, bottom: 20, left: -20 }}>
-              <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#94a3b8' }} angle={-30} textAnchor="end" />
-              <YAxis tick={{ fontSize: 10, fill: '#94a3b8' }} domain={[0, 100]} />
-              <Tooltip formatter={(v) => `${v}%`} contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 12 }} />
+              <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#8a8680' }} angle={-30} textAnchor="end" />
+              <YAxis tick={{ fontSize: 10, fill: '#8a8680' }} domain={[0, 100]} />
+              <Tooltip formatter={(v) => `${v}%`} contentStyle={{ background: '#ffffff', border: '1px solid #e5e3da', borderRadius: 12 }} />
               <Bar dataKey="accuracy" radius={[4, 4, 0, 0]}>
                 {chartData.map((entry, i) => (
                   <Cell key={i} fill={entry.accuracy >= 70 ? '#34d399' : entry.accuracy >= 40 ? '#fbbf24' : '#f87171'} />
@@ -296,10 +296,10 @@ export default function PerformancePage() {
           <h3 className="font-semibold text-app-text mb-4">Score Trend</h3>
           <ResponsiveContainer width="100%" height={140}>
             <LineChart data={sessionChartData}>
-              <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#94a3b8' }} />
-              <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} domain={[0, 100]} />
-              <Tooltip formatter={(v) => `${v}%`} contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 12 }} />
-              <Line type="monotone" dataKey="score" stroke="#8b5cf6" strokeWidth={2} dot={{ fill: '#8b5cf6', r: 3 }} />
+              <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#8a8680' }} />
+              <YAxis tick={{ fontSize: 11, fill: '#8a8680' }} domain={[0, 100]} />
+              <Tooltip formatter={(v) => `${v}%`} contentStyle={{ background: '#ffffff', border: '1px solid #e5e3da', borderRadius: 12 }} />
+              <Line type="monotone" dataKey="score" stroke="#2d6a4f" strokeWidth={2} dot={{ fill: '#2d6a4f', r: 3 }} />
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -316,7 +316,7 @@ export default function PerformancePage() {
           </div>
           <div className="space-y-2">
             {top5.map((p, i) => (
-              <div key={p.chapterId} className="flex items-center gap-3 p-2 rounded-xl bg-emerald-500/5 border border-emerald-500/20">
+              <div key={p.chapterId} className="flex items-center gap-3 p-2 rounded-xl bg-emerald-50 border border-emerald-200">
                 <span className="text-xs font-bold text-emerald-400 w-5 text-center">#{i + 1}</span>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-app-text truncate">{p.name}</p>
@@ -344,7 +344,7 @@ export default function PerformancePage() {
           {showBottom && (
             <div className="space-y-2 mt-3">
               {bottom5.map((p, i) => (
-                <div key={p.chapterId} className="flex items-center gap-3 p-2 rounded-xl bg-rose-500/5 border border-rose-500/20">
+                <div key={p.chapterId} className="flex items-center gap-3 p-2 rounded-xl bg-rose-50 border border-rose-200">
                   <span className="text-xs font-bold text-rose-400 w-5 text-center">#{i + 1}</span>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-app-text truncate">{p.name}</p>
@@ -362,7 +362,7 @@ export default function PerformancePage() {
       <div>
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-semibold text-app-text">All Chapters</h3>
-          <button onClick={() => setActiveZone('ALL')} className="text-xs text-app-accentLight">Show All</button>
+          <button onClick={() => setActiveZone('ALL')} className="text-xs text-app-accent">Show All</button>
         </div>
         <div className="space-y-2">
           {filtered.map((p) => {

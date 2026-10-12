@@ -4,7 +4,11 @@
   "scripts": {
     "postinstall": "prisma generate --schema=backend/prisma/schema.prisma",
     "build": "npm install --prefix frontend && cd frontend && npx tsc && npx vite build",
-    "vercel-build": "npm install --prefix frontend && cd frontend && npx tsc && npx vite build"
+    "vercel-build": "npm install --prefix frontend && cd frontend && npx tsc && npx vite build",
+    "db:backup": "node backend/scripts/backupDb.mjs",
+    "db:push": "node scripts/safe-db.mjs push",
+    "db:migrate": "node scripts/safe-db.mjs migrate",
+    "db:status": "node scripts/safe-db.mjs status"
   },
   "dependencies": {
     "@prisma/client": "^5.10.0",

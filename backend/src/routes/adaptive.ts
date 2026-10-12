@@ -248,16 +248,36 @@ async function fetchNextQuestion(
   const seenIds = new Set(seenItems.map((si) => si.questionId));
   const seenIdList = [...seenIds];
 
-  // Chapter scope. Learned chapters are preferred, but a user without any
-  // (e.g. a fresh account that skipped chapter selection) must still get
-  // Practice questions — fall back to the whole active bank in that case.
-  const learnedChapters = await prisma.userChapter.findMany({ where: { userId, isLearned: true }, select: { chapterId: true } });
+  // Chapter scope: respect the user's selected exams AND learned chapters so
+  // practice never leaks into other exams' syllabi.
+  // - selected exams + learned chapters -> learned chapters within selected exams
+  // - selected exams only               -> all chapters of selected exams
+  // - learned chapters only             -> learned chapters (no exam selection yet)
+  // - neither                           -> whole active bank (fresh account; onboarding first)
+  const [learnedChapters, selectedExamChapters] = await Promise.all([
+    prisma.userChapter.findMany({ where: { userId, isLearned: true }, select: { chapterId: true } }),
+    prisma.chapter.findMany({
+      where: { subject: { exam: { userExams: { some: { userId } } } } },
+      select: { id: true },
+    }),
+  ]);
   const learnedChapterIds = learnedChapters.map((l) => l.chapterId);
-  const restrictToLearned = !isFocused && learnedChapterIds.length > 0;
+  const selectedChapterIds = selectedExamChapters.map((c) => c.id);
+  let scopeChapterIds: string[] | null = null;
+  if (learnedChapterIds.length > 0 && selectedChapterIds.length > 0) {
+    const selectedSet = new Set(selectedChapterIds);
+    const intersect = learnedChapterIds.filter((id) => selectedSet.has(id));
+    scopeChapterIds = intersect.length > 0 ? intersect : selectedChapterIds;
+  } else if (learnedChapterIds.length > 0) {
+    scopeChapterIds = learnedChapterIds;
+  } else if (selectedChapterIds.length > 0) {
+    scopeChapterIds = selectedChapterIds;
+  }
+  const restrictToScope = !isFocused && scopeChapterIds !== null;
   const doneMessage = isFocused
     ? 'Focused practice complete!'
-    : restrictToLearned
-      ? 'All questions in learned chapters completed!'
+    : restrictToScope
+      ? 'All questions in your selected chapters completed!'
       : 'No more questions available right now!';
 
   const [conceptStats, candidatesRaw] = await Promise.all([
@@ -272,8 +292,8 @@ async function fetchNextQuestion(
       WHERE q."isActive" = true
       ${isFocused
         ? Prisma.sql`AND q."conceptId" = ${session.focusConceptId}`
-        : restrictToLearned
-          ? Prisma.sql`AND q."chapterId" IN (${Prisma.join(learnedChapterIds)})`
+        : restrictToScope
+          ? Prisma.sql`AND q."chapterId" IN (${Prisma.join(scopeChapterIds!)})`
           : Prisma.empty}
       ${seenIdList.length > 0 ? Prisma.sql`AND q."id" NOT IN (${Prisma.join(seenIdList)})` : Prisma.empty}
       ORDER BY RANDOM()

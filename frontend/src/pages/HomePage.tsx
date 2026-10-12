@@ -40,24 +40,24 @@ export default function HomePage() {
     <div className="p-4 max-w-lg mx-auto space-y-5">
       {/* Welcome */}
       <div className="bg-app-accent rounded-3xl p-5 text-white">
-        <p className="text-app-textMuted text-sm">Good day,</p>
+        <p className="text-white/70 text-sm">Good day,</p>
         <h2 className="text-2xl font-bold mt-0.5">{user?.name} 👋</h2>
-        <p className="text-app-textSecondary text-sm mt-1">Keep up your preparation streak!</p>
+        <p className="text-white/80 text-sm mt-1">Keep up your preparation streak!</p>
       </div>
 
       {/* Quick Stats */}
       {stats && (
         <div className="grid grid-cols-3 gap-3">
           <div className="card text-center p-4">
-            <p className="text-2xl font-bold text-app-accentLight">{stats.accuracy}%</p>
+            <p className="text-2xl font-bold text-app-accent">{stats.accuracy}%</p>
             <p className="text-xs text-app-textMuted mt-1">Accuracy</p>
           </div>
           <div className="card text-center p-4">
-            <p className="text-2xl font-bold text-emerald-400">{stats.totalAttempts}</p>
+            <p className="text-2xl font-bold text-emerald-600">{stats.totalAttempts}</p>
             <p className="text-xs text-app-textMuted mt-1">Questions</p>
           </div>
           <div className="card text-center p-4">
-            <p className="text-2xl font-bold text-violet-400">{stats.learnedChapters}</p>
+            <p className="text-2xl font-bold text-amber-600">{stats.learnedChapters}</p>
             <p className="text-xs text-app-textMuted mt-1">Chapters</p>
           </div>
         </div>
@@ -67,24 +67,24 @@ export default function HomePage() {
       <div className="space-y-3">
         <button
           onClick={() => navigate('/adaptive')}
-          className="w-full bg-app-accent text-white rounded-3xl p-5 flex items-center gap-4 hover:opacity-90 transition-all shadow-lg"
+          className="w-full bg-app-accent text-white rounded-3xl p-5 flex items-center gap-4 hover:bg-app-accentDark transition-all shadow-md"
         >
           <div className="bg-white/20 rounded-xl p-3">
             <Brain size={28} />
           </div>
           <div className="text-left">
             <p className="font-bold text-lg">Adaptive Learning</p>
-            <p className="text-app-textSecondary text-sm">AI-powered questions based on your knowledge gaps</p>
+            <p className="text-white/70 text-sm">AI-powered questions based on your knowledge gaps</p>
           </div>
           <Zap size={20} className="ml-auto text-yellow-300" />
         </button>
 
         <button
           onClick={() => navigate('/chapters')}
-          className="w-full bg-app-card rounded-3xl p-5 flex items-center gap-4 border border-app-border hover:border-app-accent/50 transition-all"
+          className="w-full bg-white rounded-3xl p-5 flex items-center gap-4 border border-app-border hover:border-app-accent hover:shadow-md transition-all"
         >
-          <div className="bg-app-accent/10 rounded-xl p-3">
-            <BookOpen size={28} className="text-app-accentLight" />
+          <div className="bg-app-accentMuted rounded-xl p-3">
+            <BookOpen size={28} className="text-app-accent" />
           </div>
           <div className="text-left">
             <p className="font-bold text-lg text-app-text">Mark Chapters</p>
@@ -99,14 +99,14 @@ export default function HomePage() {
           {stats.weakZones.length > 0 && (
             <div className="card">
               <div className="flex items-center gap-2 mb-3">
-                <TrendingDown size={18} className="text-rose-400" />
+                <TrendingDown size={18} className="text-rose-500" />
                 <h3 className="font-semibold text-app-text">Weak Zones — Focus Here</h3>
               </div>
               <div className="space-y-2">
                 {stats.weakZones.map((z) => (
                   <div key={z.name} className="flex items-center justify-between">
                     <span className="text-sm text-app-textSecondary">{z.name}</span>
-                    <span className="text-xs font-medium text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded-full">
+                    <span className="text-xs font-medium text-rose-700 bg-rose-100 px-2 py-0.5 rounded-full">
                       {z.accuracy}%
                     </span>
                   </div>
@@ -118,14 +118,14 @@ export default function HomePage() {
           {stats.strongZones.length > 0 && (
             <div className="card">
               <div className="flex items-center gap-2 mb-3">
-                <TrendingUp size={18} className="text-emerald-400" />
+                <TrendingUp size={18} className="text-emerald-600" />
                 <h3 className="font-semibold text-app-text">Strong Zones — Keep it up!</h3>
               </div>
               <div className="space-y-2">
                 {stats.strongZones.map((z) => (
                   <div key={z.name} className="flex items-center justify-between">
                     <span className="text-sm text-app-textSecondary">{z.name}</span>
-                    <span className="text-xs font-medium text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">
+                    <span className="text-xs font-medium text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">
                       {z.accuracy}%
                     </span>
                   </div>

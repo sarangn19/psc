@@ -15,13 +15,13 @@ interface NewsItem {
 interface Category { category: string; _count: number; }
 
 const CATEGORY_COLORS: Record<string, string> = {
-  'Current Affairs': 'bg-blue-500/10 text-blue-400',
-  'Kerala State News': 'bg-emerald-500/10 text-emerald-400',
-  'National News': 'bg-orange-500/10 text-orange-400',
-  'International News': 'bg-violet-500/10 text-violet-400',
-  'PSC Notifications': 'bg-rose-500/10 text-rose-400',
-  'Education': 'bg-amber-500/10 text-amber-400',
-  'Awards & Recognition': 'bg-pink-500/10 text-pink-400',
+  'Current Affairs': 'bg-blue-100 text-blue-700',
+  'Kerala State News': 'bg-emerald-100 text-emerald-700',
+  'National News': 'bg-orange-100 text-orange-700',
+  'International News': 'bg-violet-100 text-violet-700',
+  'PSC Notifications': 'bg-rose-100 text-rose-700',
+  'Education': 'bg-amber-100 text-amber-700',
+  'Awards & Recognition': 'bg-pink-100 text-pink-700',
 };
 
 export default function NewsPage() {
@@ -65,7 +65,7 @@ export default function NewsPage() {
         <button
           onClick={() => handleCategoryFilter('')}
           className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
-            !activeCategory ? 'bg-app-accent text-white' : 'bg-app-surface text-app-textSecondary hover:bg-app-border'
+            !activeCategory ? 'bg-app-accent text-white' : 'bg-white border border-app-border text-app-textSecondary hover:bg-app-surface'
           }`}
         >
           All
@@ -77,7 +77,7 @@ export default function NewsPage() {
             className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
               activeCategory === cat.category
                 ? 'bg-app-accent text-white'
-                : 'bg-app-surface text-app-textSecondary hover:bg-app-border'
+                : 'bg-white border border-app-border text-app-textSecondary hover:bg-app-surface'
             }`}
           >
             {cat.category} ({cat._count})
@@ -92,11 +92,11 @@ export default function NewsPage() {
       ) : (
         <div className="space-y-3">
           {news.map((item) => (
-            <div key={item.id} className="card p-0 overflow-hidden cursor-pointer" onClick={() => handleExpand(item.id)}>
+            <div key={item.id} className="card p-0 overflow-hidden cursor-pointer hover:shadow-md transition-shadow" onClick={() => handleExpand(item.id)}>
               <div className="p-4">
                 <div className="flex items-start gap-3">
-                  <div className="bg-app-accent/10 rounded-xl p-2 shrink-0">
-                    <Newspaper size={16} className="text-app-accentLight" />
+                  <div className="bg-app-accentMuted rounded-xl p-2 shrink-0">
+                    <Newspaper size={16} className="text-app-accent" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">

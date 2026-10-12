@@ -70,8 +70,8 @@ export default function AdminUsers() {
                 >
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
-                      <div className="bg-app-accent/10 rounded-full w-8 h-8 flex items-center justify-center">
-                        <User size={14} className="text-app-accentLight" />
+                      <div className="bg-app-accentMuted rounded-full w-8 h-8 flex items-center justify-center">
+                        <User size={14} className="text-app-accent" />
                       </div>
                       <div>
                         <p className="font-medium text-sm text-app-text">{user.name}</p>

@@ -8,7 +8,6 @@ interface User {
   role: 'STUDENT' | 'ADMIN';
   createdAt: string;
   hasExams?: boolean;
-  travelMode?: boolean;
 }
 
 interface AuthState {
@@ -19,7 +18,6 @@ interface AuthState {
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   fetchMe: () => Promise<void>;
-  toggleTravelMode: () => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>((set, get) => ({
@@ -54,18 +52,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       set({ token: null, user: null });
     } finally {
       set({ loading: false });
-    }
-  },
-
-  toggleTravelMode: async () => {
-    const current = get().user?.travelMode === true;
-    set({ user: get().user ? { ...get().user!, travelMode: !current } : null });
-    try {
-      const { data } = await api.post('/users/travel-mode', { enabled: !current });
-      set({ user: get().user ? { ...get().user!, travelMode: data.travelMode } : null });
-    } catch {
-      set({ user: get().user ? { ...get().user!, travelMode: current } : null });
-      throw new Error('Failed to update travel mode');
     }
   },
 }));

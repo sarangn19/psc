@@ -18,7 +18,7 @@ export default function LoginPage() {
       await login(email, password);
       setTimeout(() => {
         const u = useAuthStore.getState().user;
-        navigate(u?.role === 'ADMIN' ? '/admin' : '/');
+        navigate(u?.role === 'ADMIN' ? '/admin' : '/adaptive');
       }, 100);
     } catch (err: any) {
       setError(err.response?.data?.message || 'Login failed');
@@ -28,16 +28,21 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-app-bg flex items-center justify-center p-4">
-      <div className="bg-app-card rounded-3xl shadow-2xl w-full max-w-md p-8 border border-app-border">
+    <div className="min-h-screen bg-app-bg flex flex-col items-center justify-center p-4">
+      <div className="bg-white rounded-3xl shadow-md w-full max-w-md p-8 border border-app-border">
         <div className="text-center mb-8">
-          <span className="text-5xl">🏛️</span>
-          <h1 className="text-2xl font-bold text-app-text mt-3">Kerala PSC Prep</h1>
+          <span
+            aria-hidden="true"
+            className="inline-grid place-items-center w-14 h-14 rounded-2xl bg-app-accent text-white text-2xl font-bold shadow-sm"
+          >
+            C
+          </span>
+          <h1 className="text-2xl font-bold text-app-text mt-3">Cognix</h1>
           <p className="text-app-textMuted mt-1">Sign in to continue your preparation</p>
         </div>
 
         {error && (
-          <div className="bg-rose-500/10 text-rose-400 text-sm px-4 py-3 rounded-2xl mb-4 border border-rose-500/20">{error}</div>
+          <div className="bg-rose-50 text-rose-700 text-sm px-4 py-3 rounded-2xl mb-4 border border-rose-200">{error}</div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -70,17 +75,17 @@ export default function LoginPage() {
 
         <p className="text-center text-sm text-app-textMuted mt-6">
           New here?{' '}
-          <Link to="/register" className="text-app-accentLight font-medium hover:underline">
+          <Link to="/register" className="text-app-accent font-medium hover:underline">
             Create account
           </Link>
         </p>
-
-        <div className="mt-6 p-3 bg-app-surface rounded-2xl text-xs text-app-textMuted border border-app-border">
-          <p className="font-medium mb-1 text-app-textSecondary">Demo credentials:</p>
-          <p>Student: demo@student.com / student123</p>
-          <p>Admin: admin@keralapsc.com / admin123</p>
-        </div>
       </div>
+
+      <p className="text-center mt-6 text-sm">
+        <Link to="/" className="text-app-textMuted hover:text-app-text transition-colors">
+          ← Back to home
+        </Link>
+      </p>
     </div>
   );
 }
