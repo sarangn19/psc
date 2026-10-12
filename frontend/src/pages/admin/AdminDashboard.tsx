@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Users, HelpCircle, CheckSquare, Flag, Activity, Brain } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import api from '../../lib/api';
 
 interface Stats {
@@ -18,53 +18,69 @@ export default function AdminDashboard() {
     api.get('/admin/stats').then((r) => setStats(r.data));
   }, []);
 
-  const cards = stats ? [
-    { label: 'Total Students', value: stats.totalUsers, icon: Users, color: 'text-blue-600', bg: 'bg-blue-100' },
-    { label: 'Active Today', value: stats.activeTodayCount, icon: Activity, color: 'text-emerald-600', bg: 'bg-emerald-100' },
-    { label: 'Questions', value: stats.totalQuestions, icon: HelpCircle, color: 'text-violet-600', bg: 'bg-violet-100' },
-    { label: 'Total Attempts', value: stats.totalAttempts, icon: CheckSquare, color: 'text-amber-600', bg: 'bg-amber-100' },
-    { label: 'Sessions', value: stats.totalSessions, icon: Brain, color: 'text-cyan-600', bg: 'bg-cyan-100' },
-    { label: 'Pending Reports', value: stats.pendingReports, icon: Flag, color: 'text-rose-600', bg: 'bg-rose-100' },
+  const today = new Date().toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' });
+
+  const tiles = stats ? [
+    { label: 'Students', value: stats.totalUsers },
+    { label: 'Active today', value: stats.activeTodayCount },
+    { label: 'Questions', value: stats.totalQuestions },
+    { label: 'Attempts', value: stats.totalAttempts },
+    { label: 'Sessions', value: stats.totalSessions },
+    { label: 'Pending reports', value: stats.pendingReports },
   ] : [];
 
   return (
-    <div className="p-6 max-w-5xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-app-text">Admin Dashboard</h1>
-        <p className="text-app-textMuted text-sm mt-1">Cognix — Overview</p>
+    <div className="flex flex-col gap-[18px] px-5 pt-[10px] pb-7" style={{ color: '#1A1F36', fontFamily: "'Anek Malayalam', system-ui, sans-serif" }}>
+      <div className="flex flex-col gap-1">
+        <h1 className="text-[36px] leading-[1] font-[800] tracking-[-0.01em] m-0" style={{ fontStretch: '76%' }}>Dashboard</h1>
+        <p className="text-[15px] text-app-textSecondary m-0">{today}</p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-        {cards.map(({ label, value, icon: Icon, color, bg }) => (
-          <div key={label} className="card p-5">
-            <div className={`${bg} rounded-xl w-10 h-10 flex items-center justify-center mb-3`}>
-              <Icon size={20} className={color} />
-            </div>
-            <p className="text-2xl font-bold text-app-text">{value?.toLocaleString()}</p>
-            <p className="text-sm text-app-textMuted mt-0.5">{label}</p>
+      {/* Totals grid */}
+      <section
+        aria-label="Totals"
+        className="grid bg-white border border-app-border rounded-[6px]"
+        style={{ gridTemplateColumns: 'repeat(2, minmax(0,1fr))' }}
+      >
+        {tiles.map((t, i) => (
+          <div
+            key={t.label}
+            className="p-4 flex flex-col gap-1"
+            style={{
+              borderRight: i % 2 === 0 ? '1px solid #DADDE5' : undefined,
+              borderBottom: i < tiles.length - 2 ? '1px solid #DADDE5' : undefined,
+            }}
+          >
+            <span className="text-[32px] leading-[1] font-[750]" style={{ fontStretch: '78%', fontVariantNumeric: 'tabular-nums' }}>
+              {t.value?.toLocaleString() ?? '—'}
+            </span>
+            <span className="text-[14px] text-app-textSecondary">{t.label}</span>
           </div>
         ))}
-      </div>
+      </section>
 
-      <div className="card p-5">
-        <h2 className="font-semibold text-app-text mb-4">Quick Links</h2>
-        <div className="grid grid-cols-2 gap-3">
-          {[
-            { label: 'View All Users', href: '/admin/users', color: 'bg-blue-600' },
-            { label: 'Pending Reports', href: '/admin/reports', color: 'bg-rose-600' },
-            { label: 'Manage Questions', href: '/admin/questions', color: 'bg-violet-600' },
-            { label: 'Post News', href: '/admin/news', color: 'bg-emerald-600' },
-          ].map(({ label, href, color }) => (
-            <a
-              key={label}
-              href={href}
-              className={`${color} text-white text-sm font-medium px-4 py-3 rounded-xl hover:opacity-90 transition-opacity text-center`}
-            >
-              {label}
-            </a>
-          ))}
-        </div>
-      </div>
+      {/* Quick links */}
+      <section className="bg-white border border-app-border rounded-[6px] overflow-hidden">
+        {[
+          { label: 'Students', to: '/admin/users' },
+          { label: 'Pending reports', to: '/admin/reports' },
+          { label: 'Manage questions', to: '/admin/questions' },
+          { label: 'Post news', to: '/admin/news' },
+        ].map((item, i, arr) => (
+          <Link
+            key={item.to}
+            to={item.to}
+            className={`flex items-center justify-between gap-3 px-4 min-h-[56px] no-underline text-app-text text-[16px] font-[600] ${
+              i < arr.length - 1 ? 'border-b border-app-border' : ''
+            }`}
+          >
+            {item.label}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4B5168" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 6l6 6-6 6" />
+            </svg>
+          </Link>
+        ))}
+      </section>
     </div>
   );
 }

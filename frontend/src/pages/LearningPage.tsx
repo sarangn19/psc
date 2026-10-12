@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Target, ArrowRight, ExternalLink, Loader2, BookOpen } from 'lucide-react';
 import api from '../lib/api';
 
 interface WeakConcept {
@@ -18,20 +17,32 @@ interface WeakConcept {
   questionCount: number;
 }
 
-const ZONE_BADGE: Record<string, string> = {
-  STRONG: 'bg-emerald-100 text-emerald-700',
-  MEDIUM: 'bg-amber-100 text-amber-700',
-  WEAK: 'bg-rose-100 text-rose-700',
-  UNTESTED: 'bg-app-surface text-app-textMuted',
-};
+function zoneStyle(accuracy: number) {
+  if (accuracy >= 75) return { fill: '#2A3FC1', track: '#DCE1F8', label: 'Strong', labelBg: '#E8EBFB', labelColor: '#2A3FC1' };
+  if (accuracy >= 55) return { fill: '#E3A033', track: '#F6E3BF', label: 'Medium', labelBg: '#FBF0DA', labelColor: '#8A5300' };
+  return { fill: '#C4314B', track: '#F3D5DB', label: 'Weak', labelBg: '#FBE8EC', labelColor: '#A3263D' };
+}
 
-const LEVEL_BADGE: Record<string, string> = {
-  CONCEPT: 'bg-blue-100 text-blue-700',
-  TOPIC: 'bg-violet-100 text-violet-700',
-  DOMAIN: 'bg-orange-100 text-orange-700',
-  SUBJECT: 'bg-teal-100 text-teal-700',
-  EXAM: 'bg-indigo-100 text-indigo-700',
-};
+function AccuracyRing({ accuracy, zone }: { accuracy: number; zone: ReturnType<typeof zoneStyle> }) {
+  const pct = Math.min(100, Math.max(0, accuracy));
+  return (
+    <span
+      role="img"
+      aria-label={`${pct}% accuracy`}
+      className="flex-none w-[52px] h-[52px] rounded-full grid place-items-center"
+      style={{
+        background: `conic-gradient(${zone.fill} 0 ${pct}%, ${zone.track} 0)`,
+      }}
+    >
+      <span
+        className="w-[40px] h-[40px] rounded-full bg-white grid place-items-center text-[14px] font-[750]"
+        style={{ color: zone.labelColor }}
+      >
+        {pct}%
+      </span>
+    </span>
+  );
+}
 
 export default function LearningPage() {
   const navigate = useNavigate();
@@ -57,74 +68,93 @@ export default function LearningPage() {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="w-8 h-8 border-2 border-app-accent border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
   return (
-    <div className="p-4 max-w-lg mx-auto space-y-5">
-      <div>
-        <h2 className="text-xl font-bold text-app-text flex items-center gap-2">
-          <Target size={20} className="text-app-accent" /> Learning
-        </h2>
-        <p className="text-app-textMuted text-sm">Focus on your weakest concepts — read the notes, then practice exactly that topic.</p>
+    <div className="flex flex-col gap-[18px] px-5 pt-[22px] pb-7" style={{ color: '#1A1F36', fontFamily: "'Anek Malayalam', system-ui, sans-serif" }}>
+      <div className="flex flex-col gap-[6px]">
+        <h1 className="text-[36px] leading-[1] font-[800] tracking-[-0.01em] m-0" style={{ fontStretch: '76%' }}>Learn</h1>
+        <p className="text-[15px] leading-[1.45] text-app-textSecondary m-0">
+          Concepts you've missed most. Read the notes, then practise just that concept.
+        </p>
       </div>
 
-      {loading ? (
-        <div className="flex justify-center py-12">
-          <Loader2 size={28} className="animate-spin text-app-accent" />
-        </div>
-      ) : concepts.length === 0 ? (
-        <div className="card text-center py-10">
-          <BookOpen size={32} className="mx-auto mb-2 text-app-textMuted opacity-40" />
-          <p className="text-app-textMuted text-sm">Answer questions in Adaptive Learning to unlock your weak concepts here.</p>
+      {concepts.length === 0 ? (
+        <div className="bg-white border border-app-border rounded-[6px] px-4 py-10 text-center text-app-textSecondary">
+          <p className="text-[16px] m-0">Answer questions in adaptive practice to unlock your weak concepts here.</p>
         </div>
       ) : (
-        <div className="space-y-3">
-          {concepts.map((c) => (
-            <div key={c.conceptId} className="card p-4">
-              {c.path.length > 0 && (
-                <p className="text-[11px] text-app-textMuted mb-1 truncate">
-                  {c.path.map((p) => p.name).join(' › ')}
-                </p>
-              )}
+        <ul className="list-none m-0 p-0 bg-white border border-app-border rounded-[6px]">
+          {concepts.map((c, idx) => {
+            const zone = zoneStyle(c.accuracy);
+            const chapterName = c.path.length > 0 ? c.path[c.path.length - 1].name : '';
+            return (
+              <li
+                key={c.conceptId}
+                className="grid gap-[14px] p-4"
+                style={{
+                  gridTemplateColumns: '52px minmax(0,1fr)',
+                  borderBottom: idx < concepts.length - 1 ? '1px solid #DADDE5' : undefined,
+                }}
+              >
+                <AccuracyRing accuracy={c.accuracy} zone={zone} />
 
-              <div className="flex items-center gap-2 mb-2">
-                <h3 className="font-semibold text-app-text">{c.name}</h3>
-                <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${LEVEL_BADGE[c.level] || 'bg-app-surface text-app-textMuted'}`}>
-                  {c.level}
-                </span>
-                <span className={`ml-auto text-xs px-2 py-0.5 rounded-full font-medium ${ZONE_BADGE[c.zone] || 'bg-app-surface text-app-textMuted'}`}>
-                  {c.accuracy}% · {c.zone.toLowerCase()}
-                </span>
-              </div>
+                <div className="flex flex-col gap-[10px] min-w-0">
+                  <div className="flex flex-col gap-1">
+                    <h2 className="text-[18px] font-[650] leading-[1.25] m-0">{c.name}</h2>
+                    <p className="flex flex-wrap items-center gap-1 text-[14px] text-app-textSecondary m-0">
+                      <span
+                        className="px-2 py-[1px] rounded-[999px] text-[13px] font-[650]"
+                        style={{ background: zone.labelBg, color: zone.labelColor }}
+                      >
+                        {zone.label}
+                      </span>
+                      {chapterName && <span>{chapterName}</span>}
+                      <span>{c.correct} of {c.total} right</span>
+                    </p>
+                  </div>
 
-              {c.description && (
-                <p className="text-xs text-app-textMuted leading-relaxed line-clamp-2 mb-3">{c.description}</p>
-              )}
+                  {c.description && (
+                    <p className="text-[13px] leading-[1.5] text-app-textSecondary m-0 line-clamp-2">{c.description}</p>
+                  )}
 
-              <div className="flex items-center justify-between gap-2">
-                <p className="text-xs text-app-textMuted">
-                  {c.correct}/{c.total} attempts · {c.questionCount} questions available
-                </p>
-                <div className="flex gap-2">
-                  <a
-                    href={c.notesUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-secondary flex items-center gap-1 text-xs px-3 py-2"
-                  >
-                    Notes <ExternalLink size={12} />
-                  </a>
-                  <button
-                    onClick={() => practice(c)}
-                    disabled={practicingId === c.conceptId || c.questionCount === 0}
-                    className="btn-primary flex items-center gap-1 text-xs px-3 py-2 disabled:opacity-50"
-                  >
-                    {practicingId === c.conceptId ? 'Starting...' : 'Practice'}
-                    <ArrowRight size={12} />
-                  </button>
+                  <div className="flex gap-2">
+                    {c.notesUrl && (
+                      <a
+                        href={c.notesUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Notes on ${c.name}, opens in a new tab`}
+                        className="inline-flex items-center gap-[6px] min-h-11 px-[14px] rounded-[10px] border border-[#C3C8D4] bg-white text-app-text no-underline text-[15px] font-[600]"
+                      >
+                        Notes
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M14 4h6v6" /><path d="M20 4l-9 9" />
+                          <path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
+                        </svg>
+                      </a>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => practice(c)}
+                      disabled={practicingId === c.conceptId || c.questionCount === 0}
+                      aria-label={`Practise ${c.name}`}
+                      className="inline-flex items-center min-h-11 px-4 rounded-[10px] bg-app-accent text-white text-[15px] font-[650] border-0 cursor-pointer disabled:opacity-50"
+                    >
+                      {practicingId === c.conceptId ? 'Starting…' : 'Practise'}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              </li>
+            );
+          })}
+        </ul>
       )}
     </div>
   );

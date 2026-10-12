@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, User, ChevronRight } from 'lucide-react';
 import api from '../../lib/api';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -12,9 +11,14 @@ interface UserSummary {
   _count: { attempts: number; adaptiveSessions: number; learnedChapters: number };
 }
 
+function initials(name: string) {
+  return name.split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+}
+
 export default function AdminUsers() {
   const [users, setUsers] = useState<UserSummary[]>([]);
   const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState<'all' | 'active' | 'inactive'>('all');
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -22,83 +26,101 @@ export default function AdminUsers() {
     api.get('/admin/users').then((r) => setUsers(r.data)).finally(() => setLoading(false));
   }, []);
 
-  const filtered = users.filter((u) =>
-    u.name.toLowerCase().includes(search.toLowerCase()) ||
-    u.email.toLowerCase().includes(search.toLowerCase())
-  );
+  const filtered = users.filter((u) => {
+    const matchSearch = u.name.toLowerCase().includes(search.toLowerCase()) ||
+      u.email.toLowerCase().includes(search.toLowerCase());
+    const matchFilter = filter === 'all' ? true
+      : filter === 'active' ? u._count.attempts > 0
+      : u._count.attempts === 0;
+    return matchSearch && matchFilter;
+  });
+
+  const filters: { id: typeof filter; label: string }[] = [
+    { id: 'all', label: 'All' },
+    { id: 'active', label: 'Active' },
+    { id: 'inactive', label: 'Inactive' },
+  ];
 
   return (
-    <div className="p-6 max-w-5xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-app-text">User Research</h1>
-        <p className="text-app-textMuted text-sm mt-1">View detailed activity and performance of every student</p>
+    <div className="flex flex-col gap-[14px] px-5 pt-[10px] pb-7" style={{ color: '#1A1F36', fontFamily: "'Anek Malayalam', system-ui, sans-serif" }}>
+      <div className="flex items-baseline gap-[10px]">
+        <h1 className="text-[36px] leading-[1] font-[800] tracking-[-0.01em] m-0" style={{ fontStretch: '76%' }}>Students</h1>
+        <span className="text-[16px] text-app-textSecondary" style={{ fontVariantNumeric: 'tabular-nums' }}>{users.length.toLocaleString()}</span>
       </div>
 
+      {/* Search */}
       <div className="relative">
-        <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-app-textMuted" />
+        <label htmlFor="student-search" className="sr-only">Search students</label>
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4B5168" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute left-[14px] top-4">
+          <circle cx="11" cy="11" r="6.5" /><path d="M20 20l-4.2-4.2" />
+        </svg>
         <input
+          id="student-search"
+          type="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search by name or email..."
-          className="input w-full pl-9"
+          placeholder="Search by name"
+          className="input pl-[44px]"
         />
       </div>
 
-      <div className="card overflow-hidden">
-        {loading ? (
-          <div className="flex justify-center py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-2 border-app-accent border-t-transparent"></div>
-          </div>
-        ) : (
-          <table className="w-full">
-            <thead className="bg-app-surface border-b border-app-border">
-              <tr>
-                <th className="text-left text-xs font-semibold text-app-textMuted px-4 py-3">Student</th>
-                <th className="text-center text-xs font-semibold text-app-textMuted px-3 py-3">Attempts</th>
-                <th className="text-center text-xs font-semibold text-app-textMuted px-3 py-3">Sessions</th>
-                <th className="text-center text-xs font-semibold text-app-textMuted px-3 py-3">Chapters</th>
-                <th className="text-left text-xs font-semibold text-app-textMuted px-3 py-3">Joined</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-app-border">
-              {filtered.map((user) => (
-                <tr
-                  key={user.id}
-                  onClick={() => navigate(`/admin/users/${user.id}`)}
-                  className="hover:bg-app-surface/50 cursor-pointer transition-colors"
-                >
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-3">
-                      <div className="bg-app-accentMuted rounded-full w-8 h-8 flex items-center justify-center">
-                        <User size={14} className="text-app-accent" />
-                      </div>
-                      <div>
-                        <p className="font-medium text-sm text-app-text">{user.name}</p>
-                        <p className="text-xs text-app-textMuted">{user.email}</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-3 py-3 text-center text-sm text-app-textSecondary">{user._count.attempts}</td>
-                  <td className="px-3 py-3 text-center text-sm text-app-textSecondary">{user._count.adaptiveSessions}</td>
-                  <td className="px-3 py-3 text-center text-sm text-app-textSecondary">{user._count.learnedChapters}</td>
-                  <td className="px-3 py-3 text-xs text-app-textMuted">
-                    {formatDistanceToNow(new Date(user.createdAt), { addSuffix: true })}
-                  </td>
-                  <td className="px-3 py-3">
-                    <ChevronRight size={16} className="text-app-textMuted" />
-                  </td>
-                </tr>
-              ))}
-              {filtered.length === 0 && (
-                <tr>
-                  <td colSpan={6} className="text-center py-12 text-app-textMuted">No students found</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        )}
+      {/* Filters */}
+      <div role="group" aria-label="Filter" className="flex gap-2 overflow-x-auto">
+        {filters.map((f) => {
+          const on = filter === f.id;
+          return (
+            <button
+              key={f.id}
+              type="button"
+              onClick={() => setFilter(f.id)}
+              aria-pressed={on}
+              className="flex-none min-h-[40px] px-[14px] rounded-[999px] text-[15px] font-[600] whitespace-nowrap cursor-pointer border-[1.5px]"
+              style={{ borderColor: on ? '#2A3FC1' : '#C3C8D4', background: on ? '#2A3FC1' : '#FFFFFF', color: on ? '#FFFFFF' : '#1A1F36' }}
+            >
+              {f.label}
+            </button>
+          );
+        })}
       </div>
+
+      {/* List */}
+      {loading ? (
+        <div className="flex justify-center py-12">
+          <div className="w-8 h-8 border-2 border-app-accent border-t-transparent rounded-full animate-spin" />
+        </div>
+      ) : (
+        <ul className="list-none m-0 p-0 bg-white border border-app-border rounded-[6px]">
+          {filtered.map((user) => (
+            <li key={user.id} className="border-b border-app-borderLight last:border-0">
+              <button
+                type="button"
+                onClick={() => navigate(`/admin/users/${user.id}`)}
+                className="flex items-center gap-3 w-full min-h-[68px] px-4 border-0 bg-transparent text-left cursor-pointer hover:bg-app-borderLight transition-colors"
+              >
+                <span
+                  aria-hidden="true"
+                  className="flex-none w-10 h-10 rounded-full grid place-items-center text-[15px] font-[700]"
+                  style={{ background: '#E8EBFB', color: '#2A3FC1' }}
+                >
+                  {initials(user.name)}
+                </span>
+                <span className="flex-1 flex flex-col gap-[2px] min-w-0">
+                  <span className="text-[16px] font-[650] truncate">{user.name}</span>
+                  <span className="text-[13px] text-app-textSecondary truncate">
+                    {user._count.attempts} attempts · {formatDistanceToNow(new Date(user.createdAt), { addSuffix: true })}
+                  </span>
+                </span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4B5168" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 6l6 6-6 6" />
+                </svg>
+              </button>
+            </li>
+          ))}
+          {filtered.length === 0 && (
+            <li className="px-4 py-8 text-center text-[15px] text-app-textSecondary">No students found.</li>
+          )}
+        </ul>
+      )}
     </div>
   );
 }

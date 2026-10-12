@@ -1,395 +1,272 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { TrendingUp, TrendingDown, Minus, BarChart2, Flame, Target, RefreshCw, ChevronDown, ChevronUp, Zap } from 'lucide-react';
-import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell, LineChart, Line } from 'recharts';
+import { useEffect, useState } from 'react';
 import api from '../lib/api';
 
-interface ChapterPerformance {
-  chapterId: string;
-  name: string;
-  subjectName: string;
-  total: number;
-  correct: number;
-  accuracy: number;
-  zone: 'STRONG' | 'MEDIUM' | 'WEAK' | 'UNTESTED';
-}
-
-interface UserStats {
+interface Stats {
   totalAttempts: number;
   correctAttempts: number;
   accuracy: number;
   totalSessions: number;
   learnedChapters: number;
   lastSessionScore: number;
-  weakZones: any[];
-  strongZones: any[];
+  weekAccuracy?: number;
+  prevWeekAccuracy?: number;
+  weekQuestions?: number;
+  prevWeekQuestions?: number;
+  streak?: number;
+  todayQuestions?: number;
+  weakZones: { name: string; accuracy: number }[];
+  strongZones: { name: string; accuracy: number }[];
+  sessionHistory?: number[];
 }
 
-interface StreakData {
-  streak: number;
-  todayCount: number;
+function zone(v: number) {
+  if (v >= 75) return { fill: '#2A3FC1', text: '#2A3FC1' };
+  if (v >= 55) return { fill: '#E3A033', text: '#8A5300' };
+  return { fill: '#C4314B', text: '#A3263D' };
 }
-
-interface WeeklyData {
-  thisWeek: { total: number; correct: number; accuracy: number };
-  lastWeek: { total: number; correct: number; accuracy: number };
-}
-
-const ZONE_CONFIG = {
-  STRONG: { color: 'text-emerald-700', bg: 'bg-emerald-50', border: 'border-emerald-300', icon: TrendingUp, label: 'Strong' },
-  MEDIUM: { color: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-300', icon: Minus, label: 'Medium' },
-  WEAK: { color: 'text-rose-700', bg: 'bg-rose-50', border: 'border-rose-300', icon: TrendingDown, label: 'Weak' },
-  UNTESTED: { color: 'text-app-textMuted', bg: 'bg-app-surface', border: 'border-app-border', icon: Minus, label: 'Untested' },
-};
 
 export default function PerformancePage() {
-  const navigate = useNavigate();
-  const [performance, setPerformance] = useState<ChapterPerformance[]>([]);
-  const [sessions, setSessions] = useState<any[]>([]);
-  const [stats, setStats] = useState<UserStats | null>(null);
-  const [streak, setStreak] = useState<StreakData>({ streak: 0, todayCount: 0 });
-  const [weekly, setWeekly] = useState<WeeklyData | null>(null);
+  const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const [activeZone, setActiveZone] = useState<string>('ALL');
-  const [showBottom, setShowBottom] = useState(false);
-
-  const fetchData = useCallback(async (isRefresh = false) => {
-    if (isRefresh) setRefreshing(true);
-    try {
-      const [perfRes, sessRes, statsRes, streakRes, weeklyRes] = await Promise.all([
-        api.get('/questions/performance'),
-        api.get('/adaptive/sessions'),
-        api.get('/users/stats'),
-        api.get('/users/streak'),
-        api.get('/users/weekly'),
-      ]);
-      setPerformance(perfRes.data);
-      setSessions(sessRes.data);
-      setStats(statsRes.data);
-      setStreak(streakRes.data);
-      setWeekly(weeklyRes.data);
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
-  }, []);
-
-  useEffect(() => { fetchData(); }, [fetchData]);
 
   useEffect(() => {
-    const onFocus = () => fetchData(true);
-    window.addEventListener('focus', onFocus);
-    return () => window.removeEventListener('focus', onFocus);
-  }, [fetchData]);
-
-  const weak = performance.filter((p) => p.zone === 'WEAK');
-  const medium = performance.filter((p) => p.zone === 'MEDIUM');
-  const strong = performance.filter((p) => p.zone === 'STRONG');
-
-  const filtered = activeZone === 'ALL' ? performance.filter((p) => p.zone !== 'UNTESTED') : performance.filter((p) => p.zone === activeZone);
-
-  const chartData = performance
-    .filter((p) => p.total >= 3)
-    .slice(0, 8)
-    .map((p) => ({ name: p.name.split(' ').slice(0, 2).join(' '), accuracy: p.accuracy, total: p.total }));
-
-  const sessionChartData = sessions.slice(0, 10).reverse().map((s, i) => ({
-    name: `S${i + 1}`,
-    score: s.totalQ > 0 ? Math.round((s.correctQ / s.totalQ) * 100) : 0,
-    questions: s.totalQ,
-  }));
-
-  // Subject-wise aggregation
-  const subjectMap = new Map<string, { total: number; correct: number; chapters: number }>();
-  for (const p of performance) {
-    if (!subjectMap.has(p.subjectName)) subjectMap.set(p.subjectName, { total: 0, correct: 0, chapters: 0 });
-    const s = subjectMap.get(p.subjectName)!;
-    s.total += p.total;
-    s.correct += p.correct;
-    s.chapters++;
-  }
-  const subjectData = Array.from(subjectMap.entries())
-    .map(([name, d]) => ({ name, total: d.total, correct: d.correct, accuracy: d.total > 0 ? Math.round((d.correct / d.total) * 100) : 0, chapters: d.chapters }))
-    .sort((a, b) => b.total - a.total);
-
-  // Top/Bottom 5
-  const tested = performance.filter((p) => p.total >= 5);
-  const top5 = [...tested].sort((a, b) => b.accuracy - a.accuracy).slice(0, 5);
-  const bottom5 = [...tested].sort((a, b) => a.accuracy - b.accuracy).slice(0, 5);
-
-  const weekDelta = weekly ? weekly.thisWeek.accuracy - weekly.lastWeek.accuracy : 0;
+    api.get('/users/stats').then((r) => setStats(r.data)).finally(() => setLoading(false));
+  }, []);
 
   if (loading) {
     return (
-      <div className="p-4 max-w-lg mx-auto flex items-center justify-center h-64">
-        <div className="text-app-textMuted text-sm">Loading performance...</div>
+      <div className="flex items-center justify-center h-64">
+        <div className="w-8 h-8 border-2 border-app-accent border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
+  if (!stats) return null;
+
+  const allZones = [
+    ...stats.strongZones.map((z) => ({ ...z, kind: 'strong' })),
+    ...(stats.weakZones || []).map((z) => ({ ...z, kind: 'weak' })),
+  ];
+
+  // Session sparkline
+  const sessions = stats.sessionHistory ?? [];
+  const MAX_SCORE = 20;
+  const W = 316, H = 176, PAD_L = 22, PAD_B = 26, PAD_T = 20;
+  const plotH = H - PAD_T - PAD_B;
+  const plotW = W - PAD_L;
+  const pts = sessions.map((v, i) => {
+    const x = PAD_L + (i / Math.max(sessions.length - 1, 1)) * plotW;
+    const y = PAD_T + plotH - (v / MAX_SCORE) * plotH;
+    return `${x},${y}`;
+  }).join(' ');
+
   return (
-    <div className="p-4 max-w-lg mx-auto space-y-5">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-xl font-bold text-app-text">Performance</h2>
-          <p className="text-app-textMuted text-sm">Track your progress</p>
-        </div>
-        <button
-          onClick={() => fetchData(true)}
-          disabled={refreshing}
-          className="p-2 rounded-xl text-app-textMuted hover:text-app-textSecondary hover:bg-app-surface transition-all disabled:opacity-50"
-          title="Refresh"
-        >
-          <RefreshCw size={16} className={refreshing ? 'animate-spin' : ''} />
-        </button>
+    <div className="flex flex-col gap-[18px] px-5 pt-[22px] pb-7" style={{ color: '#1A1F36', fontFamily: "'Anek Malayalam', system-ui, sans-serif" }}>
+      <div className="flex flex-col gap-[6px]">
+        <h1 className="text-[36px] leading-[1] font-[800] tracking-[-0.01em] m-0" style={{ fontStretch: '76%' }}>Stats</h1>
+        <p className="text-[15px] leading-[1.45] text-app-textSecondary m-0">Everything you've answered.</p>
       </div>
 
-      {/* Overall Stats Header */}
-      {stats && (
-        <div className="grid grid-cols-4 gap-2">
-          <div className="card p-3 text-center">
-            <p className="text-xl font-bold text-app-accent">{stats.totalAttempts}</p>
-            <p className="text-[10px] text-app-textMuted uppercase tracking-wide">Total Qs</p>
-          </div>
-          <div className="card p-3 text-center">
-            <p className="text-xl font-bold text-emerald-600">{stats.accuracy}%</p>
-            <p className="text-[10px] text-app-textMuted uppercase tracking-wide">Accuracy</p>
-          </div>
-          <div className="card p-3 text-center">
-            <div className="flex items-center justify-center gap-1">
-              <Flame size={14} className="text-amber-500" />
-              <p className="text-xl font-bold text-amber-600">{streak.streak}</p>
-            </div>
-            <p className="text-[10px] text-app-textMuted uppercase tracking-wide">Streak</p>
-          </div>
-          <div className="card p-3 text-center">
-            <p className="text-xl font-bold text-sky-600">{streak.todayCount}</p>
-            <p className="text-[10px] text-app-textMuted uppercase tracking-wide">Today</p>
-          </div>
+      {/* Totals grid */}
+      <section
+        aria-label="Totals"
+        className="grid bg-white border border-app-border rounded-[6px]"
+        style={{ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' }}
+      >
+        <div className="p-4 flex flex-col gap-1 border-r border-b border-app-border">
+          <span className="text-[36px] leading-[1] font-[750]" style={{ fontVariantNumeric: 'tabular-nums', fontStretch: '78%' }}>
+            {stats.totalAttempts.toLocaleString()}
+          </span>
+          <span className="text-[14px] text-app-textSecondary">Questions answered</span>
         </div>
-      )}
-
-      {/* Weekly Comparison */}
-      {weekly && weekly.thisWeek.total > 0 && (
-        <div className="card p-4">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="font-semibold text-app-text text-sm">This Week vs Last Week</h3>
-            <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${weekDelta >= 0 ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
-              {weekDelta >= 0 ? '+' : ''}{weekDelta}%
-            </span>
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div className="bg-app-surface rounded-xl p-3">
-              <p className="text-xs text-app-textMuted mb-1">This Week</p>
-              <p className="text-lg font-bold text-app-text">{weekly.thisWeek.total} Qs</p>
-              <p className="text-xs text-app-textMuted">{weekly.thisWeek.accuracy}% accuracy</p>
-            </div>
-            <div className="bg-app-surface rounded-xl p-3">
-              <p className="text-xs text-app-textMuted mb-1">Last Week</p>
-              <p className="text-lg font-bold text-app-textSecondary">{weekly.lastWeek.total} Qs</p>
-              <p className="text-xs text-app-textMuted">{weekly.lastWeek.accuracy}% accuracy</p>
-            </div>
-          </div>
+        <div className="p-4 flex flex-col gap-1 border-b border-app-border">
+          <span className="text-[36px] leading-[1] font-[750]" style={{ fontVariantNumeric: 'tabular-nums', fontStretch: '78%' }}>
+            {stats.accuracy}%
+          </span>
+          <span className="text-[14px] text-app-textSecondary">Accuracy</span>
         </div>
-      )}
+        <div className="p-4 flex flex-col gap-1 border-r border-app-border">
+          <span className="text-[36px] leading-[1] font-[750]" style={{ fontVariantNumeric: 'tabular-nums', fontStretch: '78%' }}>
+            {stats.streak ?? 0} days
+          </span>
+          <span className="text-[14px] text-app-textSecondary">Practice streak</span>
+        </div>
+        <div className="p-4 flex flex-col gap-1">
+          <span className="text-[36px] leading-[1] font-[750]" style={{ fontVariantNumeric: 'tabular-nums', fontStretch: '78%' }}>
+            {stats.todayQuestions ?? 0}
+          </span>
+          <span className="text-[14px] text-app-textSecondary">Answered today</span>
+        </div>
+      </section>
 
-      {/* Zone Summary Cards */}
-      <div className="grid grid-cols-3 gap-3">
-        {[
-          { zone: 'STRONG', count: strong.length },
-          { zone: 'MEDIUM', count: medium.length },
-          { zone: 'WEAK', count: weak.length },
-        ].map(({ zone, count }) => {
-          const cfg = ZONE_CONFIG[zone as keyof typeof ZONE_CONFIG];
-          const Icon = cfg.icon;
-          return (
-            <button
-              key={zone}
-              onClick={() => setActiveZone(activeZone === zone ? 'ALL' : zone)}
-              className={`card p-3 text-center border-2 transition-all ${
-                activeZone === zone ? `${cfg.border} ${cfg.bg}` : 'border-transparent'
-              }`}
-            >
-              <Icon size={18} className={`${cfg.color} mx-auto mb-1`} />
-              <p className={`text-xl font-bold ${cfg.color}`}>{count}</p>
-              <p className="text-xs text-app-textMuted">{cfg.label}</p>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Weak Areas Quick Action */}
-      {weak.length > 0 && (
-        <button
-          onClick={() => navigate('/chapters')}
-          className="w-full card p-3 flex items-center gap-3 border-2 border-rose-300 bg-rose-50 hover:bg-rose-100 transition-all"
-        >
-          <div className="p-2 rounded-xl bg-rose-100">
-            <Zap size={18} className="text-rose-600" />
-          </div>
-          <div className="text-left flex-1">
-            <p className="text-sm font-medium text-app-text">{weak.length} weak {weak.length === 1 ? 'area' : 'areas'} found</p>
-            <p className="text-xs text-app-textMuted">Tap to practice weak chapters</p>
-          </div>
-          <TrendingUp size={16} className="text-rose-600" />
-        </button>
-      )}
-
-      {/* Subject Breakdown */}
-      {subjectData.length > 0 && (
-        <div className="card">
-          <h3 className="font-semibold text-app-text mb-3 flex items-center gap-2">
-            <BarChart2 size={16} className="text-app-accent" />
-            By Subject
-          </h3>
-          <div className="space-y-2">
-            {subjectData.slice(0, 6).map((s) => (
-              <div key={s.name} className="flex items-center gap-3">
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between mb-1">
-                    <p className="text-sm text-app-text truncate">{s.name}</p>
-                    <p className="text-xs font-medium text-app-textMuted ml-2">{s.accuracy}%</p>
-                  </div>
-                  <div className="w-full h-1.5 bg-app-surface rounded-full overflow-hidden">
-                    <div
-                      className="h-full rounded-full transition-all"
-                      style={{
-                        width: `${s.accuracy}%`,
-                        backgroundColor: s.accuracy >= 70 ? '#34d399' : s.accuracy >= 40 ? '#fbbf24' : '#f87171',
-                      }}
-                    />
-                  </div>
+      {/* This week vs last week */}
+      {(stats.weekAccuracy != null || stats.prevWeekAccuracy != null) && (
+        <section className="bg-white border border-app-border rounded-[6px] p-4 flex flex-col gap-[14px]">
+          <h2 className="text-[21px] font-[750] m-0" style={{ fontStretch: '85%' }}>This week and last week</h2>
+          <div className="flex flex-col gap-3">
+            {stats.weekAccuracy != null && (
+              <div className="flex flex-col gap-[6px]">
+                <div className="flex justify-between items-baseline text-[15px]">
+                  <span className="font-[600]">This week so far</span>
+                  <span className="font-[700] text-app-accent" style={{ fontVariantNumeric: 'tabular-nums' }}>{stats.weekAccuracy}%</span>
                 </div>
+                <span aria-hidden="true" className="flex h-[10px] rounded-[5px] overflow-hidden" style={{ background: '#EEF0F4' }}>
+                  <span style={{ width: `${stats.weekAccuracy}%`, background: '#2A3FC1' }} />
+                </span>
+                {stats.weekQuestions != null && <span className="text-[13px] text-app-textSecondary">{stats.weekQuestions} questions</span>}
               </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Bar Chart */}
-      {chartData.length > 0 && (
-        <div className="card">
-          <h3 className="font-semibold text-app-text mb-4 flex items-center gap-2">
-            <BarChart2 size={16} className="text-app-accent" />
-            Chapter Accuracy
-          </h3>
-          <ResponsiveContainer width="100%" height={180}>
-            <BarChart data={chartData} margin={{ top: 0, right: 0, bottom: 20, left: -20 }}>
-              <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#8a8680' }} angle={-30} textAnchor="end" />
-              <YAxis tick={{ fontSize: 10, fill: '#8a8680' }} domain={[0, 100]} />
-              <Tooltip formatter={(v) => `${v}%`} contentStyle={{ background: '#ffffff', border: '1px solid #e5e3da', borderRadius: 12 }} />
-              <Bar dataKey="accuracy" radius={[4, 4, 0, 0]}>
-                {chartData.map((entry, i) => (
-                  <Cell key={i} fill={entry.accuracy >= 70 ? '#34d399' : entry.accuracy >= 40 ? '#fbbf24' : '#f87171'} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      )}
-
-      {/* Session Score Trend */}
-      {sessionChartData.length > 0 && (
-        <div className="card">
-          <h3 className="font-semibold text-app-text mb-4">Score Trend</h3>
-          <ResponsiveContainer width="100%" height={140}>
-            <LineChart data={sessionChartData}>
-              <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#8a8680' }} />
-              <YAxis tick={{ fontSize: 11, fill: '#8a8680' }} domain={[0, 100]} />
-              <Tooltip formatter={(v) => `${v}%`} contentStyle={{ background: '#ffffff', border: '1px solid #e5e3da', borderRadius: 12 }} />
-              <Line type="monotone" dataKey="score" stroke="#2d6a4f" strokeWidth={2} dot={{ fill: '#2d6a4f', r: 3 }} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
-      )}
-
-      {/* Top / Bottom 5 */}
-      {top5.length > 0 && (
-        <div className="card">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="font-semibold text-app-text text-sm flex items-center gap-2">
-              <TrendingUp size={16} className="text-emerald-400" />
-              Top 5 Chapters
-            </h3>
-          </div>
-          <div className="space-y-2">
-            {top5.map((p, i) => (
-              <div key={p.chapterId} className="flex items-center gap-3 p-2 rounded-xl bg-emerald-50 border border-emerald-200">
-                <span className="text-xs font-bold text-emerald-400 w-5 text-center">#{i + 1}</span>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm text-app-text truncate">{p.name}</p>
-                  <p className="text-xs text-app-textMuted">{p.subjectName}</p>
+            )}
+            {stats.prevWeekAccuracy != null && (
+              <div className="flex flex-col gap-[6px]">
+                <div className="flex justify-between items-baseline text-[15px]">
+                  <span className="font-[600]">Last week</span>
+                  <span className="font-[700] text-app-textSecondary" style={{ fontVariantNumeric: 'tabular-nums' }}>{stats.prevWeekAccuracy}%</span>
                 </div>
-                <p className="text-sm font-bold text-emerald-400">{p.accuracy}%</p>
+                <span aria-hidden="true" className="flex h-[10px] rounded-[5px] overflow-hidden" style={{ background: '#EEF0F4' }}>
+                  <span style={{ width: `${stats.prevWeekAccuracy}%`, background: '#8E94A8' }} />
+                </span>
+                {stats.prevWeekQuestions != null && <span className="text-[13px] text-app-textSecondary">{stats.prevWeekQuestions} questions</span>}
               </div>
-            ))}
+            )}
           </div>
-        </div>
+        </section>
       )}
 
-      {bottom5.length > 0 && (
-        <div className="card">
-          <button
-            onClick={() => setShowBottom(!showBottom)}
-            className="w-full flex items-center justify-between"
+      {/* Zones summary */}
+      <section className="bg-white border border-app-border rounded-[6px] p-4 flex flex-col gap-3">
+        <h2 className="text-[21px] font-[750] m-0" style={{ fontStretch: '85%' }}>Zones</h2>
+        <div aria-hidden="true" className="flex gap-[3px] h-[14px]">
+          <span className="flex-[6] rounded-[3px]" style={{ background: '#2A3FC1' }} />
+          <span className="flex-[4] rounded-[3px]" style={{ background: '#E3A033' }} />
+          <span className="flex-[4] rounded-[3px]" style={{ background: '#C4314B' }} />
+        </div>
+        <ul className="list-none m-0 p-0">
+          {[
+            { label: 'Strong', desc: '75% and above', color: '#2A3FC1', count: stats.strongZones.length },
+            { label: 'Medium', desc: '55% to 74%', color: '#E3A033', count: allZones.filter((z) => z.accuracy >= 55 && z.accuracy < 75).length },
+            { label: 'Weak', desc: 'Below 55%', color: '#C4314B', count: stats.weakZones.length },
+          ].map((row) => (
+            <li key={row.label} className="flex items-center gap-[10px] min-h-[46px] border-t border-app-borderLight">
+              <span aria-hidden="true" className="w-3 h-3 rounded-full" style={{ background: row.color }} />
+              <span className="flex-1 flex flex-col">
+                <span className="text-[16px] font-[600]">{row.label}</span>
+                <span className="text-[13px] text-app-textSecondary">{row.desc}</span>
+              </span>
+              <span className="text-[15px]">{row.count} chapters</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* By subject (using weak + strong zones) */}
+      {allZones.length > 0 && (
+        <section className="bg-white border border-app-border rounded-[6px] p-4 flex flex-col gap-2">
+          <h2 className="text-[21px] font-[750] m-0 mb-1" style={{ fontStretch: '85%' }}>By chapter</h2>
+          <ul className="list-none m-0 p-0">
+            {[...stats.strongZones, ...stats.weakZones].sort((a, b) => b.accuracy - a.accuracy).map((z) => {
+              const z2 = zone(z.accuracy);
+              return (
+                <li key={z.name} className="flex flex-col gap-[6px] py-[10px] border-t border-app-borderLight">
+                  <div className="flex justify-between items-baseline gap-3">
+                    <span className="text-[16px]">{z.name}</span>
+                    <span className="text-[15px] font-[700]" style={{ color: z2.text, fontVariantNumeric: 'tabular-nums' }}>{z.accuracy}%</span>
+                  </div>
+                  <span aria-hidden="true" className="flex h-[6px] rounded-[3px] overflow-hidden" style={{ background: '#EEF0F4' }}>
+                    <span style={{ width: `${z.accuracy}%`, background: z2.fill }} />
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      )}
+
+      {/* Session sparkline */}
+      {sessions.length > 1 && (
+        <section className="bg-white border border-app-border rounded-[6px] p-4 flex flex-col gap-3">
+          <div className="flex flex-col gap-1">
+            <h2 className="text-[21px] font-[750] m-0" style={{ fontStretch: '85%' }}>Session scores</h2>
+            <p className="text-[14px] text-app-textSecondary m-0">Your last {sessions.length} sessions, out of 20</p>
+          </div>
+          <svg
+            role="img"
+            aria-label={`Session scores over ${sessions.length} sessions`}
+            viewBox={`0 0 ${W} ${H}`}
+            width="100%"
+            style={{ display: 'block' }}
           >
-            <h3 className="font-semibold text-app-text text-sm flex items-center gap-2">
-              <TrendingDown size={16} className="text-rose-400" />
-              Bottom 5 Chapters
-            </h3>
-            {showBottom ? <ChevronUp size={16} className="text-app-textMuted" /> : <ChevronDown size={16} className="text-app-textMuted" />}
-          </button>
-          {showBottom && (
-            <div className="space-y-2 mt-3">
-              {bottom5.map((p, i) => (
-                <div key={p.chapterId} className="flex items-center gap-3 p-2 rounded-xl bg-rose-50 border border-rose-200">
-                  <span className="text-xs font-bold text-rose-400 w-5 text-center">#{i + 1}</span>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm text-app-text truncate">{p.name}</p>
-                    <p className="text-xs text-app-textMuted">{p.subjectName}</p>
-                  </div>
-                  <p className="text-sm font-bold text-rose-400">{p.accuracy}%</p>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+            <g stroke="#EEF0F4" strokeWidth="1">
+              <line x1={PAD_L} y1={PAD_T} x2={W} y2={PAD_T} />
+              <line x1={PAD_L} y1={PAD_T + plotH / 2} x2={W} y2={PAD_T + plotH / 2} />
+              <line x1={PAD_L} y1={PAD_T + plotH} x2={W} y2={PAD_T + plotH} />
+            </g>
+            <g style={{ fontSize: 11, fill: '#4B5168', fontFamily: 'inherit' }}>
+              <text x={0} y={PAD_T + 4}>20</text>
+              <text x={0} y={PAD_T + plotH / 2 + 4}>10</text>
+              <text x={6} y={PAD_T + plotH + 4}>0</text>
+              <text x={PAD_L} y={H}>Earlier</text>
+              <text x={W} y={H} textAnchor="end">Latest</text>
+            </g>
+            {pts && (
+              <polyline points={pts} fill="none" stroke="#2A3FC1" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
+            )}
+            {sessions.map((v, i) => {
+              const x = PAD_L + (i / Math.max(sessions.length - 1, 1)) * plotW;
+              const y = PAD_T + plotH - (v / MAX_SCORE) * plotH;
+              return i === sessions.length - 1 ? (
+                <g key={i}>
+                  <circle cx={x} cy={y} r={6} fill="#2A3FC1" stroke="#FFFFFF" strokeWidth="2" />
+                  <text x={x} y={y - 10} textAnchor="middle" style={{ fontSize: 14, fontWeight: 700, fill: '#1A1F36', fontFamily: 'inherit' }}>{v}</text>
+                </g>
+              ) : (
+                <circle key={i} cx={x} cy={y} r={3} fill="#2A3FC1" />
+              );
+            })}
+          </svg>
+        </section>
       )}
 
-      {/* Chapter List */}
-      <div>
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="font-semibold text-app-text">All Chapters</h3>
-          <button onClick={() => setActiveZone('ALL')} className="text-xs text-app-accent">Show All</button>
-        </div>
-        <div className="space-y-2">
-          {filtered.map((p) => {
-            const cfg = ZONE_CONFIG[p.zone];
-            const Icon = cfg.icon;
-            return (
-              <div key={p.chapterId} className={`flex items-center gap-3 p-3 rounded-xl border ${cfg.bg} ${cfg.border}`}>
-                <Icon size={16} className={cfg.color} />
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-app-text truncate">{p.name}</p>
-                  <p className="text-xs text-app-textMuted">{p.subjectName} · {p.total} questions</p>
-                </div>
-                <div className="text-right">
-                  <p className={`font-bold text-sm ${cfg.color}`}>{p.accuracy}%</p>
-                  <p className="text-xs text-app-textMuted">{p.correct}/{p.total}</p>
-                </div>
-              </div>
-            );
-          })}
-          {filtered.length === 0 && (
-            <div className="text-center py-8 text-app-textMuted">
-              <BarChart2 size={32} className="mx-auto mb-2 opacity-40" />
-              <p className="text-sm">Practice more questions to see performance</p>
-            </div>
-          )}
-        </div>
-      </div>
+      {/* Top & bottom 5 */}
+      {stats.strongZones.length > 0 && (
+        <section className="bg-white border border-app-border rounded-[6px] p-4 flex flex-col gap-[6px]">
+          <h2 className="text-[21px] font-[750] m-0 mb-1" style={{ fontStretch: '85%' }}>Top chapters</h2>
+          <ol className="list-none m-0 p-0">
+            {[...stats.strongZones].sort((a, b) => b.accuracy - a.accuracy).slice(0, 5).map((z, i) => (
+              <li
+                key={z.name}
+                className="grid items-center gap-[10px] min-h-[46px] border-t border-app-borderLight"
+                style={{ gridTemplateColumns: '24px minmax(0,1fr) auto' }}
+              >
+                <span className="text-[15px] font-[700] text-app-textSecondary" style={{ fontVariantNumeric: 'tabular-nums' }}>{i + 1}</span>
+                <span className="text-[16px]">{z.name}</span>
+                <span className="text-[15px] font-[700] text-app-accent" style={{ fontVariantNumeric: 'tabular-nums' }}>{z.accuracy}%</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      {stats.weakZones.length > 0 && (
+        <section className="bg-white border border-app-border rounded-[6px] p-4 flex flex-col gap-[6px]">
+          <h2 className="text-[21px] font-[750] m-0 mb-1" style={{ fontStretch: '85%' }}>Bottom chapters</h2>
+          <ol className="list-none m-0 p-0">
+            {[...stats.weakZones].sort((a, b) => a.accuracy - b.accuracy).slice(0, 5).map((z, i) => {
+              const z2 = zone(z.accuracy);
+              return (
+                <li
+                  key={z.name}
+                  className="grid items-center gap-[10px] min-h-[46px] border-t border-app-borderLight"
+                  style={{ gridTemplateColumns: '24px minmax(0,1fr) auto' }}
+                >
+                  <span className="text-[15px] font-[700] text-app-textSecondary" style={{ fontVariantNumeric: 'tabular-nums' }}>{i + 1}</span>
+                  <span className="text-[16px]">{z.name}</span>
+                  <span className="text-[15px] font-[700]" style={{ color: z2.text, fontVariantNumeric: 'tabular-nums' }}>{z.accuracy}%</span>
+                </li>
+              );
+            })}
+          </ol>
+        </section>
+      )}
     </div>
   );
 }

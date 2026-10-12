@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anek+Malayalam:wdth,wght@75..125,100..800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,75 +9,99 @@
     @apply bg-app-bg text-app-text font-sans antialiased;
     color-scheme: light;
   }
+  * {
+    box-sizing: border-box;
+  }
+  button, input, select, textarea {
+    font: inherit;
+    color: inherit;
+  }
+  :focus-visible {
+    outline: 2px solid #2A3FC1;
+    outline-offset: 2px;
+  }
+  a {
+    color: #2A3FC1;
+  }
+  a:hover {
+    color: #1E2E94;
+  }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-app-accent hover:bg-app-accentDark text-white font-semibold px-5 py-3 rounded-2xl transition-all disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.98] shadow-sm;
+    @apply flex items-center justify-center min-h-[52px] px-5 rounded-[10px] bg-app-accent text-white text-[17px] font-[650] no-underline transition-all active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed;
   }
   .btn-secondary {
-    @apply bg-white hover:bg-app-surface text-app-textSecondary font-medium px-5 py-3 rounded-2xl border border-app-border transition-all active:scale-[0.98];
+    @apply flex items-center justify-center min-h-[52px] px-5 rounded-[10px] bg-white border border-[#C3C8D4] text-app-text text-[17px] font-[600] no-underline transition-all active:scale-[0.98];
   }
   .btn-ghost {
-    @apply bg-transparent hover:bg-app-surface text-app-textSecondary font-medium px-4 py-2 rounded-xl transition-all;
+    @apply flex items-center justify-center w-11 h-11 rounded-full text-app-text transition-colors hover:bg-app-borderLight;
   }
   .card {
-    @apply bg-white rounded-2xl border border-app-border p-6 shadow-sm;
-  }
-  .card-elevated {
-    @apply bg-white rounded-2xl border border-app-border p-6 shadow-md;
+    @apply bg-white border border-app-border rounded-[6px];
   }
   .input {
-    @apply w-full bg-app-surface border border-app-border rounded-2xl px-4 py-3 text-app-text placeholder-app-textMuted focus:outline-none focus:ring-2 focus:ring-app-accent focus:border-transparent transition-all;
+    @apply w-full h-[52px] px-[14px] border border-[#7A8095] rounded-[8px] bg-white text-[16px] focus:outline-none focus:ring-2 focus:ring-app-accent focus:border-transparent transition-all;
+  }
+  .label {
+    @apply text-[15px] font-[600];
+  }
+
+  /* Bottom nav */
+  .nav-item {
+    @apply flex flex-col items-center justify-center gap-[3px] min-h-[56px] no-underline text-[12px] font-[500] text-app-textSecondary;
+  }
+  .nav-item.active {
+    @apply font-[650] text-app-accent;
+  }
+  .nav-icon {
+    @apply grid place-items-center w-[52px] h-[30px] rounded-[999px];
+  }
+  .nav-icon.active {
+    @apply bg-app-accentLight;
+  }
+
+  /* Cognix logo mark */
+  .cognix-logo {
+    @apply inline-flex items-baseline font-[800] leading-none tracking-tight;
+    font-stretch: 78%;
+  }
+  .cognix-dot {
+    @apply inline-block rounded-full bg-app-accent;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    @apply flex h-[6px] rounded-[3px] overflow-hidden;
   }
 }
 
-.custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
+/* Scrollbars */
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.04); }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
+
+/* Toggle switch */
+.toggle-track {
+  @apply flex items-center w-[46px] h-[28px] p-[3px] rounded-[14px] transition-colors duration-150;
 }
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.04);
-}
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
+.toggle-knob {
+  @apply w-[22px] h-[22px] rounded-full bg-white shadow-sm transition-[margin] duration-150;
 }
 
-@layer utilities {}
-
-/* Landing page micro-interactions (respect reduced-motion) */
+/* Animations */
 @keyframes cognix-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes cognix-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
 }
-
-.animate-fade-up {
-  animation: cognix-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.animate-float {
-  animation: cognix-float 6s ease-in-out infinite;
-}
+.animate-fade-up  { animation: cognix-fade-up  0.7s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-float    { animation: cognix-float 6s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-fade-up,
-  .animate-float {
-    animation: none !important;
-  }
+  .animate-fade-up, .animate-float, * { transition: none !important; animation: none !important; }
 }

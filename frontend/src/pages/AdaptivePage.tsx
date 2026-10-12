@@ -1,34 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import { CheckCircle, XCircle, Loader2, Lightbulb, Trophy, RotateCcw, Flag } from 'lucide-react';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import api from '../lib/api';
-
-const LOADING_FACTS = [
-  { title: 'PSC Exam Tip', text: 'Read the question twice before answering. Many mistakes happen from rushing.' },
-  { title: 'Did you know?', text: 'Kerala PSC conducts exams for over 500 different posts every year.' },
-  { title: 'Study Strategy', text: 'Revise weak topics right after studying them — it boosts retention by 60%.' },
-  { title: 'PSC Fact', text: 'The One Rank One Pension scheme was a major demand of Kerala PSC rank holders.' },
-  { title: 'Exam Tip', text: 'Eliminate two wrong options first. Even a guess among 2 choices has 50% odds.' },
-  { title: 'Did you know?', text: 'Current affairs from the last 6 months are the most frequently asked in PSC exams.' },
-  { title: 'Study Strategy', text: 'Practice previous year papers — patterns often repeat across exam cycles.' },
-  { title: 'PSC Fact', text: 'Kerala PSC uses negative marking only for OMR-based exams, not online tests.' },
-  { title: 'Exam Tip', text: 'Time management: aim for ~1 minute per question. Don\'t spend 5 minutes on one.' },
-  { title: 'Did you know?', text: 'The Secretariat is the most common PSC exam location in Kerala.' },
-  { title: 'Study Strategy', text: 'Group study helps — teaching a concept to someone else strengthens your own understanding.' },
-  { title: 'PSC Fact', text: 'Kerala PSC publishes rank lists that remain valid for 3 years from the date of approval.' },
-];
-
-interface ConceptInfo {
-  id: number | null;
-  name: string;
-  level: string;
-  path: { level: string; name: string }[];
-  total: number;
-  correct: number;
-  accuracy: number;
-  mastery: boolean;
-  zone: string;
-}
 
 interface Question {
   id: string;
@@ -40,13 +12,32 @@ interface Question {
   concept: { id: number; level: string; nameEnglish: string } | null;
 }
 
-const LETTER_LABELS = ['A', 'B', 'C', 'D'];
+interface ConceptInfo {
+  id: number | null; name: string; level: string;
+  path: { level: string; name: string }[];
+  total: number; correct: number; accuracy: number; mastery: boolean; zone: string;
+}
 
-const DIFFICULTY_COLORS: Record<string, string> = {
-  EASY: 'text-emerald-400',
-  MEDIUM: 'text-amber-400',
-  HARD: 'text-rose-400',
+const LETTERS = ['A', 'B', 'C', 'D'];
+const SESSION_TOTAL = 20;
+
+type OptionKind = 'idle' | 'right' | 'key' | 'wrong' | 'dim';
+
+const LOOK: Record<OptionKind, { rowBg: string; rowBd: string; bubBg: string; bubBd: string; bubColor: string }> = {
+  idle:  { rowBg: '#FFFFFF', rowBd: '#DADDE5', bubBg: '#FFFFFF', bubBd: '#7A8095', bubColor: '#4B5168' },
+  right: { rowBg: '#EEF1FD', rowBd: '#2A3FC1', bubBg: '#2A3FC1', bubBd: '#2A3FC1', bubColor: '#FFFFFF' },
+  key:   { rowBg: '#EEF1FD', rowBd: '#2A3FC1', bubBg: '#FFFFFF', bubBd: '#2A3FC1', bubColor: '#2A3FC1' },
+  wrong: { rowBg: '#FCEEF1', rowBd: '#C4314B', bubBg: '#C4314B', bubBd: '#C4314B', bubColor: '#FFFFFF' },
+  dim:   { rowBg: '#FFFFFF', rowBd: '#E6E8EE', bubBg: '#FFFFFF', bubBd: '#B5BAC8', bubColor: '#6B7186' },
 };
+
+function optionKind(idx: number, selected: number | null, correct: number, answered: boolean): OptionKind {
+  if (!answered) return 'idle';
+  if (idx === correct && idx === selected) return 'right';
+  if (idx === correct) return 'key';
+  if (idx === selected) return 'wrong';
+  return 'dim';
+}
 
 export default function AdaptivePage() {
   const navigate = useNavigate();
@@ -64,18 +55,10 @@ export default function AdaptivePage() {
   const [totalQuestions, setTotalQuestions] = useState(0);
   const [streak, setStreak] = useState(0);
   const [startTime, setStartTime] = useState(Date.now());
-  const [factIndex, setFactIndex] = useState(() => Math.floor(Math.random() * LOADING_FACTS.length));
   const [flagged, setFlagged] = useState(false);
+  const [history, setHistory] = useState<boolean[]>([]);
   const prefetchedRef = useRef<{ data: any; sid: string } | null>(null);
   const recoveringRef = useRef(false);
-
-  useEffect(() => {
-    if (!loadingNext && !loading) return;
-    const interval = setInterval(() => {
-      setFactIndex((i) => (i + 1) % LOADING_FACTS.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [loadingNext, loading]);
 
   const doFetch = async (sid: string) => {
     const { data } = await api.get(`/adaptive/session/${sid}/next`);
@@ -83,11 +66,7 @@ export default function AdaptivePage() {
   };
 
   const prefetchNext = (sid: string) => {
-    doFetch(sid).then((data) => {
-      prefetchedRef.current = { data, sid };
-    }).catch((err) => {
-      console.error('Prefetch failed:', err?.response?.status, err?.message);
-    });
+    doFetch(sid).then((data) => { prefetchedRef.current = { data, sid }; }).catch(() => {});
   };
 
   const fetchNext = async (sid: string) => {
@@ -98,17 +77,12 @@ export default function AdaptivePage() {
     if (prefetchedRef.current && prefetchedRef.current.sid === sid) {
       const data = prefetchedRef.current.data;
       prefetchedRef.current = null;
-      setLoadingNext(true);
-      if (data.done) {
-        setDone(true);
-      } else {
-        setQuestion(data.question);
-        setQuestionNumber(data.questionNumber);
-        setConcept(data.concept || null);
-        setStartTime(Date.now());
-        prefetchNext(sid);
-      }
-      setLoadingNext(false);
+      if (data.done) { setDone(true); return; }
+      setQuestion(data.question);
+      setQuestionNumber(data.questionNumber);
+      setConcept(data.concept || null);
+      setStartTime(Date.now());
+      prefetchNext(sid);
       return;
     }
 
@@ -117,29 +91,17 @@ export default function AdaptivePage() {
     setStartTime(Date.now());
     try {
       const data = await doFetch(sid);
-      if (data.done) {
-        setDone(true);
-      } else {
-        setQuestion(data.question);
-        setQuestionNumber(data.questionNumber);
-        setConcept(data.concept || null);
-        prefetchNext(sid);
-      }
+      if (data.done) { setDone(true); return; }
+      setQuestion(data.question);
+      setQuestionNumber(data.questionNumber);
+      setConcept(data.concept || null);
+      prefetchNext(sid);
     } catch (err) {
-      // Stale/unknown session id in localStorage (or a deleted session) would
-      // otherwise leave the user stuck on "Loading next question..." forever.
-      // Recover by dropping it and starting a fresh session — once only.
       if (recoveringRef.current) throw err;
       recoveringRef.current = true;
-      console.error('Session fetch failed, starting a fresh session:', (err as any)?.response?.status, (err as any)?.message);
       localStorage.removeItem('adaptiveSessionId');
       prefetchedRef.current = null;
-      try {
-        await startSession();
-      } catch (e) {
-        console.error('Session recovery failed:', e);
-      }
-      return;
+      try { await startSession(); } catch {}
     } finally {
       setLoadingNext(false);
     }
@@ -152,6 +114,7 @@ export default function AdaptivePage() {
     setTotalQuestions(0);
     setStreak(0);
     setQuestionNumber(0);
+    setHistory([]);
     try {
       const { data } = await api.post('/adaptive/session/start');
       setSessionId(data.id);
@@ -165,24 +128,15 @@ export default function AdaptivePage() {
   const handleAnswer = async (option: number) => {
     if (!sessionId || !question || result) return;
     setSelected(option);
-
-    // Instant feedback from client-side data — no waiting for server
     const isCorrect = option === question.correctOption;
     setResult({ isCorrect, correctOption: question.correctOption, explanation: undefined, explanationLoaded: false });
     setTotalQuestions((t) => t + 1);
-    if (isCorrect) {
-      setSessionScore((s) => s + 1);
-      setStreak((s) => s + 1);
-    } else {
-      setStreak(0);
-    }
-
-    // Fire-and-forget: save answer to server in background
+    if (isCorrect) { setSessionScore((s) => s + 1); setStreak((s) => s + 1); }
+    else { setStreak(0); }
+    setHistory((h) => [...h, isCorrect]);
     const timeTaken = Math.round((Date.now() - startTime) / 1000);
     api.post(`/adaptive/session/${sessionId}/answer`, {
-      questionId: question.id,
-      selectedOption: option,
-      timeTaken,
+      questionId: question.id, selectedOption: option, timeTaken,
     }).then(({ data }) => {
       setResult((prev) => prev ? { ...prev, explanation: data.explanation || undefined, explanationLoaded: true } : prev);
     }).catch(() => {
@@ -190,20 +144,13 @@ export default function AdaptivePage() {
     });
   };
 
-  const handleNext = () => {
-    if (sessionId) fetchNext(sessionId);
-  };
+  const handleNext = () => { if (sessionId) fetchNext(sessionId); };
 
   const toggleFlag = async () => {
     if (!question) return;
     try {
-      if (flagged) {
-        await api.delete(`/questions/${question.id}/flag`);
-        setFlagged(false);
-      } else {
-        await api.post(`/questions/${question.id}/flag`);
-        setFlagged(true);
-      }
+      if (flagged) { await api.delete(`/questions/${question.id}/flag`); setFlagged(false); }
+      else { await api.post(`/questions/${question.id}/flag`); setFlagged(true); }
     } catch {}
   };
 
@@ -223,206 +170,218 @@ export default function AdaptivePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Loading state
-  if (loading) {
-    const fact = LOADING_FACTS[factIndex % LOADING_FACTS.length];
+  // ── Loading ──
+  if (loading || (!question && !done)) {
     return (
-      <div className="p-4 max-w-lg mx-auto flex flex-col items-center justify-center min-h-[70vh] text-center">
-        <Loader2 size={32} className="animate-spin text-app-accent mb-4" />
-        <p className="text-sm text-app-textMuted mb-4">Finding your first question...</p>
-        <div className="card w-full text-left">
-          <div className="flex items-start gap-2">
-            <Lightbulb size={16} className="text-app-accent mt-0.5 shrink-0" />
-            <div>
-              <p className="text-xs font-semibold text-app-accent mb-0.5">{fact.title}</p>
-              <p className="text-xs text-app-textMuted leading-relaxed">{fact.text}</p>
-            </div>
-          </div>
-        </div>
+      <div className="flex items-center justify-center min-h-screen bg-app-bg">
+        <div className="w-8 h-8 border-2 border-app-accent border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
-  // Done — session complete
+  // ── Done ──
   if (done) {
     const pct = totalQuestions > 0 ? Math.round((sessionScore / totalQuestions) * 100) : 0;
     return (
-      <div className="p-4 max-w-lg mx-auto flex flex-col items-center justify-center min-h-[70vh] text-center space-y-4">
-        <Trophy size={48} className={pct >= 70 ? 'text-emerald-400' : pct >= 40 ? 'text-amber-400' : 'text-rose-400'} />
-        <h2 className="text-2xl font-bold text-app-text">Session Complete!</h2>
-        <div className="card w-full text-center py-6">
-          <p className="text-4xl font-bold text-app-accent">{pct}%</p>
-          <p className="text-app-textMuted text-sm mt-1">{sessionScore}/{totalQuestions} correct</p>
-        </div>
-        <p className="text-xs text-app-textMuted max-w-xs">Your performance has been recorded. Next session will focus on your weak areas.</p>
-        <button onClick={startSession} className="btn-primary px-8 py-3 flex items-center gap-2">
-          <RotateCcw size={16} /> New Session
-        </button>
-      </div>
-    );
-  }
+      <div className="flex flex-col min-h-screen bg-app-bg" style={{ color: '#1A1F36', fontFamily: "'Anek Malayalam', system-ui, sans-serif" }}>
+        <header className="flex items-center gap-[6px] px-[10px] py-[8px]">
+          <Link to="/adaptive" aria-label="Close summary" className="w-11 h-11 grid place-items-center rounded-full text-app-text no-underline">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </Link>
+          <p className="text-[15px] font-[650] m-0">Session complete</p>
+        </header>
 
-  // Loading next question
-  if (!question) {
-    const fact = LOADING_FACTS[factIndex % LOADING_FACTS.length];
-    return (
-      <div className="p-4 max-w-lg mx-auto flex flex-col items-center justify-center min-h-[70vh] text-center">
-        <Loader2 size={32} className="animate-spin text-app-accent mb-4" />
-        <p className="text-sm text-app-textMuted mb-4">Loading next question...</p>
-        <div className="card w-full text-left">
-          <div className="flex items-start gap-2">
-            <Lightbulb size={16} className="text-app-accent mt-0.5 shrink-0" />
-            <div>
-              <p className="text-xs font-semibold text-app-accent mb-0.5">{fact.title}</p>
-              <p className="text-xs text-app-textMuted leading-relaxed">{fact.text}</p>
+        <main className="flex flex-col gap-5 px-5 pb-7">
+          <section className="flex flex-col gap-[6px]">
+            <h1 className="text-[96px] leading-[0.88] font-[800] tracking-[-0.02em] m-0" style={{ fontStretch: '75%', fontVariantNumeric: 'tabular-nums' }}>
+              {sessionScore}<span className="text-app-textMuted">/{totalQuestions}</span>
+            </h1>
+            <p className="text-[17px] leading-[1.45] text-app-textSecondary m-0">{pct}% correct</p>
+          </section>
+
+          {/* Answer sheet */}
+          <section className="bg-white border border-app-border rounded-[6px] p-4 flex flex-col gap-[14px]">
+            <h2 className="text-[21px] font-[750] m-0" style={{ fontStretch: '85%' }}>Your answer sheet</h2>
+            <div role="img" aria-label={`${sessionScore} right and ${totalQuestions - sessionScore} wrong`} className="grid gap-[3px]" style={{ gridTemplateColumns: 'repeat(10, minmax(0, 1fr))' }}>
+              {history.map((ok, i) => (
+                <span key={i} className="aspect-square rounded-full" style={ok ? { background: '#2A3FC1' } : { background: '#FFFFFF', border: '2px solid #C4314B' }} />
+              ))}
             </div>
+            <div aria-hidden="true" className="flex gap-4 text-[13px] text-app-textSecondary">
+              <span className="flex items-center gap-[6px]"><span className="w-[10px] h-[10px] rounded-full" style={{ background: '#2A3FC1' }} />Right</span>
+              <span className="flex items-center gap-[6px]"><span className="w-[10px] h-[10px] rounded-full border-2" style={{ borderColor: '#C4314B' }} />Wrong</span>
+            </div>
+          </section>
+
+          <div className="flex flex-col gap-[10px]">
+            <button onClick={startSession} className="btn-primary w-full">Start another session</button>
+            <Link to="/adaptive" className="btn-secondary w-full">Back to home</Link>
           </div>
-        </div>
+        </main>
       </div>
     );
   }
 
-  // Question view
+  // ── Question view ──
+  const answered = result !== null;
+  const isRight = answered && result!.isCorrect;
+  const curIdx = (questionNumber || 1) - 1;
+  const isWeak = concept?.zone === 'WEAK';
+
   return (
-    <div className="max-w-lg mx-auto flex flex-col h-full">
-      {/* Question Header */}
-      <div className="px-5 pt-4 pb-6 bg-app-accent text-white flex flex-col relative border-b border-app-accentDark/40">
-        <div className="flex items-center justify-between mb-2">
-          {streak >= 3 && (
-            <span className="text-xs font-medium text-amber-300">🔥 {streak} streak</span>
-          )}
-          <button
-            onClick={toggleFlag}
-            className="ml-auto p-1.5 rounded-lg transition-colors"
-            title={flagged ? 'Unflag' : 'Flag for review'}
-          >
-            <Flag size={16} className={flagged ? 'fill-amber-300 text-amber-300' : 'text-white/60 hover:text-white'} />
-          </button>
-        </div>
+    <div className="flex flex-col min-h-screen bg-app-bg" style={{ color: '#1A1F36', fontFamily: "'Anek Malayalam', system-ui, sans-serif" }}>
+      {/* Header */}
+      <header className="flex items-center gap-[6px] px-[10px] py-[8px]">
+        <Link to="/adaptive" aria-label="End session" className="flex-none w-11 h-11 grid place-items-center rounded-full text-app-text no-underline">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </Link>
+        <p className="flex-1 text-[15px] font-[650] m-0">Question {questionNumber} of {SESSION_TOTAL}</p>
+        <span className="flex items-center gap-[5px] min-h-[34px] px-3 rounded-[999px] bg-white border border-app-border text-[14px] font-[650]">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4314B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 21c3.9 0 6.5-2.6 6.5-6.2 0-3.6-2.6-5.7-4-8.8-.5 2-1.6 3.3-3 3.8C11.9 7.3 10.6 4.6 8.5 3c.4 3.6-3 6.3-3 11.8C5.5 18.4 8.1 21 12 21z" />
+          </svg>
+          {streak} in a row
+        </span>
+        <button
+          type="button"
+          onClick={toggleFlag}
+          aria-pressed={flagged}
+          aria-label="Flag this question for review"
+          className="flex-none w-11 h-11 grid place-items-center rounded-full border-0 cursor-pointer"
+          style={{ background: flagged ? '#E8EBFB' : 'transparent', color: flagged ? '#2A3FC1' : '#4B5168' }}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill={flagged ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M6 21V4" />
+            <path d="M6 4.5h11.5l-2.5 4 2.5 4H6" />
+          </svg>
+        </button>
+      </header>
 
-        <h1 className="text-lg font-bold leading-snug text-white min-h-[56px]">
-          {question.text}
-        </h1>
-
-        <div className="absolute -bottom-8 right-0 w-36 h-36 bg-white/20 rounded-full blur-2xl pointer-events-none" />
+      {/* Progress strip */}
+      <div
+        role="img"
+        aria-label={`${sessionScore} right and ${history.length - sessionScore} wrong so far`}
+        className="grid gap-1 px-5"
+        style={{ gridTemplateColumns: `repeat(${SESSION_TOTAL}, minmax(0, 1fr))` }}
+      >
+        {Array.from({ length: SESSION_TOTAL }, (_, i) => {
+          if (i < history.length) {
+            const ok = history[i];
+            return <span key={i} className="aspect-square rounded-full" style={ok ? { background: '#2A3FC1', border: '2px solid #2A3FC1' } : { background: '#FFFFFF', border: '2px solid #C4314B' }} />;
+          }
+          if (i === curIdx) return <span key={i} className="aspect-square rounded-full" style={{ background: '#E8EBFB', border: '2px solid #2A3FC1' }} />;
+          return <span key={i} className="aspect-square rounded-full" style={{ background: 'transparent', border: '2px solid #C3C8D4' }} />;
+        })}
       </div>
 
-      {/* Options Area */}
-      <div className="flex-1 bg-app-bg p-5 flex flex-col overflow-y-auto custom-scrollbar">
-        <span className="text-[11px] font-bold uppercase tracking-wider text-app-textMuted mb-3">
-          Select the correct answer
-        </span>
+      {/* Question */}
+      <main className="flex-1 flex flex-col gap-4 px-5 pt-5 pb-5">
+        {/* Badges */}
+        <div className="flex gap-2 flex-wrap">
+          <span className="px-[10px] py-1 rounded-[999px] bg-white border border-app-border text-[13px] font-[600] text-app-textSecondary">
+            {question!.chapter.name}
+          </span>
+          <span
+            className="px-[10px] py-1 rounded-[999px] text-[13px] font-[600]"
+            style={isWeak ? { background: '#FBE8EC', color: '#A3263D' } : { background: '#E8EBFB', color: '#2A3FC1' }}
+          >
+            {isWeak ? 'Weak chapter' : 'Strong chapter'}
+          </span>
+        </div>
 
-        <div className="space-y-3">
-          {question.options.map((option, idx) => {
-            const isSelected = selected === idx;
-            const letter = LETTER_LABELS[idx];
-            let cardStyle = 'bg-white border-app-border text-app-text hover:border-app-accent hover:bg-app-surface';
-            let badgeStyle = 'bg-app-surface text-app-textSecondary border-app-border';
+        {/* Q number + text */}
+        <div className="grid gap-[6px] items-baseline" style={{ gridTemplateColumns: '40px minmax(0,1fr)' }}>
+          <span aria-hidden="true" className="text-[36px] leading-[1] font-[800] text-app-accent" style={{ fontStretch: '75%', fontVariantNumeric: 'tabular-nums' }}>
+            {questionNumber}
+          </span>
+          <h1 className="text-[21px] leading-[1.32] font-[650] m-0">{question!.text}</h1>
+        </div>
 
-            if (isSelected && !result) {
-              cardStyle = 'bg-app-accentMuted border-2 border-app-accent text-app-text shadow-sm';
-              badgeStyle = 'bg-app-accent text-white border-transparent';
+        {/* Options */}
+        <div role="group" aria-label="Options" className="flex flex-col gap-[10px]">
+          {question!.options.map((text, idx) => {
+            const kind = optionKind(idx, selected, result?.correctOption ?? -1, answered);
+            const look = LOOK[kind];
+            let note = '';
+            if (answered) {
+              if (kind === 'right') note = 'Your answer';
+              if (kind === 'key') note = 'Correct answer';
+              if (kind === 'wrong') note = 'Your answer';
             }
-
-            if (result) {
-              if (idx === result.correctOption) {
-                cardStyle = 'bg-emerald-50 border-2 border-emerald-500 text-app-text shadow-sm';
-                badgeStyle = 'bg-emerald-500 text-white border-transparent';
-              } else if (isSelected && !result.isCorrect) {
-                cardStyle = 'bg-rose-50 border-2 border-rose-500 text-app-text';
-                badgeStyle = 'bg-rose-500 text-white border-transparent';
-              } else {
-                cardStyle = 'opacity-45 bg-app-surface border-app-border text-app-textMuted';
-              }
-            }
+            const showTick = kind === 'right' || kind === 'key';
+            const showCross = kind === 'wrong';
+            const showLetter = !showTick && !showCross;
 
             return (
               <button
                 key={idx}
+                type="button"
                 onClick={() => handleAnswer(idx)}
-                disabled={!!result || loadingNext}
-                className={`w-full text-left p-3.5 rounded-2xl flex items-center justify-between border transition-all duration-150 ${cardStyle} min-h-[56px] active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-app-accent focus:ring-offset-1`}
+                aria-disabled={answered}
+                disabled={answered || loadingNext}
+                className="relative flex items-center gap-3 w-full min-h-[58px] px-3 text-left rounded-[10px] border-[1.5px] cursor-pointer"
+                style={{ borderColor: look.rowBd, background: look.rowBg }}
               >
-                <div className="flex items-center gap-3.5 pr-2">
-                  <span className={`w-8 h-8 rounded-xl font-bold text-xs flex items-center justify-center border shrink-0 transition-colors ${badgeStyle}`}>
-                    {letter}
-                  </span>
-                  <span className="font-semibold text-sm tracking-tight leading-snug">
-                    {option}
-                  </span>
-                </div>
-
-                {result && idx === result.correctOption && <CheckCircle size={20} className="text-emerald-400 shrink-0" />}
-                {result && isSelected && !result.isCorrect && <XCircle size={20} className="text-rose-400 shrink-0" />}
+                <span
+                  aria-hidden="true"
+                  className="flex-none w-9 h-9 rounded-full grid place-items-center text-[15px] font-[700] border-2"
+                  style={{ background: look.bubBg, borderColor: look.bubBd, color: look.bubColor }}
+                >
+                  {showLetter && LETTERS[idx]}
+                  {showTick && (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12.5l4.5 4.5L19 7.5" />
+                    </svg>
+                  )}
+                  {showCross && (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M6 6l12 12M18 6L6 18" />
+                    </svg>
+                  )}
+                </span>
+                <span className="flex-1 flex flex-col gap-[2px]">
+                  <span className="text-[16px] leading-[1.35]" style={{ color: kind === 'dim' ? '#4B5168' : '#1A1F36' }}>{text}</span>
+                  {note && (
+                    <span className="text-[13px] font-[650]" style={{ color: kind === 'wrong' ? '#A3263D' : '#2A3FC1' }}>{note}</span>
+                  )}
+                </span>
               </button>
             );
           })}
-
-          {/* Explanation */}
-          {result && (
-            result.explanation ? (
-              <div className={`p-4 rounded-2xl text-xs space-y-1.5 transition-all ${
-                result.isCorrect
-                  ? 'bg-emerald-50 border border-emerald-200 text-app-text'
-                  : 'bg-amber-50 border border-amber-200 text-app-text'
-              }`}>
-                <div className="font-bold">
-                  {result.isCorrect ? '🎉 Correct!' : '💡 Solution'}
-                </div>
-                <p className="leading-relaxed text-app-textSecondary">
-                  {result.explanation}
-                </p>
-              </div>
-            ) : result.explanationLoaded ? (
-              <div className={`p-4 rounded-2xl text-xs transition-all ${
-                result.isCorrect
-                  ? 'bg-emerald-50 border border-emerald-200 text-app-text'
-                  : 'bg-amber-50 border border-amber-200 text-app-text'
-              }`}>
-                <div className="font-bold">
-                  {result.isCorrect ? '🎉 Correct!' : '💡 Solution'}
-                </div>
-                {!result.isCorrect && (
-                  <p className="mt-1 leading-relaxed text-app-textSecondary">
-                    No explanation available for this question yet. Use the flag button if it needs review.
-                  </p>
-                )}
-              </div>
-            ) : (
-              <div className={`p-4 rounded-2xl text-xs transition-all ${
-                result.isCorrect
-                  ? 'bg-emerald-50 border border-emerald-200 text-app-text'
-                  : 'bg-amber-50 border border-amber-200 text-app-text'
-              }`}>
-                <div className="font-bold">
-                  {result.isCorrect ? '🎉 Correct!' : '💡 Loading explanation...'}
-                </div>
-              </div>
-            )
-          )}
         </div>
+      </main>
 
-        {/* Action */}
-        <div className="pt-4 mt-auto">
-          {result ? (
-            <button
-              onClick={handleNext}
-              disabled={loadingNext}
-              className="w-full py-3.5 px-4 rounded-2xl font-bold text-sm bg-app-accent text-white flex items-center justify-center gap-1 shadow-md hover:opacity-90 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loadingNext ? 'Loading...' : 'Next Question →'}
-            </button>
+      {/* Answer panel */}
+      {answered && (
+        <section
+          aria-live="polite"
+          className="sticky bottom-0 bg-white border-t border-app-border rounded-t-[16px] px-5 pt-[18px] pb-5 flex flex-col gap-[10px]"
+          style={{ boxShadow: '0 -6px 20px rgba(26,31,54,0.06)' }}
+        >
+          <p className="flex items-center gap-2 text-[23px] leading-[1.1] font-[800] m-0" style={{ fontStretch: '80%', color: isRight ? '#2A3FC1' : '#A3263D' }}>
+            {isRight ? 'Correct' : `Not quite. The answer is ${LETTERS[result!.correctOption]}.`}
+          </p>
+          {result!.explanation ? (
+            <p className="text-[15px] leading-[1.5] text-app-text m-0">{result!.explanation}</p>
+          ) : result!.explanationLoaded ? (
+            <p className="text-[15px] leading-[1.5] text-app-textSecondary m-0">No explanation available.</p>
           ) : (
-            <button
-              disabled
-              className="w-full py-3.5 px-4 rounded-2xl font-bold text-sm bg-app-surface text-app-textMuted cursor-not-allowed"
-            >
-              Select an answer
-            </button>
+            <p className="text-[15px] leading-[1.5] text-app-textSecondary m-0">Loading explanation…</p>
           )}
-        </div>
-      </div>
+          <button
+            type="button"
+            onClick={handleNext}
+            disabled={loadingNext}
+            className="btn-primary w-full mt-1"
+          >
+            {loadingNext ? 'Loading…' : 'Next question'}
+          </button>
+        </section>
+      )}
     </div>
   );
 }

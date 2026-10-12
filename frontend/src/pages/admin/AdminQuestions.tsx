@@ -256,14 +256,14 @@ export default function AdminQuestions() {
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
   return (
-    <div className="p-6 max-w-6xl mx-auto space-y-5">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-app-text">Question Bank</h1>
-          <p className="text-app-textMuted text-sm mt-1">Review, edit, flag or delete questions and their taxonomy mapping</p>
+    <div className="px-5 pt-[10px] pb-7 max-w-6xl mx-auto flex flex-col gap-5" style={{ color: '#1A1F36', fontFamily: "'Anek Malayalam', system-ui, sans-serif" }}>
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex flex-col gap-1">
+          <h1 className="text-[36px] leading-[1] font-[800] tracking-[-0.01em] m-0" style={{ fontStretch: '76%' }}>Questions</h1>
+          <p className="text-[15px] text-app-textSecondary m-0">Review, edit and manage the question bank</p>
         </div>
-        <button onClick={() => { setEditing(null); setShowForm(true); }} className="btn-primary flex items-center gap-2">
-          <Plus size={16} /> Add Question
+        <button onClick={() => { setEditing(null); setShowForm(true); }} className="inline-flex items-center gap-2 min-h-[40px] px-[14px] rounded-[10px] bg-app-accent text-white text-[14px] font-[650] border-0 cursor-pointer">
+          + Add question
         </button>
       </div>
 
