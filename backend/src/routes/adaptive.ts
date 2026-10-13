@@ -248,10 +248,6 @@ async function fetchNextQuestion(
   const seenIds = new Set(seenItems.map((si) => si.questionId));
   const seenIdList = [...seenIds];
 
-  if (seenItems.length >= 20) {
-    return { done: true, message: 'Session complete!' };
-  }
-
   // Chapter scope: respect the user's selected exams AND learned chapters so
   // practice never leaks into other exams' syllabi.
   // - selected exams + learned chapters -> learned chapters within selected exams

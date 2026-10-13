@@ -19,7 +19,6 @@ interface ConceptInfo {
 }
 
 const LETTERS = ['A', 'B', 'C', 'D'];
-const SESSION_TOTAL = 20;
 
 type OptionKind = 'idle' | 'right' | 'key' | 'wrong' | 'dim';
 
@@ -197,51 +196,6 @@ export default function AdaptivePage() {
     );
   }
 
-  // ── Done ──
-  if (done) {
-    const pct = totalQuestions > 0 ? Math.round((sessionScore / totalQuestions) * 100) : 0;
-    return (
-      <div className="flex flex-col min-h-screen bg-app-bg" style={{ color: '#1A1F36', fontFamily: "'Anek Malayalam', system-ui, sans-serif" }}>
-        <header className="flex items-center gap-[6px] px-[10px] py-[8px]">
-          <Link to="/adaptive" aria-label="Close summary" className="w-11 h-11 grid place-items-center rounded-full text-app-text no-underline">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M6 6l12 12M18 6L6 18" />
-            </svg>
-          </Link>
-          <p className="text-[15px] font-[650] m-0">Session complete</p>
-        </header>
-
-        <main className="flex flex-col gap-5 px-5 pb-7">
-          <section className="flex flex-col gap-[6px]">
-            <h1 className="text-[96px] leading-[0.88] font-[800] tracking-[-0.02em] m-0" style={{ fontStretch: '75%', fontVariantNumeric: 'tabular-nums' }}>
-              {sessionScore}<span className="text-app-textMuted">/{totalQuestions}</span>
-            </h1>
-            <p className="text-[17px] leading-[1.45] text-app-textSecondary m-0">{pct}% correct</p>
-          </section>
-
-          {/* Answer sheet */}
-          <section className="bg-white border border-app-border rounded-[6px] p-4 flex flex-col gap-[14px]">
-            <h2 className="text-[21px] font-[750] m-0" style={{ fontStretch: '85%' }}>Your answer sheet</h2>
-            <div role="img" aria-label={`${sessionScore} right and ${totalQuestions - sessionScore} wrong`} className="grid gap-[3px]" style={{ gridTemplateColumns: 'repeat(10, minmax(0, 1fr))' }}>
-              {history.map((ok, i) => (
-                <span key={i} className="aspect-square rounded-full" style={ok ? { background: '#2A3FC1' } : { background: '#FFFFFF', border: '2px solid #C4314B' }} />
-              ))}
-            </div>
-            <div aria-hidden="true" className="flex gap-4 text-[13px] text-app-textSecondary">
-              <span className="flex items-center gap-[6px]"><span className="w-[10px] h-[10px] rounded-full" style={{ background: '#2A3FC1' }} />Right</span>
-              <span className="flex items-center gap-[6px]"><span className="w-[10px] h-[10px] rounded-full border-2" style={{ borderColor: '#C4314B' }} />Wrong</span>
-            </div>
-          </section>
-
-          <div className="flex flex-col gap-[10px]">
-            <button onClick={startSession} className="btn-primary w-full">Start another session</button>
-            <Link to="/adaptive" className="btn-secondary w-full">Back to home</Link>
-          </div>
-        </main>
-      </div>
-    );
-  }
-
   // ── Question view ──
   const answered = result !== null;
   const isRight = answered && result!.isCorrect;
@@ -258,7 +212,7 @@ export default function AdaptivePage() {
             <path d="M6 6l12 12M18 6L6 18" />
           </svg>
         </Link>
-        <p className="flex-1 text-[15px] font-[650] m-0">Question {questionNumber} of {SESSION_TOTAL}</p>
+        <p className="flex-1 text-[15px] font-[650] m-0">Question {questionNumber}</p>
         <span className="flex items-center gap-[5px] min-h-[34px] px-3 rounded-[999px] bg-white border border-app-border text-[14px] font-[650]">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4314B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 21c3.9 0 6.5-2.6 6.5-6.2 0-3.6-2.6-5.7-4-8.8-.5 2-1.6 3.3-3 3.8C11.9 7.3 10.6 4.6 8.5 3c.4 3.6-3 6.3-3 11.8C5.5 18.4 8.1 21 12 21z" />
@@ -279,23 +233,6 @@ export default function AdaptivePage() {
           </svg>
         </button>
       </header>
-
-      {/* Progress strip */}
-      <div
-        role="img"
-        aria-label={`${sessionScore} right and ${history.length - sessionScore} wrong so far`}
-        className="grid gap-1 px-5"
-        style={{ gridTemplateColumns: `repeat(${SESSION_TOTAL}, minmax(0, 1fr))` }}
-      >
-        {Array.from({ length: SESSION_TOTAL }, (_, i) => {
-          if (i < history.length) {
-            const ok = history[i];
-            return <span key={i} className="aspect-square rounded-full" style={ok ? { background: '#2A3FC1', border: '2px solid #2A3FC1' } : { background: '#FFFFFF', border: '2px solid #C4314B' }} />;
-          }
-          if (i === curIdx) return <span key={i} className="aspect-square rounded-full" style={{ background: '#E8EBFB', border: '2px solid #2A3FC1' }} />;
-          return <span key={i} className="aspect-square rounded-full" style={{ background: 'transparent', border: '2px solid #C3C8D4' }} />;
-        })}
-      </div>
 
       {/* Question */}
       <main className="flex-1 flex flex-col gap-4 px-5 pt-5 pb-5">
