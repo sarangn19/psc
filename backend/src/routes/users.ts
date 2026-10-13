@@ -44,6 +44,38 @@ router.get('/stats', authenticate, async (req: AuthRequest, res: Response) => {
     .filter((c) => c.total >= 5 && c.correct / c.total >= 0.7)
     .map((c) => ({ ...c, accuracy: Math.round((c.correct / c.total) * 100) }));
 
+  // Streak
+  const activities = await prisma.userActivity.findMany({
+    where: { userId, type: 'QUESTION_ANSWERED' },
+    select: { createdAt: true },
+    orderBy: { createdAt: 'desc' },
+  });
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const days = new Set(activities.map(a => { const d = new Date(a.createdAt); d.setHours(0, 0, 0, 0); return d.getTime(); }));
+  const todayMs = today.getTime();
+  let streak = 0;
+  let check = todayMs;
+  if (!days.has(todayMs)) check -= 86400000;
+  while (days.has(check)) { streak++; check -= 86400000; }
+
+  // Weekly comparison
+  const now = new Date();
+  const startOfThisWeek = new Date(now); startOfThisWeek.setDate(now.getDate() - now.getDay()); startOfThisWeek.setHours(0, 0, 0, 0);
+  const startOfLastWeek = new Date(startOfThisWeek); startOfLastWeek.setDate(startOfLastWeek.getDate() - 7);
+  const weekAttempts = await prisma.questionAttempt.findMany({
+    where: { userId, createdAt: { gte: startOfLastWeek } },
+    select: { isCorrect: true, createdAt: true },
+  });
+  const summarize = (list: { isCorrect: boolean }[]) => ({ total: list.length, correct: list.filter(a => a.isCorrect).length, accuracy: list.length > 0 ? Math.round((list.filter(a => a.isCorrect).length / list.length) * 100) : 0 });
+
+  // Session sparkline
+  const sessions = await prisma.adaptiveSession.findMany({
+    where: { userId },
+    orderBy: { startedAt: 'desc' },
+    take: 20,
+    select: { totalQ: true, correctQ: true },
+  });
+
   return res.json({
     totalAttempts,
     correctAttempts,
@@ -51,6 +83,13 @@ router.get('/stats', authenticate, async (req: AuthRequest, res: Response) => {
     totalSessions,
     learnedChapters,
     lastSessionScore: lastSession?.score || 0,
+    streak,
+    todayQuestions: activities.filter(a => new Date(a.createdAt).getTime() >= todayMs).length,
+    weekAccuracy: summarize(weekAttempts.filter(a => new Date(a.createdAt) >= startOfThisWeek)).accuracy,
+    prevWeekAccuracy: summarize(weekAttempts.filter(a => new Date(a.createdAt) < startOfThisWeek)).accuracy,
+    weekQuestions: weekAttempts.filter(a => new Date(a.createdAt) >= startOfThisWeek).length,
+    prevWeekQuestions: weekAttempts.filter(a => new Date(a.createdAt) < startOfThisWeek).length,
+    sessionHistory: sessions.reverse().map(s => s.correctQ),
     weakZones: weakZones.slice(0, 5),
     strongZones: strongZones.slice(0, 5),
   });
