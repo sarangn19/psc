@@ -2,6 +2,7 @@ import { Router, Response } from 'express';
 import prisma from '../lib/prisma';
 import { authenticate, AuthRequest } from '../middleware/auth';
 import { NodeLevel } from '@prisma/client';
+import { refreshTaxonomyCache } from '../lib/taxonomyCache';
 
 const router = Router();
 
@@ -61,6 +62,12 @@ router.get('/stats', authenticate, async (_req: AuthRequest, res: Response) => {
     total,
     byLevel: Object.fromEntries(grouped.map((g) => [g.level, g._count])),
   });
+});
+
+// Refresh taxonomy cache (admin only)
+router.post('/refresh-cache', authenticate, async (_req: AuthRequest, res: Response) => {
+  refreshTaxonomyCache();
+  return res.json({ message: 'Taxonomy cache refreshed successfully' });
 });
 
 export default router;

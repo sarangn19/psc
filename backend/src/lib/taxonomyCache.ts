@@ -2,6 +2,7 @@
  * In-memory taxonomy cache.
  * Loads all TaxonomyNodes once on first use, then resolves paths entirely
  * in memory — zero DB queries per path lookup.
+ * Cache can be refreshed via refreshTaxonomyCache() — useful after admin UI changes.
  */
 import prisma from './prisma';
 
@@ -33,6 +34,11 @@ async function ensureCache(): Promise<Map<number, CacheNode>> {
 
 export async function warmTaxonomyCache(): Promise<void> {
   await ensureCache();
+}
+
+export function refreshTaxonomyCache(): void {
+  cache = null;
+  warmPromise = null;
 }
 
 export async function getCachedNodePath(
