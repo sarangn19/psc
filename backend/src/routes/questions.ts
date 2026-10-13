@@ -5,6 +5,17 @@ import { authenticate, AuthRequest } from '../middleware/auth';
 
 const router = Router();
 
+// Student feedback/suggestion
+router.post('/feedback', authenticate, async (req: AuthRequest, res: Response) => {
+  const { message, type } = req.body;
+  const userId = req.user!.id;
+  if (!message || !message.trim()) return res.status(400).json({ message: 'Feedback message is required' });
+  await prisma.userActivity.create({ data: { userId, type: 'USER_FEEDBACK', metadata: { message, type } } });
+  return res.json({ success: true });
+});
+
+const router = Router();
+
 // Get questions by chapter
 router.get('/chapter/:chapterId', authenticate, async (req: AuthRequest, res: Response) => {
   const { chapterId } = req.params;

@@ -90,7 +90,7 @@ export default function PerformancePage() {
                 if (!feedback.trim()) return;
                 setFeedbackLoading(true);
                 try {
-                  await api.post('/admin/feedback', { message: feedback, type: 'general' });
+                  await api.post('/questions/feedback', { message: feedback, type: 'general' });
                   setFeedbackSent(true);
                   setFeedback('');
                 } catch {}
