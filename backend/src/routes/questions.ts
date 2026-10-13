@@ -14,8 +14,6 @@ router.post('/feedback', authenticate, async (req: AuthRequest, res: Response) =
   return res.json({ success: true });
 });
 
-const router = Router();
-
 // Get questions by chapter
 router.get('/chapter/:chapterId', authenticate, async (req: AuthRequest, res: Response) => {
   const { chapterId } = req.params;
