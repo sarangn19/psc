@@ -155,6 +155,26 @@ router.patch('/reports/:reportId/resolve', async (req, res: Response) => {
   return res.json(report);
 });
 
+// Add user feedback/message to admin
+router.post('/feedback', authenticate, async (req: AuthRequest, res: Response) => {
+  const { message, type } = req.body;
+  const userId = req.user!.id;
+
+  if (!message || message.trim().length === 0) {
+    return res.status(400).json({ message: 'Feedback message is required' });
+  }
+
+  await prisma.userActivity.create({
+    data: {
+      userId,
+      type: 'USER_FEEDBACK',
+      metadata: { message, type },
+    },
+  });
+
+  return res.json({ success: true });
+});
+
 // Toggle question active status
 router.patch('/questions/:questionId/toggle', async (req, res: Response) => {
   const { questionId } = req.params;
