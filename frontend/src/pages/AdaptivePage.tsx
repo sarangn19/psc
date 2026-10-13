@@ -227,7 +227,8 @@ export default function AdaptivePage() {
   // ── Question view ──
   const answered = result !== null;
   const isRight = answered && result!.isCorrect;
-  const curIdx = (questionNumber || 1) - 1;
+  // curIdx = next empty slot = history.length (before answering) or history.length-1 (after answering)
+  const curIdx = answered ? history.length - 1 : history.length;
   const isWeak = concept?.zone === 'WEAK';
 
   return (
