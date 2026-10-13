@@ -81,21 +81,26 @@ router.get('/performance', authenticate, async (req: AuthRequest, res: Response)
   return res.json(performance);
 });
 
-// Flag a question (bookmark for later review)
+// Flag a question with reason
 router.post('/:questionId/flag', authenticate, async (req: AuthRequest, res: Response) => {
   const userId = req.user!.id;
   const { questionId } = req.params;
+  const { reason, details } = req.body;
 
   const existing = await prisma.flaggedQuestion.findUnique({
     where: { userId_questionId: { userId, questionId } },
   });
 
   if (existing) {
-    return res.json({ flagged: true });
+    await prisma.flaggedQuestion.update({
+      where: { userId_questionId: { userId, questionId } },
+      data: { reason: reason || 'general', details: details || null },
+    });
+    return res.json({ flagged: true, updated: true });
   }
 
   await prisma.flaggedQuestion.create({
-    data: { userId, questionId },
+    data: { userId, questionId, reason: reason || 'general', details: details || null },
   });
 
   return res.json({ flagged: true });

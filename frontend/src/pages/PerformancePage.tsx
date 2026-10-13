@@ -28,6 +28,9 @@ function zone(v: number) {
 export default function PerformancePage() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [feedback, setFeedback] = useState('');
+  const [feedbackSent, setFeedbackSent] = useState(false);
+  const [feedbackLoading, setFeedbackLoading] = useState(false);
 
   useEffect(() => {
     api.get('/users/stats').then((r) => setStats(r.data)).finally(() => setLoading(false));
@@ -66,6 +69,41 @@ export default function PerformancePage() {
         <h1 className="text-[36px] leading-[1] font-[800] tracking-[-0.01em] m-0" style={{ fontStretch: '76%' }}>Stats</h1>
         <p className="text-[15px] leading-[1.45] text-app-textSecondary m-0">Everything you've answered.</p>
       </div>
+
+      {/* Feedback / Suggestion box */}
+      <section className="bg-white border border-app-border rounded-[6px] p-4 flex flex-col gap-3">
+        <h2 className="text-[21px] font-[750] m-0" style={{ fontStretch: '85%' }}>Send feedback</h2>
+        <p className="text-[14px] text-app-textSecondary m-0">Report a problem or suggest an improvement</p>
+        {feedbackSent ? (
+          <p className="text-[15px] font-[600] m-0" style={{ color: '#2A3FC1' }}>Thanks! Your feedback has been sent.</p>
+        ) : (
+          <>
+            <textarea
+              placeholder="Type your feedback or suggestion..."
+              value={feedback}
+              onChange={e => setFeedback(e.target.value)}
+              rows={3}
+              className="w-full border border-app-border rounded-lg p-2 text-[14px] resize-none"
+            />
+            <button
+              onClick={async () => {
+                if (!feedback.trim()) return;
+                setFeedbackLoading(true);
+                try {
+                  await api.post('/admin/feedback', { message: feedback, type: 'general' });
+                  setFeedbackSent(true);
+                  setFeedback('');
+                } catch {}
+                setFeedbackLoading(false);
+              }}
+              disabled={!feedback.trim() || feedbackLoading}
+              className="btn-primary disabled:opacity-50"
+            >
+              {feedbackLoading ? 'Sending…' : 'Send feedback'}
+            </button>
+          </>
+        )}
+      </section>
 
       {/* Totals grid */}
       <section

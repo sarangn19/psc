@@ -56,6 +56,10 @@ export default function AdaptivePage() {
   const [streak, setStreak] = useState(0);
   const [startTime, setStartTime] = useState(Date.now());
   const [flagged, setFlagged] = useState(false);
+  const [showFlagModal, setShowFlagModal] = useState(false);
+  const [flagReason, setFlagReason] = useState('');
+  const [flagDetails, setFlagDetails] = useState('');
+  const [flagSubmitting, setFlagSubmitting] = useState(false);
   const [history, setHistory] = useState<boolean[]>([]);
   const prefetchedRef = useRef<{ data: any; sid: string } | null>(null);
   const recoveringRef = useRef(false);
@@ -146,12 +150,26 @@ export default function AdaptivePage() {
 
   const handleNext = () => { if (sessionId) fetchNext(sessionId); };
 
-  const toggleFlag = async () => {
+  const handleFlag = () => {
     if (!question) return;
+    if (flagged) {
+      api.delete(`/questions/${question.id}/flag`).then(() => setFlagged(false)).catch(() => {});
+    } else {
+      setShowFlagModal(true);
+    }
+  };
+
+  const submitFlag = async () => {
+    if (!question || !flagReason) return;
+    setFlagSubmitting(true);
     try {
-      if (flagged) { await api.delete(`/questions/${question.id}/flag`); setFlagged(false); }
-      else { await api.post(`/questions/${question.id}/flag`); setFlagged(true); }
+      await api.post(`/questions/${question.id}/flag`, { reason: flagReason, details: flagDetails || undefined });
+      setFlagged(true);
+      setShowFlagModal(false);
+      setFlagReason('');
+      setFlagDetails('');
     } catch {}
+    setFlagSubmitting(false);
   };
 
   const startedRef = useRef(false);
@@ -249,7 +267,7 @@ export default function AdaptivePage() {
         </span>
         <button
           type="button"
-          onClick={toggleFlag}
+          onClick={handleFlag}
           aria-pressed={flagged}
           aria-label="Flag this question for review"
           className="flex-none w-11 h-11 grid place-items-center rounded-full border-0 cursor-pointer"
@@ -382,6 +400,44 @@ export default function AdaptivePage() {
             {loadingNext ? 'Loading…' : 'Next question'}
           </button>
         </section>
+      )}
+
+      {/* Flag reason modal */}
+      {showFlagModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={() => setShowFlagModal(false)}>
+          <div className="bg-white rounded-2xl p-5 w-full max-w-sm flex flex-col gap-4" onClick={e => e.stopPropagation()}>
+            <h3 className="text-[18px] font-[700] m-0">Flag this question</h3>
+            <p className="text-[14px] text-app-textSecondary m-0">What's wrong with this question?</p>
+            <div className="flex flex-col gap-2">
+              {[
+                { v: 'incorrect', l: 'Wrong answer' },
+                { v: 'typo', l: 'Typo / grammar' },
+                { v: 'offensive', l: 'Offensive content' },
+                { v: 'duplicate', l: 'Duplicate' },
+                { v: 'unclear', l: 'Unclear question' },
+                { v: 'other', l: 'Other' },
+              ].map(r => (
+                <label key={r.v} className="flex items-center gap-2 text-[15px] cursor-pointer">
+                  <input type="radio" name="flagReason" value={r.v} checked={flagReason === r.v} onChange={() => setFlagReason(r.v)} />
+                  {r.l}
+                </label>
+              ))}
+            </div>
+            <textarea
+              placeholder="Additional details (optional)"
+              value={flagDetails}
+              onChange={e => setFlagDetails(e.target.value)}
+              rows={3}
+              className="w-full border border-app-border rounded-lg p-2 text-[14px] resize-none"
+            />
+            <div className="flex gap-2">
+              <button onClick={submitFlag} disabled={!flagReason || flagSubmitting} className="btn-primary flex-1 disabled:opacity-50">
+                {flagSubmitting ? 'Submitting…' : 'Submit'}
+              </button>
+              <button onClick={() => setShowFlagModal(false)} className="btn-secondary flex-1">Cancel</button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
