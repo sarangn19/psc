@@ -257,13 +257,14 @@ async function fetchNextQuestion(
   const [learnedChapters, selectedExamChapters] = await Promise.all([
     prisma.userChapter.findMany({ where: { userId, isLearned: true }, select: { chapterId: true } }),
     prisma.chapter.findMany({
-      where: { subject: { exam: { userExams: { some: { userId } } } } },
+      where: { subject: { exam: { some: { userId } } } },
       select: { id: true },
     }),
   ]);
   const learnedChapterIds = learnedChapters.map((l) => l.chapterId);
   const selectedChapterIds = selectedExamChapters.map((c) => c.id);
   let scopeChapterIds: string[] | null = null;
+  // Priority: learned chapters within selected exams > learned chapters only > selected exams only > whole bank
   if (learnedChapterIds.length > 0 && selectedChapterIds.length > 0) {
     const selectedSet = new Set(selectedChapterIds);
     const intersect = learnedChapterIds.filter((id) => selectedSet.has(id));
@@ -272,6 +273,12 @@ async function fetchNextQuestion(
     scopeChapterIds = learnedChapterIds;
   } else if (selectedChapterIds.length > 0) {
     scopeChapterIds = selectedChapterIds;
+  }
+  // Debug: ensure scope is never null when there are questions available
+  if (!scopeChapterIds && candidateIds.length > 0) {
+    // Fallback: use first chapter from candidates if scope is unexpectedly null
+    const firstChapter = candidateIds[0].chapterId;
+    if (firstChapter) scopeChapterIds = [firstChapter];
   }
   const restrictToScope = !isFocused && scopeChapterIds !== null;
   const doneMessage = isFocused
@@ -380,7 +387,7 @@ router.post('/session/:sessionId/answer', authenticate, async (req: AuthRequest,
   const question = await prisma.question.findUnique({ where: { id: questionId } });
   if (!question) return res.status(404).json({ message: 'Question not found' });
 
-  const isCorrect = selectedOption === question.correctOption;
+  const isCorrect = Number(selectedOption) - 1 === question.correctOption;
 
   // Upsert aggregated stat using raw SQL (handles partial unique indexes on nullable columns)
   const upsertStat = question.conceptId !== null
