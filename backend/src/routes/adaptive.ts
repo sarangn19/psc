@@ -248,7 +248,7 @@ async function fetchNextQuestion(
     }),
     prisma.userChapter.findMany({ where: { userId, isLearned: true }, select: { chapterId: true } }),
     prisma.chapter.findMany({
-      where: { subject: { exam: { some: { userId } } } },
+      where: { subject: { exam: { userExams: { some: { userId } } } } },
       select: { id: true },
     }),
   ]);
