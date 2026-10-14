@@ -241,26 +241,25 @@ async function fetchNextQuestion(
 ): Promise<{ done: boolean; message?: string; question?: any; concept?: ConceptInfo; questionNumber?: number }> {
   const isFocused = session.focusConceptId !== null && session.focusConceptId !== undefined;
 
-  const seenItems = await prisma.adaptiveItem.findMany({
-    where: { sessionId },
-    select: { questionId: true },
-  });
-  const seenIds = new Set(seenItems.map((si) => si.questionId));
-  const seenIdList = [...seenIds];
-
-  // Chapter scope: respect the user's selected exams AND learned chapters so
-  // practice never leaks into other exams' syllabi.
-  // - selected exams + learned chapters -> learned chapters within selected exams
-  // - selected exams only               -> all chapters of selected exams
-  // - learned chapters only             -> learned chapters (no exam selection yet)
-  // - neither                           -> whole active bank (fresh account; onboarding first)
-  const [learnedChapters, selectedExamChapters] = await Promise.all([
+  const [seenItems, learnedChapters, selectedExamChapters] = await Promise.all([
+    prisma.adaptiveItem.findMany({
+      where: { sessionId },
+      select: { questionId: true },
+    }),
     prisma.userChapter.findMany({ where: { userId, isLearned: true }, select: { chapterId: true } }),
     prisma.chapter.findMany({
       where: { subject: { exam: { some: { userId } } } },
       select: { id: true },
     }),
   ]);
+  const seenIds = new Set(seenItems.map((si) => si.questionId));
+  const seenIdList = [...seenIds];
+  // Chapter scope: respect the user's selected exams AND learned chapters so
+  // practice never leaks into other exams' syllabi.
+  // - selected exams + learned chapters -> learned chapters within selected exams
+  // - selected exams only               -> all chapters of selected exams
+  // - learned chapters only             -> learned chapters (no exam selection yet)
+  // - neither                           -> whole active bank (fresh account; onboarding first)
   const learnedChapterIds = learnedChapters.map((l) => l.chapterId);
   const selectedChapterIds = selectedExamChapters.map((c) => c.id);
   let scopeChapterIds: string[] | null = null;
@@ -287,6 +286,11 @@ async function fetchNextQuestion(
       ? 'All questions in your selected chapters completed!'
       : 'No more questions available right now!';
 
+  // Fast candidate fetch: use a random offset instead of ORDER BY RANDOM().
+  // ORDER BY RANDOM() does a full sequential scan on 32k rows → 504 timeout.
+  // Instead we pick a random starting offset client-side and fetch the next 60 rows.
+  // If the tail is short we also fetch from offset 0 to pad up.
+  const randomOffset = Math.floor(Math.random() * 800); // spread across first ~800 rows in index order
   const [conceptStats, candidatesRaw] = await Promise.all([
     prisma.userConceptStat.findMany({
       where: { userId },
@@ -303,12 +307,24 @@ async function fetchNextQuestion(
           ? Prisma.sql`AND q."chapterId" IN (${Prisma.join(scopeChapterIds!)})`
           : Prisma.empty}
       ${seenIdList.length > 0 ? Prisma.sql`AND q."id" NOT IN (${Prisma.join(seenIdList)})` : Prisma.empty}
-      ORDER BY RANDOM()
-      LIMIT 30
+      LIMIT 60 OFFSET ${randomOffset}
     ` as Promise<{ id: string; conceptId: number | null; chapterId: string; difficulty: Difficulty }[]>,
   ]);
 
   let candidateIds = candidatesRaw.filter((q) => !seenIds.has(q.id));
+
+  // If random offset landed beyond available rows, retry from offset 0
+  if (candidateIds.length === 0 && !isFocused) {
+    const fallback = await prisma.$queryRaw`
+      SELECT q.id, q."conceptId", q."chapterId", q.difficulty
+      FROM questions q
+      WHERE q."isActive" = true
+      ${restrictToScope ? Prisma.sql`AND q."chapterId" IN (${Prisma.join(scopeChapterIds!)})` : Prisma.empty}
+      ${seenIdList.length > 0 ? Prisma.sql`AND q."id" NOT IN (${Prisma.join(seenIdList)})` : Prisma.empty}
+      LIMIT 60
+    ` as typeof candidatesRaw;
+    candidateIds = fallback.filter((q) => !seenIds.has(q.id));
+  }
 
   if (candidateIds.length === 0 && isFocused) {
     const adjacent = await findAdjacentQuestionIds([session.focusConceptId!], seenIds);
