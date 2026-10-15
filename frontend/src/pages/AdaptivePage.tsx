@@ -203,7 +203,7 @@ export default function AdaptivePage() {
     if (prefetchedRef.current && prefetchedRef.current.sid === sid) {
       const data = prefetchedRef.current.data;
       prefetchedRef.current = null;
-      if (data.done) { setDone(true); handleEnd(); return; }
+      if (data.done || !data.question) { setDone(true); handleEnd(); return; }
       setQuestion(data.question);
       setQuestionNumber(data.questionNumber);
       setConcept(data.concept || null);
@@ -216,7 +216,7 @@ export default function AdaptivePage() {
     setLoadingNext(true);
     try {
       const data = await doFetch(sid);
-      if (data.done) { setDone(true); handleEnd(); return; }
+      if (data.done || !data.question) { setDone(true); handleEnd(); return; }
       setQuestion(data.question);
       setQuestionNumber(data.questionNumber);
       setConcept(data.concept || null);
@@ -472,6 +472,15 @@ export default function AdaptivePage() {
           <p className="text-[15px] text-app-textSecondary m-0 leading-[1.5]">Adaptive questions picked from your syllabus, timed to the millisecond.</p>
           <button type="button" onClick={() => startSession()} className="btn-primary w-full mt-2">Start session</button>
         </div>
+      </div>
+    );
+  }
+
+  // ── Question not loaded yet (resume/next fetch in flight) ──
+  if (!question) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-app-bg">
+        <div className="w-8 h-8 border-2 border-app-accent border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
