@@ -403,7 +403,7 @@ router.post('/session/:sessionId/answer', authenticate, async (req: AuthRequest,
   const question = await prisma.question.findUnique({ where: { id: questionId } });
   if (!question) return res.status(404).json({ message: 'Question not found' });
 
-  const isCorrect = Number(selectedOption) - 1 === question.correctOption;
+  const isCorrect = Number(selectedOption) === question.correctOption;
 
   // Upsert aggregated stat using raw SQL (handles partial unique indexes on nullable columns)
   const upsertStat = question.conceptId !== null

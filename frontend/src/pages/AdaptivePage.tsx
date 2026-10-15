@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { useSearchParams, useNavigate, Link } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import api from '../lib/api';
+import SessionSummary from '../components/SessionSummary';
 
 interface Question {
   id: string;
@@ -107,6 +108,19 @@ function triggerHaptic(type: 'correct' | 'milestone' | 'break') {
   }
 }
 
+// ── Timer formatting (true milliseconds) ─────────────────────────────
+function fmtElapsed(ms: number): string {
+  if (ms >= 60000) {
+    const m = Math.floor(ms / 60000);
+    const s = Math.floor((ms % 60000) / 1000);
+    const millis = Math.floor(ms % 1000);
+    return `${m}:${String(s).padStart(2, '0')}.${String(millis).padStart(3, '0')}`;
+  }
+  const s = Math.floor(ms / 1000);
+  const millis = Math.floor(ms % 1000);
+  return `${s}.${String(millis).padStart(3, '0')}`;
+}
+
 export default function AdaptivePage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -123,7 +137,6 @@ export default function AdaptivePage() {
   const [totalQuestions, setTotalQuestions] = useState(0);
   // answerStreak: consecutive correct answers in this session (NOT the daily practice streak)
   const [streak, setStreak] = useState(0);
-  const [startTime, setStartTime] = useState(Date.now());
   const [flagged, setFlagged] = useState(false);
   const [showFlagModal, setShowFlagModal] = useState(false);
   const [flagReason, setFlagReason] = useState('');
@@ -135,6 +148,16 @@ export default function AdaptivePage() {
   const [lostStreak, setLostStreak] = useState(0);
   const [milestoneHit, setMilestoneHit] = useState(0);
   const [burstPlaying, setBurstPlaying] = useState(false);
+  // ── Timer + session lifecycle ──
+  const [elapsedMs, setElapsedMs] = useState(0);
+  const [times, setTimes] = useState<number[]>([]); // per-question elapsed ms, parallel to history
+  const [showStart, setShowStart] = useState(false);
+  const [showSummary, setShowSummary] = useState(false);
+  const [showEndConfirm, setShowEndConfirm] = useState(false);
+  const [ending, setEnding] = useState(false);
+  const qStartRef = useRef(0);
+  const rafRef = useRef(0);
+  const sessionStartRef = useRef(0);
   const prefetchedRef = useRef<{ data: any; sid: string } | null>(null);
   const recoveringRef = useRef(false);
   const stripRef = useRef<HTMLDivElement>(null);
@@ -142,6 +165,24 @@ export default function AdaptivePage() {
   // Refs for stable pill + ring WAAPI (Change 1 & 2)
   const pillRef = useRef<HTMLSpanElement>(null);
   const circleRef = useRef<SVGCircleElement>(null);
+
+  const startTimer = () => {
+    cancelAnimationFrame(rafRef.current);
+    qStartRef.current = performance.now();
+    setElapsedMs(0);
+    const tick = () => {
+      setElapsedMs(performance.now() - qStartRef.current);
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+  };
+
+  const stopTimer = (): number => {
+    cancelAnimationFrame(rafRef.current);
+    const final = performance.now() - qStartRef.current;
+    setElapsedMs(final);
+    return final;
+  };
 
   const doFetch = async (sid: string) => {
     const { data } = await api.get(`/adaptive/session/${sid}/next`);
@@ -162,24 +203,24 @@ export default function AdaptivePage() {
     if (prefetchedRef.current && prefetchedRef.current.sid === sid) {
       const data = prefetchedRef.current.data;
       prefetchedRef.current = null;
-      if (data.done) { setDone(true); return; }
+      if (data.done) { setDone(true); handleEnd(); return; }
       setQuestion(data.question);
       setQuestionNumber(data.questionNumber);
       setConcept(data.concept || null);
-      setStartTime(Date.now());
+      startTimer();
       prefetchNext(sid);
       return;
     }
 
     prefetchedRef.current = null;
     setLoadingNext(true);
-    setStartTime(Date.now());
     try {
       const data = await doFetch(sid);
-      if (data.done) { setDone(true); return; }
+      if (data.done) { setDone(true); handleEnd(); return; }
       setQuestion(data.question);
       setQuestionNumber(data.questionNumber);
       setConcept(data.concept || null);
+      startTimer();
       prefetchNext(sid);
     } catch (err) {
       if (recoveringRef.current) throw err;
@@ -195,6 +236,8 @@ export default function AdaptivePage() {
   const startSession = async () => {
     setLoading(true);
     setDone(false);
+    setShowStart(false);
+    setShowSummary(false);
     setSessionScore(0);
     setTotalQuestions(0);
     setStreak(0);
@@ -204,6 +247,8 @@ export default function AdaptivePage() {
     setMilestoneHit(0);
     setQuestionNumber(0);
     setHistory([]);
+    setTimes([]);
+    sessionStartRef.current = performance.now();
     try {
       const { data } = await api.post('/adaptive/session/start');
       setSessionId(data.id);
@@ -235,13 +280,14 @@ export default function AdaptivePage() {
       setLastEvent('break');
     }
     setHistory((h) => [...h, isCorrect]);
+    const timeTakenMs = stopTimer();
+    setTimes((t) => [...t, timeTakenMs]);
     // Haptics (Change 5): use triggerHaptic helper
     if (milestone) triggerHaptic('milestone');
     else if (isCorrect) triggerHaptic('correct');
     else if (streak >= 2) triggerHaptic('break');
-    const timeTaken = Math.round((Date.now() - startTime) / 1000);
     api.post(`/adaptive/session/${sessionId}/answer`, {
-      questionId: question.id, selectedOption: option, timeTaken,
+      questionId: question.id, selectedOption: option, timeTaken: Math.round(timeTakenMs),
     }).then(({ data }) => {
       setResult((prev) => prev ? { ...prev, explanation: data.explanation || undefined, explanationLoaded: true } : prev);
     }).catch(() => {
@@ -250,6 +296,22 @@ export default function AdaptivePage() {
   };
 
   const handleNext = () => { if (sessionId) fetchNext(sessionId); };
+
+  const handleEnd = async () => {
+    if (ending) return;
+    setEnding(true);
+    cancelAnimationFrame(rafRef.current);
+    try {
+      if (sessionId) {
+        await api.post(`/adaptive/session/${sessionId}/end`).catch(() => {});
+      }
+    } finally {
+      localStorage.removeItem('adaptiveSessionId');
+      setShowEndConfirm(false);
+      setShowSummary(true);
+      setEnding(false);
+    }
+  };
 
   const handleFlag = () => {
     if (!question) return;
@@ -276,18 +338,22 @@ export default function AdaptivePage() {
   const startedRef = useRef(false);
   useEffect(() => {
     if (startedRef.current) return;
+    startedRef.current = true;
     const sid = searchParams.get('sessionId') || localStorage.getItem('adaptiveSessionId');
     if (sid) {
       setSessionId(sid);
-      startedRef.current = true;
       setLoading(false);
+      sessionStartRef.current = performance.now();
       fetchNext(sid);
     } else {
-      startedRef.current = true;
-      startSession();
+      setLoading(false);
+      setShowStart(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Cleanup rAF on unmount
+  useEffect(() => () => cancelAnimationFrame(rafRef.current), []);
 
   // Change 1 & 2: WAAPI pill pop/shake + ring imperative transition (fires after every answer)
   useEffect(() => {
@@ -367,10 +433,45 @@ export default function AdaptivePage() {
   }, [totalQuestions]);
 
   // ── Loading ──
-  if (loading || (!question && !done)) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-app-bg">
         <div className="w-8 h-8 border-2 border-app-accent border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  // ── Summary view ──
+  if (showSummary) {
+    return (
+      <SessionSummary
+        sessionId={sessionId}
+        score={sessionScore}
+        total={totalQuestions}
+        bestStreak={bestStreak}
+        times={times}
+        history={history}
+        totalElapsedMs={sessionStartRef.current > 0 ? performance.now() - sessionStartRef.current : 0}
+        onRestart={() => startSession()}
+        onHome={() => navigate('/')}
+      />
+    );
+  }
+
+  // ── Start screen ──
+  if (showStart) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-app-bg px-5" style={{ color: '#1A1F36', fontFamily: "'Anek Malayalam', system-ui, sans-serif" }}>
+        <div className="card w-full max-w-sm flex flex-col items-center gap-4 py-8 px-6 text-center">
+          <div className="w-14 h-14 rounded-full grid place-items-center" style={{ background: '#E8EBFB' }}>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2A3FC1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 21c3.9 0 6.5-2.6 6.5-6.2 0-3.6-2.6-5.7-4-8.8-.5 2-1.6 3.3-3 3.8C11.9 7.3 10.6 4.6 8.5 3c.4 3.6-3 6.3-3 11.8C5.5 18.4 8.1 21 12 21z" />
+            </svg>
+          </div>
+          <h1 className="text-[22px] font-[750] m-0" style={{ fontStretch: '80%' }}>Ready to practice?</h1>
+          <p className="text-[15px] text-app-textSecondary m-0 leading-[1.5]">Adaptive questions picked from your syllabus, timed to the millisecond.</p>
+          <button type="button" onClick={() => startSession()} className="btn-primary w-full mt-2">Start session</button>
+        </div>
       </div>
     );
   }
@@ -404,12 +505,38 @@ export default function AdaptivePage() {
     <div className="flex flex-col min-h-screen bg-app-bg" style={{ color: '#1A1F36', fontFamily: "'Anek Malayalam', system-ui, sans-serif" }}>
       {/* Header */}
       <header className="flex items-center gap-[6px] px-[10px] py-[8px]">
-        <Link to="/adaptive" aria-label="End session" className="flex-none w-11 h-11 grid place-items-center rounded-full text-app-text no-underline">
+        <button
+          type="button"
+          onClick={() => { if (totalQuestions > 0) setShowEndConfirm(true); else { localStorage.removeItem('adaptiveSessionId'); navigate('/'); } }}
+          aria-label="End session"
+          className="flex-none w-11 h-11 grid place-items-center rounded-full border-0 bg-transparent cursor-pointer text-app-text"
+        >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M6 6l12 12M18 6L6 18" />
           </svg>
-        </Link>
+        </button>
         <p className="flex-1 text-[15px] font-[650] m-0 truncate">Question {questionNumber}</p>
+        {/* Per-question millisecond timer */}
+        <span
+          aria-label="Time on this question"
+          className="flex-none flex items-center gap-[5px] min-h-[30px] px-[10px] rounded-[999px] border"
+          style={{
+            background: answered ? '#F3F4F8' : '#FFFFFF',
+            borderColor: answered ? '#E6E8EE' : '#DADDE5',
+            color: answered ? '#6B7186' : '#1A1F36',
+            fontVariantNumeric: 'tabular-nums',
+            fontFamily: "'SF Mono', ui-monospace, monospace",
+            fontSize: 13,
+            fontWeight: 700,
+            letterSpacing: '0.02em',
+          }}
+        >
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <circle cx="12" cy="13" r="8" />
+            <path d="M12 9v4l2.5 2.5M9 2h6" />
+          </svg>
+          {fmtElapsed(elapsedMs)}
+        </span>
         <span
           ref={pillRef}
           className="flex-none flex items-center gap-[6px] min-h-[34px] pl-[7px] pr-3 rounded-[999px] border"
@@ -741,6 +868,24 @@ export default function AdaptivePage() {
             {loadingNext ? 'Loading…' : 'Next question'}
           </button>
         </section>
+      )}
+
+      {/* End session confirm modal */}
+      {showEndConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={() => !ending && setShowEndConfirm(false)}>
+          <div className="bg-white rounded-2xl p-5 w-full max-w-sm flex flex-col gap-4" onClick={e => e.stopPropagation()}>
+            <h3 className="text-[18px] font-[700] m-0">End this session?</h3>
+            <p className="text-[14px] text-app-textSecondary m-0">
+              You answered {totalQuestions} question{totalQuestions === 1 ? '' : 's'}. You'll see a summary of your performance.
+            </p>
+            <div className="flex gap-2">
+              <button onClick={() => handleEnd()} disabled={ending} className="btn-primary flex-1 disabled:opacity-50">
+                {ending ? 'Ending…' : 'End session'}
+              </button>
+              <button onClick={() => setShowEndConfirm(false)} disabled={ending} className="btn-secondary flex-1">Keep going</button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Flag reason modal */}
