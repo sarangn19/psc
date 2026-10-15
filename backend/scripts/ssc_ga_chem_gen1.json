@@ -1,0 +1,17 @@
+[
+  {"q": "The chemical formula of common salt is?", "opts": ["KCl", "NaCl", "CaCl2", "MgCl2"], "a": 1, "exp": "Common salt is sodium chloride (NaCl). Answer: NaCl", "d": "EASY", "t": "chem"},
+  {"q": "Which gas is known as laughing gas?", "opts": ["Nitrogen dioxide", "Nitrous oxide", "Carbon monoxide", "Sulphur dioxide"], "a": 1, "exp": "Nitrous oxide (N2O) is called laughing gas. Answer: Nitrous oxide", "d": "EASY", "t": "chem"},
+  {"q": "The pH value of pure water at 25°C is?", "opts": ["0", "7", "10", "14"], "a": 1, "exp": "Pure water is neutral with pH = 7 at 25°C. Answer: 7", "d": "EASY", "t": "chem"},
+  {"q": "Which acid is present in lemon?", "opts": ["Acetic acid", "Citric acid", "Lactic acid", "Tartaric acid"], "a": 1, "exp": "Lemons contain citric acid. Answer: Citric acid", "d": "EASY", "t": "chem"},
+  {"q": "The lightest element in the periodic table is?", "opts": ["Helium", "Hydrogen", "Lithium", "Beryllium"], "a": 1, "exp": "Hydrogen (atomic number 1) is the lightest element. Answer: Hydrogen", "d": "EASY", "t": "chem"},
+  {"q": "Which gas is used in fire extinguishers (common type)?", "opts": ["Oxygen", "Carbon dioxide", "Hydrogen", "Nitrogen"], "a": 1, "exp": "Carbon dioxide is used in common fire extinguishers as it does not support combustion. Answer: Carbon dioxide", "d": "MEDIUM", "t": "chem"},
+  {"q": "The chemical name of Vitamin C is?", "opts": ["Retinol", "Ascorbic acid", "Thiamine", "Riboflavin"], "a": 1, "exp": "Vitamin C is ascorbic acid. Answer: Ascorbic acid", "d": "MEDIUM", "t": "chem"},
+  {"q": "Rusting of iron is a process of?", "opts": ["Reduction", "Oxidation", "Neutralisation", "Displacement"], "a": 1, "exp": "Rusting is oxidation of iron in the presence of moisture and oxygen, forming hydrated iron(III) oxide. Answer: Oxidation", "d": "MEDIUM", "t": "chem"},
+  {"q": "Which noble gas is used in advertising signboards (neon signs)?", "opts": ["Helium", "Argon", "Neon", "Krypton"], "a": 2, "exp": "Neon gas gives the characteristic reddish-orange glow in neon signs. Answer: Neon", "d": "MEDIUM", "t": "chem"},
+  {"q": "The hardest natural substance on Earth is?", "opts": ["Iron", "Quartz", "Diamond", "Platinum"], "a": 2, "exp": "Diamond (an allotrope of carbon) is the hardest natural substance. Answer: Diamond", "d": "MEDIUM", "t": "chem"},
+  {"q": "Brass is an alloy of which metals?", "opts": ["Copper and tin", "Copper and zinc", "Iron and carbon", "Aluminium and copper"], "a": 1, "exp": "Brass is an alloy of copper and zinc. Answer: Copper and zinc", "d": "MEDIUM", "t": "chem"},
+  {"q": "Which acid is known as 'king of chemicals'?", "opts": ["Sulphuric acid", "Nitric acid", "Hydrochloric acid", "Phosphoric acid"], "a": 0, "exp": "Sulphuric acid (H2SO4) is called the king of chemicals. Answer: Sulphuric acid", "d": "HARD", "t": "chem"},
+  {"q": "The catalyst used in the Haber process for ammonia synthesis is?", "opts": ["Platinum", "Iron", "Nickel", "Vanadium pentoxide"], "a": 1, "exp": "Finely divided iron is the catalyst in the Haber process (N2 + 3H2 ⇌ 2NH3). Answer: Iron", "d": "HARD", "t": "chem"},
+  {"q": "Which vitamin deficiency causes scurvy?", "opts": ["Vitamin A", "Vitamin B12", "Vitamin C", "Vitamin D"], "a": 2, "exp": "Scurvy is caused by Vitamin C (ascorbic acid) deficiency. Answer: Vitamin C", "d": "HARD", "t": "chem"},
+  {"q": "The gas released during photosynthesis is?", "opts": ["Carbon dioxide", "Oxygen", "Nitrogen", "Hydrogen"], "a": 1, "exp": "Plants release oxygen during photosynthesis. Answer: Oxygen", "d": "HARD", "t": "chem"}
+]

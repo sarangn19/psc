@@ -1,0 +1,17 @@
+[
+  {"q": "How many meaningful English words can be formed using the letters C, A, T?", "opts": ["1", "2", "3", "4"], "a": 2, "exp": "CAT, ACT, AT = 3 meaningful words. Answer: 3", "d": "EASY", "t": "word_f"},
+  {"q": "Which word cannot be formed from the letters of the word COMPUTER?", "opts": ["PUTE", "MOOT", "ROUTE", "TEMPER"], "a": 1, "exp": "COMPUTER has only one O; MOOT needs two O's. Answer: MOOT", "d": "EASY", "t": "word_f"},
+  {"q": "From the word STRENGTH, how many consonants are there?", "opts": ["5", "6", "7", "8"], "a": 2, "exp": "S,T,R,E,N,G,T,H: consonants = S,T,R,N,G,T,H = 7. Answer: 7", "d": "EASY", "t": "word_f"},
+  {"q": "How many meaningful English words can be formed using the letters E, A, T?", "opts": ["1", "2", "3", "4"], "a": 2, "exp": "EAT, ATE, TEA = 3 meaningful words. Answer: 3", "d": "EASY", "t": "word_f"},
+  {"q": "From the word BANANA, which letter appears the least number of times?", "opts": ["B", "A", "N", "All equal"], "a": 0, "exp": "B appears 1 time, A appears 3, N appears 2; least = B. Answer: B", "d": "EASY", "t": "word_f"},
+  {"q": "How many meaningful English words can be formed using the letters P, L, A, Y?", "opts": ["2", "3", "4", "5"], "a": 1, "exp": "PLAY, PAL, LAY = 3 meaningful words. Answer: 3", "d": "MEDIUM", "t": "word_f"},
+  {"q": "Which word cannot be formed from the letters of CONSTABLE?", "opts": ["TABLE", "CABLE", "STABLE", "SHEEP"], "a": 3, "exp": "CONSTABLE has only one E; SHEEP needs two E's. Answer: SHEEP", "d": "MEDIUM", "t": "word_f"},
+  {"q": "How many meaningful English words can be formed using the letters S, T, A, R?", "opts": ["2", "3", "4", "5"], "a": 2, "exp": "STAR, RATS, ARTS, TARS = 4 meaningful words. Answer: 4", "d": "MEDIUM", "t": "word_f"},
+  {"q": "From the word MATTER, which letter appears most frequently?", "opts": ["M", "A", "T", "R"], "a": 2, "exp": "M=1, A=1, T=2, E=1, R=1; most frequent = T. Answer: T", "d": "MEDIUM", "t": "word_f"},
+  {"q": "How many meaningful English words can be formed using the letters L, E, A, F?", "opts": ["1", "2", "3", "4"], "a": 1, "exp": "LEAF, FLEA = 2 meaningful words. Answer: 2", "d": "MEDIUM", "t": "word_f"},
+  {"q": "From the word EDUCATION, how many vowels are there?", "opts": ["3", "4", "5", "6"], "a": 2, "exp": "E,D,U,C,A,T,I,O,N: vowels = E, U, A, I, O = 5. Answer: 5", "d": "MEDIUM", "t": "word_f"},
+  {"q": "How many meaningful English words can be formed using the letters P, A, T?", "opts": ["1", "2", "3", "4"], "a": 2, "exp": "PAT, APT, TAP = 3 meaningful words. Answer: 3", "d": "HARD", "t": "word_f"},
+  {"q": "Which word cannot be formed from the letters of KNOWLEDGE?", "opts": ["WOKEN", "GOWN", "LIKE", "DONE"], "a": 2, "exp": "KNOWLEDGE has K,N,O,W,L,E,D,G,E; LIKE needs I which is not present. Answer: LIKE", "d": "HARD", "t": "word_f"},
+  {"q": "From the word PSYCHOLOGY, how many vowels are there (treating Y as consonant)?", "opts": ["2", "3", "4", "5"], "a": 0, "exp": "P,S,Y,C,H,O,L,O,G,Y: vowels = O, O = 2. Answer: 2", "d": "HARD", "t": "word_f"},
+  {"q": "How many meaningful English words can be formed using the letters R, A, I, N?", "opts": ["1", "2", "3", "4"], "a": 2, "exp": "RAIN, AIR, RAN = 3 meaningful words. Answer: 3", "d": "HARD", "t": "word_f"}
+]

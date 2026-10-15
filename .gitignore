@@ -41,6 +41,17 @@ qb_*.csv
 CONVERSATION_SUMMARY.md
 all_questions_answers.pdf
 
+# temp / one-off scratch files
+build_output.txt
+ts_errors.txt
+git_log.txt
+test_write.txt
+Cognix App UI.html
+backend/scripts/_test*.mjs
+backend/scripts/_tmp*.mjs
+backend/scripts/_verify*.mjs
+backend/scripts/*.backup*
+
 # os / editor
 Desktop.ini
 Thumbs.db

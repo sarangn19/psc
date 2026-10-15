@@ -1,0 +1,17 @@
+[
+  {"q": "Identify the error: 'He do not like tea.'", "opts": ["He", "do not", "like", "tea"], "a": 1, "exp": "'He' is third person singular; should be 'does not'. Answer: do not", "d": "EASY", "t": "error"},
+  {"q": "Identify the error: 'She don't go to school.'", "opts": ["She", "don't", "go to", "school"], "a": 1, "exp": "'She' requires 'doesn't', not 'don't'. Answer: don't", "d": "EASY", "t": "error"},
+  {"q": "Identify the error: 'The childrens are playing.'", "opts": ["The", "childrens", "are playing", "No error"], "a": 1, "exp": "'Children' is already plural; 'childrens' is incorrect. Answer: childrens", "d": "EASY", "t": "error"},
+  {"q": "Identify the error: 'He give me a book.'", "opts": ["He", "give", "me a book", "No error"], "a": 1, "exp": "Third person singular requires 'gives'. Answer: give", "d": "EASY", "t": "error"},
+  {"q": "Identify the error: 'I has a pen.'", "opts": ["I", "has", "a pen", "No error"], "a": 1, "exp": "'I' requires 'have', not 'has'. Answer: has", "d": "EASY", "t": "error"},
+  {"q": "Identify the error: 'He is one of the best player.'", "opts": ["He is", "one of the", "best player", "No error"], "a": 2, "exp": "'One of the' requires plural noun: 'players'. Answer: best player", "d": "MEDIUM", "t": "error"},
+  {"q": "Identify the error: 'Each of the boys have a pen.'", "opts": ["Each of the", "boys", "have", "a pen"], "a": 2, "exp": "'Each' is singular; should be 'has'. Answer: have", "d": "MEDIUM", "t": "error"},
+  {"q": "Identify the error: 'The number of students are increasing.'", "opts": ["The number of", "students", "are increasing", "No error"], "a": 2, "exp": "'The number of' takes singular verb: 'is increasing'. Answer: are increasing", "d": "MEDIUM", "t": "error"},
+  {"q": "Identify the error: 'He discussed about the problem.'", "opts": ["He", "discussed about", "the problem", "No error"], "a": 1, "exp": "'Discuss' is transitive; 'about' is redundant. Answer: discussed about", "d": "MEDIUM", "t": "error"},
+  {"q": "Identify the error: 'I am living here since 2010.'", "opts": ["I am", "living here", "since 2010", "No error"], "a": 0, "exp": "For state since a point in time, use 'I have been living'. Answer: I am", "d": "MEDIUM", "t": "error"},
+  {"q": "Identify the error: 'He is senior than me.'", "opts": ["He is", "senior than", "me", "No error"], "a": 1, "exp": "'Senior' takes 'to', not 'than'. Answer: senior than", "d": "MEDIUM", "t": "error"},
+  {"q": "Identify the error: 'Neither of the two brothers were honest.'", "opts": ["Neither of the", "two brothers", "were", "honest"], "a": 2, "exp": "'Neither' is singular; should be 'was'. Answer: were", "d": "HARD", "t": "error"},
+  {"q": "Identify the error: 'A number of students is absent today.'", "opts": ["A number of", "students", "is absent", "today"], "a": 2, "exp": "'A number of' takes plural verb: 'are absent'. Answer: is absent", "d": "HARD", "t": "error"},
+  {"q": "Identify the error: 'He is one of the oldest man in the village.'", "opts": ["He is", "one of the oldest", "man", "in the village"], "a": 2, "exp": "'One of the oldest' requires plural: 'men'. Answer: man", "d": "HARD", "t": "error"},
+  {"q": "Identify the error: 'I would rather to die than beg.'", "opts": ["I would", "rather to die", "than beg", "No error"], "a": 1, "exp": "'Would rather' takes bare infinitive: 'would rather die'. Answer: rather to die", "d": "HARD", "t": "error"}
+]

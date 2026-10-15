@@ -1,0 +1,17 @@
+[
+  {"q": "She ____ to school every day.", "opts": ["go", "goes", "going", "gone"], "a": 1, "exp": "Third person singular present tense: goes. Answer: goes", "d": "EASY", "t": "fill"},
+  {"q": "I ____ a new book yesterday.", "opts": ["buy", "bought", "buys", "buying"], "a": 1, "exp": "'Yesterday' requires past tense: bought. Answer: bought", "d": "EASY", "t": "fill"},
+  {"q": "He ____ playing cricket now.", "opts": ["is", "are", "was", "were"], "a": 0, "exp": "Present continuous with 'he': is playing. Answer: is", "d": "EASY", "t": "fill"},
+  {"q": "They ____ not finished their work yet.", "opts": ["has", "have", "had", "having"], "a": 1, "exp": "'They' takes 'have'; present perfect with 'yet'. Answer: have", "d": "EASY", "t": "fill"},
+  {"q": "The sun ____ in the east.", "opts": ["rise", "rises", "rose", "rising"], "a": 1, "exp": "Universal truth takes simple present: rises. Answer: rises", "d": "EASY", "t": "fill"},
+  {"q": "She has been living here ____ 2015.", "opts": ["for", "since", "from", "by"], "a": 1, "exp": "'Since' with a point in time; 'for' with duration. Answer: since", "d": "MEDIUM", "t": "fill"},
+  {"q": "He is allergic ____ dust.", "opts": ["of", "to", "from", "with"], "a": 1, "exp": "'Allergic to' is the correct collocation. Answer: to", "d": "MEDIUM", "t": "fill"},
+  {"q": "The train had left ____ I reached the station.", "opts": ["when", "before", "after", "until"], "a": 1, "exp": "Past perfect 'had left' pairs with 'before'. Answer: before", "d": "MEDIUM", "t": "fill"},
+  {"q": "She is good ____ mathematics.", "opts": ["in", "at", "on", "for"], "a": 1, "exp": "'Good at' is the correct collocation. Answer: at", "d": "MEDIUM", "t": "fill"},
+  {"q": "He died ____ a road accident.", "opts": ["of", "from", "in", "by"], "a": 2, "exp": "'Died in' an accident; 'died of' a disease. Answer: in", "d": "MEDIUM", "t": "fill"},
+  {"q": "Neither of the two answers ____ correct.", "opts": ["is", "are", "were", "have been"], "a": 0, "exp": "'Neither' is singular: is correct. Answer: is", "d": "MEDIUM", "t": "fill"},
+  {"q": "The committee ____ divided in their opinion.", "opts": ["is", "are", "was being", "has"], "a": 1, "exp": "Collective noun showing individual members acting: 'are'. Answer: are", "d": "HARD", "t": "fill"},
+  {"q": "Hardly had he arrived ____ it started raining.", "opts": ["than", "when", "that", "then"], "a": 1, "exp": "'Hardly...when' is the correct correlative pair. Answer: when", "d": "HARD", "t": "fill"},
+  {"q": "She insisted ____ paying the bill.", "opts": ["on", "in", "at", "for"], "a": 0, "exp": "'Insist on' is the correct collocation. Answer: on", "d": "HARD", "t": "fill"},
+  {"q": "No sooner had he spoken ____ the audience applauded.", "opts": ["when", "than", "that", "then"], "a": 1, "exp": "'No sooner...than' is the correct correlative pair. Answer: than", "d": "HARD", "t": "fill"}
+]

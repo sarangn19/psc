@@ -1,0 +1,17 @@
+[
+  {"q": "Find the next term: A, C, E, G, ?", "opts": ["H", "I", "J", "K"], "a": 1, "exp": "Pattern: skip 1 letter each step; G + 2 = I. Answer: I", "d": "EASY", "t": "alph_s"},
+  {"q": "Find the next term: B, D, F, H, ?", "opts": ["I", "J", "K", "L"], "a": 1, "exp": "Pattern: skip 1; H + 2 = J. Answer: J", "d": "EASY", "t": "alph_s"},
+  {"q": "Find the next term: Z, X, V, T, ?", "opts": ["R", "Q", "S", "P"], "a": 0, "exp": "Pattern: -2 each step; T - 2 = R. Answer: R", "d": "EASY", "t": "alph_s"},
+  {"q": "Find the next term: C, F, I, L, ?", "opts": ["M", "N", "O", "P"], "a": 2, "exp": "Pattern: +3 each; L + 3 = O. Answer: O", "d": "EASY", "t": "alph_s"},
+  {"q": "Find the next term: X, W, V, U, ?", "opts": ["S", "T", "R", "Q"], "a": 1, "exp": "Pattern: -1 each; U - 1 = T. Answer: T", "d": "EASY", "t": "alph_s"},
+  {"q": "Find the next term: A, B, D, G, ?", "opts": ["K", "L", "M", "N"], "a": 1, "exp": "Pattern: +1, +2, +3, +4; G + 5 = L. Answer: L", "d": "MEDIUM", "t": "alph_s"},
+  {"q": "Find the next term: AZ, BY, CX, ?", "opts": ["DV", "EW", "DW", "EV"], "a": 2, "exp": "Pattern: first letter +1, second letter -1; CX → DW. Answer: DW", "d": "MEDIUM", "t": "alph_s"},
+  {"q": "Find the next term: A, Z, B, Y, C, ?", "opts": ["W", "X", "D", "V"], "a": 1, "exp": "Pattern: alternate ends; A(1), Z(26), B(2), Y(25), C(3), X(24). Answer: X", "d": "MEDIUM", "t": "alph_s"},
+  {"q": "Find the next term: AB, DE, GH, ?", "opts": ["IJ", "JK", "KL", "MN"], "a": 1, "exp": "Pattern: pairs with gap of 2; AB(1-2), DE(4-5), GH(7-8), JK(10-11). Answer: JK", "d": "MEDIUM", "t": "alph_s"},
+  {"q": "Find the next term: A, E, I, M, ?", "opts": ["P", "Q", "R", "S"], "a": 1, "exp": "Pattern: +4 each; M(13) + 4 = Q(17). Answer: Q", "d": "MEDIUM", "t": "alph_s"},
+  {"q": "Find the next term: A, C, F, J, ?", "opts": ["N", "O", "P", "Q"], "a": 1, "exp": "Pattern: +2, +3, +4, +5; J(10) + 5 = O(15). Answer: O", "d": "HARD", "t": "alph_s"},
+  {"q": "Find the next term: ACE, BDF, CEG, ?", "opts": ["DFH", "EGI", "DFI", "DGH"], "a": 0, "exp": "Pattern: each group shifts +1; CEG → DFH. Answer: DFH", "d": "HARD", "t": "alph_s"},
+  {"q": "Find the next term: BA, DC, FE, ?", "opts": ["JI", "HG", "IH", "JG"], "a": 1, "exp": "Pattern: reverse pairs stepping +2; BA(2,1), DC(4,3), FE(6,5), HG(8,7). Answer: HG", "d": "HARD", "t": "alph_s"},
+  {"q": "Find the next term: AFC, BGD, CHE, ?", "opts": ["DIF", "DIG", "DJF", "DJG"], "a": 1, "exp": "Pattern: first +1, second +2, third +1; CHE → DIG. Answer: DIG", "d": "HARD", "t": "alph_s"},
+  {"q": "Find the next term: Z, X, S, N, ?", "opts": ["I", "J", "K", "H"], "a": 0, "exp": "Pattern: -2, -5, -5, -5; Z(26)-2 = X(24); X(24)-5 = S(19); S(19)-5 = N(14); N(14)-5 = I(9). Answer: I", "d": "HARD", "t": "alph_s"}
+]

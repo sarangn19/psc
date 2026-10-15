@@ -1,0 +1,17 @@
+[
+  {"q": "What is the 5th letter from the left in the English alphabet?", "opts": ["D", "E", "F", "G"], "a": 1, "exp": "A=1, B=2, C=3, D=4, E=5. Answer: E", "d": "EASY", "t": "alph_t"},
+  {"q": "What is the position of the letter M in the English alphabet?", "opts": ["11", "12", "13", "14"], "a": 2, "exp": "M is the 13th letter. Answer: 13", "d": "EASY", "t": "alph_t"},
+  {"q": "Which letter is 8th from the right end (Z=1 from right)?", "opts": ["R", "S", "T", "U"], "a": 1, "exp": "Z=1, Y=2, ..., S=8. Answer: S", "d": "EASY", "t": "alph_t"},
+  {"q": "What is the 10th letter from the left?", "opts": ["H", "I", "J", "K"], "a": 2, "exp": "J is the 10th letter. Answer: J", "d": "EASY", "t": "alph_t"},
+  {"q": "Which letter is exactly in the middle of D and N?", "opts": ["H", "I", "J", "K"], "a": 1, "exp": "D=4, N=14; middle = (4+14)/2 = 9 = I. Answer: I", "d": "EASY", "t": "alph_t"},
+  {"q": "If the alphabet is written backwards, what is the 6th letter from the left?", "opts": ["T", "U", "V", "W"], "a": 1, "exp": "Backwards: Z=1, Y=2, X=3, W=4, V=5, U=6. Answer: U", "d": "MEDIUM", "t": "alph_t"},
+  {"q": "What is the sum of positions of the letters in the word CAT?", "opts": ["18", "20", "22", "24"], "a": 3, "exp": "C=3, A=1, T=20; sum = 3 + 1 + 20 = 24. Answer: 24", "d": "MEDIUM", "t": "alph_t"},
+  {"q": "Which letter is 3rd to the right of J?", "opts": ["L", "M", "N", "O"], "a": 1, "exp": "J(10) + 3 = M(13). Answer: M", "d": "MEDIUM", "t": "alph_t"},
+  {"q": "What is the position of the letter that is exactly midway between A and Z?", "opts": ["12", "13", "14", "15"], "a": 1, "exp": "Midway = (1+26)/2 = 13.5 → 13th letter M. Answer: 13", "d": "MEDIUM", "t": "alph_t"},
+  {"q": "If the letters of the word TABLE are written in reverse order, what is the new first letter?", "opts": ["T", "A", "B", "E"], "a": 3, "exp": "TABLE reversed = ELBAT; first letter = E. Answer: E", "d": "MEDIUM", "t": "alph_t"},
+  {"q": "Which letter is 5th from the right end?", "opts": ["S", "T", "U", "V"], "a": 1, "exp": "Z=1, Y=2, X=3, W=4, T=5. Answer: T", "d": "MEDIUM", "t": "alph_t"},
+  {"q": "What is the 7th letter to the left of Q?", "opts": ["J", "K", "L", "M"], "a": 0, "exp": "Q(17) - 7 = J(10). Answer: J", "d": "HARD", "t": "alph_t"},
+  {"q": "How many letters are there between P and X (excluding both)?", "opts": ["6", "7", "8", "9"], "a": 1, "exp": "P=16, X=24; letters between = 24-16-1 = 7. Answer: 7", "d": "HARD", "t": "alph_t"},
+  {"q": "What is the 4th letter after the letter that is 2nd before M?", "opts": ["O", "P", "Q", "R"], "a": 0, "exp": "2nd before M(13) = K(11); 4th after K = O(15). Answer: O", "d": "HARD", "t": "alph_t"},
+  {"q": "If the alphabet is written in reverse order starting from Z, which letter will be at the 10th position?", "opts": ["R", "S", "T", "U"], "a": 0, "exp": "Z=1, Y=2, ..., position 10 = R. Answer: R", "d": "HARD", "t": "alph_t"}
+]

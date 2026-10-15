@@ -1,0 +1,17 @@
+[
+  {"q": "Choose the correctly spelt word.", "opts": ["Definately", "Definitely", "Definitly", "Definatly"], "a": 1, "exp": "Correct spelling: Definitely. Answer: Definitely", "d": "EASY", "t": "spell"},
+  {"q": "Choose the correctly spelt word.", "opts": ["Occured", "Ocurred", "Occurred", "Occurrd"], "a": 2, "exp": "Correct spelling: Occurred (double r). Answer: Occurred", "d": "EASY", "t": "spell"},
+  {"q": "Choose the correctly spelt word.", "opts": ["Recieve", "Receive", "Recive", "Receeve"], "a": 1, "exp": "Correct spelling: Receive (i before e except after c). Answer: Receive", "d": "EASY", "t": "spell"},
+  {"q": "Choose the correctly spelt word.", "opts": ["Neccessary", "Necessary", "Neccesary", "Necesary"], "a": 1, "exp": "Correct spelling: Necessary (one c, two s's). Answer: Necessary", "d": "EASY", "t": "spell"},
+  {"q": "Choose the correctly spelt word.", "opts": ["Acomplish", "Accomplish", "Akcomplish", "Accompish"], "a": 1, "exp": "Correct spelling: Accomplish (double c). Answer: Accomplish", "d": "EASY", "t": "spell"},
+  {"q": "Choose the correctly spelt word.", "opts": ["Embarrass", "Embarass", "Embbarrass", "Embarras"], "a": 0, "exp": "Correct spelling: Embarrass (double r, double s). Answer: Embarrass", "d": "MEDIUM", "t": "spell"},
+  {"q": "Choose the correctly spelt word.", "opts": ["Maintainance", "Maintenance", "Maintenence", "Maintanance"], "a": 1, "exp": "Correct spelling: Maintenance. Answer: Maintenance", "d": "MEDIUM", "t": "spell"},
+  {"q": "Choose the correctly spelt word.", "opts": ["Priviledge", "Privilege", "Privelege", "Privilage"], "a": 1, "exp": "Correct spelling: Privilege. Answer: Privilege", "d": "MEDIUM", "t": "spell"},
+  {"q": "Choose the correctly spelt word.", "opts": ["Consciencious", "Conscientious", "Conscentious", "Consciencius"], "a": 1, "exp": "Correct spelling: Conscientious. Answer: Conscientious", "d": "MEDIUM", "t": "spell"},
+  {"q": "Choose the correctly spelt word.", "opts": ["Millenium", "Millennium", "Milennium", "Milleniam"], "a": 1, "exp": "Correct spelling: Millennium (double l, double n). Answer: Millennium", "d": "MEDIUM", "t": "spell"},
+  {"q": "Choose the correctly spelt word.", "opts": ["Rythm", "Rhythm", "Rhythem", "Rythme"], "a": 1, "exp": "Correct spelling: Rhythm. Answer: Rhythm", "d": "MEDIUM", "t": "spell"},
+  {"q": "Choose the correctly spelt word.", "opts": ["Questionaire", "Questionnaire", "Questionnare", "Questionnair"], "a": 1, "exp": "Correct spelling: Questionnaire (double n). Answer: Questionnaire", "d": "HARD", "t": "spell"},
+  {"q": "Choose the correctly spelt word.", "opts": ["Concience", "Conscience", "Consciense", "Consience"], "a": 1, "exp": "Correct spelling: Conscience. Answer: Conscience", "d": "HARD", "t": "spell"},
+  {"q": "Choose the correctly spelt word.", "opts": ["Bureacracy", "Bureaucracy", "Buraucracy", "Beaurocracy"], "a": 1, "exp": "Correct spelling: Bureaucracy. Answer: Bureaucracy", "d": "HARD", "t": "spell"},
+  {"q": "Choose the correctly spelt word.", "opts": ["Sacreligious", "Sacrilegious", "Sacriligious", "Sacrilegous"], "a": 1, "exp": "Correct spelling: Sacrilegious (not sacreligious — common trap). Answer: Sacrilegious", "d": "HARD", "t": "spell"}
+]
