@@ -1,0 +1,4213 @@
+{
+  "generatedAt": "2026-10-06T17:46:49.140Z",
+  "step": "A3",
+  "seedBase": 12345,
+  "numSeeds": 20,
+  "model": {
+    "correctGain": 0.006,
+    "wrongGain": 0.003,
+    "knowledgeCap": 0.98,
+    "forgettingFactor": 0.9985,
+    "forgettingFloor": "user starting level (baseKnowledge)",
+    "difficultyAdjustment": {
+      "EASY": 0.1,
+      "MEDIUM": 0,
+      "HARD": -0.1
+    },
+    "learnRates": {
+      "A": 1,
+      "B": 0,
+      "C": 0.5,
+      "D": 1
+    },
+    "A3_1_diminishingReturns": "gain *= (1 - knowledge/0.98)",
+    "A3_2_spacing": "gain *= STREAK_FACTORS[min(n,4)-1] with STREAK_FACTORS=[1,0.8,0.6,0.4] (n = consecutive same-concept answers incl. this one); gain *= 1.3 if concept last practiced >= 30 answers ago (or never), else 1.0",
+    "A3_3_quitProbability": "pQuit = min(0.9, 0.08*max(0, sameConceptStreak-5) + 0.12*max(0, wrongRun-3)), checked after every answer; quit ends session, next answer starts a fresh session (run state reset)",
+    "A3_4_repeats": "concept exhausted -> re-serve least recently seen question of that concept (adaptive); whole bank exhausted -> global least recently seen (random)"
+  },
+  "gatePassed": true,
+  "scenarios": {
+    "LARGE": {
+      "questionsPerConcept": 200,
+      "totalAnswers": 300,
+      "totalQuestions": 1200,
+      "results": {
+        "A|adaptive": {
+          "maxStreak": {
+            "mean": 13.3,
+            "sd": 1.3803
+          },
+          "repeats": {
+            "mean": 74.3,
+            "sd": 27.2302
+          },
+          "minGap": {
+            "mean": 201.8421,
+            "sd": 7.0967
+          },
+          "wrongResurfacedCount": {
+            "mean": 43.1,
+            "sd": 16.1209
+          },
+          "wrongResurfacedAvgGap": {
+            "mean": 202.9053,
+            "sd": 7.3295
+          },
+          "avgTime": {
+            "mean": 0.0648,
+            "sd": 0.0098
+          },
+          "worstTime": {
+            "mean": 0.3298,
+            "sd": 0.2098
+          },
+          "finalMeanKnowledge": {
+            "mean": 0.6313,
+            "sd": 0.0046
+          },
+          "accuracyByWindow": {
+            "1-50": {
+              "mean": 0.476,
+              "sd": 0.0835
+            },
+            "51-100": {
+              "mean": 0.437,
+              "sd": 0.0552
+            },
+            "101-200": {
+              "mean": 0.457,
+              "sd": 0.0522
+            },
+            "201-300": {
+              "mean": 0.63,
+              "sd": 0.1114
+            }
+          },
+          "accuracyByDifficulty": {
+            "EASY": {
+              "mean": 0.5601,
+              "sd": 0.0667
+            },
+            "MEDIUM": {
+              "mean": 0.5016,
+              "sd": 0.0684
+            },
+            "HARD": {
+              "mean": 0.4355,
+              "sd": 0.0814
+            }
+          },
+          "shareBreakdown": {
+            "exploration": {
+              "mean": 0.1804,
+              "sd": 0.221
+            },
+            "weakFocused": {
+              "mean": 0.8049,
+              "sd": 0.226
+            },
+            "review": {
+              "mean": 0.0146,
+              "sd": 0.0488
+            }
+          },
+          "finalKnowledgeGain": {
+            "1": {
+              "mean": 0,
+              "sd": 0
+            },
+            "2": {
+              "mean": 0,
+              "sd": 0
+            },
+            "3": {
+              "mean": 0,
+              "sd": 0
+            },
+            "4": {
+              "mean": 0.0987,
+              "sd": 0.1547
+            },
+            "5": {
+              "mean": 0.0864,
+              "sd": 0.1487
+            },
+            "6": {
+              "mean": 0.1528,
+              "sd": 0.163
+            }
+          },
+          "estimatedMastery": {
+            "1": {
+              "estimated": {
+                "mean": 0.975,
+                "sd": 0.1118
+              },
+              "trueEnd": {
+                "mean": 0.85,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.125,
+                "sd": 0.1118
+              }
+            },
+            "2": {
+              "estimated": {
+                "mean": 0.9834,
+                "sd": 0.0745
+              },
+              "trueEnd": {
+                "mean": 0.85,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.1333,
+                "sd": 0.0745
+              }
+            },
+            "3": {
+              "estimated": {
+                "mean": 0.9834,
+                "sd": 0.0745
+              },
+              "trueEnd": {
+                "mean": 0.85,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.1333,
+                "sd": 0.0745
+              }
+            },
+            "4": {
+              "estimated": {
+                "mean": 0.6966,
+                "sd": 0.2418
+              },
+              "trueEnd": {
+                "mean": 0.3987,
+                "sd": 0.1547
+              },
+              "diff": {
+                "mean": 0.2979,
+                "sd": 0.3446
+              }
+            },
+            "5": {
+              "estimated": {
+                "mean": 0.7582,
+                "sd": 0.2559
+              },
+              "trueEnd": {
+                "mean": 0.3863,
+                "sd": 0.1487
+              },
+              "diff": {
+                "mean": 0.372,
+                "sd": 0.3628
+              }
+            },
+            "6": {
+              "estimated": {
+                "mean": 0.7245,
+                "sd": 0.2576
+              },
+              "trueEnd": {
+                "mean": 0.4529,
+                "sd": 0.163
+              },
+              "diff": {
+                "mean": 0.2716,
+                "sd": 0.4072
+              }
+            }
+          },
+          "shareByWindowPerConcept": {
+            "1-50": {
+              "1": 0.024,
+              "2": 0.024,
+              "3": 0.025,
+              "4": 0.361,
+              "5": 0.22,
+              "6": 0.346
+            },
+            "51-100": {
+              "1": 0,
+              "2": 0.001,
+              "3": 0,
+              "4": 0.261,
+              "5": 0.283,
+              "6": 0.455
+            },
+            "101-200": {
+              "1": 0,
+              "2": 0,
+              "3": 0,
+              "4": 0.251,
+              "5": 0.252,
+              "6": 0.497
+            },
+            "201-300": {
+              "1": 0,
+              "2": 0,
+              "3": 0,
+              "4": 0.319,
+              "5": 0.264,
+              "6": 0.417
+            }
+          },
+          "coldStartDist": {
+            "1": {
+              "mean": 1.2,
+              "sd": 0.4104
+            },
+            "2": {
+              "mean": 1.2,
+              "sd": 0.4104
+            },
+            "3": {
+              "mean": 1.25,
+              "sd": 0.5501
+            },
+            "4": {
+              "mean": 10.55,
+              "sd": 10.2571
+            },
+            "5": {
+              "mean": 6.65,
+              "sd": 7.8692
+            },
+            "6": {
+              "mean": 9.15,
+              "sd": 10.0905
+            }
+          },
+          "sessions": {
+            "mean": 32.55,
+            "sd": 2.1879
+          },
+          "avgSessionLength": {
+            "mean": 9.2562,
+            "sd": 0.624
+          },
+          "total": 300,
+          "v2": null
+        },
+        "A|random": {
+          "maxStreak": {
+            "mean": 4.1,
+            "sd": 0.7881
+          },
+          "repeats": {
+            "mean": 0,
+            "sd": 0
+          },
+          "minGap": null,
+          "wrongResurfacedCount": {
+            "mean": 0,
+            "sd": 0
+          },
+          "wrongResurfacedAvgGap": null,
+          "avgTime": {
+            "mean": 0.0139,
+            "sd": 0.0031
+          },
+          "worstTime": {
+            "mean": 0.2085,
+            "sd": 0.1329
+          },
+          "finalMeanKnowledge": {
+            "mean": 0.5848,
+            "sd": 0.0021
+          },
+          "accuracyByWindow": {
+            "1-50": {
+              "mean": 0.596,
+              "sd": 0.0611
+            },
+            "51-100": {
+              "mean": 0.577,
+              "sd": 0.0613
+            },
+            "101-200": {
+              "mean": 0.581,
+              "sd": 0.0422
+            },
+            "201-300": {
+              "mean": 0.571,
+              "sd": 0.0588
+            }
+          },
+          "accuracyByDifficulty": {
+            "EASY": {
+              "mean": 0.6912,
+              "sd": 0.0488
+            },
+            "MEDIUM": {
+              "mean": 0.5757,
+              "sd": 0.0544
+            },
+            "HARD": {
+              "mean": 0.4711,
+              "sd": 0.0523
+            }
+          },
+          "shareBreakdown": {
+            "exploration": {
+              "mean": 0.0243,
+              "sd": 0.0026
+            },
+            "weakFocused": {
+              "mean": 0.4211,
+              "sd": 0.0669
+            },
+            "review": {
+              "mean": 0.5547,
+              "sd": 0.0653
+            }
+          },
+          "finalKnowledgeGain": {
+            "1": {
+              "mean": 0.0001,
+              "sd": 0.0002
+            },
+            "2": {
+              "mean": 0.0002,
+              "sd": 0.0004
+            },
+            "3": {
+              "mean": 0,
+              "sd": 0.0001
+            },
+            "4": {
+              "mean": 0.02,
+              "sd": 0.0135
+            },
+            "5": {
+              "mean": 0.0183,
+              "sd": 0.0071
+            },
+            "6": {
+              "mean": 0.0205,
+              "sd": 0.0135
+            }
+          },
+          "estimatedMastery": {
+            "1": {
+              "estimated": {
+                "mean": 0.8366,
+                "sd": 0.041
+              },
+              "trueEnd": {
+                "mean": 0.8501,
+                "sd": 0.0003
+              },
+              "diff": {
+                "mean": -0.0135,
+                "sd": 0.0409
+              }
+            },
+            "2": {
+              "estimated": {
+                "mean": 0.8233,
+                "sd": 0.0554
+              },
+              "trueEnd": {
+                "mean": 0.8501,
+                "sd": 0.0004
+              },
+              "diff": {
+                "mean": -0.0269,
+                "sd": 0.0555
+              }
+            },
+            "3": {
+              "estimated": {
+                "mean": 0.8293,
+                "sd": 0.0488
+              },
+              "trueEnd": {
+                "mean": 0.85,
+                "sd": 0
+              },
+              "diff": {
+                "mean": -0.0208,
+                "sd": 0.0489
+              }
+            },
+            "4": {
+              "estimated": {
+                "mean": 0.3111,
+                "sd": 0.0625
+              },
+              "trueEnd": {
+                "mean": 0.3201,
+                "sd": 0.0136
+              },
+              "diff": {
+                "mean": -0.009,
+                "sd": 0.0553
+              }
+            },
+            "5": {
+              "estimated": {
+                "mean": 0.3357,
+                "sd": 0.0802
+              },
+              "trueEnd": {
+                "mean": 0.3183,
+                "sd": 0.007
+              },
+              "diff": {
+                "mean": 0.0176,
+                "sd": 0.0801
+              }
+            },
+            "6": {
+              "estimated": {
+                "mean": 0.3267,
+                "sd": 0.0789
+              },
+              "trueEnd": {
+                "mean": 0.3206,
+                "sd": 0.0135
+              },
+              "diff": {
+                "mean": 0.0061,
+                "sd": 0.0769
+              }
+            }
+          },
+          "shareByWindowPerConcept": {
+            "1-50": {
+              "1": 0.178,
+              "2": 0.16,
+              "3": 0.168,
+              "4": 0.166,
+              "5": 0.164,
+              "6": 0.164
+            },
+            "51-100": {
+              "1": 0.163,
+              "2": 0.18,
+              "3": 0.162,
+              "4": 0.178,
+              "5": 0.155,
+              "6": 0.162
+            },
+            "101-200": {
+              "1": 0.177,
+              "2": 0.15,
+              "3": 0.171,
+              "4": 0.161,
+              "5": 0.17,
+              "6": 0.171
+            },
+            "201-300": {
+              "1": 0.166,
+              "2": 0.176,
+              "3": 0.17,
+              "4": 0.168,
+              "5": 0.16,
+              "6": 0.16
+            }
+          },
+          "coldStartDist": {
+            "1": {
+              "mean": 5.1,
+              "sd": 1.889
+            },
+            "2": {
+              "mean": 4.95,
+              "sd": 1.9595
+            },
+            "3": {
+              "mean": 4.85,
+              "sd": 1.9808
+            },
+            "4": {
+              "mean": 4.85,
+              "sd": 1.8994
+            },
+            "5": {
+              "mean": 5.15,
+              "sd": 1.5313
+            },
+            "6": {
+              "mean": 5.1,
+              "sd": 1.9974
+            }
+          },
+          "sessions": {
+            "mean": 2.25,
+            "sd": 1.118
+          },
+          "avgSessionLength": {
+            "mean": 168,
+            "sd": 83.6251
+          },
+          "total": 300,
+          "v2": null
+        },
+        "B|adaptive": {
+          "maxStreak": {
+            "mean": 12.85,
+            "sd": 1.4965
+          },
+          "repeats": {
+            "mean": 72.35,
+            "sd": 21.047
+          },
+          "minGap": {
+            "mean": 200.2105,
+            "sd": 0.9177
+          },
+          "wrongResurfacedCount": {
+            "mean": 50.55,
+            "sd": 14.9929
+          },
+          "wrongResurfacedAvgGap": {
+            "mean": 203.0789,
+            "sd": 5.3381
+          },
+          "avgTime": {
+            "mean": 0.0612,
+            "sd": 0.0019
+          },
+          "worstTime": {
+            "mean": 0.2978,
+            "sd": 0.0495
+          },
+          "finalMeanKnowledge": {
+            "mean": 0.25,
+            "sd": 0
+          },
+          "accuracyByWindow": {
+            "1-50": {
+              "mean": 0.366,
+              "sd": 0.0746
+            },
+            "51-100": {
+              "mean": 0.308,
+              "sd": 0.0451
+            },
+            "101-200": {
+              "mean": 0.219,
+              "sd": 0.037
+            },
+            "201-300": {
+              "mean": 0.2995,
+              "sd": 0.0527
+            }
+          },
+          "accuracyByDifficulty": {
+            "EASY": {
+              "mean": 0.3538,
+              "sd": 0.0343
+            },
+            "MEDIUM": {
+              "mean": 0.2675,
+              "sd": 0.0448
+            },
+            "HARD": {
+              "mean": 0.1494,
+              "sd": 0.0468
+            }
+          },
+          "shareBreakdown": {
+            "exploration": {
+              "mean": 0.0204,
+              "sd": 0.001
+            },
+            "weakFocused": {
+              "mean": 0.9797,
+              "sd": 0.001
+            },
+            "review": {
+              "mean": 0,
+              "sd": 0
+            }
+          },
+          "finalKnowledgeGain": {
+            "1": {
+              "mean": 0,
+              "sd": 0
+            },
+            "2": {
+              "mean": 0,
+              "sd": 0
+            },
+            "3": {
+              "mean": 0,
+              "sd": 0
+            },
+            "4": {
+              "mean": 0,
+              "sd": 0
+            },
+            "5": {
+              "mean": 0,
+              "sd": 0
+            },
+            "6": {
+              "mean": 0,
+              "sd": 0
+            }
+          },
+          "estimatedMastery": {
+            "1": {
+              "estimated": {
+                "mean": 0.5742,
+                "sd": 0.2952
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.3242,
+                "sd": 0.2952
+              }
+            },
+            "2": {
+              "estimated": {
+                "mean": 0.6439,
+                "sd": 0.3369
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.3939,
+                "sd": 0.3369
+              }
+            },
+            "3": {
+              "estimated": {
+                "mean": 0.5335,
+                "sd": 0.2935
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.2835,
+                "sd": 0.2935
+              }
+            },
+            "4": {
+              "estimated": {
+                "mean": 0.7135,
+                "sd": 0.2987
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.4635,
+                "sd": 0.2987
+              }
+            },
+            "5": {
+              "estimated": {
+                "mean": 0.6463,
+                "sd": 0.337
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.3963,
+                "sd": 0.337
+              }
+            },
+            "6": {
+              "estimated": {
+                "mean": 0.5733,
+                "sd": 0.27
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.3233,
+                "sd": 0.27
+              }
+            }
+          },
+          "shareByWindowPerConcept": {
+            "1-50": {
+              "1": 0.159,
+              "2": 0.218,
+              "3": 0.231,
+              "4": 0.082,
+              "5": 0.139,
+              "6": 0.171
+            },
+            "51-100": {
+              "1": 0.183,
+              "2": 0.18,
+              "3": 0.263,
+              "4": 0.053,
+              "5": 0.226,
+              "6": 0.095
+            },
+            "101-200": {
+              "1": 0.178,
+              "2": 0.2,
+              "3": 0.251,
+              "4": 0.05,
+              "5": 0.221,
+              "6": 0.1
+            },
+            "201-300": {
+              "1": 0.15,
+              "2": 0.2,
+              "3": 0.25,
+              "4": 0.05,
+              "5": 0.25,
+              "6": 0.1
+            }
+          },
+          "coldStartDist": {
+            "1": {
+              "mean": 5.25,
+              "sd": 5.4952
+            },
+            "2": {
+              "mean": 6,
+              "sd": 7.3556
+            },
+            "3": {
+              "mean": 6.25,
+              "sd": 5.5143
+            },
+            "4": {
+              "mean": 2.6,
+              "sd": 2.3709
+            },
+            "5": {
+              "mean": 3.7,
+              "sd": 4.2065
+            },
+            "6": {
+              "mean": 6.2,
+              "sd": 7.0233
+            }
+          },
+          "sessions": {
+            "mean": 34,
+            "sd": 2.0774
+          },
+          "avgSessionLength": {
+            "mean": 8.8572,
+            "sd": 0.581
+          },
+          "total": 300,
+          "v2": null
+        },
+        "B|random": {
+          "maxStreak": {
+            "mean": 3.9,
+            "sd": 0.8522
+          },
+          "repeats": {
+            "mean": 0,
+            "sd": 0
+          },
+          "minGap": null,
+          "wrongResurfacedCount": {
+            "mean": 0,
+            "sd": 0
+          },
+          "wrongResurfacedAvgGap": null,
+          "avgTime": {
+            "mean": 0.0129,
+            "sd": 0.0006
+          },
+          "worstTime": {
+            "mean": 0.1955,
+            "sd": 0.0534
+          },
+          "finalMeanKnowledge": {
+            "mean": 0.25,
+            "sd": 0
+          },
+          "accuracyByWindow": {
+            "1-50": {
+              "mean": 0.279,
+              "sd": 0.0505
+            },
+            "51-100": {
+              "mean": 0.262,
+              "sd": 0.0584
+            },
+            "101-200": {
+              "mean": 0.2455,
+              "sd": 0.0504
+            },
+            "201-300": {
+              "mean": 0.2455,
+              "sd": 0.0502
+            }
+          },
+          "accuracyByDifficulty": {
+            "EASY": {
+              "mean": 0.3575,
+              "sd": 0.0544
+            },
+            "MEDIUM": {
+              "mean": 0.2573,
+              "sd": 0.0378
+            },
+            "HARD": {
+              "mean": 0.1476,
+              "sd": 0.0329
+            }
+          },
+          "shareBreakdown": {
+            "exploration": {
+              "mean": 0.0225,
+              "sd": 0.0016
+            },
+            "weakFocused": {
+              "mean": 0.9661,
+              "sd": 0.0108
+            },
+            "review": {
+              "mean": 0.0115,
+              "sd": 0.0102
+            }
+          },
+          "finalKnowledgeGain": {
+            "1": {
+              "mean": 0,
+              "sd": 0
+            },
+            "2": {
+              "mean": 0,
+              "sd": 0
+            },
+            "3": {
+              "mean": 0,
+              "sd": 0
+            },
+            "4": {
+              "mean": 0,
+              "sd": 0
+            },
+            "5": {
+              "mean": 0,
+              "sd": 0
+            },
+            "6": {
+              "mean": 0,
+              "sd": 0
+            }
+          },
+          "estimatedMastery": {
+            "1": {
+              "estimated": {
+                "mean": 0.2521,
+                "sd": 0.0452
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.0022,
+                "sd": 0.0452
+              }
+            },
+            "2": {
+              "estimated": {
+                "mean": 0.2492,
+                "sd": 0.0615
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": -0.0009,
+                "sd": 0.0616
+              }
+            },
+            "3": {
+              "estimated": {
+                "mean": 0.247,
+                "sd": 0.0603
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": -0.003,
+                "sd": 0.0603
+              }
+            },
+            "4": {
+              "estimated": {
+                "mean": 0.2601,
+                "sd": 0.0568
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.01,
+                "sd": 0.0568
+              }
+            },
+            "5": {
+              "estimated": {
+                "mean": 0.2721,
+                "sd": 0.081
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.0221,
+                "sd": 0.081
+              }
+            },
+            "6": {
+              "estimated": {
+                "mean": 0.2436,
+                "sd": 0.0661
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": -0.0064,
+                "sd": 0.0661
+              }
+            }
+          },
+          "shareByWindowPerConcept": {
+            "1-50": {
+              "1": 0.178,
+              "2": 0.16,
+              "3": 0.168,
+              "4": 0.166,
+              "5": 0.164,
+              "6": 0.164
+            },
+            "51-100": {
+              "1": 0.163,
+              "2": 0.18,
+              "3": 0.162,
+              "4": 0.178,
+              "5": 0.155,
+              "6": 0.162
+            },
+            "101-200": {
+              "1": 0.177,
+              "2": 0.15,
+              "3": 0.171,
+              "4": 0.161,
+              "5": 0.17,
+              "6": 0.171
+            },
+            "201-300": {
+              "1": 0.166,
+              "2": 0.176,
+              "3": 0.17,
+              "4": 0.168,
+              "5": 0.16,
+              "6": 0.16
+            }
+          },
+          "coldStartDist": {
+            "1": {
+              "mean": 5.1,
+              "sd": 1.889
+            },
+            "2": {
+              "mean": 4.95,
+              "sd": 1.9595
+            },
+            "3": {
+              "mean": 4.85,
+              "sd": 1.9808
+            },
+            "4": {
+              "mean": 4.85,
+              "sd": 1.8994
+            },
+            "5": {
+              "mean": 5.15,
+              "sd": 1.5313
+            },
+            "6": {
+              "mean": 5.1,
+              "sd": 1.9974
+            }
+          },
+          "sessions": {
+            "mean": 15.5,
+            "sd": 3.8594
+          },
+          "avgSessionLength": {
+            "mean": 20.6217,
+            "sd": 5.6803
+          },
+          "total": 300,
+          "v2": null
+        },
+        "C|adaptive": {
+          "maxStreak": {
+            "mean": 13.2,
+            "sd": 1.3611
+          },
+          "repeats": {
+            "mean": 66.3,
+            "sd": 28.9648
+          },
+          "minGap": {
+            "mean": 204.1579,
+            "sd": 10.0734
+          },
+          "wrongResurfacedCount": {
+            "mean": 41.8,
+            "sd": 18.1589
+          },
+          "wrongResurfacedAvgGap": {
+            "mean": 208.4158,
+            "sd": 14.8991
+          },
+          "avgTime": {
+            "mean": 0.0609,
+            "sd": 0.002
+          },
+          "worstTime": {
+            "mean": 0.3168,
+            "sd": 0.1245
+          },
+          "finalMeanKnowledge": {
+            "mean": 0.3289,
+            "sd": 0.005
+          },
+          "accuracyByWindow": {
+            "1-50": {
+              "mean": 0.413,
+              "sd": 0.0862
+            },
+            "51-100": {
+              "mean": 0.395,
+              "sd": 0.0494
+            },
+            "101-200": {
+              "mean": 0.366,
+              "sd": 0.0557
+            },
+            "201-300": {
+              "mean": 0.4805,
+              "sd": 0.106
+            }
+          },
+          "accuracyByDifficulty": {
+            "EASY": {
+              "mean": 0.4692,
+              "sd": 0.0594
+            },
+            "MEDIUM": {
+              "mean": 0.4118,
+              "sd": 0.0481
+            },
+            "HARD": {
+              "mean": 0.3033,
+              "sd": 0.0779
+            }
+          },
+          "shareBreakdown": {
+            "exploration": {
+              "mean": 0.0451,
+              "sd": 0.0451
+            },
+            "weakFocused": {
+              "mean": 0.9549,
+              "sd": 0.0451
+            },
+            "review": {
+              "mean": 0,
+              "sd": 0
+            }
+          },
+          "finalKnowledgeGain": {
+            "1": {
+              "mean": 0.0259,
+              "sd": 0.0646
+            },
+            "2": {
+              "mean": 0.0291,
+              "sd": 0.0704
+            },
+            "3": {
+              "mean": 0.0576,
+              "sd": 0.0837
+            },
+            "4": {
+              "mean": 0.0193,
+              "sd": 0.0594
+            },
+            "5": {
+              "mean": 0.0321,
+              "sd": 0.0667
+            },
+            "6": {
+              "mean": 0.0096,
+              "sd": 0.0428
+            }
+          },
+          "estimatedMastery": {
+            "1": {
+              "estimated": {
+                "mean": 0.6356,
+                "sd": 0.2533
+              },
+              "trueEnd": {
+                "mean": 0.3259,
+                "sd": 0.0645
+              },
+              "diff": {
+                "mean": 0.3097,
+                "sd": 0.2834
+              }
+            },
+            "2": {
+              "estimated": {
+                "mean": 0.7188,
+                "sd": 0.2907
+              },
+              "trueEnd": {
+                "mean": 0.3291,
+                "sd": 0.0704
+              },
+              "diff": {
+                "mean": 0.3897,
+                "sd": 0.3286
+              }
+            },
+            "3": {
+              "estimated": {
+                "mean": 0.6146,
+                "sd": 0.2671
+              },
+              "trueEnd": {
+                "mean": 0.3576,
+                "sd": 0.0838
+              },
+              "diff": {
+                "mean": 0.257,
+                "sd": 0.3196
+              }
+            },
+            "4": {
+              "estimated": {
+                "mean": 0.739,
+                "sd": 0.2697
+              },
+              "trueEnd": {
+                "mean": 0.3193,
+                "sd": 0.0594
+              },
+              "diff": {
+                "mean": 0.4197,
+                "sd": 0.2983
+              }
+            },
+            "5": {
+              "estimated": {
+                "mean": 0.7438,
+                "sd": 0.2956
+              },
+              "trueEnd": {
+                "mean": 0.3321,
+                "sd": 0.0667
+              },
+              "diff": {
+                "mean": 0.4117,
+                "sd": 0.3416
+              }
+            },
+            "6": {
+              "estimated": {
+                "mean": 0.7183,
+                "sd": 0.2688
+              },
+              "trueEnd": {
+                "mean": 0.3095,
+                "sd": 0.0427
+              },
+              "diff": {
+                "mean": 0.4088,
+                "sd": 0.284
+              }
+            }
+          },
+          "shareByWindowPerConcept": {
+            "1-50": {
+              "1": 0.204,
+              "2": 0.203,
+              "3": 0.234,
+              "4": 0.128,
+              "5": 0.1,
+              "6": 0.131
+            },
+            "51-100": {
+              "1": 0.191,
+              "2": 0.199,
+              "3": 0.297,
+              "4": 0.105,
+              "5": 0.152,
+              "6": 0.056
+            },
+            "101-200": {
+              "1": 0.146,
+              "2": 0.171,
+              "3": 0.325,
+              "4": 0.102,
+              "5": 0.192,
+              "6": 0.064
+            },
+            "201-300": {
+              "1": 0.15,
+              "2": 0.158,
+              "3": 0.342,
+              "4": 0.1,
+              "5": 0.2,
+              "6": 0.051
+            }
+          },
+          "coldStartDist": {
+            "1": {
+              "mean": 5.75,
+              "sd": 6.0077
+            },
+            "2": {
+              "mean": 5.85,
+              "sd": 7.2929
+            },
+            "3": {
+              "mean": 7.15,
+              "sd": 6.0635
+            },
+            "4": {
+              "mean": 3.75,
+              "sd": 4.7226
+            },
+            "5": {
+              "mean": 3.2,
+              "sd": 3.6792
+            },
+            "6": {
+              "mean": 4.3,
+              "sd": 5.526
+            }
+          },
+          "sessions": {
+            "mean": 30.9,
+            "sd": 2.6931
+          },
+          "avgSessionLength": {
+            "mean": 9.7767,
+            "sd": 0.8239
+          },
+          "total": 300,
+          "v2": null
+        },
+        "C|random": {
+          "maxStreak": {
+            "mean": 4,
+            "sd": 0.8584
+          },
+          "repeats": {
+            "mean": 0,
+            "sd": 0
+          },
+          "minGap": null,
+          "wrongResurfacedCount": {
+            "mean": 0,
+            "sd": 0
+          },
+          "wrongResurfacedAvgGap": null,
+          "avgTime": {
+            "mean": 0.0132,
+            "sd": 0.0014
+          },
+          "worstTime": {
+            "mean": 0.1635,
+            "sd": 0.1164
+          },
+          "finalMeanKnowledge": {
+            "mean": 0.3012,
+            "sd": 0.0005
+          },
+          "accuracyByWindow": {
+            "1-50": {
+              "mean": 0.331,
+              "sd": 0.0492
+            },
+            "51-100": {
+              "mean": 0.312,
+              "sd": 0.0676
+            },
+            "101-200": {
+              "mean": 0.305,
+              "sd": 0.0518
+            },
+            "201-300": {
+              "mean": 0.294,
+              "sd": 0.0536
+            }
+          },
+          "accuracyByDifficulty": {
+            "EASY": {
+              "mean": 0.4073,
+              "sd": 0.0593
+            },
+            "MEDIUM": {
+              "mean": 0.3087,
+              "sd": 0.0452
+            },
+            "HARD": {
+              "mean": 0.2054,
+              "sd": 0.0419
+            }
+          },
+          "shareBreakdown": {
+            "exploration": {
+              "mean": 0.0257,
+              "sd": 0.0028
+            },
+            "weakFocused": {
+              "mean": 0.9576,
+              "sd": 0.0143
+            },
+            "review": {
+              "mean": 0.0166,
+              "sd": 0.013
+            }
+          },
+          "finalKnowledgeGain": {
+            "1": {
+              "mean": 0.0009,
+              "sd": 0.0011
+            },
+            "2": {
+              "mean": 0.0013,
+              "sd": 0.0015
+            },
+            "3": {
+              "mean": 0.0014,
+              "sd": 0.0026
+            },
+            "4": {
+              "mean": 0.0015,
+              "sd": 0.0025
+            },
+            "5": {
+              "mean": 0.0013,
+              "sd": 0.0013
+            },
+            "6": {
+              "mean": 0.0008,
+              "sd": 0.001
+            }
+          },
+          "estimatedMastery": {
+            "1": {
+              "estimated": {
+                "mean": 0.3148,
+                "sd": 0.0531
+              },
+              "trueEnd": {
+                "mean": 0.3009,
+                "sd": 0.0012
+              },
+              "diff": {
+                "mean": 0.0139,
+                "sd": 0.0528
+              }
+            },
+            "2": {
+              "estimated": {
+                "mean": 0.2888,
+                "sd": 0.0472
+              },
+              "trueEnd": {
+                "mean": 0.3013,
+                "sd": 0.0016
+              },
+              "diff": {
+                "mean": -0.0124,
+                "sd": 0.047
+              }
+            },
+            "3": {
+              "estimated": {
+                "mean": 0.3004,
+                "sd": 0.079
+              },
+              "trueEnd": {
+                "mean": 0.3013,
+                "sd": 0.0025
+              },
+              "diff": {
+                "mean": -0.0009,
+                "sd": 0.0788
+              }
+            },
+            "4": {
+              "estimated": {
+                "mean": 0.304,
+                "sd": 0.065
+              },
+              "trueEnd": {
+                "mean": 0.3014,
+                "sd": 0.0025
+              },
+              "diff": {
+                "mean": 0.0025,
+                "sd": 0.064
+              }
+            },
+            "5": {
+              "estimated": {
+                "mean": 0.3219,
+                "sd": 0.0851
+              },
+              "trueEnd": {
+                "mean": 0.3014,
+                "sd": 0.0015
+              },
+              "diff": {
+                "mean": 0.0206,
+                "sd": 0.0854
+              }
+            },
+            "6": {
+              "estimated": {
+                "mean": 0.3095,
+                "sd": 0.0716
+              },
+              "trueEnd": {
+                "mean": 0.3007,
+                "sd": 0.001
+              },
+              "diff": {
+                "mean": 0.0088,
+                "sd": 0.0718
+              }
+            }
+          },
+          "shareByWindowPerConcept": {
+            "1-50": {
+              "1": 0.178,
+              "2": 0.16,
+              "3": 0.168,
+              "4": 0.166,
+              "5": 0.164,
+              "6": 0.164
+            },
+            "51-100": {
+              "1": 0.163,
+              "2": 0.18,
+              "3": 0.162,
+              "4": 0.178,
+              "5": 0.155,
+              "6": 0.162
+            },
+            "101-200": {
+              "1": 0.177,
+              "2": 0.15,
+              "3": 0.171,
+              "4": 0.161,
+              "5": 0.17,
+              "6": 0.171
+            },
+            "201-300": {
+              "1": 0.166,
+              "2": 0.176,
+              "3": 0.17,
+              "4": 0.168,
+              "5": 0.16,
+              "6": 0.16
+            }
+          },
+          "coldStartDist": {
+            "1": {
+              "mean": 5.1,
+              "sd": 1.889
+            },
+            "2": {
+              "mean": 4.95,
+              "sd": 1.9595
+            },
+            "3": {
+              "mean": 4.85,
+              "sd": 1.9808
+            },
+            "4": {
+              "mean": 4.85,
+              "sd": 1.8994
+            },
+            "5": {
+              "mean": 5.15,
+              "sd": 1.5313
+            },
+            "6": {
+              "mean": 5.1,
+              "sd": 1.9974
+            }
+          },
+          "sessions": {
+            "mean": 11.4,
+            "sd": 3.4244
+          },
+          "avgSessionLength": {
+            "mean": 28.6907,
+            "sd": 8.6486
+          },
+          "total": 300,
+          "v2": null
+        },
+        "D|adaptive": {
+          "maxStreak": {
+            "mean": 13.4,
+            "sd": 1.0954
+          },
+          "repeats": {
+            "mean": 72.2,
+            "sd": 27.6607
+          },
+          "minGap": {
+            "mean": 203.8947,
+            "sd": 14.9105
+          },
+          "wrongResurfacedCount": {
+            "mean": 25.15,
+            "sd": 9.9381
+          },
+          "wrongResurfacedAvgGap": {
+            "mean": 207.2158,
+            "sd": 16.0529
+          },
+          "avgTime": {
+            "mean": 0.0607,
+            "sd": 0.0016
+          },
+          "worstTime": {
+            "mean": 0.3182,
+            "sd": 0.0568
+          },
+          "finalMeanKnowledge": {
+            "mean": 0.587,
+            "sd": 0.0047
+          },
+          "accuracyByWindow": {
+            "1-50": {
+              "mean": 0.669,
+              "sd": 0.083
+            },
+            "51-100": {
+              "mean": 0.679,
+              "sd": 0.0483
+            },
+            "101-200": {
+              "mean": 0.6485,
+              "sd": 0.0465
+            },
+            "201-300": {
+              "mean": 0.7785,
+              "sd": 0.0905
+            }
+          },
+          "accuracyByDifficulty": {
+            "EASY": {
+              "mean": 0.7435,
+              "sd": 0.0618
+            },
+            "MEDIUM": {
+              "mean": 0.6903,
+              "sd": 0.0597
+            },
+            "HARD": {
+              "mean": 0.6142,
+              "sd": 0.0682
+            }
+          },
+          "shareBreakdown": {
+            "exploration": {
+              "mean": 0.192,
+              "sd": 0.1892
+            },
+            "weakFocused": {
+              "mean": 0.2879,
+              "sd": 0.3112
+            },
+            "review": {
+              "mean": 0.5201,
+              "sd": 0.3909
+            }
+          },
+          "finalKnowledgeGain": {
+            "1": {
+              "mean": 0.0547,
+              "sd": 0.0984
+            },
+            "2": {
+              "mean": 0.0471,
+              "sd": 0.0968
+            },
+            "3": {
+              "mean": 0.0119,
+              "sd": 0.0534
+            },
+            "4": {
+              "mean": 0.0351,
+              "sd": 0.0857
+            },
+            "5": {
+              "mean": 0.0509,
+              "sd": 0.0924
+            },
+            "6": {
+              "mean": 0.0221,
+              "sd": 0.0681
+            }
+          },
+          "estimatedMastery": {
+            "1": {
+              "estimated": {
+                "mean": 0.8411,
+                "sd": 0.1566
+              },
+              "trueEnd": {
+                "mean": 0.6047,
+                "sd": 0.0984
+              },
+              "diff": {
+                "mean": 0.2364,
+                "sd": 0.2254
+              }
+            },
+            "2": {
+              "estimated": {
+                "mean": 0.8718,
+                "sd": 0.1518
+              },
+              "trueEnd": {
+                "mean": 0.5971,
+                "sd": 0.0968
+              },
+              "diff": {
+                "mean": 0.2748,
+                "sd": 0.2168
+              }
+            },
+            "3": {
+              "estimated": {
+                "mean": 0.9197,
+                "sd": 0.132
+              },
+              "trueEnd": {
+                "mean": 0.562,
+                "sd": 0.0534
+              },
+              "diff": {
+                "mean": 0.3578,
+                "sd": 0.1604
+              }
+            },
+            "4": {
+              "estimated": {
+                "mean": 0.9081,
+                "sd": 0.1472
+              },
+              "trueEnd": {
+                "mean": 0.5851,
+                "sd": 0.0856
+              },
+              "diff": {
+                "mean": 0.323,
+                "sd": 0.2105
+              }
+            },
+            "5": {
+              "estimated": {
+                "mean": 0.8716,
+                "sd": 0.1522
+              },
+              "trueEnd": {
+                "mean": 0.6009,
+                "sd": 0.0923
+              },
+              "diff": {
+                "mean": 0.2707,
+                "sd": 0.2277
+              }
+            },
+            "6": {
+              "estimated": {
+                "mean": 0.8948,
+                "sd": 0.1525
+              },
+              "trueEnd": {
+                "mean": 0.5721,
+                "sd": 0.0681
+              },
+              "diff": {
+                "mean": 0.3228,
+                "sd": 0.1963
+              }
+            }
+          },
+          "shareByWindowPerConcept": {
+            "1-50": {
+              "1": 0.213,
+              "2": 0.221,
+              "3": 0.097,
+              "4": 0.164,
+              "5": 0.169,
+              "6": 0.136
+            },
+            "51-100": {
+              "1": 0.232,
+              "2": 0.214,
+              "3": 0.054,
+              "4": 0.198,
+              "5": 0.155,
+              "6": 0.147
+            },
+            "101-200": {
+              "1": 0.238,
+              "2": 0.204,
+              "3": 0.051,
+              "4": 0.16,
+              "5": 0.235,
+              "6": 0.113
+            },
+            "201-300": {
+              "1": 0.249,
+              "2": 0.201,
+              "3": 0.05,
+              "4": 0.15,
+              "5": 0.249,
+              "6": 0.1
+            }
+          },
+          "coldStartDist": {
+            "1": {
+              "mean": 5.9,
+              "sd": 6.6878
+            },
+            "2": {
+              "mean": 6.5,
+              "sd": 8.1467
+            },
+            "3": {
+              "mean": 3.6,
+              "sd": 5.4328
+            },
+            "4": {
+              "mean": 5.15,
+              "sd": 7.3504
+            },
+            "5": {
+              "mean": 5.7,
+              "sd": 6.9668
+            },
+            "6": {
+              "mean": 3.15,
+              "sd": 3.6889
+            }
+          },
+          "sessions": {
+            "mean": 30.15,
+            "sd": 3.0826
+          },
+          "avgSessionLength": {
+            "mean": 10.0565,
+            "sd": 1.1027
+          },
+          "total": 300,
+          "v2": null
+        },
+        "D|random": {
+          "maxStreak": {
+            "mean": 4.1,
+            "sd": 0.7881
+          },
+          "repeats": {
+            "mean": 0,
+            "sd": 0
+          },
+          "minGap": null,
+          "wrongResurfacedCount": {
+            "mean": 0,
+            "sd": 0
+          },
+          "wrongResurfacedAvgGap": null,
+          "avgTime": {
+            "mean": 0.0131,
+            "sd": 0.0015
+          },
+          "worstTime": {
+            "mean": 0.1296,
+            "sd": 0.0959
+          },
+          "finalMeanKnowledge": {
+            "mean": 0.5512,
+            "sd": 0.0004
+          },
+          "accuracyByWindow": {
+            "1-50": {
+              "mean": 0.561,
+              "sd": 0.0637
+            },
+            "51-100": {
+              "mean": 0.564,
+              "sd": 0.0545
+            },
+            "101-200": {
+              "mean": 0.5595,
+              "sd": 0.0502
+            },
+            "201-300": {
+              "mean": 0.5395,
+              "sd": 0.0577
+            }
+          },
+          "accuracyByDifficulty": {
+            "EASY": {
+              "mean": 0.6591,
+              "sd": 0.0575
+            },
+            "MEDIUM": {
+              "mean": 0.5458,
+              "sd": 0.0524
+            },
+            "HARD": {
+              "mean": 0.4578,
+              "sd": 0.0564
+            }
+          },
+          "shareBreakdown": {
+            "exploration": {
+              "mean": 0.1048,
+              "sd": 0.0377
+            },
+            "weakFocused": {
+              "mean": 0.3887,
+              "sd": 0.2302
+            },
+            "review": {
+              "mean": 0.5066,
+              "sd": 0.2347
+            }
+          },
+          "finalKnowledgeGain": {
+            "1": {
+              "mean": 0.0007,
+              "sd": 0.0011
+            },
+            "2": {
+              "mean": 0.0015,
+              "sd": 0.0017
+            },
+            "3": {
+              "mean": 0.0009,
+              "sd": 0.0017
+            },
+            "4": {
+              "mean": 0.0015,
+              "sd": 0.0025
+            },
+            "5": {
+              "mean": 0.0018,
+              "sd": 0.002
+            },
+            "6": {
+              "mean": 0.001,
+              "sd": 0.0015
+            }
+          },
+          "estimatedMastery": {
+            "1": {
+              "estimated": {
+                "mean": 0.5521,
+                "sd": 0.0692
+              },
+              "trueEnd": {
+                "mean": 0.5507,
+                "sd": 0.0011
+              },
+              "diff": {
+                "mean": 0.0014,
+                "sd": 0.0694
+              }
+            },
+            "2": {
+              "estimated": {
+                "mean": 0.5386,
+                "sd": 0.0573
+              },
+              "trueEnd": {
+                "mean": 0.5516,
+                "sd": 0.0018
+              },
+              "diff": {
+                "mean": -0.0128,
+                "sd": 0.0577
+              }
+            },
+            "3": {
+              "estimated": {
+                "mean": 0.546,
+                "sd": 0.093
+              },
+              "trueEnd": {
+                "mean": 0.5508,
+                "sd": 0.0016
+              },
+              "diff": {
+                "mean": -0.0049,
+                "sd": 0.0929
+              }
+            },
+            "4": {
+              "estimated": {
+                "mean": 0.5539,
+                "sd": 0.0614
+              },
+              "trueEnd": {
+                "mean": 0.5515,
+                "sd": 0.0024
+              },
+              "diff": {
+                "mean": 0.0024,
+                "sd": 0.061
+              }
+            },
+            "5": {
+              "estimated": {
+                "mean": 0.5779,
+                "sd": 0.0653
+              },
+              "trueEnd": {
+                "mean": 0.5518,
+                "sd": 0.002
+              },
+              "diff": {
+                "mean": 0.0262,
+                "sd": 0.0658
+              }
+            },
+            "6": {
+              "estimated": {
+                "mean": 0.5567,
+                "sd": 0.0701
+              },
+              "trueEnd": {
+                "mean": 0.5511,
+                "sd": 0.0016
+              },
+              "diff": {
+                "mean": 0.0059,
+                "sd": 0.0705
+              }
+            }
+          },
+          "shareByWindowPerConcept": {
+            "1-50": {
+              "1": 0.178,
+              "2": 0.16,
+              "3": 0.168,
+              "4": 0.166,
+              "5": 0.164,
+              "6": 0.164
+            },
+            "51-100": {
+              "1": 0.163,
+              "2": 0.18,
+              "3": 0.162,
+              "4": 0.178,
+              "5": 0.155,
+              "6": 0.162
+            },
+            "101-200": {
+              "1": 0.177,
+              "2": 0.15,
+              "3": 0.171,
+              "4": 0.161,
+              "5": 0.17,
+              "6": 0.171
+            },
+            "201-300": {
+              "1": 0.166,
+              "2": 0.176,
+              "3": 0.17,
+              "4": 0.168,
+              "5": 0.16,
+              "6": 0.16
+            }
+          },
+          "coldStartDist": {
+            "1": {
+              "mean": 5.1,
+              "sd": 1.889
+            },
+            "2": {
+              "mean": 4.95,
+              "sd": 1.9595
+            },
+            "3": {
+              "mean": 4.85,
+              "sd": 1.9808
+            },
+            "4": {
+              "mean": 4.85,
+              "sd": 1.8994
+            },
+            "5": {
+              "mean": 5.15,
+              "sd": 1.5313
+            },
+            "6": {
+              "mean": 5.1,
+              "sd": 1.9974
+            }
+          },
+          "sessions": {
+            "mean": 2.75,
+            "sd": 1.5853
+          },
+          "avgSessionLength": {
+            "mean": 142.6429,
+            "sd": 76.4327
+          },
+          "total": 300,
+          "v2": null
+        }
+      }
+    },
+    "SMALL_BANK_LONG": {
+      "questionsPerConcept": 40,
+      "totalAnswers": 1000,
+      "totalQuestions": 240,
+      "results": {
+        "A|adaptive": {
+          "maxStreak": {
+            "mean": 14.25,
+            "sd": 0.7164
+          },
+          "repeats": {
+            "mean": 932.15,
+            "sd": 19.2334
+          },
+          "minGap": {
+            "mean": 40,
+            "sd": 0
+          },
+          "wrongResurfacedCount": {
+            "mean": 61.75,
+            "sd": 20.3958
+          },
+          "wrongResurfacedAvgGap": {
+            "mean": 49.4,
+            "sd": 10.603
+          },
+          "avgTime": {
+            "mean": 0.0117,
+            "sd": 0.001
+          },
+          "worstTime": {
+            "mean": 0.3412,
+            "sd": 0.1918
+          },
+          "finalMeanKnowledge": {
+            "mean": 0.6763,
+            "sd": 0.0055
+          },
+          "accuracyByWindow": {
+            "1-50": {
+              "mean": 0.411,
+              "sd": 0.0766
+            },
+            "51-100": {
+              "mean": 0.408,
+              "sd": 0.0552
+            },
+            "101-200": {
+              "mean": 0.5115,
+              "sd": 0.0442
+            },
+            "201-300": {
+              "mean": 0.6781,
+              "sd": 0.1329
+            }
+          },
+          "accuracyByDifficulty": {
+            "EASY": {
+              "mean": 0.7339,
+              "sd": 0.1016
+            },
+            "MEDIUM": {
+              "mean": 0.6211,
+              "sd": 0.1178
+            },
+            "HARD": {
+              "mean": 0.5494,
+              "sd": 0.1078
+            }
+          },
+          "shareBreakdown": {
+            "exploration": {
+              "mean": 0.0252,
+              "sd": 0.0115
+            },
+            "weakFocused": {
+              "mean": 0.6731,
+              "sd": 0.3676
+            },
+            "review": {
+              "mean": 0.3017,
+              "sd": 0.3699
+            }
+          },
+          "finalKnowledgeGain": {
+            "1": {
+              "mean": 0,
+              "sd": 0
+            },
+            "2": {
+              "mean": 0,
+              "sd": 0
+            },
+            "3": {
+              "mean": 0,
+              "sd": 0
+            },
+            "4": {
+              "mean": 0.2231,
+              "sd": 0.2495
+            },
+            "5": {
+              "mean": 0.1439,
+              "sd": 0.1897
+            },
+            "6": {
+              "mean": 0.241,
+              "sd": 0.2557
+            }
+          },
+          "estimatedMastery": {
+            "1": {
+              "estimated": {
+                "mean": 0.9834,
+                "sd": 0.0745
+              },
+              "trueEnd": {
+                "mean": 0.85,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.1333,
+                "sd": 0.0745
+              }
+            },
+            "2": {
+              "estimated": {
+                "mean": 0.9834,
+                "sd": 0.0745
+              },
+              "trueEnd": {
+                "mean": 0.85,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.1333,
+                "sd": 0.0745
+              }
+            },
+            "3": {
+              "estimated": {
+                "mean": 0.99,
+                "sd": 0.0447
+              },
+              "trueEnd": {
+                "mean": 0.85,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.14,
+                "sd": 0.0447
+              }
+            },
+            "4": {
+              "estimated": {
+                "mean": 0.7659,
+                "sd": 0.201
+              },
+              "trueEnd": {
+                "mean": 0.5231,
+                "sd": 0.2495
+              },
+              "diff": {
+                "mean": 0.2428,
+                "sd": 0.3924
+              }
+            },
+            "5": {
+              "estimated": {
+                "mean": 0.784,
+                "sd": 0.2295
+              },
+              "trueEnd": {
+                "mean": 0.4439,
+                "sd": 0.1898
+              },
+              "diff": {
+                "mean": 0.3401,
+                "sd": 0.3882
+              }
+            },
+            "6": {
+              "estimated": {
+                "mean": 0.7839,
+                "sd": 0.2152
+              },
+              "trueEnd": {
+                "mean": 0.5411,
+                "sd": 0.2557
+              },
+              "diff": {
+                "mean": 0.2429,
+                "sd": 0.4275
+              }
+            }
+          },
+          "shareByWindowPerConcept": {
+            "1-50": {
+              "1": 0.024,
+              "2": 0.024,
+              "3": 0.025,
+              "4": 0.371,
+              "5": 0.234,
+              "6": 0.322
+            },
+            "51-100": {
+              "1": 0,
+              "2": 0,
+              "3": 0,
+              "4": 0.398,
+              "5": 0.252,
+              "6": 0.35
+            },
+            "101-200": {
+              "1": 0,
+              "2": 0,
+              "3": 0,
+              "4": 0.403,
+              "5": 0.248,
+              "6": 0.35
+            },
+            "201-300": {
+              "1": 0,
+              "2": 0,
+              "3": 0,
+              "4": 0.361,
+              "5": 0.252,
+              "6": 0.387
+            }
+          },
+          "coldStartDist": {
+            "1": {
+              "mean": 1.2,
+              "sd": 0.4104
+            },
+            "2": {
+              "mean": 1.2,
+              "sd": 0.4104
+            },
+            "3": {
+              "mean": 1.25,
+              "sd": 0.5501
+            },
+            "4": {
+              "mean": 10.55,
+              "sd": 10.2571
+            },
+            "5": {
+              "mean": 6.8,
+              "sd": 8.102
+            },
+            "6": {
+              "mean": 9,
+              "sd": 10.1151
+            }
+          },
+          "sessions": {
+            "mean": 108.15,
+            "sd": 5.1122
+          },
+          "avgSessionLength": {
+            "mean": 9.267,
+            "sd": 0.4569
+          },
+          "total": 1000,
+          "v2": null
+        },
+        "A|random": {
+          "maxStreak": {
+            "mean": 3.7,
+            "sd": 0.9234
+          },
+          "repeats": {
+            "mean": 760,
+            "sd": 0
+          },
+          "minGap": {
+            "mean": 240,
+            "sd": 0
+          },
+          "wrongResurfacedCount": {
+            "mean": 163.3,
+            "sd": 5.8409
+          },
+          "wrongResurfacedAvgGap": {
+            "mean": 240,
+            "sd": 0
+          },
+          "avgTime": {
+            "mean": 0.0027,
+            "sd": 0.0011
+          },
+          "worstTime": {
+            "mean": 0.0513,
+            "sd": 0.0818
+          },
+          "finalMeanKnowledge": {
+            "mean": 0.591,
+            "sd": 0.0024
+          },
+          "accuracyByWindow": {
+            "1-50": {
+              "mean": 0.594,
+              "sd": 0.0668
+            },
+            "51-100": {
+              "mean": 0.584,
+              "sd": 0.0545
+            },
+            "101-200": {
+              "mean": 0.5845,
+              "sd": 0.0422
+            },
+            "201-300": {
+              "mean": 0.5799,
+              "sd": 0.0172
+            }
+          },
+          "accuracyByDifficulty": {
+            "EASY": {
+              "mean": 0.6837,
+              "sd": 0.0219
+            },
+            "MEDIUM": {
+              "mean": 0.5882,
+              "sd": 0.0258
+            },
+            "HARD": {
+              "mean": 0.4791,
+              "sd": 0.0237
+            }
+          },
+          "shareBreakdown": {
+            "exploration": {
+              "mean": 0.0062,
+              "sd": 0.0004
+            },
+            "weakFocused": {
+              "mean": 0.4745,
+              "sd": 0.0246
+            },
+            "review": {
+              "mean": 0.5191,
+              "sd": 0.0244
+            }
+          },
+          "finalKnowledgeGain": {
+            "1": {
+              "mean": 0.0002,
+              "sd": 0.0004
+            },
+            "2": {
+              "mean": 0.0002,
+              "sd": 0.0004
+            },
+            "3": {
+              "mean": 0.0002,
+              "sd": 0.0005
+            },
+            "4": {
+              "mean": 0.0329,
+              "sd": 0.0089
+            },
+            "5": {
+              "mean": 0.0299,
+              "sd": 0.0082
+            },
+            "6": {
+              "mean": 0.0328,
+              "sd": 0.01
+            }
+          },
+          "estimatedMastery": {
+            "1": {
+              "estimated": {
+                "mean": 0.8362,
+                "sd": 0.0273
+              },
+              "trueEnd": {
+                "mean": 0.8501,
+                "sd": 0.0004
+              },
+              "diff": {
+                "mean": -0.0138,
+                "sd": 0.0273
+              }
+            },
+            "2": {
+              "estimated": {
+                "mean": 0.8431,
+                "sd": 0.0335
+              },
+              "trueEnd": {
+                "mean": 0.8502,
+                "sd": 0.0004
+              },
+              "diff": {
+                "mean": -0.0071,
+                "sd": 0.0336
+              }
+            },
+            "3": {
+              "estimated": {
+                "mean": 0.8386,
+                "sd": 0.0331
+              },
+              "trueEnd": {
+                "mean": 0.8502,
+                "sd": 0.0006
+              },
+              "diff": {
+                "mean": -0.0116,
+                "sd": 0.0331
+              }
+            },
+            "4": {
+              "estimated": {
+                "mean": 0.3256,
+                "sd": 0.0337
+              },
+              "trueEnd": {
+                "mean": 0.3329,
+                "sd": 0.0088
+              },
+              "diff": {
+                "mean": -0.0072,
+                "sd": 0.0273
+              }
+            },
+            "5": {
+              "estimated": {
+                "mean": 0.3083,
+                "sd": 0.0261
+              },
+              "trueEnd": {
+                "mean": 0.33,
+                "sd": 0.0082
+              },
+              "diff": {
+                "mean": -0.0213,
+                "sd": 0.022
+              }
+            },
+            "6": {
+              "estimated": {
+                "mean": 0.3335,
+                "sd": 0.0414
+              },
+              "trueEnd": {
+                "mean": 0.3328,
+                "sd": 0.0101
+              },
+              "diff": {
+                "mean": 0.0008,
+                "sd": 0.034
+              }
+            }
+          },
+          "shareByWindowPerConcept": {
+            "1-50": {
+              "1": 0.174,
+              "2": 0.164,
+              "3": 0.166,
+              "4": 0.168,
+              "5": 0.162,
+              "6": 0.166
+            },
+            "51-100": {
+              "1": 0.161,
+              "2": 0.185,
+              "3": 0.161,
+              "4": 0.17,
+              "5": 0.16,
+              "6": 0.163
+            },
+            "101-200": {
+              "1": 0.172,
+              "2": 0.157,
+              "3": 0.172,
+              "4": 0.16,
+              "5": 0.177,
+              "6": 0.163
+            },
+            "201-300": {
+              "1": 0.166,
+              "2": 0.167,
+              "3": 0.167,
+              "4": 0.167,
+              "5": 0.166,
+              "6": 0.168
+            }
+          },
+          "coldStartDist": {
+            "1": {
+              "mean": 5.1,
+              "sd": 1.889
+            },
+            "2": {
+              "mean": 4.9,
+              "sd": 1.8325
+            },
+            "3": {
+              "mean": 4.8,
+              "sd": 1.9084
+            },
+            "4": {
+              "mean": 4.95,
+              "sd": 1.8771
+            },
+            "5": {
+              "mean": 5.15,
+              "sd": 1.4244
+            },
+            "6": {
+              "mean": 5.1,
+              "sd": 1.9974
+            }
+          },
+          "sessions": {
+            "mean": 5.35,
+            "sd": 2.7004
+          },
+          "avgSessionLength": {
+            "mean": 241.6089,
+            "sd": 131.0433
+          },
+          "total": 1000,
+          "v2": null
+        },
+        "B|adaptive": {
+          "maxStreak": {
+            "mean": 13.85,
+            "sd": 1.04
+          },
+          "repeats": {
+            "mean": 941.2,
+            "sd": 9.9186
+          },
+          "minGap": {
+            "mean": 40,
+            "sd": 0
+          },
+          "wrongResurfacedCount": {
+            "mean": 40,
+            "sd": 0
+          },
+          "wrongResurfacedAvgGap": {
+            "mean": 41.62,
+            "sd": 1.5992
+          },
+          "avgTime": {
+            "mean": 0.0115,
+            "sd": 0.0004
+          },
+          "worstTime": {
+            "mean": 0.2948,
+            "sd": 0.1126
+          },
+          "finalMeanKnowledge": {
+            "mean": 0.25,
+            "sd": 0
+          },
+          "accuracyByWindow": {
+            "1-50": {
+              "mean": 0.319,
+              "sd": 0.0817
+            },
+            "51-100": {
+              "mean": 0.229,
+              "sd": 0.0456
+            },
+            "101-200": {
+              "mean": 0.26,
+              "sd": 0.0363
+            },
+            "201-300": {
+              "mean": 0.2495,
+              "sd": 0.0148
+            }
+          },
+          "accuracyByDifficulty": {
+            "EASY": {
+              "mean": 0.3518,
+              "sd": 0.0296
+            },
+            "MEDIUM": {
+              "mean": 0.2531,
+              "sd": 0.0205
+            },
+            "HARD": {
+              "mean": 0.1534,
+              "sd": 0.0223
+            }
+          },
+          "shareBreakdown": {
+            "exploration": {
+              "mean": 0.006,
+              "sd": 0
+            },
+            "weakFocused": {
+              "mean": 0.994,
+              "sd": 0
+            },
+            "review": {
+              "mean": 0,
+              "sd": 0
+            }
+          },
+          "finalKnowledgeGain": {
+            "1": {
+              "mean": 0,
+              "sd": 0
+            },
+            "2": {
+              "mean": 0,
+              "sd": 0
+            },
+            "3": {
+              "mean": 0,
+              "sd": 0
+            },
+            "4": {
+              "mean": 0,
+              "sd": 0
+            },
+            "5": {
+              "mean": 0,
+              "sd": 0
+            },
+            "6": {
+              "mean": 0,
+              "sd": 0
+            }
+          },
+          "estimatedMastery": {
+            "1": {
+              "estimated": {
+                "mean": 0.554,
+                "sd": 0.3085
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.304,
+                "sd": 0.3085
+              }
+            },
+            "2": {
+              "estimated": {
+                "mean": 0.6272,
+                "sd": 0.3538
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.3772,
+                "sd": 0.3538
+              }
+            },
+            "3": {
+              "estimated": {
+                "mean": 0.5057,
+                "sd": 0.3091
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.2557,
+                "sd": 0.3091
+              }
+            },
+            "4": {
+              "estimated": {
+                "mean": 0.6959,
+                "sd": 0.3174
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.4459,
+                "sd": 0.3174
+              }
+            },
+            "5": {
+              "estimated": {
+                "mean": 0.651,
+                "sd": 0.3318
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.401,
+                "sd": 0.3318
+              }
+            },
+            "6": {
+              "estimated": {
+                "mean": 0.5538,
+                "sd": 0.2835
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.3039,
+                "sd": 0.2835
+              }
+            }
+          },
+          "shareByWindowPerConcept": {
+            "1-50": {
+              "1": 0.158,
+              "2": 0.225,
+              "3": 0.247,
+              "4": 0.081,
+              "5": 0.102,
+              "6": 0.187
+            },
+            "51-100": {
+              "1": 0.102,
+              "2": 0.295,
+              "3": 0.355,
+              "4": 0.05,
+              "5": 0.055,
+              "6": 0.143
+            },
+            "101-200": {
+              "1": 0.1,
+              "2": 0.3,
+              "3": 0.35,
+              "4": 0.05,
+              "5": 0.05,
+              "6": 0.15
+            },
+            "201-300": {
+              "1": 0.1,
+              "2": 0.3,
+              "3": 0.35,
+              "4": 0.05,
+              "5": 0.05,
+              "6": 0.15
+            }
+          },
+          "coldStartDist": {
+            "1": {
+              "mean": 5.25,
+              "sd": 5.4952
+            },
+            "2": {
+              "mean": 6,
+              "sd": 7.3556
+            },
+            "3": {
+              "mean": 6.2,
+              "sd": 5.5498
+            },
+            "4": {
+              "mean": 2.6,
+              "sd": 2.3709
+            },
+            "5": {
+              "mean": 3.7,
+              "sd": 4.2065
+            },
+            "6": {
+              "mean": 6.25,
+              "sd": 7.1442
+            }
+          },
+          "sessions": {
+            "mean": 122.25,
+            "sd": 2.6333
+          },
+          "avgSessionLength": {
+            "mean": 8.1835,
+            "sd": 0.1734
+          },
+          "total": 1000,
+          "v2": null
+        },
+        "B|random": {
+          "maxStreak": {
+            "mean": 3.7,
+            "sd": 0.9234
+          },
+          "repeats": {
+            "mean": 760,
+            "sd": 0
+          },
+          "minGap": {
+            "mean": 240,
+            "sd": 0
+          },
+          "wrongResurfacedCount": {
+            "mean": 235.65,
+            "sd": 2.1831
+          },
+          "wrongResurfacedAvgGap": {
+            "mean": 240,
+            "sd": 0
+          },
+          "avgTime": {
+            "mean": 0.0023,
+            "sd": 0.0001
+          },
+          "worstTime": {
+            "mean": 0.0184,
+            "sd": 0.0173
+          },
+          "finalMeanKnowledge": {
+            "mean": 0.25,
+            "sd": 0
+          },
+          "accuracyByWindow": {
+            "1-50": {
+              "mean": 0.281,
+              "sd": 0.0509
+            },
+            "51-100": {
+              "mean": 0.255,
+              "sd": 0.0569
+            },
+            "101-200": {
+              "mean": 0.2535,
+              "sd": 0.0508
+            },
+            "201-300": {
+              "mean": 0.2473,
+              "sd": 0.0129
+            }
+          },
+          "accuracyByDifficulty": {
+            "EASY": {
+              "mean": 0.3505,
+              "sd": 0.0272
+            },
+            "MEDIUM": {
+              "mean": 0.2594,
+              "sd": 0.0227
+            },
+            "HARD": {
+              "mean": 0.1472,
+              "sd": 0.0145
+            }
+          },
+          "shareBreakdown": {
+            "exploration": {
+              "mean": 0.0061,
+              "sd": 0.0003
+            },
+            "weakFocused": {
+              "mean": 0.991,
+              "sd": 0.0024
+            },
+            "review": {
+              "mean": 0.0029,
+              "sd": 0.0023
+            }
+          },
+          "finalKnowledgeGain": {
+            "1": {
+              "mean": 0,
+              "sd": 0
+            },
+            "2": {
+              "mean": 0,
+              "sd": 0
+            },
+            "3": {
+              "mean": 0,
+              "sd": 0
+            },
+            "4": {
+              "mean": 0,
+              "sd": 0
+            },
+            "5": {
+              "mean": 0,
+              "sd": 0
+            },
+            "6": {
+              "mean": 0,
+              "sd": 0
+            }
+          },
+          "estimatedMastery": {
+            "1": {
+              "estimated": {
+                "mean": 0.2544,
+                "sd": 0.0224
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.0044,
+                "sd": 0.0224
+              }
+            },
+            "2": {
+              "estimated": {
+                "mean": 0.2508,
+                "sd": 0.0257
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.0008,
+                "sd": 0.0257
+              }
+            },
+            "3": {
+              "estimated": {
+                "mean": 0.2508,
+                "sd": 0.0331
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.0008,
+                "sd": 0.0331
+              }
+            },
+            "4": {
+              "estimated": {
+                "mean": 0.2534,
+                "sd": 0.0294
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.0033,
+                "sd": 0.0294
+              }
+            },
+            "5": {
+              "estimated": {
+                "mean": 0.2382,
+                "sd": 0.0288
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": -0.0119,
+                "sd": 0.0288
+              }
+            },
+            "6": {
+              "estimated": {
+                "mean": 0.2517,
+                "sd": 0.0289
+              },
+              "trueEnd": {
+                "mean": 0.25,
+                "sd": 0
+              },
+              "diff": {
+                "mean": 0.0017,
+                "sd": 0.0289
+              }
+            }
+          },
+          "shareByWindowPerConcept": {
+            "1-50": {
+              "1": 0.174,
+              "2": 0.164,
+              "3": 0.166,
+              "4": 0.168,
+              "5": 0.162,
+              "6": 0.166
+            },
+            "51-100": {
+              "1": 0.161,
+              "2": 0.185,
+              "3": 0.161,
+              "4": 0.17,
+              "5": 0.16,
+              "6": 0.163
+            },
+            "101-200": {
+              "1": 0.172,
+              "2": 0.157,
+              "3": 0.172,
+              "4": 0.16,
+              "5": 0.177,
+              "6": 0.163
+            },
+            "201-300": {
+              "1": 0.166,
+              "2": 0.167,
+              "3": 0.167,
+              "4": 0.167,
+              "5": 0.166,
+              "6": 0.168
+            }
+          },
+          "coldStartDist": {
+            "1": {
+              "mean": 5.1,
+              "sd": 1.889
+            },
+            "2": {
+              "mean": 4.9,
+              "sd": 1.8325
+            },
+            "3": {
+              "mean": 4.8,
+              "sd": 1.9084
+            },
+            "4": {
+              "mean": 4.95,
+              "sd": 1.8771
+            },
+            "5": {
+              "mean": 5.15,
+              "sd": 1.4244
+            },
+            "6": {
+              "mean": 5.1,
+              "sd": 1.9974
+            }
+          },
+          "sessions": {
+            "mean": 55,
+            "sd": 5.3607
+          },
+          "avgSessionLength": {
+            "mean": 18.3499,
+            "sd": 1.8237
+          },
+          "total": 1000,
+          "v2": null
+        },
+        "C|adaptive": {
+          "maxStreak": {
+            "mean": 14.15,
+            "sd": 1.04
+          },
+          "repeats": {
+            "mean": 914.05,
+            "sd": 22.0561
+          },
+          "minGap": {
+            "mean": 40,
+            "sd": 0
+          },
+          "wrongResurfacedCount": {
+            "mean": 71.8,
+            "sd": 23.8716
+          },
+          "wrongResurfacedAvgGap": {
+            "mean": 69.03,
+            "sd": 19.9695
+          },
+          "avgTime": {
+            "mean": 0.0109,
+            "sd": 0.0006
+          },
+          "worstTime": {
+            "mean": 0.2601,
+            "sd": 0.0488
+          },
+          "finalMeanKnowledge": {
+            "mean": 0.3565,
+            "sd": 0.0201
+          },
+          "accuracyByWindow": {
+            "1-50": {
+              "mean": 0.37,
+              "sd": 0.0914
+            },
+            "51-100": {
+              "mean": 0.319,
+              "sd": 0.0582
+            },
+            "101-200": {
+              "mean": 0.404,
+              "sd": 0.0486
+            },
+            "201-300": {
+              "mean": 0.5072,
+              "sd": 0.1045
+            }
+          },
+          "accuracyByDifficulty": {
+            "EASY": {
+              "mean": 0.5677,
+              "sd": 0.0915
+            },
+            "MEDIUM": {
+              "mean": 0.4847,
+              "sd": 0.094
+            },
+            "HARD": {
+              "mean": 0.3889,
+              "sd": 0.0871
+            }
+          },
+          "shareBreakdown": {
+            "exploration": {
+              "mean": 0.0157,
+              "sd": 0.0121
+            },
+            "weakFocused": {
+              "mean": 0.9844,
+              "sd": 0.0121
+            },
+            "review": {
+              "mean": 0,
+              "sd": 0
+            }
+          },
+          "finalKnowledgeGain": {
+            "1": {
+              "mean": 0.0774,
+              "sd": 0.142
+            },
+            "2": {
+              "mean": 0.0649,
+              "sd": 0.1235
+            },
+            "3": {
+              "mean": 0.1185,
+              "sd": 0.167
+            },
+            "4": {
+              "mean": 0.036,
+              "sd": 0.0803
+            },
+            "5": {
+              "mean": 0.0093,
+              "sd": 0.0305
+            },
+            "6": {
+              "mean": 0.0327,
+              "sd": 0.1093
+            }
+          },
+          "estimatedMastery": {
+            "1": {
+              "estimated": {
+                "mean": 0.6404,
+                "sd": 0.254
+              },
+              "trueEnd": {
+                "mean": 0.3773,
+                "sd": 0.142
+              },
+              "diff": {
+                "mean": 0.263,
+                "sd": 0.3257
+              }
+            },
+            "2": {
+              "estimated": {
+                "mean": 0.7368,
+                "sd": 0.2804
+              },
+              "trueEnd": {
+                "mean": 0.3649,
+                "sd": 0.1236
+              },
+              "diff": {
+                "mean": 0.3719,
+                "sd": 0.3579
+              }
+            },
+            "3": {
+              "estimated": {
+                "mean": 0.6281,
+                "sd": 0.261
+              },
+              "trueEnd": {
+                "mean": 0.4185,
+                "sd": 0.1671
+              },
+              "diff": {
+                "mean": 0.2098,
+                "sd": 0.3567
+              }
+            },
+            "4": {
+              "estimated": {
+                "mean": 0.7592,
+                "sd": 0.2552
+              },
+              "trueEnd": {
+                "mean": 0.336,
+                "sd": 0.0803
+              },
+              "diff": {
+                "mean": 0.4232,
+                "sd": 0.3034
+              }
+            },
+            "5": {
+              "estimated": {
+                "mean": 0.7621,
+                "sd": 0.2798
+              },
+              "trueEnd": {
+                "mean": 0.3093,
+                "sd": 0.0305
+              },
+              "diff": {
+                "mean": 0.4528,
+                "sd": 0.2909
+              }
+            },
+            "6": {
+              "estimated": {
+                "mean": 0.7197,
+                "sd": 0.2739
+              },
+              "trueEnd": {
+                "mean": 0.3327,
+                "sd": 0.1093
+              },
+              "diff": {
+                "mean": 0.387,
+                "sd": 0.3174
+              }
+            }
+          },
+          "shareByWindowPerConcept": {
+            "1-50": {
+              "1": 0.195,
+              "2": 0.205,
+              "3": 0.229,
+              "4": 0.129,
+              "5": 0.112,
+              "6": 0.13
+            },
+            "51-100": {
+              "1": 0.15,
+              "2": 0.234,
+              "3": 0.25,
+              "4": 0.15,
+              "5": 0.104,
+              "6": 0.112
+            },
+            "101-200": {
+              "1": 0.169,
+              "2": 0.222,
+              "3": 0.256,
+              "4": 0.148,
+              "5": 0.101,
+              "6": 0.104
+            },
+            "201-300": {
+              "1": 0.218,
+              "2": 0.203,
+              "3": 0.301,
+              "4": 0.109,
+              "5": 0.067,
+              "6": 0.101
+            }
+          },
+          "coldStartDist": {
+            "1": {
+              "mean": 5.75,
+              "sd": 6.0077
+            },
+            "2": {
+              "mean": 5.85,
+              "sd": 7.2929
+            },
+            "3": {
+              "mean": 7.15,
+              "sd": 6.0635
+            },
+            "4": {
+              "mean": 3.75,
+              "sd": 4.7226
+            },
+            "5": {
+              "mean": 3.25,
+              "sd": 3.8371
+            },
+            "6": {
+              "mean": 4.25,
+              "sd": 5.5239
+            }
+          },
+          "sessions": {
+            "mean": 108.65,
+            "sd": 3.9507
+          },
+          "avgSessionLength": {
+            "mean": 9.2156,
+            "sd": 0.338
+          },
+          "total": 1000,
+          "v2": null
+        },
+        "C|random": {
+          "maxStreak": {
+            "mean": 3.7,
+            "sd": 0.9234
+          },
+          "repeats": {
+            "mean": 760,
+            "sd": 0
+          },
+          "minGap": {
+            "mean": 240,
+            "sd": 0
+          },
+          "wrongResurfacedCount": {
+            "mean": 232.85,
+            "sd": 2.8335
+          },
+          "wrongResurfacedAvgGap": {
+            "mean": 240,
+            "sd": 0
+          },
+          "avgTime": {
+            "mean": 0.0024,
+            "sd": 0.0001
+          },
+          "worstTime": {
+            "mean": 0.0167,
+            "sd": 0.0167
+          },
+          "finalMeanKnowledge": {
+            "mean": 0.3012,
+            "sd": 0.0005
+          },
+          "accuracyByWindow": {
+            "1-50": {
+              "mean": 0.33,
+              "sd": 0.0501
+            },
+            "51-100": {
+              "mean": 0.31,
+              "sd": 0.0641
+            },
+            "101-200": {
+              "mean": 0.3065,
+              "sd": 0.0475
+            },
+            "201-300": {
+              "mean": 0.2971,
+              "sd": 0.0178
+            }
+          },
+          "accuracyByDifficulty": {
+            "EASY": {
+              "mean": 0.4034,
+              "sd": 0.0254
+            },
+            "MEDIUM": {
+              "mean": 0.3064,
+              "sd": 0.0238
+            },
+            "HARD": {
+              "mean": 0.1989,
+              "sd": 0.0213
+            }
+          },
+          "shareBreakdown": {
+            "exploration": {
+              "mean": 0.0063,
+              "sd": 0.0005
+            },
+            "weakFocused": {
+              "mean": 0.9894,
+              "sd": 0.0033
+            },
+            "review": {
+              "mean": 0.0041,
+              "sd": 0.0034
+            }
+          },
+          "finalKnowledgeGain": {
+            "1": {
+              "mean": 0.0011,
+              "sd": 0.0013
+            },
+            "2": {
+              "mean": 0.001,
+              "sd": 0.0014
+            },
+            "3": {
+              "mean": 0.0018,
+              "sd": 0.0016
+            },
+            "4": {
+              "mean": 0.0011,
+              "sd": 0.0016
+            },
+            "5": {
+              "mean": 0.0007,
+              "sd": 0.0011
+            },
+            "6": {
+              "mean": 0.0017,
+              "sd": 0.0019
+            }
+          },
+          "estimatedMastery": {
+            "1": {
+              "estimated": {
+                "mean": 0.3034,
+                "sd": 0.0275
+              },
+              "trueEnd": {
+                "mean": 0.3011,
+                "sd": 0.0013
+              },
+              "diff": {
+                "mean": 0.0025,
+                "sd": 0.0274
+              }
+            },
+            "2": {
+              "estimated": {
+                "mean": 0.2903,
+                "sd": 0.0241
+              },
+              "trueEnd": {
+                "mean": 0.301,
+                "sd": 0.0014
+              },
+              "diff": {
+                "mean": -0.0106,
+                "sd": 0.0242
+              }
+            },
+            "3": {
+              "estimated": {
+                "mean": 0.3029,
+                "sd": 0.0393
+              },
+              "trueEnd": {
+                "mean": 0.3019,
+                "sd": 0.0017
+              },
+              "diff": {
+                "mean": 0.0012,
+                "sd": 0.0389
+              }
+            },
+            "4": {
+              "estimated": {
+                "mean": 0.3052,
+                "sd": 0.0331
+              },
+              "trueEnd": {
+                "mean": 0.3012,
+                "sd": 0.0018
+              },
+              "diff": {
+                "mean": 0.0041,
+                "sd": 0.0326
+              }
+            },
+            "5": {
+              "estimated": {
+                "mean": 0.2895,
+                "sd": 0.0281
+              },
+              "trueEnd": {
+                "mean": 0.3006,
+                "sd": 0.001
+              },
+              "diff": {
+                "mean": -0.0112,
+                "sd": 0.0279
+              }
+            },
+            "6": {
+              "estimated": {
+                "mean": 0.3104,
+                "sd": 0.0347
+              },
+              "trueEnd": {
+                "mean": 0.3017,
+                "sd": 0.002
+              },
+              "diff": {
+                "mean": 0.0087,
+                "sd": 0.035
+              }
+            }
+          },
+          "shareByWindowPerConcept": {
+            "1-50": {
+              "1": 0.174,
+              "2": 0.164,
+              "3": 0.166,
+              "4": 0.168,
+              "5": 0.162,
+              "6": 0.166
+            },
+            "51-100": {
+              "1": 0.161,
+              "2": 0.185,
+              "3": 0.161,
+              "4": 0.17,
+              "5": 0.16,
+              "6": 0.163
+            },
+            "101-200": {
+              "1": 0.172,
+              "2": 0.157,
+              "3": 0.172,
+              "4": 0.16,
+              "5": 0.177,
+              "6": 0.163
+            },
+            "201-300": {
+              "1": 0.166,
+              "2": 0.167,
+              "3": 0.167,
+              "4": 0.167,
+              "5": 0.166,
+              "6": 0.168
+            }
+          },
+          "coldStartDist": {
+            "1": {
+              "mean": 5.1,
+              "sd": 1.889
+            },
+            "2": {
+              "mean": 4.9,
+              "sd": 1.8325
+            },
+            "3": {
+              "mean": 4.8,
+              "sd": 1.9084
+            },
+            "4": {
+              "mean": 4.95,
+              "sd": 1.8771
+            },
+            "5": {
+              "mean": 5.15,
+              "sd": 1.4244
+            },
+            "6": {
+              "mean": 5.1,
+              "sd": 1.9974
+            }
+          },
+          "sessions": {
+            "mean": 41.8,
+            "sd": 4.6859
+          },
+          "avgSessionLength": {
+            "mean": 24.2228,
+            "sd": 2.8236
+          },
+          "total": 1000,
+          "v2": null
+        },
+        "D|adaptive": {
+          "maxStreak": {
+            "mean": 14.35,
+            "sd": 0.8751
+          },
+          "repeats": {
+            "mean": 899.4,
+            "sd": 16.8442
+          },
+          "minGap": {
+            "mean": 40,
+            "sd": 0
+          },
+          "wrongResurfacedCount": {
+            "mean": 77.25,
+            "sd": 14.1119
+          },
+          "wrongResurfacedAvgGap": {
+            "mean": 59.35,
+            "sd": 29.144
+          },
+          "avgTime": {
+            "mean": 0.0109,
+            "sd": 0.0006
+          },
+          "worstTime": {
+            "mean": 0.2712,
+            "sd": 0.0392
+          },
+          "finalMeanKnowledge": {
+            "mean": 0.5986,
+            "sd": 0.0088
+          },
+          "accuracyByWindow": {
+            "1-50": {
+              "mean": 0.611,
+              "sd": 0.09
+            },
+            "51-100": {
+              "mean": 0.613,
+              "sd": 0.0606
+            },
+            "101-200": {
+              "mean": 0.678,
+              "sd": 0.0457
+            },
+            "201-300": {
+              "mean": 0.7605,
+              "sd": 0.0679
+            }
+          },
+          "accuracyByDifficulty": {
+            "EASY": {
+              "mean": 0.8243,
+              "sd": 0.062
+            },
+            "MEDIUM": {
+              "mean": 0.7365,
+              "sd": 0.0644
+            },
+            "HARD": {
+              "mean": 0.6483,
+              "sd": 0.0626
+            }
+          },
+          "shareBreakdown": {
+            "exploration": {
+              "mean": 0.0444,
+              "sd": 0.0664
+            },
+            "weakFocused": {
+              "mean": 0.1816,
+              "sd": 0.3373
+            },
+            "review": {
+              "mean": 0.774,
+              "sd": 0.3975
+            }
+          },
+          "finalKnowledgeGain": {
+            "1": {
+              "mean": 0.0759,
+              "sd": 0.1174
+            },
+            "2": {
+              "mean": 0.0306,
+              "sd": 0.0661
+            },
+            "3": {
+              "mean": 0.0278,
+              "sd": 0.0858
+            },
+            "4": {
+              "mean": 0.0542,
+              "sd": 0.0821
+            },
+            "5": {
+              "mean": 0.0469,
+              "sd": 0.0925
+            },
+            "6": {
+              "mean": 0.0563,
+              "sd": 0.0824
+            }
+          },
+          "estimatedMastery": {
+            "1": {
+              "estimated": {
+                "mean": 0.8215,
+                "sd": 0.1378
+              },
+              "trueEnd": {
+                "mean": 0.6259,
+                "sd": 0.1174
+              },
+              "diff": {
+                "mean": 0.1956,
+                "sd": 0.2199
+              }
+            },
+            "2": {
+              "estimated": {
+                "mean": 0.8604,
+                "sd": 0.1434
+              },
+              "trueEnd": {
+                "mean": 0.5806,
+                "sd": 0.066
+              },
+              "diff": {
+                "mean": 0.2799,
+                "sd": 0.1857
+              }
+            },
+            "3": {
+              "estimated": {
+                "mean": 0.9054,
+                "sd": 0.1267
+              },
+              "trueEnd": {
+                "mean": 0.5779,
+                "sd": 0.0858
+              },
+              "diff": {
+                "mean": 0.3276,
+                "sd": 0.1772
+              }
+            },
+            "4": {
+              "estimated": {
+                "mean": 0.8451,
+                "sd": 0.1702
+              },
+              "trueEnd": {
+                "mean": 0.6043,
+                "sd": 0.0821
+              },
+              "diff": {
+                "mean": 0.241,
+                "sd": 0.2334
+              }
+            },
+            "5": {
+              "estimated": {
+                "mean": 0.8693,
+                "sd": 0.1449
+              },
+              "trueEnd": {
+                "mean": 0.5969,
+                "sd": 0.0925
+              },
+              "diff": {
+                "mean": 0.2724,
+                "sd": 0.2097
+              }
+            },
+            "6": {
+              "estimated": {
+                "mean": 0.8277,
+                "sd": 0.1717
+              },
+              "trueEnd": {
+                "mean": 0.6064,
+                "sd": 0.0825
+              },
+              "diff": {
+                "mean": 0.2214,
+                "sd": 0.2316
+              }
+            }
+          },
+          "shareByWindowPerConcept": {
+            "1-50": {
+              "1": 0.202,
+              "2": 0.234,
+              "3": 0.097,
+              "4": 0.179,
+              "5": 0.181,
+              "6": 0.107
+            },
+            "51-100": {
+              "1": 0.159,
+              "2": 0.255,
+              "3": 0.053,
+              "4": 0.191,
+              "5": 0.173,
+              "6": 0.169
+            },
+            "101-200": {
+              "1": 0.161,
+              "2": 0.233,
+              "3": 0.051,
+              "4": 0.191,
+              "5": 0.208,
+              "6": 0.158
+            },
+            "201-300": {
+              "1": 0.262,
+              "2": 0.161,
+              "3": 0.069,
+              "4": 0.166,
+              "5": 0.157,
+              "6": 0.184
+            }
+          },
+          "coldStartDist": {
+            "1": {
+              "mean": 5.9,
+              "sd": 6.6878
+            },
+            "2": {
+              "mean": 6.5,
+              "sd": 8.1467
+            },
+            "3": {
+              "mean": 3.6,
+              "sd": 5.4328
+            },
+            "4": {
+              "mean": 5.15,
+              "sd": 7.3504
+            },
+            "5": {
+              "mean": 5.7,
+              "sd": 6.9668
+            },
+            "6": {
+              "mean": 3.15,
+              "sd": 3.6889
+            }
+          },
+          "sessions": {
+            "mean": 105.55,
+            "sd": 6.211
+          },
+          "avgSessionLength": {
+            "mean": 9.5098,
+            "sd": 0.639
+          },
+          "total": 1000,
+          "v2": null
+        },
+        "D|random": {
+          "maxStreak": {
+            "mean": 3.7,
+            "sd": 0.9234
+          },
+          "repeats": {
+            "mean": 760,
+            "sd": 0
+          },
+          "minGap": {
+            "mean": 240,
+            "sd": 0
+          },
+          "wrongResurfacedCount": {
+            "mean": 199.15,
+            "sd": 6.5315
+          },
+          "wrongResurfacedAvgGap": {
+            "mean": 240,
+            "sd": 0
+          },
+          "avgTime": {
+            "mean": 0.0023,
+            "sd": 0.0001
+          },
+          "worstTime": {
+            "mean": 0.0118,
+            "sd": 0.0088
+          },
+          "finalMeanKnowledge": {
+            "mean": 0.5512,
+            "sd": 0.0004
+          },
+          "accuracyByWindow": {
+            "1-50": {
+              "mean": 0.562,
+              "sd": 0.0619
+            },
+            "51-100": {
+              "mean": 0.555,
+              "sd": 0.0665
+            },
+            "101-200": {
+              "mean": 0.552,
+              "sd": 0.0514
+            },
+            "201-300": {
+              "mean": 0.5476,
+              "sd": 0.0184
+            }
+          },
+          "accuracyByDifficulty": {
+            "EASY": {
+              "mean": 0.6518,
+              "sd": 0.0301
+            },
+            "MEDIUM": {
+              "mean": 0.5556,
+              "sd": 0.022
+            },
+            "HARD": {
+              "mean": 0.4473,
+              "sd": 0.0292
+            }
+          },
+          "shareBreakdown": {
+            "exploration": {
+              "mean": 0.1015,
+              "sd": 0.0417
+            },
+            "weakFocused": {
+              "mean": 0.4047,
+              "sd": 0.2327
+            },
+            "review": {
+              "mean": 0.4938,
+              "sd": 0.2333
+            }
+          },
+          "finalKnowledgeGain": {
+            "1": {
+              "mean": 0.001,
+              "sd": 0.0018
+            },
+            "2": {
+              "mean": 0.0009,
+              "sd": 0.0012
+            },
+            "3": {
+              "mean": 0.0021,
+              "sd": 0.002
+            },
+            "4": {
+              "mean": 0.0008,
+              "sd": 0.0012
+            },
+            "5": {
+              "mean": 0.0007,
+              "sd": 0.0021
+            },
+            "6": {
+              "mean": 0.0021,
+              "sd": 0.0025
+            }
+          },
+          "estimatedMastery": {
+            "1": {
+              "estimated": {
+                "mean": 0.5458,
+                "sd": 0.0378
+              },
+              "trueEnd": {
+                "mean": 0.5511,
+                "sd": 0.0019
+              },
+              "diff": {
+                "mean": -0.0052,
+                "sd": 0.0377
+              }
+            },
+            "2": {
+              "estimated": {
+                "mean": 0.5427,
+                "sd": 0.0314
+              },
+              "trueEnd": {
+                "mean": 0.5509,
+                "sd": 0.0013
+              },
+              "diff": {
+                "mean": -0.0083,
+                "sd": 0.0314
+              }
+            },
+            "3": {
+              "estimated": {
+                "mean": 0.5447,
+                "sd": 0.0417
+              },
+              "trueEnd": {
+                "mean": 0.5522,
+                "sd": 0.002
+              },
+              "diff": {
+                "mean": -0.0074,
+                "sd": 0.0418
+              }
+            },
+            "4": {
+              "estimated": {
+                "mean": 0.5607,
+                "sd": 0.0416
+              },
+              "trueEnd": {
+                "mean": 0.5507,
+                "sd": 0.0011
+              },
+              "diff": {
+                "mean": 0.01,
+                "sd": 0.0409
+              }
+            },
+            "5": {
+              "estimated": {
+                "mean": 0.5403,
+                "sd": 0.0314
+              },
+              "trueEnd": {
+                "mean": 0.5507,
+                "sd": 0.002
+              },
+              "diff": {
+                "mean": -0.0104,
+                "sd": 0.0313
+              }
+            },
+            "6": {
+              "estimated": {
+                "mean": 0.5608,
+                "sd": 0.0365
+              },
+              "trueEnd": {
+                "mean": 0.5521,
+                "sd": 0.0026
+              },
+              "diff": {
+                "mean": 0.0087,
+                "sd": 0.0368
+              }
+            }
+          },
+          "shareByWindowPerConcept": {
+            "1-50": {
+              "1": 0.174,
+              "2": 0.164,
+              "3": 0.166,
+              "4": 0.168,
+              "5": 0.162,
+              "6": 0.166
+            },
+            "51-100": {
+              "1": 0.161,
+              "2": 0.185,
+              "3": 0.161,
+              "4": 0.17,
+              "5": 0.16,
+              "6": 0.163
+            },
+            "101-200": {
+              "1": 0.172,
+              "2": 0.157,
+              "3": 0.172,
+              "4": 0.16,
+              "5": 0.177,
+              "6": 0.163
+            },
+            "201-300": {
+              "1": 0.166,
+              "2": 0.167,
+              "3": 0.167,
+              "4": 0.167,
+              "5": 0.166,
+              "6": 0.168
+            }
+          },
+          "coldStartDist": {
+            "1": {
+              "mean": 5.1,
+              "sd": 1.889
+            },
+            "2": {
+              "mean": 4.9,
+              "sd": 1.8325
+            },
+            "3": {
+              "mean": 4.8,
+              "sd": 1.9084
+            },
+            "4": {
+              "mean": 4.95,
+              "sd": 1.8771
+            },
+            "5": {
+              "mean": 5.15,
+              "sd": 1.4244
+            },
+            "6": {
+              "mean": 5.1,
+              "sd": 1.9974
+            }
+          },
+          "sessions": {
+            "mean": 7.1,
+            "sd": 2.1001
+          },
+          "avgSessionLength": {
+            "mean": 155.5573,
+            "sd": 54.4082
+          },
+          "total": 1000,
+          "v2": null
+        }
+      }
+    }
+  }
+}

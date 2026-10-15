@@ -1,0 +1,788 @@
+[
+  {
+    "id": "cmtshad6a001alueqxd7s5j2i",
+    "currentChapter": "Imported Corpus",
+    "text": "This model focuses on brief and focused intervention rather than being explorato",
+    "reason": "Question stems and options are mismatched/incomplete."
+  },
+  {
+    "id": "cmtshad6b001llueqn4rgkstq",
+    "currentChapter": "Biology Basics",
+    "text": "Auditing ensures that financial records present a true and fair view of organiza",
+    "reason": "Biology chapter tag is mismatched with accounting question."
+  },
+  {
+    "id": "cmtshad6b001plueqar1gjyzb",
+    "currentChapter": "Biology Basics",
+    "text": "Which of the following statements about POSDCORB is NOT correct?",
+    "reason": "Biology chapter tag is mismatched with public administration question."
+  },
+  {
+    "id": "cmtshad6d004olueqd2xjq9zs",
+    "currentChapter": "Time & Distance",
+    "text": "The train __________ the station.",
+    "reason": "Grammar question mismatched with vocabulary options."
+  },
+  {
+    "id": "cmtshadoy00mzlueq3vlcdjlj",
+    "currentChapter": "Chemistry Basics",
+    "text": "Arrange chronologically based on the sequence of years in which the events took ",
+    "reason": "Chapter mismatch; history questions tagged as chemistry."
+  },
+  {
+    "id": "cmtshadoy00n0lueqgt2f7zbj",
+    "currentChapter": "Indian Constitution",
+    "text": "The prolific writer who translated Shakespeare's Hamlet into Malayalam is",
+    "reason": "Chapter mismatch; Hamlet translated by A.R. Rajaraja Varma."
+  },
+  {
+    "id": "cmtshadoz00o3lueqc0ozv2wp",
+    "currentChapter": "Chemistry Basics",
+    "text": "Match the instrumental fish quality assessment methods (1) HPLC (a) Heavy metals",
+    "reason": "Mismatched pairing between analytical methods and fish quality parameters."
+  },
+  {
+    "id": "cmtshae0s013glueq1v0letiw",
+    "currentChapter": "Indian Constitution",
+    "text": "Find the writings of Vaikom Muhammed Basheer among the ones given below : (i) Pa",
+    "reason": "Category mismatch; question asks about Basheer's works, not Indian Constitution."
+  },
+  {
+    "id": "cmtshae0u015llueqtyvo2wbs",
+    "currentChapter": "Chemistry Basics",
+    "text": "Find the volume of right circle cone? Its base radius is 4 cm and height is 6 cm",
+    "reason": "Volume of cone is 32pi? (1/3)*pi*16*6 = 32pi. Math is correct, but chapter mismatch."
+  },
+  {
+    "id": "cmtshaefl01ehlueqctcgfu8f",
+    "currentChapter": "Chemistry Basics",
+    "text": "Which of the following is a relational clause?",
+    "reason": "Question and options mismatch chemistry basics; it is an English grammar question."
+  },
+  {
+    "id": "cmtshef7i000b7djt4bks1q9t",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "If the principal is ₹6,000 and simple interest is ₹900 at 5% per annum, what is ",
+    "reason": "Question chapter mismatch; classified under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshef7i000c7djtrgg1adwo",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "What is the simple interest on ₹12,000 at 7% per annum for 2 years?",
+    "reason": "Question chapter mismatch; classified under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshef7i000d7djtfzux26tx",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "What is the amount of ₹7,000 at 5% simple interest for 4 years?",
+    "reason": "Question chapter mismatch; classified under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshef7i000e7djtc8gbnohs",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "If ₹10,000 earns ₹2,000 simple interest in 4 years, what is the annual rate?",
+    "reason": "Question chapter mismatch; classified under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshef7i000f7djt1yeblpuc",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "The simple interest on a sum for 4 years at 7.5% per annum is ₹1,800. Find the p",
+    "reason": "Question chapter mismatch; classified under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefot003d7djt75ngwcfl",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A pipe fills a tank in 8 hours and another pipe fills it in 16 hours. How much o",
+    "reason": "Question chapter mismatch; math question under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefot003e7djtl42cbx7j",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "If 10 workers complete a job in 6 days, how many days will 5 workers take, assum",
+    "reason": "Question chapter mismatch; math question under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefot003f7djtzez7tsk7",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A can complete a work in 12 days and B in 15 days. How many days will they take ",
+    "reason": "Question chapter mismatch; math question under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefot003g7djtcmf6lluz",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A can complete a work in 18 days and B in 27 days. How much of the work will the",
+    "reason": "Question chapter mismatch; math question under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefot003h7djtenzto5n3",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A and B together can complete a work in 10 days. A alone can complete it in 15 d",
+    "reason": "Question chapter mismatch; math question under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefou00427djt5uxdoxn7",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A pipe fills a tank in 9 hours and another pipe fills it in 18 hours. How much o",
+    "reason": "Chapter mismatch and incorrect math; 3(1/9 + 1/18) = 1/2 is correct, but chapter is wrong."
+  },
+  {
+    "id": "cmtshefou00437djtm3krum15",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A pipe fills a tank in 20 minutes and another in 30 minutes. If both are opened ",
+    "reason": "Chapter mismatch: placed under Synonyms & Antonyms instead of Mathematics."
+  },
+  {
+    "id": "cmtshefou00447djtb03q1ily",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A worker completes 40% of a job in 8 days. At the same rate, how many days are r",
+    "reason": "Chapter mismatch: math question categorized under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefou00457djt4hlj10jq",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A and B together complete a work in 12 days. A alone takes 20 days. How many day",
+    "reason": "Chapter mismatch: math problem placed in Synonyms & Antonyms category."
+  },
+  {
+    "id": "cmtshefou00467djt6wyun8nc",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A can complete a work in 40 days and B in 60 days. They work together for 12 day",
+    "reason": "Chapter mismatch: math question wrongly categorized under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefwn004r7djt1h5reu00",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A can complete a work in 10 days. B takes twice as long as A. How many days will",
+    "reason": "Chapter mismatch: math question under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefwn004s7djtzdgqvqqs",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A can complete a work in 24 days. How many days will he take to complete 3/4 of ",
+    "reason": "Chapter mismatch: math question under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefwn004t7djtiwx74ooz",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A and B work at the same efficiency. If A takes 14 days to complete a work, how ",
+    "reason": "Chapter mismatch: math question under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefwn004u7djtowp2mpn5",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A pipe fills a tank in 20 hours. How long will it take to fill one-fourth of the",
+    "reason": "Chapter mismatch: math question under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefwn004v7djtjxpy4jdo",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "If 12 workers complete a work in 5 days, how many worker-days are required?",
+    "reason": "Chapter mismatch: math question under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefwn004w7djttpin8qa5",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A receives ₹900 for 3 days of work. What is his daily wage?",
+    "reason": "Chapter mismatch: math question under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefwn004x7djtcei7fpgm",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A can complete a work in 16 days and B in 8 days. How many times is B as efficie",
+    "reason": "Chapter mismatch: math question under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefwn004y7djt32z93wi6",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A pipe fills a tank in 15 hours. How much of the tank is filled in 5 hours?",
+    "reason": "Chapter mismatch: math question under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefwn004z7djt3s8hhwke",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A completes a work in 5 days and B completes it in 10 days. How much work do the",
+    "reason": "Chapter mismatch: math question under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefwn00507djt4thxx3uq",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A can complete a work in 12 days and B in 16 days. How many days will they take ",
+    "reason": "Chapter mismatch: math question under Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtshefwo00607djtejtsksgk",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "Eight workers can complete a work in 18 days. After 6 days, three workers leave.",
+    "reason": "Chapter mismatch; this is time and work, not synonyms and antonyms."
+  },
+  {
+    "id": "cmtshefwo00617djt8u7cnyug",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A is 50% more efficient than B, and B is 20% more efficient than C. If C takes 3",
+    "reason": "Chapter mismatch; this is time and work, not synonyms and antonyms."
+  },
+  {
+    "id": "cmtsheg5w00627djt48dpi1a1",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A can complete a work in 10 days. What fraction of the work does he complete in ",
+    "reason": "Chapter mismatch; this is time and work, not synonyms and antonyms."
+  },
+  {
+    "id": "cmtsheg5w00637djth79ffwq2",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A can do a piece of work in 12 days. How many days will he take to complete the ",
+    "reason": "Chapter mismatch; this is time and work, not synonyms and antonyms."
+  },
+  {
+    "id": "cmtsheg5w00647djt56e3jzll",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A can complete a work in 8 days and B can complete it in 16 days. How long will ",
+    "reason": "Chapter mismatch; this is time and work, not synonyms and antonyms."
+  },
+  {
+    "id": "cmtsheg5x00797djt67qii8iw",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A and B together can do a work in 12 days. B alone can do it in 20 days. How lon",
+    "reason": "Question chapter mismatch; math question tagged as Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtsheg5x007a7djtc0gw9qw1",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A can complete a work in 40 days and B in 60 days. If they work together for 8 d",
+    "reason": "Chapter mismatch and marked answer is incorrect; remaining fraction is 2/3."
+  },
+  {
+    "id": "cmtsheg5x007b7djt7lz538um",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A and B together can complete a work in 10 days. A alone takes 15 days. If B wor",
+    "reason": "Question chapter mismatch; math question tagged as Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtsheg5x007c7djtlckbv5uj",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A can complete a work in 12 days, B in 18 days and C in 36 days. They work toget",
+    "reason": "Question chapter mismatch; math question tagged as Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtsheg5x007d7djt2451ahkd",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A and B together complete a work in 8 days. A is 60% more efficient than B. How ",
+    "reason": "Question chapter mismatch; math question tagged as Synonyms & Antonyms."
+  },
+  {
+    "id": "cmtsheg5x007j7djtostpjo4b",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A can complete a work in 18 days and B in 24 days. They work together for 6 days",
+    "reason": "Chapter mismatch; this is a quantitative aptitude question, not synonyms."
+  },
+  {
+    "id": "cmtsheg5x007k7djteta52wwj",
+    "currentChapter": "Synonyms & Antonyms",
+    "text": "A worker is 25% more efficient than another worker. If together they complete a ",
+    "reason": "Chapter mismatch; this is a time and work aptitude question."
+  },
+  {
+    "id": "cmtsimuc101dn11hqbwyrdy13",
+    "currentChapter": "Computer Awareness",
+    "text": "Input: 72 BANK 16 DELHI 45 APPLE 28. Step I: Arrange numbers ascending. Step II:",
+    "reason": "Step sequence leads to invalid output mismatching option C."
+  },
+  {
+    "id": "cmttnjmuj010469ptvt2kwyab",
+    "currentChapter": "Classification",
+    "text": "A bank customer is classified as a low-risk customer based on which of the follo",
+    "reason": "Question and options are mismatched and ambiguous."
+  },
+  {
+    "id": "cmttnjoz4011m69ptbc99hr9c",
+    "currentChapter": "Mirror & Water Image",
+    "text": "What is the name of the phenomenon where light falls on a water surface and pass",
+    "reason": "Light passing through water is refraction, but chapter topic and phrasing mismatch."
+  },
+  {
+    "id": "cmttnk1e5017i69ptbwdbc7qq",
+    "currentChapter": "Sentence Connectors",
+    "text": "What is 20% of 500?",
+    "reason": "Chapter mismatch; math question in sentence connectors chapter."
+  },
+  {
+    "id": "cmttnk1e5017j69ptld00h6dn",
+    "currentChapter": "Sentence Connectors",
+    "text": "A person has Rs. 1500. He spends 25% of it. What amount is left?",
+    "reason": "Chapter mismatch; math question in sentence connectors chapter."
+  },
+  {
+    "id": "cmttnmrod01a0f4hinys5eyyd",
+    "currentChapter": "One Word Substitution",
+    "text": "What is 20% of 500?",
+    "reason": "Chapter mismatch: Math question categorized under One Word Substitution."
+  },
+  {
+    "id": "cmttnmvpf01dwf4hihqtshpdm",
+    "currentChapter": "Banking Awareness (Financial Inclusion)",
+    "text": "What is the objective of the National Digital Literacy Mission (NDLM)?",
+    "reason": "Question and options mismatch regarding 'All of the above'."
+  },
+  {
+    "id": "cmttnn3d801kjf4hicy2ykjry",
+    "currentChapter": "Computer Hardware",
+    "text": "The primary function of a CPU is to execute instructions?",
+    "reason": "Question and options mismatch; CPU primary function is processing instructions."
+  },
+  {
+    "id": "cmttnnfy8023cf4hia00g4ofa",
+    "currentChapter": "Seating Arrangement (Linear)",
+    "text": "Six persons A, B and C sit in one row facing north, while D, E and F sit in anot",
+    "reason": "Left/right ends for opposite rows are mismatched in the logic."
+  },
+  {
+    "id": "cmttnos3j03tof4hi228pc8gb",
+    "currentChapter": "Machine Input-Output",
+    "text": "Input: APPLE 52 18 BANK 31 LION 9. Step I: Arrange words alphabetically. Step II",
+    "reason": "Mismatched element counts across steps."
+  },
+  {
+    "id": "cmttnot6703u7f4hib5vjvbak",
+    "currentChapter": "Logical Reasoning",
+    "text": "Find the odd one out: Car, Bus, Rickshaw, Scooter",
+    "reason": "Options are completely mismatched with the question."
+  },
+  {
+    "id": "cmttnoyat03zqf4hi4vrethyr",
+    "currentChapter": "Classification",
+    "text": "A loan is classified as a long-term loan if its tenure is more than 5 years.",
+    "reason": "Question and options mismatch, making it incoherent."
+  },
+  {
+    "id": "cmttnp4mz0473f4hiaeb7t8bw",
+    "currentChapter": "Sentence Connectors",
+    "text": "What is 20% of 500?",
+    "reason": "Chapter mismatch: quantitative aptitude question under sentence connectors."
+  },
+  {
+    "id": "cmttnp4mz0474f4hiw7nx4bz7",
+    "currentChapter": "Sentence Connectors",
+    "text": "A person has Rs. 1500. He spends 25% of it. What amount is left?",
+    "reason": "Chapter mismatch: quantitative aptitude question under sentence connectors."
+  },
+  {
+    "id": "cmttnpehp04ctf4hij7rhe5fn",
+    "currentChapter": "Banking Awareness (Types of Banks)",
+    "text": "What is the type of bank which provides banking services to its shareholders onl",
+    "reason": "Public sector banks do not serve only shareholders; options/answer mismatch."
+  },
+  {
+    "id": "cmttnqe2m05e9f4hipvt9g1zq",
+    "currentChapter": "Sentence Connectors",
+    "text": "What is 20% of 500?",
+    "reason": "Question chapter mismatch; math question in sentence connectors."
+  },
+  {
+    "id": "cmttnqxyn05raf4hizjte06ol",
+    "currentChapter": "Computer Hardware",
+    "text": "The primary function of a CPU is to execute instructions?",
+    "reason": "Question stem and options are malformed and mismatched."
+  },
+  {
+    "id": "cmttnrog006u2f4hivd0nkyio",
+    "currentChapter": "Classification",
+    "text": "A bank classifies its assets as current assets if they are expected to be sold o",
+    "reason": "Question and options format is confusing and mismatched."
+  },
+  {
+    "id": "cmttnxc94006y1ejyl8eki4lx",
+    "currentChapter": "Classification",
+    "text": "A bank classifies its assets as current assets if they are expected to be sold o",
+    "reason": "Question statement and options format mismatch."
+  },
+  {
+    "id": "cmttnxjid00gu1ejyf7qv7yjl",
+    "currentChapter": "Antonyms",
+    "text": "Synchronize",
+    "reason": "Question chapter mismatch; disrupt is not a direct antonym."
+  },
+  {
+    "id": "cmttstre10031wcpaa8zaa7ov",
+    "currentChapter": "Government Schemes",
+    "text": "The 'Jeevan Beema Yojana' is a government scheme that provides life insurance to",
+    "reason": "Question asks for Jeevan Beema Yojana but options and answer mismatch."
+  },
+  {
+    "id": "cmttsw9a0000p831k17urm2rj",
+    "currentChapter": "Kerala History",
+    "text": "The Travancore Kingdom was established by which ruler in the 17th century?",
+    "reason": "Travancore was founded by Marthanda Varma in the 18th century, options are mismatched."
+  },
+  {
+    "id": "cmtv4wf58005v292htjlnbnzu",
+    "currentChapter": "Malayalam Grammar",
+    "text": "What is the term for the process of changing a verb form to its corresponding ge",
+    "reason": "Question and options are conceptually mismatched and confusing."
+  },
+  {
+    "id": "cmtv539mu000v12clhq81esw4",
+    "currentChapter": "International News",
+    "text": "The recent Israel-Palestine conflict is related to a disputed territory known as",
+    "reason": "Question and options mismatch regarding the territory."
+  },
+  {
+    "id": "cmtv553j0002x12clhr9o1z66",
+    "currentChapter": "Time & Distance",
+    "text": "A bus travels from one city to another city at an average speed of 30 kmph. Afte",
+    "reason": "Question and options mismatch, unclear what is being asked."
+  },
+  {
+    "id": "cmtvrg57l000j7tyxgr66ac5q",
+    "currentChapter": "Comprehension",
+    "text": "Read the passage: 'The teacher did not simply give the answer. She asked several",
+    "reason": "Passage tests understanding, not curiosity; question-option mismatch."
+  },
+  {
+    "id": "cmusn1xsf00b5tnva7qrrb2e4",
+    "currentChapter": "Government Schemes",
+    "text": "Match the items given in List 1 and those in List 2 : List 1 List 2 (a) Distance",
+    "reason": "Mismatched matching pairs in options and question."
+  },
+  {
+    "id": "cmusn20ig00dltnvanuo8nou6",
+    "currentChapter": "Time & Distance",
+    "text": "If ‘TRAIN’ is coded as 34567, then how will you code ‘RAIN’?",
+    "reason": "Chapter mismatch; this is a coding-decoding question, not Time & Distance."
+  },
+  {
+    "id": "cmusn20ig00dmtnva9scchqq6",
+    "currentChapter": "Time & Distance",
+    "text": "‘TRAIN’ ಪದವನುನ್ 34567 ಎಂದು ಸಂಕೇತಿľದರೆ, ‘RAIN’ ಪದವನುನ್ ಹೇಗೆ ಸಂಕೇತಿಸಲಾಗುತತ್ದೆ?",
+    "reason": "Kannada text in a Kerala PSC exam context with chapter mismatch."
+  },
+  {
+    "id": "cmusn20ig00dqtnva36n8qyh7",
+    "currentChapter": "Time & Distance",
+    "text": "The train __________ the station.",
+    "reason": "Chapter mismatch; English grammar question mislabeled as Time & Distance."
+  },
+  {
+    "id": "cmusn20ig00drtnvap6cmfnkh",
+    "currentChapter": "Time & Distance",
+    "text": "A short-term type of restraint used in infants and small children during examina",
+    "reason": "Chapter mismatch; nursing question mislabeled as Time & Distance."
+  },
+  {
+    "id": "cmusn20ig00dstnvaac7b6sso",
+    "currentChapter": "Time & Distance",
+    "text": "A —————— constraint is used to limit the range of values possible in a column.",
+    "reason": "Chapter mismatch; DBMS question mislabeled as Time & Distance."
+  },
+  {
+    "id": "cmusn20ig00dttnvan35pqvl2",
+    "currentChapter": "Time & Distance",
+    "text": "The area under the stress-strain curve represents",
+    "reason": "Chapter mismatch; mechanics question mislabeled as Time & Distance."
+  },
+  {
+    "id": "cmusn20yp00dutnvaqitmkypx",
+    "currentChapter": "Simple & Compound Interest",
+    "text": "Why does Ghurye argue that endogamy should be treated as a principal feature of ",
+    "reason": "Chapter mismatch; sociology question mislabeled as Simple & Compound Interest."
+  },
+  {
+    "id": "cmusn20yq00e0tnvaitjj7xyu",
+    "currentChapter": "Simple & Compound Interest",
+    "text": "Why are political parties considered essential for democratic functioning?",
+    "reason": "Question mismatched with chapter topic Simple & Compound Interest."
+  },
+  {
+    "id": "cmusn21ys00eetnvaszz2tv1n",
+    "currentChapter": "Algebra",
+    "text": "The following facts are related to treatment of Normal Loss, Abnormal Loss and A",
+    "reason": "Question text mismatched with options."
+  },
+  {
+    "id": "cmusn22v000g5tnvacsd7o94a",
+    "currentChapter": "Tenses",
+    "text": "The clear headroom beneath and above the mezzanine floor shall not be less than ",
+    "reason": "Chapter mismatch; question is about building construction, not English tenses."
+  },
+  {
+    "id": "cmusn22v000g6tnva9kto8koc",
+    "currentChapter": "Tenses",
+    "text": "What will be the output of the following program? main () { int a=5; int *b; int",
+    "reason": "Chapter mismatch; question is about C programming, not English tenses."
+  },
+  {
+    "id": "cmusn22v000g7tnvayy51d1nr",
+    "currentChapter": "Tenses",
+    "text": "What will be the output of the following program? #include <stdio.h> #include <s",
+    "reason": "Chapter mismatch; question is about C programming, not English tenses."
+  },
+  {
+    "id": "cmusn2hcr018vtnvadvsar1su",
+    "currentChapter": "Profit & Loss",
+    "text": "The hysteresis loop of a magnetic material has an area of 10 cm2 with the axis s",
+    "reason": "Chapter mismatch; technical electrical engineering question mislabeled as Profit & Loss."
+  },
+  {
+    "id": "cmusn2hcs018wtnvazp1md1z0",
+    "currentChapter": "Profit & Loss",
+    "text": "The voltage and current in a power electronics switch are given in the figure be",
+    "reason": "Chapter mismatch; garbled text referring to missing figure and mismatched topic."
+  },
+  {
+    "id": "cmusn2ibj019qtnvaswmg13pg",
+    "currentChapter": "Time & Distance",
+    "text": "A short-term type of restraint used in infants and small children during examina",
+    "reason": "Chapter mismatch; this is a pediatric nursing question."
+  },
+  {
+    "id": "cmusn2ibj019rtnvap1nvadwz",
+    "currentChapter": "Time & Distance",
+    "text": "A —————— constraint is used to limit the range of values possible in a column.",
+    "reason": "Chapter mismatch; this is a database management question."
+  },
+  {
+    "id": "cmusn2ibj019stnva5lx5fmsm",
+    "currentChapter": "Time & Distance",
+    "text": "The area under the stress-strain curve represents",
+    "reason": "Chapter mismatch; this is a material science question."
+  },
+  {
+    "id": "cmusn2iqa019ttnva1dbl0fa3",
+    "currentChapter": "Simple & Compound Interest",
+    "text": "Why does Ghurye argue that endogamy should be treated as a principal feature of ",
+    "reason": "Chapter mismatch; this is a sociology question."
+  },
+  {
+    "id": "cmusn2iqa019utnvaij3bv2pe",
+    "currentChapter": "Simple & Compound Interest",
+    "text": "Consider the following two statements regarding the components of a pitched roof",
+    "reason": "Chapter mismatch and civil engineering content irrelevant to interest."
+  },
+  {
+    "id": "cmusn2iqb019ztnvaf1iaevw5",
+    "currentChapter": "Simple & Compound Interest",
+    "text": "Why are political parties considered essential for democratic functioning?",
+    "reason": "Chapter mismatch: Political science question placed in Simple & Compound Interest."
+  },
+  {
+    "id": "cmusn2j4w01a6tnvato9mytyt",
+    "currentChapter": "Mensuration",
+    "text": "The perimeter of circle is 314 mm, What is the radius of circle?",
+    "reason": "Perimeter 314 mm gives radius 50 mm (5 cm), but options/math mismatch."
+  },
+  {
+    "id": "cmusn2jjp01adtnvatgycdju9",
+    "currentChapter": "Algebra",
+    "text": "The following facts are related to treatment of Normal Loss, Abnormal Loss and A",
+    "reason": "Question stem and options are completely mismatched and garbled."
+  },
+  {
+    "id": "cmusn2kh701dvtnva6huczzgm",
+    "currentChapter": "Tenses",
+    "text": "What will be the prefix expression corresponding to Postfix expression AB+CD+*?",
+    "reason": "Chapter mismatch; data structures question incorrectly tagged under Tenses."
+  },
+  {
+    "id": "cmusn2qdw01pztnvahhhvkq2z",
+    "currentChapter": "Biology Basics",
+    "text": "What was the childhood passion of Marlow in the Heart of Darkness?",
+    "reason": "Question belongs to English Literature, mismatched with Biology Basics chapter."
+  },
+  {
+    "id": "cmusn31td0256tnvaruk6sefi",
+    "currentChapter": "Time & Work",
+    "text": "What is the minimum required length of pipe in a pipe electrode earthing system?",
+    "reason": "Option format is erroneous (2.5.0m) and mismatched chapter."
+  },
+  {
+    "id": "cmusn31td0257tnvafpb2abmr",
+    "currentChapter": "Time & Work",
+    "text": "Which fitting is commonly used to provide flexibility in long pipelines?",
+    "reason": "Option D contains junk text; mismatched chapter."
+  },
+  {
+    "id": "cmusn32pn025vtnvaftu7d70a",
+    "currentChapter": "Simple & Compound Interest",
+    "text": "Wooden pieces which are placed horizontally on principal rafters to carry the co",
+    "reason": "Chapter mismatch; question is about building construction, not interest."
+  },
+  {
+    "id": "cmusn32pn025wtnvaz0xr7o1q",
+    "currentChapter": "Simple & Compound Interest",
+    "text": "ABC Company reports sales of Rs. 25,00,000, with variable costs of Rs. 15,00,000",
+    "reason": "Chapter mismatch; question is about financial management, not interest."
+  },
+  {
+    "id": "cmusn32pn025xtnvauesjdnmg",
+    "currentChapter": "Simple & Compound Interest",
+    "text": "Which of the following policies might a government implement to counteract a rec",
+    "reason": "Chapter mismatch; question is about macroeconomics, not interest."
+  },
+  {
+    "id": "cmusn32pn025ytnvazqhlyksv",
+    "currentChapter": "Simple & Compound Interest",
+    "text": "Why are political parties considered essential for democratic functioning?",
+    "reason": "Chapter mismatch; question is about political science, not interest."
+  },
+  {
+    "id": "cmusn336s025ztnva8m2sppu5",
+    "currentChapter": "Mensuration",
+    "text": "What is the development of the curved surface of a cone?",
+    "reason": "Chapter mismatch; question is about engineering drawing, not mensuration."
+  },
+  {
+    "id": "cmusn33l5026ctnvaum09nnew",
+    "currentChapter": "Algebra",
+    "text": "The following facts are related to treatment of Normal Loss, Abnormal Loss and A",
+    "reason": "Question stem and options mismatch completely."
+  },
+  {
+    "id": "cmusn3403027mtnvau6hewr20",
+    "currentChapter": "Grammar Basics",
+    "text": "A wooden article is made by scooping out hemisphere of radius r from each end of",
+    "reason": "Mismatched question and options; math question under grammar."
+  },
+  {
+    "id": "cmusn3403027ntnvadu9294rj",
+    "currentChapter": "Grammar Basics",
+    "text": "The device used Recirculatory Aquaculture System (RAS) to increase settling of w",
+    "reason": "Mismatched chapter category; aquaculture question under grammar."
+  },
+  {
+    "id": "cmusn3403027ttnva8dr458z7",
+    "currentChapter": "Grammar Basics",
+    "text": "The maximum size of clay particle is",
+    "reason": "Chapter mismatch: Soil mechanics question labeled as Grammar Basics."
+  },
+  {
+    "id": "cmusn3403027utnvar6rqaykc",
+    "currentChapter": "Grammar Basics",
+    "text": "If the particle size range is between 0.425 mm to 2.0 mm, then the soil sample i",
+    "reason": "Chapter mismatch and medium sand size is 0.425mm to 2mm is coarse sand."
+  },
+  {
+    "id": "cmusn39d402edtnvapxzxo9m7",
+    "currentChapter": "Physics Basics",
+    "text": "Which of the following statement is/are correct about the laws of growth? (i) Gr",
+    "reason": "Physics chapter mismatch; human development statements contain factual errors."
+  },
+  {
+    "id": "cmusn39z102gqtnva022faame",
+    "currentChapter": "Chemistry Basics",
+    "text": "Slide Master D. Database Package Options:",
+    "reason": "Question text is garbled and mismatched with the chapter."
+  },
+  {
+    "id": "cmusn39z302i4tnva2yjp1rc0",
+    "currentChapter": "Chemistry Basics",
+    "text": "Calculate the extra widening required for a pavement of width 7 m on a horizonta",
+    "reason": "Chapter mismatch; question is civil engineering (transportation), not chemistry."
+  },
+  {
+    "id": "cmusn39z302i5tnvah628tyqe",
+    "currentChapter": "Chemistry Basics",
+    "text": "A person invested a certain amount at a rate 8% simple interest for 2 years. If ",
+    "reason": "Chapter mismatch; question is quantitative aptitude, not chemistry."
+  },
+  {
+    "id": "cmusn39z302i6tnva8emskmbr",
+    "currentChapter": "Chemistry Basics",
+    "text": "In linguistics, what does the term “doxastic nature” most directly refer to :",
+    "reason": "Chapter mismatch; question is linguistics/philosophy, not chemistry."
+  },
+  {
+    "id": "cmusn39z302i7tnvaj7p24twb",
+    "currentChapter": "Chemistry Basics",
+    "text": "Which of the following statement is/are correct for application of remote sensin",
+    "reason": "Chapter mismatch; question is about remote sensing, not chemistry."
+  },
+  {
+    "id": "cmusn39z302i8tnva2er4sl08",
+    "currentChapter": "Chemistry Basics",
+    "text": "In a three-tier web application, which of the following is a valid reason for us",
+    "reason": "Chapter mismatch; question is computer science, not chemistry."
+  },
+  {
+    "id": "cmusn3l9s032btnvau089kkxl",
+    "currentChapter": "Algebra",
+    "text": "The following facts are related to treatment of Normal Loss, Abnormal Loss and A",
+    "reason": "Question stem and options mismatch completely."
+  },
+  {
+    "id": "cmusn3m7e0361tnvabpd9m3m0",
+    "currentChapter": "Tenses",
+    "text": "What will be the output of the following program? #include <stdio.h> void main (",
+    "reason": "Chapter mismatch and syntax errors in the question."
+  },
+  {
+    "id": "cmusn3nj9036ftnva8tbvtm0o",
+    "currentChapter": "Vocabulary",
+    "text": "Match List-I with List-II : List-I List-II (a) Poly Amide (I) PVAA (b) Poly Viny",
+    "reason": "Mismatched polymer abbreviations and options."
+  },
+  {
+    "id": "cmusn3r5803adtnva9xl3h06l",
+    "currentChapter": "Physics Basics",
+    "text": "Which of the following statements is/are correct about the literary work ‘Sreebu",
+    "reason": "Chapter mismatch; Physics Basics chapter assigned to Malayalam literature question."
+  },
+  {
+    "id": "cmusn3r5803aetnvalynbsusd",
+    "currentChapter": "Physics Basics",
+    "text": "Which among the following can be considered as the primary goal of teaching pron",
+    "reason": "Chapter mismatch; Physics basics chapter assigned to pedagogy question."
+  },
+  {
+    "id": "cmusn3r5803aftnvami0as92y",
+    "currentChapter": "Physics Basics",
+    "text": "Stoneware pipes are commonly used for",
+    "reason": "Chapter mismatch; Physics basics chapter assigned to civil engineering question."
+  },
+  {
+    "id": "cmusn3r5803agtnvau0dr0cuz",
+    "currentChapter": "Physics Basics",
+    "text": "How does body orientation differ from other non verbal cues like gestures or fac",
+    "reason": "Chapter mismatch; Physics basics chapter assigned to communication question."
+  },
+  {
+    "id": "cmusn3r5803ahtnvaa60mvyik",
+    "currentChapter": "Physics Basics",
+    "text": "Example of diversion dam is ___________.",
+    "reason": "Chapter mismatch; Physics basics chapter assigned to civil engineering question."
+  },
+  {
+    "id": "cmusn3r5b03bwtnvaybfo9p1y",
+    "currentChapter": "Physics Basics",
+    "text": "Men swarm around the 'Phenomenal woman' like",
+    "reason": "Physics chapter mismatch; this is an English literature question."
+  },
+  {
+    "id": "cmusn3rnl03d5tnvap5t9bc7j",
+    "currentChapter": "Chemistry Basics",
+    "text": "According to Chomsky, what is Language Acquisition Device (LAD)?",
+    "reason": "Chapter mismatch: Chomsky is linguistics, not chemistry basics."
+  },
+  {
+    "id": "cmusn3rnl03d6tnvaayk2y5kj",
+    "currentChapter": "Chemistry Basics",
+    "text": "The porosity of language is crucial in the creation of",
+    "reason": "Chapter mismatch: Linguistics question categorized under chemistry basics."
+  },
+  {
+    "id": "cmusn3rnl03d7tnvaa462c6hq",
+    "currentChapter": "Chemistry Basics",
+    "text": "In a multilingual Indian classroom, a teacher adopts a process syllabus that pro",
+    "reason": "Chapter mismatch: Pedagogy question miscategorized as chemistry."
+  },
+  {
+    "id": "cmusn3rnl03d8tnvatd1de9f8",
+    "currentChapter": "Chemistry Basics",
+    "text": "Match the fish products with the most suitable packaging (1) Fresh chilled fish ",
+    "reason": "Chapter mismatch: Fisheries question placed under chemistry basics."
+  },
+  {
+    "id": "cmusn3rnm03dytnvau93csssk",
+    "currentChapter": "Chemistry Basics",
+    "text": "Match the purpose and name of welfare schemes of government of Kerala I. Medical",
+    "reason": "Mismatched scheme pairings and wrong chapter category."
+  }
+]
