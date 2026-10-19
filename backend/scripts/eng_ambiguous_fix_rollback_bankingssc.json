@@ -1,0 +1,80 @@
+{
+  "appliedAt": "2026-10-19T18:47:55.701Z",
+  "moved": [
+    {
+      "id": "cmtsimr5f019111hq8f7989bn",
+      "from": "banking-ch-english-language",
+      "to": "banking-ch-banking-awareness"
+    },
+    {
+      "id": "cmtsimrcb019311hqlhvhdepf",
+      "from": "banking-ch-english-language",
+      "to": "banking-ch-banking-awareness"
+    },
+    {
+      "id": "cmtsimrcb019411hq33rd4d3b",
+      "from": "banking-ch-english-language",
+      "to": "banking-ch-banking-awareness"
+    },
+    {
+      "id": "cmttnmtm501brf4hieol59r8t",
+      "from": "cmtsycivb0042trjbe4wb1e8b",
+      "to": "cmtsycvu4004gtrjbmh9trrdr"
+    },
+    {
+      "id": "cmttnmtm501bsf4hix41ip7kk",
+      "from": "cmtsycivb0042trjbe4wb1e8b",
+      "to": "cmtsycvu4004gtrjbmh9trrdr"
+    },
+    {
+      "id": "cmttnnvnj02kof4hiig5x7pvk",
+      "from": "cmttnfgia0073atd55za3ljhu",
+      "to": "cmttnfjo7007vatd5ne2q37nn"
+    },
+    {
+      "id": "cmttnnz0p02oef4hi7be8l46x",
+      "from": "cmttnfi05007hatd5qb0cp1aa",
+      "to": "cmttnfjo7007vatd5ne2q37nn"
+    },
+    {
+      "id": "cmttnp9b504bnf4hiksw1pnd7",
+      "from": "cmtsyjibb0042c1zbqlligycm",
+      "to": "cmtsyjvh7004gc1zbzv7viioz"
+    },
+    {
+      "id": "cmttnqbne05atf4himwhyit2g",
+      "from": "cmttnfyvm00bhatd5g8ysvpcx",
+      "to": "cmttnfzkj00bnatd5cc4aa518"
+    },
+    {
+      "id": "cmttnqjfe05iif4hiiy8kap1l",
+      "from": "cmttng4g900c9atd5ahrgannq",
+      "to": "cmttng6aq00cnatd5r4yn6zhi"
+    },
+    {
+      "id": "cmttnqjfe05ijf4hikgevkj4v",
+      "from": "cmttng4g900c9atd5ahrgannq",
+      "to": "cmttng6aq00cnatd5r4yn6zhi"
+    },
+    {
+      "id": "cmttnrzo20762f4hi9kjzwcsx",
+      "from": "cmttncup60042fv7i5unxgusm",
+      "to": "cmttncwf7004gfv7ia8fgaija"
+    },
+    {
+      "id": "cmttnxlm900il1ejyk43yveo1",
+      "from": "cmttndn3000a7fv7io7px47q6",
+      "to": "cmttndooi00alfv7i2n0zt188"
+    },
+    {
+      "id": "cmttnxlm900in1ejytvw1sozt",
+      "from": "cmttndn3000a7fv7io7px47q6",
+      "to": "cmttndooi00alfv7i2n0zt188"
+    },
+    {
+      "id": "cmttnxlma00iw1ejybkon4rca",
+      "from": "cmttndn3000a7fv7io7px47q6",
+      "to": "cmttndooi00alfv7i2n0zt188"
+    }
+  ]
+}

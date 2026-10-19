@@ -1,0 +1,218 @@
+{
+  "generatedAt": "2026-10-19T18:47:55.699Z",
+  "moves": [
+    {
+      "id": "cmtsimr5f019111hq8f7989bn",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "text": "What is the process of checking the income of a customer?",
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness"
+    },
+    {
+      "id": "cmtsimrcb019311hqlhvhdepf",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "text": "The bank's ______________ is Rs. 500 million.",
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness"
+    },
+    {
+      "id": "cmtsimrcb019411hq33rd4d3b",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "text": "The customer's ______________ was debited by Rs. 1000.",
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness"
+    },
+    {
+      "id": "cmttnmtm501brf4hieol59r8t",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsycivb0042trjbe4wb1e8b",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "text": "What is the time period for a short-term loan?",
+      "toChapterId": "cmtsycvu4004gtrjbmh9trrdr",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness"
+    },
+    {
+      "id": "cmttnmtm501bsf4hix41ip7kk",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsycivb0042trjbe4wb1e8b",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "text": "Which of the following is a type of Risk Management technique?",
+      "toChapterId": "cmtsycvu4004gtrjbmh9trrdr",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness"
+    },
+    {
+      "id": "cmttnnvnj02kof4hiig5x7pvk",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfgia0073atd55za3ljhu",
+      "fromChapterName": "Word Usage",
+      "attempts": 0,
+      "text": "The credit score is a measure of an individual's ______________.",
+      "toChapterId": "cmttnfjo7007vatd5ne2q37nn",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness"
+    },
+    {
+      "id": "cmttnnz0p02oef4hi7be8l46x",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfi05007hatd5qb0cp1aa",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "text": "What is the process of checking the income of a customer?",
+      "toChapterId": "cmttnfjo7007vatd5ne2q37nn",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness"
+    },
+    {
+      "id": "cmttnp9b504bnf4hiksw1pnd7",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyjibb0042c1zbqlligycm",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "text": "What is the process of checking the income of a customer?",
+      "toChapterId": "cmtsyjvh7004gc1zbzv7viioz",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness"
+    },
+    {
+      "id": "cmttnqbne05atf4himwhyit2g",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttnfyvm00bhatd5g8ysvpcx",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "text": "Fill in the blank: Unless you ___ the instructions carefully, you may make a mistake.",
+      "toChapterId": "cmttnfzkj00bnatd5cc4aa518",
+      "toChapterName": "Fill in the Blanks (Single)",
+      "toSubject": "English Language"
+    },
+    {
+      "id": "cmttnqjfe05iif4hiiy8kap1l",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng4g900c9atd5ahrgannq",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "text": "What is the time period for a short-term loan?",
+      "toChapterId": "cmttng6aq00cnatd5r4yn6zhi",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness"
+    },
+    {
+      "id": "cmttnqjfe05ijf4hikgevkj4v",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng4g900c9atd5ahrgannq",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "text": "Which of the following is a type of Risk Management technique?",
+      "toChapterId": "cmttng6aq00cnatd5r4yn6zhi",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness"
+    },
+    {
+      "id": "cmttnrzo20762f4hi9kjzwcsx",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncup60042fv7i5unxgusm",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "text": "What is the process of checking the income of a customer?",
+      "toChapterId": "cmttncwf7004gfv7ia8fgaija",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness"
+    },
+    {
+      "id": "cmttnxlm900il1ejyk43yveo1",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndn3000a7fv7io7px47q6",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "text": "What is the process of checking the credentials of a customer?",
+      "toChapterId": "cmttndooi00alfv7i2n0zt188",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness"
+    },
+    {
+      "id": "cmttnxlm900in1ejytvw1sozt",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndn3000a7fv7io7px47q6",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "text": "What is the time period for a short-term loan?",
+      "toChapterId": "cmttndooi00alfv7i2n0zt188",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness"
+    },
+    {
+      "id": "cmttnxlma00iw1ejybkon4rca",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndn3000a7fv7io7px47q6",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "text": "What is the time period for a long-term loan?",
+      "toChapterId": "cmttndooi00alfv7i2n0zt188",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness"
+    }
+  ],
+  "kept": [
+    {
+      "id": "cmtsimqcx016l11hql8ogj2hh",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 1,
+      "text": "The customer's account will be closed after six months of inactivity.",
+      "why": "already in correct chapter (audit LLM mis-flag)"
+    },
+    {
+      "id": "cmtsimqcx016n11hqe4g3aq8b",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "text": "The bank's policy is to provide loans to customers at a low interest rate.",
+      "why": "already in correct chapter (audit LLM mis-flag)"
+    },
+    {
+      "id": "cmtsimqcx016p11hqqvjsx6iq",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "text": "The bank's policy is to provide loans to customers who have a good credit history.",
+      "why": "already in correct chapter (audit LLM mis-flag)"
+    },
+    {
+      "id": "cmv9d96ao017u503of0diandz",
+      "exam": "SSC CGL",
+      "fromChapterId": "cmv9cwmhu003ktzys4zs5mznw",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "text": "Match the following: Column A: A. Benevolent, B. Abundant, C. Reluctant. Column B: 1. Unwilling, 2. Plentiful, 3. Kind-h",
+      "why": "already in correct chapter (audit LLM mis-flag)"
+    },
+    {
+      "id": "cmv9d96ao017v503o7uek71kn",
+      "exam": "SSC CGL",
+      "fromChapterId": "cmv9cwmhu003ktzys4zs5mznw",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "text": "Match the following: Column A: A. Concise, B. Fragile, C. Inevitable. Column B: 1. Certain to happen, 2. Easily broken, ",
+      "why": "already in correct chapter (audit LLM mis-flag)"
+    }
+  ],
+  "problems": []
+}

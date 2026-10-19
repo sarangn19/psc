@@ -1,0 +1,9 @@
+Alignment audit | scope=ssc prefilter=1 resume=true
+English-chapter questions in scope: 852
+Prefilter kept 356 candidates (496 skipped as clearly aligned)
+Resuming — 1507 already audited
+Queue: 91
+5/91 | misaligned: 2 | ETA ~17m   10/91 | misaligned: 2 | ETA ~14m   15/91 | misaligned: 3 | ETA ~14m   20/91 | misaligned: 3 | ETA ~13m   25/91 | misaligned: 4 | ETA ~12m   30/91 | misaligned: 4 | ETA ~11m   35/91 | misaligned: 4 | ETA ~10m   40/91 | misaligned: 4 | ETA ~10m   45/91 | misaligned: 4 | ETA ~8m   50/91 | misaligned: 5 | ETA ~8m   55/91 | misaligned: 5 | ETA ~7m   60/91 | misaligned: 5 | ETA ~6m   65/91 | misaligned: 5 | ETA ~5m   70/91 | misaligned: 5 | ETA ~4m   75/91 | misaligned: 5 | ETA ~3m   80/91 | misaligned: 6 | ETA ~2m   85/91 | misaligned: 6 | ETA ~1m   90/91 | misaligned: 6 | ETA ~0m   91/91 | misaligned: 6 | ETA ~0m   
+Done. audited=91 misaligned=6
+Verdicts: C:\Users\saran\Documents\psc app\backend\scripts\eng_alignment_verdicts.jsonl
+Bad     : C:\Users\saran\Documents\psc app\backend\scripts\eng_alignment_bad.jsonl

@@ -1,0 +1,4817 @@
+{
+  "generatedAt": "2026-10-19T18:26:40.457Z",
+  "source": "eng_alignment_bad.jsonl",
+  "moves": [
+    {
+      "id": "cmtsimnwe011s11hqk7v65z9n",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Math",
+      "reason": "Math question in English chapter",
+      "text": "A man bought 10 shirts at Rs. 50 each. What is the total cost of the shirts?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Math",
+        "Math question in English chapter"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Profit and Loss",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimnwe011u11hqnl1naaty",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Math",
+      "reason": "Math question in English chapter",
+      "text": "A group of friends shared some money among themselves in the ratio 3:5:8. If the total amount shared was Rs. 12000, what",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Math",
+        "Math question in English chapter"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Ratio and Proportion",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimnwe011y11hq4e1erwsr",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Math",
+      "reason": "Math question in English chapter",
+      "text": "A person borrowed Rs. 10000 at a 12% interest rate. What is the interest paid after 2 years?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Math",
+        "Math question in English chapter"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Simple Interest",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimnwe012111hqm5uphn3d",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Math",
+      "reason": "Math question in English chapter",
+      "text": "A person invested Rs. 75000 in a fixed deposit. What is the interest earned if the rate of interest is 9% per annum for ",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Math",
+        "Math question in English chapter"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Simple Interest",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimnwe012211hqmd7wwios",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Total Cost  Q2: Qn topic: Ratio and Proportion (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman bought 3 books at Rs. 80 each. What is the total cost of the books?",
+      "candidates": [
+        "General Knowledge",
+        "Total Cost",
+        "Simple Interest"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Profit and Loss",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimnwe012311hqdp6fls9i",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Profit Sharing  Q3: Qn topic: Simple Interest (math)",
+      "reason": "Ratio and Proportion (math)",
+      "text": "A group of friends started a business with an initial investment of Rs. 30000. If the profit is shared in the ratio 3:5:",
+      "candidates": [
+        "Profit and Loss",
+        "Profit and Loss in Business",
+        "Profit Sharing",
+        "Ratio and Proportion"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Ratio and Proportion",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimnwe012511hqwnlm53p5",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Interest Paid  Q4: Qn topic: Fill in the Blanks (vocabulary)",
+      "reason": "Simple Interest (math)",
+      "text": "A person borrowed Rs. 5000 at a 10% interest rate. What is the interest paid after 1 year?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Interest Paid",
+        "Simple Interest"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Simple Interest",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimots013u11hq7u1puxpp",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q2: Qn topic: Banking (finance)",
+      "reason": "Banking (finance)",
+      "text": "The Reserve Bank of India's headquarters is located in ___________",
+      "candidates": [
+        "Economics",
+        "Banking"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimots014411hqb1t4qemv",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q2: Qn topic: Banking (finance)",
+      "reason": "Banking (finance)",
+      "text": "A bank's ___________ is the process of evaluating the creditworthiness of its customers",
+      "candidates": [
+        "Operating System",
+        "Process Management",
+        "Banking"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimots014611hqyvt70vwm",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q3: Qn topic: Banking (finance)",
+      "reason": "Banking (finance)",
+      "text": "A bank's ___________ is the ratio of its net profits to its total assets",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Banking"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimots014711hqxyi3zsq5",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 1,
+      "targetTopic": "Banking  Q4: Qn topic: Banking (finance)",
+      "reason": "Banking (finance)",
+      "text": "The ___________ is a type of bank account that is held in a foreign currency",
+      "candidates": [
+        "Current Affairs",
+        "Banking"
+      ],
+      "toChapterId": "banking-ch-current-affairs",
+      "toChapterName": "Current Affairs",
+      "toSubject": "Current Affairs",
+      "via": "Current Affairs",
+      "viaText": false
+    },
+    {
+      "id": "cmtsimots014811hqtos3zwbj",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q5: Qn topic: Banking (finance)",
+      "reason": "Banking (finance)",
+      "text": "A bank's ___________ is the process of managing its liquidity position",
+      "candidates": [
+        "Operating System",
+        "Process Management",
+        "Banking"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimots014911hqbwsv8fbv",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking",
+      "reason": "Banking (finance)",
+      "text": "The ___________ is a type of financial instrument that represents a promise to pay a certain amount of money at a specif",
+      "candidates": [
+        "Indian Polity",
+        "Banking"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimp6k014v11hq71hdaq6h",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 1,
+      "targetTopic": "Economics",
+      "reason": "<=8 words",
+      "text": "Match the following: Column A: A. Fiscal policy, B. Monetary policy, C. Trade deficit, D. Capital expenditure. Column B:",
+      "candidates": [
+        "Monetary Policy",
+        "Economics",
+        "words"
+      ],
+      "toChapterId": "banking-ch-general-knowledge",
+      "toChapterName": "General Knowledge",
+      "toSubject": "General Knowledge",
+      "via": "Economics",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimp6k014w11hqmv4qsaq0",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Economics",
+      "reason": "<=8 words",
+      "text": "Match the following: Column A: A. Arbitrage, B. Collateral, C. Default, D. Solvency. Column B: 1. Failure to meet a fina",
+      "candidates": [
+        "Current Affairs",
+        "Economics",
+        "words"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimq2u016411hqu5st6xda",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Math",
+      "reason": "Percentage",
+      "text": "A person has Rs. 1500. He spends 25% of it. What amount is left?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Math",
+        "Percentage"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimq2u016611hqn4leemn3",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 1,
+      "targetTopic": "Math",
+      "reason": "Percentage",
+      "text": "A shopkeeper offers a discount of 20% on the marked price of an article. If the marked price is Rs. 1200, what is the di",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Math",
+        "Percentage"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimq2u016711hqfkri63ci",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Math",
+      "reason": "Percentage",
+      "text": "A book costs Rs. 480. If the author is paid 12% of the cost price, how much money will he get?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Math",
+        "Percentage"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimq2u016811hqv3sc8jmg",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Simple Interest  Q2: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 2400. She spends 10% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Simple Interest"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimq2u016911hqnhiorg9o",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Simple Interest  Q3: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A man saves 20% of his salary. If he saves Rs. 480, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimq2u016b11hq9jrpq08p",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Simple Interest  Q4: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 1800. She spends 25% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Simple Interest"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimq2u016c11hqxfv561xj",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Simple Interest  Q5: Qn topic: Discount (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A man saves 10% of his salary. If he saves Rs. 300, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimq2u016d11hq1c3vleqk",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Discount",
+      "reason": "Discount (math)",
+      "text": "A shopkeeper offers a discount of 25% on the marked price of an article. If the marked price is Rs. 720, what is the dis",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Discount"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimq2u016e11hqy3zoogh5",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Math  Q2: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 1200. She spends 12% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Math",
+        "Simple Interest"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimq2u016f11hq15xaq3n9",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Math  Q3: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A shopkeeper offers a discount of 12% on the marked price of an article. If the marked price is Rs. 900, what is the dis",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Math",
+        "Simple Interest"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimq2u016g11hqedj6lgwc",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Math  Q4: Qn topic: Sentence Correction (grammar)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 2400. She spends 20% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Math",
+        "Simple Interest"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimqcx016o11hq1bnsht0l",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q4: Qn topic: Banking Policy",
+      "reason": "Banking Policy",
+      "text": "The bank will deduct the interest on loan from the customer's account.",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Banking",
+        "Banking Policy"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimqcx016q11hqbt0j2tny",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking",
+      "reason": "Banking Policy",
+      "text": "The bank will provide the customer with a loan of Rs. 25,000 at 10% interest.",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Banking",
+        "Banking Policy"
+      ],
+      "toChapterId": "banking-ch-quantitative-aptitude",
+      "toChapterName": "Quantitative Aptitude",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Quantitative Aptitude",
+      "viaText": false
+    },
+    {
+      "id": "cmtsimqs7017s11hq0q4jdo36",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking",
+      "reason": "Topic does not match chapter",
+      "text": "The Reserve Bank of India's main function is?",
+      "candidates": [
+        "Monetary Policy",
+        "Banking",
+        "Topic does not match chapter"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimqs7017t11hqdsuymzmi",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q2: Qn topic: Banking/Finance",
+      "reason": "Banking/Finance",
+      "text": "What is a 'Cheque Truncation System'?",
+      "candidates": [
+        "Geography",
+        "Banking",
+        "Banking Finance"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimqs7017v11hqcbvpe2gq",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q3: Qn topic: Banking/Finance",
+      "reason": "Banking/Finance",
+      "text": "The National Electronic Fund Transfer (NEFT) is?",
+      "candidates": [
+        "Current Affairs",
+        "Banking",
+        "Banking Finance"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimqs7017w11hqcd4i9ysi",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q4: Qn topic: Banking/Finance",
+      "reason": "Banking/Finance",
+      "text": "The 'Know Your Customer' (KYC) guidelines are?",
+      "candidates": [
+        "Economics",
+        "Banking",
+        "Banking Finance"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimqs7017x11hq1i8jkbam",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q5: Qn topic: Banking/Finance",
+      "reason": "Banking/Finance",
+      "text": "The 'Cash Reserve Ratio (CRR)' is?",
+      "candidates": [
+        "Economics",
+        "Banking",
+        "Banking Finance"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimqs7017y11hqzugd2nsr",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking",
+      "reason": "Banking/Finance",
+      "text": "The 'Securities and Exchange Board of India' (SEBI) is?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Banking",
+        "Banking Finance"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimqs7018011hq9r3w2gin",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q2: Qn topic: Banking Terms",
+      "reason": "Banking Terms",
+      "text": "The 'Prudential Norms' are?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Banking",
+        "Banking Terms"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimqs7018111hq4e3thayw",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q3: Qn topic: Banking Terms",
+      "reason": "Banking Terms",
+      "text": "The 'Bank Rate' is?",
+      "candidates": [
+        "Economics",
+        "Banking",
+        "Banking Terms"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimqs7018211hqohbzy44z",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q4: Qn topic: Banking Terms",
+      "reason": "Banking Terms",
+      "text": "The 'Repo Rate' is?",
+      "candidates": [
+        "Relational Model",
+        "Rows",
+        "Banking",
+        "Banking Terms"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimqs7018311hq5ncbl386",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q5: Qn topic: Banking Terms",
+      "reason": "Banking Terms",
+      "text": "The 'Reverse Repo Rate' is?",
+      "candidates": [
+        "Poetry",
+        "Verse",
+        "Banking",
+        "Banking Terms"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimqs7018511hqef3bw5so",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 1,
+      "targetTopic": "Banking",
+      "reason": "Banking Terms",
+      "text": "The 'Financial Stability and Development Council (FSDC)' is?",
+      "candidates": [
+        "Monetary Policy",
+        "Banking",
+        "Banking Terms"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimqs7018611hq722c707v",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q2: Qn topic: Vocabulary (synonym)",
+      "reason": "Banking (finance)",
+      "text": "The 'National Housing Bank (NHB)' is?",
+      "candidates": [
+        "Current Affairs",
+        "Banking"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimr5f018m11hq00jdct0p",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking Terminology",
+      "reason": "<=8 words",
+      "text": "What is the opposite of 'Deposit' in banking?",
+      "candidates": [
+        "Banking",
+        "Banking Terminology",
+        "words"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimr5f018n11hq3uyanqu4",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking Terminology",
+      "reason": "<=8 words",
+      "text": "Which of the following is a type of loan?",
+      "candidates": [
+        "Malayalam",
+        "Banking Terminology",
+        "words"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimr5f018q11hq00yr2boj",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking",
+      "reason": "Time Period",
+      "text": "What is the time period for a short-term loan?",
+      "candidates": [
+        "History",
+        "Banking",
+        "Time Period"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimr5f018r11hqbnn0365j",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Finance",
+      "reason": "Risk Management",
+      "text": "Which of the following is a type of Risk Management technique?",
+      "candidates": [
+        "Current Affairs",
+        "Finance",
+        "Risk Management"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimr5f018x11hqjvgrsfu4",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q2: Qn topic: Banking (finance)",
+      "reason": "Banking (finance)",
+      "text": "What is the process of checking the creditworthiness of a customer?",
+      "candidates": [
+        "Indian Polity",
+        "Banking"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmtsimr5f019011hqtkkxs5o1",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q3: Qn topic: Banking (finance)",
+      "reason": "Banking (finance)",
+      "text": "Which of the following is a type of credit facility?",
+      "candidates": [
+        "General Knowledge",
+        "Banking"
+      ],
+      "toChapterId": "banking-ch-banking-awareness",
+      "toChapterName": "Banking Awareness",
+      "toSubject": "Banking Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnjzhw016869ptdqmy3xy9",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttnes960023atd548iejg4h",
+      "fromChapterName": "Fill in the Blanks (Single)",
+      "attempts": 0,
+      "targetTopic": "Reserve Bank of India  Q3 [ID:cmttnjzhw016969ptxji184iw] (Exam: IBPS PO",
+      "reason": "Geography (GK)",
+      "text": "The Reserve Bank of India's headquarters is located in ___________",
+      "candidates": [
+        "Economics",
+        "Reserve Bank of India",
+        "Geography"
+      ],
+      "toChapterId": "cmttnewgj002vatd5hv10prli",
+      "toChapterName": "Banking Awareness (RBI Functions)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnjzhw016969ptxji184iw",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttnes960023atd548iejg4h",
+      "fromChapterName": "Fill in the Blanks (Single)",
+      "attempts": 0,
+      "targetTopic": "Bank's capital  Q4 [ID:cmttnjzhw016b69ptxb689q2k] (Exam: IBPS PO",
+      "reason": "Banking (Finance)",
+      "text": "A bank's ___________ is the difference between its total assets and total liabilities",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Bank's capital",
+        "Banking"
+      ],
+      "toChapterId": "cmttney6p0033atd553oki42h",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnjzhw016b69ptxb689q2k",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttnes960023atd548iejg4h",
+      "fromChapterName": "Fill in the Blanks (Single)",
+      "attempts": 0,
+      "targetTopic": "Financial statement  Q5 [ID:cmttnjzhw016f69pt55xebita] (Exam: IBPS PO",
+      "reason": "Accounting (Finance)",
+      "text": "The ___________ is a financial statement that shows a company's financial position at a specific date",
+      "candidates": [
+        "Profit and Loss",
+        "Financial statement",
+        "Accounting"
+      ],
+      "toChapterId": "cmtsy7ov6000ekrpfxiduhtn8",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Profit and Loss",
+      "viaText": false
+    },
+    {
+      "id": "cmttnjzhw016f69pt55xebita",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttnes960023atd548iejg4h",
+      "fromChapterName": "Fill in the Blanks (Single)",
+      "attempts": 0,
+      "targetTopic": "Type of loan",
+      "reason": "Banking (Finance)",
+      "text": "The ___________ is a type of loan that is secured by a mortgage on a property",
+      "candidates": [
+        "Information Technology",
+        "Type of loan",
+        "Banking"
+      ],
+      "toChapterId": "cmttnewr4002xatd550jrmk2i",
+      "toChapterName": "Banking Awareness (Types of Banks)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnk0h1017c69ptudzunrgo",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttnesm70025atd53ukjiyzd",
+      "fromChapterName": "Double Fillers",
+      "attempts": 0,
+      "targetTopic": "Employment  Q2: Qn topic: Simple Interest (math)",
+      "reason": "Employment and Economic Concepts",
+      "text": "Fill in the blanks: The government introduced several measures to ___ employment and ___ the effects of the economic slo",
+      "candidates": [
+        "Economics",
+        "Employment",
+        "Employment and Economic Concepts"
+      ],
+      "toChapterId": "cmttnes960023atd548iejg4h",
+      "toChapterName": "Fill in the Blanks (Single)",
+      "toSubject": "English Language",
+      "via": "Fill in the Blanks",
+      "viaText": true
+    },
+    {
+      "id": "cmttnk1e5017l69ptw30193qv",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttnestu0027atd5htpcyga4",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest  Q3: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A shopkeeper offers a discount of 20% on the marked price of an article. If the marked price is Rs. 1200, what is the di",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy7ov6000ekrpfxiduhtn8",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnk1e5017m69ptkrbt1zag",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttnestu0027atd5htpcyga4",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest  Q4: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A book costs Rs. 480. If the author is paid 12% of the cost price, how much money will he get?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy7j1g0008krpfgau4quod",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnk1e5017n69pt7xaa5uc8",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttnestu0027atd5htpcyga4",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest  Q5: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 2400. She spends 10% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy7j1g0008krpfgau4quod",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnk1e5017o69ptg1s92a9z",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttnestu0027atd5htpcyga4",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "Simple Interest (math)",
+      "text": "A man saves 20% of his salary. If he saves Rs. 480, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy7j1g0008krpfgau4quod",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnk1e5017q69ptnaquzfzp",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttnestu0027atd5htpcyga4",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Math  Q2: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 1800. She spends 25% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Math",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy7j1g0008krpfgau4quod",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnk1e6017s69ptvd6ozwmx",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttnestu0027atd5htpcyga4",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Math  Q3: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A shopkeeper offers a discount of 25% on the marked price of an article. If the marked price is Rs. 720, what is the dis",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Math",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy7ov6000ekrpfxiduhtn8",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnk1e6017t69pto9wydccz",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttnestu0027atd5htpcyga4",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Math  Q4: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 1200. She spends 12% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Math",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy7j1g0008krpfgau4quod",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnk1e6017u69pte65qlxd7",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttnestu0027atd5htpcyga4",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Math  Q5: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A shopkeeper offers a discount of 12% on the marked price of an article. If the marked price is Rs. 900, what is the dis",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Math",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy7ov6000ekrpfxiduhtn8",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnk1e6017v69pt4m7jdu3m",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttnestu0027atd5htpcyga4",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Math",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 2400. She spends 20% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Math",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy7j1g0008krpfgau4quod",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnk2by018069pt4u9mf0s4",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttnet3q0029atd5wl01kd4d",
+      "fromChapterName": "Phrase Replacement",
+      "attempts": 0,
+      "targetTopic": "Cost  Q2: Qn topic: Vocabulary (finance)",
+      "reason": "Simple Interest (math)",
+      "text": "A car costs Rs. 15000 and the driver is paid 10% of the cost as commission.",
+      "candidates": [
+        "Costs",
+        "Cost",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy7j1g0008krpfgau4quod",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnkabn01b869pt585azdaz",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttnev1f002natd5rc7recez",
+      "fromChapterName": "Sentence Starters",
+      "attempts": 0,
+      "targetTopic": "",
+      "reason": "Current Affairs",
+      "text": "The Reserve Bank of India's main function is?",
+      "candidates": [
+        "Monetary Policy",
+        "Current Affairs"
+      ],
+      "toChapterId": "cmttnewgj002vatd5hv10prli",
+      "toChapterName": "Banking Awareness (RBI Functions)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmmj80143f4hi6rhk2yrr",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsybszl003atrjbc3n65hw7",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "<=8 words",
+      "text": "Choose the word most similar in meaning to 'ABUNDANT'.",
+      "candidates": [
+        "Mental Ability",
+        "Vocabulary",
+        "words"
+      ],
+      "toChapterId": "cmtsyc7rw003qtrjbz9e4xp9c",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmmj80144f4hide7pih9k",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsybszl003atrjbc3n65hw7",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "<=8 words",
+      "text": "Choose the word opposite in meaning to 'ANCIENT'.",
+      "candidates": [
+        "Mean",
+        "Vocabulary",
+        "words"
+      ],
+      "toChapterId": "cmtsyc7rw003qtrjbz9e4xp9c",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmmj80145f4hi84j3qfrp",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsybszl003atrjbc3n65hw7",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "<=8 words",
+      "text": "Choose the word most similar in meaning to 'BRAVE'.",
+      "candidates": [
+        "Mental Ability",
+        "Vocabulary",
+        "words"
+      ],
+      "toChapterId": "cmtsyc7rw003qtrjbz9e4xp9c",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmmj80146f4hirb1rw90n",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsybszl003atrjbc3n65hw7",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "<=8 words",
+      "text": "Choose the word opposite in meaning to 'EXPAND'.",
+      "candidates": [
+        "Mental Ability",
+        "Vocabulary",
+        "words"
+      ],
+      "toChapterId": "cmtsyc7rw003qtrjbz9e4xp9c",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmmj80147f4hiaq0zv6qd",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsybszl003atrjbc3n65hw7",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Illiterate  Q2: Qn topic: Vocabulary",
+      "reason": "Vocabulary",
+      "text": "One who cannot read or write is called:",
+      "candidates": [
+        "General Knowledge",
+        "Illiterate",
+        "Vocabulary"
+      ],
+      "toChapterId": "cmtsyc7rw003qtrjbz9e4xp9c",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmp80017if4hi2zm5jte8",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsyc2l6003ktrjbkhmir0mx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "",
+      "text": "What is 20% of 500?",
+      "candidates": [
+        "General Knowledge",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy8ykn0008trjbwkwea451",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmp80017jf4hilz3ovlp2",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsyc2l6003ktrjbkhmir0mx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "",
+      "text": "A person has Rs. 1500. He spends 25% of it. What amount is left?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy8ykn0008trjbwkwea451",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmp80017lf4hisz77rq5z",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsyc2l6003ktrjbkhmir0mx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Discount  Q2: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A shopkeeper offers a discount of 20% on the marked price of an article. If the marked price is Rs. 1200, what is the di",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Discount",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy948f000etrjbxu5nykh3",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmp80017mf4hilr9bvxed",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsyc2l6003ktrjbkhmir0mx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Book Cost  Q3: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A book costs Rs. 480. If the author is paid 12% of the cost price, how much money will he get?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Book Cost",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy8ykn0008trjbwkwea451",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmp80017nf4himgkqvs5c",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsyc2l6003ktrjbkhmir0mx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Woman's Savings  Q4: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 2400. She spends 10% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Woman's Savings",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy8ykn0008trjbwkwea451",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmp80017of4hi8tp42vlz",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsyc2l6003ktrjbkhmir0mx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Man's Savings  Q5: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A man saves 20% of his salary. If he saves Rs. 480, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Man's Savings",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy8ykn0008trjbwkwea451",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmp80017qf4hiro6vl45t",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsyc2l6003ktrjbkhmir0mx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Woman's Expenses",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 1800. She spends 25% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Woman's Expenses",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsy8ykn0008trjbwkwea451",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmp80017rf4hiek0tl84h",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsyc2l6003ktrjbkhmir0mx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Monthly Salary",
+      "reason": "",
+      "text": "A man saves 10% of his salary. If he saves Rs. 300, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Monthly Salary"
+      ],
+      "toChapterId": "cmtsy8ykn0008trjbwkwea451",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmp80017tf4hikjh1c6bz",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsyc2l6003ktrjbkhmir0mx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Amount Left",
+      "reason": "",
+      "text": "A woman has Rs. 1200. She spends 12% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Amount Left"
+      ],
+      "toChapterId": "cmtsy8ykn0008trjbwkwea451",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmp80017vf4hiekolm7hv",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsyc2l6003ktrjbkhmir0mx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Amount Left",
+      "reason": "",
+      "text": "A woman has Rs. 2400. She spends 20% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Amount Left"
+      ],
+      "toChapterId": "cmtsy8ykn0008trjbwkwea451",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmqt9018uf4hi5lspq9qz",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsyc7rw003qtrjbz9e4xp9c",
+      "fromChapterName": "Synonyms",
+      "attempts": 0,
+      "targetTopic": "Antonym  Q2 [ID:cmttnmqta0190f4hig29fcx1a] (Exam: IBPS Clerk",
+      "reason": "Antonym",
+      "text": "Choose the word opposite in meaning to 'ANCIENT'.",
+      "candidates": [
+        "Mean",
+        "Antonym"
+      ],
+      "toChapterId": "cmtsyc9wv003strjbiolf5xvr",
+      "toChapterName": "Antonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmt4s01b8f4hi79f2lwqe",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsycgzs0040trjba2h0klqg",
+      "fromChapterName": "Sentence Starters",
+      "attempts": 0,
+      "targetTopic": "Current Affairs",
+      "reason": "Current Affairs does not match the chapter topic (Sentence Starters is for English grammar/vocabulary)",
+      "text": "The Reserve Bank of India's main function is?",
+      "candidates": [
+        "Monetary Policy",
+        "Current Affairs",
+        "Current Affairs does not match the chapter topic"
+      ],
+      "toChapterId": "cmtsycopq0048trjbqfvzu21r",
+      "toChapterName": "Banking Awareness (RBI Functions)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmt4s01b9f4hiw9n424z9",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsycgzs0040trjba2h0klqg",
+      "fromChapterName": "Sentence Starters",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "Vocabulary does not match the chapter topic (Sentence Starters is for English grammar/vocabulary)",
+      "text": "What is a 'Cheque Truncation System'?",
+      "candidates": [
+        "Geography",
+        "Vocabulary",
+        "Vocabulary does not match the chapter topic"
+      ],
+      "toChapterId": "cmtsyctzb004etrjbsm5x07m1",
+      "toChapterName": "Banking Awareness (Digital Banking)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmtm501buf4hir3s54sse",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsycivb0042trjbe4wb1e8b",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Financial concept",
+      "reason": "",
+      "text": "What is the process of verifying the identity of a customer?",
+      "candidates": [
+        "Indian Polity",
+        "Financial concept"
+      ],
+      "toChapterId": "cmtsycvu4004gtrjbmh9trrdr",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmtm601bwf4hiv7mh951g",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsycivb0042trjbe4wb1e8b",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Financial concept",
+      "reason": "",
+      "text": "What is the type of account that allows multiple withdrawals?",
+      "candidates": [
+        "Sociology",
+        "Financial concept"
+      ],
+      "toChapterId": "cmtsycqg0004atrjbexo6frf0",
+      "toChapterName": "Banking Awareness (Types of Banks)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmtm601byf4higzas55pf",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsycivb0042trjbe4wb1e8b",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Financial concept",
+      "reason": "",
+      "text": "What is the process of checking the creditworthiness of a customer?",
+      "candidates": [
+        "Indian Polity",
+        "Financial concept"
+      ],
+      "toChapterId": "cmtsycvu4004gtrjbmh9trrdr",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnmtm601c1f4hi52ijo7wo",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsycivb0042trjbe4wb1e8b",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Banking  Q2: Qn topic: Financial Literacy/Digital Banking",
+      "reason": "Banking/Credit Facility",
+      "text": "Which of the following is a type of credit facility?",
+      "candidates": [
+        "General Knowledge",
+        "Banking",
+        "Banking Credit Facility"
+      ],
+      "toChapterId": "cmtsycvu4004gtrjbmh9trrdr",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnr8502fmf4hi05fu6xi6",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfekz006natd54iy6la1w",
+      "fromChapterName": "Cloze Test",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "Math question in Cloze Test chapter",
+      "text": "A man bought 10 shirts at Rs. 50 each. What is the total cost of the shirts?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest",
+        "Math question in Cloze Test chapter"
+      ],
+      "toChapterId": "cmtsyey1o006jtrjbw54g0kra",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Profit and Loss",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnr8602fof4hibwihxqv0",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfekz006natd54iy6la1w",
+      "fromChapterName": "Cloze Test",
+      "attempts": 0,
+      "targetTopic": "Ratio and Proportion",
+      "reason": "Math question in Cloze Test chapter",
+      "text": "A group of friends shared some money among themselves in the ratio 3:5:8. If the total amount shared was Rs. 12000, what",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Ratio and Proportion",
+        "Math question in Cloze Test chapter"
+      ],
+      "toChapterId": "cmtsyeu9d006ftrjb5k0e0ex8",
+      "toChapterName": "Ratio & Proportion",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Ratio and Proportion",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnr8602fsf4hijon70r53",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfekz006natd54iy6la1w",
+      "fromChapterName": "Cloze Test",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "Math question in Cloze Test chapter",
+      "text": "A person borrowed Rs. 10000 at a 12% interest rate. What is the interest paid after 2 years?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest",
+        "Math question in Cloze Test chapter"
+      ],
+      "toChapterId": "cmtto0f72000111ig06cuciy7",
+      "toChapterName": "Simple & Compound Interest",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Simple Interest",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnr8602fvf4hie1my0n0h",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfekz006natd54iy6la1w",
+      "fromChapterName": "Cloze Test",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "Math question in Cloze Test chapter",
+      "text": "A person invested Rs. 75000 in a fixed deposit. What is the interest earned if the rate of interest is 9% per annum for ",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest",
+        "Math question in Cloze Test chapter"
+      ],
+      "toChapterId": "cmtto0f72000111ig06cuciy7",
+      "toChapterName": "Simple & Compound Interest",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Simple Interest",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnrv502gnf4him6frdegx",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfetz006patd5ep0a0yax",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "<=8 words",
+      "text": "Choose the word most similar in meaning to 'DILIGENT'.",
+      "candidates": [
+        "Mental Ability",
+        "Vocabulary",
+        "words"
+      ],
+      "toChapterId": "cmttnfgq40075atd5x5r0gh6b",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnrv502gof4himtk65ox3",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfetz006patd5ep0a0yax",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "<=8 words",
+      "text": "Choose the word opposite in meaning to 'OPTIMISTIC'.",
+      "candidates": [
+        "Mental Ability",
+        "Vocabulary",
+        "words"
+      ],
+      "toChapterId": "cmttnfgq40075atd5x5r0gh6b",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnrv602grf4hic0tmtqcp",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfetz006patd5ep0a0yax",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "HOSTILE",
+      "reason": "<=8 words",
+      "text": "Choose the word most similar in meaning to 'HOSTILE'.",
+      "candidates": [
+        "Mental Ability",
+        "HOSTILE",
+        "words"
+      ],
+      "toChapterId": "cmttnfgq40075atd5x5r0gh6b",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnrv602gsf4hixkbe6g9o",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfetz006patd5ep0a0yax",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "VICTORY",
+      "reason": "<=8 words",
+      "text": "Choose the word opposite in meaning to 'VICTORY'.",
+      "candidates": [
+        "Mental Ability",
+        "VICTORY",
+        "words"
+      ],
+      "toChapterId": "cmttnfgq40075atd5x5r0gh6b",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnu8v02juf4hi8yhu9anf",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfg0n006zatd5lo2clmiq",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "What is",
+      "reason": "Simple Arithmetic",
+      "text": "What is 20% of 500?",
+      "candidates": [
+        "General Knowledge",
+        "What is",
+        "Simple Arithmetic"
+      ],
+      "toChapterId": "cmtsyescq006dtrjblop3af9l",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnu8v02jvf4hilhyy733s",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfg0n006zatd5lo2clmiq",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "A person has",
+      "reason": "Simple Arithmetic",
+      "text": "A person has Rs. 1500. He spends 25% of it. What amount is left?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "A person has",
+        "Simple Arithmetic"
+      ],
+      "toChapterId": "cmtsyescq006dtrjblop3af9l",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnu8v02jxf4hi09t551hx",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfg0n006zatd5lo2clmiq",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "A shopkeeper offers",
+      "reason": "Simple Arithmetic",
+      "text": "A shopkeeper offers a discount of 20% on the marked price of an article. If the marked price is Rs. 1200, what is the di",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "A shopkeeper offers",
+        "Simple Arithmetic"
+      ],
+      "toChapterId": "cmtsyey1o006jtrjbw54g0kra",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnu8v02jyf4hiyrasgckt",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfg0n006zatd5lo2clmiq",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "A book costs",
+      "reason": "Simple Arithmetic",
+      "text": "A book costs Rs. 480. If the author is paid 12% of the cost price, how much money will he get?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "A book costs",
+        "Simple Arithmetic"
+      ],
+      "toChapterId": "cmtsyescq006dtrjblop3af9l",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnu8v02jzf4hikx6j3ftx",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfg0n006zatd5lo2clmiq",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Interest  Q2: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 2400. She spends 10% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Interest",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsyescq006dtrjblop3af9l",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnu8v02k0f4hikaknj01c",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfg0n006zatd5lo2clmiq",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Interest  Q3: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A man saves 20% of his salary. If he saves Rs. 480, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Interest",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsyescq006dtrjblop3af9l",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnu8v02k2f4hi8i525gz6",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfg0n006zatd5lo2clmiq",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Interest  Q4: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 1800. She spends 25% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Interest",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsyescq006dtrjblop3af9l",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnu8v02k3f4hihlj3kzx0",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfg0n006zatd5lo2clmiq",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Interest  Q5: Qn topic: Discount (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A man saves 10% of his salary. If he saves Rs. 300, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Interest",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsyescq006dtrjblop3af9l",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnu8v02k4f4hid35t8vtx",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfg0n006zatd5lo2clmiq",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "",
+      "reason": "Discount (math)",
+      "text": "A shopkeeper offers a discount of 25% on the marked price of an article. If the marked price is Rs. 720, what is the dis",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Discount"
+      ],
+      "toChapterId": "cmtsyey1o006jtrjbw54g0kra",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnw7f02l6f4hiykhj41ej",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfgq40075atd5x5r0gh6b",
+      "fromChapterName": "Synonyms",
+      "attempts": 0,
+      "targetTopic": "ANCIENT  Q2 [ID:cmttnnw7f02lcf4hirp419vq2] (Exam: SBI PO",
+      "reason": "Antonym",
+      "text": "Choose the word opposite in meaning to 'ANCIENT'.",
+      "candidates": [
+        "Mean",
+        "ANCIENT",
+        "Antonym"
+      ],
+      "toChapterId": "cmttnfgzf0077atd5a10grd4l",
+      "toChapterName": "Antonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnykw02nkf4hiipq5rzxg",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfhtm007fatd5a1uapgod",
+      "fromChapterName": "Sentence Starters",
+      "attempts": 0,
+      "targetTopic": "Current Affairs/GK",
+      "reason": "",
+      "text": "The Reserve Bank of India's main function is?",
+      "candidates": [
+        "Monetary Policy",
+        "Current Affairs GK"
+      ],
+      "toChapterId": "cmttnfiqz007natd5vqqovz5t",
+      "toChapterName": "Banking Awareness (RBI Functions)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnykw02nlf4hiqxqp7w8q",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfhtm007fatd5a1uapgod",
+      "fromChapterName": "Sentence Starters",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "",
+      "text": "What is a 'Cheque Truncation System'?",
+      "candidates": [
+        "Geography",
+        "Vocabulary"
+      ],
+      "toChapterId": "cmttnfjfp007tatd5k9n9u6b2",
+      "toChapterName": "Banking Awareness (Digital Banking)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnz0p02oaf4hi95ddso3o",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfi05007hatd5qb0cp1aa",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Creditworthiness",
+      "reason": "",
+      "text": "What is the process of checking the creditworthiness of a customer?",
+      "candidates": [
+        "Indian Polity",
+        "Creditworthiness"
+      ],
+      "toChapterId": "cmttnfjo7007vatd5ne2q37nn",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnnz0p02odf4hieq3bs3b4",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfi05007hatd5qb0cp1aa",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Credit facility",
+      "reason": "",
+      "text": "Which of the following is a type of credit facility?",
+      "candidates": [
+        "General Knowledge",
+        "Credit facility"
+      ],
+      "toChapterId": "cmttnfjo7007vatd5ne2q37nn",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp260043of4hinbc2sxb3",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyirn5003ac1zbtoga6hju",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Synonym",
+      "reason": "",
+      "text": "Choose the word most similar in meaning to 'ABUNDANT'.",
+      "candidates": [
+        "Mental Ability",
+        "Synonym"
+      ],
+      "toChapterId": "cmtsyj6vw003qc1zbnzai1dqt",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp261043zf4higdejmxxt",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyirn5003ac1zbtoga6hju",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Idiom  Q2: Word meaning",
+      "reason": "Idiom  Q2: Word meaning",
+      "text": "Choose the correct meaning of the idiom 'Once in a blue moon'.",
+      "candidates": [
+        "Mental Ability",
+        "Idiom"
+      ],
+      "toChapterId": "cmtsyjcsk003wc1zbn3ck4eun",
+      "toChapterName": "Idioms & Phrases",
+      "toSubject": "English Language",
+      "via": "Idioms and Proverbs",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp2610440f4hicrryle7u",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyirn5003ac1zbtoga6hju",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Word  Q3: Word opposite meaning",
+      "reason": "Word  Q3: Word opposite meaning",
+      "text": "Choose the word most similar in meaning to 'HOSTILE'.",
+      "candidates": [
+        "Mental Ability",
+        "Word"
+      ],
+      "toChapterId": "cmtsyj6vw003qc1zbnzai1dqt",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp2610441f4hiy4n6ouyy",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyirn5003ac1zbtoga6hju",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Word  Q4: Idiom meaning",
+      "reason": "Word  Q4: Idiom meaning",
+      "text": "Choose the word opposite in meaning to 'VICTORY'.",
+      "candidates": [
+        "Mental Ability",
+        "Word"
+      ],
+      "toChapterId": "cmtsyj6vw003qc1zbnzai1dqt",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp4n00476f4hicsa8ppvo",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyj1dc003kc1zbkn3l9vqj",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "",
+      "text": "A shopkeeper offers a discount of 20% on the marked price of an article. If the marked price is Rs. 1200, what is the di",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsyftwx000ec1zbwwbckngy",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp4n00477f4his6jmssd7",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyj1dc003kc1zbkn3l9vqj",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "",
+      "text": "A book costs Rs. 480. If the author is paid 12% of the cost price, how much money will he get?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsyfo6o0008c1zbgqr9g9h0",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp4n00478f4hij7zgsdan",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyj1dc003kc1zbkn3l9vqj",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "",
+      "text": "A woman has Rs. 2400. She spends 10% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsyfo6o0008c1zbgqr9g9h0",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp4n00479f4hilpg5jyj1",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyj1dc003kc1zbkn3l9vqj",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "",
+      "text": "A man saves 20% of his salary. If he saves Rs. 480, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsyfo6o0008c1zbgqr9g9h0",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp4n0047bf4hipr5m8021",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyj1dc003kc1zbkn3l9vqj",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Interest  Q2: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 1800. She spends 25% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Interest",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsyfo6o0008c1zbgqr9g9h0",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp4n0047cf4hijwp514dc",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyj1dc003kc1zbkn3l9vqj",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Interest  Q3: Qn topic: Discount (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A man saves 10% of his salary. If he saves Rs. 300, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Interest",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsyfo6o0008c1zbgqr9g9h0",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp4n0047df4hitb485m4w",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyj1dc003kc1zbkn3l9vqj",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Discount  Q4: Qn topic: Simple Interest (math)",
+      "reason": "Discount (math)",
+      "text": "A shopkeeper offers a discount of 25% on the marked price of an article. If the marked price is Rs. 720, what is the dis",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Discount"
+      ],
+      "toChapterId": "cmtsyftwx000ec1zbwwbckngy",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp4n0047ef4hia65dwirv",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyj1dc003kc1zbkn3l9vqj",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Interest  Q5: Qn topic: Discount (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 1200. She spends 12% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Interest",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtsyfo6o0008c1zbgqr9g9h0",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp4n0047ff4hi3t3ckit4",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyj1dc003kc1zbkn3l9vqj",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Discount",
+      "reason": "Discount (math)",
+      "text": "A shopkeeper offers a discount of 12% on the marked price of an article. If the marked price is Rs. 900, what is the dis",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Discount"
+      ],
+      "toChapterId": "cmtsyftwx000ec1zbwwbckngy",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp4n0047gf4hij0nglbgj",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyj1dc003kc1zbkn3l9vqj",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Math",
+      "reason": "",
+      "text": "A woman has Rs. 2400. She spends 20% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Math"
+      ],
+      "toChapterId": "cmtsyfo6o0008c1zbgqr9g9h0",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp520047lf4hi55weilcn",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyj36p003mc1zbaceulosd",
+      "fromChapterName": "Phrase Replacement",
+      "attempts": 0,
+      "targetTopic": "Math",
+      "reason": "",
+      "text": "A car costs Rs. 15000 and the driver is paid 10% of the cost as commission.",
+      "candidates": [
+        "Costs",
+        "Math"
+      ],
+      "toChapterId": "cmtsyfo6o0008c1zbgqr9g9h0",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp8ib04atf4hixuzxlwo5",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyjgem0040c1zblbkujedn",
+      "fromChapterName": "Sentence Starters",
+      "attempts": 0,
+      "targetTopic": "Reserve Bank of India  Q2: Qn topic: Current Affairs",
+      "reason": "Current Affairs",
+      "text": "The Reserve Bank of India's main function is?",
+      "candidates": [
+        "Monetary Policy",
+        "Reserve Bank of India",
+        "Current Affairs"
+      ],
+      "toChapterId": "cmtsyjnn90048c1zb69sv741x",
+      "toChapterName": "Banking Awareness (RBI Functions)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp8ib04auf4hikctjuvvm",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyjgem0040c1zblbkujedn",
+      "fromChapterName": "Sentence Starters",
+      "attempts": 0,
+      "targetTopic": "Cheque Truncation System  Q3: Qn topic: Current Affairs",
+      "reason": "Current Affairs",
+      "text": "What is a 'Cheque Truncation System'?",
+      "candidates": [
+        "Geography",
+        "Cheque Truncation System",
+        "Current Affairs"
+      ],
+      "toChapterId": "cmtsyjtid004ec1zbga4o7tsy",
+      "toChapterName": "Banking Awareness (Digital Banking)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp8ib04awf4hiyxdc939e",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyjgem0040c1zblbkujedn",
+      "fromChapterName": "Sentence Starters",
+      "attempts": 0,
+      "targetTopic": "National Electronic Fund Transfer  Q4: Qn topic: Current Affairs",
+      "reason": "Current Affairs",
+      "text": "The National Electronic Fund Transfer (NEFT) is?",
+      "candidates": [
+        "Current Affairs",
+        "National Electronic Fund Transfer"
+      ],
+      "toChapterId": "cmtsyjtid004ec1zbga4o7tsy",
+      "toChapterName": "Banking Awareness (Digital Banking)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp8ib04axf4hiytpuldnt",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyjgem0040c1zblbkujedn",
+      "fromChapterName": "Sentence Starters",
+      "attempts": 0,
+      "targetTopic": "Know Your Customer  Q5: Qn topic: Current Affairs",
+      "reason": "Current Affairs",
+      "text": "The 'Know Your Customer' (KYC) guidelines are?",
+      "candidates": [
+        "Economics",
+        "Know Your Customer",
+        "Current Affairs"
+      ],
+      "toChapterId": "cmtsyjvh7004gc1zbzv7viioz",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnp8ib04ayf4hitx637h0a",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyjgem0040c1zblbkujedn",
+      "fromChapterName": "Sentence Starters",
+      "attempts": 0,
+      "targetTopic": "Cash Reserve Ratio  All questions are about current affairs and do not match the chapter",
+      "reason": "Current Affairs",
+      "text": "The 'Cash Reserve Ratio (CRR)' is?",
+      "candidates": [
+        "Economics",
+        "Cash Reserve Ratio All questions are about current affairs and do not match the chapter",
+        "Current Affairs"
+      ],
+      "toChapterId": "cmtsyjxne004ic1zb99sdpraa",
+      "toChapterName": "Banking Awareness (Current Rates)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqaw305a3f4hiz0f4gzph",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttnfyns00bfatd5bj44nw7m",
+      "fromChapterName": "Cloze Test",
+      "attempts": 0,
+      "targetTopic": "Ratio and Proportion",
+      "reason": "Math question in English chapter",
+      "text": "A group of friends shared some money among themselves in the ratio 3:5:8. If the total amount shared was Rs. 12000, what",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Ratio and Proportion",
+        "Math question in English chapter"
+      ],
+      "toChapterId": "cmtto0kkq001511igumziym65",
+      "toChapterName": "Ratio & Proportion",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Ratio and Proportion",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqaw305a7f4hiv3101az4",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttnfyns00bfatd5bj44nw7m",
+      "fromChapterName": "Cloze Test",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "Math question in English chapter",
+      "text": "A person borrowed Rs. 10000 at a 12% interest rate. What is the interest paid after 2 years?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest",
+        "Math question in English chapter"
+      ],
+      "toChapterId": "cmtto0l60001b11igoftdear9",
+      "toChapterName": "Simple & Compound Interest",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Simple Interest",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqaw405aaf4hi2c6e1s27",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttnfyns00bfatd5bj44nw7m",
+      "fromChapterName": "Cloze Test",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "Math question in English chapter",
+      "text": "A person invested Rs. 75000 in a fixed deposit. What is the interest earned if the rate of interest is 9% per annum for ",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest",
+        "Math question in English chapter"
+      ],
+      "toChapterId": "cmtto0l60001b11igoftdear9",
+      "toChapterName": "Simple & Compound Interest",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Simple Interest",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqaw405abf4hiwpvtytgo",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttnfyns00bfatd5bj44nw7m",
+      "fromChapterName": "Cloze Test",
+      "attempts": 0,
+      "targetTopic": "Basic Arithmetic",
+      "reason": "Math question in English chapter",
+      "text": "A woman bought 3 books at Rs. 80 each. What is the total cost of the books?",
+      "candidates": [
+        "General Knowledge",
+        "Basic Arithmetic",
+        "Math question in English chapter"
+      ],
+      "toChapterId": "cmtto0kyv001911igduig2pof",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Profit and Loss",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqaw505acf4hi7gby49u9",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttnfyns00bfatd5bj44nw7m",
+      "fromChapterName": "Cloze Test",
+      "attempts": 0,
+      "targetTopic": "Ratio and Proportion",
+      "reason": "Math question in English chapter",
+      "text": "A group of friends started a business with an initial investment of Rs. 30000. If the profit is shared in the ratio 3:5:",
+      "candidates": [
+        "Profit and Loss",
+        "Profit and Loss in Business",
+        "Ratio and Proportion",
+        "Math question in English chapter"
+      ],
+      "toChapterId": "cmtto0kkq001511igumziym65",
+      "toChapterName": "Ratio & Proportion",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Ratio and Proportion",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqaw505aef4hil0av50i7",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttnfyns00bfatd5bj44nw7m",
+      "fromChapterName": "Cloze Test",
+      "attempts": 0,
+      "targetTopic": "Interest  Q2: Qn topic: Error Detection (grammar)",
+      "reason": "Simple Interest (math)",
+      "text": "A person borrowed Rs. 5000 at a 10% interest rate. What is the interest paid after 1 year?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Interest",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtto0l60001b11igoftdear9",
+      "toChapterName": "Simple & Compound Interest",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Simple Interest",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqbne05auf4hia49rimpw",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttnfyvm00bhatd5g8ysvpcx",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Similar  Q3: Qn topic: Vocabulary",
+      "reason": "Vocabulary",
+      "text": "Choose the word most similar in meaning to 'ABUNDANT'.",
+      "candidates": [
+        "Mental Ability",
+        "Similar",
+        "Vocabulary"
+      ],
+      "toChapterId": "cmttng33x00bxatd527umuvc7",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqbne05avf4hi0elk7x92",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttnfyvm00bhatd5g8ysvpcx",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Ancient  Q4: Qn topic: Vocabulary",
+      "reason": "Vocabulary",
+      "text": "Choose the word opposite in meaning to 'ANCIENT'.",
+      "candidates": [
+        "Mean",
+        "Ancient",
+        "Vocabulary"
+      ],
+      "toChapterId": "cmttng33x00bxatd527umuvc7",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqbne05awf4hi6yz5jxab",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttnfyvm00bhatd5g8ysvpcx",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Brave  Q5: Qn topic: Vocabulary",
+      "reason": "Vocabulary",
+      "text": "Choose the word most similar in meaning to 'BRAVE'.",
+      "candidates": [
+        "Mental Ability",
+        "Brave",
+        "Vocabulary"
+      ],
+      "toChapterId": "cmttng33x00bxatd527umuvc7",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqbnf05axf4hi0tsfeg9b",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttnfyvm00bhatd5g8ysvpcx",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Expand",
+      "reason": "Vocabulary",
+      "text": "Choose the word opposite in meaning to 'EXPAND'.",
+      "candidates": [
+        "Mental Ability",
+        "Expand",
+        "Vocabulary"
+      ],
+      "toChapterId": "cmttng33x00bxatd527umuvc7",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqbnf05ayf4hi6f5nqnea",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttnfyvm00bhatd5g8ysvpcx",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Illiterate  Q2: Qn topic: Vocabulary",
+      "reason": "Vocabulary",
+      "text": "One who cannot read or write is called:",
+      "candidates": [
+        "General Knowledge",
+        "Illiterate",
+        "Vocabulary"
+      ],
+      "toChapterId": "cmttng33x00bxatd527umuvc7",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqbnf05azf4hij97ka6g2",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttnfyvm00bhatd5g8ysvpcx",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Philanthropist  Q3: Qn topic: Idiom",
+      "reason": "Vocabulary",
+      "text": "A person who loves mankind is called a:",
+      "candidates": [
+        "Current Affairs",
+        "Philanthropist",
+        "Vocabulary"
+      ],
+      "toChapterId": "cmttng33x00bxatd527umuvc7",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqbnf05b2f4hi43qczr8l",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttnfyvm00bhatd5g8ysvpcx",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Diligent",
+      "reason": "Vocabulary",
+      "text": "Choose the word most similar in meaning to 'DILIGENT'.",
+      "candidates": [
+        "Mental Ability",
+        "Diligent",
+        "Vocabulary"
+      ],
+      "toChapterId": "cmttng33x00bxatd527umuvc7",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqe2m05eaf4hia3pwjyhx",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng2dk00bratd5ufh2rb5g",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Sentence Connectors",
+      "reason": "Simple Interest (math)",
+      "text": "A person has Rs. 1500. He spends 25% of it. What amount is left?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Sentence Connectors",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtto0kbg001311ighsg9jhe9",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqe2m05ecf4hish0jva5k",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng2dk00bratd5ufh2rb5g",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Sentence Connectors",
+      "reason": "Simple Interest (math)",
+      "text": "A shopkeeper offers a discount of 20% on the marked price of an article. If the marked price is Rs. 1200, what is the di",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Sentence Connectors",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtto0kyv001911igduig2pof",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqe2n05edf4hic96tmo71",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng2dk00bratd5ufh2rb5g",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Sentence Connectors",
+      "reason": "Simple Interest (math)",
+      "text": "A book costs Rs. 480. If the author is paid 12% of the cost price, how much money will he get?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Sentence Connectors",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtto0kbg001311ighsg9jhe9",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqe2n05eef4hizerhww7h",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng2dk00bratd5ufh2rb5g",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Interest  Q2: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 2400. She spends 10% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Interest",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtto0kbg001311ighsg9jhe9",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqe2n05ehf4him1xou1p3",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng2dk00bratd5ufh2rb5g",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Interest  Q3: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 1800. She spends 25% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Interest",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtto0kbg001311ighsg9jhe9",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqe2n05eif4hiz2uoc3xs",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng2dk00bratd5ufh2rb5g",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Interest  Q4: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A man saves 10% of his salary. If he saves Rs. 300, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Interest",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtto0kbg001311ighsg9jhe9",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqe2n05ekf4hiccv5encb",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng2dk00bratd5ufh2rb5g",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Interest  Q5: Qn topic: Discount (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 1200. She spends 12% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Interest",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtto0kbg001311ighsg9jhe9",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqe2n05elf4hipk9yl8wc",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng2dk00bratd5ufh2rb5g",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Discount",
+      "reason": "Discount (math)",
+      "text": "A shopkeeper offers a discount of 12% on the marked price of an article. If the marked price is Rs. 900, what is the dis",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Discount"
+      ],
+      "toChapterId": "cmtto0kyv001911igduig2pof",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqe2n05emf4hi3b59h60x",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng2dk00bratd5ufh2rb5g",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Math  Q2: Qn topic: Percentage (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 2400. She spends 20% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Math",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmtto0kbg001311ighsg9jhe9",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqejo05euf4hi7ti2sgw6",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng2l700btatd5kuiwm9oz",
+      "fromChapterName": "Phrase Replacement",
+      "attempts": 0,
+      "targetTopic": "Math  Q3: Qn topic: Vocabulary (Word Usage)",
+      "reason": "Percentage (math)",
+      "text": "A person's age is 40% of his age 5 years ago.",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Math",
+        "Percentage"
+      ],
+      "toChapterId": "cmtto0kbg001311ighsg9jhe9",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqjfe05ilf4hi7665a53e",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng4g900c9atd5ahrgannq",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Customer verification process",
+      "reason": "",
+      "text": "What is the process of verifying the identity of a customer?",
+      "candidates": [
+        "Indian Polity",
+        "Customer verification process"
+      ],
+      "toChapterId": "cmttng6aq00cnatd5r4yn6zhi",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqjff05inf4hixd4n68so",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng4g900c9atd5ahrgannq",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Account type",
+      "reason": "",
+      "text": "What is the type of account that allows multiple withdrawals?",
+      "candidates": [
+        "Sociology",
+        "Account type"
+      ],
+      "toChapterId": "cmttng5ea00chatd53hmblus4",
+      "toChapterName": "Banking Awareness (Types of Banks)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnqjff05ipf4hiio54zdgo",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng4g900c9atd5ahrgannq",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Customer creditworthiness check",
+      "reason": "",
+      "text": "What is the process of checking the creditworthiness of a customer?",
+      "candidates": [
+        "Indian Polity",
+        "Customer creditworthiness check"
+      ],
+      "toChapterId": "cmttng6aq00cnatd5r4yn6zhi",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnrs5e06xnf4hi6el2xlfj",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncr000038fv7isecaiho5",
+      "fromChapterName": "Cloze Test",
+      "attempts": 0,
+      "targetTopic": "Interest  Q2: Qn topic: Error Detection (grammar)",
+      "reason": "Simple Interest (math)",
+      "text": "A person borrowed Rs. 5000 at a 10% interest rate. What is the interest paid after 1 year?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Interest",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttnceam000gfv7ibxpylre8",
+      "toChapterName": "Simple & Compound Interest",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Simple Interest",
+      "viaText": true
+    },
+    {
+      "id": "cmttnrt3606z1f4hijd9nziuz",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncrgr003cfv7i82q2vq7p",
+      "fromChapterName": "Sentence Improvement",
+      "attempts": 0,
+      "targetTopic": "Passage",
+      "reason": "Reading Comprehension",
+      "text": "The customer's account will be closed after six months of inactivity.",
+      "candidates": [
+        "Modals",
+        "Will",
+        "Passage",
+        "Reading Comprehension"
+      ],
+      "toChapterId": "cmttncqot0036fv7ihbxmhi05",
+      "toChapterName": "Reading Comprehension",
+      "toSubject": "English Language",
+      "via": "Reading Comprehension",
+      "viaText": false
+    },
+    {
+      "id": "cmttnrt3606z3f4hi4qbn5k5t",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncrgr003cfv7i82q2vq7p",
+      "fromChapterName": "Sentence Improvement",
+      "attempts": 0,
+      "targetTopic": "Policy",
+      "reason": "Reading Comprehension",
+      "text": "The bank's policy is to provide loans to customers at a low interest rate.",
+      "candidates": [
+        "Simple Interest",
+        "Simple Interest in Loans",
+        "Policy",
+        "Reading Comprehension"
+      ],
+      "toChapterId": "cmttncqot0036fv7ihbxmhi05",
+      "toChapterName": "Reading Comprehension",
+      "toSubject": "English Language",
+      "via": "Reading Comprehension",
+      "viaText": false
+    },
+    {
+      "id": "cmttnrv6f071lf4hin2tl187x",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncsht003kfv7igtk4ebzx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "",
+      "text": "A shopkeeper offers a discount of 20% on the marked price of an article. If the marked price is Rs. 1200, what is the di",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttnce3s000efv7i9gqpb1r1",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnrv6f071mf4hienhpqcqv",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncsht003kfv7igtk4ebzx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "",
+      "text": "A book costs Rs. 480. If the author is paid 12% of the cost price, how much money will he get?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttncdf90008fv7i8bzm1eul",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnrv6f071nf4hiuwf8w1j1",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncsht003kfv7igtk4ebzx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "",
+      "text": "A woman has Rs. 2400. She spends 10% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttncdf90008fv7i8bzm1eul",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnrv6f071of4hiyprooxfv",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncsht003kfv7igtk4ebzx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "",
+      "text": "A man saves 20% of his salary. If he saves Rs. 480, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttncdf90008fv7i8bzm1eul",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnrv6f071qf4hi0gb4le6l",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncsht003kfv7igtk4ebzx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "",
+      "text": "A woman has Rs. 1800. She spends 25% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttncdf90008fv7i8bzm1eul",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnrv6f071rf4hixvl3aduh",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncsht003kfv7igtk4ebzx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest  Q2: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A man saves 10% of his salary. If he saves Rs. 300, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttncdf90008fv7i8bzm1eul",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnrv6f071sf4hittkt7m2k",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncsht003kfv7igtk4ebzx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest  Q3: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A shopkeeper offers a discount of 25% on the marked price of an article. If the marked price is Rs. 720, what is the dis",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttnce3s000efv7i9gqpb1r1",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnrv6f071tf4hii5krpr6l",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncsht003kfv7igtk4ebzx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest  Q4: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 1200. She spends 12% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttncdf90008fv7i8bzm1eul",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnrv6f071uf4hile0ow56b",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncsht003kfv7igtk4ebzx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest  Q5: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A shopkeeper offers a discount of 12% on the marked price of an article. If the marked price is Rs. 900, what is the dis",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttnce3s000efv7i9gqpb1r1",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnrv6g071vf4hiocifljwp",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncsht003kfv7igtk4ebzx",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 2400. She spends 20% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttncdf90008fv7i8bzm1eul",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnrzo2075yf4hin7xl6lgm",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncup60042fv7i5unxgusm",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Creditworthiness",
+      "reason": "",
+      "text": "What is the process of checking the creditworthiness of a customer?",
+      "candidates": [
+        "Indian Polity",
+        "Creditworthiness"
+      ],
+      "toChapterId": "cmttncwf7004gfv7ia8fgaija",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnrzo20761f4hi3lczd2ml",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncup60042fv7i5unxgusm",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Credit facility",
+      "reason": "",
+      "text": "Which of the following is a type of credit facility?",
+      "candidates": [
+        "General Knowledge",
+        "Credit facility"
+      ],
+      "toChapterId": "cmttncwf7004gfv7ia8fgaija",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxfi200bb1ejyjf9xwvu9",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndjji009ffv7irnsxgv1p",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "Topic mismatch",
+      "text": "Choose the word most similar in meaning to 'HOSTILE'.",
+      "candidates": [
+        "Mental Ability",
+        "Vocabulary",
+        "Topic mismatch"
+      ],
+      "toChapterId": "cmttndlf9009vfv7int9yjwwl",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxfi200bc1ejyxs8gtha7",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndjji009ffv7irnsxgv1p",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "Topic mismatch",
+      "text": "Choose the word opposite in meaning to 'VICTORY'.",
+      "candidates": [
+        "Mental Ability",
+        "Vocabulary",
+        "Topic mismatch"
+      ],
+      "toChapterId": "cmttndlf9009vfv7int9yjwwl",
+      "toChapterName": "Synonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxgzw00d41ejyywyt5b3f",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndk7v009lfv7i2s9en1xa",
+      "fromChapterName": "Fill in the Blanks (Single)",
+      "attempts": 0,
+      "targetTopic": "Geography",
+      "reason": "default",
+      "text": "The Reserve Bank of India's headquarters is located in ___________",
+      "candidates": [
+        "Economics",
+        "Geography",
+        "default"
+      ],
+      "toChapterId": "cmttndnsm00adfv7iof6xixcb",
+      "toChapterName": "Banking Awareness (RBI Functions)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxht600ee1ejyihze2t6u",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndkp0009pfv7iccz7n3wy",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Math  Q2: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "What is 20% of 500?",
+      "candidates": [
+        "General Knowledge",
+        "Math",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttnd5mi006dfv7iy0k7p2ut",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxht600ef1ejyt9car2kf",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndkp0009pfv7iccz7n3wy",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Math  Q3: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A person has Rs. 1500. He spends 25% of it. What amount is left?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Math",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttnd5mi006dfv7iy0k7p2ut",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxht600eh1ejyu8k86wqd",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndkp0009pfv7iccz7n3wy",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Math  Q4: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A shopkeeper offers a discount of 20% on the marked price of an article. If the marked price is Rs. 1200, what is the di",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Math",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttnd6b4006jfv7ih9bc3s3m",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxht600ei1ejyn4pbb0ex",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndkp0009pfv7iccz7n3wy",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Math  Q5: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A book costs Rs. 480. If the author is paid 12% of the cost price, how much money will he get?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Math",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttnd5mi006dfv7iy0k7p2ut",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxht700ej1ejy7q3uv5z1",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndkp0009pfv7iccz7n3wy",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Math",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 2400. She spends 10% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Math",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttnd5mi006dfv7iy0k7p2ut",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxht700ek1ejy1pezr6pu",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndkp0009pfv7iccz7n3wy",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Salary  Q2: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A man saves 20% of his salary. If he saves Rs. 480, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Salary",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttnd5mi006dfv7iy0k7p2ut",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxht700em1ejymfofpduv",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndkp0009pfv7iccz7n3wy",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Salary  Q3: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 1800. She spends 25% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Salary",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttnd5mi006dfv7iy0k7p2ut",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxht700en1ejyr49z9fhl",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndkp0009pfv7iccz7n3wy",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Salary  Q4: Qn topic: Discount (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A man saves 10% of his salary. If he saves Rs. 300, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Salary",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttnd5mi006dfv7iy0k7p2ut",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxht700eo1ejyybjjfntd",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndkp0009pfv7iccz7n3wy",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Price  Q5: Qn topic: Simple Interest (math)",
+      "reason": "Discount (math)",
+      "text": "A shopkeeper offers a discount of 25% on the marked price of an article. If the marked price is Rs. 720, what is the dis",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Price",
+        "Discount"
+      ],
+      "toChapterId": "cmttnd6b4006jfv7ih9bc3s3m",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxht700ep1ejy82x61xxc",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndkp0009pfv7iccz7n3wy",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Amount",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 1200. She spends 12% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Amount",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttnd5mi006dfv7iy0k7p2ut",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxht700eq1ejyw8hs6jrt",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndkp0009pfv7iccz7n3wy",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Discount  Q2: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A shopkeeper offers a discount of 12% on the marked price of an article. If the marked price is Rs. 900, what is the dis",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Discount",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttnd6b4006jfv7ih9bc3s3m",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxht700er1ejyiy71kit7",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndkp0009pfv7iccz7n3wy",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Discount  Q3: Qn topic: Vocabulary (finance)",
+      "reason": "Simple Interest (math)",
+      "text": "A woman has Rs. 2400. She spends 20% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Discount",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmttnd5mi006dfv7iy0k7p2ut",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxl6n00i41ejy9m519ccq",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndmtv00a5fv7iwa99u4dt",
+      "fromChapterName": "Sentence Starters",
+      "attempts": 0,
+      "targetTopic": "",
+      "reason": "\"The Reserve Bank of India's main function\"",
+      "text": "The Reserve Bank of India's main function is?",
+      "candidates": [
+        "Monetary Policy",
+        "The Reserve Bank of India's main function"
+      ],
+      "toChapterId": "cmttndnsm00adfv7iof6xixcb",
+      "toChapterName": "Banking Awareness (RBI Functions)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxl6n00i51ejyfhoekwit",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndmtv00a5fv7iwa99u4dt",
+      "fromChapterName": "Sentence Starters",
+      "attempts": 0,
+      "targetTopic": "",
+      "reason": "\"What is a 'Cheque Truncation System'\"",
+      "text": "What is a 'Cheque Truncation System'?",
+      "candidates": [
+        "Geography",
+        "What is a 'Cheque Truncation System'"
+      ],
+      "toChapterId": "cmttndogj00ajfv7iz7fig9rs",
+      "toChapterName": "Banking Awareness (Digital Banking)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxl6o00i71ejyy2z6s7bz",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndmtv00a5fv7iwa99u4dt",
+      "fromChapterName": "Sentence Starters",
+      "attempts": 0,
+      "targetTopic": "",
+      "reason": "\"The National Electronic Fund Transfer (NEFT)\"",
+      "text": "The National Electronic Fund Transfer (NEFT) is?",
+      "candidates": [
+        "Current Affairs",
+        "The National Electronic Fund Transfer"
+      ],
+      "toChapterId": "cmttndogj00ajfv7iz7fig9rs",
+      "toChapterName": "Banking Awareness (Digital Banking)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxlm900iq1ejyp5yduav5",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndn3000a7fv7io7px47q6",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "KYC process",
+      "reason": "",
+      "text": "What is the process of verifying the identity of a customer?",
+      "candidates": [
+        "Indian Polity",
+        "KYC process"
+      ],
+      "toChapterId": "cmttndooi00alfv7i2n0zt188",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmttnxlma00iu1ejy4hlrhq4s",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndn3000a7fv7io7px47q6",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "KYC process",
+      "reason": "",
+      "text": "What is the process of checking the creditworthiness of a customer?",
+      "candidates": [
+        "Indian Polity",
+        "KYC process"
+      ],
+      "toChapterId": "cmttndooi00alfv7i2n0zt188",
+      "toChapterName": "Banking Awareness (Banking Terms)",
+      "toSubject": "General Awareness",
+      "via": "Banking Awareness",
+      "viaText": true
+    },
+    {
+      "id": "cmv9d94gs0159503ojcl3ui77",
+      "exam": "SSC CGL",
+      "fromChapterId": "cmv9cwlss0030tzysz77650cq",
+      "fromChapterName": "Sentence Improvement",
+      "attempts": 0,
+      "targetTopic": "Reading Comprehension",
+      "reason": "",
+      "text": "The customer's account will be closed after six months of inactivity.",
+      "candidates": [
+        "Modals",
+        "Will",
+        "Reading Comprehension"
+      ],
+      "toChapterId": "cmv9cwlks002utzys68t6pd5i",
+      "toChapterName": "Reading Comprehension",
+      "toSubject": "English Language",
+      "via": "Reading Comprehension",
+      "viaText": false
+    },
+    {
+      "id": "cmv9d9jw002ho503o32ompg1u",
+      "exam": "SSC CHSL",
+      "fromChapterId": "cmv9cws9z0081tzysi6nx5n2b",
+      "fromChapterName": "Synonyms",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "different topic",
+      "text": "One who speaks many languages is called a:",
+      "candidates": [
+        "Languages",
+        "Vocabulary",
+        "different topic"
+      ],
+      "toChapterId": "cmv9cwsex0083tzyspu4qsmeh",
+      "toChapterName": "Antonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmv9d9l0d02iv503oeklkp1l1",
+      "exam": "SSC CHSL",
+      "fromChapterId": "cmv9cwsrp008btzysdm9h06p5",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "Math question in Sentence Connectors chapter",
+      "text": "A man saves 10% of his salary. If he saves Rs. 300, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest",
+        "Math question in Sentence Connectors chapter"
+      ],
+      "toChapterId": "cmv9cwo9o004xtzys2gb3tysz",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmv9d9l0d02iw503o3dykhhqv",
+      "exam": "SSC CHSL",
+      "fromChapterId": "cmv9cwsrp008btzysdm9h06p5",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Discount",
+      "reason": "Math question in Sentence Connectors chapter",
+      "text": "A shopkeeper offers a discount of 20% on the marked price of an article. If the marked price is Rs. 1200, what is the di",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Discount",
+        "Math question in Sentence Connectors chapter"
+      ],
+      "toChapterId": "cmv9cwohg0053tzyskuhznz4l",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmv9d9l0d02ix503o8vgbbayl",
+      "exam": "SSC CHSL",
+      "fromChapterId": "cmv9cwsrp008btzysdm9h06p5",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Percentage",
+      "reason": "Math question in Sentence Connectors chapter",
+      "text": "A person has Rs. 1500. He spends 25% of it. What amount is left?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Percentage",
+        "Math question in Sentence Connectors chapter"
+      ],
+      "toChapterId": "cmv9cwo9o004xtzys2gb3tysz",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmv9d9l0d02iy503ofz5evzu1",
+      "exam": "SSC CHSL",
+      "fromChapterId": "cmv9cwsrp008btzysdm9h06p5",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Percentage",
+      "reason": "Math question in Sentence Connectors chapter",
+      "text": "A woman has Rs. 2400. She spends 10% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Percentage",
+        "Math question in Sentence Connectors chapter"
+      ],
+      "toChapterId": "cmv9cwo9o004xtzys2gb3tysz",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmv9d9l0d02iz503omepvxpge",
+      "exam": "SSC CHSL",
+      "fromChapterId": "cmv9cwsrp008btzysdm9h06p5",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest  Q2: Simple Interest (math)",
+      "reason": "Simple Interest  Q2: Simple Interest (math)",
+      "text": "A woman has Rs. 1800. She spends 25% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmv9cwo9o004xtzys2gb3tysz",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmv9d9l0d02j0503olmtk1pz7",
+      "exam": "SSC CHSL",
+      "fromChapterId": "cmv9cwsrp008btzysdm9h06p5",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest  Q3: Simple Interest (math)",
+      "reason": "Simple Interest  Q3: Simple Interest (math)",
+      "text": "A woman has Rs. 1200. She spends 12% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmv9cwo9o004xtzys2gb3tysz",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmv9d9l0d02j1503or7tlccju",
+      "exam": "SSC CHSL",
+      "fromChapterId": "cmv9cwsrp008btzysdm9h06p5",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest  Q4: Simple Interest (math)",
+      "reason": "Simple Interest  Q4: Simple Interest (math)",
+      "text": "A woman has Rs. 2400. She spends 20% of it on an article. What amount is left?",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmv9cwo9o004xtzys2gb3tysz",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmv9d9l0d02j2503osx8kwrgh",
+      "exam": "SSC CHSL",
+      "fromChapterId": "cmv9cwsrp008btzysdm9h06p5",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest  Q5: Simple Interest (math)",
+      "reason": "Simple Interest  Q5: Simple Interest (math)",
+      "text": "What is 20% of 500?",
+      "candidates": [
+        "General Knowledge",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmv9cwo9o004xtzys2gb3tysz",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmv9d9l0d02j3503o9itha2lc",
+      "exam": "SSC CHSL",
+      "fromChapterId": "cmv9cwsrp008btzysdm9h06p5",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Simple Interest",
+      "reason": "unspecified",
+      "text": "A book costs Rs. 480. If the author is paid 12% of the cost price, how much money will he get?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Simple Interest",
+        "unspecified"
+      ],
+      "toChapterId": "cmv9cwo9o004xtzys2gb3tysz",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmv9d9l0d02j4503oj5nugwbx",
+      "exam": "SSC CHSL",
+      "fromChapterId": "cmv9cwsrp008btzysdm9h06p5",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Salary  Q2: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A man saves 20% of his salary. If he saves Rs. 480, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Salary",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmv9cwo9o004xtzys2gb3tysz",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    },
+    {
+      "id": "cmv9d9l0d02j5503or8mapbul",
+      "exam": "SSC CHSL",
+      "fromChapterId": "cmv9cwsrp008btzysdm9h06p5",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Discount  Q3: Qn topic: Simple Interest (math)",
+      "reason": "Simple Interest (math)",
+      "text": "A shopkeeper offers a discount of 25% on the marked price of an article. If the marked price is Rs. 720, what is the dis",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Discount",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmv9cwohg0053tzyskuhznz4l",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmv9d9l0d02j6503o4mtxgprr",
+      "exam": "SSC CHSL",
+      "fromChapterId": "cmv9cwsrp008btzysdm9h06p5",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Discount  Q4: Qn topic: Financial Literacy (current affairs)",
+      "reason": "Simple Interest (math)",
+      "text": "A shopkeeper offers a discount of 12% on the marked price of an article. If the marked price is Rs. 900, what is the dis",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Discount",
+        "Simple Interest"
+      ],
+      "toChapterId": "cmv9cwohg0053tzyskuhznz4l",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmv9d9zdd03ts503odi776bue",
+      "exam": "SSC MTS",
+      "fromChapterId": "cmv9cx0dq00d0tzysxnp4gjim",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Math",
+      "reason": "",
+      "text": "A shopkeeper offers a discount of 25% on the marked price of an article. If the marked price is Rs. 720, what is the dis",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Math"
+      ],
+      "toChapterId": "cmv9cwv90009stzysjqchb3r4",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmv9d9zdd03tt503odlz7ubhm",
+      "exam": "SSC MTS",
+      "fromChapterId": "cmv9cx0dq00d0tzysxnp4gjim",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "Math",
+      "reason": "",
+      "text": "A shopkeeper offers a discount of 12% on the marked price of an article. If the marked price is Rs. 900, what is the dis",
+      "candidates": [
+        "Parts of Speech",
+        "Article",
+        "Math"
+      ],
+      "toChapterId": "cmv9cwv90009stzysjqchb3r4",
+      "toChapterName": "Profit & Loss",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Discount",
+      "viaText": true
+    },
+    {
+      "id": "cmv9dad5r052y503o4fny66qh",
+      "exam": "SSC GD Constable",
+      "fromChapterId": "cmv9cx7et00hftzysacvhzo8n",
+      "fromChapterName": "Synonyms",
+      "attempts": 0,
+      "targetTopic": "Linguist",
+      "reason": "One who speaks many languages is called a:",
+      "text": "One who speaks many languages is called a:",
+      "candidates": [
+        "Languages",
+        "Linguist",
+        "One who speaks many languages is called a"
+      ],
+      "toChapterId": "cmv9cx7hc00hhtzys19sbq1gc",
+      "toChapterName": "Antonyms",
+      "toSubject": "English Language",
+      "via": "Vocabulary",
+      "viaText": true
+    },
+    {
+      "id": "cmv9dae9x0545503o2hsokulb",
+      "exam": "SSC GD Constable",
+      "fromChapterId": "cmv9cx7sb00hptzyss761bvsz",
+      "fromChapterName": "Sentence Connectors",
+      "attempts": 0,
+      "targetTopic": "",
+      "reason": "Math",
+      "text": "A man saves 10% of his salary. If he saves Rs. 300, what is his monthly salary?",
+      "candidates": [
+        "Quantitative Aptitude",
+        "Math"
+      ],
+      "toChapterId": "cmv9cx2gz00ebtzysffivsqx9",
+      "toChapterName": "Percentage",
+      "toSubject": "Quantitative Aptitude",
+      "via": "Percentage",
+      "viaText": true
+    }
+  ],
+  "deactivations": [
+    {
+      "id": "cmtsimots013x11hqzocs8ud5",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 1,
+      "targetTopic": "Accounting  Q4: Qn topic: Banking (finance)",
+      "reason": "Accounting (finance)",
+      "text": "The ___________ is a financial statement that shows a company's financial position at a specific date",
+      "candidates": [
+        "Profit and Loss",
+        "Accounting"
+      ],
+      "conceptSubject": "Quantitative Aptitude",
+      "conceptDomain": "Arithmetic",
+      "why": "LLM topic is non-English"
+    }
+  ],
+  "left": [
+    {
+      "id": "cmttnjxef015169ptq24dgdbe",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttneru8001zatd5pot1rjp9",
+      "fromChapterName": "Sentence Improvement",
+      "attempts": 0,
+      "targetTopic": "Passage",
+      "reason": "",
+      "text": "The customer's account will be closed after six months of inactivity.",
+      "candidates": [
+        "Modals",
+        "Will",
+        "Passage"
+      ],
+      "conceptSubject": "English",
+      "conceptDomain": "English Grammar",
+      "why": "LLM topic is English content"
+    },
+    {
+      "id": "cmttnk9bp01b169ptoy5urfso",
+      "exam": "IBPS PO",
+      "fromChapterId": "cmttneurr002latd5eokid9at",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "targetTopic": "Adjectives  Q4 [ID:cmttnk9bp01b269pty176h63g] (Exam: IBPS PO",
+      "reason": "Adjectives",
+      "text": "Match the following: Column A: A. Resilient, B. Ambiguous, C. Prudent. Column B: 1. Sensible and cautious, 2. Able to re",
+      "candidates": [
+        "Mean",
+        "Adjectives"
+      ],
+      "conceptSubject": "Statistics",
+      "conceptDomain": "Descriptive Statistics",
+      "why": "LLM topic is English content"
+    },
+    {
+      "id": "cmttnmsml01auf4hikrprf6xm",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsycf9r003ytrjb5uy20y55",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "<=8 words",
+      "text": "Match the following: Column A: A. Benevolent, B. Abundant, C. Reluctant. Column B: 1. Unwilling, 2. Plentiful, 3. Kind-h",
+      "candidates": [
+        "Mean",
+        "Vocabulary",
+        "words"
+      ],
+      "conceptSubject": "Statistics",
+      "conceptDomain": "Descriptive Statistics",
+      "why": "LLM topic is English content"
+    },
+    {
+      "id": "cmttnp7yh04aff4hi969gve88",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyjekh003yc1zbcs3s0z6g",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "<=4 words",
+      "text": "Match the following: Column A: A. Benevolent, B. Abundant, C. Reluctant. Column B: 1. Unwilling, 2. Plentiful, 3. Kind-h",
+      "candidates": [
+        "Mean",
+        "Vocabulary",
+        "words"
+      ],
+      "conceptSubject": "Statistics",
+      "conceptDomain": "Descriptive Statistics",
+      "why": "LLM topic is English content"
+    },
+    {
+      "id": "cmttnp7yh04agf4hivrl9yxun",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyjekh003yc1zbcs3s0z6g",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "<=4 words",
+      "text": "Match the following: Column A: A. Inflation, B. Liquidity, C. Insolvency. Column B: 1. Inability to meet financial oblig",
+      "candidates": [
+        "Inflation",
+        "Vocabulary",
+        "words"
+      ],
+      "conceptSubject": "Economics",
+      "conceptDomain": "Macroeconomics",
+      "why": "LLM topic is English content"
+    },
+    {
+      "id": "cmttnp7yh04ahf4hievksfz4h",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyjekh003yc1zbcs3s0z6g",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "<=4 words",
+      "text": "Match the following: Column A: A. Concise, B. Fragile, C. Inevitable. Column B: 1. Certain to happen, 2. Easily broken, ",
+      "candidates": [
+        "Mean",
+        "Vocabulary",
+        "words"
+      ],
+      "conceptSubject": "Statistics",
+      "conceptDomain": "Descriptive Statistics",
+      "why": "LLM topic is English content"
+    },
+    {
+      "id": "cmttnp7yh04aif4hilg0pnkjh",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyjekh003yc1zbcs3s0z6g",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "<=4 words",
+      "text": "Match the following: Column A: A. Credible, B. Diligent, C. Obsolete. Column B: 1. No longer useful or current, 2. Trust",
+      "candidates": [
+        "Mean",
+        "Vocabulary",
+        "words"
+      ],
+      "conceptSubject": "Statistics",
+      "conceptDomain": "Descriptive Statistics",
+      "why": "LLM topic is English content"
+    },
+    {
+      "id": "cmttnrt3506yuf4hiquh6fa3l",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncrgr003cfv7i82q2vq7p",
+      "fromChapterName": "Sentence Improvement",
+      "attempts": 0,
+      "targetTopic": "Error",
+      "reason": "Grammar Error",
+      "text": "Identify the error: 'He discussed about the new project with his team.'",
+      "candidates": [
+        "Parts of Speech",
+        "Verb",
+        "Error",
+        "Grammar Error"
+      ],
+      "conceptSubject": "English",
+      "conceptDomain": "English Grammar",
+      "why": "LLM topic is English content"
+    },
+    {
+      "id": "cmv9d9kpg02ih503oyth366ff",
+      "exam": "SSC CHSL",
+      "fromChapterId": "cmv9cwsp50089tzysrwvqfqws",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "<=8 words",
+      "text": "Match the following: Column A: A. Benevolent, B. Abundant, C. Reluctant. Column B: 1. Unwilling, 2. Plentiful, 3. Kind-h",
+      "candidates": [
+        "Mean",
+        "Vocabulary",
+        "words"
+      ],
+      "conceptSubject": "Statistics",
+      "conceptDomain": "Descriptive Statistics",
+      "why": "LLM topic is English content"
+    },
+    {
+      "id": "cmv9d9kpg02ii503oczhaj88p",
+      "exam": "SSC CHSL",
+      "fromChapterId": "cmv9cwsp50089tzysrwvqfqws",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "<=8 words",
+      "text": "Match the following: Column A: A. Concise, B. Fragile, C. Inevitable. Column B: 1. Certain to happen, 2. Easily broken, ",
+      "candidates": [
+        "Mean",
+        "Vocabulary",
+        "words"
+      ],
+      "conceptSubject": "Statistics",
+      "conceptDomain": "Descriptive Statistics",
+      "why": "LLM topic is English content"
+    },
+    {
+      "id": "cmv9d9kph02ij503o2wn7sj75",
+      "exam": "SSC CHSL",
+      "fromChapterId": "cmv9cwsp50089tzysrwvqfqws",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "<=8 words",
+      "text": "Match the following: Column A: A. Resilient, B. Ambiguous, C. Prudent. Column B: 1. Sensible and cautious, 2. Able to re",
+      "candidates": [
+        "Mean",
+        "Vocabulary",
+        "words"
+      ],
+      "conceptSubject": "Statistics",
+      "conceptDomain": "Descriptive Statistics",
+      "why": "LLM topic is English content"
+    },
+    {
+      "id": "cmv9d9z4l03t4503o3ybx2afa",
+      "exam": "SSC MTS",
+      "fromChapterId": "cmv9cx0b300cytzyswsu0i3ev",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "Vocabulary question in a matching column chapter",
+      "text": "Match the following: Column A: A. Benevolent, B. Abundant, C. Reluctant. Column B: 1. Unwilling, 2. Plentiful, 3. Kind-h",
+      "candidates": [
+        "Mean",
+        "Vocabulary",
+        "Vocabulary question in a matching column chapter"
+      ],
+      "conceptSubject": "Statistics",
+      "conceptDomain": "Descriptive Statistics",
+      "why": "LLM topic is English content"
+    },
+    {
+      "id": "cmv9d9z4l03t5503oz0n4wsuz",
+      "exam": "SSC MTS",
+      "fromChapterId": "cmv9cx0b300cytzyswsu0i3ev",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "Vocabulary question in a matching column chapter",
+      "text": "Match the following: Column A: A. Concise, B. Fragile, C. Inevitable. Column B: 1. Certain to happen, 2. Easily broken, ",
+      "candidates": [
+        "Mean",
+        "Vocabulary",
+        "Vocabulary question in a matching column chapter"
+      ],
+      "conceptSubject": "Statistics",
+      "conceptDomain": "Descriptive Statistics",
+      "why": "LLM topic is English content"
+    },
+    {
+      "id": "cmv9d9z4l03t6503oahvh2hii",
+      "exam": "SSC MTS",
+      "fromChapterId": "cmv9cx0b300cytzyswsu0i3ev",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "Vocabulary question in a matching column chapter",
+      "text": "Match the following: Column A: A. Resilient, B. Ambiguous, C. Prudent. Column B: 1. Sensible and cautious, 2. Able to re",
+      "candidates": [
+        "Mean",
+        "Vocabulary",
+        "Vocabulary question in a matching column chapter"
+      ],
+      "conceptSubject": "Statistics",
+      "conceptDomain": "Descriptive Statistics",
+      "why": "LLM topic is English content"
+    },
+    {
+      "id": "cmv9d9z4l03t7503opfk7mpqs",
+      "exam": "SSC MTS",
+      "fromChapterId": "cmv9cx0b300cytzyswsu0i3ev",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "targetTopic": "Vocabulary",
+      "reason": "Vocabulary question in a matching column chapter",
+      "text": "Match the following: Column A: A. Credible, B. Diligent, C. Obsolete. Column B: 1. No longer useful or current, 2. Trust",
+      "candidates": [
+        "Mean",
+        "Vocabulary",
+        "Vocabulary question in a matching column chapter"
+      ],
+      "conceptSubject": "Statistics",
+      "conceptDomain": "Descriptive Statistics",
+      "why": "LLM topic is English content"
+    },
+    {
+      "id": "cmv9dac7c050v503ok1x8k6n0",
+      "exam": "SSC GD Constable",
+      "fromChapterId": "cmv9cx6wy00h3tzysydp72vsy",
+      "fromChapterName": "Sentence Improvement",
+      "attempts": 0,
+      "targetTopic": "Grammar",
+      "reason": "",
+      "text": "Identify the error: 'The news are very encouraging for the investors.'",
+      "candidates": [
+        "Parts of Speech",
+        "Noun",
+        "Grammar"
+      ],
+      "conceptSubject": "English",
+      "conceptDomain": "English Grammar",
+      "why": "LLM topic is English content"
+    },
+    {
+      "id": "cmv9dac7c051c503o9391yn4c",
+      "exam": "SSC GD Constable",
+      "fromChapterId": "cmv9cx6wy00h3tzysydp72vsy",
+      "fromChapterName": "Sentence Improvement",
+      "attempts": 0,
+      "targetTopic": "Grammar",
+      "reason": "Error Detection",
+      "text": "Identify the error: 'Neither the manager nor his assistants was willing to take responsibility.'",
+      "candidates": [
+        "Parts of Speech",
+        "Verb",
+        "Grammar",
+        "Error Detection"
+      ],
+      "conceptSubject": "English",
+      "conceptDomain": "English Grammar",
+      "why": "LLM topic is English content"
+    }
+  ],
+  "ambiguous": [
+    {
+      "id": "cmtsimqcx016l11hql8ogj2hh",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 1,
+      "targetTopic": "Banking  Q2: Qn topic: Banking Policy",
+      "reason": "Banking Policy",
+      "text": "The customer's account will be closed after six months of inactivity.",
+      "candidates": [
+        "Modals",
+        "Will",
+        "Banking",
+        "Banking Policy"
+      ],
+      "conceptSubject": "English",
+      "conceptDomain": "English Grammar",
+      "matchNames": [],
+      "why": "unclear topic",
+      "textEnglish": false
+    },
+    {
+      "id": "cmtsimqcx016n11hqe4g3aq8b",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q3: Qn topic: Banking Policy",
+      "reason": "Banking Policy",
+      "text": "The bank's policy is to provide loans to customers at a low interest rate.",
+      "candidates": [
+        "Simple Interest",
+        "Simple Interest in Loans",
+        "Banking",
+        "Banking Policy"
+      ],
+      "conceptSubject": "Quantitative Aptitude",
+      "conceptDomain": "Arithmetic",
+      "matchNames": [],
+      "why": "unclear topic",
+      "textEnglish": false
+    },
+    {
+      "id": "cmtsimqcx016p11hqqvjsx6iq",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q5: Qn topic: Banking Policy",
+      "reason": "Banking Policy",
+      "text": "The bank's policy is to provide loans to customers who have a good credit history.",
+      "candidates": [
+        "History",
+        "Banking",
+        "Banking Policy"
+      ],
+      "conceptSubject": "History",
+      "conceptDomain": null,
+      "matchNames": [],
+      "why": "unclear topic",
+      "textEnglish": true
+    },
+    {
+      "id": "cmtsimr5f019111hq8f7989bn",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q4: Qn topic: Banking (finance)",
+      "reason": "Banking (finance)",
+      "text": "What is the process of checking the income of a customer?",
+      "candidates": [
+        "Indian Polity",
+        "Banking"
+      ],
+      "conceptSubject": "Indian Polity",
+      "conceptDomain": null,
+      "matchNames": [],
+      "why": "unclear topic",
+      "textEnglish": false
+    },
+    {
+      "id": "cmtsimrcb019311hqlhvhdepf",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking  Q5: Qn topic: Banking (finance)",
+      "reason": "Banking (finance)",
+      "text": "The bank's ______________ is Rs. 500 million.",
+      "candidates": [
+        "Economics",
+        "Banking"
+      ],
+      "conceptSubject": "Economics",
+      "conceptDomain": null,
+      "matchNames": [],
+      "why": "unclear topic",
+      "textEnglish": false
+    },
+    {
+      "id": "cmtsimrcb019411hq33rd4d3b",
+      "exam": "Banking Exams (IBPS/SBI)",
+      "fromChapterId": "banking-ch-english-language",
+      "fromChapterName": "English Language",
+      "attempts": 0,
+      "targetTopic": "Banking",
+      "reason": "Banking (finance)",
+      "text": "The customer's ______________ was debited by Rs. 1000.",
+      "candidates": [
+        "Indian Polity",
+        "Banking"
+      ],
+      "conceptSubject": "Indian Polity",
+      "conceptDomain": null,
+      "matchNames": [],
+      "why": "unclear topic",
+      "textEnglish": false
+    },
+    {
+      "id": "cmttnmtm501brf4hieol59r8t",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsycivb0042trjbe4wb1e8b",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Financial concept",
+      "reason": "",
+      "text": "What is the time period for a short-term loan?",
+      "candidates": [
+        "History",
+        "Financial concept"
+      ],
+      "matchNames": [
+        "Banking Awareness (RBI Functions)",
+        "Banking Awareness (Banking Terms)"
+      ],
+      "why": "text topic \"Banking Awareness\""
+    },
+    {
+      "id": "cmttnmtm501bsf4hix41ip7kk",
+      "exam": "IBPS Clerk",
+      "fromChapterId": "cmtsycivb0042trjbe4wb1e8b",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Financial concept",
+      "reason": "",
+      "text": "Which of the following is a type of Risk Management technique?",
+      "candidates": [
+        "Current Affairs",
+        "Financial concept"
+      ],
+      "matchNames": [
+        "Banking Awareness (RBI Functions)",
+        "Banking Awareness (Banking Terms)"
+      ],
+      "why": "text topic \"Banking Awareness\""
+    },
+    {
+      "id": "cmttnnvnj02kof4hiig5x7pvk",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfgia0073atd55za3ljhu",
+      "fromChapterName": "Word Usage",
+      "attempts": 0,
+      "targetTopic": "credit",
+      "reason": "",
+      "text": "The credit score is a measure of an individual's ______________.",
+      "candidates": [
+        "History",
+        "credit"
+      ],
+      "matchNames": [
+        "Banking Awareness (RBI Functions)",
+        "Banking Awareness (Banking Terms)"
+      ],
+      "why": "text topic \"Banking Awareness\""
+    },
+    {
+      "id": "cmttnnz0p02oef4hi7be8l46x",
+      "exam": "SBI PO",
+      "fromChapterId": "cmttnfi05007hatd5qb0cp1aa",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Income verification",
+      "reason": "",
+      "text": "What is the process of checking the income of a customer?",
+      "candidates": [
+        "Indian Polity",
+        "Income verification"
+      ],
+      "conceptSubject": "Indian Polity",
+      "conceptDomain": null,
+      "matchNames": [],
+      "why": "unclear topic",
+      "textEnglish": false
+    },
+    {
+      "id": "cmttnp9b504bnf4hiksw1pnd7",
+      "exam": "SBI Clerk",
+      "fromChapterId": "cmtsyjibb0042c1zbqlligycm",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "AML  Q2: Qn topic: Financial Literacy & Digital Banking",
+      "reason": "Anti-Money Laundering (AML) process",
+      "text": "What is the process of checking the income of a customer?",
+      "candidates": [
+        "Indian Polity",
+        "AML",
+        "Anti-Money Laundering process"
+      ],
+      "conceptSubject": "Indian Polity",
+      "conceptDomain": null,
+      "matchNames": [],
+      "why": "unclear topic",
+      "textEnglish": false
+    },
+    {
+      "id": "cmttnqbne05atf4himwhyit2g",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttnfyvm00bhatd5g8ysvpcx",
+      "fromChapterName": "Error Detection",
+      "attempts": 0,
+      "targetTopic": "Carefully  Q2: Qn topic: Vocabulary",
+      "reason": "Grammar",
+      "text": "Fill in the blank: Unless you ___ the instructions carefully, you may make a mistake.",
+      "candidates": [
+        "Sentence Completion",
+        "Fill in the Blank",
+        "Carefully",
+        "Grammar"
+      ],
+      "matchNames": [
+        "Fill in the Blanks (Single)",
+        "Double Fillers"
+      ],
+      "why": "text topic \"Fill in the Blanks\""
+    },
+    {
+      "id": "cmttnqjfe05iif4hiiy8kap1l",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng4g900c9atd5ahrgannq",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Short-term loan",
+      "reason": "",
+      "text": "What is the time period for a short-term loan?",
+      "candidates": [
+        "History",
+        "Short-term loan"
+      ],
+      "matchNames": [
+        "Banking Awareness (RBI Functions)",
+        "Banking Awareness (Banking Terms)"
+      ],
+      "why": "text topic \"Banking Awareness\""
+    },
+    {
+      "id": "cmttnqjfe05ijf4hikgevkj4v",
+      "exam": "RBI Grade B",
+      "fromChapterId": "cmttng4g900c9atd5ahrgannq",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Risk Management technique",
+      "reason": "",
+      "text": "Which of the following is a type of Risk Management technique?",
+      "candidates": [
+        "Current Affairs",
+        "Risk Management technique"
+      ],
+      "matchNames": [
+        "Banking Awareness (RBI Functions)",
+        "Banking Awareness (Banking Terms)"
+      ],
+      "why": "text topic \"Banking Awareness\""
+    },
+    {
+      "id": "cmttnrzo20762f4hi9kjzwcsx",
+      "exam": "IBPS RRB Officer Scale I",
+      "fromChapterId": "cmttncup60042fv7i5unxgusm",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Income verification",
+      "reason": "",
+      "text": "What is the process of checking the income of a customer?",
+      "candidates": [
+        "Indian Polity",
+        "Income verification"
+      ],
+      "conceptSubject": "Indian Polity",
+      "conceptDomain": null,
+      "matchNames": [],
+      "why": "unclear topic",
+      "textEnglish": false
+    },
+    {
+      "id": "cmttnxlm900il1ejyk43yveo1",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndn3000a7fv7io7px47q6",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "AML and KYC process",
+      "reason": "",
+      "text": "What is the process of checking the credentials of a customer?",
+      "candidates": [
+        "Indian Polity",
+        "AML and KYC process"
+      ],
+      "conceptSubject": "Indian Polity",
+      "conceptDomain": null,
+      "matchNames": [],
+      "why": "unclear topic",
+      "textEnglish": false
+    },
+    {
+      "id": "cmttnxlm900in1ejytvw1sozt",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndn3000a7fv7io7px47q6",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Time period for loans",
+      "reason": "",
+      "text": "What is the time period for a short-term loan?",
+      "candidates": [
+        "History",
+        "Time period for loans"
+      ],
+      "matchNames": [
+        "Banking Awareness (RBI Functions)",
+        "Banking Awareness (Banking Terms)"
+      ],
+      "why": "text topic \"Banking Awareness\""
+    },
+    {
+      "id": "cmttnxlma00iw1ejybkon4rca",
+      "exam": "IBPS RRB Office Assistant",
+      "fromChapterId": "cmttndn3000a7fv7io7px47q6",
+      "fromChapterName": "Word Association",
+      "attempts": 0,
+      "targetTopic": "Time period for loans",
+      "reason": "",
+      "text": "What is the time period for a long-term loan?",
+      "candidates": [
+        "History",
+        "Time period for loans"
+      ],
+      "conceptSubject": "History",
+      "conceptDomain": null,
+      "matchNames": [],
+      "why": "unclear topic",
+      "textEnglish": false
+    },
+    {
+      "id": "cmv9d96ao017u503of0diandz",
+      "exam": "SSC CGL",
+      "fromChapterId": "cmv9cwmhu003ktzys4zs5mznw",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "targetTopic": "",
+      "reason": "unspecified",
+      "text": "Match the following: Column A: A. Benevolent, B. Abundant, C. Reluctant. Column B: 1. Unwilling, 2. Plentiful, 3. Kind-h",
+      "candidates": [
+        "Mean",
+        "unspecified"
+      ],
+      "conceptSubject": "Statistics",
+      "conceptDomain": "Descriptive Statistics",
+      "matchNames": [],
+      "why": "unclear topic",
+      "textEnglish": false
+    },
+    {
+      "id": "cmv9d96ao017v503o7uek71kn",
+      "exam": "SSC CGL",
+      "fromChapterId": "cmv9cwmhu003ktzys4zs5mznw",
+      "fromChapterName": "Match the Column",
+      "attempts": 0,
+      "targetTopic": "",
+      "reason": "unspecified",
+      "text": "Match the following: Column A: A. Concise, B. Fragile, C. Inevitable. Column B: 1. Certain to happen, 2. Easily broken, ",
+      "candidates": [
+        "Mean",
+        "unspecified"
+      ],
+      "conceptSubject": "Statistics",
+      "conceptDomain": "Descriptive Statistics",
+      "matchNames": [],
+      "why": "unclear topic",
+      "textEnglish": false
+    }
+  ]
+}
