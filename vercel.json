@@ -1,6 +1,6 @@
 {
   "framework": null,
-  "installCommand": "npm install && ./node_modules/.bin/prisma generate --schema=backend/prisma/schema.prisma",
+  "installCommand": "npm install && node ./node_modules/prisma/build/index.js generate --schema=backend/prisma/schema.prisma",
   "buildCommand": "npm install --prefix frontend && cd frontend && npx tsc && npx vite build",
   "outputDirectory": "dist",
   "regions": [
