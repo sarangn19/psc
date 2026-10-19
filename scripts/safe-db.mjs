@@ -67,8 +67,11 @@ if (action === 'push' || action === 'migrate') {
   const schemaFlag = '--schema=backend/prisma/schema.prisma';
   
   if (action === 'push') {
-    // Always use --force-reset=never as extra safety
-    const cmd = `npx prisma db push ${schemaFlag} --force-reset=never ${args.join(' ')}`;
+    // NOTE: never pass --force-reset here. Prisma parses --force-reset as a
+    // boolean flag, so "--force-reset=never" is read as --force-reset=true and
+    // WIPES ALL DATA. (That exact bug destroyed the DB on 2026-10-19; the
+    // "--force-reset=never" "safeguard" below was the cause, not the cure.)
+    const cmd = `npx prisma db push ${schemaFlag} ${args.join(' ')}`;
     console.log(`> ${cmd}`);
     execSync(cmd, { cwd: rootDir, stdio: 'inherit' });
   } else {
