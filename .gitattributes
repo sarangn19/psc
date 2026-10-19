@@ -1,0 +1,4 @@
+# Shell scripts must keep LF endings. bash on Vercel's Linux builders fails
+# on CRLF with "$'\r': command not found". This holds regardless of each
+# machine's core.autocrlf setting.
+*.sh text eol=lf
