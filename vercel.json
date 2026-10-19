@@ -1,6 +1,6 @@
 {
   "framework": null,
-  "installCommand": "npm install && node ./node_modules/prisma/build/index.js generate --schema=backend/prisma/schema.prisma",
+  "installCommand": "npm install && node ./node_modules/prisma/build/index.js generate --schema=backend/prisma/schema.prisma || (echo '--- PRISMA GENERATE FAILED: diagnostics ---'; echo 'node_modules/prisma:'; ls -d node_modules/prisma 2>&1; echo 'node_modules/@prisma:'; ls -d node_modules/@prisma 2>&1; echo 'node_modules/.bin:'; ls node_modules/.bin 2>&1 | head -40; echo 'ignore-scripts:'; npm config get ignore-scripts; echo 'NODE_ENV:'; echo \"${NODE_ENV:-unset}\"; exit 1)",
   "buildCommand": "npm install --prefix frontend && cd frontend && npx tsc && npx vite build",
   "outputDirectory": "dist",
   "regions": [
