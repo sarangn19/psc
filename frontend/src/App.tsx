@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import OnboardingPage from './pages/OnboardingPage';
 import AdaptivePage from './pages/AdaptivePage';
+import PocketPage from './pages/PocketPage';
 import HomePage from './pages/HomePage';
 import LearningPage from './pages/LearningPage';
 import ChaptersPage from './pages/ChaptersPage';
@@ -55,6 +56,7 @@ export default function App() {
         {/* Student routes */}
         <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
           <Route path="/adaptive" element={<AdaptivePage />} />
+          <Route path="/pocket" element={<PocketPage />} />
           <Route path="/learning" element={<LearningPage />} />
           <Route path="/chapters" element={<ChaptersPage />} />
           <Route path="/news" element={<NewsPage />} />

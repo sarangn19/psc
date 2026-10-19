@@ -13,6 +13,17 @@ const NAV = [
     ),
   },
   {
+    to: '/pocket',
+    label: 'Pocket',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="7.5" width="18" height="12.5" rx="2.2" />
+        <path d="M8.5 7.5V5.6A1.6 1.6 0 0 1 10.1 4h3.8a1.6 1.6 0 0 1 1.6 1.6v1.9" />
+        <path d="M3 12.8h18" />
+      </svg>
+    ),
+  },
+  {
     to: '/chapters',
     label: 'Chapters',
     icon: (

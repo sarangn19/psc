@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
@@ -28,6 +28,15 @@ enum Difficulty {
   HARD
 }
 
+// Whether a chapter's questions can be answered without scratch work.
+// Derived from chapter/subject names at import time; a per-question override
+// tag ("scratch:none" / "scratch:mental") can win over this for exceptions.
+enum ScratchTier {
+  NONE // purely mental: vocab, grammar, GK, polity, current affairs
+  MENTAL // short mental math: percentages, number system
+  WRITTEN // needs working out: SI/CI, time & work, mensuration
+}
+
 enum ActivityType {
   LOGIN
   EXAM_SELECTED
@@ -40,24 +49,25 @@ enum ActivityType {
 }
 
 model User {
-  id            String   @id @default(cuid())
-  name          String
-  email         String   @unique
-  password      String
-  role          Role     @default(STUDENT)
+  id       String @id @default(cuid())
+  name     String
+  email    String @unique
+  password String
+  role     Role   @default(STUDENT)
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  selectedExams     UserExam[]
-  learnedChapters   UserChapter[]
-  attempts          QuestionAttempt[]
-  adaptiveSessions  AdaptiveSession[]
-  activities        UserActivity[]
-  questionReports   QuestionReport[]
-  newsViews         NewsView[]
-  conceptStats      UserConceptStat[]
-  flaggedQuestions  FlaggedQuestion[]
+  selectedExams    UserExam[]
+  learnedChapters  UserChapter[]
+  attempts         QuestionAttempt[]
+  adaptiveSessions AdaptiveSession[]
+  activities       UserActivity[]
+  questionReports  QuestionReport[]
+  newsViews        NewsView[]
+  conceptStats     UserConceptStat[]
+  flaggedQuestions FlaggedQuestion[]
+  pocketSessions   PocketSession[]
 
   @@map("users")
 }
@@ -69,17 +79,17 @@ model Exam {
   category    String
   createdAt   DateTime @default(now())
 
-  subjects    Subject[]
-  userExams   UserExam[]
+  subjects  Subject[]
+  userExams UserExam[]
 
   @@map("exams")
 }
 
 model Subject {
-  id       String @id @default(cuid())
-  name     String
-  examId   String
-  order    Int    @default(0)
+  id     String @id @default(cuid())
+  name   String
+  examId String
+  order  Int    @default(0)
 
   exam     Exam      @relation(fields: [examId], references: [id])
   chapters Chapter[]
@@ -89,39 +99,42 @@ model Subject {
 }
 
 model Chapter {
-  id        String @id @default(cuid())
-  name      String
-  subjectId String
-  order     Int    @default(0)
+  id          String      @id @default(cuid())
+  name        String
+  subjectId   String
+  order       Int         @default(0)
+  scratchTier ScratchTier @default(MENTAL)
 
-  subject         Subject       @relation(fields: [subjectId], references: [id])
-  questions       Question[]
-  userChapters    UserChapter[]
+  subject      Subject       @relation(fields: [subjectId], references: [id])
+  questions    Question[]
+  userChapters UserChapter[]
 
   @@unique([name, subjectId])
+  @@index([scratchTier])
   @@map("chapters")
 }
 
 model Question {
-  id             String        @id @default(cuid())
-  chapterId      String
-  conceptId      Int?
-  text           String
-  options        Json
-  correctOption  Int
-  explanation    String?
-  difficulty     Difficulty    @default(MEDIUM)
-  tags           String[]
-  isActive       Boolean       @default(true)
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  id            String     @id @default(cuid())
+  chapterId     String
+  conceptId     Int?
+  text          String
+  options       Json
+  correctOption Int
+  explanation   String?
+  difficulty    Difficulty @default(MEDIUM)
+  tags          String[]
+  isActive      Boolean    @default(true)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
 
-  chapter         Chapter           @relation(fields: [chapterId], references: [id])
-  concept         TaxonomyNode?     @relation(fields: [conceptId], references: [id])
-  attempts        QuestionAttempt[]
-  reports         QuestionReport[]
-  adaptiveItems   AdaptiveItem[]
-  flaggedBy       FlaggedQuestion[]
+  chapter       Chapter           @relation(fields: [chapterId], references: [id])
+  concept       TaxonomyNode?     @relation(fields: [conceptId], references: [id])
+  attempts      QuestionAttempt[]
+  reports       QuestionReport[]
+  adaptiveItems AdaptiveItem[]
+  pocketItems   PocketItem[]
+  flaggedBy     FlaggedQuestion[]
 
   @@index([conceptId])
   @@index([chapterId, isActive])
@@ -143,11 +156,11 @@ model UserExam {
 }
 
 model UserChapter {
-  id          String   @id @default(cuid())
-  userId      String
-  chapterId   String
-  isLearned   Boolean  @default(true)
-  learnedAt   DateTime @default(now())
+  id        String   @id @default(cuid())
+  userId    String
+  chapterId String
+  isLearned Boolean  @default(true)
+  learnedAt DateTime @default(now())
 
   user    User    @relation(fields: [userId], references: [id])
   chapter Chapter @relation(fields: [chapterId], references: [id])
@@ -157,17 +170,17 @@ model UserChapter {
 }
 
 model QuestionAttempt {
-  id              String   @id @default(cuid())
-  userId          String
-  questionId      String
-  selectedOption  Int
-  isCorrect       Boolean
-  timeTaken       Int      @default(0)
-  sessionId       String?
-  createdAt       DateTime @default(now())
+  id             String   @id @default(cuid())
+  userId         String
+  questionId     String
+  selectedOption Int
+  isCorrect      Boolean
+  timeTaken      Int      @default(0)
+  sessionId      String?
+  createdAt      DateTime @default(now())
 
-  user     User            @relation(fields: [userId], references: [id])
-  question Question        @relation(fields: [questionId], references: [id])
+  user     User             @relation(fields: [userId], references: [id])
+  question Question         @relation(fields: [questionId], references: [id])
   session  AdaptiveSession? @relation(fields: [sessionId], references: [id])
 
   @@index([userId])
@@ -187,9 +200,9 @@ model AdaptiveSession {
   correctQ       Int       @default(0)
   score          Float     @default(0)
 
-  user      User              @relation(fields: [userId], references: [id])
-  attempts  QuestionAttempt[]
-  items     AdaptiveItem[]
+  user     User              @relation(fields: [userId], references: [id])
+  attempts QuestionAttempt[]
+  items    AdaptiveItem[]
 
   @@index([focusConceptId])
   @@map("adaptive_sessions")
@@ -208,18 +221,60 @@ model AdaptiveItem {
   @@map("adaptive_items")
 }
 
+// Pocket mode — standalone commute-sized practice, fully separate from
+// AdaptiveSession/AdaptiveItem. The whole batch is dealt up front so a session
+// can be played offline; answers land in PocketItem (idempotent via clientId)
+// and are flushed to the shared attempt log + UserConceptStat on reconnect.
+model PocketSession {
+  id             String    @id @default(cuid())
+  userId         String
+  batchSize      Int       @default(8)
+  quota          Int       @default(70) // % of batch that should be NONE/MENTAL before falling back
+  focusConceptId Int?
+  totalQ         Int       @default(0)
+  correctQ       Int       @default(0)
+  startedAt      DateTime  @default(now())
+  endedAt        DateTime?
+
+  user  User         @relation(fields: [userId], references: [id])
+  items PocketItem[]
+
+  @@index([userId])
+  @@map("pocket_sessions")
+}
+
+model PocketItem {
+  id             String    @id @default(cuid())
+  sessionId      String
+  questionId     String
+  order          Int
+  clientId       String    @unique // client-generated uuid; makes answer sync retry-safe
+  selectedOption Int?
+  isCorrect      Boolean?
+  timeTaken      Int       @default(0)
+  answeredAt     DateTime?
+  syncedAt       DateTime?
+
+  session  PocketSession @relation(fields: [sessionId], references: [id])
+  question Question      @relation(fields: [questionId], references: [id])
+
+  @@unique([sessionId, questionId])
+  @@index([sessionId])
+  @@map("pocket_items")
+}
+
 // Pre-aggregated per-user per-concept stats — updated on every answer submission.
 // Used by the adaptive engine instead of scanning raw attempts, so accuracy
 // is always 100% correct regardless of how many total attempts the user has.
 // conceptId XOR chapterId is set (never both, never neither).
 model UserConceptStat {
-  id          String   @id @default(cuid())
-  userId      String
-  conceptId   Int?
-  chapterId   String?
-  total       Int      @default(0)
-  correct     Int      @default(0)
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(cuid())
+  userId    String
+  conceptId Int?
+  chapterId String?
+  total     Int      @default(0)
+  correct   Int      @default(0)
+  updatedAt DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id])
 
@@ -230,11 +285,11 @@ model UserConceptStat {
 }
 
 model UserActivity {
-  id          String       @id @default(cuid())
-  userId      String
-  type        ActivityType
-  metadata    Json?
-  createdAt   DateTime     @default(now())
+  id        String       @id @default(cuid())
+  userId    String
+  type      ActivityType
+  metadata  Json?
+  createdAt DateTime     @default(now())
 
   user User @relation(fields: [userId], references: [id])
 
@@ -242,14 +297,14 @@ model UserActivity {
 }
 
 model QuestionReport {
-  id          String   @id @default(cuid())
-  userId      String
-  questionId  String
-  reason      String
-  details     String?
-  isResolved  Boolean  @default(false)
-  resolvedAt  DateTime?
-  createdAt   DateTime @default(now())
+  id         String    @id @default(cuid())
+  userId     String
+  questionId String
+  reason     String
+  details    String?
+  isResolved Boolean   @default(false)
+  resolvedAt DateTime?
+  createdAt  DateTime  @default(now())
 
   user     User     @relation(fields: [userId], references: [id])
   question Question @relation(fields: [questionId], references: [id])
@@ -286,26 +341,26 @@ model NewsView {
 }
 
 model TaxonomyNode {
-  id           Int       @id
-  parentId     Int?
-  level        NodeLevel
-  nameEnglish  String
+  id            Int       @id
+  parentId      Int?
+  level         NodeLevel
+  nameEnglish   String
   nameMalayalam String?
-  nameHindi    String?
-  description  String?
-  aliases      String[]
-  slug         String    @unique
-  status       String    @default("draft")
-  importance   String    @default("medium")
-  difficulty   String    @default("beginner")
-  tags         String[]
-  metadata     Json?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  nameHindi     String?
+  description   String?
+  aliases       String[]
+  slug          String    @unique
+  status        String    @default("draft")
+  importance    String    @default("medium")
+  difficulty    String    @default("beginner")
+  tags          String[]
+  metadata      Json?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 
-  parent      TaxonomyNode?    @relation("NodeTree", fields: [parentId], references: [id])
-  children    TaxonomyNode[]   @relation("NodeTree")
-  questions   Question[]
+  parent    TaxonomyNode?  @relation("NodeTree", fields: [parentId], references: [id])
+  children  TaxonomyNode[] @relation("NodeTree")
+  questions Question[]
 
   @@index([parentId])
   @@index([level])
