@@ -170,6 +170,45 @@ interface ConceptInfo {
   zone: string;
 }
 
+// Sent alongside a question when the engine left a mastered concept for an
+// adjacent one, so the UI can show the move instead of it happening silently.
+interface Adaptation {
+  reason: 'mastered-moving-on';
+  from: string[];
+  fromCount: number;
+}
+
+// Resolve display names for ranked groups (concept:123 / chapter:<uuid> keys).
+// Only called on the rare mastery-hop path, so the extra chapter lookup is cheap.
+async function resolveGroupNames(groups: RankedGroup[]): Promise<string[]> {
+  const conceptIds = groups
+    .filter((g) => g.key.startsWith('concept:'))
+    .map((g) => Number(g.key.slice('concept:'.length)))
+    .filter((n) => Number.isFinite(n));
+  const chapterIds = groups
+    .filter((g) => g.key.startsWith('chapter:'))
+    .map((g) => g.key.slice('chapter:'.length));
+
+  const [paths, chapters] = await Promise.all([
+    conceptIds.length > 0 ? getCachedNodePaths(conceptIds) : Promise.resolve(new Map<number, { level: string; name: string }[]>()),
+    chapterIds.length > 0
+      ? prisma.chapter.findMany({ where: { id: { in: chapterIds } }, select: { id: true, name: true } })
+      : Promise.resolve([] as { id: string; name: string }[]),
+  ]);
+
+  const names: string[] = [];
+  for (const g of groups) {
+    if (g.key.startsWith('concept:')) {
+      const p = paths.get(Number(g.key.slice('concept:'.length)));
+      if (p && p.length) names.push(p[p.length - 1].name);
+    } else {
+      const ch = chapters.find((c) => c.id === g.key.slice('chapter:'.length));
+      if (ch) names.push(ch.name);
+    }
+  }
+  return names;
+}
+
 // Resolve ancestor path — uses in-memory cache (no DB queries)
 async function getNodePath(conceptId: number): Promise<{ level: string; name: string }[]> {
   return getCachedNodePath(conceptId);
@@ -238,7 +277,7 @@ async function fetchNextQuestion(
   userId: string,
   sessionId: string,
   session: { focusConceptId: number | null }
-): Promise<{ done: boolean; message?: string; question?: any; concept?: ConceptInfo; questionNumber?: number }> {
+): Promise<{ done: boolean; message?: string; question?: any; concept?: ConceptInfo; questionNumber?: number; adaptation?: Adaptation }> {
   const isFocused = session.focusConceptId !== null && session.focusConceptId !== undefined;
 
   const [seenItems, learnedChapters, selectedExamChapters] = await Promise.all([
@@ -338,13 +377,23 @@ async function fetchNextQuestion(
   const ranked = rankGroups(candidateIds, stats);
   let chosenId: string | null = ranked.length ? ranked[0].questions[0].id : null;
 
+  // Every remaining candidate group is mastered, so step sideways into an
+  // adjacent concept. Record the hop so the client can announce the move
+  // rather than the topic changing silently under the user.
+  let adaptation: Adaptation | undefined;
   if (ranked.length > 0 && ranked.every((g) => g.mastery)) {
     const masteredConceptIds = [...new Set(ranked.flatMap((g) => g.questions).map((q) => q.conceptId).filter((id): id is number => id !== null))];
     const adjacent = await findAdjacentQuestionIds(masteredConceptIds, seenIds);
     if (adjacent.length > 0) {
       const filteredAdjacent = adjacent.filter((q) => !seenIds.has(q.id));
       const adjacentRanked = rankGroups(filteredAdjacent, stats);
-      if (adjacentRanked.length) chosenId = adjacentRanked[0].questions[0].id;
+      if (adjacentRanked.length) {
+        chosenId = adjacentRanked[0].questions[0].id;
+        const from = await resolveGroupNames(ranked);
+        if (from.length > 0) {
+          adaptation = { reason: 'mastered-moving-on', from, fromCount: from.length };
+        }
+      }
     }
   }
 
@@ -373,7 +422,7 @@ async function fetchNextQuestion(
       : null,
   };
 
-  return { done: false, question: safe, concept: conceptInfo, questionNumber: seenItems.length + 1 };
+  return { done: false, question: safe, concept: conceptInfo, questionNumber: seenItems.length + 1, adaptation };
 }
 
 // Get next question for adaptive session

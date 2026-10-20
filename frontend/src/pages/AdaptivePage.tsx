@@ -19,6 +19,12 @@ interface ConceptInfo {
   total: number; correct: number; accuracy: number; mastery: boolean; zone: string;
 }
 
+interface Adaptation {
+  reason: 'mastered-moving-on';
+  from: string[];
+  fromCount: number;
+}
+
 const LETTERS = ['A', 'B', 'C', 'D'];
 
 type OptionKind = 'idle' | 'right' | 'key' | 'wrong' | 'dim';
@@ -128,6 +134,7 @@ export default function AdaptivePage() {
   const [question, setQuestion] = useState<Question | null>(null);
   const [questionNumber, setQuestionNumber] = useState(0);
   const [concept, setConcept] = useState<ConceptInfo | null>(null);
+  const [adaptation, setAdaptation] = useState<Adaptation | null>(null);
   const [selected, setSelected] = useState<number | null>(null);
   const [result, setResult] = useState<{ isCorrect: boolean; correctOption: number; explanation?: string; explanationLoaded?: boolean } | null>(null);
   const [loading, setLoading] = useState(true);
@@ -199,6 +206,7 @@ export default function AdaptivePage() {
     setFlagged(false);
     setLastEvent(null);
     setMilestoneHit(0);
+    setAdaptation(null);
 
     if (prefetchedRef.current && prefetchedRef.current.sid === sid) {
       const data = prefetchedRef.current.data;
@@ -207,6 +215,7 @@ export default function AdaptivePage() {
       setQuestion(data.question);
       setQuestionNumber(data.questionNumber);
       setConcept(data.concept || null);
+      setAdaptation(data.adaptation || null);
       startTimer();
       prefetchNext(sid);
       return;
@@ -220,6 +229,7 @@ export default function AdaptivePage() {
       setQuestion(data.question);
       setQuestionNumber(data.questionNumber);
       setConcept(data.concept || null);
+      setAdaptation(data.adaptation || null);
       startTimer();
       prefetchNext(sid);
     } catch (err) {
@@ -489,10 +499,11 @@ export default function AdaptivePage() {
   const answered = result !== null;
   const isRight = answered && result!.isCorrect;
 
-  // Zone is four-valued on the backend (UNTESTED/WEAK/MEDIUM/STRONG). Collapse
-  // it to a label here rather than a boolean, so an untested topic is not
-  // reported as "Strong". Accuracy is only shown once the backend has enough
-  // attempts to assign a real zone.
+  // Zone is four-valued on the backend (UNTESTED/WEAK/MEDIUM/STRONG). Only
+  // render once the backend has enough attempts (>=5) to assign a real zone —
+  // otherwise a fresh account would read "New topic" on every single question,
+  // which is noise rather than information. Never collapse to a boolean: that
+  // is what used to label untested topics as strong.
   const zone = concept?.zone ?? null;
   const zoneBadge =
     zone === 'WEAK'
@@ -501,9 +512,7 @@ export default function AdaptivePage() {
         ? { label: `Medium · ${concept!.accuracy}%`, background: '#FBF0DA', color: '#855300' }
         : zone === 'STRONG'
           ? { label: `Strong · ${concept!.accuracy}%`, background: '#E8EBFB', color: '#2A3FC1' }
-          : zone === 'UNTESTED'
-            ? { label: 'New topic', background: '#EEF0F4', color: '#4B5168' }
-            : null;
+          : null;
 
   // ── Streak derived state ──
   const tier = tierOf(streak);
@@ -729,6 +738,30 @@ export default function AdaptivePage() {
       {/* Question */}
       <div className="relative flex-1 flex flex-col">
         <main className="flex-1 flex flex-col gap-4 px-5 pt-5 pb-5">
+        {/* Topic transition: shown for exactly one question, cleared on advance */}
+        {adaptation && adaptation.reason === 'mastered-moving-on' && concept && (
+          <div
+            role="status"
+            className="rounded-[14px] px-4 py-3 flex gap-3 items-start"
+            style={{ background: '#FFF6E3', border: '1.5px solid #E3A033' }}
+          >
+            <span aria-hidden="true" style={{ color: '#855300', fontWeight: 800, lineHeight: 1.1 }}>
+              &#10003;
+            </span>
+            <div className="min-w-0">
+              <p className="m-0 text-[13px] font-[750]" style={{ color: '#855300' }}>
+                Topic mastered
+              </p>
+              <p className="m-0 text-[15px] font-[650]" style={{ color: '#4B5168' }}>
+                {adaptation.from.slice(0, 2).join(', ')}
+                {adaptation.fromCount > 2 ? ` +${adaptation.fromCount - 2} more` : ''}
+                {' → moving to '}
+                <span style={{ color: '#1E2E94' }}>{concept.name}</span>
+              </p>
+            </div>
+          </div>
+        )}
+
         {/* Badges */}
         <div className="flex gap-2 flex-wrap">
           <span className="px-[10px] py-1 rounded-[999px] bg-white border border-app-border text-[13px] font-[600] text-app-textSecondary">
