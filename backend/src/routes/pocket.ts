@@ -11,6 +11,9 @@ const DEFAULT_BATCH = 8;
 const MAX_BATCH = 20;
 const DEFAULT_QUOTA = 70; // % of the batch that should be NONE/MENTAL before falling back
 const POOL_SIZE = 600;
+// A session can keep being refilled, but only up to this many questions. The
+// bound keeps the resume payload and the offline copy on the device sane.
+const SESSION_CAP = 200;
 
 const PREFERRED = new Set<ScratchTier>([ScratchTier.NONE, ScratchTier.MENTAL]);
 
@@ -54,7 +57,12 @@ async function resolveScopeChapterIds(userId: string): Promise<string[] | null> 
   return null;
 }
 
-async function fetchPool(userId: string, scopeChapterIds: string[] | null, focusConceptId: number | null): Promise<PoolRow[]> {
+async function fetchPool(
+  userId: string,
+  scopeChapterIds: string[] | null,
+  focusConceptId: number | null,
+  excludeIds: string[] = []
+): Promise<PoolRow[]> {
   const attemptsPromise = prisma.questionAttempt.findMany({
     where: { userId },
     select: { questionId: true },
@@ -67,6 +75,8 @@ async function fetchPool(userId: string, scopeChapterIds: string[] | null, focus
     WHERE q."isActive" = true
     ${focusConceptId !== null ? Prisma.sql`AND q."conceptId" = ${focusConceptId}` : Prisma.empty}
     ${scopeChapterIds ? Prisma.sql`AND q."chapterId" IN (${Prisma.join(scopeChapterIds)})` : Prisma.empty}
+    ${excludeIds.length > 0 ? Prisma.sql`AND NOT (q.id = ANY(${excludeIds}))` : Prisma.empty}
+    ORDER BY random()
     LIMIT ${POOL_SIZE}
   `) as { id: string; conceptId: number | null; chapterId: string; difficulty: Difficulty; scratchTier: ScratchTier; tags: string[] }[];
 
@@ -179,6 +189,105 @@ router.post('/start', authenticate, async (req: AuthRequest, res: Response) => {
         },
       };
     }),
+  });
+});
+
+// Deal more questions into an existing session so pocket practice keeps going
+// instead of ending after the first batch. Appends at max(order) + 1 and never
+// re-deals a question this session already holds, so the client can walk the
+// growing list the same way it walks the initial batch.
+router.post('/session/:sessionId/refill', authenticate, async (req: AuthRequest, res: Response) => {
+  const userId = req.user!.id;
+  const { sessionId } = req.params;
+  const session = await ownedSession(userId, sessionId);
+  if (!session) return res.status(404).json({ message: 'Session not found' });
+
+  const quota = session.quota ?? DEFAULT_QUOTA;
+  const requested = Math.min(MAX_BATCH, Math.max(1, Number(req.body?.count) || DEFAULT_BATCH));
+
+  const existing = await prisma.pocketItem.findMany({
+    where: { sessionId: session.id },
+    select: { order: true, questionId: true },
+    orderBy: { order: 'desc' },
+  });
+  if (existing.length === 0) {
+    return res.status(409).json({ message: 'Session has no dealt questions; start one with /start.' });
+  }
+
+  const dealtCount = existing.length;
+  if (dealtCount >= SESSION_CAP) {
+    return res.json({ session, tiers: { preferred: 0, fallback: 0 }, items: [], capReached: true, dealtCount });
+  }
+
+  const batchSize = Math.min(requested, SESSION_CAP - dealtCount);
+  const maxOrder = existing[0].order;
+  const excludeIds = existing.map((e) => e.questionId);
+
+  // Same scope ladder as /start: learned + selected exams, then widen to the
+  // whole bank — but the widened pass still never repeats a dealt question.
+  const scopeChapterIds = await resolveScopeChapterIds(userId);
+  let source = scopeChapterIds ? await fetchPool(userId, scopeChapterIds, session.focusConceptId, excludeIds) : [];
+  if (source.length < batchSize) {
+    const wide = await fetchPool(userId, null, session.focusConceptId, excludeIds);
+    const seen = new Set(source.map((r) => r.id));
+    source = source.concat(wide.filter((r) => !seen.has(r.id)));
+  }
+
+  const { picked, preferred, fallback } = deal(source, batchSize, quota);
+  if (picked.length === 0) {
+    return res.json({
+      session,
+      tiers: { preferred: 0, fallback: 0 },
+      items: [],
+      capReached: false,
+      dealtCount,
+      exhausted: true,
+    });
+  }
+
+  // skipDuplicates: (sessionId, questionId) is unique, so a racing refill that
+  // dealt the same question drops its copies instead of failing the request.
+  await prisma.pocketItem.createMany({
+    skipDuplicates: true,
+    data: picked.map((q, i) => ({
+      sessionId: session.id,
+      questionId: q.id,
+      order: maxOrder + i + 1,
+      clientId: randomUUID(),
+    })),
+  });
+
+  const items = await prisma.pocketItem.findMany({
+    where: { sessionId: session.id, order: { gt: maxOrder } },
+    orderBy: { order: 'asc' },
+    include: { question: { include: { chapter: { include: { subject: true } }, concept: true } } },
+  });
+
+  const nextDealt = dealtCount + items.length;
+  return res.json({
+    session: { ...session, batchSize: nextDealt },
+    tiers: { preferred, fallback },
+    items: items.map((it) => {
+      const { correctOption, ...safe } = it.question;
+      return {
+        id: it.id,
+        order: it.order,
+        clientId: it.clientId,
+        question: {
+          id: safe.id,
+          text: safe.text,
+          options: normalizeOptions(safe.options),
+          correctOption,
+          explanation: safe.explanation,
+          difficulty: safe.difficulty,
+          tags: safe.tags,
+          chapter: { name: safe.chapter.name, subject: safe.chapter.subject.name },
+          concept: safe.concept ? { id: safe.concept.id, level: safe.concept.level, nameEnglish: safe.concept.nameEnglish } : null,
+        },
+      };
+    }),
+    capReached: nextDealt >= SESSION_CAP,
+    dealtCount: nextDealt,
   });
 });
 

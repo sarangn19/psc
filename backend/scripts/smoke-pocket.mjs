@@ -139,6 +139,62 @@ const main = async () => {
   check('UserConceptStat totals grew by exactly 8', totalAdded === 8, `delta=${totalAdded}`);
   check('UserConceptStat correct grew by exactly 7', correctAdded === 7, `delta=${correctAdded}`);
 
+  // ---- refill: a session keeps dealing instead of ending after one batch ----
+  const r1 = await call(tok, 'POST', '/api/pocket/start', { batchSize: 4 });
+  check('refill setup: start deals 4', r1.status === 200 && r1.data.items?.length === 4, `status=${r1.status} n=${r1.data.items?.length}`);
+  const rSession = r1.data.session;
+  const rItems = r1.data.items;
+
+  const rf1 = await call(tok, 'POST', `/api/pocket/session/${rSession.id}/refill`, { count: 8 });
+  check('refill 200', rf1.status === 200, `status=${rf1.status}`);
+  const n1 = rf1.data.items.length;
+  check('refill adds the requested count', n1 === 8, `got ${n1}`);
+  check('refill order starts after the old tail', rf1.data.items[0]?.order === 5, `first=${rf1.data.items[0]?.order}`);
+  check('refill order is contiguous', rf1.data.items[n1 - 1]?.order === 4 + n1, `last=${rf1.data.items[n1 - 1]?.order}`);
+  check('refill tracks dealtCount', rf1.data.dealtCount === 4 + n1, `dealt=${rf1.data.dealtCount}`);
+  check('refill reports not at cap', rf1.data.capReached === false);
+  check('refill ships correctOption for offline grading', rf1.data.items.every((i) => typeof i.question.correctOption === 'number'));
+
+  const dealtBefore = new Set(rItems.map((i) => i.question.id));
+  check('refill never repeats a question already dealt', rf1.data.items.every((i) => !dealtBefore.has(i.question.id)));
+
+  const rf2 = await call(tok, 'POST', `/api/pocket/session/${rSession.id}/refill`, { count: 8 });
+  const n2 = rf2.data.items.length;
+  check('second refill appends after the first', n2 > 0 && rf2.data.items[0]?.order === 5 + n1, `first=${rf2.data.items[0]?.order}`);
+  const seen = new Set([...rItems, ...rf1.data.items, ...rf2.data.items].map((i) => i.question.id));
+  check('no question repeats across refills', seen.size === 4 + n1 + n2, `unique=${seen.size} expected=${4 + n1 + n2}`);
+
+  check(
+    'refill clamps count to MAX_BATCH',
+    (await call(tok, 'POST', `/api/pocket/session/${rSession.id}/refill`, { count: 500 })).data.items.length <= 20
+  );
+  check('other user cannot refill', (await call(adm.token, 'POST', `/api/pocket/session/${rSession.id}/refill`, { count: 4 })).status === 404);
+
+  // ---- refill: the 200-question cap ----
+  const capSession = await prisma.pocketSession.create({
+    data: { userId: demo.userId, batchSize: 200, quota: 70, totalQ: 0, correctQ: 0 },
+  });
+  const capQs = await prisma.question.findMany({ where: { isActive: true }, select: { id: true }, take: 200 });
+  await prisma.pocketItem.createMany({
+    data: capQs.map((q, i) => ({ sessionId: capSession.id, questionId: q.id, order: i + 1, clientId: `cap-${i}` })),
+  });
+  const capRefill = await call(tok, 'POST', `/api/pocket/session/${capSession.id}/refill`, { count: 8 });
+  check(
+    'at the cap: empty items, capReached, still 200',
+    capRefill.status === 200 && capRefill.data.items.length === 0 && capRefill.data.capReached === true,
+    JSON.stringify({ status: capRefill.status, n: capRefill.data.items?.length, cap: capRefill.data.capReached })
+  );
+
+  // ---- refill: a session with nothing dealt yet ----
+  const emptySession = await prisma.pocketSession.create({
+    data: { userId: demo.userId, batchSize: 0, quota: 70, totalQ: 0, correctQ: 0 },
+  });
+  check('refill with nothing dealt -> 409', (await call(tok, 'POST', `/api/pocket/session/${emptySession.id}/refill`, { count: 4 })).status === 409);
+
+  // clean up everything this block created
+  await prisma.pocketItem.deleteMany({ where: { sessionId: { in: [rSession.id, capSession.id, emptySession.id] } } });
+  await prisma.pocketSession.deleteMany({ where: { id: { in: [rSession.id, capSession.id, emptySession.id] } } });
+
   await prisma.$disconnect();
   console.log(failures === 0 ? '\nALL PASS' : `\n${failures} FAILURE(S)`);
   process.exit(failures === 0 ? 0 : 1);

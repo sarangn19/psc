@@ -14,9 +14,11 @@ import {
 } from '../lib/pocketDB';
 
 const BATCH_SIZE = 8;
+const SESSION_CAP = 200; // keep in sync with SESSION_CAP in backend/src/routes/pocket.ts
+const PREFETCH_AT = 3; // deal more once this few unanswered questions are left
 const LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 
-type Phase = 'boot' | 'start' | 'playing' | 'summary';
+type Phase = 'boot' | 'start' | 'playing' | 'outofbuffer' | 'summary';
 type Kind = 'idle' | 'dim' | 'right' | 'wrong' | 'reveal';
 
 const LOOK: Record<Kind, { rowBd: string; rowBg: string; badge: string; badgeText: string }> = {
@@ -51,14 +53,20 @@ export default function PocketPage() {
   const [pending, setPending] = useState(0);
   const [syncing, setSyncing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [exhausted, setExhausted] = useState(false);
+  const [waitingMore, setWaitingMore] = useState(false);
 
   const questionStartedAt = useRef<number>(Date.now());
   const flushing = useRef(false);
+  const inflight = useRef<Promise<PocketItem[]> | null>(null);
 
   const items = session?.items ?? [];
   const answeredCount = useMemo(() => items.filter((i) => i.answeredAt).length, [items]);
   const current: PocketItem | undefined = items[cursor];
   const correctCount = useMemo(() => items.filter((i) => i.isCorrect === true).length, [items]);
+  // Questions already dealt beyond the one on screen — a buffer the player
+  // never has to wait on when it is non-empty.
+  const bufferLeft = Math.max(0, items.length - answeredCount - (revealed ? 0 : 1));
 
   const refreshPending = useCallback(() => {
     queueSize()
@@ -107,10 +115,14 @@ export default function PocketPage() {
         const stored = await loadAnySession();
         if (stored && alive) {
           const firstUnanswered = stored.items.findIndex((i) => !i.answeredAt);
+          const full = stored.items.length >= SESSION_CAP;
           setSession(stored);
+          setExhausted(full);
           setCursor(firstUnanswered === -1 ? stored.items.length - 1 : firstUnanswered);
           setRevealed(firstUnanswered === -1);
-          setPhase(firstUnanswered === -1 ? 'summary' : 'playing');
+          // Everything dealt has been answered: at the cap that is a summary,
+          // otherwise there are more to deal (the effect below pulls them).
+          setPhase(firstUnanswered === -1 ? (full ? 'summary' : 'outofbuffer') : 'playing');
           questionStartedAt.current = Date.now();
         } else if (alive) {
           setPhase('start');
@@ -147,6 +159,45 @@ export default function PocketPage() {
     saveSession(next).catch(() => {});
   }, []);
 
+  // Deal more questions into the running session. Concurrent callers share one
+  // request, so a background prefetch racing a manual refill cannot append the
+  // same questions twice.
+  const doRefill = useCallback((): Promise<PocketItem[]> => {
+    if (inflight.current) return inflight.current;
+    if (!session) return Promise.resolve([]);
+
+    const request = (async () => {
+      setWaitingMore(true);
+      try {
+        const { data } = await api.post(`/pocket/session/${session.id}/refill`, { count: BATCH_SIZE });
+        const added: PocketItem[] = data.items ?? [];
+        if (added.length === 0 || data.capReached) setExhausted(true);
+        // Append is idempotent: never re-add an item this copy already holds.
+        const known = new Set(session.items.map((i) => i.id));
+        const fresh = added.filter((i) => !known.has(i.id));
+        if (fresh.length > 0) persistSession({ ...session, items: [...session.items, ...fresh] });
+        return fresh;
+      } catch {
+        return []; // offline or transient — leave exhausted alone so we retry later
+      } finally {
+        inflight.current = null;
+        setWaitingMore(false);
+      }
+    })();
+
+    inflight.current = request;
+    return request;
+  }, [session, persistSession]);
+
+  // Top the buffer up before the player reaches the end, so the session reads
+  // as continuous instead of stopping after every batch.
+  const unanswered = items.length - answeredCount;
+  useEffect(() => {
+    if (phase !== 'playing' || !online || exhausted) return;
+    if (items.length >= SESSION_CAP || unanswered > PREFETCH_AT) return;
+    doRefill();
+  }, [phase, online, exhausted, items.length, unanswered, doRefill]);
+
   const startSession = async () => {
     setError(null);
     setPhase('boot');
@@ -164,6 +215,7 @@ export default function PocketPage() {
       setCursor(0);
       setSelected(null);
       setRevealed(false);
+      setExhausted(false);
       questionStartedAt.current = Date.now();
       setPhase('playing');
     } catch (e: any) {
@@ -207,18 +259,59 @@ export default function PocketPage() {
     if (online) flush();
   };
 
-  const advance = () => {
+  const advance = async () => {
     if (!session) return;
     const nextIndex = session.items.findIndex((it, i) => i > cursor && !it.answeredAt);
-    if (nextIndex === -1) {
+    if (nextIndex !== -1) {
+      setCursor(nextIndex);
+      setSelected(null);
+      setRevealed(false);
+      questionStartedAt.current = Date.now();
+      return;
+    }
+
+    // Buffer exhausted — decide what the end of the session looks like.
+    if (session.items.length >= SESSION_CAP || exhausted) {
       setPhase('summary');
       return;
     }
-    setCursor(nextIndex);
+    if (!online) {
+      setPhase('outofbuffer');
+      return;
+    }
+
+    // Online and more should exist: deal them and land on the first one.
+    const added = await doRefill();
+    if (added.length === 0) {
+      setPhase('summary');
+      return;
+    }
+    setCursor(session.items.length); // appended items start right after the old tail
     setSelected(null);
     setRevealed(false);
     questionStartedAt.current = Date.now();
   };
+
+  const tryMore = async () => {
+    if (!session || !online) return;
+    const added = await doRefill();
+    if (added.length === 0) {
+      setPhase('summary');
+      return;
+    }
+    setCursor(session.items.length);
+    setSelected(null);
+    setRevealed(false);
+    questionStartedAt.current = Date.now();
+    setPhase('playing');
+  };
+
+  // Walking back into signal should silently resume play rather than leaving
+  // the player on a dead-end screen.
+  useEffect(() => {
+    if (online && phase === 'outofbuffer') void tryMore();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [online, phase]);
 
   const finish = async () => {
     if (!session) return;
@@ -259,25 +352,53 @@ export default function PocketPage() {
           <div className="card p-5 flex flex-col gap-3">
             <h1 className="text-[22px] font-[700] text-app-text m-0">Pocket practice</h1>
             <p className="text-[15px] leading-[1.55] text-app-textSecondary m-0">
-              A short batch built for travel: {BATCH_SIZE} questions, mostly ones you can answer without reaching for
-              pen and paper. Once a batch is dealt it keeps working with no signal — answers are queued on this device
-              and sync when you're back.
+              Built for travel: questions you can answer without reaching for pen and paper. It keeps dealing more as
+              you go, up to {SESSION_CAP} per session — and once a batch is on your device it works with no signal,
+              queueing answers locally until you're back online.
             </p>
             <ul className="text-[14px] leading-[1.7] text-app-textSecondary m-0 pl-5">
-              <li>{BATCH_SIZE} questions per batch</li>
+              <li>Keeps dealing automatically, up to {SESSION_CAP} questions</li>
               <li>~70% no-scratch questions, falling back when your syllabus is maths-heavy</li>
               <li>Progress survives a dropped connection and a page refresh</li>
             </ul>
           </div>
           {error && <p className="text-app-danger text-[14px] m-0">{error}</p>}
           <button type="button" className="btn-primary w-full" onClick={startSession}>
-            Deal a batch
+            Start practice
           </button>
           {!online && (
             <p className="text-app-warnDark text-[13px] m-0 text-center">
               You're offline — you'll need a connection to start.
             </p>
           )}
+        </main>
+      </div>
+    );
+  }
+
+  if (phase === 'outofbuffer') {
+    return (
+      <div className="flex flex-col min-h-screen bg-app-bg">
+        <Header online={online} pending={pending} syncing={syncing} onExit={() => navigate('/adaptive')} />
+        <main className="flex-1 flex flex-col justify-center px-5 pb-24 gap-5">
+          <div className="card p-5 flex flex-col gap-3">
+            <h1 className="text-[22px] font-[700] text-app-text m-0">Out of offline questions</h1>
+            <p className="text-[15px] leading-[1.55] text-app-textSecondary m-0">
+              You've played through everything stored on this device. Reconnect to deal more — this session carries on
+              from here with your score intact.
+            </p>
+            {pending > 0 && (
+              <p className="text-[13px] text-app-warnDark m-0">
+                {pending} answer{pending === 1 ? '' : 's'} waiting to sync
+              </p>
+            )}
+          </div>
+          <button type="button" className="btn-primary w-full" onClick={tryMore} disabled={waitingMore || !online}>
+            {waitingMore ? 'Dealing more…' : online ? 'Load more questions' : 'Reconnect to load more'}
+          </button>
+          <button type="button" className="btn-secondary w-full" onClick={finish} disabled={syncing}>
+            End session
+          </button>
         </main>
       </div>
     );
@@ -343,16 +464,20 @@ export default function PocketPage() {
       <div className="px-5 pt-3">
         <div className="flex items-center justify-between text-[13px] text-app-textSecondary">
           <span>
-            Question {cursor + 1} of {items.length}
+            Question {answeredCount + 1} · {correctCount} correct
           </span>
           <span>
-            {correctCount} correct
+            {bufferLeft > 0
+              ? `${bufferLeft} more ready`
+              : waitingMore
+                ? 'Dealing more…'
+                : `${Math.min(items.length, SESSION_CAP)} / ${SESSION_CAP}`}
           </span>
         </div>
         <div className="mt-2 h-[6px] w-full rounded-full bg-app-borderLight overflow-hidden">
           <div
             className="h-full bg-app-accent transition-all duration-300"
-            style={{ width: `${(answeredCount / Math.max(1, items.length)) * 100}%` }}
+            style={{ width: `${(answeredCount / SESSION_CAP) * 100}%` }}
           />
         </div>
       </div>
@@ -404,8 +529,8 @@ export default function PocketPage() {
               Offline — saved on this device{pending > 0 ? `, ${pending} waiting to sync` : ''}.
             </p>
           )}
-          <button type="button" className="btn-primary w-full mt-1" onClick={advance}>
-            {cursor + 1 >= items.length ? 'See summary' : 'Next question'}
+          <button type="button" className="btn-primary w-full mt-1" onClick={advance} disabled={waitingMore}>
+            {waitingMore ? 'Dealing more…' : 'Next question'}
           </button>
         </section>
       )}
