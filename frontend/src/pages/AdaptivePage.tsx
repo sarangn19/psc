@@ -488,7 +488,22 @@ export default function AdaptivePage() {
   // ── Question view ──
   const answered = result !== null;
   const isRight = answered && result!.isCorrect;
-  const isWeak = concept?.zone === 'WEAK';
+
+  // Zone is four-valued on the backend (UNTESTED/WEAK/MEDIUM/STRONG). Collapse
+  // it to a label here rather than a boolean, so an untested topic is not
+  // reported as "Strong". Accuracy is only shown once the backend has enough
+  // attempts to assign a real zone.
+  const zone = concept?.zone ?? null;
+  const zoneBadge =
+    zone === 'WEAK'
+      ? { label: `Weak · ${concept!.accuracy}%`, background: '#FBE8EC', color: '#A3263D' }
+      : zone === 'MEDIUM'
+        ? { label: `Medium · ${concept!.accuracy}%`, background: '#FBF0DA', color: '#855300' }
+        : zone === 'STRONG'
+          ? { label: `Strong · ${concept!.accuracy}%`, background: '#E8EBFB', color: '#2A3FC1' }
+          : zone === 'UNTESTED'
+            ? { label: 'New topic', background: '#EEF0F4', color: '#4B5168' }
+            : null;
 
   // ── Streak derived state ──
   const tier = tierOf(streak);
@@ -719,12 +734,15 @@ export default function AdaptivePage() {
           <span className="px-[10px] py-1 rounded-[999px] bg-white border border-app-border text-[13px] font-[600] text-app-textSecondary">
             {question!.chapter.name}
           </span>
-          <span
-            className="px-[10px] py-1 rounded-[999px] text-[13px] font-[600]"
-            style={isWeak ? { background: '#FBE8EC', color: '#A3263D' } : { background: '#E8EBFB', color: '#2A3FC1' }}
-          >
-            {isWeak ? 'Weak chapter' : 'Strong chapter'}
-          </span>
+          {zoneBadge && (
+            <span
+              className="px-[10px] py-1 rounded-[999px] text-[13px] font-[600]"
+              style={{ background: zoneBadge.background, color: zoneBadge.color }}
+              title="Your accuracy on this topic so far"
+            >
+              {zoneBadge.label}
+            </span>
+          )}
         </div>
 
         {/* Q number + text */}
