@@ -60,6 +60,33 @@ const main = async () => {
   const statsBefore = await snapStats(demo.userId);
   const attemptsBefore = await prisma.questionAttempt.count({ where: { userId: demo.userId } });
 
+  // ---- route surface ----
+  // Every mount must be reachable. Guards against a route living in one server
+  // entry point but not the other, which is how /api/pocket once 404'd on
+  // Vercel while working locally. Probed unauthenticated on purpose: a mounted
+  // route answers 401/400/200, an unmounted one falls through to Express' 404,
+  // and nothing here creates a session or writes a row.
+  const surface = [
+    ['health', 'GET', '/api/health'],
+    ['auth', 'POST', '/api/auth/login', {}],
+    ['exams', 'GET', '/api/exams/my'],
+    ['questions', 'GET', '/api/questions/performance'],
+    ['adaptive', 'POST', '/api/adaptive/session/start', {}],
+    ['pocket', 'POST', '/api/pocket/start', {}],
+    ['users', 'GET', '/api/users/stats'],
+    ['admin', 'GET', '/api/admin/stats'],
+    ['news', 'GET', '/api/news'],
+    ['taxonomy', 'GET', '/api/taxonomy/subjects'],
+  ];
+  for (const [label, method, path, body] of surface) {
+    const status = await fetch(`${BASE}${path}`, {
+      method,
+      headers: { 'content-type': 'application/json' },
+      body: body === undefined ? undefined : JSON.stringify(body),
+    }).then((r) => r.status);
+    check(`route surface: ${label} mounted`, status !== 404, `${method} ${path} -> ${status}`);
+  }
+
   // ---- start: batch deal + quota ----
   const start = await call(tok, 'POST', '/api/pocket/start', { batchSize: 8 });
   check('start 200', start.status === 200, `status=${start.status}`);

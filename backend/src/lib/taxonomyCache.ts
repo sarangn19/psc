@@ -22,13 +22,23 @@ async function ensureCache(): Promise<Map<number, CacheNode>> {
     await warmPromise;
     return cache!;
   }
-  warmPromise = (async () => {
+  const warming = (async () => {
     const nodes = await prisma.taxonomyNode.findMany({
       select: { id: true, parentId: true, level: true, nameEnglish: true },
     });
     cache = new Map(nodes.map((n) => [n.id, n]));
   })();
-  await warmPromise;
+  warmPromise = warming;
+
+  try {
+    await warming;
+  } catch (err) {
+    // A transient failure — DB not reachable yet during a cold start, a
+    // connection limit — must not poison the cache forever. Drop the promise so
+    // the next caller retries instead of awaiting the same rejection forever.
+    if (warmPromise === warming) warmPromise = null;
+    throw err;
+  }
   return cache!;
 }
 
