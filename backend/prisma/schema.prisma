@@ -46,6 +46,7 @@ enum ActivityType {
   ADAPTIVE_SESSION_ENDED
   QUESTION_FLAGGED
   NEWS_VIEWED
+  USER_FEEDBACK
 }
 
 model User {

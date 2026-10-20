@@ -273,12 +273,6 @@ async function fetchNextQuestion(
   } else if (selectedChapterIds.length > 0) {
     scopeChapterIds = selectedChapterIds;
   }
-  // Debug: ensure scope is never null when there are questions available
-  if (!scopeChapterIds && candidateIds.length > 0) {
-    // Fallback: use first chapter from candidates if scope is unexpectedly null
-    const firstChapter = candidateIds[0].chapterId;
-    if (firstChapter) scopeChapterIds = [firstChapter];
-  }
   const restrictToScope = !isFocused && scopeChapterIds !== null;
   const doneMessage = isFocused
     ? 'Focused practice complete!'
