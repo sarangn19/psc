@@ -56,6 +56,15 @@ model User {
   password String
   role     Role   @default(STUDENT)
 
+  // Subscription columns, added outside Prisma. Every column is text in the
+  // database (including the dates), so these stay String rather than being
+  // "cleaned up" into DateTime — that would rewrite the columns.
+  subscriptionStatus    String  @default("trial") @map("subscription_status")
+  subscriptionPlan      String? @map("subscription_plan")
+  subscriptionEndsAt    String? @map("subscription_ends_at")
+  subscriptionGrantedBy Int?    @map("subscription_granted_by")
+  subscriptionGrantedAt String? @map("subscription_granted_at")
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -126,6 +135,10 @@ model Question {
   difficulty    Difficulty @default(MEDIUM)
   tags          String[]
   isActive      Boolean    @default(true)
+  // Legacy denormalised exam label. Added outside Prisma and back-filled across
+  // every row; nothing in the app reads it, but it is question data and must not
+  // be dropped. Modelled so db push stops wanting to remove it.
+  exam          String?    @default("ibps")
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
 
@@ -381,4 +394,64 @@ model FlaggedQuestion {
 
   @@unique([userId, questionId])
   @@map("flagged_questions")
+}
+
+// ---- Legacy current-affairs tables ----
+//
+// Created outside Prisma by the retired CA pipeline (the api/cron functions and
+// their scripts, since deleted). They hold ~420 rows of scraped news. Nothing in
+// the app reads them, but they are data, so they are modelled here rather than
+// left for `db push` to drop alongside some unrelated change.
+//
+// No relations are declared on purpose: ca_quiz_questions.ca_item_id is an
+// integer while current_affairs.id is a bigint, which Prisma will not accept as
+// a relation. Leaving it a plain column means a future db push may drop that
+// one foreign key — a constraint on dead data, no rows affected.
+model CurrentAffair {
+  id         BigInt  @id @default(autoincrement())
+  title      String
+  description String?
+  content    String?
+  category   String?
+  source     String?
+  sourceUrl  String? @map("source_url")
+  link       String? @unique
+  imageUrl   String? @map("image_url")
+  pubDate    String? @map("pub_date")
+  fetchedAt  String? @default(dbgenerated("to_char(now(), 'YYYY-MM-DD HH24:MI:SS')")) @map("fetched_at")
+
+  @@index([category])
+  @@index([pubDate])
+  @@map("current_affairs")
+}
+
+model CaQuizQuestion {
+  id            BigInt  @id @default(autoincrement())
+  caItemId      Int?    @map("ca_item_id")
+  questionText  String  @map("question_text")
+  optionA       String  @map("option_a")
+  optionB       String  @map("option_b")
+  optionC       String  @map("option_c")
+  optionD       String  @map("option_d")
+  optionE       String? @map("option_e")
+  correctOption String  @map("correct_option")
+  explanation   String?
+  category      String?
+  createdAt     String? @default(dbgenerated("to_char(now(), 'YYYY-MM-DD HH24:MI:SS')")) @map("created_at")
+
+  @@index([category])
+  @@map("ca_quiz_questions")
+}
+
+model CaFetchLog {
+  id               BigInt  @id @default(autoincrement())
+  day              String  @unique
+  totalInserted    Int     @default(0) @map("total_inserted")
+  reclassified     Int     @default(0)
+  status           String
+  perCat           String? @map("per_cat")
+  failedCategories String? @map("failed_categories")
+  createdAt        String? @default(dbgenerated("to_char(now(), 'YYYY-MM-DD HH24:MI:SS')")) @map("created_at")
+
+  @@map("ca_fetch_log")
 }
