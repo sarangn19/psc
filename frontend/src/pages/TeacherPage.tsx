@@ -41,6 +41,10 @@ export default function TeacherPage() {
   const [hintLoading, setHintLoading] = useState(false);
   const [questionNumber, setQuestionNumber] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
+  const [attemptCount, setAttemptCount] = useState(0);
+  const [lastWasCorrect, setLastWasCorrect] = useState<boolean | null>(null);
+  const [sessionWeakTopic, setSessionWeakTopic] = useState<WeakTopic | null>(null);
+  const [teacherMessage, setTeacherMessage] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -95,13 +99,14 @@ export default function TeacherPage() {
     setFeedback(null);
     setSelectedOption(null);
     try {
-      const { data } = await api.get(`/adaptive/session/${sid}/next`);
+      const { data } = await api.get(`/teacher/session/${sid}/next`);
       if (data.done || !data.question) {
         setError(data.message || 'No stored questions are available for this topic.');
         return;
       }
       setQuestion(data.question);
       setConcept(data.concept);
+      setTeacherMessage(data.teacherMessage || '');
       setQuestionNumber(data.questionNumber || 0);
       if (data.question.concept?.id) {
         api.post('/teacher/lesson-meta', { conceptId: data.question.concept.id }).then(({ data: meta }) => setLessonMeta(meta)).catch(() => setLessonMeta({ sourceMissing: true }));
@@ -113,12 +118,23 @@ export default function TeacherPage() {
     }
   };
 
-  const startLesson = async () => {
+  const startLesson = async (requestedConceptId?: number) => {
     setStarting(true);
     setError('');
     try {
-      const { data: session } = await api.post('/adaptive/session/start', {});
+      const targetWeakTopic = requestedConceptId
+        ? weak.find((topic) => topic.id === requestedConceptId) || { id: requestedConceptId, name: 'Selected topic', accuracy: 0 }
+        : weak[0] || sessionWeakTopic;
+      const { data: session } = await api.post(
+        '/teacher/session/start',
+        targetWeakTopic ? { conceptId: targetWeakTopic.id } : {},
+      );
       setSessionId(session.id);
+      setAttemptCount(0);
+      setCorrectCount(0);
+      setLastWasCorrect(null);
+      setSessionWeakTopic(targetWeakTopic || null);
+      setTeacherMessage(session.welcome || 'Hi! Let’s learn together, one clear step at a time.');
       await loadNext(session.id);
     } catch {
       setError('Could not start the lesson. Check the connection and try again.');
@@ -130,8 +146,10 @@ export default function TeacherPage() {
   const submitAnswer = async () => {
     if (!sessionId || !question || selectedOption === null) return;
     try {
-      const { data } = await api.post(`/adaptive/session/${sessionId}/answer`, { questionId: question.id, selectedOption, timeTaken: 0 });
+      const { data } = await api.post(`/teacher/session/${sessionId}/answer`, { questionId: question.id, selectedOption, timeTaken: 0 });
       setFeedback(data);
+      setAttemptCount((count) => count + 1);
+      setLastWasCorrect(data.isCorrect);
       if (data.isCorrect) setCorrectCount((count) => count + 1);
     } catch {
       setError('The answer could not be scored. Try submitting it again.');
@@ -175,7 +193,7 @@ export default function TeacherPage() {
         <div>
           <p className="text-[13px] font-[700] uppercase tracking-[.08em] text-app-accent m-0">Teacher-led study</p>
           <h1 className="text-[34px] leading-none font-[800] mt-2 mb-1">AI Teacher</h1>
-          <p className="text-app-textSecondary m-0">Your next lesson, practice, and review are chosen for you.</p>
+          <p className="text-app-textSecondary m-0">Hi! I’ll guide each lesson, practice it with you, and help you improve step by step.</p>
         </div>
         {sessionId && <button type="button" className="btn-secondary !min-h-11 !px-3 !text-[14px]" onClick={pause}>Pause</button>}
       </header>
@@ -203,7 +221,7 @@ export default function TeacherPage() {
               </div>
               <div className="flex flex-wrap gap-2 mt-4">
                 <button type="button" className="btn-primary !min-h-11 !px-4 !text-[15px]" onClick={createPlan}>Create study plan</button>
-                <button type="button" className="btn-secondary !min-h-11 !px-4 !text-[15px]" disabled={starting} onClick={startLesson}>
+                <button type="button" className="btn-secondary !min-h-11 !px-4 !text-[15px]" disabled={starting} onClick={() => startLesson()}>
                   {starting ? 'Starting…' : 'Start next lesson'}
                 </button>
               </div>
@@ -226,9 +244,13 @@ export default function TeacherPage() {
               <div className="p-4 md:p-5">
                 {!feedback && (
                   <div className="mb-5">
-                    <p className="text-[13px] font-[700] text-app-textSecondary mb-2">Teacher's concept</p>
+                    <p className="text-[13px] font-[700] text-app-accent mb-2">1 · Your teacher’s explanation</p>
+                    {teacherMessage && <p className="text-[15px] leading-[1.55] font-[650] mb-3">{teacherMessage}</p>}
                     <p className="text-[17px] leading-[1.55] m-0">
                       {lessonMeta?.description || 'Use the practice pattern below. The curator has not added a source explanation for this topic yet; do not treat this as a complete lesson note.'}
+                    </p>
+                    <p className="mt-3 mb-0 rounded-[8px] bg-app-accentLight px-3 py-2 text-[14px] text-app-accentDark">
+                      <strong>Worked approach:</strong> Read what this topic asks for, identify the given information, choose one simple method, and check the result before answering.
                     </p>
                   </div>
                 )}
@@ -237,7 +259,7 @@ export default function TeacherPage() {
                   <>
                     <div className="rounded-[8px] bg-app-bg px-4 py-4">
                       <div className="flex items-center justify-between gap-2 mb-3">
-                        <p className="m-0 text-[13px] font-[700] text-app-textSecondary">Practice question</p>
+                        <p className="m-0 text-[13px] font-[700] text-app-accent">2 · Let’s practice together</p>
                         <span className="text-[12px] text-app-textMuted">AI-generated label: no — stored bank</span>
                       </div>
                       <p className="text-[18px] font-[650] leading-[1.45] mt-0 mb-4">{question.text}</p>
@@ -270,7 +292,14 @@ export default function TeacherPage() {
                     ) : (
                       <div className="mt-4 rounded-[8px] border border-app-border px-4 py-4" aria-live="polite">
                         <p className={`text-[18px] font-[800] m-0 ${feedback.isCorrect ? 'text-app-accent' : 'text-app-danger'}`}>
-                          {feedback.isCorrect ? 'Correct — well worked.' : 'Not quite — review this answer.'}
+                          {feedback.isCorrect ? 'Correct — lovely work!' : 'Not quite — and that’s okay. Let’s learn from it.'}
+                        </p>
+                        <p className="mt-2 mb-0 text-[14px] font-[700] text-app-accent">3 · Here’s what I noticed</p>
+                        <p className="mt-2 mb-0 text-[14px] text-app-textSecondary">
+                          <strong>Why: </strong>
+                          {feedback.isCorrect
+                            ? 'You identified the correct method and result. This topic will advance slightly in difficulty.'
+                            : `You selected ${selectedOption !== null ? String.fromCharCode(65 + selectedOption) : 'an option'}. Re-read the worked concept and compare each option against the explanation below. The next question will be easier.`}
                         </p>
                         <p className="mt-2 mb-0 text-[15px] leading-[1.55]">
                           <strong>Correct answer: </strong>{question.options[feedback.correctOption] || 'Not available'}
@@ -278,7 +307,18 @@ export default function TeacherPage() {
                         <p className="mt-2 mb-0 text-[15px] leading-[1.55]">
                           {question.explanation || feedback.explanation || 'No stored explanation is available for this question.'}
                         </p>
-                        <button type="button" className="btn-primary !min-h-11 !px-4 !text-[15px] mt-4" onClick={nextQuestion}>Next adapted question</button>
+                        <div className="mt-4 rounded-[8px] bg-app-bg px-3 py-3">
+                          <p className="text-[13px] font-[700] text-app-textSecondary m-0">Session progress</p>
+                          <p className="text-[15px] font-[650] mt-1 mb-0">
+                            {correctCount} correct of {attemptCount} answered · {attemptCount ? Math.round((correctCount / attemptCount) * 100) : 0}% accuracy
+                          </p>
+                          <p className="text-[13px] text-app-textSecondary mt-1 mb-0">
+                            Recommended next: {feedback.isCorrect ? `${concept?.name || lessonMeta?.name || 'A new sibling topic'}, at a slightly harder level` : `Review ${concept?.name || lessonMeta?.name || 'this topic'}, then continue with an easier question`}
+                          </p>
+                        </div>
+                        <button type="button" className="btn-primary !min-h-11 !px-4 !text-[15px] mt-4" onClick={nextQuestion}>
+                          Continue teaching
+                        </button>
                       </div>
                     )}
                     {hint && (
@@ -313,8 +353,15 @@ export default function TeacherPage() {
           <section className="card p-4">
             <h2 className="text-[17px] font-[750] mt-0 mb-3">Weak-topic review</h2>
             {weak.length ? <ul className="list-none p-0 m-0 flex flex-col gap-2">{weak.map((topic) => (
-              <li key={topic.id} className="flex items-center justify-between gap-3 text-[14px]">
-                <span>{topic.name}</span><strong className="text-app-danger">{topic.accuracy}%</strong>
+              <li key={topic.id}>
+                <button
+                  type="button"
+                  className="w-full flex items-center justify-between gap-3 text-[14px] min-h-[44px] px-2 rounded-[8px] border border-transparent hover:border-app-border hover:bg-app-bg text-left"
+                  onClick={() => startLesson(topic.id)}
+                  disabled={starting}
+                >
+                  <span>{topic.name}</span><strong className="text-app-danger">{topic.accuracy}%</strong>
+                </button>
               </li>
             ))}</ul> : <p className="text-[14px] text-app-textSecondary m-0">Answer a few bank questions to unlock weak-topic review.</p>}
           </section>

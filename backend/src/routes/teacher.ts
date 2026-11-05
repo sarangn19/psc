@@ -2,6 +2,8 @@ import { Router } from 'express';
 import prisma from '../lib/prisma';
 import { authenticate, AuthRequest } from '../middleware/auth';
 import { buildDayPlan, nextDifficulty } from '../lib/teacher';
+import { Difficulty, Prisma } from '@prisma/client';
+import { normalizeOptions } from '../lib/options';
 
 const router = Router();
 
@@ -72,6 +74,150 @@ router.post('/lesson-meta', authenticate, async (req: AuthRequest, res) => {
   if (!Number.isInteger(conceptId)) return res.status(400).json({ message: 'conceptId is required' });
   const node = await prisma.taxonomyNode.findUnique({ where: { id: conceptId }, include: { parent: true } });
   return res.json({ name: node?.nameEnglish || 'Topic', description: node?.description || null, sourceMissing: !node?.description });
+});
+
+router.post('/session/start', authenticate, async (req: AuthRequest, res) => {
+  const userId = req.user!.id;
+  const requestedConceptId = Number(req.body?.conceptId);
+  let focusConceptId = Number.isInteger(requestedConceptId) ? requestedConceptId : null;
+
+  if (!focusConceptId) {
+    const weakStats = await prisma.userConceptStat.findMany({
+      where: { userId, conceptId: { not: null }, total: { gt: 0 } },
+      select: { conceptId: true, total: true, correct: true },
+      take: 100,
+    });
+    const weakest = [...weakStats].sort((a, b) =>
+      (a.correct / a.total) - (b.correct / b.total)
+    )[0];
+    focusConceptId = weakest?.conceptId || null;
+  }
+
+  const session = await prisma.adaptiveSession.create({
+    data: { userId, focusConceptId },
+  });
+  const concept = focusConceptId
+    ? await prisma.taxonomyNode.findUnique({ where: { id: focusConceptId } })
+    : null;
+  await prisma.userActivity.create({
+    data: { userId, type: 'ADAPTIVE_SESSION_STARTED', metadata: { teacherSessionId: session.id, focusConceptId } },
+  });
+  return res.json({
+    id: session.id,
+    teacherMode: true,
+    focusTopic: concept?.nameEnglish || null,
+    welcome: concept?.nameEnglish
+      ? `Hi! We’ll work through ${concept.nameEnglish} together. I’ll explain the idea, then we’ll try one question at a time.`
+      : 'Hi! Let’s start with a friendly lesson. I’ll choose a useful topic and guide you one question at a time.',
+  });
+});
+
+router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, res) => {
+  const userId = req.user!.id;
+  const session = await prisma.adaptiveSession.findUnique({ where: { id: req.params.sessionId } });
+  if (!session || session.userId !== userId) return res.status(404).json({ message: 'Teacher session not found' });
+
+  const seenItems = await prisma.adaptiveItem.findMany({
+    where: { sessionId: session.id },
+    select: { questionId: true },
+  });
+  const seenIds = seenItems.map((item) => item.questionId);
+
+  const candidates = await prisma.question.findMany({
+    where: {
+      isActive: true,
+      ...(session.focusConceptId ? { conceptId: session.focusConceptId } : {}),
+      ...(seenIds.length ? { id: { notIn: seenIds } } : {}),
+    },
+    include: { chapter: { include: { subject: true } }, concept: true },
+    take: 25,
+    orderBy: [{ difficulty: 'asc' }, { updatedAt: 'desc' }],
+  });
+  const question = candidates[0];
+  if (!question) return res.json({ done: true, message: 'Nicely done! I’ve run out of stored questions for this topic. We can review another topic or come back later.' });
+
+  await prisma.adaptiveItem.create({
+    data: { sessionId: session.id, questionId: question.id, order: seenItems.length + 1 },
+  });
+
+  const conceptId = question.conceptId;
+  const node = conceptId ? await prisma.taxonomyNode.findUnique({ where: { id: conceptId } }) : null;
+  const stats = conceptId
+    ? await prisma.userConceptStat.findFirst({ where: { userId, conceptId } })
+    : null;
+  const accuracy = stats?.total ? Math.round((stats.correct / stats.total) * 100) : null;
+
+  const { correctOption, ...safeQuestion } = question;
+  return res.json({
+    done: false,
+    questionNumber: seenItems.length + 1,
+    question: {
+      ...safeQuestion,
+      options: normalizeOptions(question.options),
+      correctOption,
+    },
+    concept: {
+      id: conceptId,
+      name: node?.nameEnglish || question.chapter.name,
+      description: node?.description || null,
+      sourceMissing: !node?.description,
+      accuracy,
+    },
+    teacherMessage: seenItems.length === 0
+      ? `Let’s begin with ${node?.nameEnglish || question.chapter.name}. Read the quick concept below, then try the question.`
+      : 'You’re making progress. Let’s carry that learning into the next question.',
+  });
+});
+
+router.post('/session/:sessionId/answer', authenticate, async (req: AuthRequest, res) => {
+  const userId = req.user!.id;
+  const session = await prisma.adaptiveSession.findUnique({ where: { id: req.params.sessionId } });
+  if (!session || session.userId !== userId) return res.status(404).json({ message: 'Teacher session not found' });
+
+  const selectedOption = Number(req.body?.selectedOption);
+  const questionId = String(req.body?.questionId || '');
+  const question = await prisma.question.findUnique({ where: { id: questionId } });
+  if (!question) return res.status(404).json({ message: 'Question not found' });
+  if (!Number.isInteger(selectedOption) || selectedOption < 0) return res.status(400).json({ message: 'Please select one answer option' });
+
+  const isCorrect = selectedOption === question.correctOption;
+  await Promise.all([
+    prisma.questionAttempt.create({
+      data: { userId, questionId, selectedOption, isCorrect, timeTaken: Number(req.body?.timeTaken) || 0, sessionId: session.id },
+    }),
+    prisma.adaptiveSession.update({
+      where: { id: session.id },
+      data: { totalQ: { increment: 1 }, correctQ: isCorrect ? { increment: 1 } : undefined },
+    }),
+    question.conceptId
+      ? prisma.$executeRaw`
+          INSERT INTO user_concept_stats (id, "userId", "conceptId", total, correct, "updatedAt")
+          VALUES (gen_random_uuid()::text, ${userId}, ${question.conceptId}, 1, ${isCorrect ? 1 : 0}, now())
+          ON CONFLICT ("userId", "conceptId") WHERE "conceptId" IS NOT NULL
+          DO UPDATE SET total = user_concept_stats.total + 1,
+                        correct = user_concept_stats.correct + ${isCorrect ? 1 : 0},
+                        "updatedAt" = now()`
+      : prisma.$executeRaw`
+          INSERT INTO user_concept_stats (id, "userId", "chapterId", total, correct, "updatedAt")
+          VALUES (gen_random_uuid()::text, ${userId}, ${question.chapterId}, 1, ${isCorrect ? 1 : 0}, now())
+          ON CONFLICT ("userId", "chapterId") WHERE "chapterId" IS NOT NULL
+          DO UPDATE SET total = user_concept_stats.total + 1,
+                        correct = user_concept_stats.correct + ${isCorrect ? 1 : 0},
+                        "updatedAt" = now()`,
+  ]);
+  prisma.userActivity.create({
+    data: { userId, type: 'QUESTION_ANSWERED', metadata: { questionId, isCorrect, teacherSession: true } },
+  }).catch(() => {});
+
+  return res.json({
+    isCorrect,
+    correctOption: question.correctOption,
+    explanation: question.explanation || null,
+    diagnosis: isCorrect
+      ? 'Nice work—you used the right idea. We’ll gently increase the challenge next.'
+      : 'That answer was close. Let’s review the method and retry with an easier question so the idea becomes clear.',
+    nextDifficulty: nextDifficulty(question.difficulty, isCorrect),
+  });
 });
 
 router.post('/next-difficulty', authenticate, (req, res) => {
