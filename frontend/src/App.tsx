@@ -9,6 +9,7 @@ import AdaptivePage from './pages/AdaptivePage';
 import PocketPage from './pages/PocketPage';
 import HomePage from './pages/HomePage';
 import LearningPage from './pages/LearningPage';
+import TeacherPage from './pages/TeacherPage';
 import ChaptersPage from './pages/ChaptersPage';
 import NewsPage from './pages/NewsPage';
 import PerformancePage from './pages/PerformancePage';
@@ -58,6 +59,7 @@ export default function App() {
           <Route path="/adaptive" element={<AdaptivePage />} />
           <Route path="/pocket" element={<PocketPage />} />
           <Route path="/learning" element={<LearningPage />} />
+          <Route path="/teacher" element={<TeacherPage />} />
           <Route path="/chapters" element={<ChaptersPage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/performance" element={<PerformancePage />} />

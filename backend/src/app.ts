@@ -17,6 +17,7 @@ import userRoutes from './routes/users';
 import adminRoutes from './routes/admin';
 import newsRoutes from './routes/news';
 import taxonomyRoutes from './routes/taxonomy';
+import teacherRoutes from './routes/teacher';
 import prisma from './lib/prisma';
 
 // cors@2 calls the origin function with (requestOrigin, callback) only — no
@@ -84,6 +85,7 @@ export function createApp(): express.Express {
   app.use('/api/admin', adminRoutes);
   app.use('/api/news', newsRoutes);
   app.use('/api/taxonomy', taxonomyRoutes);
+  app.use('/api/teacher', teacherRoutes);
 
   app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
     console.error('UNHANDLED ERROR:', err);

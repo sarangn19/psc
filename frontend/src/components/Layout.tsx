@@ -43,6 +43,16 @@ const NAV = [
     ),
   },
   {
+    to: '/teacher',
+    label: 'AI Teacher',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 19.5V5.8A1.8 1.8 0 0 1 5.8 4h12.4A1.8 1.8 0 0 1 20 5.8v9.4a1.8 1.8 0 0 1-1.8 1.8H8l-4 3z" />
+        <path d="M8 9h8M8 12h6" />
+      </svg>
+    ),
+  },
+  {
     to: '/news',
     label: 'News',
     icon: (
