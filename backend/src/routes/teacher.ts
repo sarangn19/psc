@@ -76,6 +76,35 @@ router.post('/lesson-meta', authenticate, async (req: AuthRequest, res) => {
   return res.json({ name: node?.nameEnglish || 'Topic', description: node?.description || null, sourceMissing: !node?.description });
 });
 
+router.get('/session/latest', authenticate, async (req: AuthRequest, res) => {
+  const userId = req.user!.id;
+  const activities = await prisma.userActivity.findMany({
+    where: { userId, type: 'ADAPTIVE_SESSION_STARTED' },
+    orderBy: { createdAt: 'desc' },
+    take: 25,
+  });
+  const sessionId = activities
+    .map((activity) => (activity.metadata as any)?.teacherSessionId)
+    .find((id): id is string => typeof id === 'string');
+  if (!sessionId) return res.json({ session: null });
+
+  const session = await prisma.adaptiveSession.findUnique({ where: { id: sessionId } });
+  if (!session || session.userId !== userId) return res.json({ session: null });
+  const focusTopic = session.focusConceptId
+    ? await prisma.taxonomyNode.findUnique({ where: { id: session.focusConceptId }, select: { nameEnglish: true } })
+    : null;
+  return res.json({
+    session: {
+      id: session.id,
+      focusConceptId: session.focusConceptId,
+      focusTopic: focusTopic?.nameEnglish || null,
+      totalQ: session.totalQ,
+      correctQ: session.correctQ,
+      startedAt: session.startedAt,
+    },
+  });
+});
+
 router.post('/session/start', authenticate, async (req: AuthRequest, res) => {
   const userId = req.user!.id;
   const requestedConceptId = Number(req.body?.conceptId);

@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import api from '../lib/api';
 
-interface Exam { id: string; name: string; subjects?: any[] }
-interface WeakTopic { id: number; name: string; accuracy: number }
-interface PlanItem { date: string; title: string; type: 'lesson' | 'review'; completed: boolean }
 interface Question {
   id: string;
   text: string;
@@ -15,194 +12,197 @@ interface Question {
   concept?: { id: number; nameEnglish: string } | null;
 }
 
-interface TeacherMessage {
+interface ChatMessage {
   id: string;
   sender: 'teacher' | 'student';
-  kind: 'text' | 'feedback' | 'hint';
   text: string;
+  kind?: 'text' | 'feedback' | 'hint' | 'question';
   correct?: boolean;
 }
 
-const PREF_KEY = 'cognix.aiTeacher.preferences';
+interface StoredChat {
+  sessionId?: string;
+  messages?: ChatMessage[];
+  question?: Question | null;
+  feedback?: any;
+  questionNumber?: number;
+  correctCount?: number;
+  attemptCount?: number;
+  concept?: any;
+  lessonMeta?: any;
+}
+
+const CHAT_KEY = 'cognix.aiTeacher.chat';
+
+function readStoredChat(): StoredChat {
+  try {
+    return JSON.parse(localStorage.getItem(CHAT_KEY) || '{}');
+  } catch {
+    return {};
+  }
+}
 
 export default function TeacherPage() {
-  const [exams, setExams] = useState<Exam[]>([]);
-  const [weak, setWeak] = useState<WeakTopic[]>([]);
-  const [preferences, setPreferences] = useState(() => {
-    try { return JSON.parse(localStorage.getItem(PREF_KEY) || '{}'); } catch { return {}; }
-  });
-  const [examId, setExamId] = useState(preferences.examId || '');
-  const [customExam, setCustomExam] = useState(preferences.customExam || '');
-  const [targetDate, setTargetDate] = useState(preferences.targetDate || '');
-  const [plan, setPlan] = useState<PlanItem[]>([]);
-  const [planSource, setPlanSource] = useState('');
+  const stored = useRef(readStoredChat()).current;
   const [loading, setLoading] = useState(true);
   const [starting, setStarting] = useState(false);
-  const [sessionId, setSessionId] = useState<string | null>(null);
-  const [question, setQuestion] = useState<Question | null>(null);
-  const [concept, setConcept] = useState<any>(null);
-  const [lessonMeta, setLessonMeta] = useState<any>(null);
+  const [sessionId, setSessionId] = useState<string | null>(stored.sessionId || null);
+  const [messages, setMessages] = useState<ChatMessage[]>(stored.messages || []);
+  const [question, setQuestion] = useState<Question | null>(stored.question || null);
+  const [feedback, setFeedback] = useState<any>(stored.feedback || null);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
-  const [feedback, setFeedback] = useState<any>(null);
-  const [hint, setHint] = useState<string | null>(null);
-  const [hintIsGenerated, setHintIsGenerated] = useState(false);
-  const [hintLoading, setHintLoading] = useState(false);
-  const [questionNumber, setQuestionNumber] = useState(0);
-  const [correctCount, setCorrectCount] = useState(0);
-  const [attemptCount, setAttemptCount] = useState(0);
-  const [lastWasCorrect, setLastWasCorrect] = useState<boolean | null>(null);
-  const [sessionWeakTopic, setSessionWeakTopic] = useState<WeakTopic | null>(null);
-  const [teacherMessage, setTeacherMessage] = useState('');
-  const [error, setError] = useState('');
-  const [messages, setMessages] = useState<TeacherMessage[]>([]);
-  const [helpText, setHelpText] = useState('');
+  const [questionNumber, setQuestionNumber] = useState(stored.questionNumber || 0);
+  const [correctCount, setCorrectCount] = useState(stored.correctCount || 0);
+  const [attemptCount, setAttemptCount] = useState(stored.attemptCount || 0);
+  const [concept, setConcept] = useState<any>(stored.concept || null);
+  const [lessonMeta, setLessonMeta] = useState<any>(stored.lessonMeta || null);
   const [teacherTyping, setTeacherTyping] = useState(false);
+  const [helpText, setHelpText] = useState('');
+  const [error, setError] = useState('');
+  const [hintLoading, setHintLoading] = useState(false);
   const threadEndRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    api.get('/teacher/bootstrap').then(({ data }) => {
-      setExams(data.exams || []);
-      setWeak(data.weak || []);
-      if (!examId && data.exams?.[0]) setExamId(data.exams[0].id);
-    }).catch(() => setError('The teacher could not load your syllabus and progress. Check your connection and try again.'))
-      .finally(() => setLoading(false));
-  }, []);
-
-  useEffect(() => {
-    threadEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, question, feedback]);
-
-  useEffect(() => {
-    if (!feedback || !sessionId) return;
-    const timer = window.setTimeout(() => {
-      addMessage('teacher', feedback.isCorrect ? 'Your accuracy is improving. Here’s your next small challenge.' : 'I’ve adjusted the next question, so we can get this comfortably.', 'text');
-      loadNext(sessionId);
-    }, 3200);
-    return () => window.clearTimeout(timer);
-  }, [feedback, sessionId]);
-
-  const addMessage = (sender: TeacherMessage['sender'], text: string, kind: TeacherMessage['kind'] = 'text', correct?: boolean) => {
-    setMessages((current) => [...current, { id: `${Date.now()}-${Math.random()}`, sender, text, kind, correct }]);
+  const addMessage = (
+    sender: ChatMessage['sender'],
+    text: string,
+    kind: ChatMessage['kind'] = 'text',
+    correct?: boolean,
+  ) => {
+    setMessages((current) => [
+      ...current,
+      { id: `${Date.now()}-${Math.random()}`, sender, text, kind, correct },
+    ]);
   };
 
-  const savePreferences = (exam: string, custom: string, date: string) => {
-    localStorage.setItem(PREF_KEY, JSON.stringify({ examId: exam, customExam: custom, targetDate: date }));
-    setPreferences({ examId: exam, customExam: custom, targetDate: date });
-  };
-
-  const createPlan = async () => {
-    setError('');
-    savePreferences(examId, customExam, targetDate);
-    if (!examId && !customExam) {
-      setError('Choose an exam or enter an Other exam name.');
-      return;
-    }
-    if (!targetDate) {
-      setError('Choose a target date.');
-      return;
-    }
-    try {
-      if (examId) await api.post('/exams/select', { examIds: [examId] });
-      if (customExam && !examId) {
-        const selected = exams[0];
-        if (selected) {
-          const { data } = await api.get('/teacher/plan', { params: { examId: selected.id, targetDate } });
-          setPlan(data.plan.map((item: PlanItem, index: number) => index ? item : { ...item, title: `${customExam}: ${item.title}` }));
-          setPlanSource(`Other exam: ${customExam}. Plan uses available study content because a configured syllabus was not found.`);
-        } else {
-          setPlan([]);
-          setPlanSource(`Other exam: ${customExam}. Add or select a syllabus before lesson routing is available.`);
-        }
-      } else {
-        const { data } = await api.get('/teacher/plan', { params: { examId, targetDate } });
-        setPlan(data.plan);
-        setPlanSource(data.source);
-      }
-    } catch {
-      setError('The study plan could not be created. Stored questions can still be used by starting a lesson.');
-    }
+  const saveChat = (next: Partial<StoredChat>) => {
+    const current = readStoredChat();
+    localStorage.setItem(CHAT_KEY, JSON.stringify({ ...current, ...next }));
   };
 
   const loadNext = async (sid: string) => {
     setTeacherTyping(true);
-    setHint(null);
     setFeedback(null);
     setSelectedOption(null);
     try {
       const { data } = await api.get(`/teacher/session/${sid}/next`);
       if (data.done || !data.question) {
-        setError(data.message || 'No stored questions are available for this topic.');
+        addMessage('teacher', data.message || 'We have reached a good stopping point for today. I’ll keep this conversation here for next time.');
         setTeacherTyping(false);
         return;
       }
+
       setQuestion(data.question);
       setConcept(data.concept);
-      setTeacherMessage(data.teacherMessage || '');
       setQuestionNumber(data.questionNumber || 0);
-      addMessage('teacher', data.teacherMessage || 'Let’s continue one small step at a time.');
-      if (data.concept?.description) {
-        addMessage('teacher', data.concept.description);
-      }
-      if (data.question.concept?.id) {
-        api.post('/teacher/lesson-meta', { conceptId: data.question.concept.id }).then(({ data: meta }) => setLessonMeta(meta)).catch(() => setLessonMeta({ sourceMissing: true }));
-      } else {
-        setLessonMeta({ name: data.concept?.name || data.question.chapter?.name || 'Study topic', sourceMissing: true });
-      }
+      setLessonMeta({
+        name: data.concept?.name || data.question.chapter?.name || 'Study topic',
+        description: data.concept?.description || null,
+        sourceMissing: data.concept?.sourceMissing,
+      });
+      addMessage(
+        'teacher',
+        data.teacherMessage || `Let’s work on ${data.concept?.name || 'the next topic'} together.`,
+      );
+      if (data.concept?.description) addMessage('teacher', data.concept.description);
+      else addMessage('teacher', 'The curated note for this topic is not available yet. The question comes from the stored question bank.');
     } catch {
-      setError('The next question could not be loaded. Your progress is still saved.');
-    }
-    finally {
+      setError('I could not load the next practice question. Your saved progress is still safe.');
+    } finally {
       setTeacherTyping(false);
     }
   };
 
-  const startLesson = async (requestedConceptId?: number) => {
+  const startOrResume = async () => {
     setStarting(true);
     setError('');
-    setMessages([]);
     try {
-      const targetWeakTopic = requestedConceptId
-        ? weak.find((topic) => topic.id === requestedConceptId) || { id: requestedConceptId, name: 'Selected topic', accuracy: 0 }
-        : weak[0] || sessionWeakTopic;
-      const { data: session } = await api.post(
-        '/teacher/session/start',
-        targetWeakTopic ? { conceptId: targetWeakTopic.id } : {},
-      );
+      const { data } = await api.get('/teacher/session/latest');
+      if (data.session?.id) {
+        const sid = data.session.id;
+        setSessionId(sid);
+        if (!stored.sessionId || stored.sessionId !== sid) {
+          setMessages((current) => current.length
+            ? current
+            : [{ id: 'resume', sender: 'teacher', text: 'Welcome back. We’ll continue from where we stopped.' }]);
+        }
+        if (!stored.question) await loadNext(sid);
+        return;
+      }
+
+      const { data: session } = await api.post('/teacher/session/start', {});
       setSessionId(session.id);
-      setAttemptCount(0);
-      setCorrectCount(0);
-      setLastWasCorrect(null);
-      setSessionWeakTopic(targetWeakTopic || null);
-      setTeacherMessage(session.welcome || 'Hi! Let’s learn together, one clear step at a time.');
-      addMessage('teacher', session.welcome || 'Hi! Let’s learn together, one clear step at a time.');
+      setMessages([{
+        id: 'welcome',
+        sender: 'teacher',
+        text: session.welcome || 'Hi! I’ll guide you one small step at a time.',
+      }]);
       await loadNext(session.id);
     } catch {
-      setError('Could not start the lesson. Check the connection and try again.');
+      setError('I could not restore your conversation. Please check your connection and try again.');
     } finally {
+      setLoading(false);
       setStarting(false);
     }
   };
 
+  useEffect(() => {
+    startOrResume();
+  }, []);
+
+  useEffect(() => {
+    saveChat({
+      sessionId: sessionId || undefined,
+      messages,
+      question,
+      feedback,
+      questionNumber,
+      correctCount,
+      attemptCount,
+      concept,
+      lessonMeta,
+    });
+  }, [sessionId, messages, question, feedback, questionNumber, correctCount, attemptCount, concept, lessonMeta]);
+
+  useEffect(() => {
+    threadEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, question, feedback, teacherTyping]);
+
+  useEffect(() => {
+    if (!feedback || !sessionId) return;
+    const timer = window.setTimeout(async () => {
+      addMessage(
+        'teacher',
+        feedback.isCorrect
+          ? 'Nice work. I’m choosing the next challenge from your performance.'
+          : 'I’ve found the area to revisit. We’ll make it easier now, then build up again.',
+      );
+      await loadNext(sessionId);
+    }, 2600);
+    return () => window.clearTimeout(timer);
+  }, [feedback, sessionId]);
+
   const submitAnswer = async () => {
     if (!sessionId || !question || selectedOption === null) return;
     try {
-      const { data } = await api.post(`/teacher/session/${sessionId}/answer`, { questionId: question.id, selectedOption, timeTaken: 0 });
-      const answerLabel = `${String.fromCharCode(65 + selectedOption)}. ${question.options[selectedOption]}`;
-      addMessage('student', answerLabel);
+      addMessage('student', `${String.fromCharCode(65 + selectedOption)}. ${question.options[selectedOption]}`, 'text');
+      const { data } = await api.post(`/teacher/session/${sessionId}/answer`, {
+        questionId: question.id,
+        selectedOption,
+        timeTaken: 0,
+      });
       setFeedback(data);
       setAttemptCount((count) => count + 1);
-      setLastWasCorrect(data.isCorrect);
       if (data.isCorrect) setCorrectCount((count) => count + 1);
       addMessage(
         'teacher',
         data.isCorrect
-          ? `Lovely work — that is correct! ${question.explanation || data.explanation || ''}`
-          : `Not quite, and that is okay — we learn from it. The answer is ${String.fromCharCode(65 + data.correctOption)}. ${question.explanation || data.explanation || 'No stored explanation is available yet.'}`,
+          ? `Lovely work — that is correct. ${question.explanation || data.explanation || data.diagnosis || ''}`
+          : `That’s okay — we learn from it. The correct answer is ${String.fromCharCode(65 + data.correctOption)}. ${question.explanation || data.explanation || data.diagnosis || ''}`,
         'feedback',
         data.isCorrect,
       );
     } catch {
-      setError('The answer could not be scored. Try submitting it again.');
+      setError('That answer could not be scored. You can send it again.');
     }
   };
 
@@ -211,328 +211,153 @@ export default function TeacherPage() {
     setHintLoading(true);
     try {
       const { data } = await api.post('/teacher/hint', { questionId: question.id });
-      setHintIsGenerated(Boolean(data.generated));
-      setHint(data.generated ? data.text : data.message);
-      if (data.unavailable) setHint(data.message);
-      addMessage('teacher', data.generated ? data.text : data.message, 'hint');
+      const text = data.generated ? data.text : data.message;
+      addMessage('teacher', text || 'AI hint unavailable. Read the question and compare each option carefully.', 'hint');
     } catch {
-      setHintIsGenerated(false);
-      setHint('AI hint unavailable. Review the concept description and stored question explanation.');
+      addMessage('teacher', 'AI hint unavailable. The stored question bank is still available.', 'hint');
     } finally {
       setHintLoading(false);
     }
   };
 
-  const nextQuestion = () => {
-    if (sessionId) loadNext(sessionId);
+  const sendHelp = async () => {
+    const text = helpText.trim();
+    if (!text) return;
+    addMessage('student', text);
+    setHelpText('');
+    await requestHint();
   };
 
-  const pause = () => {
-    savePreferences(examId, customExam, targetDate);
-    setSessionId(null);
-    setQuestion(null);
-    setFeedback(null);
-    setLessonMeta(null);
-    setHint(null);
-  };
-
-  if (loading) return <div className="h-64 grid place-items-center"><div className="w-8 h-8 border-2 border-app-accent border-t-transparent rounded-full animate-spin" /></div>;
+  if (loading) {
+    return (
+      <div className="h-[calc(100vh-64px)] grid place-items-center">
+        <div className="text-center">
+          <div className="w-8 h-8 mx-auto border-2 border-app-accent border-t-transparent rounded-full animate-spin" />
+          <p className="mt-3 text-app-textSecondary text-[14px]">Opening your conversation…</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="mx-auto max-w-[1100px] px-4 md:px-6 pt-5 pb-28">
-      <header className="mb-5 flex items-end justify-between gap-4">
+    <main className="h-[calc(100vh-64px)] flex flex-col bg-app-bg overflow-hidden">
+      <header className="h-[68px] shrink-0 px-4 md:px-6 flex items-center justify-between border-b border-app-border bg-white">
         <div>
-          <p className="text-[13px] font-[700] uppercase tracking-[.08em] text-app-accent m-0">Teacher-led study</p>
-          <h1 className="text-[34px] leading-none font-[800] mt-2 mb-1">AI Teacher</h1>
-          <p className="text-app-textSecondary m-0">Hi! I’ll guide each lesson, practice it with you, and help you improve step by step.</p>
+          <h1 className="text-[20px] leading-tight font-[800] m-0">AI Teacher</h1>
+          <p className="text-[12px] text-app-textSecondary m-0 mt-1">
+            {lessonMeta?.name || concept?.name || 'Preparing your study path'}
+          </p>
         </div>
-        {sessionId && <button type="button" className="btn-secondary !min-h-11 !px-3 !text-[14px]" onClick={pause}>Pause</button>}
+        <div className="text-right">
+          <p className="text-[11px] text-app-textMuted m-0">Session progress</p>
+          <p className="text-[13px] font-[800] text-app-accent m-0">
+            {correctCount}/{attemptCount} correct
+          </p>
+        </div>
       </header>
 
-      {error && <div role="alert" className="card mb-4 px-4 py-3 text-app-danger text-[14px]">{error}</div>}
+      {error && (
+        <div role="alert" className="shrink-0 mx-3 mt-2 rounded-[10px] bg-red-50 px-3 py-2 text-[13px] text-app-danger">
+          {error}
+        </div>
+      )}
 
-      <div className="grid lg:grid-cols-[minmax(0,1fr)_300px] gap-4">
-        <main className="min-w-0">
-          {!sessionId ? (
-            <section className="card p-4 md:p-5">
-              <h2 className="text-[20px] font-[750] mt-0 mb-4">Set up your study path</h2>
-              <div className="grid sm:grid-cols-2 gap-3">
-                <label className="label">Exam
-                  <select className="input mt-2" value={examId} onChange={(e) => { setExamId(e.target.value); setCustomExam(e.target.value ? '' : customExam); }}>
-                    <option value="">Other exam</option>
-                    {exams.map((exam) => <option key={exam.id} value={exam.id}>{exam.name}</option>)}
-                  </select>
-                </label>
-                {!examId && <label className="label">Other exam name
-                  <input className="input mt-2" value={customExam} onChange={(e) => setCustomExam(e.target.value)} placeholder="e.g. State Police Exam" />
-                </label>}
-                <label className="label">Target date
-                  <input className="input mt-2" type="date" value={targetDate} onChange={(e) => setTargetDate(e.target.value)} />
-                </label>
-              </div>
-              <div className="flex flex-wrap gap-2 mt-4">
-                <button type="button" className="btn-primary !min-h-11 !px-4 !text-[15px]" onClick={createPlan}>Create study plan</button>
-                <button type="button" className="btn-secondary !min-h-11 !px-4 !text-[15px]" disabled={starting} onClick={() => startLesson()}>
-                  {starting ? 'Starting…' : 'Start next lesson'}
-                </button>
-              </div>
-            </section>
-          ) : (
-            <>
-            <section className="card overflow-hidden flex flex-col h-[calc(100vh-210px)] min-h-[560px] max-h-[760px]">
-              <div className="px-4 py-3 border-b border-app-border flex items-center justify-between gap-3 bg-white">
-                <div className="min-w-0">
-                  <p className="text-[12px] font-[700] uppercase tracking-[.08em] text-app-accent m-0">AI Teacher · lesson {questionNumber}</p>
-                  <h2 className="text-[17px] font-[750] m-0 mt-1 truncate">{lessonMeta?.name || concept?.name || 'Recommended topic'}</h2>
-                </div>
-                <span className="rounded-full bg-app-accentLight px-3 py-1 text-[12px] font-[750] text-app-accent">{correctCount} correct</span>
-              </div>
-
-              <div className="flex-1 overflow-y-auto px-3 md:px-5 py-4 bg-app-bg/50">
-                {messages.map((message) => (
-                  <div key={message.id} className={`mb-3 flex ${message.sender === 'student' ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`max-w-[86%] rounded-[18px] px-4 py-3 text-[15px] leading-[1.55] ${
-                      message.sender === 'student'
-                        ? 'rounded-br-[4px] bg-app-accent text-white'
-                        : message.kind === 'feedback'
-                          ? message.correct ? 'rounded-bl-[4px] border border-green-200 bg-green-50 text-green-900' : 'rounded-bl-[4px] border border-orange-200 bg-orange-50 text-orange-950'
-                          : 'rounded-bl-[4px] border border-app-border bg-white text-app-text'
-                    }`}>
-                      {message.sender === 'teacher' && <p className="m-0 mb-1 text-[11px] font-[800] uppercase tracking-[.06em] text-app-accent">Teacher</p>}
-                      {message.text}
-                    </div>
-                  </div>
-                ))}
-
-                {teacherTyping && (
-                  <div className="mb-3 flex justify-start" aria-label="Teacher is typing">
-                    <div className="rounded-[18px] rounded-bl-[4px] border border-app-border bg-white px-4 py-3">
-                      <span className="inline-flex gap-1">
-                        <span className="w-2 h-2 rounded-full bg-app-textMuted animate-bounce" />
-                        <span className="w-2 h-2 rounded-full bg-app-textMuted animate-bounce [animation-delay:150ms]" />
-                        <span className="w-2 h-2 rounded-full bg-app-textMuted animate-bounce [animation-delay:300ms]" />
-                      </span>
-                    </div>
-                  </div>
+      <div className="flex-1 min-h-0 overflow-y-auto px-3 md:px-6 py-4">
+        <div className="max-w-[760px] mx-auto">
+          {messages.map((message) => (
+            <div key={message.id} className={`mb-3 flex ${message.sender === 'student' ? 'justify-end' : 'justify-start'}`}>
+              <div className={`max-w-[88%] rounded-[18px] px-4 py-3 text-[15px] leading-[1.55] ${
+                message.sender === 'student'
+                  ? 'rounded-br-[4px] bg-app-accent text-white'
+                  : message.kind === 'feedback'
+                    ? message.correct
+                      ? 'rounded-bl-[4px] bg-green-50 border border-green-200 text-green-950'
+                      : 'rounded-bl-[4px] bg-orange-50 border border-orange-200 text-orange-950'
+                    : 'rounded-bl-[4px] border border-app-border bg-white text-app-text'
+              }`}>
+                {message.sender === 'teacher' && (
+                  <p className="m-0 mb-1 text-[10px] font-[800] uppercase tracking-[.06em] text-app-accent">Teacher</p>
                 )}
-
-                {lessonMeta?.sourceMissing && !feedback && (
-                  <div className="mb-3 max-w-[86%] rounded-[18px] rounded-bl-[4px] border border-app-warn/30 bg-app-warnLight px-4 py-3 text-[13px] text-app-warnDark">
-                    Curated notes are missing. I’ll still guide you using the stored question bank.
-                  </div>
-                )}
-
-                {question && !feedback && (
-                  <div className="mb-3 max-w-[92%] rounded-[18px] rounded-bl-[4px] border border-app-border bg-white px-4 py-4 shadow-sm">
-                    <div className="flex items-center justify-between gap-2 mb-3">
-                      <p className="m-0 text-[12px] font-[800] uppercase tracking-[.06em] text-app-accent">Quick check · MCQ</p>
-                      <span className="text-[11px] text-app-textMuted">Stored question</span>
-                    </div>
-                    <p className="text-[16px] font-[700] leading-[1.45] mt-0 mb-3">{question.text}</p>
-                    <div className="grid gap-2" role="radiogroup" aria-label="Answer options">
-                      {question.options.map((option, index) => (
-                        <button
-                          key={`${question.id}-${index}`}
-                          type="button"
-                          role="radio"
-                          aria-checked={selectedOption === index}
-                          onClick={() => setSelectedOption(index)}
-                          className={`min-h-[46px] text-left px-3 py-2 rounded-[10px] border text-[14px] transition-colors ${
-                            selectedOption === index ? 'border-app-accent bg-app-accentLight font-[700]' : 'border-app-border bg-white hover:bg-app-bg'
-                          }`}
-                        >
-                          <span className="font-[800] mr-2">{String.fromCharCode(65 + index)}.</span>{option}
-                        </button>
-                      ))}
-                    </div>
-                    <div className="flex gap-2 mt-3">
-                      <button type="button" className="btn-secondary !min-h-10 !px-3 !text-[13px]" onClick={requestHint} disabled={hintLoading}>
-                        {hintLoading ? 'Thinking…' : 'Hint'}
-                      </button>
-                      <button type="button" className="btn-primary !min-h-10 !px-4 !text-[13px]" disabled={selectedOption === null} onClick={submitAnswer}>Send answer</button>
-                    </div>
-                  </div>
-                )}
-
-                {feedback && question && (
-                  <div className="mb-3 flex justify-center">
-                    <div className="w-full max-w-[92%] rounded-[14px] border border-app-border bg-white px-4 py-3">
-                      <p className="text-[13px] font-[750] text-app-textSecondary m-0">Session progress</p>
-                      <p className="text-[14px] font-[700] mt-1 mb-1">{correctCount} correct · {attemptCount} answered · {attemptCount ? Math.round((correctCount / attemptCount) * 100) : 0}% accuracy</p>
-                      <p className="text-[13px] text-app-textSecondary m-0">Next: {feedback.isCorrect ? 'a slightly harder challenge' : 'an easier review question'}.</p>
-                      <p className="text-[12px] text-app-accent mt-2 mb-0 font-[700]">I’ll continue in a moment…</p>
-                    </div>
-                  </div>
-                )}
-                <div ref={threadEndRef} />
+                {message.text}
               </div>
+            </div>
+          ))}
 
-              <div className="border-t border-app-border bg-white px-3 py-3 flex gap-2">
-                <input
-                  className="input !min-h-11 flex-1"
-                  value={helpText}
-                  onChange={(e) => setHelpText(e.target.value)}
-                  placeholder="Ask for an explanation or hint"
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' && helpText.trim()) {
-                      addMessage('student', helpText.trim());
-                      setHelpText('');
-                      requestHint();
-                    }
-                  }}
-                  aria-label="Ask the teacher for help"
-                />
-                <button
-                  type="button"
-                  className="btn-primary !min-h-11 !px-4"
-                  disabled={!helpText.trim()}
-                  onClick={() => { addMessage('student', helpText.trim()); setHelpText(''); requestHint(); }}
-                >
-                  Send
-                </button>
+          {teacherTyping && (
+            <div className="mb-3 flex justify-start" aria-label="Teacher is typing">
+              <div className="rounded-[18px] rounded-bl-[4px] border border-app-border bg-white px-4 py-3">
+                <span className="inline-flex gap-1">
+                  <span className="w-2 h-2 rounded-full bg-app-textMuted animate-bounce" />
+                  <span className="w-2 h-2 rounded-full bg-app-textMuted animate-bounce [animation-delay:150ms]" />
+                  <span className="w-2 h-2 rounded-full bg-app-textMuted animate-bounce [animation-delay:300ms]" />
+                </span>
               </div>
-            </section>
-            <section className="hidden" aria-hidden="true">
-              <div className="px-4 py-3 border-b border-app-border flex items-center justify-between gap-3">
-                <div>
-                  <p className="text-[12px] font-[700] uppercase tracking-[.08em] text-app-accent m-0">Current lesson {questionNumber}</p>
-                  <h2 className="text-[19px] font-[750] m-0 mt-1">{lessonMeta?.name || concept?.name || 'Recommended topic'}</h2>
-                </div>
-                <span className="rounded-full bg-app-accentLight px-3 py-1 text-[13px] font-[700] text-app-accent">{correctCount} correct</span>
-              </div>
-
-              {lessonMeta?.sourceMissing && (
-                <div className="mx-4 mt-4 rounded-[8px] bg-app-warnLight px-3 py-2 text-[13px] text-app-warnDark">
-                  Curated concept notes are missing. This practice still uses the stored question bank.
-                </div>
-              )}
-              <div className="p-4 md:p-5">
-                {!feedback && (
-                  <div className="mb-5">
-                    <p className="text-[13px] font-[700] text-app-accent mb-2">1 · Your teacher’s explanation</p>
-                    {teacherMessage && <p className="text-[15px] leading-[1.55] font-[650] mb-3">{teacherMessage}</p>}
-                    <p className="text-[17px] leading-[1.55] m-0">
-                      {lessonMeta?.description || 'Use the practice pattern below. The curator has not added a source explanation for this topic yet; do not treat this as a complete lesson note.'}
-                    </p>
-                    <p className="mt-3 mb-0 rounded-[8px] bg-app-accentLight px-3 py-2 text-[14px] text-app-accentDark">
-                      <strong>Worked approach:</strong> Read what this topic asks for, identify the given information, choose one simple method, and check the result before answering.
-                    </p>
-                  </div>
-                )}
-
-                {question && (
-                  <>
-                    <div className="rounded-[8px] bg-app-bg px-4 py-4">
-                      <div className="flex items-center justify-between gap-2 mb-3">
-                        <p className="m-0 text-[13px] font-[700] text-app-accent">2 · Let’s practice together</p>
-                        <span className="text-[12px] text-app-textMuted">AI-generated label: no — stored bank</span>
-                      </div>
-                      <p className="text-[18px] font-[650] leading-[1.45] mt-0 mb-4">{question.text}</p>
-                      <div className="grid gap-2" role="radiogroup" aria-label="Answer options">
-                        {question.options.map((option, index) => (
-                          <button
-                            key={`${question.id}-${index}`}
-                            type="button"
-                            role="radio"
-                            aria-checked={selectedOption === index}
-                            disabled={Boolean(feedback)}
-                            onClick={() => setSelectedOption(index)}
-                            className={`min-h-[48px] text-left px-4 py-2 rounded-[8px] border transition-colors ${
-                              selectedOption === index ? 'border-app-accent bg-app-accentLight' : 'border-app-border bg-white'
-                            }`}
-                          >
-                            <span className="font-[700] mr-2">{String.fromCharCode(65 + index)}.</span>{option}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {!feedback ? (
-                      <div className="flex flex-wrap gap-2 mt-4">
-                        <button type="button" className="btn-secondary !min-h-11 !px-4 !text-[15px]" onClick={requestHint} disabled={hintLoading}>
-                          {hintLoading ? 'Getting hint…' : 'Show a hint'}
-                        </button>
-                        <button type="button" className="btn-primary !min-h-11 !px-4 !text-[15px]" disabled={selectedOption === null} onClick={submitAnswer}>Check answer</button>
-                      </div>
-                    ) : (
-                      <div className="mt-4 rounded-[8px] border border-app-border px-4 py-4" aria-live="polite">
-                        <p className={`text-[18px] font-[800] m-0 ${feedback.isCorrect ? 'text-app-accent' : 'text-app-danger'}`}>
-                          {feedback.isCorrect ? 'Correct — lovely work!' : 'Not quite — and that’s okay. Let’s learn from it.'}
-                        </p>
-                        <p className="mt-2 mb-0 text-[14px] font-[700] text-app-accent">3 · Here’s what I noticed</p>
-                        <p className="mt-2 mb-0 text-[14px] text-app-textSecondary">
-                          <strong>Why: </strong>
-                          {feedback.isCorrect
-                            ? 'You identified the correct method and result. This topic will advance slightly in difficulty.'
-                            : `You selected ${selectedOption !== null ? String.fromCharCode(65 + selectedOption) : 'an option'}. Re-read the worked concept and compare each option against the explanation below. The next question will be easier.`}
-                        </p>
-                        <p className="mt-2 mb-0 text-[15px] leading-[1.55]">
-                          <strong>Correct answer: </strong>{question.options[feedback.correctOption] || 'Not available'}
-                        </p>
-                        <p className="mt-2 mb-0 text-[15px] leading-[1.55]">
-                          {question.explanation || feedback.explanation || 'No stored explanation is available for this question.'}
-                        </p>
-                        <div className="mt-4 rounded-[8px] bg-app-bg px-3 py-3">
-                          <p className="text-[13px] font-[700] text-app-textSecondary m-0">Session progress</p>
-                          <p className="text-[15px] font-[650] mt-1 mb-0">
-                            {correctCount} correct of {attemptCount} answered · {attemptCount ? Math.round((correctCount / attemptCount) * 100) : 0}% accuracy
-                          </p>
-                          <p className="text-[13px] text-app-textSecondary mt-1 mb-0">
-                            Recommended next: {feedback.isCorrect ? `${concept?.name || lessonMeta?.name || 'A new sibling topic'}, at a slightly harder level` : `Review ${concept?.name || lessonMeta?.name || 'this topic'}, then continue with an easier question`}
-                          </p>
-                        </div>
-                        <button type="button" className="btn-primary !min-h-11 !px-4 !text-[15px] mt-4" onClick={nextQuestion}>
-                          Continue teaching
-                        </button>
-                      </div>
-                    )}
-                    {hint && (
-                      <p className="mt-3 rounded-[8px] bg-app-warnLight px-3 py-2 text-[14px] text-app-warnDark">
-                        <strong>{hintIsGenerated ? 'AI-generated hint: ' : 'Hint status: '}</strong>{hint}
-                      </p>
-                    )}
-                  </>
-                )}
-              </div>
-            </section>
-            </>
+            </div>
           )}
-        </main>
 
-        <aside className="flex flex-col gap-4">
-          <section className="card p-4">
-            <h2 className="text-[17px] font-[750] mt-0 mb-3">Study plan</h2>
-            {plan.length ? (
-              <>
-                <p className="text-[12px] text-app-textMuted mt-0">{planSource}</p>
-                <ol className="list-none p-0 m-0 flex flex-col gap-2">
-                  {plan.map((item, index) => (
-                    <li key={`${item.date}-${index}`} className="flex gap-3 items-start">
-                      <span className={`mt-1 w-3 h-3 rounded-full flex-none ${item.type === 'review' ? 'bg-app-warn' : 'bg-app-accent'}`} />
-                      <div><p className="text-[12px] text-app-textMuted m-0">{item.date}</p><p className="text-[14px] font-[650] m-0">{item.title}</p></div>
-                    </li>
+          {question && !feedback && (
+            <div className="mb-3 flex justify-start">
+              <div className="max-w-[92%] rounded-[18px] rounded-bl-[4px] border border-app-border bg-white px-4 py-4 shadow-sm">
+                <p className="m-0 mb-2 text-[10px] font-[800] uppercase tracking-[.06em] text-app-accent">Practice question · stored bank</p>
+                <p className="text-[16px] font-[700] leading-[1.45] m-0 mb-3">{question.text}</p>
+                <div className="grid gap-2" role="radiogroup" aria-label="Answer options">
+                  {question.options.map((option, index) => (
+                    <button
+                      key={`${question.id}-${index}`}
+                      type="button"
+                      role="radio"
+                      aria-checked={selectedOption === index}
+                      onClick={() => setSelectedOption(index)}
+                      className={`min-h-[46px] text-left px-3 py-2 rounded-[12px] border text-[14px] transition-colors ${
+                        selectedOption === index
+                          ? 'border-app-accent bg-app-accentLight font-[700]'
+                          : 'border-app-border bg-white hover:bg-app-bg'
+                      }`}
+                    >
+                      <span className="font-[800] mr-2">{String.fromCharCode(65 + index)}.</span>{option}
+                    </button>
                   ))}
-                </ol>
-              </>
-            ) : <p className="text-[14px] text-app-textSecondary m-0">Create a plan to schedule lessons and spaced review.</p>}
-          </section>
-          <section className="card p-4">
-            <h2 className="text-[17px] font-[750] mt-0 mb-3">Weak-topic review</h2>
-            {weak.length ? <ul className="list-none p-0 m-0 flex flex-col gap-2">{weak.map((topic) => (
-              <li key={topic.id}>
-                <button
-                  type="button"
-                  className="w-full flex items-center justify-between gap-3 text-[14px] min-h-[44px] px-2 rounded-[8px] border border-transparent hover:border-app-border hover:bg-app-bg text-left"
-                  onClick={() => startLesson(topic.id)}
-                  disabled={starting}
-                >
-                  <span>{topic.name}</span><strong className="text-app-danger">{topic.accuracy}%</strong>
-                </button>
-              </li>
-            ))}</ul> : <p className="text-[14px] text-app-textSecondary m-0">Answer a few bank questions to unlock weak-topic review.</p>}
-          </section>
-        </aside>
+                </div>
+                <div className="flex gap-2 mt-3">
+                  <button type="button" className="btn-secondary !min-h-10 !px-3 !text-[13px]" onClick={requestHint} disabled={hintLoading}>
+                    {hintLoading ? 'Thinking…' : 'Hint'}
+                  </button>
+                  <button type="button" className="btn-primary !min-h-10 !px-4 !text-[13px]" disabled={selectedOption === null} onClick={submitAnswer}>
+                    Send answer
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {feedback && (
+            <div className="mb-3 flex justify-center">
+              <p className="text-[12px] font-[700] text-app-textMuted m-0">
+                Next question is being chosen from your performance… {attemptCount ? Math.round((correctCount / attemptCount) * 100) : 0}% accuracy
+              </p>
+            </div>
+          )}
+          <div ref={threadEndRef} />
+        </div>
       </div>
-    </div>
+
+      <div className="shrink-0 border-t border-app-border bg-white px-3 py-3">
+        <div className="max-w-[760px] mx-auto flex gap-2">
+          <input
+            className="input !min-h-11 flex-1 rounded-full"
+            value={helpText}
+            onChange={(event) => setHelpText(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' && !starting) void sendHelp();
+            }}
+            placeholder="Message your teacher"
+            aria-label="Message your teacher"
+          />
+          <button type="button" className="btn-primary !min-h-11 !w-11 !p-0 rounded-full" disabled={!helpText.trim()} onClick={sendHelp} aria-label="Send message">
+            ➤
+          </button>
+        </div>
+      </div>
+    </main>
   );
 }
