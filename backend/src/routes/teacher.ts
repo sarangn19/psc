@@ -224,6 +224,14 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     select: { questionId: true },
   });
   const seenIds = seenItems.map((item) => item.questionId);
+  const recentAttempts = await prisma.questionAttempt.findMany({
+    where: { userId },
+    select: { questionId: true },
+    orderBy: { createdAt: 'desc' },
+    take: 120,
+  });
+  const recentlyAttemptedIds = [...new Set(recentAttempts.map((attempt) => attempt.questionId))];
+  const excludedIds = [...new Set([...seenIds, ...recentlyAttemptedIds])];
   const selectedExams = await prisma.userExam.findMany({
     where: { userId },
     select: { examId: true },
@@ -243,7 +251,7 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
       isActive: true,
       ...(session.focusConceptId ? { conceptId: session.focusConceptId } : {}),
       ...(selectedExamIds.length ? { chapter: { subject: { examId: { in: selectedExamIds } } } } : {}),
-      ...(seenIds.length ? { id: { notIn: seenIds } } : {}),
+      ...(excludedIds.length ? { id: { notIn: excludedIds } } : {}),
       difficulty: targetDifficulty,
     },
     include: { chapter: { include: { subject: true } }, concept: true },
@@ -254,7 +262,7 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     candidates = await prisma.question.findMany({
       where: {
         isActive: true,
-        ...(seenIds.length ? { id: { notIn: seenIds } } : {}),
+        ...(excludedIds.length ? { id: { notIn: excludedIds } } : {}),
         ...(selectedExamIds.length ? { chapter: { subject: { examId: { in: selectedExamIds } } } } : {}),
       },
       include: { chapter: { include: { subject: true } }, concept: true },

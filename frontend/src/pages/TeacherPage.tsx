@@ -39,9 +39,26 @@ interface StoredChat {
 const CHAT_KEY = 'cognix.aiTeacher.chat';
 const chatDelay = (milliseconds: number) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
 
+function TeacherAvatar() {
+  return (
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <rect width="40" height="40" rx="20" fill="#2A3FC1" />
+      <circle cx="20" cy="16" r="7" fill="#FFFFFF" opacity=".96" />
+      <path d="M9 34c1.5-7 6-10.5 11-10.5S29.5 27 31 34" fill="#FFFFFF" opacity=".96" />
+      <circle cx="17.5" cy="15" r="1" fill="#2A3FC1" />
+      <circle cx="22.5" cy="15" r="1" fill="#2A3FC1" />
+      <path d="M17 19c2 1.5 4 1.5 6 0" fill="none" stroke="#2A3FC1" strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 function readStoredChat(): StoredChat {
   try {
-    return JSON.parse(localStorage.getItem(CHAT_KEY) || '{}');
+    const parsed = JSON.parse(localStorage.getItem(CHAT_KEY) || '{}') as StoredChat;
+    if (parsed.messages) {
+      parsed.messages = parsed.messages.map((message) => ({ ...message, revealed: false }));
+    }
+    return parsed;
   } catch {
     return {};
   }
@@ -65,7 +82,9 @@ export default function TeacherPage() {
   const [helpText, setHelpText] = useState('');
   const [error, setError] = useState('');
   const [hintLoading, setHintLoading] = useState(false);
+  const [answering, setAnswering] = useState(false);
   const threadEndRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const addMessage = (
     sender: ChatMessage['sender'],
@@ -89,6 +108,7 @@ export default function TeacherPage() {
     setTeacherTyping(true);
     setFeedback(null);
     setSelectedOption(null);
+    setQuestion(null);
     try {
       const { data } = await api.get(`/teacher/session/${sid}/next`);
       if (data.done || !data.question) {
@@ -173,7 +193,12 @@ export default function TeacherPage() {
   }, [sessionId, messages, question, feedback, questionNumber, correctCount, attemptCount, concept, lessonMeta]);
 
   useEffect(() => {
-    threadEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const distanceFromBottom = container.scrollHeight - container.scrollTop - container.clientHeight;
+    if (distanceFromBottom < 220 || teacherTyping) {
+      container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+    }
   }, [messages, question, feedback, teacherTyping]);
 
   useEffect(() => {
@@ -184,8 +209,10 @@ export default function TeacherPage() {
     return () => window.clearTimeout(timer);
   }, [feedback, sessionId]);
 
-  const submitAnswer = async () => {
-    if (!sessionId || !question || selectedOption === null) return;
+  const submitAnswer = async (optionIndex = selectedOption) => {
+    if (!sessionId || !question || optionIndex === null || answering) return;
+    setAnswering(true);
+    setSelectedOption(optionIndex);
     try {
       addMessage(
         'teacher',
@@ -194,15 +221,15 @@ export default function TeacherPage() {
         undefined,
         {
           options: question.options,
-          selectedOption,
+          selectedOption: optionIndex,
           correctOption: question.correctOption,
         },
       );
-      addMessage('student', `${String.fromCharCode(65 + selectedOption)}. ${question.options[selectedOption]}`, 'text');
+      addMessage('student', `${String.fromCharCode(65 + optionIndex)}. ${question.options[optionIndex]}`, 'text');
       setTeacherTyping(true);
       const { data } = await api.post(`/teacher/session/${sessionId}/answer`, {
         questionId: question.id,
-        selectedOption,
+        selectedOption: optionIndex,
         timeTaken: 0,
       });
       await chatDelay(550);
@@ -223,6 +250,7 @@ export default function TeacherPage() {
       setTeacherTyping(false);
       setError('That answer could not be scored. You can send it again.');
     }
+    setAnswering(false);
   };
 
   const requestHint = async () => {
@@ -265,153 +293,178 @@ export default function TeacherPage() {
 
   if (loading) {
     return (
-      <div className="h-[calc(100vh-64px)] grid place-items-center">
-        <div className="text-center">
-          <div className="w-8 h-8 mx-auto border-2 border-app-accent border-t-transparent rounded-full animate-spin" />
-          <p className="mt-3 text-app-textSecondary text-[14px]">Opening your conversation…</p>
+      <main className="h-[calc(100vh-76px)] bg-[#F3F4F6] md:grid md:place-items-center md:px-6 overflow-hidden">
+        <div className="h-full w-full max-w-[480px] mx-auto flex flex-col bg-[#F3F4F6] md:border md:border-app-border md:shadow-xl">
+          <header className="h-[60px] shrink-0 px-4 flex items-center gap-3 bg-white border-b border-[#DADDE5]">
+            <div className="w-10 h-10"><TeacherAvatar /></div>
+            <div>
+              <h1 className="text-[20px] leading-tight font-[700] m-0">AI Teacher</h1>
+              <p className="text-[13px] text-app-textSecondary m-0">Loading…</p>
+            </div>
+          </header>
+          <div className="flex-1 p-4 flex flex-col gap-3" aria-busy="true">
+            <div className="w-[62%] h-[40px] rounded-[18px] bg-white animate-pulse" />
+            <div className="self-end w-[44%] h-[40px] rounded-[18px] bg-app-accent/30 animate-pulse" />
+            <div className="w-[78%] h-[64px] rounded-[18px] bg-white animate-pulse" />
+          </div>
         </div>
-      </div>
+      </main>
     );
   }
 
   return (
-    <main className="h-[calc(100vh-64px)] flex flex-col bg-app-bg overflow-hidden">
-      <header className="h-[68px] shrink-0 px-4 md:px-6 flex items-center justify-between border-b border-app-border bg-white">
-        <div>
-          <h1 className="text-[20px] leading-tight font-[800] m-0">AI Teacher</h1>
-          <p className="text-[12px] text-app-textSecondary m-0 mt-1">Online</p>
-        </div>
-        <div className="text-right">
-          <p className="text-[11px] text-app-textMuted m-0">Session progress</p>
-          <p className="text-[13px] font-[800] text-app-accent m-0">
-            {correctCount}/{attemptCount} correct
-          </p>
-        </div>
-      </header>
+    <main className="h-[calc(100vh-76px)] bg-[#F3F4F6] md:grid md:place-items-center md:px-6 overflow-hidden">
+      <div className="h-full w-full max-w-[480px] mx-auto flex flex-col bg-[#F3F4F6] md:border md:border-app-border md:shadow-[0_28px_60px_-30px_rgba(0,0,0,.45)]">
+        <header className="h-[60px] shrink-0 px-4 flex items-center gap-3 bg-white border-b border-[#DADDE5] shadow-[0_1px_2px_rgba(26,31,54,.08)] relative z-[2]">
+          <div className="relative w-10 h-10 shrink-0">
+            <TeacherAvatar />
+            <span className="absolute right-[-1px] bottom-[-1px] w-3 h-3 rounded-full border-2 border-white bg-green-500" aria-label="Online" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <h1 className="text-[20px] leading-tight font-[700] m-0">AI Teacher</h1>
+            <p className={`text-[13px] m-0 truncate ${teacherTyping ? 'text-app-accent font-[600]' : 'text-app-textSecondary'}`}>
+              {teacherTyping ? 'typing…' : lessonMeta?.name || concept?.name || 'Your study path'}
+            </p>
+          </div>
+          <div className="text-right shrink-0">
+            <p className="text-[11px] text-app-textMuted m-0">Session progress</p>
+            <p className="text-[14px] font-[700] text-app-accent m-0 tabular-nums">
+              {attemptCount ? `${correctCount}/${attemptCount} correct` : 'Just started'}
+            </p>
+          </div>
+        </header>
 
-      {error && (
-        <div role="alert" className="shrink-0 mx-3 mt-2 rounded-[10px] bg-red-50 px-3 py-2 text-[13px] text-app-danger">
-          {error}
-        </div>
-      )}
-
-      <div className="flex-1 min-h-0 overflow-y-auto px-3 md:px-6 py-4">
-        <div className="max-w-[760px] mx-auto">
-          {messages.map((message) => (
-            <div key={message.id} className={`mb-3 flex ${message.sender === 'student' ? 'justify-end' : 'justify-start'}`}>
-              <div className={`${message.revealed ? 'chat-message-enter' : ''} max-w-[88%] rounded-[18px] px-4 py-3 text-[15px] leading-[1.55] ${
-                message.sender === 'student'
-                  ? 'rounded-br-[4px] bg-app-accent text-white'
-                  : message.kind === 'feedback'
-                    ? message.correct
-                      ? 'rounded-bl-[4px] bg-green-50 border border-green-200 text-green-950'
-                      : 'rounded-bl-[4px] bg-orange-50 border border-orange-200 text-orange-950'
-                    : 'rounded-bl-[4px] border border-app-border bg-white text-app-text'
-              }`}>
-                {message.sender === 'teacher' && (
-                  <p className="m-0 mb-1 text-[10px] font-[800] uppercase tracking-[.06em] text-app-accent">Teacher</p>
-                )}
-                {message.text}
-                {message.kind === 'question' && message.options && (
-                  <div className="mt-3 grid gap-2">
-                    {message.options.map((option, index) => {
-                      const selected = message.selectedOption === index;
-                      const correct = message.correctOption === index;
-                      return (
-                        <div
-                          key={`${message.id}-${index}`}
-                          className={`rounded-[10px] border px-3 py-2 text-[14px] ${
-                            correct
-                              ? 'border-green-300 bg-green-50 text-green-950'
-                              : selected
-                                ? 'border-orange-300 bg-orange-50 text-orange-950'
-                                : 'border-app-border bg-white'
-                          }`}
-                        >
-                          <span className="font-[800] mr-2">{String.fromCharCode(65 + index)}.</span>{option}
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
+        <div ref={scrollContainerRef} role="log" aria-live="polite" aria-label="Conversation with AI Teacher" className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-3 flex flex-col gap-[3px]">
+          {error && (
+            <div role="alert" className="self-center max-w-[92%] my-2 px-3 py-1.5 rounded-[14px] bg-white text-[12px] text-red-700 text-center shadow-sm">
+              {error}
             </div>
-          ))}
+          )}
+
+          {messages.map((message, index) => {
+            const previous = messages[index - 1];
+            const firstInGroup = !previous || previous.sender !== message.sender;
+            const isTeacher = message.sender === 'teacher';
+            return (
+              <div key={message.id} className={`flex items-end gap-2 max-w-[92%] mb-[3px] ${isTeacher ? 'self-start' : 'self-end'} ${message.kind === 'question' ? 'w-[92%]' : ''}`}>
+                {isTeacher && (
+                  <span className="w-7 h-7 shrink-0 mb-[1px]">
+                    {firstInGroup ? <TeacherAvatar /> : <span className="block w-7 h-7" />}
+                  </span>
+                )}
+                <div className={`min-w-0 flex flex-col ${isTeacher ? 'items-start flex-1' : 'items-end'}`}>
+                  <div className={`${message.revealed ? 'chat-message-enter' : ''} max-w-full box-border px-4 pt-[10px] pb-[7px] rounded-[18px] text-[16px] leading-[1.6] overflow-wrap-anywhere ${
+                    isTeacher
+                      ? message.kind === 'feedback'
+                        ? message.correct
+                          ? 'border border-green-200 bg-green-50 text-green-950'
+                          : 'border border-orange-300 bg-orange-50 text-orange-950'
+                        : 'border border-[#DADDE5] bg-white text-[#1A1F36]'
+                      : 'border border-app-accent bg-app-accent text-white rounded-br-[4px]'
+                  } ${isTeacher && firstInGroup ? 'rounded-bl-[4px]' : ''}`}>
+                    <p className="m-0 whitespace-pre-wrap">{message.text}</p>
+                    {message.kind === 'question' && message.options && (
+                      <div className="-mx-4 mt-2 flex flex-col border-t border-[#DADDE5]">
+                        {message.options.map((option, optionIndex) => {
+                          const selected = message.selectedOption === optionIndex;
+                          const correct = message.correctOption === optionIndex;
+                          return (
+                            <div
+                              key={`${message.id}-${optionIndex}`}
+                              className={`min-h-[44px] px-3 py-2 flex items-center justify-center gap-2 border-b border-[#DADDE5] text-center last:border-b-0 ${
+                                correct
+                                  ? 'bg-green-100 text-[#1A1F36] font-[700]'
+                                  : selected
+                                    ? 'bg-orange-100 text-[#1A1F36] font-[700]'
+                                    : 'bg-white text-app-textSecondary'
+                              }`}
+                            >
+                              <span className="font-[800]">{String.fromCharCode(65 + optionIndex)}.</span>
+                              <span>{option}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
 
           {teacherTyping && (
-            <div className="mb-3 flex justify-start" aria-label="Teacher is typing">
-              <div className="rounded-[18px] rounded-bl-[4px] border border-app-border bg-white px-4 py-3">
-                <span className="inline-flex gap-1">
-                  <span className="w-2 h-2 rounded-full bg-app-textMuted animate-bounce" />
-                  <span className="w-2 h-2 rounded-full bg-app-textMuted animate-bounce [animation-delay:150ms]" />
-                  <span className="w-2 h-2 rounded-full bg-app-textMuted animate-bounce [animation-delay:300ms]" />
-                </span>
+            <div className="flex items-end gap-2 self-start max-w-[92%] mb-[3px]" aria-label="Teacher is typing">
+              <span className="w-7 h-7 shrink-0"><TeacherAvatar /></span>
+              <div className="flex gap-[5px] items-center px-[15px] py-[13px] rounded-[18px] rounded-bl-[4px] border border-[#DADDE5] bg-white">
+                <i className="w-[7px] h-[7px] rounded-full bg-app-textMuted animate-bounce" />
+                <i className="w-[7px] h-[7px] rounded-full bg-app-textMuted animate-bounce [animation-delay:150ms]" />
+                <i className="w-[7px] h-[7px] rounded-full bg-app-textMuted animate-bounce [animation-delay:300ms]" />
               </div>
             </div>
           )}
 
           {question && !feedback && (
-            <div className="mb-3 flex justify-start">
-              <div className="max-w-[92%] rounded-[18px] rounded-bl-[4px] border border-app-border bg-white px-4 py-4 shadow-sm">
-                <p className="m-0 mb-2 text-[10px] font-[800] uppercase tracking-[.06em] text-app-accent">Practice question · stored bank</p>
-                <p className="text-[16px] font-[700] leading-[1.45] m-0 mb-3">{question.text}</p>
-                <div className="grid gap-2" role="radiogroup" aria-label="Answer options">
-                  {question.options.map((option, index) => (
-                    <button
-                      key={`${question.id}-${index}`}
-                      type="button"
-                      role="radio"
-                      aria-checked={selectedOption === index}
-                      onClick={() => setSelectedOption(index)}
-                      className={`min-h-[46px] text-left px-3 py-2 rounded-[12px] border text-[14px] transition-colors ${
-                        selectedOption === index
-                          ? 'border-app-accent bg-app-accentLight font-[700]'
-                          : 'border-app-border bg-white hover:bg-app-bg'
-                      }`}
-                    >
-                      <span className="font-[800] mr-2">{String.fromCharCode(65 + index)}.</span>{option}
-                    </button>
-                  ))}
+            <div className="flex items-end gap-2 self-start max-w-[92%] w-[92%] mb-[3px] chat-message-enter">
+              <span className="w-7 h-7 shrink-0"><TeacherAvatar /></span>
+              <div className="min-w-0 flex-1">
+                <div className="w-full max-w-[380px] box-border rounded-[18px] rounded-bl-[4px] border border-[#DADDE5] bg-white px-4 pt-[10px] pb-0 text-[#1A1F36] text-[16px] leading-[1.6]">
+                  <p className="m-0 mb-2 text-[11px] font-[700] uppercase tracking-[.07em] text-app-accent">Practice question</p>
+                  <p className="m-0 whitespace-pre-wrap">{question.text}</p>
+                  <div className="-mx-4 mt-2 flex flex-col border-t border-[#DADDE5]" role="radiogroup" aria-label="Answer options">
+                    {question.options.map((option, index) => (
+                      <button
+                        key={`${question.id}-${index}`}
+                        type="button"
+                        role="radio"
+                        aria-checked={selectedOption === index}
+                        disabled={answering}
+                        onClick={() => void submitAnswer(index)}
+                        className="min-h-[44px] px-3 py-2 border-0 border-b border-[#DADDE5] last:border-b-0 bg-transparent text-app-accent font-[600] text-[16px] text-center hover:bg-app-accentLight disabled:opacity-60"
+                      >
+                        <span className="font-[800] mr-2">{String.fromCharCode(65 + index)}.</span>{option}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex gap-2 mt-3">
-                  <button type="button" className="btn-secondary !min-h-10 !px-3 !text-[13px]" onClick={requestHint} disabled={hintLoading}>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  <button type="button" onClick={requestHint} disabled={hintLoading || answering} className="min-h-[44px] px-[15px] rounded-full border border-[#DADDE5] bg-white text-app-accent text-[13px] font-[600]">
                     {hintLoading ? 'Thinking…' : 'Hint'}
-                  </button>
-                  <button type="button" className="btn-primary !min-h-10 !px-4 !text-[13px]" disabled={selectedOption === null} onClick={submitAnswer}>
-                    Send answer
                   </button>
                 </div>
               </div>
             </div>
           )}
-
-          {feedback && (
-            <div className="mb-3 flex justify-center">
-              <p className="text-[12px] font-[700] text-app-textMuted m-0">
-                Next question is being chosen from your performance… {attemptCount ? Math.round((correctCount / attemptCount) * 100) : 0}% accuracy
-              </p>
-            </div>
-          )}
           <div ref={threadEndRef} />
         </div>
-      </div>
 
-      <div className="shrink-0 border-t border-app-border bg-white px-3 py-3">
-        <div className="max-w-[760px] mx-auto flex gap-2">
-          <input
-            className="input !min-h-11 flex-1 rounded-full"
-            value={helpText}
-            onChange={(event) => setHelpText(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter' && !starting) void sendHelp();
-            }}
-            placeholder="Message your teacher"
-            aria-label="Message your teacher"
-          />
-          <button type="button" className="btn-primary !min-h-11 !w-11 !p-0 rounded-full" disabled={!helpText.trim()} onClick={sendHelp} aria-label="Send message">
-            ➤
+        <form
+          className="shrink-0 flex items-end gap-2 px-4 pt-2 pb-[10px] bg-[#F3F4F6]"
+          onSubmit={(event) => { event.preventDefault(); void sendHelp(); }}
+          autoComplete="off"
+        >
+          <div className="flex-1 min-w-0 flex bg-white border border-[#DADDE5] rounded-[24px] shadow-[0_1px_2px_rgba(26,31,54,.08)] focus-within:ring-2 focus-within:ring-app-accent">
+            <textarea
+              rows={1}
+              maxLength={1000}
+              className="w-full box-border min-h-[44px] max-h-[120px] px-4 py-[11px] border-0 outline-none resize-none bg-transparent text-[#1A1F36] text-[16px] leading-[22px]"
+              value={helpText}
+              onChange={(event) => setHelpText(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) {
+                  event.preventDefault();
+                  void sendHelp();
+                }
+              }}
+              placeholder="Message your teacher"
+              aria-label="Message your teacher"
+            />
+          </div>
+          <button type="submit" className="shrink-0 grid place-items-center w-[44px] h-[44px] rounded-full border-0 bg-app-accent text-white disabled:bg-[#DADDE5] disabled:text-app-textSecondary" disabled={!helpText.trim() || starting} aria-label="Send message">
+            <svg viewBox="0 0 24 24" className="w-[22px] h-[22px]" fill="currentColor" aria-hidden="true">
+              <path d="M3.4 20.4 21 12 3.4 3.6v6.5L15 12 3.4 13.9z" />
+            </svg>
           </button>
-        </div>
+        </form>
       </div>
     </main>
   );
