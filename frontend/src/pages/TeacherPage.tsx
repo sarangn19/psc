@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import api from '../lib/api';
 
 interface Exam { id: string; name: string; subjects?: any[] }
@@ -13,6 +13,14 @@ interface Question {
   explanation?: string | null;
   chapter?: { name: string };
   concept?: { id: number; nameEnglish: string } | null;
+}
+
+interface TeacherMessage {
+  id: string;
+  sender: 'teacher' | 'student';
+  kind: 'text' | 'feedback' | 'hint';
+  text: string;
+  correct?: boolean;
 }
 
 const PREF_KEY = 'cognix.aiTeacher.preferences';
@@ -46,6 +54,10 @@ export default function TeacherPage() {
   const [sessionWeakTopic, setSessionWeakTopic] = useState<WeakTopic | null>(null);
   const [teacherMessage, setTeacherMessage] = useState('');
   const [error, setError] = useState('');
+  const [messages, setMessages] = useState<TeacherMessage[]>([]);
+  const [helpText, setHelpText] = useState('');
+  const [teacherTyping, setTeacherTyping] = useState(false);
+  const threadEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     api.get('/teacher/bootstrap').then(({ data }) => {
@@ -55,6 +67,23 @@ export default function TeacherPage() {
     }).catch(() => setError('The teacher could not load your syllabus and progress. Check your connection and try again.'))
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    threadEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages, question, feedback]);
+
+  useEffect(() => {
+    if (!feedback || !sessionId) return;
+    const timer = window.setTimeout(() => {
+      addMessage('teacher', feedback.isCorrect ? 'Your accuracy is improving. Here’s your next small challenge.' : 'I’ve adjusted the next question, so we can get this comfortably.', 'text');
+      loadNext(sessionId);
+    }, 3200);
+    return () => window.clearTimeout(timer);
+  }, [feedback, sessionId]);
+
+  const addMessage = (sender: TeacherMessage['sender'], text: string, kind: TeacherMessage['kind'] = 'text', correct?: boolean) => {
+    setMessages((current) => [...current, { id: `${Date.now()}-${Math.random()}`, sender, text, kind, correct }]);
+  };
 
   const savePreferences = (exam: string, custom: string, date: string) => {
     localStorage.setItem(PREF_KEY, JSON.stringify({ examId: exam, customExam: custom, targetDate: date }));
@@ -95,6 +124,7 @@ export default function TeacherPage() {
   };
 
   const loadNext = async (sid: string) => {
+    setTeacherTyping(true);
     setHint(null);
     setFeedback(null);
     setSelectedOption(null);
@@ -102,12 +132,17 @@ export default function TeacherPage() {
       const { data } = await api.get(`/teacher/session/${sid}/next`);
       if (data.done || !data.question) {
         setError(data.message || 'No stored questions are available for this topic.');
+        setTeacherTyping(false);
         return;
       }
       setQuestion(data.question);
       setConcept(data.concept);
       setTeacherMessage(data.teacherMessage || '');
       setQuestionNumber(data.questionNumber || 0);
+      addMessage('teacher', data.teacherMessage || 'Let’s continue one small step at a time.');
+      if (data.concept?.description) {
+        addMessage('teacher', data.concept.description);
+      }
       if (data.question.concept?.id) {
         api.post('/teacher/lesson-meta', { conceptId: data.question.concept.id }).then(({ data: meta }) => setLessonMeta(meta)).catch(() => setLessonMeta({ sourceMissing: true }));
       } else {
@@ -116,11 +151,15 @@ export default function TeacherPage() {
     } catch {
       setError('The next question could not be loaded. Your progress is still saved.');
     }
+    finally {
+      setTeacherTyping(false);
+    }
   };
 
   const startLesson = async (requestedConceptId?: number) => {
     setStarting(true);
     setError('');
+    setMessages([]);
     try {
       const targetWeakTopic = requestedConceptId
         ? weak.find((topic) => topic.id === requestedConceptId) || { id: requestedConceptId, name: 'Selected topic', accuracy: 0 }
@@ -135,6 +174,7 @@ export default function TeacherPage() {
       setLastWasCorrect(null);
       setSessionWeakTopic(targetWeakTopic || null);
       setTeacherMessage(session.welcome || 'Hi! Let’s learn together, one clear step at a time.');
+      addMessage('teacher', session.welcome || 'Hi! Let’s learn together, one clear step at a time.');
       await loadNext(session.id);
     } catch {
       setError('Could not start the lesson. Check the connection and try again.');
@@ -147,10 +187,20 @@ export default function TeacherPage() {
     if (!sessionId || !question || selectedOption === null) return;
     try {
       const { data } = await api.post(`/teacher/session/${sessionId}/answer`, { questionId: question.id, selectedOption, timeTaken: 0 });
+      const answerLabel = `${String.fromCharCode(65 + selectedOption)}. ${question.options[selectedOption]}`;
+      addMessage('student', answerLabel);
       setFeedback(data);
       setAttemptCount((count) => count + 1);
       setLastWasCorrect(data.isCorrect);
       if (data.isCorrect) setCorrectCount((count) => count + 1);
+      addMessage(
+        'teacher',
+        data.isCorrect
+          ? `Lovely work — that is correct! ${question.explanation || data.explanation || ''}`
+          : `Not quite, and that is okay — we learn from it. The answer is ${String.fromCharCode(65 + data.correctOption)}. ${question.explanation || data.explanation || 'No stored explanation is available yet.'}`,
+        'feedback',
+        data.isCorrect,
+      );
     } catch {
       setError('The answer could not be scored. Try submitting it again.');
     }
@@ -164,6 +214,7 @@ export default function TeacherPage() {
       setHintIsGenerated(Boolean(data.generated));
       setHint(data.generated ? data.text : data.message);
       if (data.unavailable) setHint(data.message);
+      addMessage('teacher', data.generated ? data.text : data.message, 'hint');
     } catch {
       setHintIsGenerated(false);
       setHint('AI hint unavailable. Review the concept description and stored question explanation.');
@@ -227,7 +278,121 @@ export default function TeacherPage() {
               </div>
             </section>
           ) : (
-            <section className="card overflow-hidden">
+            <>
+            <section className="card overflow-hidden flex flex-col h-[calc(100vh-210px)] min-h-[560px] max-h-[760px]">
+              <div className="px-4 py-3 border-b border-app-border flex items-center justify-between gap-3 bg-white">
+                <div className="min-w-0">
+                  <p className="text-[12px] font-[700] uppercase tracking-[.08em] text-app-accent m-0">AI Teacher · lesson {questionNumber}</p>
+                  <h2 className="text-[17px] font-[750] m-0 mt-1 truncate">{lessonMeta?.name || concept?.name || 'Recommended topic'}</h2>
+                </div>
+                <span className="rounded-full bg-app-accentLight px-3 py-1 text-[12px] font-[750] text-app-accent">{correctCount} correct</span>
+              </div>
+
+              <div className="flex-1 overflow-y-auto px-3 md:px-5 py-4 bg-app-bg/50">
+                {messages.map((message) => (
+                  <div key={message.id} className={`mb-3 flex ${message.sender === 'student' ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`max-w-[86%] rounded-[18px] px-4 py-3 text-[15px] leading-[1.55] ${
+                      message.sender === 'student'
+                        ? 'rounded-br-[4px] bg-app-accent text-white'
+                        : message.kind === 'feedback'
+                          ? message.correct ? 'rounded-bl-[4px] border border-green-200 bg-green-50 text-green-900' : 'rounded-bl-[4px] border border-orange-200 bg-orange-50 text-orange-950'
+                          : 'rounded-bl-[4px] border border-app-border bg-white text-app-text'
+                    }`}>
+                      {message.sender === 'teacher' && <p className="m-0 mb-1 text-[11px] font-[800] uppercase tracking-[.06em] text-app-accent">Teacher</p>}
+                      {message.text}
+                    </div>
+                  </div>
+                ))}
+
+                {teacherTyping && (
+                  <div className="mb-3 flex justify-start" aria-label="Teacher is typing">
+                    <div className="rounded-[18px] rounded-bl-[4px] border border-app-border bg-white px-4 py-3">
+                      <span className="inline-flex gap-1">
+                        <span className="w-2 h-2 rounded-full bg-app-textMuted animate-bounce" />
+                        <span className="w-2 h-2 rounded-full bg-app-textMuted animate-bounce [animation-delay:150ms]" />
+                        <span className="w-2 h-2 rounded-full bg-app-textMuted animate-bounce [animation-delay:300ms]" />
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {lessonMeta?.sourceMissing && !feedback && (
+                  <div className="mb-3 max-w-[86%] rounded-[18px] rounded-bl-[4px] border border-app-warn/30 bg-app-warnLight px-4 py-3 text-[13px] text-app-warnDark">
+                    Curated notes are missing. I’ll still guide you using the stored question bank.
+                  </div>
+                )}
+
+                {question && !feedback && (
+                  <div className="mb-3 max-w-[92%] rounded-[18px] rounded-bl-[4px] border border-app-border bg-white px-4 py-4 shadow-sm">
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <p className="m-0 text-[12px] font-[800] uppercase tracking-[.06em] text-app-accent">Quick check · MCQ</p>
+                      <span className="text-[11px] text-app-textMuted">Stored question</span>
+                    </div>
+                    <p className="text-[16px] font-[700] leading-[1.45] mt-0 mb-3">{question.text}</p>
+                    <div className="grid gap-2" role="radiogroup" aria-label="Answer options">
+                      {question.options.map((option, index) => (
+                        <button
+                          key={`${question.id}-${index}`}
+                          type="button"
+                          role="radio"
+                          aria-checked={selectedOption === index}
+                          onClick={() => setSelectedOption(index)}
+                          className={`min-h-[46px] text-left px-3 py-2 rounded-[10px] border text-[14px] transition-colors ${
+                            selectedOption === index ? 'border-app-accent bg-app-accentLight font-[700]' : 'border-app-border bg-white hover:bg-app-bg'
+                          }`}
+                        >
+                          <span className="font-[800] mr-2">{String.fromCharCode(65 + index)}.</span>{option}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="flex gap-2 mt-3">
+                      <button type="button" className="btn-secondary !min-h-10 !px-3 !text-[13px]" onClick={requestHint} disabled={hintLoading}>
+                        {hintLoading ? 'Thinking…' : 'Hint'}
+                      </button>
+                      <button type="button" className="btn-primary !min-h-10 !px-4 !text-[13px]" disabled={selectedOption === null} onClick={submitAnswer}>Send answer</button>
+                    </div>
+                  </div>
+                )}
+
+                {feedback && question && (
+                  <div className="mb-3 flex justify-center">
+                    <div className="w-full max-w-[92%] rounded-[14px] border border-app-border bg-white px-4 py-3">
+                      <p className="text-[13px] font-[750] text-app-textSecondary m-0">Session progress</p>
+                      <p className="text-[14px] font-[700] mt-1 mb-1">{correctCount} correct · {attemptCount} answered · {attemptCount ? Math.round((correctCount / attemptCount) * 100) : 0}% accuracy</p>
+                      <p className="text-[13px] text-app-textSecondary m-0">Next: {feedback.isCorrect ? 'a slightly harder challenge' : 'an easier review question'}.</p>
+                      <p className="text-[12px] text-app-accent mt-2 mb-0 font-[700]">I’ll continue in a moment…</p>
+                    </div>
+                  </div>
+                )}
+                <div ref={threadEndRef} />
+              </div>
+
+              <div className="border-t border-app-border bg-white px-3 py-3 flex gap-2">
+                <input
+                  className="input !min-h-11 flex-1"
+                  value={helpText}
+                  onChange={(e) => setHelpText(e.target.value)}
+                  placeholder="Ask for an explanation or hint"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && helpText.trim()) {
+                      addMessage('student', helpText.trim());
+                      setHelpText('');
+                      requestHint();
+                    }
+                  }}
+                  aria-label="Ask the teacher for help"
+                />
+                <button
+                  type="button"
+                  className="btn-primary !min-h-11 !px-4"
+                  disabled={!helpText.trim()}
+                  onClick={() => { addMessage('student', helpText.trim()); setHelpText(''); requestHint(); }}
+                >
+                  Send
+                </button>
+              </div>
+            </section>
+            <section className="hidden" aria-hidden="true">
               <div className="px-4 py-3 border-b border-app-border flex items-center justify-between gap-3">
                 <div>
                   <p className="text-[12px] font-[700] uppercase tracking-[.08em] text-app-accent m-0">Current lesson {questionNumber}</p>
@@ -330,6 +495,7 @@ export default function TeacherPage() {
                 )}
               </div>
             </section>
+            </>
           )}
         </main>
 
