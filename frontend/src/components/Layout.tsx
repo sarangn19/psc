@@ -13,26 +13,6 @@ const NAV = [
     ),
   },
   {
-    to: '/pocket',
-    label: 'Pocket',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="7.5" width="18" height="12.5" rx="2.2" />
-        <path d="M8.5 7.5V5.6A1.6 1.6 0 0 1 10.1 4h3.8a1.6 1.6 0 0 1 1.6 1.6v1.9" />
-        <path d="M3 12.8h18" />
-      </svg>
-    ),
-  },
-  {
-    to: '/chapters',
-    label: 'Chapters',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 19V5a1 1 0 0 1 1-1h14v14H5.5A1.5 1.5 0 0 0 4 19.5 1.5 1.5 0 0 0 5.5 21H19" />
-      </svg>
-    ),
-  },
-  {
     to: '/learning',
     label: 'Learn',
     icon: (
@@ -49,17 +29,6 @@ const NAV = [
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         <path d="M4 19.5V5.8A1.8 1.8 0 0 1 5.8 4h12.4A1.8 1.8 0 0 1 20 5.8v9.4a1.8 1.8 0 0 1-1.8 1.8H8l-4 3z" />
         <path d="M8 9h8M8 12h6" />
-      </svg>
-    ),
-  },
-  {
-    to: '/news',
-    label: 'News',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 5h12v14a1 1 0 0 0 1 1H6a2 2 0 0 1-2-2z" />
-        <path d="M16 9h4v9a2 2 0 0 1-2 2" />
-        <path d="M7.5 9h5M7.5 12.5h5M7.5 16h3" />
       </svg>
     ),
   },

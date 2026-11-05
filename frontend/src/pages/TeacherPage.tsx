@@ -18,6 +18,10 @@ interface ChatMessage {
   text: string;
   kind?: 'text' | 'feedback' | 'hint' | 'question';
   correct?: boolean;
+  options?: string[];
+  selectedOption?: number;
+  correctOption?: number;
+  revealed?: boolean;
 }
 
 interface StoredChat {
@@ -33,6 +37,7 @@ interface StoredChat {
 }
 
 const CHAT_KEY = 'cognix.aiTeacher.chat';
+const chatDelay = (milliseconds: number) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
 
 function readStoredChat(): StoredChat {
   try {
@@ -67,10 +72,11 @@ export default function TeacherPage() {
     text: string,
     kind: ChatMessage['kind'] = 'text',
     correct?: boolean,
+    extra: Pick<ChatMessage, 'options' | 'selectedOption' | 'correctOption'> = {},
   ) => {
     setMessages((current) => [
       ...current,
-      { id: `${Date.now()}-${Math.random()}`, sender, text, kind, correct },
+      { id: `${Date.now()}-${Math.random()}`, sender, text, kind, correct, ...extra, revealed: true },
     ]);
   };
 
@@ -91,7 +97,6 @@ export default function TeacherPage() {
         return;
       }
 
-      setQuestion(data.question);
       setConcept(data.concept);
       setQuestionNumber(data.questionNumber || 0);
       setLessonMeta({
@@ -99,12 +104,16 @@ export default function TeacherPage() {
         description: data.concept?.description || null,
         sourceMissing: data.concept?.sourceMissing,
       });
-      addMessage(
-        'teacher',
-        data.teacherMessage || `Let’s work on ${data.concept?.name || 'the next topic'} together.`,
-      );
-      if (data.concept?.description) addMessage('teacher', data.concept.description);
-      else addMessage('teacher', 'The curated note for this topic is not available yet. The question comes from the stored question bank.');
+      await chatDelay(650);
+      addMessage('teacher', data.teacherMessage || `Let’s work on ${data.concept?.name || 'the next topic'} together.`);
+      await chatDelay(850);
+      if (data.concept?.description) {
+        addMessage('teacher', data.concept.description);
+      } else {
+        addMessage('teacher', 'The curated note for this topic is not available yet. The question comes from the stored question bank.');
+      }
+      await chatDelay(650);
+      setQuestion(data.question);
     } catch {
       setError('I could not load the next practice question. Your saved progress is still safe.');
     } finally {
@@ -184,12 +193,25 @@ export default function TeacherPage() {
   const submitAnswer = async () => {
     if (!sessionId || !question || selectedOption === null) return;
     try {
+      addMessage(
+        'teacher',
+        question.text,
+        'question',
+        undefined,
+        {
+          options: question.options,
+          selectedOption,
+          correctOption: question.correctOption,
+        },
+      );
       addMessage('student', `${String.fromCharCode(65 + selectedOption)}. ${question.options[selectedOption]}`, 'text');
+      setTeacherTyping(true);
       const { data } = await api.post(`/teacher/session/${sessionId}/answer`, {
         questionId: question.id,
         selectedOption,
         timeTaken: 0,
       });
+      await chatDelay(550);
       setFeedback(data);
       setAttemptCount((count) => count + 1);
       if (data.isCorrect) setCorrectCount((count) => count + 1);
@@ -201,7 +223,9 @@ export default function TeacherPage() {
         'feedback',
         data.isCorrect,
       );
+      setTeacherTyping(false);
     } catch {
+      setTeacherTyping(false);
       setError('That answer could not be scored. You can send it again.');
     }
   };
@@ -266,7 +290,7 @@ export default function TeacherPage() {
         <div className="max-w-[760px] mx-auto">
           {messages.map((message) => (
             <div key={message.id} className={`mb-3 flex ${message.sender === 'student' ? 'justify-end' : 'justify-start'}`}>
-              <div className={`max-w-[88%] rounded-[18px] px-4 py-3 text-[15px] leading-[1.55] ${
+              <div className={`${message.revealed ? 'chat-message-enter' : ''} max-w-[88%] rounded-[18px] px-4 py-3 text-[15px] leading-[1.55] ${
                 message.sender === 'student'
                   ? 'rounded-br-[4px] bg-app-accent text-white'
                   : message.kind === 'feedback'
@@ -279,6 +303,28 @@ export default function TeacherPage() {
                   <p className="m-0 mb-1 text-[10px] font-[800] uppercase tracking-[.06em] text-app-accent">Teacher</p>
                 )}
                 {message.text}
+                {message.kind === 'question' && message.options && (
+                  <div className="mt-3 grid gap-2">
+                    {message.options.map((option, index) => {
+                      const selected = message.selectedOption === index;
+                      const correct = message.correctOption === index;
+                      return (
+                        <div
+                          key={`${message.id}-${index}`}
+                          className={`rounded-[10px] border px-3 py-2 text-[14px] ${
+                            correct
+                              ? 'border-green-300 bg-green-50 text-green-950'
+                              : selected
+                                ? 'border-orange-300 bg-orange-50 text-orange-950'
+                                : 'border-app-border bg-white'
+                          }`}
+                        >
+                          <span className="font-[800] mr-2">{String.fromCharCode(65 + index)}.</span>{option}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             </div>
           ))}

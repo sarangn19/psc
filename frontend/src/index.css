@@ -123,6 +123,13 @@
 @keyframes cellSnap{0%,100%{transform:translateX(0)}30%{transform:translateX(-2px)}60%{transform:translateX(2px)}}
 @keyframes cellIn{0%{transform:scale(.4)}60%{transform:scale(1.35)}100%{transform:scale(1)}}
 @keyframes lineIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes chatMessageIn {
+  from { opacity: 0; transform: translateY(10px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.chat-message-enter {
+  animation: chatMessageIn .38s cubic-bezier(.22,.61,.36,1) both;
+}
 /* @keyframes ringSet removed — replaced by WAAPI imperative ring transition in AdaptivePage.tsx */
 
 /* Reduced to 10 particles at tier 4 for 60fps on low-end Android */
