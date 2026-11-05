@@ -69,6 +69,50 @@ router.post('/hint', authenticate, async (req: AuthRequest, res) => {
   return res.status(result.status).json(result.body);
 });
 
+router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
+  const userId = req.user!.id;
+  const message = String(req.body?.message || '').trim();
+  if (!message) return res.status(400).json({ message: 'Message is required' });
+
+  const [selected, stats, currentQuestion] = await Promise.all([
+    prisma.userExam.findMany({
+      where: { userId },
+      include: { exam: { select: { name: true } } },
+    }),
+    prisma.userConceptStat.findMany({
+      where: { userId, conceptId: { not: null }, total: { gt: 0 } },
+      select: { conceptId: true, total: true, correct: true },
+      take: 12,
+    }),
+    req.body?.questionId
+      ? prisma.question.findUnique({
+          where: { id: String(req.body.questionId) },
+          include: { chapter: { include: { subject: true } }, concept: true },
+        })
+      : null,
+  ]);
+  const weakIds = stats
+    .filter((stat) => stat.correct / stat.total < 0.7)
+    .map((stat) => stat.conceptId)
+    .filter((id): id is number => id !== null);
+  const weakNodes = weakIds.length
+    ? await prisma.taxonomyNode.findMany({ where: { id: { in: weakIds } }, select: { nameEnglish: true } })
+    : [];
+  const examNames = selected.map((item) => item.exam.name);
+  const prompt = [
+    'Act as the student’s friendly private exam teacher. Reply naturally to the student and stay grounded in their syllabus and performance.',
+    `Selected exams: ${examNames.length ? examNames.join(', ') : 'not selected yet'}.`,
+    `Weak topics: ${weakNodes.map((node) => node.nameEnglish).join(', ') || 'no clear weak topic yet'}.`,
+    currentQuestion
+      ? `Current topic: ${currentQuestion.concept?.nameEnglish || currentQuestion.chapter.name}. Current question: ${currentQuestion.text}`
+      : 'There is no active practice question.',
+    `Student message: ${message}`,
+    'If the request is for a hint, help without revealing the answer option or value. If it asks for an explanation, teach it simply. Do not claim official predictions or certainty.',
+  ].join('\n');
+  const result = await generateOptional(userId, prompt);
+  return res.status(result.status).json(result.body);
+});
+
 router.post('/lesson-meta', authenticate, async (req: AuthRequest, res) => {
   const conceptId = Number(req.body?.conceptId);
   if (!Number.isInteger(conceptId)) return res.status(400).json({ message: 'conceptId is required' });
@@ -111,12 +155,35 @@ router.post('/session/start', authenticate, async (req: AuthRequest, res) => {
   let focusConceptId = Number.isInteger(requestedConceptId) ? requestedConceptId : null;
 
   if (!focusConceptId) {
+    const selectedExams = await prisma.userExam.findMany({
+      where: { userId },
+      select: { examId: true },
+    });
+    const selectedExamIds = selectedExams.map((item) => item.examId);
     const weakStats = await prisma.userConceptStat.findMany({
       where: { userId, conceptId: { not: null }, total: { gt: 0 } },
       select: { conceptId: true, total: true, correct: true },
       take: 100,
     });
-    const weakest = [...weakStats].sort((a, b) =>
+    const eligibleQuestions = selectedExamIds.length
+      ? await prisma.question.findMany({
+          where: {
+            isActive: true,
+            chapter: { subject: { examId: { in: selectedExamIds } } },
+            conceptId: { not: null },
+          },
+          select: { conceptId: true },
+          distinct: ['conceptId'],
+        })
+      : await prisma.question.findMany({
+          where: { isActive: true, conceptId: { not: null } },
+          select: { conceptId: true },
+          distinct: ['conceptId'],
+        });
+    const eligibleConceptIds = new Set(eligibleQuestions.map((item) => item.conceptId).filter((id): id is number => id !== null));
+    const weakest = [...weakStats]
+      .filter((stat) => eligibleConceptIds.has(stat.conceptId!))
+      .sort((a, b) =>
       (a.correct / a.total) - (b.correct / b.total)
     )[0];
     focusConceptId = weakest?.conceptId || null;
@@ -131,11 +198,17 @@ router.post('/session/start', authenticate, async (req: AuthRequest, res) => {
   await prisma.userActivity.create({
     data: { userId, type: 'ADAPTIVE_SESSION_STARTED', metadata: { teacherSessionId: session.id, focusConceptId } },
   });
+  const welcomePrompt = concept?.nameEnglish
+    ? `Write one warm, natural opening message from a private tutor to a student. Mention exactly that the next topic is ${concept.nameEnglish}. Do not use generic quiz language or mention that you are an AI.`
+    : 'Write one warm, natural opening message from a private tutor beginning a new study conversation. Do not use generic quiz language or mention that you are an AI.';
+  const welcomeAi = await generateOptional(userId, welcomePrompt);
   return res.json({
     id: session.id,
     teacherMode: true,
     focusTopic: concept?.nameEnglish || null,
-    welcome: concept?.nameEnglish
+    welcome: welcomeAi.status === 200 && welcomeAi.body.generated
+      ? welcomeAi.body.text
+      : concept?.nameEnglish
       ? `Hi! We’ll work through ${concept.nameEnglish} together. I’ll explain the idea, then we’ll try one question at a time.`
       : 'Hi! Let’s start with a friendly lesson. I’ll choose a useful topic and guide you one question at a time.',
   });
@@ -151,17 +224,64 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     select: { questionId: true },
   });
   const seenIds = seenItems.map((item) => item.questionId);
+  const selectedExams = await prisma.userExam.findMany({
+    where: { userId },
+    select: { examId: true },
+  });
+  const selectedExamIds = selectedExams.map((item) => item.examId);
+  const latestAttempt = await prisma.questionAttempt.findFirst({
+    where: { userId, sessionId: session.id },
+    orderBy: { createdAt: 'desc' },
+    include: { question: { select: { difficulty: true, conceptId: true } } },
+  });
+  const targetDifficulty = latestAttempt
+    ? nextDifficulty(latestAttempt.question.difficulty, latestAttempt.isCorrect)
+    : Difficulty.EASY;
 
-  const candidates = await prisma.question.findMany({
+  let candidates = await prisma.question.findMany({
     where: {
       isActive: true,
       ...(session.focusConceptId ? { conceptId: session.focusConceptId } : {}),
+      ...(selectedExamIds.length ? { chapter: { subject: { examId: { in: selectedExamIds } } } } : {}),
       ...(seenIds.length ? { id: { notIn: seenIds } } : {}),
+      difficulty: targetDifficulty,
     },
     include: { chapter: { include: { subject: true } }, concept: true },
     take: 25,
     orderBy: [{ difficulty: 'asc' }, { updatedAt: 'desc' }],
   });
+  if (!candidates.length) {
+    candidates = await prisma.question.findMany({
+      where: {
+        isActive: true,
+        ...(seenIds.length ? { id: { notIn: seenIds } } : {}),
+        ...(selectedExamIds.length ? { chapter: { subject: { examId: { in: selectedExamIds } } } } : {}),
+      },
+      include: { chapter: { include: { subject: true } }, concept: true },
+      take: 25,
+      orderBy: [{ updatedAt: 'desc' }],
+    });
+  }
+  if (candidates.length > 1) {
+    const conceptIds = candidates.map((item) => item.conceptId).filter((id): id is number => id !== null);
+    const conceptStats = conceptIds.length
+      ? await prisma.userConceptStat.findMany({
+          where: { userId, conceptId: { in: conceptIds } },
+          select: { conceptId: true, total: true, correct: true },
+        })
+      : [];
+    const accuracyByConcept = new Map(
+      conceptStats.map((stat) => [
+        stat.conceptId,
+        stat.total > 0 ? stat.correct / stat.total : 0.5,
+      ]),
+    );
+    candidates.sort((a, b) => {
+      const aAccuracy = a.conceptId ? (accuracyByConcept.get(a.conceptId) ?? 0.5) : 0.5;
+      const bAccuracy = b.conceptId ? (accuracyByConcept.get(b.conceptId) ?? 0.5) : 0.5;
+      return aAccuracy - bAccuracy;
+    });
+  }
   const question = candidates[0];
   if (!question) return res.json({ done: true, message: 'Nicely done! I’ve run out of stored questions for this topic. We can review another topic or come back later.' });
 
@@ -175,6 +295,14 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     ? await prisma.userConceptStat.findFirst({ where: { userId, conceptId } })
     : null;
   const accuracy = stats?.total ? Math.round((stats.correct / stats.total) * 100) : null;
+  const topicName = node?.nameEnglish || question.chapter.name;
+  const introductionPrompt = [
+    `Act as a friendly private exam teacher for the student's selected syllabus.`,
+    `Teach ${topicName} in one short, natural paragraph. Use the student's current accuracy of ${accuracy ?? 'not yet measured'}% when available.`,
+    `Then introduce the stored practice question in a conversational way. Do not say the answer or reveal an option.`,
+    `Use a calm encouraging tone. ${node?.description ? `Curated note: ${node.description}` : 'No curated note is available; clearly avoid claiming certainty.'}`,
+  ].join(' ');
+  const introductionAi = await generateOptional(userId, introductionPrompt);
 
   const { correctOption, ...safeQuestion } = question;
   return res.json({
@@ -192,7 +320,9 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
       sourceMissing: !node?.description,
       accuracy,
     },
-    teacherMessage: seenItems.length === 0
+    teacherMessage: introductionAi.status === 200 && introductionAi.body.generated
+      ? introductionAi.body.text
+      : seenItems.length === 0
       ? `Let’s begin with ${node?.nameEnglish || question.chapter.name}. Read the quick concept below, then try the question.`
       : 'You’re making progress. Let’s carry that learning into the next question.',
   });
@@ -237,11 +367,32 @@ router.post('/session/:sessionId/answer', authenticate, async (req: AuthRequest,
   prisma.userActivity.create({
     data: { userId, type: 'QUESTION_ANSWERED', metadata: { questionId, isCorrect, teacherSession: true } },
   }).catch(() => {});
-
+  await prisma.adaptiveSession.update({
+    where: { id: session.id },
+    data: {
+      focusConceptId: isCorrect
+        ? null
+        : question.conceptId || session.focusConceptId,
+    },
+  });
+  const feedbackPrompt = [
+    'Act as a warm, specific private exam teacher responding to one answer.',
+    isCorrect ? 'The student answered correctly.' : 'The student answered incorrectly.',
+    `Question: ${question.text}`,
+    `Correct option: ${String.fromCharCode(65 + question.correctOption)}`,
+    question.explanation ? `Stored explanation: ${question.explanation}` : 'No stored explanation is available.',
+    'In 2-3 natural sentences, explain what was good or diagnose the mistake, state the idea clearly, and encourage the student. Do not offer a prediction guarantee or claim an official answer.',
+  ].join(' ');
+  const feedbackAi = await generateOptional(userId, feedbackPrompt);
   return res.json({
     isCorrect,
     correctOption: question.correctOption,
     explanation: question.explanation || null,
+    teacherFeedback: feedbackAi.status === 200 && feedbackAi.body.generated
+      ? feedbackAi.body.text
+      : isCorrect
+        ? (question.explanation || 'That is correct. The stored explanation was not available.')
+        : `The correct answer is ${String.fromCharCode(65 + question.correctOption)}. ${question.explanation || 'The stored explanation was not available, so I can review the method together.'}`,
     diagnosis: isCorrect
       ? 'Nice work—you used the right idea. We’ll gently increase the challenge next.'
       : 'That answer was close. Let’s review the method and retry with an easier question so the idea becomes clear.',

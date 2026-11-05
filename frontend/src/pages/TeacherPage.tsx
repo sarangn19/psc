@@ -179,12 +179,6 @@ export default function TeacherPage() {
   useEffect(() => {
     if (!feedback || !sessionId) return;
     const timer = window.setTimeout(async () => {
-      addMessage(
-        'teacher',
-        feedback.isCorrect
-          ? 'Nice work. I’m choosing the next challenge from your performance.'
-          : 'I’ve found the area to revisit. We’ll make it easier now, then build up again.',
-      );
       await loadNext(sessionId);
     }, 2600);
     return () => window.clearTimeout(timer);
@@ -217,9 +211,10 @@ export default function TeacherPage() {
       if (data.isCorrect) setCorrectCount((count) => count + 1);
       addMessage(
         'teacher',
-        data.isCorrect
-          ? `Lovely work — that is correct. ${question.explanation || data.explanation || data.diagnosis || ''}`
-          : `That’s okay — we learn from it. The correct answer is ${String.fromCharCode(65 + data.correctOption)}. ${question.explanation || data.explanation || data.diagnosis || ''}`,
+        data.teacherFeedback ||
+          (data.isCorrect
+            ? (question.explanation || data.explanation || data.diagnosis || 'That is correct.')
+            : `The correct answer is ${String.fromCharCode(65 + data.correctOption)}. ${question.explanation || data.explanation || data.diagnosis || ''}`),
         'feedback',
         data.isCorrect,
       );
@@ -249,7 +244,23 @@ export default function TeacherPage() {
     if (!text) return;
     addMessage('student', text);
     setHelpText('');
-    await requestHint();
+    setTeacherTyping(true);
+    try {
+      const { data } = await api.post('/teacher/conversation', {
+        message: text,
+        questionId: question?.id,
+      });
+      await chatDelay(500);
+      addMessage(
+        'teacher',
+        data.generated ? data.text : (data.message || 'AI explanation is unavailable right now. Your saved question and answer data are still available.'),
+        'text',
+      );
+    } catch {
+      addMessage('teacher', 'I couldn’t reach the teaching service. Your progress is saved, and you can continue with the stored questions.');
+    } finally {
+      setTeacherTyping(false);
+    }
   };
 
   if (loading) {
@@ -268,9 +279,7 @@ export default function TeacherPage() {
       <header className="h-[68px] shrink-0 px-4 md:px-6 flex items-center justify-between border-b border-app-border bg-white">
         <div>
           <h1 className="text-[20px] leading-tight font-[800] m-0">AI Teacher</h1>
-          <p className="text-[12px] text-app-textSecondary m-0 mt-1">
-            {lessonMeta?.name || concept?.name || 'Preparing your study path'}
-          </p>
+          <p className="text-[12px] text-app-textSecondary m-0 mt-1">Online</p>
         </div>
         <div className="text-right">
           <p className="text-[11px] text-app-textMuted m-0">Session progress</p>
