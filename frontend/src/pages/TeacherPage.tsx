@@ -423,17 +423,6 @@ export default function TeacherPage() {
             );
           })}
 
-          {teacherTyping && (
-            <div className="flex items-end gap-2 self-start max-w-[92%] mb-[3px]" aria-label="Teacher is typing">
-              <span className="w-7 h-7 shrink-0"><TeacherAvatar /></span>
-              <div className="flex gap-[5px] items-center px-[15px] py-[13px] rounded-[18px] rounded-bl-[4px] border border-[#DADDE5] bg-white">
-                <i className="w-[7px] h-[7px] rounded-full bg-app-textMuted animate-bounce" />
-                <i className="w-[7px] h-[7px] rounded-full bg-app-textMuted animate-bounce [animation-delay:150ms]" />
-                <i className="w-[7px] h-[7px] rounded-full bg-app-textMuted animate-bounce [animation-delay:300ms]" />
-              </div>
-            </div>
-          )}
-
           {question && (
             <div className="flex items-end gap-2 self-start max-w-[92%] w-[92%] mb-[3px] chat-message-enter">
               <span className="w-7 h-7 shrink-0"><TeacherAvatar /></span>
@@ -467,6 +456,16 @@ export default function TeacherPage() {
                     {hintLoading ? 'Thinking…' : 'Hint'}
                   </button>
                 </div>
+              </div>
+            </div>
+          )}
+          {teacherTyping && (
+            <div className="flex items-end gap-2 self-start max-w-[92%] mb-[3px]" aria-label="Teacher is typing">
+              <span className="w-7 h-7 shrink-0"><TeacherAvatar /></span>
+              <div className="flex gap-[5px] items-center px-[15px] py-[13px] rounded-[18px] rounded-bl-[4px] border border-[#DADDE5] bg-white">
+                <i className="w-[7px] h-[7px] rounded-full bg-app-textMuted animate-bounce" />
+                <i className="w-[7px] h-[7px] rounded-full bg-app-textMuted animate-bounce [animation-delay:150ms]" />
+                <i className="w-[7px] h-[7px] rounded-full bg-app-textMuted animate-bounce [animation-delay:300ms]" />
               </div>
             </div>
           )}
