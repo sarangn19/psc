@@ -373,12 +373,12 @@ export default function TeacherPage() {
           )}
 
           {messages.map((message, index) => {
-            if (message.kind === 'question') return null;
+            if ((message.kind as string) === 'question') return null;
             const previous = messages[index - 1];
             const firstInGroup = !previous || previous.sender !== message.sender;
             const isTeacher = message.sender === 'teacher';
             return (
-              <div key={message.id} className={`flex items-end gap-2 max-w-[92%] mb-[3px] ${isTeacher ? 'self-start' : 'self-end'} ${message.kind === 'question' ? 'w-[92%]' : ''}`}>
+              <div key={message.id} className={`flex items-end gap-2 max-w-[92%] mb-[3px] ${isTeacher ? 'self-start' : 'self-end'} ${(message.kind as string) === 'question' ? 'w-[92%]' : ''}`}>
                 {isTeacher && (
                   <span className="w-7 h-7 shrink-0 mb-[1px]">
                     {firstInGroup ? <TeacherAvatar /> : <span className="block w-7 h-7" />}
@@ -395,7 +395,7 @@ export default function TeacherPage() {
                       : 'border border-app-accent bg-app-accent text-white rounded-br-[4px]'
                   } ${isTeacher && firstInGroup ? 'rounded-bl-[4px]' : ''}`}>
                     <p className="m-0 whitespace-pre-wrap">{message.text}</p>
-                    {message.kind === 'question' && message.options && (
+                    {(message.kind as string) === 'question' && message.options && (
                       <div className="-mx-4 mt-2 flex flex-col border-t border-[#DADDE5]">
                         {message.options.map((option, optionIndex) => {
                           const selected = message.selectedOption === optionIndex;
