@@ -248,18 +248,6 @@ export default function TeacherPage() {
           correctOption: submittedQuestion.correctOption,
         },
       );
-      await chatDelay(550);
-      addMessage(
-        'teacher',
-        submittedQuestion.text,
-        'question',
-        undefined,
-        {
-          options: submittedQuestion.options,
-          selectedOption: optionIndex,
-          correctOption: submittedQuestion.correctOption,
-        },
-      );
       addMessage('student', `${String.fromCharCode(65 + optionIndex)}. ${submittedQuestion.options[optionIndex]}`, 'text');
       setFeedback(data);
       setAttemptCount((count) => count + 1);
@@ -373,7 +361,6 @@ export default function TeacherPage() {
           )}
 
           {messages.map((message, index) => {
-            if ((message.kind as string) === 'question') return null;
             const previous = messages[index - 1];
             const firstInGroup = !previous || previous.sender !== message.sender;
             const isTeacher = message.sender === 'teacher';
