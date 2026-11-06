@@ -373,6 +373,7 @@ export default function TeacherPage() {
           )}
 
           {messages.map((message, index) => {
+            if (message.kind === 'question') return null;
             const previous = messages[index - 1];
             const firstInGroup = !previous || previous.sender !== message.sender;
             const isTeacher = message.sender === 'teacher';
