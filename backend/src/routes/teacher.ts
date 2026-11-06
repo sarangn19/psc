@@ -799,7 +799,7 @@ async function generateFromConfiguredProvider(prompt: string): Promise<{ ok: boo
     ].join('\n\n');
     const startedAt = Date.now();
     const endpoint = redactEndpoint(process.env.AI_API_URL!);
-    const model = process.env.AI_MODEL || 'gemini-2.5-flash';
+    const model = process.env.AI_MODEL || 'gemini-1.5-flash';
     try {
       const response = await fetch(process.env.AI_API_URL!, {
         method: 'POST',
