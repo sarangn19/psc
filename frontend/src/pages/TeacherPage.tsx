@@ -109,15 +109,15 @@ export default function TeacherPage() {
     setTeacherTyping(true);
     setFeedback(null);
     setSelectedOption(null);
-    setQuestion(null);
     try {
       const { data } = await api.get(`/teacher/session/${sid}/next`);
       if (data.done || !data.question) {
-        addMessage('teacher', data.message || 'We have reached a good stopping point for today. I’ll keep this conversation here for next time.');
+        addMessage('teacher', data.message || 'We have reached a good stopping point for today. Iâ€™ll keep this conversation here for next time.');
         setTeacherTyping(false);
         return;
       }
 
+      setQuestion(null);
       setConcept(data.concept);
       setQuestionNumber(data.questionNumber || 0);
       setLessonMeta({
