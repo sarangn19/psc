@@ -237,7 +237,6 @@ export default function TeacherPage() {
         selectedOption: optionIndex,
         timeTaken: 0,
       });
-      await chatDelay(550);
       addMessage(
         'teacher',
         submittedQuestion.text,
