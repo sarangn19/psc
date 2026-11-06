@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import api from '../lib/api';
 import { upsertAnsweredQuestion } from '../lib/questionLifecycle';
+import { classifyMessageIntent } from '../lib/messageIntent';
 
 interface Question {
   id: string;
@@ -272,8 +273,13 @@ export default function TeacherPage() {
   const sendHelp = async () => {
     const text = helpText.trim();
     if (!text) return;
+    const intent = classifyMessageIntent(text);
     addMessage('student', text);
     setHelpText('');
+    if (intent === 'CONTINUE_PRACTICE') {
+      if (sessionId) await loadNext(sessionId);
+      return;
+    }
     setTeacherTyping(true);
     try {
       const { data } = await api.post('/teacher/conversation', {
