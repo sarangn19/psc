@@ -111,18 +111,21 @@ export default function TeacherPage() {
   };
 
   const loadNext = async (sid: string) => {
+    const requestId = requestLifecycleRef.current.start('next-question');
     setTeacherTyping(true);
     setFeedback(null);
     setSelectedOption(null);
     setQuestion(null);
     try {
       const { data } = await api.get(`/teacher/session/${sid}/next`);
+      if (!requestLifecycleRef.current.isCurrent('next-question', requestId)) return;
       if (data.done || !data.question) {
         addMessage('teacher', data.message || 'We have reached a good stopping point for today. Iâ€™ll keep this conversation here for next time.');
-        setTeacherTyping(false);
         return;
       }
-
+      if (data.question?.id && messages.some((m) => m.kind === 'question' && (m.questionId || m.text) === data.question.id)) {
+        return;
+      }
       setConcept(data.concept);
       setQuestionNumber(data.questionNumber || 0);
       setLessonMeta({
@@ -131,15 +134,21 @@ export default function TeacherPage() {
         sourceMissing: data.concept?.sourceMissing,
       });
       await chatDelay(650);
+      if (!requestLifecycleRef.current.isCurrent('next-question', requestId)) return;
       if (data.teacherMessage) {
         addMessage('teacher', data.teacherMessage);
       }
       await chatDelay(650);
+      if (!requestLifecycleRef.current.isCurrent('next-question', requestId)) return;
       setQuestion(data.question);
     } catch {
-      setError('I could not load the next practice question. Your saved progress is still safe.');
+      if (requestLifecycleRef.current.isCurrent('next-question', requestId)) {
+        setError('I could not load the next practice question. Your saved progress is still safe.');
+      }
     } finally {
-      setTeacherTyping(false);
+      if (requestLifecycleRef.current.finish('next-question', requestId)) {
+        setTeacherTyping(false);
+      }
     }
   };
 
@@ -227,6 +236,7 @@ export default function TeacherPage() {
     setAnswering(true);
     setSelectedOption(optionIndex);
     const submittedQuestion = question;
+    const requestId = requestLifecycleRef.current.start('answer-submission');
     try {
       setTeacherTyping(true);
       const { data } = await api.post(`/teacher/session/${sessionId}/answer`, {
@@ -234,6 +244,8 @@ export default function TeacherPage() {
         selectedOption: optionIndex,
         timeTaken: 0,
       });
+      if (!requestLifecycleRef.current.isCurrent('answer-submission', requestId)) return;
+      if (submittedQuestion.id !== question?.id) return;
       setMessages((current) => upsertAnsweredQuestion(current, submittedQuestion, optionIndex, submittedQuestion.correctOption, data.isCorrect, data.explanation || submittedQuestion.explanation) as any);
       addMessage('student', `${String.fromCharCode(65 + optionIndex)}. ${submittedQuestion.options[optionIndex]}`, 'text');
       setFeedback(data);
@@ -249,13 +261,18 @@ export default function TeacherPage() {
         'feedback',
         data.isCorrect,
       );
+      setQuestion(null);
       setTeacherTyping(false);
     } catch {
-      setTeacherTyping(false);
-      setSelectedOption(null);
-      setError('That answer could not be scored. You can send it again.');
+      if (requestLifecycleRef.current.isCurrent('answer-submission', requestId)) {
+        setTeacherTyping(false);
+        setSelectedOption(null);
+        setError('That answer could not be scored. You can send it again.');
+      }
+    } finally {
+      requestLifecycleRef.current.finish('answer-submission', requestId);
+      setAnswering(false);
     }
-    setAnswering(false);
   };
 
   const requestHint = async () => {
