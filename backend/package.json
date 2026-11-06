@@ -4,12 +4,14 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "prisma generate && tsc",
-    "start": "prisma migrate deploy && node dist/index.js",
+    "start": "node dist/index.js",
+    "migrate:deploy": "prisma migrate deploy",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:seed": "ts-node prisma/seed.ts",
     "taxonomy:import": "ts-node prisma/import-taxonomy.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:answer-integration": "vitest run tests/answerSubmission.integration.test.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.10.0",

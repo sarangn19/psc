@@ -26,3 +26,48 @@ export function buildDayPlan(chapters: { id: string; name: string }[], targetDat
     };
   });
 }
+
+export function validatePracticeQuestion(input: {
+  text?: unknown;
+  options?: unknown;
+  correctOption?: unknown;
+}): { valid: boolean; options: string[] } {
+  const stem = typeof input.text === 'string' ? input.text.trim() : '';
+  let options: unknown = input.options;
+  if (typeof options === 'string') {
+    try {
+      options = JSON.parse(options);
+    } catch {
+      options = [];
+    }
+  }
+  const normalized = Array.isArray(options)
+    ? options.map((option) => typeof option === 'string' ? option.trim() : '').filter(Boolean)
+    : [];
+  const correctOption = Number(input.correctOption);
+  const uniqueOptions = new Set(normalized.map((option) => option.toLowerCase().replace(/\s+/g, ' ')));
+  const stemLower = stem.toLowerCase().replace(/[?.!:\s]+/g, ' ').trim();
+  const valid = stem.length >= 10
+    && normalized.length >= 2
+    && normalized.length <= 8
+    && uniqueOptions.size === normalized.length
+    && Number.isInteger(correctOption)
+    && correctOption >= 0
+    && correctOption < normalized.length
+    && normalized.every((option) => option.length >= 1 && option.toLowerCase().replace(/[?.!:\s]+/g, ' ').trim() !== stemLower);
+
+  return { valid, options: normalized };
+}
+
+export function optionName(options: string[], index: number): string {
+  return options[index]?.trim() || `${String.fromCharCode(65 + index)} (unavailable option text)`;
+}
+
+export const TEACHER_RESPONSE_RULES = `
+Correct answer: acknowledge the actual selected option, verify the idea, praise specifically, then advance or raise difficulty.
+Wrong answer: name the actual selected choice, say what it means, state the correct answer in words, explain the mix-up, and stay on the same topic.
+Hint request: give a useful hint without revealing the answer.
+Too hard: simplify, re-explain, and offer a quick win.
+Long break: briefly recap what happened before and resume without restarting.
+Every turn must end with a question, hint offer, or short check-in.
+`;

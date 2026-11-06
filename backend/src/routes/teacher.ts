@@ -1,9 +1,14 @@
 import { Router } from 'express';
 import prisma from '../lib/prisma';
 import { authenticate, AuthRequest } from '../middleware/auth';
-import { buildDayPlan, nextDifficulty } from '../lib/teacher';
+import { buildDayPlan, nextDifficulty, optionName, validatePracticeQuestion } from '../lib/teacher';
 import { Difficulty, Prisma } from '@prisma/client';
 import { normalizeOptions } from '../lib/options';
+import { getStudentLearningProfile } from '../lib/studentLearningProfile';
+import { diagnoseStudent } from '../lib/diagnosticEngine';
+import { createAdaptiveLearningPlan, AvailableConcept } from '../lib/adaptiveLearningPlanner';
+import { buildTeachingContext, serializeTeachingContext, TeachingInteraction } from '../lib/teachingContext';
+import { AnswerSubmissionError, submitAnswerAtomically } from '../lib/answerSubmission';
 
 const router = Router();
 
@@ -65,25 +70,151 @@ router.post('/hint', authenticate, async (req: AuthRequest, res) => {
     include: { chapter: true, concept: true },
   });
   if (!question) return res.status(404).json({ message: 'Question not found' });
-  const result = await generateOptional(req.user!.id, `Give a short study hint. Do not reveal the answer letter or value. Question: ${question.text}. Topic: ${question.concept?.nameEnglish || question.chapter.name}.`);
+  const eventKey = String(req.body?.eventKey || '').trim() || `hint:${req.user!.id}:${question.id}:${req.body?.sessionId || 'none'}:${Math.floor(Date.now() / 1000)}`;
+  let sessionId = req.body?.sessionId ? String(req.body.sessionId) : null;
+  if (sessionId) {
+    const session = await prisma.adaptiveSession.findUnique({ where: { id: sessionId } });
+    if (!session || session.userId !== req.user!.id) {
+      return res.status(404).json({ message: 'Teacher session not found' });
+    }
+  } else {
+    const latestSession = await prisma.adaptiveSession.findFirst({
+      where: { userId: req.user!.id, endedAt: null },
+      orderBy: { startedAt: 'desc' },
+      select: { id: true },
+    });
+    sessionId = latestSession?.id || null;
+  }
+  await prisma.learningHint.upsert({
+    where: { userId_eventKey: { userId: req.user!.id, eventKey } },
+    create: {
+      userId: req.user!.id,
+      eventKey,
+      sessionId,
+      questionId: question.id,
+      conceptId: question.conceptId,
+      hintCount: 1,
+    },
+    update: { hintCount: { increment: 1 } },
+  });
+  const options = normalizeOptions(question.options);
+  const profile = await getStudentLearningProfile(req.user!.id, null);
+  const diagnostics = diagnoseStudent(profile);
+  const plan = createAdaptiveLearningPlan({
+    profile,
+    diagnostics,
+    availableConcepts: question.conceptId ? [{
+      conceptId: question.conceptId,
+      questionCount: 1,
+      difficultyCounts: { [question.difficulty]: 1 },
+    }] : [],
+    selectedExamIds: [],
+    currentLearningFocusId: question.conceptId,
+  });
+  const teachingContext = buildTeachingContext({
+    profile,
+    diagnostics,
+    plan,
+    currentConceptName: null,
+    currentQuestion: { text: question.text, options, correctOption: question.correctOption, storedExplanation: question.explanation },
+    studentFeedback: 'The student requested a hint.',
+  });
+  const result = await generateOptional(
+    req.user!.id,
+    [
+      'You are a patient tutor. Give one or two short conversational hint sentences.',
+      'Do not reveal the answer letter, answer value, or complete solution.',
+      'Ground the hint in the question only; if the source or method is uncertain, say that you are not sure.',
+      `Question: ${question.text}`,
+      `Options: ${options.map((option, index) => `${String.fromCharCode(65 + index)}: ${option}`).join('; ')}`,
+      serializeTeachingContext(teachingContext),
+    ].join('\n'),
+  );
   return res.status(result.status).json(result.body);
+});
+
+router.post('/feedback', authenticate, async (req: AuthRequest, res) => {
+  const allowed = new Set(['TOO_HARD', 'TOO_EASY', 'CONFUSED', 'EXPLAIN_DIFFERENTLY', 'TIRED', 'NEED_BREAK']);
+  const type = String(req.body?.type || '').trim();
+  if (!allowed.has(type)) return res.status(400).json({ message: 'Invalid learning feedback type' });
+  const eventKey = String(req.body?.eventKey || '').trim() || `feedback:${req.user!.id}:${type}:${req.body?.sessionId || 'none'}:${Date.now()}`;
+  const sessionId = req.body?.sessionId ? String(req.body.sessionId) : null;
+  if (sessionId) {
+    const session = await prisma.adaptiveSession.findUnique({ where: { id: sessionId } });
+    if (!session || session.userId !== req.user!.id) {
+      return res.status(404).json({ message: 'Teacher session not found' });
+    }
+  }
+  const questionId = req.body?.questionId ? String(req.body.questionId) : null;
+  let conceptId = Number.isInteger(Number(req.body?.conceptId)) ? Number(req.body.conceptId) : null;
+  if (questionId) {
+    const question = await prisma.question.findUnique({
+      where: { id: questionId },
+      select: { conceptId: true },
+    });
+    if (!question) return res.status(404).json({ message: 'Question not found' });
+    if (conceptId !== null && question.conceptId !== null && conceptId !== question.conceptId) {
+      return res.status(400).json({ message: 'Feedback concept does not match the question' });
+    }
+    conceptId = question.conceptId ?? conceptId;
+  }
+  await prisma.learningFeedback.upsert({
+    where: { userId_eventKey: { userId: req.user!.id, eventKey } },
+    create: {
+      userId: req.user!.id,
+      eventKey,
+      type: type as 'TOO_HARD' | 'TOO_EASY' | 'CONFUSED' | 'EXPLAIN_DIFFERENTLY' | 'TIRED' | 'NEED_BREAK',
+      sessionId,
+      questionId,
+      conceptId,
+      message: typeof req.body?.message === 'string' ? req.body.message.trim().slice(0, 500) : null,
+    },
+    update: {},
+  });
+  return res.json({ saved: true });
 });
 
 router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
   const userId = req.user!.id;
   const message = String(req.body?.message || '').trim();
+  const recentHistory = Array.isArray(req.body?.history)
+    ? req.body.history.slice(-8).map((item: any) => `${item.sender === 'student' ? 'Student' : 'Teacher'}: ${String(item.text || '').slice(0, 500)}`).join('\n')
+    : '';
   if (!message) return res.status(400).json({ message: 'Message is required' });
+  const loweredMessage = message.toLowerCase();
+  const inferredFeedback = loweredMessage.includes('too hard') || loweredMessage.includes('difficult')
+    ? 'TOO_HARD'
+    : loweredMessage.includes('too easy')
+      ? 'TOO_EASY'
+      : loweredMessage.includes('confused') || loweredMessage.includes('do not understand') || loweredMessage.includes("don't understand")
+        ? 'CONFUSED'
+        : loweredMessage.includes('explain differently') || loweredMessage.includes('another way')
+          ? 'EXPLAIN_DIFFERENTLY'
+          : loweredMessage.includes('tired')
+            ? 'TIRED'
+            : loweredMessage.includes('break')
+              ? 'NEED_BREAK'
+              : null;
+  if (inferredFeedback) {
+    const feedbackEventKey = `conversation:${userId}:${inferredFeedback}:${Math.floor(Date.now() / 60000)}`;
+    await prisma.learningFeedback.upsert({
+      where: { userId_eventKey: { userId, eventKey: feedbackEventKey } },
+      create: {
+        userId,
+        eventKey: feedbackEventKey,
+        type: inferredFeedback as 'TOO_HARD' | 'TOO_EASY' | 'CONFUSED' | 'EXPLAIN_DIFFERENTLY' | 'TIRED' | 'NEED_BREAK',
+        message: message.slice(0, 500),
+      },
+      update: {},
+    });
+  }
 
-  const [selected, stats, currentQuestion] = await Promise.all([
+  const [selected, profile, currentQuestion] = await Promise.all([
     prisma.userExam.findMany({
       where: { userId },
       include: { exam: { select: { name: true } } },
     }),
-    prisma.userConceptStat.findMany({
-      where: { userId, conceptId: { not: null }, total: { gt: 0 } },
-      select: { conceptId: true, total: true, correct: true },
-      take: 12,
-    }),
+    getStudentLearningProfile(userId, null),
     req.body?.questionId
       ? prisma.question.findUnique({
           where: { id: String(req.body.questionId) },
@@ -91,23 +222,75 @@ router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
         })
       : null,
   ]);
-  const weakIds = stats
-    .filter((stat) => stat.correct / stat.total < 0.7)
-    .map((stat) => stat.conceptId)
-    .filter((id): id is number => id !== null);
-  const weakNodes = weakIds.length
-    ? await prisma.taxonomyNode.findMany({ where: { id: { in: weakIds } }, select: { nameEnglish: true } })
-    : [];
   const examNames = selected.map((item) => item.exam.name);
+  const selectedExamIds = selected.map((item) => item.examId);
+  const diagnostics = diagnoseStudent(profile);
+  const availableRows = await prisma.question.findMany({
+    where: {
+      isActive: true,
+      conceptId: { not: null },
+      ...(selectedExamIds.length ? { chapter: { subject: { examId: { in: selectedExamIds } } } } : {}),
+    },
+    select: { conceptId: true, difficulty: true },
+  });
+  const availabilityMap = new Map<number, AvailableConcept>();
+  for (const row of availableRows) {
+    if (row.conceptId === null) continue;
+    const existing = availabilityMap.get(row.conceptId) || { conceptId: row.conceptId, questionCount: 0, difficultyCounts: {} };
+    existing.questionCount += 1;
+    existing.difficultyCounts![row.difficulty as 'EASY' | 'MEDIUM' | 'HARD'] =
+      (existing.difficultyCounts![row.difficulty as 'EASY' | 'MEDIUM' | 'HARD'] || 0) + 1;
+    availabilityMap.set(row.conceptId, existing);
+  }
+  const plan = createAdaptiveLearningPlan({
+    profile,
+    diagnostics,
+    availableConcepts: [...availabilityMap.values()],
+    selectedExamIds,
+    currentLearningFocusId: profile.currentState.currentLearningFocusId,
+  });
+  const teachingContext = buildTeachingContext({
+    profile,
+    diagnostics,
+    plan,
+    currentConceptName: currentQuestion?.concept?.nameEnglish || null,
+    currentQuestion: currentQuestion
+      ? {
+          text: currentQuestion.text,
+          options: normalizeOptions(currentQuestion.options),
+          correctOption: currentQuestion.correctOption,
+          storedExplanation: currentQuestion.explanation,
+        }
+      : null,
+    recentInteractions: Array.isArray(req.body?.history) ? req.body.history.slice(-8).map((item: any) => ({
+      sender: item.sender === 'student' ? 'student' as const : 'teacher' as const,
+      text: String(item.text || '').slice(0, 500),
+    })) : [],
+    studentMessage: message,
+    studentFeedback: message,
+  });
   const prompt = [
-    'Act as the student’s friendly private exam teacher. Reply naturally to the student and stay grounded in their syllabus and performance.',
+    'ROLE: You are a patient, accurate tutor chatting with one student. Every reply must teach something and feel like a real person.',
+    'STYLE: Use one to three short chat bubbles of meaning. Never use headings, bullet lists, raw topic labels, or stock filler. Be warm and direct.',
+    'Use the student’s own words and recent turns. Never reset or restart the conversation.',
+    'Choose the next step from accuracy, recent mistakes, time since review, hint use, answer speed, and what the student asks.',
+    'If the student says too hard, simplify and offer one quick win. If too easy or accurate, raise difficulty gradually. If tired or the session is long, recap briefly and suggest a break.',
+    'Never send the raw topic/category name. Any topic change needs one natural sentence explaining why based on performance.',
+    'Stay on the same topic after a miss until understanding is shown. After a correct answer, praise something specific, then move on or raise difficulty.',
+    'Facts and explanations must be verified against the supplied question and stored context. If unsure, say less and identify what cannot be confirmed.',
+    'Always end with the next step: a question, a hint offer, or a short check-in.',
     `Selected exams: ${examNames.length ? examNames.join(', ') : 'not selected yet'}.`,
-    `Weak topics: ${weakNodes.map((node) => node.nameEnglish).join(', ') || 'no clear weak topic yet'}.`,
     currentQuestion
-      ? `Current topic: ${currentQuestion.concept?.nameEnglish || currentQuestion.chapter.name}. Current question: ${currentQuestion.text}`
+      ? [
+          `Current question: ${currentQuestion.text}`,
+          `Options: ${normalizeOptions(currentQuestion.options).map((option, index) => `${String.fromCharCode(65 + index)}: ${option}`).join('; ')}`,
+          currentQuestion.explanation ? `Stored explanation: ${currentQuestion.explanation}` : 'Stored explanation unavailable.',
+        ].join('\n')
       : 'There is no active practice question.',
+    recentHistory ? `Recent conversation:\n${recentHistory}` : '',
     `Student message: ${message}`,
     'If the request is for a hint, help without revealing the answer option or value. If it asks for an explanation, teach it simply. Do not claim official predictions or certainty.',
+    serializeTeachingContext(teachingContext),
   ].join('\n');
   const result = await generateOptional(userId, prompt);
   return res.status(result.status).json(result.body);
@@ -160,11 +343,6 @@ router.post('/session/start', authenticate, async (req: AuthRequest, res) => {
       select: { examId: true },
     });
     const selectedExamIds = selectedExams.map((item) => item.examId);
-    const weakStats = await prisma.userConceptStat.findMany({
-      where: { userId, conceptId: { not: null }, total: { gt: 0 } },
-      select: { conceptId: true, total: true, correct: true },
-      take: 100,
-    });
     const eligibleQuestions = selectedExamIds.length
       ? await prisma.question.findMany({
           where: {
@@ -172,21 +350,30 @@ router.post('/session/start', authenticate, async (req: AuthRequest, res) => {
             chapter: { subject: { examId: { in: selectedExamIds } } },
             conceptId: { not: null },
           },
-          select: { conceptId: true },
-          distinct: ['conceptId'],
+          select: { conceptId: true, difficulty: true },
         })
       : await prisma.question.findMany({
           where: { isActive: true, conceptId: { not: null } },
-          select: { conceptId: true },
-          distinct: ['conceptId'],
+          select: { conceptId: true, difficulty: true },
         });
-    const eligibleConceptIds = new Set(eligibleQuestions.map((item) => item.conceptId).filter((id): id is number => id !== null));
-    const weakest = [...weakStats]
-      .filter((stat) => eligibleConceptIds.has(stat.conceptId!))
-      .sort((a, b) =>
-      (a.correct / a.total) - (b.correct / b.total)
-    )[0];
-    focusConceptId = weakest?.conceptId || null;
+    const availabilityMap = new Map<number, AvailableConcept>();
+    for (const row of eligibleQuestions) {
+      if (row.conceptId === null) continue;
+      const existing = availabilityMap.get(row.conceptId) || { conceptId: row.conceptId, questionCount: 0, difficultyCounts: {} };
+      existing.questionCount += 1;
+      existing.difficultyCounts![row.difficulty as 'EASY' | 'MEDIUM' | 'HARD'] =
+        (existing.difficultyCounts![row.difficulty as 'EASY' | 'MEDIUM' | 'HARD'] || 0) + 1;
+      availabilityMap.set(row.conceptId, existing);
+    }
+    const profile = await getStudentLearningProfile(userId, null);
+    const diagnostics = diagnoseStudent(profile);
+    const plan = createAdaptiveLearningPlan({
+      profile,
+      diagnostics,
+      availableConcepts: [...availabilityMap.values()],
+      selectedExamIds,
+    });
+    focusConceptId = plan.selectedConceptId;
   }
 
   const session = await prisma.adaptiveSession.create({
@@ -237,78 +424,124 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     select: { examId: true },
   });
   const selectedExamIds = selectedExams.map((item) => item.examId);
-  const latestAttempt = await prisma.questionAttempt.findFirst({
-    where: { userId, sessionId: session.id },
-    orderBy: { createdAt: 'desc' },
-    include: { question: { select: { difficulty: true, conceptId: true } } },
+  const profile = await getStudentLearningProfile(userId, session.id);
+  const diagnostics = diagnoseStudent(profile);
+  const availabilityRows = await prisma.question.findMany({
+    where: {
+      isActive: true,
+      conceptId: { not: null },
+      ...(excludedIds.length ? { id: { notIn: excludedIds } } : {}),
+      ...(selectedExamIds.length ? { chapter: { subject: { examId: { in: selectedExamIds } } } } : {}),
+    },
+    select: {
+      conceptId: true,
+      difficulty: true,
+      chapter: { select: { subject: { select: { id: true, examId: true } } } },
+    },
   });
-  const targetDifficulty = latestAttempt
-    ? nextDifficulty(latestAttempt.question.difficulty, latestAttempt.isCorrect)
-    : Difficulty.EASY;
-
+  const availabilityMap = new Map<number, AvailableConcept>();
+  for (const row of availabilityRows) {
+    if (row.conceptId === null) continue;
+    const existing = availabilityMap.get(row.conceptId) || {
+      conceptId: row.conceptId,
+      questionCount: 0,
+      difficultyCounts: {},
+      examIds: [],
+      subjectIds: [],
+    };
+    existing.questionCount += 1;
+    existing.difficultyCounts![row.difficulty as 'EASY' | 'MEDIUM' | 'HARD'] =
+      (existing.difficultyCounts![row.difficulty as 'EASY' | 'MEDIUM' | 'HARD'] || 0) + 1;
+    existing.examIds = [...new Set([...(existing.examIds || []), row.chapter.subject.examId])];
+    existing.subjectIds = [...new Set([...(existing.subjectIds || []), row.chapter.subject.id])];
+    availabilityMap.set(row.conceptId, existing);
+  }
+  const plan = createAdaptiveLearningPlan({
+    profile,
+    diagnostics,
+    availableConcepts: [...availabilityMap.values()],
+    selectedExamIds,
+    currentLearningFocusId: session.focusConceptId,
+  });
+  if (plan.selectedAction === 'no_available_question' || plan.selectedConceptId === null) {
+    return res.json({ done: true, message: 'I’ve run out of stored questions for the current learning objective. No unrelated topic has been chosen.' });
+  }
+  const targetDifficulty = plan.selectedDifficulty as Difficulty;
   let candidates = await prisma.question.findMany({
     where: {
       isActive: true,
-      ...(session.focusConceptId ? { conceptId: session.focusConceptId } : {}),
+      conceptId: plan.selectedConceptId,
       ...(selectedExamIds.length ? { chapter: { subject: { examId: { in: selectedExamIds } } } } : {}),
       ...(excludedIds.length ? { id: { notIn: excludedIds } } : {}),
       difficulty: targetDifficulty,
     },
     include: { chapter: { include: { subject: true } }, concept: true },
     take: 25,
-    orderBy: [{ difficulty: 'asc' }, { updatedAt: 'desc' }],
+    orderBy: [{ updatedAt: 'desc' }],
   });
   if (!candidates.length) {
     candidates = await prisma.question.findMany({
       where: {
         isActive: true,
-        ...(excludedIds.length ? { id: { notIn: excludedIds } } : {}),
+        conceptId: plan.selectedConceptId,
         ...(selectedExamIds.length ? { chapter: { subject: { examId: { in: selectedExamIds } } } } : {}),
+        ...(excludedIds.length ? { id: { notIn: excludedIds } } : {}),
       },
       include: { chapter: { include: { subject: true } }, concept: true },
       take: 25,
       orderBy: [{ updatedAt: 'desc' }],
     });
   }
-  if (candidates.length > 1) {
-    const conceptIds = candidates.map((item) => item.conceptId).filter((id): id is number => id !== null);
-    const conceptStats = conceptIds.length
-      ? await prisma.userConceptStat.findMany({
-          where: { userId, conceptId: { in: conceptIds } },
-          select: { conceptId: true, total: true, correct: true },
-        })
-      : [];
-    const accuracyByConcept = new Map(
-      conceptStats.map((stat) => [
-        stat.conceptId,
-        stat.total > 0 ? stat.correct / stat.total : 0.5,
-      ]),
-    );
-    candidates.sort((a, b) => {
-      const aAccuracy = a.conceptId ? (accuracyByConcept.get(a.conceptId) ?? 0.5) : 0.5;
-      const bAccuracy = b.conceptId ? (accuracyByConcept.get(b.conceptId) ?? 0.5) : 0.5;
-      return aAccuracy - bAccuracy;
-    });
-  }
-  const question = candidates[0];
+  candidates = candidates.filter((candidate) => validatePracticeQuestion({
+    text: candidate.text,
+    options: normalizeOptions(candidate.options),
+    correctOption: candidate.correctOption,
+  }).valid);
+  const question = candidates.find((candidate) => validatePracticeQuestion({
+    text: candidate.text,
+    options: normalizeOptions(candidate.options),
+    correctOption: candidate.correctOption,
+  }).valid);
   if (!question) return res.json({ done: true, message: 'Nicely done! I’ve run out of stored questions for this topic. We can review another topic or come back later.' });
 
+  const conceptId = question.conceptId;
   await prisma.adaptiveItem.create({
     data: { sessionId: session.id, questionId: question.id, order: seenItems.length + 1 },
   });
+  await prisma.adaptiveSession.update({
+    where: { id: session.id },
+    data: { focusConceptId: conceptId },
+  });
 
-  const conceptId = question.conceptId;
   const node = conceptId ? await prisma.taxonomyNode.findUnique({ where: { id: conceptId } }) : null;
   const stats = conceptId
     ? await prisma.userConceptStat.findFirst({ where: { userId, conceptId } })
     : null;
   const accuracy = stats?.total ? Math.round((stats.correct / stats.total) * 100) : null;
-  const topicName = node?.nameEnglish || question.chapter.name;
+  const teachingContext = buildTeachingContext({
+    profile,
+    diagnostics,
+    plan,
+    currentConceptName: node?.nameEnglish || null,
+    currentQuestion: {
+      text: question.text,
+      options: normalizeOptions(question.options),
+      storedExplanation: question.explanation,
+    },
+  });
   const introductionPrompt = [
-    `Act as a friendly private exam teacher for the student's selected syllabus.`,
-    `Teach ${topicName} in one short, natural paragraph. Use the student's current accuracy of ${accuracy ?? 'not yet measured'}% when available.`,
-    `Then introduce the stored practice question in a conversational way. Do not say the answer or reveal an option.`,
-    `Use a calm encouraging tone. ${node?.description ? `Curated note: ${node.description}` : 'No curated note is available; clearly avoid claiming certainty.'}`,
+    'Act as a warm, attentive private teacher chatting naturally with one student.',
+    'Teach one small idea in one to three short chat bubbles, with one idea per bubble.',
+    `Use the latest measured accuracy of ${accuracy ?? 'not yet measured'}% only when it helps explain the teaching choice.`,
+    'Do not print or announce a topic name, syllabus label, or category string.',
+    'Connect the explanation to what the student has shown they understand; never use stock encouragement.',
+    `Curated source available for this question: ${node?.description || 'none'}.`,
+    'If the source note is missing, teach only the verified facts from the question and say when a detail cannot be confirmed.',
+    `Verified question: ${question.text}`,
+    `Options: ${normalizeOptions(question.options).map((option, index) => `${String.fromCharCode(65 + index)}: ${option}`).join('; ')}`,
+    'Introduce the practice item conversationally, without revealing the answer or correct option.',
+    'Always end by asking the student to choose, explain why, or send the answer.',
+    serializeTeachingContext(teachingContext),
   ].join(' ');
   const introductionAi = await generateOptional(userId, introductionPrompt);
 
@@ -330,9 +563,8 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     },
     teacherMessage: introductionAi.status === 200 && introductionAi.body.generated
       ? introductionAi.body.text
-      : seenItems.length === 0
-      ? `Let’s begin with ${node?.nameEnglish || question.chapter.name}. Read the quick concept below, then try the question.`
-      : 'You’re making progress. Let’s carry that learning into the next question.',
+      : null,
+    aiUnavailable: introductionAi.status !== 200 || !introductionAi.body.generated,
   });
 });
 
@@ -346,65 +578,156 @@ router.post('/session/:sessionId/answer', authenticate, async (req: AuthRequest,
   const question = await prisma.question.findUnique({ where: { id: questionId } });
   if (!question) return res.status(404).json({ message: 'Question not found' });
   if (!Number.isInteger(selectedOption) || selectedOption < 0) return res.status(400).json({ message: 'Please select one answer option' });
+  if (selectedOption >= normalizeOptions(question.options).length) {
+    return res.status(400).json({ message: 'Selected answer option is invalid' });
+  }
 
   const isCorrect = selectedOption === question.correctOption;
-  await Promise.all([
-    prisma.questionAttempt.create({
-      data: { userId, questionId, selectedOption, isCorrect, timeTaken: Number(req.body?.timeTaken) || 0, sessionId: session.id },
-    }),
-    prisma.adaptiveSession.update({
-      where: { id: session.id },
-      data: { totalQ: { increment: 1 }, correctQ: isCorrect ? { increment: 1 } : undefined },
-    }),
+  const [profileBefore, existingRevision] = await Promise.all([
+    getStudentLearningProfile(userId, session.id),
     question.conceptId
-      ? prisma.$executeRaw`
-          INSERT INTO user_concept_stats (id, "userId", "conceptId", total, correct, "updatedAt")
-          VALUES (gen_random_uuid()::text, ${userId}, ${question.conceptId}, 1, ${isCorrect ? 1 : 0}, now())
-          ON CONFLICT ("userId", "conceptId") WHERE "conceptId" IS NOT NULL
-          DO UPDATE SET total = user_concept_stats.total + 1,
-                        correct = user_concept_stats.correct + ${isCorrect ? 1 : 0},
-                        "updatedAt" = now()`
-      : prisma.$executeRaw`
-          INSERT INTO user_concept_stats (id, "userId", "chapterId", total, correct, "updatedAt")
-          VALUES (gen_random_uuid()::text, ${userId}, ${question.chapterId}, 1, ${isCorrect ? 1 : 0}, now())
-          ON CONFLICT ("userId", "chapterId") WHERE "chapterId" IS NOT NULL
-          DO UPDATE SET total = user_concept_stats.total + 1,
-                        correct = user_concept_stats.correct + ${isCorrect ? 1 : 0},
-                        "updatedAt" = now()`,
+      ? prisma.conceptRevision.findUnique({ where: { userId_conceptId: { userId, conceptId: question.conceptId } } })
+      : Promise.resolve(null),
   ]);
-  prisma.userActivity.create({
-    data: { userId, type: 'QUESTION_ANSWERED', metadata: { questionId, isCorrect, teacherSession: true } },
-  }).catch(() => {});
-  await prisma.adaptiveSession.update({
-    where: { id: session.id },
-    data: {
-      focusConceptId: isCorrect
-        ? null
-        : question.conceptId || session.focusConceptId,
+  const conceptBefore = question.conceptId
+    ? profileBefore.academic.concepts.find((item) => item.conceptId === question.conceptId)
+    : undefined;
+  const repeatedMistakesBefore = question.conceptId
+    ? profileBefore.behaviour.repeatedMistakes
+      .filter((item) => item.conceptId === question.conceptId)
+      .reduce((sum, item) => sum + item.incorrectAttempts, 0)
+    : 0;
+  const rawSubmissionKey = typeof req.body?.submissionKey === 'string'
+    ? req.body.submissionKey.trim()
+    : '';
+  if (rawSubmissionKey && (
+    rawSubmissionKey.length > 128 ||
+    !/^[A-Za-z0-9._:-]+$/.test(rawSubmissionKey)
+  )) {
+    return res.status(400).json({ message: 'Invalid submission key' });
+  }
+  const submissionKey = rawSubmissionKey
+    ? `answer:${userId}:${session.id}:${questionId}:${rawSubmissionKey}`
+    : `answer:${userId}:${session.id}:${questionId}`;
+
+  let submitted;
+  try {
+    submitted = await submitAnswerAtomically(prisma, {
+      userId,
+      sessionId: session.id,
+      questionId,
+      selectedOption,
+      timeTaken: Number(req.body?.timeTaken) || 0,
+      submissionKey,
+      isCorrect,
+      conceptId: question.conceptId,
+      chapterId: question.chapterId,
+      masteryBefore: conceptBefore?.accuracy ?? null,
+      previousMastery: existingRevision?.masterySnapshot ?? null,
+      attemptCountBefore: conceptBefore?.attempts || 0,
+      repeatedMistakes: repeatedMistakesBefore,
+      existingIntervalDays: existingRevision?.intervalDays ?? null,
+      consecutiveSuccesses: existingRevision?.consecutiveSuccesses || 0,
+    });
+  } catch (error) {
+    if (error instanceof AnswerSubmissionError) {
+      return res.status(error.status).json({ message: error.message });
+    }
+    throw error;
+  }
+
+  if (submitted.duplicate) {
+    return res.json({
+      isCorrect: submitted.isCorrect,
+      correctOption: question.correctOption,
+      explanation: question.explanation || null,
+      teacherFeedback: null,
+      aiUnavailable: true,
+      diagnosis: submitted.isCorrect
+        ? 'This answer was already recorded.'
+        : 'This answer attempt was already recorded.',
+      nextDifficulty: nextDifficulty(undefined, submitted.isCorrect),
+      duplicate: true,
+    });
+  }
+
+  const options = normalizeOptions(question.options);
+  const [profile, selectedExams, availabilityRows] = await Promise.all([
+    getStudentLearningProfile(userId, session.id),
+    prisma.userExam.findMany({ where: { userId }, select: { examId: true } }),
+    prisma.question.findMany({
+      where: {
+        isActive: true,
+        conceptId: { not: null },
+      },
+      select: { conceptId: true, difficulty: true, chapter: { select: { subject: { select: { examId: true } } } } },
+    }),
+  ]);
+  const selectedExamIds = selectedExams.map((item) => item.examId);
+  const diagnostics = diagnoseStudent(profile);
+  const availabilityMap = new Map<number, AvailableConcept>();
+  for (const row of availabilityRows) {
+    if (row.conceptId === null) continue;
+    if (selectedExamIds.length && !selectedExamIds.includes(row.chapter.subject.examId)) continue;
+    const existing = availabilityMap.get(row.conceptId) || { conceptId: row.conceptId, questionCount: 0, difficultyCounts: {} };
+    existing.questionCount += 1;
+    existing.difficultyCounts![row.difficulty as 'EASY' | 'MEDIUM' | 'HARD'] =
+      (existing.difficultyCounts![row.difficulty as 'EASY' | 'MEDIUM' | 'HARD'] || 0) + 1;
+    availabilityMap.set(row.conceptId, existing);
+  }
+  const plan = createAdaptiveLearningPlan({
+    profile,
+    diagnostics,
+    availableConcepts: [...availabilityMap.values()],
+    selectedExamIds,
+    currentLearningFocusId: question.conceptId || profile.currentState.currentLearningFocusId,
+  });
+  const teachingContext = buildTeachingContext({
+    profile,
+    diagnostics,
+    plan,
+    currentConceptName: null,
+    currentQuestion: {
+      text: question.text,
+      options,
+      correctOption: question.correctOption,
+      storedExplanation: question.explanation,
     },
+    studentFeedback: isCorrect ? 'The student answered correctly.' : 'The student answered incorrectly.',
   });
   const feedbackPrompt = [
-    'Act as a warm, specific private exam teacher responding to one answer.',
-    isCorrect ? 'The student answered correctly.' : 'The student answered incorrectly.',
+    'ROLE: Reply as a warm, accurate private teacher checking one student answer.',
+    'STYLE: Use one to three short chat bubbles, with no headings or bullet lists. Do not use stock filler.',
+    `The student chose ${String.fromCharCode(65 + selectedOption)}: ${optionName(options, selectedOption)}.`,
+    isCorrect
+      ? 'The student was correct. Acknowledge the specific idea or calculation they used, then move on or raise difficulty.'
+      : 'The student was wrong. Name what their selected choice actually means or does, then clearly state the correct answer in words.',
     `Question: ${question.text}`,
-    `Correct option: ${String.fromCharCode(65 + question.correctOption)}`,
-    question.explanation ? `Stored explanation: ${question.explanation}` : 'No stored explanation is available.',
-    'In 2-3 natural sentences, explain what was good or diagnose the mistake, state the idea clearly, and encourage the student. Do not offer a prediction guarantee or claim an official answer.',
-  ].join(' ');
+    `Correct answer: ${String.fromCharCode(65 + question.correctOption)}: ${optionName(options, question.correctOption)}.`,
+    question.explanation ? `Verified stored explanation: ${question.explanation}` : 'No stored explanation is available; explain only what follows directly from the question and do not guess.',
+    'If wrong, explain the misconception in two short sentences, offer a different angle or hint, then keep the next item on the same topic.',
+    'If right, praise a specific insight and connect the next step to their performance.',
+    'Always end with the next step: a similar question, a hint offer, or a short check-in.',
+    serializeTeachingContext(teachingContext),
+  ].join('\n');
   const feedbackAi = await generateOptional(userId, feedbackPrompt);
+  const nextDifficultyValue = plan.selectedDifficulty === 'HARD'
+    ? Difficulty.HARD
+    : plan.selectedDifficulty === 'MEDIUM'
+      ? Difficulty.MEDIUM
+      : Difficulty.EASY;
   return res.json({
     isCorrect,
     correctOption: question.correctOption,
     explanation: question.explanation || null,
     teacherFeedback: feedbackAi.status === 200 && feedbackAi.body.generated
       ? feedbackAi.body.text
-      : isCorrect
-        ? (question.explanation || 'That is correct. The stored explanation was not available.')
-        : `The correct answer is ${String.fromCharCode(65 + question.correctOption)}. ${question.explanation || 'The stored explanation was not available, so I can review the method together.'}`,
+      : null,
+    aiUnavailable: feedbackAi.status !== 200 || !feedbackAi.body.generated,
     diagnosis: isCorrect
       ? 'Nice work—you used the right idea. We’ll gently increase the challenge next.'
       : 'That answer was close. Let’s review the method and retry with an easier question so the idea becomes clear.',
-    nextDifficulty: nextDifficulty(question.difficulty, isCorrect),
+    nextDifficulty: nextDifficultyValue,
   });
 });
 
@@ -412,11 +735,11 @@ router.post('/next-difficulty', authenticate, (req, res) => {
   return res.json({ difficulty: nextDifficulty(req.body?.previous, Boolean(req.body?.correct)) });
 });
 
-async function generateOptional(userKey: string, prompt: string): Promise<{ status: number; body: any }> {
+export async function generateOptional(userKey: string, prompt: string): Promise<{ status: number; body: any }> {
   if (!process.env.AI_API_KEY || !process.env.AI_API_URL) {
     return { status: 200, body: { unavailable: true, message: 'AI generation is unavailable. Stored hints and bank explanations remain available.' } };
   }
-  const limit = Math.max(1, Number(process.env.AI_RPM || 10));
+  const limit = Math.max(1, Number(process.env.AI_RPM || 30));
   const now = Date.now();
   const window = rateWindows.get(userKey);
   if (window && window.resetAt > now && window.count >= limit) {
@@ -437,6 +760,7 @@ async function generateOptional(userKey: string, prompt: string): Promise<{ stat
       if (fallback.ok) {
         return { status: 200, body: { unavailable: false, generated: true, fallbackProvider: 'groq', text: fallback.text } };
       }
+      console.error(JSON.stringify({ event: 'ai_fallback_exhausted', provider: 'groq', result: 'failed' }));
     }
 
     if (process.env.AI_FALLBACK2_API_URL && process.env.AI_FALLBACK2_API_KEY) {
@@ -449,9 +773,12 @@ async function generateOptional(userKey: string, prompt: string): Promise<{ stat
       if (secondFallback.ok) {
         return { status: 200, body: { unavailable: false, generated: true, fallbackProvider: 'openrouter', text: secondFallback.text } };
       }
+      console.error(JSON.stringify({ event: 'ai_fallback_exhausted', provider: 'openrouter', result: 'failed' }));
     }
+    console.error(JSON.stringify({ event: 'ai_all_providers_exhausted' }));
     return { status: 502, body: { unavailable: true, message: 'The configured AI providers are unavailable. Stored practice is still usable.' } };
-  } catch {
+  } catch (error: any) {
+    console.error(JSON.stringify({ event: 'ai_generation_exception', error: sanitizeNetworkError(error) }));
     return { status: 502, body: { unavailable: true, message: 'AI generation could not be reached. Stored practice is still usable.' } };
   }
 }
@@ -461,19 +788,45 @@ async function generateFromConfiguredProvider(prompt: string): Promise<{ ok: boo
   const isGemini = provider === 'gemini' || provider === 'google'
     || process.env.AI_API_URL!.includes('generativelanguage.googleapis.com');
   if (isGemini) {
-    const response = await fetch(process.env.AI_API_URL!, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': process.env.AI_API_KEY! },
-      body: JSON.stringify({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        generationConfig: { maxOutputTokens: Number(process.env.AI_MAX_TOKENS || 180) },
-      }),
-      signal: AbortSignal.timeout(Number(process.env.AI_TIMEOUT_MS || 15000)),
-    });
-    if (!response.ok) return { ok: false, text: null };
-    const data = await response.json() as any;
-    const text = data?.candidates?.[0]?.content?.parts?.map((part: any) => part?.text || '').filter(Boolean).join('\n');
-    return { ok: typeof text === 'string' && text.length > 0, text: typeof text === 'string' ? text : null };
+    const groundedPrompt = [
+      'You are a patient, accurate private exam teacher, not a chatbot assistant.',
+      'Every reply must teach. Use one to three short conversational bubbles with one idea per bubble.',
+      'Use the exact student performance and question context. Never print raw topic names or category tags.',
+      'Verify every fact against the supplied context. Never reveal an answer before an attempt or claim official predictions.',
+      'Wrong answers: name the chosen option in words, state the correct answer in words, explain the mismatch, stay on topic, and offer a similar item.',
+      'Always end with a question, hint offer, or short check-in. Never use stock filler or headings.',
+      prompt,
+    ].join('\n\n');
+    const startedAt = Date.now();
+    const endpoint = redactEndpoint(process.env.AI_API_URL!);
+    const model = process.env.AI_MODEL || 'gemini-2.5-flash';
+    try {
+      const response = await fetch(process.env.AI_API_URL!, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': process.env.AI_API_KEY! },
+        body: JSON.stringify({
+          contents: [{ role: 'user', parts: [{ text: groundedPrompt }] }],
+          generationConfig: { maxOutputTokens: Number(process.env.AI_MAX_TOKENS || 220), temperature: 0.8 },
+        }),
+        signal: AbortSignal.timeout(Number(process.env.AI_TIMEOUT_MS || 15000)),
+      });
+      const durationMs = Date.now() - startedAt;
+      if (!response.ok) {
+        const body = await response.text().catch(() => '');
+        console.error(JSON.stringify({ event: 'ai_provider_failure', provider: 'gemini', model, endpoint, status: response.status, durationMs, error: sanitizeProviderError(body, prompt) }));
+        return { ok: false, text: null };
+      }
+      const data = await response.json() as any;
+      const text = data?.candidates?.[0]?.content?.parts?.map((part: any) => part?.text || '').filter(Boolean).join('\n');
+      if (typeof text !== 'string' || text.length === 0) {
+        console.error(JSON.stringify({ event: 'ai_provider_empty_response', provider: 'gemini', model, endpoint, durationMs }));
+      }
+      return { ok: typeof text === 'string' && text.length > 0, text: typeof text === 'string' ? text : null };
+    } catch (error: any) {
+      const durationMs = Date.now() - startedAt;
+      console.error(JSON.stringify({ event: 'ai_provider_network_error', provider: 'gemini', model, endpoint, durationMs, error: sanitizeNetworkError(error) }));
+      return { ok: false, text: null };
+    }
   }
   return generateOpenAiCompatible(
     process.env.AI_API_URL!,
@@ -486,20 +839,79 @@ async function generateFromConfiguredProvider(prompt: string): Promise<{ ok: boo
 async function generateOpenAiCompatible(url: string, apiKey: string, model: string, prompt: string): Promise<{ ok: boolean; text: string | null }> {
   const isGroq = url.includes('api.groq.com');
   const tokenLimit = Number(process.env.AI_MAX_TOKENS || 180);
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
-    body: JSON.stringify({
-      model,
-      messages: [{ role: 'user', content: prompt }],
-      ...(isGroq ? { max_completion_tokens: tokenLimit } : { max_tokens: tokenLimit }),
-    }),
-    signal: AbortSignal.timeout(Number(process.env.AI_TIMEOUT_MS || 15000)),
-  });
-  if (!response.ok) return { ok: false, text: null };
-  const data = await response.json() as any;
-  const text = data?.choices?.[0]?.message?.content || data?.response || data?.message?.content;
-  return { ok: typeof text === 'string' && text.length > 0, text: typeof text === 'string' ? text : null };
+  const endpoint = redactEndpoint(url);
+  const startedAt = Date.now();
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+      body: JSON.stringify({
+        model,
+        messages: [
+          {
+            role: 'system',
+            content: [
+              'You are a patient, accurate private exam teacher chatting with one student.',
+              'Every reply must teach something. Use natural conversational bubbles: one to three short bubbles, one idea per bubble.',
+              'Check every explanation against the supplied question, options, and stored source. Never give unverified facts, reveal an answer before an attempt, or claim official predictions.',
+              'Never print raw topic names or category tags. On a wrong answer, name the chosen option in words, state the correct answer in words, explain the misconception, stay on the topic, and offer a similar item.',
+              'On a right answer, praise something specific, then move on or raise difficulty.',
+              'Always end with a question, hint offer, or short check-in. Never use stock filler, headings, or bullet lists.',
+            ].join(' '),
+          },
+          { role: 'user', content: prompt },
+        ],
+        temperature: 0.8,
+        ...(isGroq ? { max_completion_tokens: tokenLimit } : { max_tokens: tokenLimit }),
+      }),
+      signal: AbortSignal.timeout(Number(process.env.AI_TIMEOUT_MS || 15000)),
+    });
+    const durationMs = Date.now() - startedAt;
+    if (!response.ok) {
+      const body = await response.text().catch(() => '');
+      console.error(JSON.stringify({ event: 'ai_provider_failure', provider: isGroq ? 'groq' : 'openai-compatible', model, endpoint, status: response.status, durationMs, error: sanitizeProviderError(body, prompt) }));
+      return { ok: false, text: null };
+    }
+    const data = await response.json() as any;
+    const text = data?.choices?.[0]?.message?.content || data?.response || data?.message?.content;
+    if (typeof text !== 'string' || text.length === 0) {
+      console.error(JSON.stringify({ event: 'ai_provider_empty_response', provider: isGroq ? 'groq' : 'openai-compatible', model, endpoint, durationMs }));
+    }
+    return { ok: typeof text === 'string' && text.length > 0, text: typeof text === 'string' ? text : null };
+  } catch (error: any) {
+    const durationMs = Date.now() - startedAt;
+    console.error(JSON.stringify({ event: 'ai_provider_network_error', provider: isGroq ? 'groq' : 'openai-compatible', model, endpoint, durationMs, error: sanitizeNetworkError(error) }));
+    return { ok: false, text: null };
+  }
+}
+
+function redactEndpoint(rawUrl: string): string {
+  try {
+    const parsed = new URL(rawUrl);
+    return `${parsed.hostname}${parsed.pathname}`;
+  } catch {
+    return 'invalid-endpoint';
+  }
+}
+
+function sanitizeProviderError(body: string, prompt?: string): string {
+  let sanitized = body.replace(/\s+/g, ' ').trim().slice(0, 300);
+  const secrets = [
+    process.env.AI_API_KEY,
+    process.env.AI_FALLBACK_API_KEY,
+    process.env.AI_FALLBACK2_API_KEY,
+  ].filter(Boolean) as string[];
+  for (const secret of secrets) {
+    sanitized = sanitized.split(secret).join('[REDACTED]');
+  }
+  if (prompt) {
+    sanitized = sanitized.split(prompt).join('[REDACTED]');
+  }
+  return sanitized;
+}
+
+function sanitizeNetworkError(error: any): string {
+  return String(error?.name || error?.code || 'network_error') + ': ' + String(error?.message || '').slice(0, 200);
 }
 
 export default router;

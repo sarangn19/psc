@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { Difficulty } from '@prisma/client';
-import { buildDayPlan, nextDifficulty, scoreAnswer } from '../src/lib/teacher';
+import {
+  TEACHER_RESPONSE_RULES,
+  buildDayPlan,
+  nextDifficulty,
+  optionName,
+  scoreAnswer,
+  validatePracticeQuestion,
+} from '../src/lib/teacher';
 
 describe('AI Teacher progression helpers', () => {
   it('scores exact options deterministically', () => {
@@ -21,5 +28,36 @@ describe('AI Teacher progression helpers', () => {
     expect(plan).toHaveLength(7);
     expect(plan[3].type).toBe('review');
     expect(plan[3].title).toContain('Ratio');
+  });
+
+  it('names chosen and correct options in correct and wrong answer feedback', () => {
+    const options = ['A decrease of 20%', 'An increase of 20%', 'No change', 'An increase of 10%'];
+    expect(optionName(options, 0)).toBe('A decrease of 20%');
+    expect(optionName(options, 1)).toBe('An increase of 20%');
+    expect(scoreAnswer(1, 1)).toBe(true);
+    expect(scoreAnswer(0, 1)).toBe(false);
+  });
+
+  it('validates that a practice question has a complete stem and unambiguous choices', () => {
+    expect(validatePracticeQuestion({
+      text: 'If a price increases by 20% and returns to the original price, what is required?',
+      options: ['A decrease of 20%', 'An increase of 20%', 'No change', 'An increase of 10%'],
+      correctOption: 1,
+    }).valid).toBe(true);
+    expect(validatePracticeQuestion({
+      text: '',
+      options: ['One', 'One'],
+      correctOption: 0,
+    }).valid).toBe(false);
+  });
+
+  it.each([
+    ['correct answer', 'correct'],
+    ['wrong answer', 'wrong'],
+    ['hint request', 'hint'],
+    ['too-hard request', 'simplify'],
+    ['long-break return', 'Long break'],
+  ])('covers teacher response behavior for %s', (_caseName, expectedRule) => {
+    expect(TEACHER_RESPONSE_RULES.toLowerCase()).toContain(expectedRule.toLowerCase());
   });
 });

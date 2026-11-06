@@ -85,6 +85,7 @@ export default function TeacherPage() {
   const [answering, setAnswering] = useState(false);
   const threadEndRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const initialScrollDone = useRef(false);
 
   const addMessage = (
     sender: ChatMessage['sender'],
@@ -125,7 +126,11 @@ export default function TeacherPage() {
         sourceMissing: data.concept?.sourceMissing,
       });
       await chatDelay(650);
-      addMessage('teacher', data.teacherMessage || `Let’s work on ${data.concept?.name || 'the next topic'} together.`);
+      if (data.teacherMessage) {
+        addMessage('teacher', data.teacherMessage);
+      } else if (data.aiUnavailable) {
+        addMessage('teacher', 'AI teaching text is unavailable. The stored lesson and question bank are still available below.');
+      }
       await chatDelay(850);
       if (data.concept?.description) {
         addMessage('teacher', data.concept.description);
@@ -197,9 +202,20 @@ export default function TeacherPage() {
     if (!container) return;
     const distanceFromBottom = container.scrollHeight - container.scrollTop - container.clientHeight;
     if (distanceFromBottom < 220 || teacherTyping) {
-      container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+      container.scrollTo({ top: container.scrollHeight, behavior: answering ? 'auto' : 'smooth' });
     }
-  }, [messages, question, feedback, teacherTyping]);
+  }, [messages, question, feedback, teacherTyping, answering]);
+
+  useEffect(() => {
+    if (loading || initialScrollDone.current) return;
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const frame = window.requestAnimationFrame(() => {
+      container.scrollTop = container.scrollHeight;
+      initialScrollDone.current = true;
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [loading, messages]);
 
   useEffect(() => {
     if (!feedback || !sessionId) return;
@@ -213,41 +229,44 @@ export default function TeacherPage() {
     if (!sessionId || !question || optionIndex === null || answering) return;
     setAnswering(true);
     setSelectedOption(optionIndex);
+    const submittedQuestion = question;
     try {
-      addMessage(
-        'teacher',
-        question.text,
-        'question',
-        undefined,
-        {
-          options: question.options,
-          selectedOption: optionIndex,
-          correctOption: question.correctOption,
-        },
-      );
-      addMessage('student', `${String.fromCharCode(65 + optionIndex)}. ${question.options[optionIndex]}`, 'text');
       setTeacherTyping(true);
       const { data } = await api.post(`/teacher/session/${sessionId}/answer`, {
-        questionId: question.id,
+        questionId: submittedQuestion.id,
         selectedOption: optionIndex,
         timeTaken: 0,
       });
       await chatDelay(550);
+      addMessage(
+        'teacher',
+        submittedQuestion.text,
+        'question',
+        undefined,
+        {
+          options: submittedQuestion.options,
+          selectedOption: optionIndex,
+          correctOption: submittedQuestion.correctOption,
+        },
+      );
+      addMessage('student', `${String.fromCharCode(65 + optionIndex)}. ${submittedQuestion.options[optionIndex]}`, 'text');
       setFeedback(data);
       setAttemptCount((count) => count + 1);
       if (data.isCorrect) setCorrectCount((count) => count + 1);
       addMessage(
         'teacher',
         data.teacherFeedback ||
-          (data.isCorrect
-            ? (question.explanation || data.explanation || data.diagnosis || 'That is correct.')
-            : `The correct answer is ${String.fromCharCode(65 + data.correctOption)}. ${question.explanation || data.explanation || data.diagnosis || ''}`),
+          `Result: ${data.isCorrect ? 'correct' : 'incorrect'}. ` +
+          (data.explanation
+            ? `Stored explanation: ${data.explanation}`
+            : `The correct option is ${String.fromCharCode(65 + data.correctOption)}. AI-generated feedback is unavailable; no stored explanation is available.`),
         'feedback',
         data.isCorrect,
       );
       setTeacherTyping(false);
     } catch {
       setTeacherTyping(false);
+      setSelectedOption(null);
       setError('That answer could not be scored. You can send it again.');
     }
     setAnswering(false);
@@ -277,6 +296,7 @@ export default function TeacherPage() {
       const { data } = await api.post('/teacher/conversation', {
         message: text,
         questionId: question?.id,
+        history: messages.slice(-8).map(({ sender, text }) => ({ sender, text })),
       });
       await chatDelay(500);
       addMessage(
@@ -323,7 +343,7 @@ export default function TeacherPage() {
           <div className="min-w-0 flex-1">
             <h1 className="text-[20px] leading-tight font-[700] m-0">AI Teacher</h1>
             <p className={`text-[13px] m-0 truncate ${teacherTyping ? 'text-app-accent font-[600]' : 'text-app-textSecondary'}`}>
-              {teacherTyping ? 'typing…' : lessonMeta?.name || concept?.name || 'Your study path'}
+              {teacherTyping ? 'typing…' : 'Online'}
             </p>
           </div>
           <div className="text-right shrink-0">
@@ -403,7 +423,7 @@ export default function TeacherPage() {
             </div>
           )}
 
-          {question && !feedback && (
+          {question && (
             <div className="flex items-end gap-2 self-start max-w-[92%] w-[92%] mb-[3px] chat-message-enter">
               <span className="w-7 h-7 shrink-0"><TeacherAvatar /></span>
               <div className="min-w-0 flex-1">
@@ -419,9 +439,14 @@ export default function TeacherPage() {
                         aria-checked={selectedOption === index}
                         disabled={answering}
                         onClick={() => void submitAnswer(index)}
-                        className="min-h-[44px] px-3 py-2 border-0 border-b border-[#DADDE5] last:border-b-0 bg-transparent text-app-accent font-[600] text-[16px] text-center hover:bg-app-accentLight disabled:opacity-60"
+                        className={`min-h-[44px] px-3 py-2 border-0 border-b border-[#DADDE5] last:border-b-0 text-[16px] text-center disabled:opacity-70 ${
+                          selectedOption === index
+                            ? 'bg-app-accentLight text-app-accent font-[700]'
+                            : 'bg-transparent text-app-accent font-[600] hover:bg-app-accentLight'
+                        }`}
                       >
                         <span className="font-[800] mr-2">{String.fromCharCode(65 + index)}.</span>{option}
+                        {answering && selectedOption === index ? ' (checking...)' : ''}
                       </button>
                     ))}
                   </div>

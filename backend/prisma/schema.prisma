@@ -49,6 +49,26 @@ enum ActivityType {
   USER_FEEDBACK
 }
 
+enum LearningFeedbackType {
+  TOO_HARD
+  TOO_EASY
+  CONFUSED
+  EXPLAIN_DIFFERENTLY
+  TIRED
+  NEED_BREAK
+  HINT_REQUESTED
+}
+
+enum LearningMemoryType {
+  DIFFICULT_CONCEPT
+  REPEATED_MISTAKE
+  SUCCESSFUL_APPROACH
+  MASTERY_CHANGE
+  UNFINISHED_OBJECTIVE
+  STUDENT_FEEDBACK
+  REVISION_OUTCOME
+}
+
 model User {
   id       String @id @default(cuid())
   name     String
@@ -76,6 +96,10 @@ model User {
   questionReports  QuestionReport[]
   newsViews        NewsView[]
   conceptStats     UserConceptStat[]
+  learningHints    LearningHint[]
+  learningFeedback LearningFeedback[]
+  learningMemory   StudentLearningMemory[]
+  conceptRevisions ConceptRevision[]
   flaggedQuestions FlaggedQuestion[]
   pocketSessions   PocketSession[]
 
@@ -191,6 +215,7 @@ model QuestionAttempt {
   isCorrect      Boolean
   timeTaken      Int      @default(0)
   sessionId      String?
+  submissionKey  String?
   createdAt      DateTime @default(now())
 
   user     User             @relation(fields: [userId], references: [id])
@@ -200,6 +225,7 @@ model QuestionAttempt {
   @@index([userId])
   @@index([sessionId])
   @@index([questionId])
+  @@unique([userId, submissionKey])
   @@map("question_attempts")
 }
 
@@ -296,6 +322,80 @@ model UserConceptStat {
   @@unique([userId, chapterId])
   @@index([userId])
   @@map("user_concept_stats")
+}
+
+model LearningHint {
+  id             String   @id @default(cuid())
+  userId         String
+  sessionId      String?
+  questionId     String
+  conceptId      Int?
+  hintCount      Int      @default(1)
+  requestedAt    DateTime @default(now())
+  answeredAt     DateTime?
+  answeredCorrect Boolean?
+  eventKey       String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventKey])
+  @@index([userId, conceptId])
+  @@index([userId, questionId])
+  @@map("learning_hints")
+}
+
+model LearningFeedback {
+  id        String              @id @default(cuid())
+  userId    String
+  sessionId String?
+  questionId String?
+  conceptId Int?
+  type      LearningFeedbackType
+  message   String?
+  eventKey  String
+  createdAt DateTime            @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventKey])
+  @@index([userId, conceptId])
+  @@map("learning_feedback")
+}
+
+model StudentLearningMemory {
+  id        String             @id @default(cuid())
+  userId    String
+  conceptId Int?
+  type      LearningMemoryType
+  key       String
+  details   Json
+  occurredAt DateTime          @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, type, conceptId, key])
+  @@index([userId, occurredAt])
+  @@map("student_learning_memory")
+}
+
+model ConceptRevision {
+  id                        String   @id @default(cuid())
+  userId                    String
+  conceptId                 Int
+  masterySnapshot           Int?
+  intervalDays              Int      @default(1)
+  consecutiveSuccesses      Int      @default(0)
+  dueAt                     DateTime
+  lastReviewedAt            DateTime?
+  lastResultCorrect         Boolean?
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, conceptId])
+  @@index([userId, dueAt])
+  @@map("concept_revisions")
 }
 
 model UserActivity {
