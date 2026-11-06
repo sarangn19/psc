@@ -109,6 +109,7 @@ export default function TeacherPage() {
     setTeacherTyping(true);
     setFeedback(null);
     setSelectedOption(null);
+    setQuestion(null);
     try {
       const { data } = await api.get(`/teacher/session/${sid}/next`);
       if (data.done || !data.question) {
@@ -117,7 +118,6 @@ export default function TeacherPage() {
         return;
       }
 
-      setQuestion(null);
       setConcept(data.concept);
       setQuestionNumber(data.questionNumber || 0);
       setLessonMeta({
