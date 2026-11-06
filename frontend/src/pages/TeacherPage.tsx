@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import api from '../lib/api';
 import { upsertAnsweredQuestion } from '../lib/questionLifecycle';
 import { classifyMessageIntent } from '../lib/messageIntent';
+import { RequestLifecycle } from '../lib/requestLifecycle';
 
 interface Question {
   id: string;
@@ -88,6 +89,7 @@ export default function TeacherPage() {
   const [answering, setAnswering] = useState(false);
   const threadEndRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const requestLifecycleRef = useRef(new RequestLifecycle());
   const initialScrollDone = useRef(false);
 
   const addMessage = (
@@ -281,22 +283,29 @@ export default function TeacherPage() {
       return;
     }
     setTeacherTyping(true);
+    const requestId = requestLifecycleRef.current.start('teacher-response');
     try {
       const { data } = await api.post('/teacher/conversation', {
         message: text,
         questionId: question?.id,
         history: messages.slice(-8).map(({ sender, text }) => ({ sender, text })),
       });
+      if (!requestLifecycleRef.current.isCurrent('teacher-response', requestId)) return;
       await chatDelay(500);
+      if (!requestLifecycleRef.current.isCurrent('teacher-response', requestId)) return;
       addMessage(
         'teacher',
         data.generated ? data.text : (data.message || 'AI explanation is unavailable right now. Your saved question and answer data are still available.'),
         'text',
       );
     } catch {
-      addMessage('teacher', 'I couldn’t reach the teaching service. Your progress is saved, and you can continue with the stored questions.');
+      if (requestLifecycleRef.current.isCurrent('teacher-response', requestId)) {
+        addMessage('teacher', 'I couldn’t reach the teaching service. Your progress is saved, and you can continue with the stored questions.');
+      }
     } finally {
-      setTeacherTyping(false);
+      if (requestLifecycleRef.current.finish('teacher-response', requestId)) {
+        setTeacherTyping(false);
+      }
     }
   };
 
