@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import api from '../lib/api';
+import { upsertAnsweredQuestion } from '../lib/questionLifecycle';
 
 interface Question {
   id: string;
@@ -230,18 +231,7 @@ export default function TeacherPage() {
         selectedOption: optionIndex,
         timeTaken: 0,
       });
-      addMessage(
-        'teacher',
-        submittedQuestion.text,
-        'question',
-        undefined,
-        {
-          options: submittedQuestion.options,
-          selectedOption: optionIndex,
-          correctOption: submittedQuestion.correctOption,
-          questionId: submittedQuestion.id,
-        },
-      );
+      setMessages((current) => upsertAnsweredQuestion(current, submittedQuestion, optionIndex, submittedQuestion.correctOption, data.isCorrect, data.explanation || submittedQuestion.explanation) as any);
       addMessage('student', `${String.fromCharCode(65 + optionIndex)}. ${submittedQuestion.options[optionIndex]}`, 'text');
       setFeedback(data);
       setAttemptCount((count) => count + 1);
