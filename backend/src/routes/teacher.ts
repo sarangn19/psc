@@ -762,7 +762,6 @@ export async function generateOptional(userKey: string, prompt: string): Promise
 
     const primary = await generateFromConfiguredProvider(prompt);
     if (primary.ok) return { status: 200, body: { unavailable: false, generated: true, text: primary.text } };
-'''
 
     if (process.env.AI_FALLBACK2_API_URL && process.env.AI_FALLBACK2_API_KEY) {
       const secondFallback = await generateOpenAiCompatible(
