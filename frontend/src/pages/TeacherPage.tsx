@@ -129,14 +129,6 @@ export default function TeacherPage() {
       await chatDelay(650);
       if (data.teacherMessage) {
         addMessage('teacher', data.teacherMessage);
-      } else if (data.aiUnavailable) {
-        addMessage('teacher', 'AI teaching text is unavailable. The stored lesson and question bank are still available below.');
-      }
-      await chatDelay(850);
-      if (data.concept?.description) {
-        addMessage('teacher', data.concept.description);
-      } else {
-        addMessage('teacher', 'The curated note for this topic is not available yet. The question comes from the stored question bank.');
       }
       await chatDelay(650);
       setQuestion(data.question);
