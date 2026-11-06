@@ -22,6 +22,7 @@ interface ChatMessage {
   selectedOption?: number;
   correctOption?: number;
   revealed?: boolean;
+  questionId?: string;
 }
 
 interface StoredChat {
@@ -92,7 +93,7 @@ export default function TeacherPage() {
     text: string,
     kind: ChatMessage['kind'] = 'text',
     correct?: boolean,
-    extra: Pick<ChatMessage, 'options' | 'selectedOption' | 'correctOption'> = {},
+    extra: Pick<ChatMessage, 'options' | 'selectedOption' | 'correctOption' | 'questionId'> = {},
   ) => {
     setMessages((current) => [
       ...current,
@@ -246,6 +247,7 @@ export default function TeacherPage() {
           options: submittedQuestion.options,
           selectedOption: optionIndex,
           correctOption: submittedQuestion.correctOption,
+          questionId: submittedQuestion.id,
         },
       );
       addMessage('student', `${String.fromCharCode(65 + optionIndex)}. ${submittedQuestion.options[optionIndex]}`, 'text');
@@ -331,6 +333,8 @@ export default function TeacherPage() {
     );
   }
 
+  const seenQuestionIds = new Set<string>();
+
   return (
     <main className="h-[calc(100vh-76px)] bg-[#F3F4F6] md:grid md:place-items-center md:px-6 overflow-hidden">
       <div className="h-full w-full max-w-[480px] mx-auto flex flex-col bg-[#F3F4F6] md:border md:border-app-border md:shadow-[0_28px_60px_-30px_rgba(0,0,0,.45)]">
@@ -361,6 +365,11 @@ export default function TeacherPage() {
           )}
 
           {messages.map((message, index) => {
+            if ((message.kind as string) === 'question') {
+              const questionKey = message.questionId || message.text;
+              if (seenQuestionIds.has(questionKey)) return null;
+              seenQuestionIds.add(questionKey);
+            }
             const previous = messages[index - 1];
             const firstInGroup = !previous || previous.sender !== message.sender;
             const isTeacher = message.sender === 'teacher';
@@ -387,7 +396,6 @@ export default function TeacherPage() {
                         {message.options.map((option, optionIndex) => {
                           const selected = message.selectedOption === optionIndex;
                           const correct = message.correctOption === optionIndex;
-                          return (
                             <div
                               key={`${message.id}-${optionIndex}`}
                               className={`min-h-[44px] px-3 py-2 flex items-center justify-center gap-2 border-b border-[#DADDE5] text-center last:border-b-0 ${
@@ -411,7 +419,7 @@ export default function TeacherPage() {
             );
           })}
 
-          {question && (
+          {question && !seenQuestionIds.has(question.id) && (
             <div className="flex items-end gap-2 self-start max-w-[92%] w-[92%] mb-[3px] chat-message-enter">
               <span className="w-7 h-7 shrink-0"><TeacherAvatar /></span>
               <div className="min-w-0 flex-1">
