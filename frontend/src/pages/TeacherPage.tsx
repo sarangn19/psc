@@ -325,6 +325,10 @@ export default function TeacherPage() {
     );
   }
 
+  const historicalQuestionIds = new Set(
+    messages.filter((m) => m.kind === 'question').map((m) => m.questionId || m.text),
+  );
+
   return (
     <main className="h-[calc(100vh-76px)] bg-[#F3F4F6] md:grid md:place-items-center md:px-6 overflow-hidden">
       <div className="h-full w-full max-w-[480px] mx-auto flex flex-col bg-[#F3F4F6] md:border md:border-app-border md:shadow-[0_28px_60px_-30px_rgba(0,0,0,.45)]">
@@ -410,7 +414,7 @@ export default function TeacherPage() {
             );
           })}
 
-          {question && (
+          {question && !historicalQuestionIds.has(question.id) && (
             <div className="flex items-end gap-2 self-start max-w-[92%] w-[92%] mb-[3px] chat-message-enter">
               <span className="w-7 h-7 shrink-0"><TeacherAvatar /></span>
               <div className="min-w-0 flex-1">
