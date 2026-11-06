@@ -457,7 +457,7 @@ export default function TeacherPage() {
                         }`}
                       >
                         <span className="font-[800] mr-2">{String.fromCharCode(65 + index)}.</span>{option}
-                        {answering && selectedOption === index ? ' (checking...)' : ''}
+                        {answering && selectedOption === index ? <span className="ml-2 inline-block animate-spin">⟳</span> : null}
                       </button>
                     ))}
                   </div>
