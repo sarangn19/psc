@@ -747,21 +747,22 @@ export async function generateOptional(userKey: string, prompt: string): Promise
   }
   rateWindows.set(userKey, window && window.resetAt > now ? { count: window.count + 1, resetAt: window.resetAt } : { count: 1, resetAt: now + 60000 });
   try {
-    const primary = await generateFromConfiguredProvider(prompt);
-    if (primary.ok) return { status: 200, body: { unavailable: false, generated: true, text: primary.text } };
-
     if (process.env.AI_FALLBACK_API_URL && process.env.AI_FALLBACK_API_KEY) {
-      const fallback = await generateOpenAiCompatible(
+      const groq = await generateOpenAiCompatible(
         process.env.AI_FALLBACK_API_URL,
         process.env.AI_FALLBACK_API_KEY,
         process.env.AI_FALLBACK_MODEL || 'llama-3.3-70b-versatile',
         prompt,
       );
-      if (fallback.ok) {
-        return { status: 200, body: { unavailable: false, generated: true, fallbackProvider: 'groq', text: fallback.text } };
+      if (groq.ok) {
+        return { status: 200, body: { unavailable: false, generated: true, fallbackProvider: 'groq', text: groq.text } };
       }
       console.error(JSON.stringify({ event: 'ai_fallback_exhausted', provider: 'groq', result: 'failed' }));
     }
+
+    const primary = await generateFromConfiguredProvider(prompt);
+    if (primary.ok) return { status: 200, body: { unavailable: false, generated: true, text: primary.text } };
+'''
 
     if (process.env.AI_FALLBACK2_API_URL && process.env.AI_FALLBACK2_API_KEY) {
       const secondFallback = await generateOpenAiCompatible(
