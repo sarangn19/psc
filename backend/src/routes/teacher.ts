@@ -710,7 +710,7 @@ router.post('/session/:sessionId/answer', authenticate, async (req: AuthRequest,
     'Always end with the next step: a similar question, a hint offer, or a short check-in.',
     serializeTeachingContext(teachingContext),
   ].join('\n');
-  const feedbackAi = { status: 502, body: { unavailable: true, generated: false } };
+  const feedbackAi = { status: 502, body: { unavailable: true, generated: false, text: null } };
   const nextDifficultyValue = plan.selectedDifficulty === 'HARD'
     ? Difficulty.HARD
     : plan.selectedDifficulty === 'MEDIUM'
