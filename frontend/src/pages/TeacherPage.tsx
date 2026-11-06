@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import api from '../lib/api';
 import { upsertAnsweredQuestion } from '../lib/questionLifecycle';
+import { normalizeRestoredChat } from '../lib/conversationRestoration';
 import { classifyMessageIntent } from '../lib/messageIntent';
 import { RequestLifecycle } from '../lib/requestLifecycle';
 
@@ -62,7 +63,7 @@ function readStoredChat(): StoredChat {
     if (parsed.messages) {
       parsed.messages = parsed.messages.map((message) => ({ ...message, revealed: false }));
     }
-    return parsed;
+    return normalizeRestoredChat(parsed) as StoredChat;
   } catch {
     return {};
   }
