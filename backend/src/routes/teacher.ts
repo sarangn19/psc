@@ -10,6 +10,7 @@ import { createAdaptiveLearningPlan, AvailableConcept } from '../lib/adaptiveLea
 import { buildTeachingContext, serializeTeachingContext, TeachingInteraction } from '../lib/teachingContext';
 import { AnswerSubmissionError, submitAnswerAtomically } from '../lib/answerSubmission';
 import { composeAnswerFeedback, composeQuestionIntroduction, composeWelcome } from '../lib/teachingResponseComposer';
+import { classifyIntent, composeConversationResponse } from '../lib/conversationIntent';
 
 const router = Router();
 
@@ -293,8 +294,9 @@ router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
     'If the request is for a hint, help without revealing the answer option or value. If it asks for an explanation, teach it simply. Do not claim official predictions or certainty.',
     serializeTeachingContext(teachingContext),
   ].join('\n');
-  const result = await generateOptional(userId, prompt);
-  return res.status(result.status).json(result.body);
+  const intent = classifyIntent(message);
+  const composed = composeConversationResponse(intent, message, currentQuestion?.text || null, currentQuestion?.explanation || null);
+  return res.status(200).json({ generated: true, text: composed, unavailable: false });
 });
 
 router.post('/lesson-meta', authenticate, async (req: AuthRequest, res) => {
