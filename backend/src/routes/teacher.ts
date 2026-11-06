@@ -760,9 +760,12 @@ export async function generateOptional(userKey: string, prompt: string): Promise
       console.error(JSON.stringify({ event: 'ai_fallback_exhausted', provider: 'groq', result: 'failed' }));
     }
 
-    const primary = await generateFromConfiguredProvider(prompt);
-    if (primary.ok) return { status: 200, body: { unavailable: false, generated: true, text: primary.text } };
+    // Primary Gemini temporarily skipped to avoid gateway timeout.
+    // const primaryResult = await generateFromConfiguredProvider(prompt);
+    // if (primaryResult.ok) return { status: 200, body: { unavailable: false, generated: true, text: primaryResult.text } };
 
+    // OpenRouter temporarily skipped to avoid gateway timeout.
+    /*
     if (process.env.AI_FALLBACK2_API_URL && process.env.AI_FALLBACK2_API_KEY) {
       const secondFallback = await generateOpenAiCompatible(
         process.env.AI_FALLBACK2_API_URL,
@@ -775,6 +778,7 @@ export async function generateOptional(userKey: string, prompt: string): Promise
       }
       console.error(JSON.stringify({ event: 'ai_fallback_exhausted', provider: 'openrouter', result: 'failed' }));
     }
+    */
     console.error(JSON.stringify({ event: 'ai_all_providers_exhausted' }));
     return { status: 502, body: { unavailable: true, message: 'The configured AI providers are unavailable. Stored practice is still usable.' } };
   } catch (error: any) {
@@ -808,7 +812,7 @@ async function generateFromConfiguredProvider(prompt: string): Promise<{ ok: boo
           contents: [{ role: 'user', parts: [{ text: groundedPrompt }] }],
           generationConfig: { maxOutputTokens: Number(process.env.AI_MAX_TOKENS || 220), temperature: 0.8 },
         }),
-        signal: AbortSignal.timeout(Math.min(Number(process.env.AI_TIMEOUT_MS || 15000), 9000)),
+        signal: AbortSignal.timeout(Math.min(Number(process.env.AI_TIMEOUT_MS || 15000), 5000)),
       });
       const durationMs = Date.now() - startedAt;
       if (!response.ok) {
@@ -864,7 +868,7 @@ async function generateOpenAiCompatible(url: string, apiKey: string, model: stri
         temperature: 0.8,
         ...(isGroq ? { max_completion_tokens: tokenLimit } : { max_tokens: tokenLimit }),
       }),
-      signal: AbortSignal.timeout(Math.min(Number(process.env.AI_TIMEOUT_MS || 15000), 9000)),
+      signal: AbortSignal.timeout(Math.min(Number(process.env.AI_TIMEOUT_MS || 15000), 5000)),
     });
     const durationMs = Date.now() - startedAt;
     if (!response.ok) {
