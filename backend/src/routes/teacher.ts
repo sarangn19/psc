@@ -808,7 +808,7 @@ async function generateFromConfiguredProvider(prompt: string): Promise<{ ok: boo
           contents: [{ role: 'user', parts: [{ text: groundedPrompt }] }],
           generationConfig: { maxOutputTokens: Number(process.env.AI_MAX_TOKENS || 220), temperature: 0.8 },
         }),
-        signal: AbortSignal.timeout(Number(process.env.AI_TIMEOUT_MS || 15000)),
+        signal: AbortSignal.timeout(Math.min(Number(process.env.AI_TIMEOUT_MS || 15000), 9000)),
       });
       const durationMs = Date.now() - startedAt;
       if (!response.ok) {
@@ -864,7 +864,7 @@ async function generateOpenAiCompatible(url: string, apiKey: string, model: stri
         temperature: 0.8,
         ...(isGroq ? { max_completion_tokens: tokenLimit } : { max_tokens: tokenLimit }),
       }),
-      signal: AbortSignal.timeout(Number(process.env.AI_TIMEOUT_MS || 15000)),
+      signal: AbortSignal.timeout(Math.min(Number(process.env.AI_TIMEOUT_MS || 15000), 9000)),
     });
     const durationMs = Date.now() - startedAt;
     if (!response.ok) {
