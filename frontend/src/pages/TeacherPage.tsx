@@ -248,6 +248,18 @@ export default function TeacherPage() {
           correctOption: submittedQuestion.correctOption,
         },
       );
+      await chatDelay(550);
+      addMessage(
+        'teacher',
+        submittedQuestion.text,
+        'question',
+        undefined,
+        {
+          options: submittedQuestion.options,
+          selectedOption: optionIndex,
+          correctOption: submittedQuestion.correctOption,
+        },
+      );
       addMessage('student', `${String.fromCharCode(65 + optionIndex)}. ${submittedQuestion.options[optionIndex]}`, 'text');
       setFeedback(data);
       setAttemptCount((count) => count + 1);
