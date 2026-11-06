@@ -231,7 +231,6 @@ export default function TeacherPage() {
     setSelectedOption(optionIndex);
     const submittedQuestion = question;
     try {
-      setTeacherTyping(true);
       const { data } = await api.post(`/teacher/session/${sessionId}/answer`, {
         questionId: submittedQuestion.id,
         selectedOption: optionIndex,
