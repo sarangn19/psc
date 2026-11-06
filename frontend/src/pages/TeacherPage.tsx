@@ -333,8 +333,6 @@ export default function TeacherPage() {
     );
   }
 
-  const seenQuestionIds = new Set<string>();
-
   return (
     <main className="h-[calc(100vh-76px)] bg-[#F3F4F6] md:grid md:place-items-center md:px-6 overflow-hidden">
       <div className="h-full w-full max-w-[480px] mx-auto flex flex-col bg-[#F3F4F6] md:border md:border-app-border md:shadow-[0_28px_60px_-30px_rgba(0,0,0,.45)]">
@@ -367,8 +365,8 @@ export default function TeacherPage() {
           {messages.map((message, index) => {
             if ((message.kind as string) === 'question') {
               const questionKey = message.questionId || message.text;
-              if (seenQuestionIds.has(questionKey)) return null;
-              seenQuestionIds.add(questionKey);
+              
+              
             }
             const previous = messages[index - 1];
             const firstInGroup = !previous || previous.sender !== message.sender;
@@ -396,6 +394,7 @@ export default function TeacherPage() {
                         {message.options.map((option, optionIndex) => {
                           const selected = message.selectedOption === optionIndex;
                           const correct = message.correctOption === optionIndex;
+                          return (
                             <div
                               key={`${message.id}-${optionIndex}`}
                               className={`min-h-[44px] px-3 py-2 flex items-center justify-center gap-2 border-b border-[#DADDE5] text-center last:border-b-0 ${
@@ -419,7 +418,7 @@ export default function TeacherPage() {
             );
           })}
 
-          {question && !seenQuestionIds.has(question.id) && (
+          {question && (
             <div className="flex items-end gap-2 self-start max-w-[92%] w-[92%] mb-[3px] chat-message-enter">
               <span className="w-7 h-7 shrink-0"><TeacherAvatar /></span>
               <div className="min-w-0 flex-1">
@@ -442,7 +441,7 @@ export default function TeacherPage() {
                         }`}
                       >
                         <span className="font-[800] mr-2">{String.fromCharCode(65 + index)}.</span>{option}
-                        {answering && selectedOption === index ? <span className="ml-2 inline-block animate-spin">⟳</span> : null}
+                        {answering && selectedOption === index ? "(checking...)" : null}
                       </button>
                     ))}
                   </div>
