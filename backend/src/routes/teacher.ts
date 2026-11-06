@@ -9,6 +9,7 @@ import { diagnoseStudent } from '../lib/diagnosticEngine';
 import { createAdaptiveLearningPlan, AvailableConcept } from '../lib/adaptiveLearningPlanner';
 import { buildTeachingContext, serializeTeachingContext, TeachingInteraction } from '../lib/teachingContext';
 import { AnswerSubmissionError, submitAnswerAtomically } from '../lib/answerSubmission';
+import { composeAnswerFeedback, composeQuestionIntroduction, composeWelcome } from '../lib/teachingResponseComposer';
 
 const router = Router();
 
@@ -561,10 +562,8 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
       sourceMissing: !node?.description,
       accuracy,
     },
-    teacherMessage: introductionAi.status === 200 && introductionAi.body.generated
-      ? introductionAi.body.text
-      : null,
-    aiUnavailable: introductionAi.status !== 200 || !introductionAi.body.generated,
+    teacherMessage: composeQuestionIntroduction(question.text, node?.nameEnglish || question.chapter.name),
+    aiUnavailable: false,
   });
 });
 
@@ -720,10 +719,16 @@ router.post('/session/:sessionId/answer', authenticate, async (req: AuthRequest,
     isCorrect,
     correctOption: question.correctOption,
     explanation: question.explanation || null,
-    teacherFeedback: feedbackAi.status === 200 && feedbackAi.body.generated
-      ? feedbackAi.body.text
-      : null,
-    aiUnavailable: feedbackAi.status !== 200 || !feedbackAi.body.generated,
+    teacherFeedback: composeAnswerFeedback({
+      questionText: question.text,
+      options,
+      selectedOption,
+      correctOption: question.correctOption,
+      isCorrect,
+      explanation: question.explanation,
+      conceptName: null,
+    }),
+    aiUnavailable: false,
     diagnosis: isCorrect
       ? 'Nice work—you used the right idea. We’ll gently increase the challenge next.'
       : 'That answer was close. Let’s review the method and retry with an easier question so the idea becomes clear.',
