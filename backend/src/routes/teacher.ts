@@ -295,7 +295,7 @@ router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
     serializeTeachingContext(teachingContext),
   ].join('\n');
   const intent = classifyIntent(message);
-  const composed = composeConversationResponse(intent, message, currentQuestion?.text || null, currentQuestion?.explanation || null);
+  const composed = composeConversationResponse(intent, message, currentQuestion?.text || null, currentQuestion?.explanation || null, currentQuestion?.concept?.nameEnglish || null);
   return res.status(200).json({ generated: true, text: composed, unavailable: false });
 });
 

@@ -18,7 +18,7 @@ export function classifyIntent(message: string): ConversationIntent {
   return 'GENERAL_CONVERSATION';
 }
 
-export function composeConversationResponse(intent: ConversationIntent, message: string, questionText?: string | null, explanation?: string | null): string {
+export function composeConversationResponse(intent: ConversationIntent, message: string, questionText?: string | null, explanation?: string | null, conceptName?: string | null): string {
   switch (intent) {
     case 'GREETING':
       return "Hey! Good to see you. Ready to learn something today, or would you like to ask me something?";
