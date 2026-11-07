@@ -21,7 +21,7 @@ export function classifyIntent(message: string): ConversationIntent {
 export function composeConversationResponse(intent: ConversationIntent, message: string, questionText?: string | null, explanation?: string | null, conceptName?: string | null): string {
   switch (intent) {
     case 'GREETING':
-      return "Hey! Good to see you. Ready to learn something today, or would you like to ask me something?";
+      return "Hey! Good to see you. Ready to learn something today?";
     case 'HINT_REQUEST':
       return explanation
         ? `Hint: ${explanation.split('.')[0]}. Try applying that idea to the question.`
@@ -34,6 +34,13 @@ export function composeConversationResponse(intent: ConversationIntent, message:
       return 'Let me simplify. Focus on the key idea in the question and try once more.';
     case 'DOUBT':
       return explanation || 'I can help with that. Please point to the specific part you want clarified.';
+    case 'GENERAL_CONVERSATION': {
+      const lower = message.toLowerCase();
+      if (lower.includes('how are you') || lower.includes("how you doing") || lower.includes("what's up")) {
+        return "I'm doing well and ready to help you learn. What would you like to study?";
+      }
+      return "I'm here to help with your study. You can ask for a hint, explanation, or another question.";
+    }
     default:
       return "I'm here to help with your study. You can ask for a hint, explanation, or another question.";
   }
