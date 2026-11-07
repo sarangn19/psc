@@ -307,6 +307,11 @@ export default function TeacherPage() {
       if (sessionId) await loadNext(sessionId);
       return;
     }
+    if (intent === 'PERFORMANCE_REQUEST') {
+      const accuracy = attemptCount ? Math.round((correctCount / attemptCount) * 100) : 0;
+      addMessage('teacher', `You've attempted ${attemptCount} questions, with ${correctCount} correct. That's about ${accuracy}% accuracy. I can help you focus on a specific topic if you'd like.`);
+      return;
+    }
     setTeacherTyping(true);
     const requestId = requestLifecycleRef.current.start('teacher-response');
     try {

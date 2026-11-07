@@ -11,6 +11,7 @@ export type TeachingIntent =
   | 'REVISION_REQUEST'
   | 'ENCOURAGEMENT'
   | 'PAUSE_PRACTICE'
+  | 'PERFORMANCE_REQUEST'
   | 'GENERAL';
 
 export type ResponseAction =
@@ -33,6 +34,7 @@ export function classifyTeachingIntent(message: string): TeachingIntent {
   if (text.includes('another question') || text.includes('quiz') || text.includes('practice')) return 'QUIZ_REQUEST';
   if (text.includes('revision') || text.includes('revise')) return 'REVISION_REQUEST';
   if (text.includes('too hard') || text.includes('confusing') || text.includes('do not understand') || text.includes("don't understand")) return 'CONFUSION';
+  if (text.includes('performance') || text.includes('how am i doing') || text.includes('how many') || text.includes('weak')) return 'PERFORMANCE_REQUEST';
   if (text.includes('?')) return 'CONCEPT_QUESTION';
   if (text.includes('thanks') || text.includes('thank you')) return 'ENCOURAGEMENT';
   if (text.includes('stop') || text.includes('pause')) return 'PAUSE_PRACTICE';
@@ -59,6 +61,8 @@ export function determineResponseAction(intent: TeachingIntent): ResponseAction 
       return 'START_PRACTICE';
     case 'REVISION_REQUEST':
       return 'START_REVISION';
+    case 'PERFORMANCE_REQUEST':
+      return 'RESPOND_CONVERSATIONALLY';
     case 'ENCOURAGEMENT':
       return 'ENCOURAGE_STUDENT';
     case 'PAUSE_PRACTICE':
