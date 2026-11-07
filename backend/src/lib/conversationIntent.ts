@@ -9,7 +9,8 @@ export type ConversationIntent =
 
 export function classifyIntent(message: string): ConversationIntent {
   const text = message.toLowerCase();
-  if (/\b(hi|hello|hey|good morning|good evening)\b/.test(text)) return 'GREETING';
+if (/\b(hi|hello|hey|good morning|good evening)\b/.test(text)) return 'GREETING';
+  if (text.includes('your name') || text.includes('who are you') || text.includes('what can you do') || text.includes('can you teach') || text.includes('how can you help')) return 'GREETING';
   if (text.includes('hint')) return 'HINT_REQUEST';
   if (text.includes('explain') || text.includes('why')) return 'EXPLANATION_REQUEST';
   if (text.includes('another question') || text.includes('next question') || text.includes('continue practice')) return 'CONTINUE_PRACTICE';
@@ -20,8 +21,13 @@ export function classifyIntent(message: string): ConversationIntent {
 
 export function composeConversationResponse(intent: ConversationIntent, message: string, questionText?: string | null, explanation?: string | null, conceptName?: string | null): string {
   switch (intent) {
-    case 'GREETING':
+    case 'GREETING': {
+      const lower = message.toLowerCase();
+      if (lower.includes('name') || lower.includes('who are you')) return "I'm Cognix, your AI Teacher! I can help you understand concepts, solve doubts and practise for your exams.";
+      if (lower.includes('what can you do') || lower.includes('how can you help')) return "I can explain difficult topics, give you hints, work through examples, help you practise and discuss your learning progress.";
+      if (lower.includes('teach')) return "Absolutely! We can work through that subject step by step. What topic would you like to start with?";
       return "Hey! Good to see you. Ready to learn something today?";
+    }
     case 'HINT_REQUEST':
       return explanation
         ? `Hint: ${explanation.split('.')[0]}. Try applying that idea to the question.`
@@ -32,8 +38,13 @@ export function composeConversationResponse(intent: ConversationIntent, message:
       return "Let's try another question to strengthen this concept.";
     case 'FEEDBACK':
       return 'Let me simplify. Focus on the key idea in the question and try once more.';
-    case 'DOUBT':
-      return explanation || 'I can help with that. Please point to the specific part you want clarified.';
+    case 'DOUBT': {
+      const lower = message.toLowerCase();
+      if (lower.includes('this') || lower.includes('that') || lower.includes('question') || lower.includes('explain')) {
+        return explanation || 'I can help with that. Please point to the specific part you want clarified.';
+      }
+      return "I'm here to help with your study. You can ask for a hint, explanation, or another question.";
+    }
     case 'GENERAL_CONVERSATION': {
       const lower = message.toLowerCase();
       if (lower.includes('how are you') || lower.includes("how you doing") || lower.includes("what's up")) {

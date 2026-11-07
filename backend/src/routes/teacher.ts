@@ -177,8 +177,10 @@ router.post('/feedback', authenticate, async (req: AuthRequest, res) => {
 });
 
 router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
+  const requestId = `conv_${Date.now()}_${Math.random().toString(36).slice(2,8)}`;
   const userId = req.user!.id;
   const message = String(req.body?.message || '').trim();
+  console.log(JSON.stringify({ event: 'conversation_start', requestId, message: message.slice(0,200) }));
   const recentHistory = Array.isArray(req.body?.history)
     ? req.body.history.slice(-8).map((item: any) => `${item.sender === 'student' ? 'Student' : 'Teacher'}: ${String(item.text || '').slice(0, 500)}`).join('\n')
     : '';
@@ -225,6 +227,7 @@ router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
       : null,
   ]);
   const examNames = selected.map((item) => item.exam.name);
+  console.log(JSON.stringify({ event: 'conversation_exam', requestId, exams: examNames }));
   const selectedExamIds = selected.map((item) => item.examId);
   const diagnostics = diagnoseStudent(profile);
   const availableRows = await prisma.question.findMany({
@@ -271,6 +274,9 @@ router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
     studentMessage: message,
     studentFeedback: message,
   });
+const intent = classifyIntent(message);
+const replyTo = req.body?.replyTo;
+  const replyContext = replyTo ? `Student is replying to ${replyTo.sender}: "${String(replyTo.text || '').slice(0,300)}"` : '';
   const prompt = [
     'ROLE: You are a patient, accurate tutor chatting with one student. Every reply must teach something and feel like a real person.',
     'STYLE: Use one to three short chat bubbles of meaning. Never use headings, bullet lists, raw topic labels, or stock filler. Be warm and direct.',
@@ -290,13 +296,21 @@ router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
         ].join('\n')
       : 'There is no active practice question.',
     recentHistory ? `Recent conversation:\n${recentHistory}` : '',
+    replyContext ? `Reply context: ${replyContext}` : '',
     `Student message: ${message}`,
     'If the request is for a hint, help without revealing the answer option or value. If it asks for an explanation, teach it simply. Do not claim official predictions or certainty.',
     serializeTeachingContext(teachingContext),
   ].join('\n');
-  const intent = classifyIntent(message);
-  const composed = composeConversationResponse(intent, message, currentQuestion?.text || null, currentQuestion?.explanation || null, currentQuestion?.concept?.nameEnglish || null);
-  return res.status(200).json({ generated: true, text: composed, unavailable: false });
+  const isCasual = intent === 'GREETING' || intent === 'GENERAL_CONVERSATION';
+  const isSelfContained = /^\s*\d+\s*[\+\-\*\/]\s*\d+\s*\??\s*$/.test(message) || message.toLowerCase().includes('what is');
+  const isRecommendation = /which topic|what should i focus|what am i weak|where should i improve|study next/i.test(message);
+  const contextQuestion = (isCasual || isSelfContained || isRecommendation) ? null : currentQuestion;
+  const composed = composeConversationResponse(intent, message, (isCasual || isSelfContained || isRecommendation) ? null : currentQuestion?.text || null, (isCasual || isSelfContained || isRecommendation) ? null : currentQuestion?.explanation || null, (isCasual || isSelfContained || isRecommendation) ? null : currentQuestion?.concept?.nameEnglish || null);
+  const ai = await generateOptional(userId, prompt);
+  console.log(JSON.stringify({ event: 'conversation_groq', requestId, generated: !!ai.body?.generated, status: ai.status, textLength: ai.body?.text?.length ?? 0 }));
+  const text = ai.body?.generated ? ai.body.text : composed;
+  console.log(JSON.stringify({ event: 'conversation_final', requestId, source: ai.body?.generated ? 'groq' : 'fallback', textLength: text?.length ?? 0 }));
+  return res.status(200).json({ generated: ai.body?.generated ?? false, text, unavailable: !ai.body?.generated });
 });
 
 router.post('/lesson-meta', authenticate, async (req: AuthRequest, res) => {
@@ -418,7 +432,7 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     where: { userId },
     select: { questionId: true },
     orderBy: { createdAt: 'desc' },
-    take: 120,
+    take: 5,
   });
   const recentlyAttemptedIds = [...new Set(recentAttempts.map((attempt) => attempt.questionId))];
   const excludedIds = [...new Set([...seenIds, ...recentlyAttemptedIds])];
@@ -883,8 +897,10 @@ async function generateOpenAiCompatible(url: string, apiKey: string, model: stri
       console.error(JSON.stringify({ event: 'ai_provider_failure', provider: isGroq ? 'groq' : 'openai-compatible', model, endpoint, status: response.status, durationMs, error: sanitizeProviderError(body, prompt) }));
       return { ok: false, text: null };
     }
-    const data = await response.json() as any;
-    const text = data?.choices?.[0]?.message?.content || data?.response || data?.message?.content;
+const data = await response.json() as any;
+const rawText = data?.choices?.[0]?.message?.content || data?.choices?.[0]?.message?.reasoning || data?.response || data?.message?.content;
+console.log(JSON.stringify({ event: 'groq_raw', contentLength: rawText?.length ?? 0, preview: String(rawText || '').slice(0,100) }));
+const text = rawText;
     if (typeof text !== 'string' || text.length === 0) {
       console.error(JSON.stringify({ event: 'ai_provider_empty_response', provider: isGroq ? 'groq' : 'openai-compatible', model, endpoint, durationMs }));
     }
@@ -924,5 +940,29 @@ function sanitizeProviderError(body: string, prompt?: string): string {
 function sanitizeNetworkError(error: any): string {
   return String(error?.name || error?.code || 'network_error') + ': ' + String(error?.message || '').slice(0, 200);
 }
+
+router.post('/understand', authenticate, async (req: AuthRequest, res) => {
+  const requestId = `req_${Date.now()}_${Math.random().toString(36).slice(2,8)}`;
+  const message = String(req.body?.message || '').trim();
+  console.log(JSON.stringify({ event: 'understand_start', requestId, message: message.slice(0,200) }));
+  if (!message) return res.status(400).json({ message: 'Message is required' });
+  const prompt = `Classify the student message into one intent: CASUAL_CONVERSATION, GREETING, CONCEPT_EXPLANATION, DOUBT_SOLVING, STUDENT_UNCERTAINTY, HINT_REQUEST, PERFORMANCE_REQUEST, PROGRESS_INQUIRY, PRACTICE_REQUEST, ANSWER_SUBMISSION, ALTERNATIVE_EXPLANATION, ENCOURAGEMENT, GENERAL_STUDY_HELP. Return only JSON: {"intent":"...","confidence":0.0}. Message: ${message}`;
+  const result = await generateOptional(req.user!.id, prompt);
+  let intent = 'GENERAL_STUDY_HELP';
+  let confidence = 0;
+  if (result.body?.generated && result.body?.text) {
+    try {
+      const match = String(result.body.text).match(/\{.*\}/s);
+      const parsed = JSON.parse(match ? match[0] : '{}');
+      if (typeof parsed.intent === 'string') intent = parsed.intent;
+      if (typeof parsed.confidence === 'number') confidence = parsed.confidence;
+    } catch {}
+  }
+  if (confidence < 0.6) {
+    intent = classifyIntent(message);
+  }
+  console.log(JSON.stringify({ event: 'understand_result', requestId, intent, confidence, generated: !!result.body?.generated }));
+  return res.json({ intent, confidence });
+});
 
 export default router;

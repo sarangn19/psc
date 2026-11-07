@@ -28,6 +28,7 @@ interface ChatMessage {
   correctOption?: number;
   revealed?: boolean;
   questionId?: string;
+  replyTo?: { id: string; sender: 'teacher' | 'student'; text: string };
 }
 
 interface StoredChat {
@@ -85,13 +86,16 @@ export default function TeacherPage() {
   const [concept, setConcept] = useState<any>(stored.concept || null);
   const [lessonMeta, setLessonMeta] = useState<any>(stored.lessonMeta || null);
   const [teacherTyping, setTeacherTyping] = useState(false);
-  const [helpText, setHelpText] = useState('');
+  const [replyTo, setReplyTo] = useState<{ id: string; sender: ChatMessage['sender']; text: string } | null>(null);
   const [error, setError] = useState('');
+  const [showNextPrompt, setShowNextPrompt] = useState(false);
+  const [helpText, setHelpText] = useState('');
   const [hintLoading, setHintLoading] = useState(false);
   const [answering, setAnswering] = useState(false);
   const threadEndRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const requestLifecycleRef = useRef(new RequestLifecycle());
+  const sendingRef = useRef(false);
   const initialScrollDone = useRef(false);
 
   const addMessage = (
@@ -99,7 +103,7 @@ export default function TeacherPage() {
     text: string,
     kind: ChatMessage['kind'] = 'text',
     correct?: boolean,
-    extra: Pick<ChatMessage, 'options' | 'selectedOption' | 'correctOption' | 'questionId'> = {},
+    extra: Pick<ChatMessage, 'options' | 'selectedOption' | 'correctOption' | 'questionId' | 'replyTo'> = {},
   ) => {
     setMessages((current) => [
       ...current,
@@ -225,13 +229,7 @@ export default function TeacherPage() {
     return () => window.cancelAnimationFrame(frame);
   }, [loading, messages]);
 
-  useEffect(() => {
-    if (!feedback || !sessionId) return;
-    const timer = window.setTimeout(async () => {
-      await loadNext(sessionId);
-    }, 2600);
-    return () => window.clearTimeout(timer);
-  }, [feedback, sessionId]);
+  // removed auto-load effect
 
   const submitAnswer = async (optionIndex = selectedOption) => {
     if (!sessionId || !question || optionIndex === null || answering) return;
@@ -263,6 +261,7 @@ export default function TeacherPage() {
         'feedback',
         data.isCorrect,
       );
+      setShowNextPrompt(true);
       setQuestion(null);
       setTeacherTyping(false);
     } catch {
@@ -292,42 +291,73 @@ export default function TeacherPage() {
   };
 
   const sendHelp = async () => {
+    if (sendingRef.current) return;
+    sendingRef.current = true;
     const text = helpText.trim();
-    if (!text) return;
+    if (!text) { sendingRef.current = false; return; }
     const intent = classifyMessageIntent(text);
-    const teachingIntent = classifyTeachingIntent(text);
+    let teachingIntent = classifyTeachingIntent(text);
+    try {
+      const { data } = await api.post('/teacher/understand', { message: text, questionId: question?.id, history: messages.slice(-8).map(({ sender, text }) => ({ sender, text })) });
+      if (data?.intent && (data.confidence ?? 0) >= 0.6) {
+        const mapped = String(data.intent).toLowerCase();
+        if (mapped.includes('uncertainty')) teachingIntent = 'UNCERTAINTY';
+        else if (mapped.includes('performance') || mapped.includes('progress')) teachingIntent = 'PERFORMANCE_REQUEST';
+        else if (mapped.includes('hint')) teachingIntent = 'HINT_REQUEST';
+        else if (mapped.includes('practice')) teachingIntent = 'QUIZ_REQUEST';
+        else if (mapped.includes('explain') || mapped.includes('doubt') || mapped.includes('concept')) teachingIntent = 'EXPLANATION_REQUEST';
+        else if (mapped.includes('greeting') || mapped.includes('casual') || mapped.includes('encouragement')) teachingIntent = 'GREETING';
+      }
+    } catch {
+      // fallback to deterministic
+    }
     const action = determineResponseAction(teachingIntent);
-    addMessage('student', text);
+    addMessage('student', text, 'text', undefined, replyTo ? { replyTo } : {});
     setHelpText('');
     if (action === 'START_PRACTICE') {
       if (question) {
         addMessage('teacher', 'You already have a question to work on. Let’s finish it first.');
+        sendingRef.current = false;
         return;
       }
       if (sessionId) await loadNext(sessionId);
+      sendingRef.current = false;
       return;
     }
-    if (intent === 'PERFORMANCE_REQUEST') {
+    if (teachingIntent === 'PERFORMANCE_REQUEST') {
       const accuracy = attemptCount ? Math.round((correctCount / attemptCount) * 100) : 0;
       addMessage('teacher', `You've attempted ${attemptCount} questions, with ${correctCount} correct. That's about ${accuracy}% accuracy. I can help you focus on a specific topic if you'd like.`);
+      sendingRef.current = false;
+      return;
+    }
+    if (teachingIntent === 'UNCERTAINTY') {
+      addMessage('teacher', "That's okay! Let's work through it together.");
+      if (question) {
+        await requestHint();
+      } else {
+        addMessage('teacher', 'No active question right now. Start a practice question and I can help.');
+      }
+      sendingRef.current = false;
       return;
     }
     setTeacherTyping(true);
     const requestId = requestLifecycleRef.current.start('teacher-response');
     try {
-      const { data } = await api.post('/teacher/conversation', {
+const { data } = await api.post('/teacher/conversation', {
         message: text,
         questionId: question?.id,
         history: messages.slice(-8).map(({ sender, text }) => ({ sender, text })),
+        replyTo: replyTo ? { id: replyTo.id, sender: replyTo.sender, text: replyTo.text } : undefined,
       });
-      if (!requestLifecycleRef.current.isCurrent('teacher-response', requestId)) return;
+      if (!requestLifecycleRef.current.isCurrent('teacher-response', requestId)) { sendingRef.current = false; return; }
       await chatDelay(500);
-      if (!requestLifecycleRef.current.isCurrent('teacher-response', requestId)) return;
+      if (!requestLifecycleRef.current.isCurrent('teacher-response', requestId)) { sendingRef.current = false; return; }
       addMessage(
         'teacher',
         data.generated ? data.text : (data.message || 'AI explanation is unavailable right now. Your saved question and answer data are still available.'),
         'text',
       );
+      setReplyTo(null);
     } catch {
       if (requestLifecycleRef.current.isCurrent('teacher-response', requestId)) {
         addMessage('teacher', 'I couldn’t reach the teaching service. Your progress is saved, and you can continue with the stored questions.');
@@ -336,6 +366,7 @@ export default function TeacherPage() {
       if (requestLifecycleRef.current.finish('teacher-response', requestId)) {
         setTeacherTyping(false);
       }
+      sendingRef.current = false;
     }
   };
 
@@ -378,12 +409,6 @@ export default function TeacherPage() {
               {teacherTyping ? 'typing…' : 'Online'}
             </p>
           </div>
-          <div className="text-right shrink-0">
-            <p className="text-[11px] text-app-textMuted m-0">Session progress</p>
-            <p className="text-[14px] font-[700] text-app-accent m-0 tabular-nums">
-              {attemptCount ? `${correctCount}/${attemptCount} correct` : 'Just started'}
-            </p>
-          </div>
         </header>
 
         <div ref={scrollContainerRef} role="log" aria-live="polite" aria-label="Conversation with AI Teacher" className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-3 flex flex-col gap-[3px]">
@@ -419,7 +444,13 @@ export default function TeacherPage() {
                         : 'border border-[#DADDE5] bg-white text-[#1A1F36]'
                       : 'border border-app-accent bg-app-accent text-white rounded-br-[4px]'
                   } ${isTeacher && firstInGroup ? 'rounded-bl-[4px]' : ''}`}>
+                    {message.replyTo && (
+                      <div className="mb-1 px-2 py-1 bg-gray-100 border-l-2 border-gray-400 text-xs text-gray-600 truncate">
+                        {message.replyTo.sender === 'student' ? 'You' : 'Teacher'}: {message.replyTo.text.slice(0, 60)}
+                      </div>
+                    )}
                     <p className="m-0 whitespace-pre-wrap">{message.text}</p>
+                    <button type="button" onClick={() => setReplyTo({ id: message.id, sender: message.sender, text: message.text })} className="mt-1 text-xs opacity-70">Reply</button>
                     {(message.kind as string) === 'question' && message.options && (
                       <div className="-mx-4 mt-2 flex flex-col border-t border-[#DADDE5]">
                         {message.options.map((option, optionIndex) => {
@@ -498,8 +529,23 @@ export default function TeacherPage() {
           <div ref={threadEndRef} />
         </div>
 
+{replyTo && (
+          <div className="shrink-0 flex items-center justify-between gap-2 px-4 py-2 bg-white border-t border-[#DADDE5] text-sm">
+            <div className="truncate">
+              <span className="font-semibold">{replyTo.sender === 'student' ? 'You' : 'Teacher'}: </span>
+              <span className="text-gray-600">{replyTo.text.slice(0, 80)}</span>
+            </div>
+            <button type="button" onClick={() => setReplyTo(null)} className="text-gray-500">✕</button>
+          </div>
+        )}
+{showNextPrompt && (
+          <div className="shrink-0 flex gap-2 px-4 py-2">
+            <button type="button" onClick={async () => { setShowNextPrompt(false); if (sessionId) await loadNext(sessionId); }} className="px-3 py-1 bg-app-accent text-white rounded">Yes, show next question</button>
+            <button type="button" onClick={() => setShowNextPrompt(false)} className="px-3 py-1 border rounded">No, not now</button>
+          </div>
+        )}
         <form
-          className="shrink-0 flex items-end gap-2 px-4 pt-2 pb-[10px] bg-[#F3F4F6]"
+          className="shrink-0 flex items-end gap-2 px-4 pt-2 pb-2 bg-[#F3F4F6]"
           onSubmit={(event) => { event.preventDefault(); void sendHelp(); }}
           autoComplete="off"
         >

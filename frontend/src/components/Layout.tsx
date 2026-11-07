@@ -56,11 +56,12 @@ export default function Layout() {
   return (
     <div className="min-h-screen flex flex-col bg-app-bg">
       {/* Main content */}
-      <main className="flex-1 overflow-auto custom-scrollbar pb-[76px]">
+      <main className={`flex-1 overflow-auto custom-scrollbar ${location.pathname === '/teacher' ? '' : 'pb-[76px]'}`}>
         <Outlet />
       </main>
 
       {/* Bottom nav */}
+      {location.pathname !== '/teacher' && (
       <nav
         aria-label="Main"
         className="fixed bottom-0 left-0 right-0 grid bg-white border-t border-app-border"
@@ -89,6 +90,7 @@ export default function Layout() {
           );
         })}
       </nav>
+      )}
     </div>
   );
 }
