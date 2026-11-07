@@ -95,6 +95,7 @@ export default function TeacherPage() {
   const threadEndRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const requestLifecycleRef = useRef(new RequestLifecycle());
+  const loadingNextRef = useRef(false);
   const sendingRef = useRef(false);
   const initialScrollDone = useRef(false);
 
@@ -117,6 +118,8 @@ export default function TeacherPage() {
   };
 
   const loadNext = async (sid: string) => {
+    if (loadingNextRef.current) return;
+    loadingNextRef.current = true;
     const requestId = requestLifecycleRef.current.start('next-question');
     setTeacherTyping(true);
     setFeedback(null);
@@ -152,6 +155,7 @@ export default function TeacherPage() {
         setError('I could not load the next practice question. Your saved progress is still safe.');
       }
     } finally {
+      loadingNextRef.current = false;
       if (requestLifecycleRef.current.finish('next-question', requestId)) {
         setTeacherTyping(false);
       }
@@ -540,7 +544,7 @@ const { data } = await api.post('/teacher/conversation', {
         )}
 {showNextPrompt && (
           <div className="shrink-0 flex gap-2 px-4 py-2">
-            <button type="button" onClick={async () => { setShowNextPrompt(false); if (sessionId) await loadNext(sessionId); }} className="px-3 py-1 bg-app-accent text-white rounded">Yes, show next question</button>
+            <button type="button" disabled={teacherTyping} onClick={async () => { setShowNextPrompt(false); if (sessionId) await loadNext(sessionId); }} className="px-3 py-1 bg-app-accent text-white rounded disabled:opacity-50">Yes, show next question</button>
             <button type="button" onClick={() => setShowNextPrompt(false)} className="px-3 py-1 border rounded">No, not now</button>
           </div>
         )}
@@ -576,3 +580,10 @@ const { data } = await api.post('/teacher/conversation', {
     </main>
   );
 }
+
+
+
+
+
+
+

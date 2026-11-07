@@ -16,6 +16,7 @@ const router = Router();
 
 interface RateWindow { count: number; resetAt: number }
 const rateWindows = new Map<string, RateWindow>();
+const nextSessionLocks = new Map<string, Promise<void>>();
 
 router.get('/bootstrap', authenticate, async (req: AuthRequest, res) => {
   const userId = req.user!.id;
@@ -275,10 +276,30 @@ router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
     studentFeedback: message,
   });
 const intent = classifyIntent(message);
-const replyTo = req.body?.replyTo;
+  const lowerMessage = message.toLowerCase();
+  const replyTo = req.body?.replyTo;
+  const hasExplicitTopicCorrection = /not about the question|in general|i mean in general|forget that|change the topic|leave the question|something else|talk about something else/i.test(lowerMessage);
+  const isEmotionalSupport = /stressed|tired|exhausted|sad|anxious|overwhelmed|confused|not motivated|need someone to talk/i.test(lowerMessage) && !/this question|that question|the question/i.test(lowerMessage);
+  const isPerformanceQuestion = /am i improving|how am i doing|my weak|my progress|how am i performing/i.test(lowerMessage);
+  const isPracticeRequest = /another question|next question|test me|practice|give me a question/i.test(lowerMessage);
+  const isExamPrep = /how should i prepare|how to prepare|study plan|what should i study/i.test(lowerMessage);
+  const referencesCurrentQuestion = /\b(this|that|it|the question|the problem|last step|previous|above|these|those)\b/.test(lowerMessage);
+  const isFollowUp = /\b(why|how does that work|explain that again|another example|what happens if|did not understand|didn't understand)\b/.test(lowerMessage) && referencesCurrentQuestion;
+  let contextMode = 'GENERAL_ACADEMIC_HELP';
+  if (replyTo) contextMode = 'EXPLICIT_REPLY_FOLLOWUP';
+  else if (hasExplicitTopicCorrection) contextMode = 'GENERAL_CONVERSATION';
+  else if (isEmotionalSupport) contextMode = 'EMOTIONAL_SUPPORT';
+  else if (isPerformanceQuestion) contextMode = 'PERFORMANCE_RESPONSE';
+  else if (isPracticeRequest) contextMode = 'START_PRACTICE';
+  else if (isExamPrep) contextMode = 'EXAM_PREPARATION_GUIDANCE';
+  else if (isFollowUp) contextMode = 'ACTIVE_QUESTION_HELP';
+  else if (referencesCurrentQuestion) contextMode = 'ACTIVE_QUESTION_HELP';
+  const contextQuestion = (contextMode === 'ACTIVE_QUESTION_HELP') ? currentQuestion : null;
+  const composed = composeConversationResponse(intent, message, (contextQuestion ? currentQuestion?.text : null) || null, (contextQuestion ? currentQuestion?.explanation : null) || null, (contextQuestion ? currentQuestion?.concept?.nameEnglish : null) || null);
   const replyContext = replyTo ? `Student is replying to ${replyTo.sender}: "${String(replyTo.text || '').slice(0,300)}"` : '';
   const prompt = [
     'ROLE: You are a patient, accurate tutor chatting with one student. Every reply must teach something and feel like a real person.',
+    "Always answer the student's actual question directly first, then add helpful context if needed.",
     'STYLE: Use one to three short chat bubbles of meaning. Never use headings, bullet lists, raw topic labels, or stock filler. Be warm and direct.',
     'Use the student’s own words and recent turns. Never reset or restart the conversation.',
     'Choose the next step from accuracy, recent mistakes, time since review, hint use, answer speed, and what the student asks.',
@@ -288,11 +309,11 @@ const replyTo = req.body?.replyTo;
     'Facts and explanations must be verified against the supplied question and stored context. If unsure, say less and identify what cannot be confirmed.',
     'Always end with the next step: a question, a hint offer, or a short check-in.',
     `Selected exams: ${examNames.length ? examNames.join(', ') : 'not selected yet'}.`,
-    currentQuestion
+    contextQuestion
       ? [
-          `Current question: ${currentQuestion.text}`,
-          `Options: ${normalizeOptions(currentQuestion.options).map((option, index) => `${String.fromCharCode(65 + index)}: ${option}`).join('; ')}`,
-          currentQuestion.explanation ? `Stored explanation: ${currentQuestion.explanation}` : 'Stored explanation unavailable.',
+          `Current question: ${contextQuestion.text}`,
+          `Options: ${normalizeOptions(contextQuestion.options).map((option, index) => `${String.fromCharCode(65 + index)}: ${option}`).join('; ')}`,
+          contextQuestion.explanation ? `Stored explanation: ${contextQuestion.explanation}` : 'Stored explanation unavailable.',
         ].join('\n')
       : 'There is no active practice question.',
     recentHistory ? `Recent conversation:\n${recentHistory}` : '',
@@ -301,11 +322,6 @@ const replyTo = req.body?.replyTo;
     'If the request is for a hint, help without revealing the answer option or value. If it asks for an explanation, teach it simply. Do not claim official predictions or certainty.',
     serializeTeachingContext(teachingContext),
   ].join('\n');
-  const isCasual = intent === 'GREETING' || intent === 'GENERAL_CONVERSATION';
-  const isSelfContained = /^\s*\d+\s*[\+\-\*\/]\s*\d+\s*\??\s*$/.test(message) || message.toLowerCase().includes('what is');
-  const isRecommendation = /which topic|what should i focus|what am i weak|where should i improve|study next/i.test(message);
-  const contextQuestion = (isCasual || isSelfContained || isRecommendation) ? null : currentQuestion;
-  const composed = composeConversationResponse(intent, message, (isCasual || isSelfContained || isRecommendation) ? null : currentQuestion?.text || null, (isCasual || isSelfContained || isRecommendation) ? null : currentQuestion?.explanation || null, (isCasual || isSelfContained || isRecommendation) ? null : currentQuestion?.concept?.nameEnglish || null);
   const ai = await generateOptional(userId, prompt);
   console.log(JSON.stringify({ event: 'conversation_groq', requestId, generated: !!ai.body?.generated, status: ai.status, textLength: ai.body?.text?.length ?? 0 }));
   const text = ai.body?.generated ? ai.body.text : composed;
@@ -423,6 +439,12 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
   const session = await prisma.adaptiveSession.findUnique({ where: { id: req.params.sessionId } });
   if (!session || session.userId !== userId) return res.status(404).json({ message: 'Teacher session not found' });
 
+  const previousLock = nextSessionLocks.get(session.id) || Promise.resolve();
+  let releaseLock!: () => void;
+  const lockPromise = new Promise<void>((resolve) => { releaseLock = resolve; });
+  nextSessionLocks.set(session.id, lockPromise);
+  await previousLock;
+  try {
   const seenItems = await prisma.adaptiveItem.findMany({
     where: { sessionId: session.id },
     select: { questionId: true },
@@ -473,53 +495,76 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     existing.subjectIds = [...new Set([...(existing.subjectIds || []), row.chapter.subject.id])];
     availabilityMap.set(row.conceptId, existing);
   }
-  const plan = createAdaptiveLearningPlan({
+  const availableConcepts = [...availabilityMap.values()];
+  let plan = createAdaptiveLearningPlan({
     profile,
     diagnostics,
-    availableConcepts: [...availabilityMap.values()],
+    availableConcepts,
     selectedExamIds,
     currentLearningFocusId: session.focusConceptId,
   });
   if (plan.selectedAction === 'no_available_question' || plan.selectedConceptId === null) {
-    return res.json({ done: true, message: 'I’ve run out of stored questions for the current learning objective. No unrelated topic has been chosen.' });
+    return res.json({ done: true, message: 'I\u0027ve run out of stored questions for the current learning objective. No unrelated topic has been chosen.' });
   }
-  const targetDifficulty = plan.selectedDifficulty as Difficulty;
-  let candidates = await prisma.question.findMany({
-    where: {
-      isActive: true,
-      conceptId: plan.selectedConceptId,
-      ...(selectedExamIds.length ? { chapter: { subject: { examId: { in: selectedExamIds } } } } : {}),
-      ...(excludedIds.length ? { id: { notIn: excludedIds } } : {}),
-      difficulty: targetDifficulty,
-    },
-    include: { chapter: { include: { subject: true } }, concept: true },
-    take: 25,
-    orderBy: [{ updatedAt: 'desc' }],
-  });
-  if (!candidates.length) {
-    candidates = await prisma.question.findMany({
+  const failedConcepts = new Set<number>();
+  let question: any = null;
+  let targetDifficulty: Difficulty = plan.selectedDifficulty as Difficulty;
+  while (!question && failedConcepts.size < 5) {
+    if (failedConcepts.has(plan.selectedConceptId!)) {
+      const filtered = availableConcepts.filter((concept) => !failedConcepts.has(concept.conceptId));
+      if (!filtered.length) break;
+      plan = createAdaptiveLearningPlan({
+        profile,
+        diagnostics,
+        availableConcepts: filtered,
+        selectedExamIds,
+        currentLearningFocusId: session.focusConceptId,
+      });
+      if (plan.selectedAction === 'no_available_question' || plan.selectedConceptId === null) break;
+    }
+    targetDifficulty = plan.selectedDifficulty as Difficulty;
+    let candidates = await prisma.question.findMany({
       where: {
         isActive: true,
-        conceptId: plan.selectedConceptId,
+        conceptId: plan.selectedConceptId!,
         ...(selectedExamIds.length ? { chapter: { subject: { examId: { in: selectedExamIds } } } } : {}),
         ...(excludedIds.length ? { id: { notIn: excludedIds } } : {}),
+        difficulty: targetDifficulty,
       },
       include: { chapter: { include: { subject: true } }, concept: true },
       take: 25,
       orderBy: [{ updatedAt: 'desc' }],
     });
+    if (!candidates.length) {
+      candidates = await prisma.question.findMany({
+        where: {
+          isActive: true,
+          conceptId: plan.selectedConceptId!,
+          ...(selectedExamIds.length ? { chapter: { subject: { examId: { in: selectedExamIds } } } } : {}),
+          ...(excludedIds.length ? { id: { notIn: excludedIds } } : {}),
+        },
+        include: { chapter: { include: { subject: true } }, concept: true },
+        take: 25,
+        orderBy: [{ updatedAt: 'desc' }],
+      });
+    }
+    candidates = candidates.filter((candidate) => validatePracticeQuestion({
+      text: candidate.text,
+      options: normalizeOptions(candidate.options),
+      correctOption: candidate.correctOption,
+    }).valid);
+    question = candidates.find((candidate) => validatePracticeQuestion({
+      text: candidate.text,
+      options: normalizeOptions(candidate.options),
+      correctOption: candidate.correctOption,
+    }).valid) || null;
+    if (!question) {
+      failedConcepts.add(plan.selectedConceptId!);
+    }
   }
-  candidates = candidates.filter((candidate) => validatePracticeQuestion({
-    text: candidate.text,
-    options: normalizeOptions(candidate.options),
-    correctOption: candidate.correctOption,
-  }).valid);
-  const question = candidates.find((candidate) => validatePracticeQuestion({
-    text: candidate.text,
-    options: normalizeOptions(candidate.options),
-    correctOption: candidate.correctOption,
-  }).valid);
-  if (!question) return res.json({ done: true, message: 'Nicely done! I’ve run out of stored questions for this topic. We can review another topic or come back later.' });
+  if (!question) {
+    return res.json({ done: true, message: 'Nicely done! I\u0027ve run out of stored questions for this topic. We can review another topic or come back later.' });
+  }
 
   const conceptId = question.conceptId;
   await prisma.adaptiveItem.create({
@@ -581,6 +626,10 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     teacherMessage: composeQuestionIntroduction(question.text, node?.nameEnglish || question.chapter.name),
     aiUnavailable: false,
   });
+} finally {
+  releaseLock();
+  if (nextSessionLocks.get(session.id) === lockPromise) nextSessionLocks.delete(session.id);
+}
 });
 
 router.post('/session/:sessionId/answer', authenticate, async (req: AuthRequest, res) => {
@@ -966,3 +1015,11 @@ router.post('/understand', authenticate, async (req: AuthRequest, res) => {
 });
 
 export default router;
+
+
+
+
+
+
+
+

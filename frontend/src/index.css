@@ -5,28 +5,53 @@
 @tailwind utilities;
 
 /* AI Teacher overrides (scoped) */
-/* AI Teacher overrides (scoped) */
 main.h-\[calc\(100vh-76px\)\] {
   height: 100vh !important;
+  background: #17191D;
+  color: #F3F4F6;
 }
 
 main.h-\[calc\(100vh-76px\)\] header {
   height: 72px;
-  background: #191b1f;
-  border-bottom: 1px solid rgba(255,255,255,.09);
-}
-
-main.h-\[calc\(100vh-76px\)\] .rounded-\[18px\] {
-  background: #25282d;
-  border: 1px solid rgba(255,255,255,.09);
+  background: #17191D;
+  border-bottom: 1px solid #343941;
+  color: #F3F4F6;
 }
 
 main.h-\[calc\(100vh-76px\)\] .bg-white {
-  background: #25282d;
+  background: #202329 !important;
+  color: #F3F4F6;
+  border: 1px solid #343941;
 }
 
 main.h-\[calc\(100vh-76px\)\] .text-\[\#1A1F36\] {
-  color: #f5f5f5;
+  color: #F3F4F6 !important;
+}
+
+main.h-\[calc\(100vh-76px\)\] .text-app-textMuted,
+main.h-\[calc\(100vh-76px\)\] .text-app-textSecondary {
+  color: #A1A7B3 !important;
+}
+
+main.h-\[calc\(100vh-76px\)\] button[role="radio"] {
+  background: #25282D !important;
+  color: #E5E7EB !important;
+  border: 1px solid #41454D !important;
+}
+
+main.h-\[calc\(100vh-76px\)\] button[role="radio"]:hover {
+  background: #2E3238 !important;
+}
+
+main.h-\[calc\(100vh-76px\)\] textarea,
+main.h-\[calc\(100vh-76px\)\] input {
+  background: #202329 !important;
+  border: 1px solid #555D6B !important;
+  color: #F3F4F6 !important;
+}
+
+main.h-\[calc\(100vh-76px\)\] textarea::placeholder {
+  color: #A1A7B3 !important;
 }
 
 @layer base {
@@ -193,14 +218,14 @@ main.h-\[calc\(100vh-76px\)\] .bg-orange-100 { background: #422b1d !important; c
 main.h-\[calc\(100vh-76px\)\] .bg-orange-100 .option-letter { color: #ffd6a5 !important; }
 main.h-\[calc\(100vh-76px\)\] .border-orange-300 { background: #3a2024 !important; color: #ffd7da !important; border-color: #754047 !important; }
 
-/* AI Teacher MCQ option overrides (scoped) */
-main.h-\[calc\(100vh-76px\)\] .option { background: #25282d !important; color: #e5e7eb !important; border-color: #41454d !important; }
-main.h-\[calc\(100vh-76px\)\] .option .option-letter { color: #aaa0ff !important; }
-main.h-\[calc\(100vh-76px\)\] .option:hover:not(:disabled) { background: #2b2e34 !important; }
-main.h-\[calc\(100vh-76px\)\] .option.selected { background: #34305c !important; color: #ffffff !important; border-color: #8b7cf6 !important; }
-main.h-\[calc\(100vh-76px\)\] .option.selected .option-letter { color: #c4b5fd !important; }
-main.h-\[calc\(100vh-76px\)\] .option.correct { background: #173a2b !important; color: #b9f6d0 !important; border-color: #286347 !important; }
-main.h-\[calc\(100vh-76px\)\] .option.correct .option-letter { color: #b9f6d0 !important; }
-main.h-\[calc\(100vh-76px\)\] .option.wrong { background: #3a2024 !important; color: #ffd7da !important; border-color: #754047 !important; }
-main.h-\[calc\(100vh-76px\)\] .option.wrong .option-letter { color: #ffd7da !important; }
-main.h-\[calc\(100vh-76px\)\] .option:disabled { color: #92969e !important; }
+/* AI Teacher MCQ option overrides (scoped to radio buttons) */
+main.h-\[calc\(100vh-76px\)\] button[role="radio"] { background: #25282d !important; color: #e5e7eb !important; border-color: #41454d !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"] span:first-child { color: #aaa0ff !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"]:hover:not(:disabled) { background: #2b2e34 !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"][aria-checked="true"] { background: #34305c !important; color: #ffffff !important; border-color: #8b7cf6 !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"][aria-checked="true"] span:first-child { color: #c4b5fd !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"].correct { background: #173a2b !important; color: #b9f6d0 !important; border-color: #286347 !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"].correct span:first-child { color: #b9f6d0 !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"].wrong { background: #3a2024 !important; color: #ffd7da !important; border-color: #754047 !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"].wrong span:first-child { color: #ffd7da !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"]:disabled { color: #92969e !important; }
