@@ -4,6 +4,7 @@ import { upsertAnsweredQuestion } from '../lib/questionLifecycle';
 import { normalizeRestoredChat } from '../lib/conversationRestoration';
 import { classifyMessageIntent } from '../lib/messageIntent';
 import { RequestLifecycle } from '../lib/requestLifecycle';
+import { classifyTeachingIntent, determineResponseAction } from '../lib/responsePolicy';
 
 interface Question {
   id: string;
@@ -294,9 +295,15 @@ export default function TeacherPage() {
     const text = helpText.trim();
     if (!text) return;
     const intent = classifyMessageIntent(text);
+    const teachingIntent = classifyTeachingIntent(text);
+    const action = determineResponseAction(teachingIntent);
     addMessage('student', text);
     setHelpText('');
-    if (intent === 'CONTINUE_PRACTICE') {
+    if (action === 'START_PRACTICE') {
+      if (question) {
+        addMessage('teacher', 'You already have a question to work on. Let’s finish it first.');
+        return;
+      }
       if (sessionId) await loadNext(sessionId);
       return;
     }
