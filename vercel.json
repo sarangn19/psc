@@ -1,6 +1,6 @@
 {
   "framework": null,
-  "installCommand": "npm install && npx --yes prisma@5.22.0 generate --schema=backend/prisma/schema.prisma",
+  "installCommand": "bash scripts/vercel-install.sh",
   "buildCommand": "npm install --prefix frontend && cd frontend && npx tsc && npx vite build",
   "outputDirectory": "dist",
   "regions": [
