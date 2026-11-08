@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+﻿import { useCallback, useEffect, useRef, useState } from 'react';
+import { useSpeechInput } from '../lib/useSpeechInput';
+import { useSpeechOutput } from '../lib/useSpeechOutput';
 import api from '../lib/api';
 import { upsertAnsweredQuestion } from '../lib/questionLifecycle';
 import { normalizeRestoredChat } from '../lib/conversationRestoration';
 import { classifyMessageIntent } from '../lib/messageIntent';
 import { RequestLifecycle } from '../lib/requestLifecycle';
-import { classifyTeachingIntent, determineResponseAction } from '../lib/responsePolicy';
+import { classifyTeachingIntent, determineResponseAction, extractSubjectPhrase } from '../lib/responsePolicy';
 
 interface Question {
   id: string;
@@ -13,7 +15,7 @@ interface Question {
   correctOption: number;
   difficulty: string;
   explanation?: string | null;
-  chapter?: { name: string };
+  chapter?: { name: string; subject?: { name: string } | null } | null;
   concept?: { id: number; nameEnglish: string } | null;
 }
 
@@ -44,7 +46,7 @@ interface StoredChat {
 }
 
 const CHAT_KEY = 'cognix.aiTeacher.chat';
-const chatDelay = (milliseconds: number) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
+const chatDelay = (ms: number) => new Promise((r) => window.setTimeout(r, ms));
 
 function TeacherAvatar() {
   return (
@@ -62,9 +64,7 @@ function TeacherAvatar() {
 function readStoredChat(): StoredChat {
   try {
     const parsed = JSON.parse(localStorage.getItem(CHAT_KEY) || '{}') as StoredChat;
-    if (parsed.messages) {
-      parsed.messages = parsed.messages.map((message) => ({ ...message, revealed: false }));
-    }
+    if (parsed.messages) parsed.messages = parsed.messages.map((m) => ({ ...m, revealed: false }));
     return normalizeRestoredChat(parsed) as StoredChat;
   } catch {
     return {};
@@ -89,15 +89,36 @@ export default function TeacherPage() {
   const [replyTo, setReplyTo] = useState<{ id: string; sender: ChatMessage['sender']; text: string } | null>(null);
   const [error, setError] = useState('');
   const [showNextPrompt, setShowNextPrompt] = useState(false);
+  const [nextPromptQuestionId, setNextPromptQuestionId] = useState<string | null>(null);
   const [helpText, setHelpText] = useState('');
   const [hintLoading, setHintLoading] = useState(false);
   const [answering, setAnswering] = useState(false);
+  const [pendingTopicChange, setPendingTopicChange] = useState(false);
+  const [voiceInterim, setVoiceInterim] = useState('');
+
   const threadEndRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const requestLifecycleRef = useRef(new RequestLifecycle());
   const loadingNextRef = useRef(false);
   const sendingRef = useRef(false);
   const initialScrollDone = useRef(false);
+  const sendHelpRef = useRef<() => void>(() => {});
+
+  // ── Voice output ────────────────────────────────────────────────────────────
+  const speechOutput = useSpeechOutput();
+
+  // ── Voice input ─────────────────────────────────────────────────────────────
+  const speechInput = useSpeechInput({
+    onTranscript: useCallback((text: string) => {
+      setVoiceInterim('');
+      setHelpText(text);
+      setTimeout(() => sendHelpRef.current(), 400);
+    }, []),
+    onInterim: useCallback((text: string) => setVoiceInterim(text), []),
+    language: 'en-IN',
+    autoSend: true,
+    silenceMs: 1800,
+  });
 
   const addMessage = (
     sender: ChatMessage['sender'],
@@ -110,6 +131,10 @@ export default function TeacherPage() {
       ...current,
       { id: `${Date.now()}-${Math.random()}`, sender, text, kind, correct, ...extra, revealed: true },
     ]);
+    // Read teacher messages aloud (skip answer-reveal feedback to avoid spoilers)
+    if (sender === 'teacher' && text && kind !== 'feedback') {
+      speechOutput.speak(text);
+    }
   };
 
   const saveChat = (next: Partial<StoredChat>) => {
@@ -117,7 +142,7 @@ export default function TeacherPage() {
     localStorage.setItem(CHAT_KEY, JSON.stringify({ ...current, ...next }));
   };
 
-  const loadNext = async (sid: string) => {
+  const loadNext = async (sid: string, requestedSubject?: string) => {
     if (loadingNextRef.current) return;
     loadingNextRef.current = true;
     const requestId = requestLifecycleRef.current.start('next-question');
@@ -126,15 +151,19 @@ export default function TeacherPage() {
     setSelectedOption(null);
     setQuestion(null);
     try {
-      const { data } = await api.get(`/teacher/session/${sid}/next`);
+      const url = requestedSubject
+        ? `/teacher/session/${sid}/next?requestedSubject=${encodeURIComponent(requestedSubject)}`
+        : `/teacher/session/${sid}/next`;
+      const { data } = await api.get(url);
       if (!requestLifecycleRef.current.isCurrent('next-question', requestId)) return;
       if (data.done || !data.question) {
-        addMessage('teacher', data.message || 'We have reached a good stopping point for today. Iâ€™ll keep this conversation here for next time.');
+        const msg = data.requestedSubjectUnavailable && data.requestedPhrase
+          ? data.message || `No practice questions are available for "${data.requestedPhrase}" right now.`
+          : data.message || `We've reached a good stopping point for today.`;
+        addMessage('teacher', msg);
         return;
       }
-      if (data.question?.id && messages.some((m) => m.kind === 'question' && (m.questionId || m.text) === data.question.id)) {
-        return;
-      }
+      if (data.question?.id && messages.some((m) => m.kind === 'question' && (m.questionId || m.text) === data.question.id)) return;
       setConcept(data.concept);
       setQuestionNumber(data.questionNumber || 0);
       setLessonMeta({
@@ -144,21 +173,16 @@ export default function TeacherPage() {
       });
       await chatDelay(650);
       if (!requestLifecycleRef.current.isCurrent('next-question', requestId)) return;
-      if (data.teacherMessage) {
-        addMessage('teacher', data.teacherMessage);
-      }
+      if (data.teacherMessage) addMessage('teacher', data.teacherMessage);
       await chatDelay(650);
       if (!requestLifecycleRef.current.isCurrent('next-question', requestId)) return;
       setQuestion(data.question);
     } catch {
-      if (requestLifecycleRef.current.isCurrent('next-question', requestId)) {
+      if (requestLifecycleRef.current.isCurrent('next-question', requestId))
         setError('I could not load the next practice question. Your saved progress is still safe.');
-      }
     } finally {
       loadingNextRef.current = false;
-      if (requestLifecycleRef.current.finish('next-question', requestId)) {
-        setTeacherTyping(false);
-      }
+      if (requestLifecycleRef.current.finish('next-question', requestId)) setTeacherTyping(false);
     }
   };
 
@@ -171,21 +195,14 @@ export default function TeacherPage() {
         const sid = data.session.id;
         setSessionId(sid);
         if (!stored.sessionId || stored.sessionId !== sid) {
-          setMessages((current) => current.length
-            ? current
-            : [{ id: 'resume', sender: 'teacher', text: 'Welcome back. We’ll continue from where we stopped.' }]);
+          setMessages((c) => c.length ? c : [{ id: 'resume', sender: 'teacher', text: `Welcome back. We'll continue from where we stopped.` }]);
         }
         if (!stored.question) await loadNext(sid);
         return;
       }
-
       const { data: session } = await api.post('/teacher/session/start', {});
       setSessionId(session.id);
-      setMessages([{
-        id: 'welcome',
-        sender: 'teacher',
-        text: session.welcome || 'Hi! I’ll guide you one small step at a time.',
-      }]);
+      setMessages([{ id: 'welcome', sender: 'teacher', text: session.welcome || `Hi! I'll guide you one small step at a time.` }]);
       await loadNext(session.id);
     } catch {
       setError('I could not restore your conversation. Please check your connection and try again.');
@@ -195,45 +212,26 @@ export default function TeacherPage() {
     }
   };
 
-  useEffect(() => {
-    startOrResume();
-  }, []);
+  useEffect(() => { startOrResume(); }, []);
 
   useEffect(() => {
-    saveChat({
-      sessionId: sessionId || undefined,
-      messages,
-      question,
-      feedback,
-      questionNumber,
-      correctCount,
-      attemptCount,
-      concept,
-      lessonMeta,
-    });
+    saveChat({ sessionId: sessionId || undefined, messages, question, feedback, questionNumber, correctCount, attemptCount, concept, lessonMeta });
   }, [sessionId, messages, question, feedback, questionNumber, correctCount, attemptCount, concept, lessonMeta]);
 
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
-    const distanceFromBottom = container.scrollHeight - container.scrollTop - container.clientHeight;
-    if (distanceFromBottom < 220 || teacherTyping) {
-      container.scrollTo({ top: container.scrollHeight, behavior: answering ? 'auto' : 'smooth' });
-    }
+    const dist = container.scrollHeight - container.scrollTop - container.clientHeight;
+    if (dist < 220 || teacherTyping) container.scrollTo({ top: container.scrollHeight, behavior: answering ? 'auto' : 'smooth' });
   }, [messages, question, feedback, teacherTyping, answering]);
 
   useEffect(() => {
     if (loading || initialScrollDone.current) return;
     const container = scrollContainerRef.current;
     if (!container) return;
-    const frame = window.requestAnimationFrame(() => {
-      container.scrollTop = container.scrollHeight;
-      initialScrollDone.current = true;
-    });
+    const frame = window.requestAnimationFrame(() => { container.scrollTop = container.scrollHeight; initialScrollDone.current = true; });
     return () => window.cancelAnimationFrame(frame);
   }, [loading, messages]);
-
-  // removed auto-load effect
 
   const submitAnswer = async (optionIndex = selectedOption) => {
     if (!sessionId || !question || optionIndex === null || answering) return;
@@ -253,18 +251,13 @@ export default function TeacherPage() {
       setMessages((current) => upsertAnsweredQuestion(current, submittedQuestion, optionIndex, submittedQuestion.correctOption, data.isCorrect, data.explanation || submittedQuestion.explanation) as any);
       addMessage('student', `${String.fromCharCode(65 + optionIndex)}. ${submittedQuestion.options[optionIndex]}`, 'text');
       setFeedback(data);
-      setAttemptCount((count) => count + 1);
-      if (data.isCorrect) setCorrectCount((count) => count + 1);
-      addMessage(
-        'teacher',
-        data.teacherFeedback ||
-          `Result: ${data.isCorrect ? 'correct' : 'incorrect'}. ` +
-          (data.explanation
-            ? `Stored explanation: ${data.explanation}`
-            : `The correct option is ${String.fromCharCode(65 + data.correctOption)}. AI-generated feedback is unavailable; no stored explanation is available.`),
-        'feedback',
-        data.isCorrect,
-      );
+      setAttemptCount((c) => c + 1);
+      if (data.isCorrect) setCorrectCount((c) => c + 1);
+      addMessage('teacher',
+        data.teacherFeedback || `Result: ${data.isCorrect ? 'correct' : 'incorrect'}. ` +
+        (data.explanation ? `Stored explanation: ${data.explanation}` : `The correct option is ${String.fromCharCode(65 + data.correctOption)}.`),
+        'feedback', data.isCorrect);
+      setNextPromptQuestionId(question?.id ?? null);
       setShowNextPrompt(true);
       setQuestion(null);
       setTeacherTyping(false);
@@ -297,93 +290,147 @@ export default function TeacherPage() {
   const sendHelp = async () => {
     if (sendingRef.current) return;
     sendingRef.current = true;
+    setShowNextPrompt(false);
+    setNextPromptQuestionId(null);
     const text = helpText.trim();
     if (!text) { sendingRef.current = false; return; }
+
+    // Pending topic change: student's reply is the new subject
+    if (pendingTopicChange) {
+      setPendingTopicChange(false);
+      addMessage('student', text, 'text', undefined, replyTo ? { replyTo } : {});
+      setHelpText('');
+      setReplyTo(null);
+      if (sessionId) await loadNext(sessionId, text);
+      sendingRef.current = false;
+      return;
+    }
+
     const intent = classifyMessageIntent(text);
     let teachingIntent = classifyTeachingIntent(text);
-    try {
-      const { data } = await api.post('/teacher/understand', { message: text, questionId: question?.id, history: messages.slice(-8).map(({ sender, text }) => ({ sender, text })) });
-      if (data?.intent && (data.confidence ?? 0) >= 0.6) {
-        const mapped = String(data.intent).toLowerCase();
-        if (mapped.includes('uncertainty')) teachingIntent = 'UNCERTAINTY';
-        else if (mapped.includes('performance') || mapped.includes('progress')) teachingIntent = 'PERFORMANCE_REQUEST';
-        else if (mapped.includes('hint')) teachingIntent = 'HINT_REQUEST';
-        else if (mapped.includes('practice')) teachingIntent = 'QUIZ_REQUEST';
-        else if (mapped.includes('explain') || mapped.includes('doubt') || mapped.includes('concept')) teachingIntent = 'EXPLANATION_REQUEST';
-        else if (mapped.includes('greeting') || mapped.includes('casual') || mapped.includes('encouragement')) teachingIntent = 'GREETING';
-      }
-    } catch {
-      // fallback to deterministic
+
+    // Locked intents must not be overridden by Groq broad classification
+    const LOCKED = new Set(['PRACTICE_SUBJECT_REQUEST', 'SESSION_STATE_INQUIRY', 'CHANGE_TOPIC']);
+    if (!LOCKED.has(teachingIntent)) {
+      try {
+        const { data } = await api.post('/teacher/understand', {
+          message: text, questionId: question?.id,
+          history: messages.slice(-8).map(({ sender, text: t }) => ({ sender, text: t })),
+        });
+        if (data?.intent && (data.confidence ?? 0) >= 0.6) {
+          const mapped = String(data.intent).toLowerCase();
+          if (mapped.includes('uncertainty')) teachingIntent = 'UNCERTAINTY';
+          else if (mapped.includes('performance') || mapped.includes('progress')) teachingIntent = 'PERFORMANCE_REQUEST';
+          else if (mapped.includes('hint')) teachingIntent = 'HINT_REQUEST';
+          else if (mapped.includes('practice') && teachingIntent !== 'PRACTICE_SUBJECT_REQUEST') teachingIntent = 'QUIZ_REQUEST';
+          else if (mapped.includes('explain') || mapped.includes('doubt') || mapped.includes('concept')) teachingIntent = 'EXPLANATION_REQUEST';
+          else if (mapped.includes('greeting') || mapped.includes('casual') || mapped.includes('encouragement')) teachingIntent = 'GREETING';
+        }
+      } catch { /* fallback to deterministic */ }
     }
+
     const action = determineResponseAction(teachingIntent);
     addMessage('student', text, 'text', undefined, replyTo ? { replyTo } : {});
     setHelpText('');
+
     if (action === 'START_PRACTICE') {
-      if (question) {
-        addMessage('teacher', 'You already have a question to work on. Let’s finish it first.');
-        sendingRef.current = false;
-        return;
-      }
+      if (question) { addMessage('teacher', `You already have a question to work on. Let's finish it first.`); sendingRef.current = false; return; }
       if (sessionId) await loadNext(sessionId);
+      sendingRef.current = false;
+      return;
+    }
+    if (action === 'START_PRACTICE_SUBJECT') {
+      const phrase = extractSubjectPhrase(text) || text;
+      if (question) { addMessage('teacher', `You have an active question. Answer it first, then I'll find a ${phrase} question for you.`); sendingRef.current = false; return; }
+      if (sessionId) await loadNext(sessionId, text);
+      sendingRef.current = false;
+      return;
+    }
+    if (action === 'REPORT_SESSION_STATE') {
+      if (!sessionId) { addMessage('teacher', 'There is no active practice session right now. Would you like to start one?'); sendingRef.current = false; return; }
+      setTeacherTyping(true);
+      try {
+        const { data } = await api.get(`/teacher/session/${sessionId}/active-question`);
+        if (data.activeQuestion) {
+          const aq = data.activeQuestion;
+          const label = [aq.conceptName, aq.chapterName, aq.subjectName].filter(Boolean)[0] || 'an unknown topic';
+          addMessage('teacher', `We are currently focusing on ${label}. The question is: \u201c${aq.text.slice(0, 120)}${aq.text.length > 120 ? '\u2026' : ''}\u201d`);
+        } else {
+          addMessage('teacher', 'There is no active question at the moment. Would you like me to pick the next question for you?');
+        }
+      } catch { addMessage('teacher', 'I had trouble checking the current question. Would you like to continue practice?'); }
+      finally { setTeacherTyping(false); }
+      sendingRef.current = false;
+      return;
+    }
+    if (action === 'HANDLE_CHANGE_TOPIC') {
+      setPendingTopicChange(true);
+      addMessage('teacher', `Sure \u2014 which subject would you like? Say something like \u201cEnglish grammar\u201d or \u201cAverage\u201d and I\u2019ll find a question.`);
       sendingRef.current = false;
       return;
     }
     if (teachingIntent === 'PERFORMANCE_REQUEST') {
       const accuracy = attemptCount ? Math.round((correctCount / attemptCount) * 100) : 0;
-      addMessage('teacher', `You've attempted ${attemptCount} questions, with ${correctCount} correct. That's about ${accuracy}% accuracy. I can help you focus on a specific topic if you'd like.`);
+      addMessage('teacher', `You\u2019ve attempted ${attemptCount} questions with ${correctCount} correct \u2014 about ${accuracy}% accuracy. I can help you focus on a specific topic if you\u2019d like.`);
       sendingRef.current = false;
       return;
     }
     if (teachingIntent === 'UNCERTAINTY') {
-      addMessage('teacher', "That's okay! Let's work through it together.");
-      if (question) {
-        await requestHint();
-      } else {
-        addMessage('teacher', 'No active question right now. Start a practice question and I can help.');
-      }
+      if (question) { await requestHint(); }
+      else { addMessage('teacher', `That\u2019s okay \u2014 let me know which topic you\u2019d like help with, or I can start a practice question for you.`); }
       sendingRef.current = false;
       return;
     }
+
     setTeacherTyping(true);
     const requestId = requestLifecycleRef.current.start('teacher-response');
     try {
-const { data } = await api.post('/teacher/conversation', {
+      const { data } = await api.post('/teacher/conversation', {
         message: text,
         questionId: question?.id,
-        history: messages.slice(-8).map(({ sender, text }) => ({ sender, text })),
+        sessionId,
+        history: messages.slice(-8).map(({ sender, text: t }) => ({ sender, text: t })),
         replyTo: replyTo ? { id: replyTo.id, sender: replyTo.sender, text: replyTo.text } : undefined,
       });
       if (!requestLifecycleRef.current.isCurrent('teacher-response', requestId)) { sendingRef.current = false; return; }
+      // Backend signals: load the next adaptive question as a practice card
+      if (data.redirectToNext && data.sessionId) {
+        requestLifecycleRef.current.finish('teacher-response', requestId);
+        setTeacherTyping(false);
+        sendingRef.current = false;
+        await loadNext(data.sessionId);
+        return;
+      }
       await chatDelay(500);
       if (!requestLifecycleRef.current.isCurrent('teacher-response', requestId)) { sendingRef.current = false; return; }
-      addMessage(
-        'teacher',
-        data.generated ? data.text : (data.message || 'AI explanation is unavailable right now. Your saved question and answer data are still available.'),
-        'text',
-      );
+      if (data.text) addMessage('teacher', data.text, 'text');
+      // Subject-specific question returned: render as practice card
+      if (data.practiceQuestion && data.requestedSubjectHonored) {
+        setConcept({ id: data.practiceQuestion.concept?.id || null, name: data.practiceQuestion.concept?.nameEnglish || data.practiceQuestion.chapter?.name || 'Practice' });
+        setQuestion(data.practiceQuestion);
+        setSelectedOption(null);
+        setFeedback(null);
+      }
       setReplyTo(null);
     } catch {
-      if (requestLifecycleRef.current.isCurrent('teacher-response', requestId)) {
-        addMessage('teacher', 'I couldn’t reach the teaching service. Your progress is saved, and you can continue with the stored questions.');
-      }
+      if (requestLifecycleRef.current.isCurrent('teacher-response', requestId))
+        addMessage('teacher', `I couldn\u2019t reach the teaching service. Your progress is saved.`);
     } finally {
-      if (requestLifecycleRef.current.finish('teacher-response', requestId)) {
-        setTeacherTyping(false);
-      }
+      if (requestLifecycleRef.current.finish('teacher-response', requestId)) setTeacherTyping(false);
       sendingRef.current = false;
     }
   };
 
+  // Keep ref in sync so voice input can call sendHelp without stale closures
+  sendHelpRef.current = sendHelp;
+
   if (loading) {
     return (
-      <main className="h-[calc(100vh-76px)] bg-[#F3F4F6] md:grid md:place-items-center md:px-6 overflow-hidden">
+      <main className="h-[calc(100dvh-76px)] bg-[#F3F4F6] md:grid md:place-items-center md:px-6 overflow-hidden">
         <div className="h-full w-full max-w-[480px] mx-auto flex flex-col bg-[#F3F4F6] md:border md:border-app-border md:shadow-xl">
           <header className="h-[60px] shrink-0 px-4 flex items-center gap-3 bg-white border-b border-[#DADDE5]">
             <div className="w-10 h-10"><TeacherAvatar /></div>
-            <div>
-              <h1 className="text-[20px] leading-tight font-[700] m-0">AI Teacher</h1>
-              <p className="text-[13px] text-app-textSecondary m-0">Loading…</p>
-            </div>
+            <div><h1 className="text-[20px] leading-tight font-[700] m-0">AI Teacher</h1><p className="text-[13px] text-app-textSecondary m-0">Loading\u2026</p></div>
           </header>
           <div className="flex-1 p-4 flex flex-col gap-3" aria-busy="true">
             <div className="w-[62%] h-[40px] rounded-[18px] bg-white animate-pulse" />
@@ -395,13 +442,13 @@ const { data } = await api.post('/teacher/conversation', {
     );
   }
 
-  const historicalQuestionIds = new Set(
-    messages.filter((m) => m.kind === 'question').map((m) => m.questionId || m.text),
-  );
+  const historicalQuestionIds = new Set(messages.filter((m) => m.kind === 'question').map((m) => m.questionId || m.text));
 
   return (
-    <main className="h-[calc(100vh-76px)] bg-[#F3F4F6] md:grid md:place-items-center md:px-6 overflow-hidden">
+    <main className="h-[calc(100dvh-76px)] bg-[#F3F4F6] md:grid md:place-items-center md:px-6 overflow-hidden">
       <div className="h-full w-full max-w-[480px] mx-auto flex flex-col bg-[#F3F4F6] md:border md:border-app-border md:shadow-[0_28px_60px_-30px_rgba(0,0,0,.45)]">
+
+        {/* Header */}
         <header className="h-[60px] shrink-0 px-4 flex items-center gap-3 bg-white border-b border-[#DADDE5] shadow-[0_1px_2px_rgba(26,31,54,.08)] relative z-[2]">
           <div className="relative w-10 h-10 shrink-0">
             <TeacherAvatar />
@@ -409,25 +456,38 @@ const { data } = await api.post('/teacher/conversation', {
           </div>
           <div className="min-w-0 flex-1">
             <h1 className="text-[20px] leading-tight font-[700] m-0">AI Teacher</h1>
-            <p className={`text-[13px] m-0 truncate ${teacherTyping ? 'text-app-accent font-[600]' : 'text-app-textSecondary'}`}>
-              {teacherTyping ? 'typing…' : 'Online'}
+            <p className={`text-[13px] m-0 truncate ${speechInput.isListening ? 'text-red-500 font-[600]' : teacherTyping ? 'text-app-accent font-[600]' : 'text-app-textSecondary'}`}>
+              {speechInput.isListening ? '\uD83C\uDFA4 Listening\u2026' : teacherTyping ? 'typing\u2026' : 'Online'}
             </p>
           </div>
+          {/* Speaker toggle */}
+          <button
+            type="button"
+            onClick={() => { speechOutput.toggle(); if (speechOutput.speaking) speechOutput.stop(); }}
+            aria-label={speechOutput.enabled ? 'Mute voice' : 'Unmute voice'}
+            className="shrink-0 grid place-items-center w-[36px] h-[36px] rounded-full border border-[#DADDE5] bg-white text-[#4B5168]"
+          >
+            {speechOutput.enabled ? (
+              <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" /><path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                <line x1="23" y1="9" x2="17" y2="15" /><line x1="17" y1="9" x2="23" y2="15" />
+              </svg>
+            )}
+          </button>
         </header>
 
-        <div ref={scrollContainerRef} role="log" aria-live="polite" aria-label="Conversation with AI Teacher" className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-3 flex flex-col gap-[3px]">
+        {/* Message thread */}
+        <div ref={scrollContainerRef} role="log" aria-live="polite" aria-label="Conversation with AI Teacher" className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-4 py-2 flex flex-col gap-[3px]">
           {error && (
-            <div role="alert" className="self-center max-w-[92%] my-2 px-3 py-1.5 rounded-[14px] bg-white text-[12px] text-red-700 text-center shadow-sm">
-              {error}
-            </div>
+            <div role="alert" className="self-center max-w-[92%] my-2 px-3 py-1.5 rounded-[14px] bg-white text-[12px] text-red-700 text-center shadow-sm">{error}</div>
           )}
 
           {messages.map((message, index) => {
-            if ((message.kind as string) === 'question') {
-              const questionKey = message.questionId || message.text;
-              
-              
-            }
             const previous = messages[index - 1];
             const firstInGroup = !previous || previous.sender !== message.sender;
             const isTeacher = message.sender === 'teacher';
@@ -442,9 +502,7 @@ const { data } = await api.post('/teacher/conversation', {
                   <div className={`${message.revealed ? 'chat-message-enter' : ''} max-w-full box-border px-4 pt-[10px] pb-[7px] rounded-[18px] text-[16px] leading-[1.6] overflow-wrap-anywhere ${
                     isTeacher
                       ? message.kind === 'feedback'
-                        ? message.correct
-                          ? 'border border-green-200 bg-green-50 text-green-950'
-                          : 'border border-orange-300 bg-orange-50 text-orange-950'
+                        ? message.correct ? 'border border-green-200 bg-green-50 text-green-950' : 'border border-[#654047] bg-[#302326] text-[#E8C9CD]'
                         : 'border border-[#DADDE5] bg-white text-[#1A1F36]'
                       : 'border border-app-accent bg-app-accent text-white rounded-br-[4px]'
                   } ${isTeacher && firstInGroup ? 'rounded-bl-[4px]' : ''}`}>
@@ -458,19 +516,10 @@ const { data } = await api.post('/teacher/conversation', {
                     {(message.kind as string) === 'question' && message.options && (
                       <div className="-mx-4 mt-2 flex flex-col border-t border-[#DADDE5]">
                         {message.options.map((option, optionIndex) => {
-                          const selected = message.selectedOption === optionIndex;
+                          const sel = message.selectedOption === optionIndex;
                           const correct = message.correctOption === optionIndex;
                           return (
-                            <div
-                              key={`${message.id}-${optionIndex}`}
-                              className={`min-h-[44px] px-3 py-2 flex items-center justify-center gap-2 border-b border-[#DADDE5] text-center last:border-b-0 ${
-                                correct
-                                  ? 'bg-green-100 text-[#1A1F36] font-[700]'
-                                  : selected
-                                    ? 'bg-orange-100 text-[#1A1F36] font-[700]'
-                                    : 'bg-white text-app-textSecondary'
-                              }`}
-                            >
+                            <div key={`${message.id}-${optionIndex}`} className={`min-h-[44px] px-3 py-2 flex items-center justify-center gap-2 border-b border-[#DADDE5] text-center last:border-b-0 ${correct ? 'bg-green-100 text-[#1A1F36] font-[700]' : sel ? 'bg-orange-100 text-[#1A1F36] font-[700]' : 'bg-white text-app-textSecondary'}`}>
                               <span className="font-[800]">{String.fromCharCode(65 + optionIndex)}.</span>
                               <span>{option}</span>
                             </div>
@@ -484,42 +533,45 @@ const { data } = await api.post('/teacher/conversation', {
             );
           })}
 
+          {/* Active practice question card */}
           {question && !historicalQuestionIds.has(question.id) && (
             <div className="flex items-end gap-2 self-start max-w-[92%] w-[92%] mb-[3px] chat-message-enter">
               <span className="w-7 h-7 shrink-0"><TeacherAvatar /></span>
               <div className="min-w-0 flex-1">
-                <div className="w-full max-w-[380px] box-border rounded-[18px] rounded-bl-[4px] border border-[#DADDE5] bg-white px-4 pt-[10px] pb-0 text-[#1A1F36] text-[16px] leading-[1.6]">
+                <div className="w-full max-w-[380px] box-border rounded-[14px] border border-[#343B4A] bg-[#252D40] px-4 pt-4 pb-0 text-[#F3F4F6] text-[15px] leading-[1.5] font-[600]">
                   <p className="m-0 mb-2 text-[11px] font-[700] uppercase tracking-[.07em] text-app-accent">Practice question</p>
                   <p className="m-0 whitespace-pre-wrap">{question.text}</p>
-                  <div className="-mx-4 mt-2 flex flex-col border-t border-[#DADDE5]" role="radiogroup" aria-label="Answer options">
-                    {question.options.map((option, index) => (
-                      <button
-                        key={`${question.id}-${index}`}
-                        type="button"
-                        role="radio"
-                        aria-checked={selectedOption === index}
-                        disabled={answering}
-                        onClick={() => void submitAnswer(index)}
-                        className={`min-h-[44px] px-3 py-2 border-0 border-b border-[#DADDE5] last:border-b-0 text-[16px] text-center disabled:opacity-70 ${
-                          selectedOption === index
-                            ? 'bg-app-accentLight text-app-accent font-[700]'
-                            : 'bg-transparent text-app-accent font-[600] hover:bg-app-accentLight'
-                        }`}
-                      >
-                        <span className="font-[800] mr-2">{String.fromCharCode(65 + index)}.</span>{option}
-                        {answering && selectedOption === index ? "(checking...)" : null}
-                      </button>
-                    ))}
+                  <div className="mt-3 flex flex-col gap-2" role="radiogroup" aria-label="Answer options">
+                    {question.options.map((option, index) => {
+                      const selected = selectedOption === index;
+                      const submitted = selectedOption !== null;
+                      const isCorrect = submitted && question.correctOption === index;
+                      const isWrong = submitted && selected && question.correctOption !== null && question.correctOption !== index;
+                      return (
+                        <button key={`${question.id}-${index}`} type="button" role="radio" aria-checked={selected} disabled={answering}
+                          onClick={() => void submitAnswer(index)}
+                          className={`min-h-[48px] px-4 py-3 rounded-[8px] border text-[14px] text-left disabled:opacity-70 transition-colors duration-150 ${
+                            isCorrect ? 'bg-[#1D352B] text-[#B9F0CD] border-[#286347]'
+                            : isWrong ? 'bg-[#382528] text-[#FFD0D0] border-[#794047]'
+                            : selected ? 'bg-[#293754] text-[#F3F6FF] border-[#6179C9]'
+                            : 'bg-[#25282D] text-[#E5E7EB] border-[#41454D] hover:bg-[#2B2E34] hover:border-[#5A5F68]'
+                          }`}>
+                          <span className="inline-block w-6 font-[700]">{String.fromCharCode(65 + index)}.</span>{option}
+                          {answering && selected ? ' (checking...)' : null}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-2">
                   <button type="button" onClick={requestHint} disabled={hintLoading || answering} className="min-h-[44px] px-[15px] rounded-full border border-[#DADDE5] bg-white text-app-accent text-[13px] font-[600]">
-                    {hintLoading ? 'Thinking…' : 'Hint'}
+                    {hintLoading ? 'Thinking\u2026' : 'Hint'}
                   </button>
                 </div>
               </div>
             </div>
           )}
+
           {teacherTyping && (
             <div className="flex items-end gap-2 self-start max-w-[92%] mb-[3px]" aria-label="Teacher is typing">
               <span className="w-7 h-7 shrink-0"><TeacherAvatar /></span>
@@ -533,57 +585,82 @@ const { data } = await api.post('/teacher/conversation', {
           <div ref={threadEndRef} />
         </div>
 
-{replyTo && (
+        {/* Reply-to banner */}
+        {replyTo && (
           <div className="shrink-0 flex items-center justify-between gap-2 px-4 py-2 bg-white border-t border-[#DADDE5] text-sm">
             <div className="truncate">
               <span className="font-semibold">{replyTo.sender === 'student' ? 'You' : 'Teacher'}: </span>
               <span className="text-gray-600">{replyTo.text.slice(0, 80)}</span>
             </div>
-            <button type="button" onClick={() => setReplyTo(null)} className="text-gray-500">✕</button>
+            <button type="button" onClick={() => setReplyTo(null)} className="text-gray-500">\u2715</button>
           </div>
         )}
-{showNextPrompt && (
+
+        {/* Next question prompt */}
+        {showNextPrompt && (
           <div className="shrink-0 flex gap-2 px-4 py-2">
-            <button type="button" disabled={teacherTyping} onClick={async () => { setShowNextPrompt(false); if (sessionId) await loadNext(sessionId); }} className="px-3 py-1 bg-app-accent text-white rounded disabled:opacity-50">Yes, show next question</button>
+            <button type="button" disabled={teacherTyping || !nextPromptQuestionId}
+              onClick={async () => { if (!nextPromptQuestionId) return; setShowNextPrompt(false); setNextPromptQuestionId(null); if (sessionId) await loadNext(sessionId); }}
+              className="px-3 py-1 bg-app-accent text-white rounded disabled:opacity-50">Yes, show next question</button>
             <button type="button" onClick={() => setShowNextPrompt(false)} className="px-3 py-1 border rounded">No, not now</button>
           </div>
         )}
+
+        {/* Chat input */}
         <form
-          className="shrink-0 sticky bottom-0 z-10 flex items-end gap-2 px-4 pt-2 pb-2 bg-[#F3F4F6]"
-          onSubmit={(event) => { event.preventDefault(); void sendHelp(); }}
+          id="teacher-chat-form"
+          className="shrink-0 sticky bottom-0 z-10 flex items-end gap-2 px-4 pt-2 pb-0 bg-[#F3F4F6]"
+          onSubmit={(e) => { e.preventDefault(); void sendHelp(); }}
           autoComplete="off"
         >
-          <div className="flex-1 min-w-0 flex bg-white border border-[#DADDE5] rounded-[24px] shadow-[0_1px_2px_rgba(26,31,54,.08)] focus-within:ring-2 focus-within:ring-app-accent">
+          <div className={`flex-1 min-w-0 flex bg-white border rounded-[24px] shadow-[0_1px_2px_rgba(26,31,54,.08)] focus-within:ring-2 focus-within:ring-app-accent transition-colors ${speechInput.isListening ? 'border-red-400 ring-2 ring-red-300' : 'border-[#DADDE5]'}`}>
             <textarea
               rows={1}
               maxLength={1000}
               className="w-full box-border min-h-[44px] max-h-[120px] px-4 py-[11px] border-0 outline-none resize-none bg-transparent text-[#1A1F36] text-[16px] leading-[22px]"
-              value={helpText}
-              onChange={(event) => setHelpText(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) {
-                  event.preventDefault();
-                  void sendHelp();
-                }
-              }}
-              placeholder="Message your teacher"
+              value={speechInput.isListening && voiceInterim ? voiceInterim : helpText}
+              onChange={(e) => setHelpText(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); void sendHelp(); } }}
+              placeholder={speechInput.isListening ? 'Listening\u2026' : 'Message your teacher'}
               aria-label="Message your teacher"
+              readOnly={speechInput.isListening}
             />
           </div>
-          <button type="submit" className="shrink-0 grid place-items-center w-[44px] h-[44px] rounded-full border-0 bg-app-accent text-white disabled:bg-[#DADDE5] disabled:text-app-textSecondary" disabled={!helpText.trim() || starting} aria-label="Send message">
+
+          {/* Mic button */}
+          {speechInput.state !== 'unsupported' && (
+            <button type="button"
+              onClick={() => speechInput.isListening ? speechInput.stop() : speechInput.start()}
+              aria-label={speechInput.isListening ? 'Stop recording' : 'Start voice input'}
+              className={`shrink-0 grid place-items-center w-[44px] h-[44px] rounded-full border-0 transition-colors ${speechInput.isListening ? 'bg-red-500 text-white animate-pulse' : 'bg-white border border-[#DADDE5] text-[#4B5168]'}`}
+            >
+              {speechInput.isListening ? (
+                <svg viewBox="0 0 24 24" className="w-[20px] h-[20px]" fill="currentColor" aria-hidden="true">
+                  <rect x="6" y="6" width="12" height="12" rx="2" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" className="w-[20px] h-[20px]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="9" y="2" width="6" height="12" rx="3" />
+                  <path d="M5 10a7 7 0 0 0 14 0" />
+                  <line x1="12" y1="19" x2="12" y2="22" />
+                  <line x1="9" y1="22" x2="15" y2="22" />
+                </svg>
+              )}
+            </button>
+          )}
+
+          {/* Send button */}
+          <button type="submit"
+            className="shrink-0 grid place-items-center w-[44px] h-[44px] rounded-full border-0 bg-app-accent text-white disabled:bg-[#DADDE5] disabled:text-app-textSecondary"
+            disabled={(!helpText.trim() && !speechInput.isListening) || starting}
+            aria-label="Send message">
             <svg viewBox="0 0 24 24" className="w-[22px] h-[22px]" fill="currentColor" aria-hidden="true">
               <path d="M3.4 20.4 21 12 3.4 3.6v6.5L15 12 3.4 13.9z" />
             </svg>
           </button>
         </form>
+
       </div>
     </main>
   );
 }
-
-
-
-
-
-
-

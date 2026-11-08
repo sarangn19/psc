@@ -1,4 +1,4 @@
-import { Router } from 'express';
+﻿import { Router } from 'express';
 import prisma from '../lib/prisma';
 import { authenticate, AuthRequest } from '../middleware/auth';
 import { buildDayPlan, nextDifficulty, optionName, validatePracticeQuestion } from '../lib/teacher';
@@ -11,6 +11,7 @@ import { buildTeachingContext, serializeTeachingContext, TeachingInteraction } f
 import { AnswerSubmissionError, submitAnswerAtomically } from '../lib/answerSubmission';
 import { composeAnswerFeedback, composeQuestionIntroduction, composeWelcome } from '../lib/teachingResponseComposer';
 import { classifyIntent, composeConversationResponse } from '../lib/conversationIntent';
+import { resolveRequestedSubject, findConstrainedQuestion, extractSubjectPhrase } from '../lib/practiceSubjectResolver';
 
 const router = Router();
 
@@ -177,15 +178,169 @@ router.post('/feedback', authenticate, async (req: AuthRequest, res) => {
   return res.json({ saved: true });
 });
 
+function selectRelevantHistory(intent: string, fullHistory: any[], contextQuestion: any, message: string): any[] {
+  const lowered = message.toLowerCase();
+  const referencesQuestion = /\b(this|that|it|the question|the problem|last step|previous|above|these|those)\b/.test(lowered);
+  if (intent === 'GENERAL_ACADEMIC') {
+    return fullHistory.filter((h: any) => {
+      const t = String(h.text || '').toLowerCase();
+      if (contextQuestion && t.includes(String(contextQuestion.text || '').toLowerCase().slice(0, 40))) return false;
+      return true;
+    }).slice(-4);
+  }
+  if (intent === 'DOUBT') {
+    return fullHistory.slice(-4);
+  }
+  return fullHistory.slice(-6);
+}
+
 router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
   const requestId = `conv_${Date.now()}_${Math.random().toString(36).slice(2,8)}`;
   const userId = req.user!.id;
   const message = String(req.body?.message || '').trim();
   console.log(JSON.stringify({ event: 'conversation_start', requestId, message: message.slice(0,200) }));
-  const recentHistory = Array.isArray(req.body?.history)
-    ? req.body.history.slice(-8).map((item: any) => `${item.sender === 'student' ? 'Student' : 'Teacher'}: ${String(item.text || '').slice(0, 500)}`).join('\n')
-    : '';
+  const fullHistory = Array.isArray(req.body?.history)
+    ? req.body.history.slice(-8).map((item: any) => ({ sender: item.sender === 'student' ? 'student' : 'teacher', text: String(item.text || '').slice(0, 500) }))
+    : [];
   if (!message) return res.status(400).json({ message: 'Message is required' });
+
+  const [selected, currentQuestion] = await Promise.all([
+    prisma.userExam.findMany({
+      where: { userId },
+      include: { exam: { select: { name: true } } },
+    }),
+    req.body?.questionId
+      ? prisma.question.findUnique({
+          where: { id: String(req.body.questionId) },
+          include: { chapter: { include: { subject: true } }, concept: true },
+        })
+      : null,
+  ]);
+  const examNames = selected.map((item) => item.exam.name);
+  const selectedExamIds = selected.map((item) => item.examId);
+  console.log(JSON.stringify({ event: 'conversation_exam', requestId, exams: examNames }));
+
+  // ── Subject-specific practice request ─────────────────────────────────────
+  // When the student asks for a specific subject, resolve it against the DB,
+  // fetch a real question, and let Groq introduce it naturally rather than
+  // using a canned template. This gives Groq full context: the question text,
+  // options, subject name, and student history — all in one Groq call.
+  const practiceSubjectPhrase = extractSubjectPhrase(message);
+  // Only enter subject-resolution if the phrase is substantive — at least 3
+  // chars and not a filler word. "give some question" → phrase="give some" but
+  // "give" and "some" are both fillers, so skip to normal adaptive flow.
+  const FILLER_WORDS = new Set(['give', 'some', 'get', 'let', 'do', 'try', 'one', 'more', 'me', 'us', 'any']);
+  const phraseIsSubstantive = practiceSubjectPhrase &&
+    practiceSubjectPhrase.length >= 3 &&
+    !practiceSubjectPhrase.split(/\s+/).every(w => FILLER_WORDS.has(w));
+
+  if (phraseIsSubstantive && !req.body?.questionId) {
+    const sessionId = req.body?.sessionId ? String(req.body.sessionId) : null;
+
+    // Get seen/excluded IDs if we have a session
+    let excludedIds: string[] = [];
+    if (sessionId) {
+      const [seenItems, recentAttempts] = await Promise.all([
+        prisma.adaptiveItem.findMany({ where: { sessionId }, select: { questionId: true } }),
+        prisma.questionAttempt.findMany({ where: { userId }, select: { questionId: true }, orderBy: { createdAt: 'desc' }, take: 5 }),
+      ]);
+      excludedIds = [...new Set([...seenItems.map(i => i.questionId), ...recentAttempts.map(a => a.questionId)])];
+    }
+
+    const resolved = await resolveRequestedSubject(message, { selectedExamIds });
+    console.log(JSON.stringify({ event: 'conversation_subject_resolve', requestId, phrase: practiceSubjectPhrase, type: resolved.type, matchedName: resolved.type === 'resolved' ? resolved.matchedName : null }));
+
+    if (resolved.type === 'resolved') {
+      const constrainedQ = await findConstrainedQuestion({ resolved, excludedIds, selectedExamIds });
+      if (constrainedQ) {
+        // Record in session if we have one
+        if (sessionId) {
+          const seenCount = excludedIds.length;
+          await prisma.adaptiveItem.create({
+            data: { sessionId, questionId: constrainedQ.id, order: seenCount + 1 },
+          }).catch(() => {}); // non-fatal if duplicate
+          await prisma.adaptiveSession.update({
+            where: { id: sessionId },
+            data: { focusConceptId: constrainedQ.conceptId ?? undefined },
+          }).catch(() => {});
+        }
+
+        const subjectLabel = constrainedQ.concept?.nameEnglish || constrainedQ.chapter?.subject?.name || constrainedQ.chapter?.name || resolved.matchedName;
+        const opts = normalizeOptions(constrainedQ.options);
+        const groqPrompt = [
+          'You are a warm private tutor. The student asked for a specific topic and a verified question has been found.',
+          'Write ONE short natural sentence introducing this topic/subject area. Be encouraging.',
+          'CRITICAL: Do NOT write out the question text. Do NOT list the options. The question will be shown separately as a card.',
+          'Just say something like: "Here is an English grammar question for you." or "Let\'s try one on averages."',
+          `Topic: ${subjectLabel}`,
+          fullHistory.length ? `Recent conversation:\n${fullHistory.map((h: {sender: string; text: string}) => `${h.sender === 'student' ? 'Student' : 'Teacher'}: ${h.text}`).join('\n')}` : '',
+        ].filter(Boolean).join('\n');
+
+        const ai = await generateOptional(userId, groqPrompt);
+        const text = ai.body?.generated ? ai.body.text : `Here's a ${subjectLabel} question for you. Read carefully and choose the best option.`;
+
+        const { correctOption, ...safeQ } = constrainedQ;
+        return res.status(200).json({
+          generated: ai.body?.generated ?? false,
+          text,
+          // Return the question so the frontend renders it as a practice card
+          practiceQuestion: {
+            id: safeQ.id,
+            text: safeQ.text,
+            options: opts,
+            correctOption,
+            difficulty: safeQ.difficulty,
+            chapter: safeQ.chapter,
+            concept: safeQ.concept ? { id: safeQ.concept.id, nameEnglish: safeQ.concept.nameEnglish } : null,
+          },
+          requestedSubjectHonored: true,
+        });
+      } else {
+        // Subject matched but no questions available
+        const unavailablePrompt = `The student asked: "${message}". The topic "${resolved.matchedName}" exists but has no available practice questions right now. Tell the student naturally and offer to continue with their current adaptive practice instead.`;
+        const ai = await generateOptional(userId, unavailablePrompt);
+        const text = ai.body?.generated ? ai.body.text : `I don't have any "${resolved.matchedName}" questions available right now. Would you like to continue with your current practice instead?`;
+        return res.status(200).json({ generated: ai.body?.generated ?? false, text, requestedSubjectUnavailable: true });
+      }
+    } else if (resolved.type === 'unresolved') {
+      const unavailablePrompt = `The student asked: "${message}". You could not find the subject "${practiceSubjectPhrase}" in the question bank. Tell the student naturally — suggest they try a different subject name or continue with adaptive practice.`;
+      const ai = await generateOptional(userId, unavailablePrompt);
+      const text = ai.body?.generated ? ai.body.text : `I couldn't find "${practiceSubjectPhrase}" in the question bank. Try a subject like "English grammar", "Average", or "Polity", or I can pick the next question for you.`;
+      return res.status(200).json({ generated: ai.body?.generated ?? false, text, requestedSubjectUnavailable: true });
+    }
+  }
+  // ── End subject-specific practice ─────────────────────────────────────────
+
+  // ── Practice-start intercept ──────────────────────────────────────────────
+  // When the student says "yes", "shall we start", "next question", "continue"
+  // etc. AND a session exists, fetch the next DB question and return it as a
+  // practice card — never let Groq invent one inline.
+  const lowerMsg = message.toLowerCase().trim();
+  const isPracticeStart =
+    /^(yes|yeah|sure|ok|okay|yep|yup|let'?s go|let'?s start|start|begin|continue|next|next question|shall we start|shall we|give me|go ahead|ready|i'?m ready|sounds good|alright|of course)[\s!.]*$/.test(lowerMsg) ||
+    /\b(next question|another question|shall we start|let'?s practice|give me a question|start practice|continue practice)\b/.test(lowerMsg);
+
+  if (isPracticeStart && req.body?.sessionId && !req.body?.questionId) {
+    const sid = String(req.body.sessionId);
+    const session = await prisma.adaptiveSession.findUnique({ where: { id: sid } });
+    if (session && session.userId === userId) {
+      // Delegate to the existing /next logic by calling it internally
+      const nextUrl = `/teacher/session/${sid}/next`;
+      // Build a minimal redirect response — tell the frontend to call loadNext
+      return res.status(200).json({
+        generated: false,
+        text: null,
+        redirectToNext: true,  // frontend will call loadNext()
+        sessionId: sid,
+      });
+    }
+  }
+  // ── End practice-start intercept ──────────────────────────────────────────
+
+  // Normal conversation path — fetch profile/diagnostics for teaching context
+  const profile = await getStudentLearningProfile(userId, null);
+  const diagnostics = diagnoseStudent(profile);
+
   const loweredMessage = message.toLowerCase();
   const inferredFeedback = loweredMessage.includes('too hard') || loweredMessage.includes('difficult')
     ? 'TOO_HARD'
@@ -213,24 +368,6 @@ router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
       update: {},
     });
   }
-
-  const [selected, profile, currentQuestion] = await Promise.all([
-    prisma.userExam.findMany({
-      where: { userId },
-      include: { exam: { select: { name: true } } },
-    }),
-    getStudentLearningProfile(userId, null),
-    req.body?.questionId
-      ? prisma.question.findUnique({
-          where: { id: String(req.body.questionId) },
-          include: { chapter: { include: { subject: true } }, concept: true },
-        })
-      : null,
-  ]);
-  const examNames = selected.map((item) => item.exam.name);
-  console.log(JSON.stringify({ event: 'conversation_exam', requestId, exams: examNames }));
-  const selectedExamIds = selected.map((item) => item.examId);
-  const diagnostics = diagnoseStudent(profile);
   const availableRows = await prisma.question.findMany({
     where: {
       isActive: true,
@@ -275,10 +412,10 @@ router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
     studentMessage: message,
     studentFeedback: message,
   });
-const intent = classifyIntent(message);
+const intent = classifyIntent(message, fullHistory);
   const lowerMessage = message.toLowerCase();
   const replyTo = req.body?.replyTo;
-  const hasExplicitTopicCorrection = /not about the question|in general|i mean in general|forget that|change the topic|leave the question|something else|talk about something else/i.test(lowerMessage);
+  const hasExplicitTopicCorrection = /not about the question|in general|i mean in general|forget that|change the topic|change topic|leave the question|something else|talk about something else/i.test(lowerMessage);
   const isEmotionalSupport = /stressed|tired|exhausted|sad|anxious|overwhelmed|confused|not motivated|need someone to talk/i.test(lowerMessage) && !/this question|that question|the question/i.test(lowerMessage);
   const isPerformanceQuestion = /am i improving|how am i doing|my weak|my progress|how am i performing/i.test(lowerMessage);
   const isPracticeRequest = /another question|next question|test me|practice|give me a question/i.test(lowerMessage);
@@ -296,32 +433,47 @@ const intent = classifyIntent(message);
   else if (referencesCurrentQuestion) contextMode = 'ACTIVE_QUESTION_HELP';
   const contextQuestion = (contextMode === 'ACTIVE_QUESTION_HELP') ? currentQuestion : null;
   const composed = composeConversationResponse(intent, message, (contextQuestion ? currentQuestion?.text : null) || null, (contextQuestion ? currentQuestion?.explanation : null) || null, (contextQuestion ? currentQuestion?.concept?.nameEnglish : null) || null);
+  const selectedHistoryEntries = selectRelevantHistory(intent, fullHistory, contextQuestion, message);
+  const selectedHistory = selectedHistoryEntries.map((item: any) => `${item.sender === 'student' ? 'Student' : 'Teacher'}: ${item.text}`).join('\n');
   const replyContext = replyTo ? `Student is replying to ${replyTo.sender}: "${String(replyTo.text || '').slice(0,300)}"` : '';
   const prompt = [
-    'ROLE: You are a patient, accurate tutor chatting with one student. Every reply must teach something and feel like a real person.',
-    "Always answer the student's actual question directly first, then add helpful context if needed.",
-    'STYLE: Use one to three short chat bubbles of meaning. Never use headings, bullet lists, raw topic labels, or stock filler. Be warm and direct.',
-    'Use the student’s own words and recent turns. Never reset or restart the conversation.',
-    'Choose the next step from accuracy, recent mistakes, time since review, hint use, answer speed, and what the student asks.',
-    'If the student says too hard, simplify and offer one quick win. If too easy or accurate, raise difficulty gradually. If tired or the session is long, recap briefly and suggest a break.',
-    'Never send the raw topic/category name. Any topic change needs one natural sentence explaining why based on performance.',
-    'Stay on the same topic after a miss until understanding is shown. After a correct answer, praise something specific, then move on or raise difficulty.',
-    'Facts and explanations must be verified against the supplied question and stored context. If unsure, say less and identify what cannot be confirmed.',
-    'Always end with the next step: a question, a hint offer, or a short check-in.',
-    `Selected exams: ${examNames.length ? examNames.join(', ') : 'not selected yet'}.`,
+    // IDENTITY
+    "You are an AI teacher for a Kerala PSC exam prep app. You are NOT a general-purpose chatbot.",
+    "Your only job: help the student understand and answer verified exam questions, and guide their study based on their performance data.",
+    // HARD RULES
+    "RULE 1 - Stay grounded: When there is an active question, refer to it. For performance/recommendation questions, use the student's weak concepts data below.",
+    "RULE 2 - Never give the answer: If the student hasn't answered yet, guide with a hint. Never reveal the correct option before they attempt.",
+    "RULE 3 - Wrong answer: State what they chose and why it is wrong. Explain the correct answer in one sentence. Offer a similar question.",
+    "RULE 4 - Right answer: Acknowledge the specific idea they got right. Move on.",
+    "RULE 5 - Off-topic: Briefly answer then redirect to practice.",
+    "RULE 6 - No invented questions: Never write out a question not from this app's question bank.",
+    "RULE 7 - Short replies: 2-4 sentences maximum. No bullet lists, no headings, no markdown.",
+    // CURRENT CONTEXT
+    `Student's selected exams: ${examNames.length ? examNames.join(', ') : 'not set yet'}.`,
+    // Weak concepts from DB — used for recommendation questions
+    (() => {
+      const weak = (profile.academic.concepts || [])
+        .filter((c: any) => c.attempts >= 3 && c.accuracy !== null && c.accuracy < 60)
+        .sort((a: any, b: any) => (a.accuracy ?? 100) - (b.accuracy ?? 100))
+        .slice(0, 5)
+        .map((c: any) => `${c.name} (${c.accuracy}% accuracy, ${c.attempts} attempts)`);
+      return weak.length ? `Student's weakest concepts: ${weak.join(', ')}.` : 'No weak concepts identified yet.';
+    })(),
     contextQuestion
       ? [
-          `Current question: ${contextQuestion.text}`,
+          '--- ACTIVE PRACTICE QUESTION (verified from question bank) ---',
+          `Question: ${contextQuestion.text}`,
           `Options: ${normalizeOptions(contextQuestion.options).map((option, index) => `${String.fromCharCode(65 + index)}: ${option}`).join('; ')}`,
-          contextQuestion.explanation ? `Stored explanation: ${contextQuestion.explanation}` : 'Stored explanation unavailable.',
+          contextQuestion.explanation ? `Stored explanation: ${contextQuestion.explanation}` : 'No stored explanation.',
+          '--- END ACTIVE QUESTION ---',
         ].join('\n')
-      : 'There is no active practice question.',
-    recentHistory ? `Recent conversation:\n${recentHistory}` : '',
+      : 'No active practice question is loaded right now.',
+    selectedHistory ? `Recent conversation:\n${selectedHistory}` : '',
     replyContext ? `Reply context: ${replyContext}` : '',
-    `Student message: ${message}`,
-    'If the request is for a hint, help without revealing the answer option or value. If it asks for an explanation, teach it simply. Do not claim official predictions or certainty.',
+    `Student: ${message}`,
+    'Teacher (reply in 2-4 sentences, no lists, no headings):',
     serializeTeachingContext(teachingContext),
-  ].join('\n');
+  ].filter(Boolean).join('\n');
   const ai = await generateOptional(userId, prompt);
   console.log(JSON.stringify({ event: 'conversation_groq', requestId, generated: !!ai.body?.generated, status: ai.status, textLength: ai.body?.text?.length ?? 0 }));
   const text = ai.body?.generated ? ai.body.text : composed;
@@ -434,6 +586,51 @@ router.post('/session/start', authenticate, async (req: AuthRequest, res) => {
   });
 });
 
+// GET /teacher/session/:sessionId/active-question
+// Returns the current question ID and its authoritative subject/topic, used
+// by the frontend to answer "which topic are we focusing on?" without relying
+// on stale chat history.
+router.get('/session/:sessionId/active-question', authenticate, async (req: AuthRequest, res) => {
+  const userId = req.user!.id;
+  const { sessionId } = req.params;
+  const session = await prisma.adaptiveSession.findUnique({ where: { id: sessionId } });
+  if (!session || session.userId !== userId) return res.status(404).json({ message: 'Teacher session not found' });
+
+  // The active question is the most recent item in this session that has not
+  // yet received a recorded answer (a QuestionAttempt).
+  const lastItem = await prisma.adaptiveItem.findFirst({
+    where: { sessionId },
+    orderBy: { order: 'desc' },
+    select: { questionId: true },
+  });
+
+  if (!lastItem) return res.json({ activeQuestion: null });
+
+  // Check whether it has been answered already.
+  const attempt = await prisma.questionAttempt.findFirst({
+    where: { userId, sessionId, questionId: lastItem.questionId },
+    select: { id: true },
+  });
+  if (attempt) return res.json({ activeQuestion: null });
+
+  const q = await prisma.question.findUnique({
+    where: { id: lastItem.questionId },
+    include: { chapter: { include: { subject: true } }, concept: true },
+  });
+  if (!q) return res.json({ activeQuestion: null });
+
+  return res.json({
+    activeQuestion: {
+      id: q.id,
+      subjectName: q.chapter?.subject?.name || null,
+      chapterName: q.chapter?.name || null,
+      conceptName: q.concept?.nameEnglish || null,
+      conceptLevel: q.concept?.level || null,
+      text: q.text,
+    },
+  });
+});
+
 router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, res) => {
   const userId = req.user!.id;
   const session = await prisma.adaptiveSession.findUnique({ where: { id: req.params.sessionId } });
@@ -463,6 +660,81 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     select: { examId: true },
   });
   const selectedExamIds = selectedExams.map((item) => item.examId);
+
+  // ── Subject-constrained override ──────────────────────────────────────────
+  // When the student requests a specific subject/topic the frontend sends it as
+  // ?requestedSubject=<student message text>. We resolve it here against the
+  // verified question bank before falling through to adaptive selection.
+  const rawRequestedSubject = typeof req.query.requestedSubject === 'string'
+    ? req.query.requestedSubject.trim()
+    : '';
+  if (rawRequestedSubject) {
+    const resolved = await resolveRequestedSubject(rawRequestedSubject, { selectedExamIds });
+    if (resolved.type === 'unresolved') {
+      // Specific subject was requested but has no verified questions.
+      return res.json({
+        done: true,
+        requestedSubjectUnavailable: true,
+        requestedPhrase: resolved.phrase,
+        message: `There are currently no practice questions available for "${resolved.phrase}" in the verified question bank. Try another topic, or continue with adaptive practice.`,
+      });
+    }
+    if (resolved.type === 'resolved') {
+      const constrained = await findConstrainedQuestion({
+        resolved,
+        excludedIds,
+        selectedExamIds,
+      });
+      if (!constrained) {
+        return res.json({
+          done: true,
+          requestedSubjectUnavailable: true,
+          requestedPhrase: resolved.phrase,
+          message: `You have worked through all available "${resolved.matchedName}" questions in this session. Try another topic, or continue with adaptive practice.`,
+        });
+      }
+      // Record the adaptive item and update session focus.
+      await prisma.adaptiveItem.create({
+        data: { sessionId: session.id, questionId: constrained.id, order: seenItems.length + 1 },
+      });
+      await prisma.adaptiveSession.update({
+        where: { id: session.id },
+        data: { focusConceptId: constrained.conceptId ?? session.focusConceptId },
+      });
+      const node = constrained.conceptId
+        ? await prisma.taxonomyNode.findUnique({ where: { id: constrained.conceptId } })
+        : null;
+      const stats = constrained.conceptId
+        ? await prisma.userConceptStat.findFirst({ where: { userId, conceptId: constrained.conceptId } })
+        : null;
+      const accuracy = stats?.total ? Math.round((stats.correct / stats.total) * 100) : null;
+      const { correctOption, ...safeQuestion } = constrained;
+      return res.json({
+        done: false,
+        questionNumber: seenItems.length + 1,
+        question: {
+          ...safeQuestion,
+          options: normalizeOptions(constrained.options),
+          correctOption,
+        },
+        concept: {
+          id: constrained.conceptId,
+          name: node?.nameEnglish || constrained.chapter.name,
+          description: node?.description || null,
+          sourceMissing: !node?.description,
+          accuracy,
+        },
+        requestedSubjectHonored: true,
+        requestedPhrase: resolved.phrase,
+        teacherMessage: composeQuestionIntroduction(constrained.text, node?.nameEnglish || constrained.chapter.name),
+        aiUnavailable: false,
+      });
+    }
+    // resolved.type === 'none' means the param was sent but contained no real
+    // subject phrase — fall through to normal adaptive selection below.
+  }
+  // ── End subject-constrained override ──────────────────────────────────────
+
   const profile = await getStudentLearningProfile(userId, session.id);
   const diagnostics = diagnoseStudent(profile);
   const availabilityRows = await prisma.question.findMany({
@@ -567,6 +839,7 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
   }
 
   const conceptId = question.conceptId;
+
   await prisma.adaptiveItem.create({
     data: { sessionId: session.id, questionId: question.id, order: seenItems.length + 1 },
   });
@@ -592,22 +865,23 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     },
   });
   const introductionPrompt = [
-    'Act as a warm, attentive private teacher chatting naturally with one student.',
-    'Teach one small idea in one to three short chat bubbles, with one idea per bubble.',
-    `Use the latest measured accuracy of ${accuracy ?? 'not yet measured'}% only when it helps explain the teaching choice.`,
-    'Do not print or announce a topic name, syllabus label, or category string.',
-    'Connect the explanation to what the student has shown they understand; never use stock encouragement.',
-    `Curated source available for this question: ${node?.description || 'none'}.`,
-    'If the source note is missing, teach only the verified facts from the question and say when a detail cannot be confirmed.',
-    `Verified question: ${question.text}`,
-    `Options: ${normalizeOptions(question.options).map((option, index) => `${String.fromCharCode(65 + index)}: ${option}`).join('; ')}`,
-    'Introduce the practice item conversationally, without revealing the answer or correct option.',
-    'Always end by asking the student to choose, explain why, or send the answer.',
-    serializeTeachingContext(teachingContext),
-  ].join(' ');
+    'You are a warm private tutor introducing the next practice question.',
+    'Write ONE short natural sentence to introduce the topic. Be encouraging.',
+    'CRITICAL: Do NOT write out the question text, options, or answer. The question is shown separately as a card.',
+    'Example: "Here is one on Banking Awareness." or "Let\'s try an Average question."',
+    `Topic: ${node?.nameEnglish || question.chapter.name}`,
+    node?.description ? `Source note: ${node.description}` : '',
+  ].filter(Boolean).join('\n');
   const introductionAi = await generateOptional(userId, introductionPrompt);
 
   const { correctOption, ...safeQuestion } = question;
+  // Use Groq's natural introduction if available; fall back to a template that
+  // uses the ACTUAL question's subject — never the session's focusConceptId label.
+  const actualConceptName = node?.nameEnglish || question.chapter.name;
+  const teacherMessage = (introductionAi.status === 200 && introductionAi.body?.generated && introductionAi.body?.text)
+    ? introductionAi.body.text
+    : composeQuestionIntroduction(question.text, actualConceptName);
+
   return res.json({
     done: false,
     questionNumber: seenItems.length + 1,
@@ -618,20 +892,19 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
     },
     concept: {
       id: conceptId,
-      name: node?.nameEnglish || question.chapter.name,
+      name: actualConceptName,
       description: node?.description || null,
       sourceMissing: !node?.description,
       accuracy,
     },
-    teacherMessage: composeQuestionIntroduction(question.text, node?.nameEnglish || question.chapter.name),
+    teacherMessage,
     aiUnavailable: false,
   });
 } finally {
   releaseLock();
   if (nextSessionLocks.get(session.id) === lockPromise) nextSessionLocks.delete(session.id);
 }
-});
-
+  });
 router.post('/session/:sessionId/answer', authenticate, async (req: AuthRequest, res) => {
   const userId = req.user!.id;
   const session = await prisma.adaptiveSession.findUnique({ where: { id: req.params.sessionId } });
@@ -882,7 +1155,7 @@ async function generateFromConfiguredProvider(prompt: string): Promise<{ ok: boo
           contents: [{ role: 'user', parts: [{ text: groundedPrompt }] }],
           generationConfig: { maxOutputTokens: Number(process.env.AI_MAX_TOKENS || 220), temperature: 0.8 },
         }),
-        signal: AbortSignal.timeout(Math.min(Number(process.env.AI_TIMEOUT_MS || 15000), 2000)),
+        signal: AbortSignal.timeout(Math.min(Number(process.env.AI_TIMEOUT_MS || 15000), 8000)),
       });
       const durationMs = Date.now() - startedAt;
       if (!response.ok) {
@@ -912,13 +1185,26 @@ async function generateFromConfiguredProvider(prompt: string): Promise<{ ok: boo
 
 async function generateOpenAiCompatible(url: string, apiKey: string, model: string, prompt: string): Promise<{ ok: boolean; text: string | null }> {
   const isGroq = url.includes('api.groq.com');
+  const isOpenRouter = url.includes('openrouter.ai');
+  const provider = isGroq ? 'groq' : isOpenRouter ? 'openrouter' : 'openai-compatible';
   const tokenLimit = Number(process.env.AI_MAX_TOKENS || 180);
+  // OpenRouter free/low-credit keys often cannot afford the full token budget.
+  const effectiveTokenLimit = isOpenRouter ? Math.min(tokenLimit, 400) : tokenLimit;
   const endpoint = redactEndpoint(url);
   const startedAt = Date.now();
   try {
     const response = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+        ...(isOpenRouter
+          ? {
+              'HTTP-Referer': process.env.FRONTEND_URL || 'http://localhost:5173',
+              'X-Title': 'Kerala PSC Teacher',
+            }
+          : {}),
+      },
       body: JSON.stringify({
         model,
         messages: [
@@ -936,14 +1222,14 @@ async function generateOpenAiCompatible(url: string, apiKey: string, model: stri
           { role: 'user', content: prompt },
         ],
         temperature: 0.8,
-        ...(isGroq ? { max_completion_tokens: tokenLimit } : { max_tokens: tokenLimit }),
+        ...(isGroq ? { max_completion_tokens: tokenLimit } : { max_tokens: effectiveTokenLimit }),
       }),
-      signal: AbortSignal.timeout(Math.min(Number(process.env.AI_TIMEOUT_MS || 15000), 2000)),
+      signal: AbortSignal.timeout(Math.min(Number(process.env.AI_TIMEOUT_MS || 15000), 8000)),
     });
     const durationMs = Date.now() - startedAt;
     if (!response.ok) {
       const body = await response.text().catch(() => '');
-      console.error(JSON.stringify({ event: 'ai_provider_failure', provider: isGroq ? 'groq' : 'openai-compatible', model, endpoint, status: response.status, durationMs, error: sanitizeProviderError(body, prompt) }));
+      console.error(JSON.stringify({ event: 'ai_provider_failure', provider, model, endpoint, status: response.status, durationMs, error: sanitizeProviderError(body, prompt) }));
       return { ok: false, text: null };
     }
 const data = await response.json() as any;
@@ -951,12 +1237,12 @@ const rawText = data?.choices?.[0]?.message?.content || data?.choices?.[0]?.mess
 console.log(JSON.stringify({ event: 'groq_raw', contentLength: rawText?.length ?? 0, preview: String(rawText || '').slice(0,100) }));
 const text = rawText;
     if (typeof text !== 'string' || text.length === 0) {
-      console.error(JSON.stringify({ event: 'ai_provider_empty_response', provider: isGroq ? 'groq' : 'openai-compatible', model, endpoint, durationMs }));
+      console.error(JSON.stringify({ event: 'ai_provider_empty_response', provider, model, endpoint, durationMs }));
     }
     return { ok: typeof text === 'string' && text.length > 0, text: typeof text === 'string' ? text : null };
   } catch (error: any) {
     const durationMs = Date.now() - startedAt;
-    console.error(JSON.stringify({ event: 'ai_provider_network_error', provider: isGroq ? 'groq' : 'openai-compatible', model, endpoint, durationMs, error: sanitizeNetworkError(error) }));
+    console.error(JSON.stringify({ event: 'ai_provider_network_error', provider, model, endpoint, durationMs, error: sanitizeNetworkError(error) }));
     return { ok: false, text: null };
   }
 }

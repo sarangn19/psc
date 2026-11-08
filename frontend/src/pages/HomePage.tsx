@@ -127,6 +127,26 @@ export default function HomePage() {
         </button>
       </section>
 
+      {/* AI Teacher card */}
+      <Link
+        to="/teacher"
+        className="flex items-center gap-[14px] px-4 py-[14px] min-h-[72px] bg-white border border-app-border rounded-[6px] no-underline text-app-text"
+      >
+        <span aria-hidden="true" className="flex-none w-10 h-10 rounded-full grid place-items-center" style={{ background: '#E8EBFB', color: '#2A3FC1' }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 2a7 7 0 0 1 7 7c0 3-1.8 5.5-4.5 6.6V17h-5v-1.4C6.8 14.5 5 12 5 9a7 7 0 0 1 7-7z"/>
+            <path d="M9 21h6M12 17v4"/>
+          </svg>
+        </span>
+        <span className="flex-1 flex flex-col gap-[2px]">
+          <span className="text-[17px] font-[650]">AI Teacher</span>
+          <span className="text-[14px] text-app-textSecondary">Chat, get hints, explain concepts</span>
+        </span>
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4B5168" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M9 6l6 6-6 6" />
+        </svg>
+      </Link>
+
       {/* Mark chapters link */}
       <Link
         to="/chapters"
