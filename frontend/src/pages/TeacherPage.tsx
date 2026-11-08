@@ -549,7 +549,7 @@ const { data } = await api.post('/teacher/conversation', {
           </div>
         )}
         <form
-          className="shrink-0 flex items-end gap-2 px-4 pt-2 pb-2 bg-[#F3F4F6]"
+          className="shrink-0 sticky bottom-0 z-10 flex items-end gap-2 px-4 pt-2 pb-2 bg-[#F3F4F6]"
           onSubmit={(event) => { event.preventDefault(); void sendHelp(); }}
           autoComplete="off"
         >

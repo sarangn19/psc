@@ -1,0 +1,875 @@
+[
+  {
+    "conceptId": 594,
+    "node": "Folk Dance",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 10273,
+    "node": "DRDO",
+    "chapterId": "cmtsgjgvs008jqkyqyj7dqhn5",
+    "chapterName": "National News",
+    "exam": "Police Constable",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 81,
+    "node": "French Revolution",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 2
+  },
+  {
+    "conceptId": 10241,
+    "node": "Mary Kom",
+    "chapterId": "cmtsgjeu90089qkyquyhns7tz",
+    "chapterName": "Sports & Awards",
+    "exam": "Police Constable",
+    "subject": "General Knowledge",
+    "count": 2
+  },
+  {
+    "conceptId": 10355,
+    "node": "UNICEF",
+    "chapterId": "cmtsgmgjh00b6jofz5j6vwtsl",
+    "chapterName": "International News",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 472,
+    "node": "Wildlife",
+    "chapterId": "cmtsgicfk003bqkyqrlxldr7j",
+    "chapterName": "Kerala State News",
+    "exam": "LGS (Last Grade Servant)",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 10519,
+    "node": "Kerala Innovation",
+    "chapterId": "cmtsgmdkt00asjofz53tv3ol5",
+    "chapterName": "Economy",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "General Knowledge",
+    "count": 1
+  },
+  {
+    "conceptId": 580,
+    "node": "Leadership",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 463,
+    "node": "Startup India",
+    "chapterId": "cmtsgmgzd00b8jofzhj35qd56",
+    "chapterName": "Government Schemes",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 23,
+    "node": "Economy",
+    "chapterId": "cmtsgmfqe00b2jofzswj7ewgt",
+    "chapterName": "Kerala State News",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 139,
+    "node": "Union Public Service Commission",
+    "chapterId": "cmtsgjiii008pqkyqziwex2rt",
+    "chapterName": "Important Appointments",
+    "exam": "Police Constable",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 459,
+    "node": "e-Governance",
+    "chapterId": "cmtsgn0d400dtjofzqhj7vdx2",
+    "chapterName": "Government Schemes",
+    "exam": "VEO (Village Extension Officer)",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 10267,
+    "node": "Jnanpith Award",
+    "chapterId": "cmtsgjgfp008hqkyqyr9r5ell",
+    "chapterName": "Kerala State News",
+    "exam": "Police Constable",
+    "subject": "Current Affairs",
+    "count": 3
+  },
+  {
+    "conceptId": 10440,
+    "node": "Kerala Solar Power",
+    "chapterId": "cmtsgjgfp008hqkyqyr9r5ell",
+    "chapterName": "Kerala State News",
+    "exam": "Police Constable",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 8735,
+    "node": "Skill India",
+    "chapterId": "cmtsgjhzd008nqkyqdcilavnf",
+    "chapterName": "Government Schemes",
+    "exam": "Police Constable",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 10287,
+    "node": "Ladakh",
+    "chapterId": "cmtsgjgvs008jqkyqyj7dqhn5",
+    "chapterName": "National News",
+    "exam": "Police Constable",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 7420,
+    "node": "Altitude",
+    "chapterId": "cmtsgiug8005kqkyqvjwzuaip",
+    "chapterName": "Indian Geography",
+    "exam": "PSC Degree Level",
+    "subject": "General Knowledge",
+    "count": 1
+  },
+  {
+    "conceptId": 133,
+    "node": "Union Government",
+    "chapterId": "cmtsgmg5r00b4jofzie4zau8c",
+    "chapterName": "National News",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 10388,
+    "node": "Arunachal Pradesh",
+    "chapterId": "cmtsgmg5r00b4jofzie4zau8c",
+    "chapterName": "National News",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 9253,
+    "node": "Boxing",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 10498,
+    "node": "Kerala Epidemic Management",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 8753,
+    "node": "Innovation",
+    "chapterId": "cmtsgjhzd008nqkyqdcilavnf",
+    "chapterName": "Government Schemes",
+    "exam": "Police Constable",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 8734,
+    "node": "Make in India",
+    "chapterId": "cmtsgjhzd008nqkyqdcilavnf",
+    "chapterName": "Government Schemes",
+    "exam": "Police Constable",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 8912,
+    "node": "Paris Agreement",
+    "chapterId": "cmtsgmgjh00b6jofz5j6vwtsl",
+    "chapterName": "International News",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "Current Affairs",
+    "count": 3
+  },
+  {
+    "conceptId": 138,
+    "node": "Comptroller and Auditor General",
+    "chapterId": "cmtsgjiii008pqkyqziwex2rt",
+    "chapterName": "Important Appointments",
+    "exam": "Police Constable",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 7153,
+    "node": "Simple Interest in Insurance",
+    "chapterId": "cmtsgmgzd00b8jofzhj35qd56",
+    "chapterName": "Government Schemes",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 22,
+    "node": "Politics",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 2
+  },
+  {
+    "conceptId": 8752,
+    "node": "Funding",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 10112,
+    "node": "Disaster Relief",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 10247,
+    "node": "Padma Bhushan",
+    "chapterId": "cmtsgmdyl00aujofzp9lpc69h",
+    "chapterName": "Sports & Awards",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "General Knowledge",
+    "count": 1
+  },
+  {
+    "conceptId": 10514,
+    "node": "Kerala Digital Services",
+    "chapterId": "cmtsgmfqe00b2jofzswj7ewgt",
+    "chapterName": "Kerala State News",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 8439,
+    "node": "Operators",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 7238,
+    "node": "Work Done Formula",
+    "chapterId": "cmtsgj0k1006eqkyqy160vkh2",
+    "chapterName": "Time & Work",
+    "exam": "PSC Degree Level",
+    "subject": "Mathematics",
+    "count": 1
+  },
+  {
+    "conceptId": 8381,
+    "node": "Input Devices",
+    "chapterId": "cmtsgncgm00fjjofz5qwiy7za",
+    "chapterName": "Computer Basics",
+    "exam": "VEO (Village Extension Officer)",
+    "subject": "General Science",
+    "count": 1
+  },
+  {
+    "conceptId": 8416,
+    "node": "Primary Memory",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 9296,
+    "node": "Indian Navy",
+    "chapterId": "cmtsgjgvs008jqkyqyj7dqhn5",
+    "chapterName": "National News",
+    "exam": "Police Constable",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 10236,
+    "node": "Major Dhyan Chand",
+    "chapterId": "cmtsgmdyl00aujofzp9lpc69h",
+    "chapterName": "Sports & Awards",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "General Knowledge",
+    "count": 1
+  },
+  {
+    "conceptId": 157,
+    "node": "Theory of Production",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 8901,
+    "node": "Pollution Control",
+    "chapterId": "cmtsgix1b005wqkyqtavuwca0",
+    "chapterName": "Kerala State News",
+    "exam": "PSC Degree Level",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 54,
+    "node": "Post-Mauryan Period",
+    "chapterId": "cmtsgmbge00akjofznwj1cxhf",
+    "chapterName": "Indian History",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "General Knowledge",
+    "count": 1
+  },
+  {
+    "conceptId": 10166,
+    "node": "Consumer Price Index",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 529,
+    "node": "Modernization",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 9294,
+    "node": "Indian Armed Forces",
+    "chapterId": "cmtsgmdyl00aujofzp9lpc69h",
+    "chapterName": "Sports & Awards",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "General Knowledge",
+    "count": 1
+  },
+  {
+    "conceptId": 9275,
+    "node": "BRICS",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 9934,
+    "node": "Waves",
+    "chapterId": "cmtsgm7p900a3jofzz0aakyzg",
+    "chapterName": "Physics Basics",
+    "exam": "Police Constable",
+    "subject": "General Science",
+    "count": 1
+  },
+  {
+    "conceptId": 10173,
+    "node": "Atmanirbhar Bharat",
+    "chapterId": "cmtsgmznf00dpjofz3yb12xga",
+    "chapterName": "National News",
+    "exam": "VEO (Village Extension Officer)",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 598,
+    "node": "Music",
+    "chapterId": "cmtsgm68w009vjofz5jnf13ci",
+    "chapterName": "Padyam",
+    "exam": "Police Constable",
+    "subject": "Malayalam",
+    "count": 1
+  },
+  {
+    "conceptId": 175,
+    "node": "Poverty and Employment",
+    "chapterId": "cmtsgmgzd00b8jofzhj35qd56",
+    "chapterName": "Government Schemes",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "Current Affairs",
+    "count": 3
+  },
+  {
+    "conceptId": 8751,
+    "node": "Incubation",
+    "chapterId": "cmtsgjhzd008nqkyqdcilavnf",
+    "chapterName": "Government Schemes",
+    "exam": "Police Constable",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 10296,
+    "node": "National Disaster Management Authority",
+    "chapterId": "cmtsgmg5r00b4jofzie4zau8c",
+    "chapterName": "National News",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 10248,
+    "node": "Padma Shri",
+    "chapterId": "cmtsgjgfp008hqkyqyr9r5ell",
+    "chapterName": "Kerala State News",
+    "exam": "Police Constable",
+    "subject": "Current Affairs",
+    "count": 1
+  },
+  {
+    "conceptId": 8977,
+    "node": "Kathak",
+    "chapterId": "cmtsgm5fw009rjofz0aigd4o4",
+    "chapterName": "Sahithyam",
+    "exam": "Police Constable",
+    "subject": "Malayalam",
+    "count": 1
+  },
+  {
+    "conceptId": 799,
+    "node": "Distance in Current Affairs",
+    "chapterId": "cmtsgjl9t0091qkyqm96vuayw",
+    "chapterName": "Time & Distance",
+    "exam": "Police Constable",
+    "subject": "Mathematics",
+    "count": 1
+  },
+  {
+    "conceptId": 9915,
+    "node": "Indian Economic Development",
+    "chapterId": "cmtsgjegl0087qkyq8x6j3ad1",
+    "chapterName": "Economy",
+    "exam": "Police Constable",
+    "subject": "General Knowledge",
+    "count": 1
+  },
+  {
+    "conceptId": 7625,
+    "node": "Number Series in Current Affairs",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 2
+  },
+  {
+    "conceptId": 7555,
+    "node": "Horizontal Distance",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 4
+  },
+  {
+    "conceptId": 7233,
+    "node": "Work with Multiple Workers",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 7584,
+    "node": "Remainder Theorem",
+    "chapterId": "cmtsghql10012qkyqi0mxnvbn",
+    "chapterName": "Number System",
+    "exam": "LDC (Lower Division Clerk)",
+    "subject": "Mathematics",
+    "count": 2
+  },
+  {
+    "conceptId": 8314,
+    "node": "Setting",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 321,
+    "node": "Direction and Distance",
+    "chapterId": "cmtsghtbj001eqkyqqrwltvdc",
+    "chapterName": "Mensuration",
+    "exam": "LDC (Lower Division Clerk)",
+    "subject": "Mathematics",
+    "count": 1
+  },
+  {
+    "conceptId": 8517,
+    "node": "Stack Operations",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 8445,
+    "node": "Structures",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 6
+  },
+  {
+    "conceptId": 9258,
+    "node": "International Sports",
+    "chapterId": "cmtsgmdyl00aujofzp9lpc69h",
+    "chapterName": "Sports & Awards",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "General Knowledge",
+    "count": 1
+  },
+  {
+    "conceptId": 10382,
+    "node": "India-Nepal Border",
+    "chapterId": "cmtsgjdxj0085qkyqxhzvueoy",
+    "chapterName": "Indian Geography",
+    "exam": "Police Constable",
+    "subject": "General Knowledge",
+    "count": 1
+  },
+  {
+    "conceptId": 103,
+    "node": "Mineral Resources",
+    "chapterId": "cmtsgms6l00cwjofzrqch3y3x",
+    "chapterName": "Environment & Ecology",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "General Science",
+    "count": 1
+  },
+  {
+    "conceptId": 7454,
+    "node": "Parallel Lines",
+    "chapterId": "cmtsghtbj001eqkyqqrwltvdc",
+    "chapterName": "Mensuration",
+    "exam": "LDC (Lower Division Clerk)",
+    "subject": "Mathematics",
+    "count": 1
+  },
+  {
+    "conceptId": 7615,
+    "node": "Prime Number Series",
+    "chapterId": "cmtsghql10012qkyqi0mxnvbn",
+    "chapterName": "Number System",
+    "exam": "LDC (Lower Division Clerk)",
+    "subject": "Mathematics",
+    "count": 2
+  },
+  {
+    "conceptId": 10386,
+    "node": "Actual Ground Position Line",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 168,
+    "node": "Balance of Payments",
+    "chapterId": "cmtsgjegl0087qkyq8x6j3ad1",
+    "chapterName": "Economy",
+    "exam": "Police Constable",
+    "subject": "General Knowledge",
+    "count": 1
+  },
+  {
+    "conceptId": 7829,
+    "node": "Southwest",
+    "chapterId": "cmtsgmckw00aojofzv942vnqd",
+    "chapterName": "Geography of Kerala",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "General Knowledge",
+    "count": 1
+  },
+  {
+    "conceptId": 7423,
+    "node": "Equilateral Triangle",
+    "chapterId": "cmtsghtbj001eqkyqqrwltvdc",
+    "chapterName": "Mensuration",
+    "exam": "LDC (Lower Division Clerk)",
+    "subject": "Mathematics",
+    "count": 2
+  },
+  {
+    "conceptId": 631,
+    "node": "Right to Constitutional Remedies",
+    "chapterId": "cmtsgmc0o00amjofzesfkbwcr",
+    "chapterName": "Indian Constitution",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "General Knowledge",
+    "count": 2
+  },
+  {
+    "conceptId": 7139,
+    "node": "Overhead Expenses",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 8874,
+    "node": "Consumers",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 8462,
+    "node": "Encapsulation",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 432,
+    "node": "Input Output Devices",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 8627,
+    "node": "Columns",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 3
+  },
+  {
+    "conceptId": 4641,
+    "node": "Statements Practice Questions",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 7812,
+    "node": "Daughter-in-law",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 7742,
+    "node": "Prime Number",
+    "chapterId": "cmtsgmi6b00bejofzlyd4t4ci",
+    "chapterName": "Number System",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "Mathematics",
+    "count": 1
+  },
+  {
+    "conceptId": 7413,
+    "node": "Pythagoras Theorem",
+    "chapterId": "cmtsgjmey0095qkyqt3tb8jt2",
+    "chapterName": "Mensuration",
+    "exam": "Police Constable",
+    "subject": "Mathematics",
+    "count": 3
+  },
+  {
+    "conceptId": 7569,
+    "node": "Real Numbers",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 1355,
+    "node": "Statement in Daily Life",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 2
+  },
+  {
+    "conceptId": 9432,
+    "node": "Charts",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 2
+  },
+  {
+    "conceptId": 1322,
+    "node": "Statements in Daily Life",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 8383,
+    "node": "Storage Devices",
+    "chapterId": "cmtsgmslv00cyjofzc338ol4q",
+    "chapterName": "Computer Basics",
+    "exam": "HSST (Higher Secondary School Teacher)",
+    "subject": "General Science",
+    "count": 1
+  },
+  {
+    "conceptId": 8682,
+    "node": "Candidate Key",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 530,
+    "node": "Urbanization",
+    "chapterId": "cmtsgjegl0087qkyq8x6j3ad1",
+    "chapterName": "Economy",
+    "exam": "Police Constable",
+    "subject": "General Knowledge",
+    "count": 1
+  },
+  {
+    "conceptId": 8216,
+    "node": "Subordinate Clause",
+    "chapterId": "cmtsgm2e8009bjofz71agoey8",
+    "chapterName": "Grammar Basics",
+    "exam": "Police Constable",
+    "subject": "English",
+    "count": 1
+  },
+  {
+    "conceptId": 8054,
+    "node": "Substitution",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 531,
+    "node": "Industrialization",
+    "chapterId": "cmtsgjegl0087qkyq8x6j3ad1",
+    "chapterName": "Economy",
+    "exam": "Police Constable",
+    "subject": "General Knowledge",
+    "count": 1
+  },
+  {
+    "conceptId": 7572,
+    "node": "Even and Odd Numbers",
+    "chapterId": "cmtsghql10012qkyqi0mxnvbn",
+    "chapterName": "Number System",
+    "exam": "LDC (Lower Division Clerk)",
+    "subject": "Mathematics",
+    "count": 1
+  },
+  {
+    "conceptId": 7651,
+    "node": "Alternating Series",
+    "chapterId": "banking-ch-quantitative-aptitude",
+    "chapterName": "Quantitative Aptitude",
+    "exam": "Banking Exams (IBPS/SBI)",
+    "subject": "Quantitative Aptitude",
+    "count": 1
+  },
+  {
+    "conceptId": 12686,
+    "node": "Original 10 Fundamental Duties",
+    "chapterId": "cmtsghtbj001eqkyqqrwltvdc",
+    "chapterName": "Mensuration",
+    "exam": "LDC (Lower Division Clerk)",
+    "subject": "Mathematics",
+    "count": 1
+  },
+  {
+    "conceptId": 4231,
+    "node": "Linear Practice Questions",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 8022,
+    "node": "Data Analysis",
+    "chapterId": "cmtshac870004lueqqnplwagn",
+    "chapterName": "Imported Corpus",
+    "exam": "Imported PSC Corpus",
+    "subject": "Imported PSC Corpus",
+    "count": 1
+  },
+  {
+    "conceptId": 7556,
+    "node": "Vertical Distance",
+    "chapterId": "cmtsghtbj001eqkyqqrwltvdc",
+    "chapterName": "Mensuration",
+    "exam": "LDC (Lower Division Clerk)",
+    "subject": "Mathematics",
+    "count": 1
+  }
+]
