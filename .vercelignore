@@ -1,0 +1,17 @@
+# Vercel deployment ignore file
+# Exclude large backup files and node_modules
+
+*.json
+backend/backups/
+backend/node_modules/
+frontend/node_modules/
+backend/.prisma/
+frontend/.prisma/
+*.log
+*.tmp
+*.tmp*
+.env
+.env.local
+.env.production
+*.dump
+*.mjs
