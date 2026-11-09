@@ -1,7 +1,6 @@
 # Vercel deployment ignore file
 # Exclude large backup files and node_modules
 
-*.json
 backend/backups/
 backend/node_modules/
 frontend/node_modules/
@@ -15,3 +14,9 @@ frontend/.prisma/
 .env.production
 *.dump
 *.mjs
+recovered_question_candidates.json
+complete_question_bank_audit.json
+question_bank_recovery_details.json
+recovered_manual_review.json
+manual_review_questions.json
+question.json
