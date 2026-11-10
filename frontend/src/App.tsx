@@ -9,6 +9,7 @@ import AdaptivePage from './pages/AdaptivePage';
 import PocketPage from './pages/PocketPage';
 import HomePage from './pages/HomePage';
 import LearningPage from './pages/LearningPage';
+import MyLearningPage from './pages/MyLearningPage';
 import TeacherPage from './pages/TeacherPage';
 import ChaptersPage from './pages/ChaptersPage';
 import NewsPage from './pages/NewsPage';
@@ -19,6 +20,10 @@ import AdminUserDetail from './pages/admin/AdminUserDetail';
 import AdminReports from './pages/admin/AdminReports';
 import AdminQuestions from './pages/admin/AdminQuestions';
 import AdminNews from './pages/admin/AdminNews';
+import AdminQuestionBank from './pages/admin/AdminQuestionBank';
+import AdminQuestionBankReview from './pages/admin/AdminQuestionBankReview';
+import AdminTaxonomy from './pages/admin/AdminTaxonomy';
+import AdminConceptDiscovery from './pages/admin/AdminConceptDiscovery';
 import Layout from './components/Layout';
 import AdminLayout from './components/AdminLayout';
 
@@ -59,6 +64,7 @@ export default function App() {
           <Route path="/adaptive" element={<AdaptivePage />} />
           <Route path="/pocket" element={<PocketPage />} />
           <Route path="/learning" element={<LearningPage />} />
+          <Route path="/my-learning" element={<MyLearningPage />} />
           <Route path="/teacher" element={<TeacherPage />} />
           <Route path="/chapters" element={<ChaptersPage />} />
           <Route path="/news" element={<NewsPage />} />
@@ -73,6 +79,10 @@ export default function App() {
           <Route path="reports" element={<AdminReports />} />
           <Route path="questions" element={<AdminQuestions />} />
           <Route path="news" element={<AdminNews />} />
+          <Route path="question-bank" element={<AdminQuestionBank />} />
+          <Route path="question-bank/review" element={<AdminQuestionBankReview />} />
+          <Route path="taxonomy" element={<AdminTaxonomy />} />
+          <Route path="taxonomy/discovery" element={<AdminConceptDiscovery />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

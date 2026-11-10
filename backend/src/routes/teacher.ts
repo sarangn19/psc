@@ -12,6 +12,7 @@ import { AnswerSubmissionError, submitAnswerAtomically } from '../lib/answerSubm
 import { composeAnswerFeedback, composeQuestionIntroduction, composeWelcome } from '../lib/teachingResponseComposer';
 import { classifyIntent, composeConversationResponse } from '../lib/conversationIntent';
 import { resolveRequestedSubject, findConstrainedQuestion, extractSubjectPhrase } from '../lib/practiceSubjectResolver';
+import { getBlockedQuestionIds, filterSafeQuestions, getSafetyRecordSync, QuestionSafetyStatus } from '../lib/questionSafety';
 
 const router = Router();
 
@@ -74,6 +75,13 @@ router.post('/hint', authenticate, async (req: AuthRequest, res) => {
     include: { chapter: true, concept: true },
   });
   if (!question) return res.status(404).json({ message: 'Question not found' });
+
+  // Check safety status - if blocked, don't generate hint for contaminated content
+  const safety = getSafetyRecordSync(question.id);
+  if (safety && (safety.status === QuestionSafetyStatus.BLOCKED_CONFIRMED || safety.status === QuestionSafetyStatus.REPAIRED_PENDING_VERIFICATION)) {
+    return res.status(403).json({ message: 'This question is not available for hints.', safetyBlocked: true });
+  }
+
   const eventKey = String(req.body?.eventKey || '').trim() || `hint:${req.user!.id}:${question.id}:${req.body?.sessionId || 'none'}:${Math.floor(Date.now() / 1000)}`;
   let sessionId = req.body?.sessionId ? String(req.body.sessionId) : null;
   if (sessionId) {
@@ -134,6 +142,11 @@ router.post('/hint', authenticate, async (req: AuthRequest, res) => {
       serializeTeachingContext(teachingContext),
     ].join('\n'),
   );
+  // Sanitize hint response
+  if (result.body?.generated && result.body?.text) {
+    const sanitized = sanitizeTeacherResponse(result.body.text);
+    if (sanitized) result.body.text = sanitized;
+  }
   return res.status(result.status).json(result.body);
 });
 
@@ -198,7 +211,6 @@ router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
   const requestId = `conv_${Date.now()}_${Math.random().toString(36).slice(2,8)}`;
   const userId = req.user!.id;
   const message = String(req.body?.message || '').trim();
-  console.log(JSON.stringify({ event: 'conversation_start', requestId, message: message.slice(0,200) }));
   const fullHistory = Array.isArray(req.body?.history)
     ? req.body.history.slice(-8).map((item: any) => ({ sender: item.sender === 'student' ? 'student' : 'teacher', text: String(item.text || '').slice(0, 500) }))
     : [];
@@ -218,8 +230,9 @@ router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
   ]);
   const examNames = selected.map((item) => item.exam.name);
   const selectedExamIds = selected.map((item) => item.examId);
-  console.log(JSON.stringify({ event: 'conversation_exam', requestId, exams: examNames }));
 
+  const { getEligibleLearnedChapterIds } = await import('../lib/learningEligibility');
+  const learnedChapterIdsConv = await getEligibleLearnedChapterIds(userId);
   // ── Subject-specific practice request ─────────────────────────────────────
   // When the student asks for a specific subject, resolve it against the DB,
   // fetch a real question, and let Groq introduce it naturally rather than
@@ -247,11 +260,21 @@ router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
       excludedIds = [...new Set([...seenItems.map(i => i.questionId), ...recentAttempts.map(a => a.questionId)])];
     }
 
+    // Fetch blocked question IDs to exclude
+    const blockedIds = await getBlockedQuestionIds(excludedIds);
+    const allExcludedIds = [...excludedIds, ...blockedIds];
+
     const resolved = await resolveRequestedSubject(message, { selectedExamIds });
-    console.log(JSON.stringify({ event: 'conversation_subject_resolve', requestId, phrase: practiceSubjectPhrase, type: resolved.type, matchedName: resolved.type === 'resolved' ? resolved.matchedName : null }));
 
     if (resolved.type === 'resolved') {
-      const constrainedQ = await findConstrainedQuestion({ resolved, excludedIds, selectedExamIds });
+      if (learnedChapterIdsConv.length === 0) {
+        // no learned chapters
+        return res.json({ reply: 'Choose the chapters you have completed studying in My Learning to start practising. Go to /my-learning to mark chapters as Learned.', myLearningLink: '/my-learning' });
+      }
+      if (resolved.kind === 'chapter' && !learnedChapterIdsConv.includes(resolved.chapterId!)) {
+        return res.json({ reply: `I can help you practise "${resolved.matchedName}"! First, please mark the chapter as Learned in My Learning. Once selected, I'll be able to include its questions in your practice. Go to /my-learning.`, myLearningLink: '/my-learning' });
+      }
+      const constrainedQ = await findConstrainedQuestion({ resolved, excludedIds: allExcludedIds, selectedExamIds, learnedChapterIds: learnedChapterIdsConv });
       if (constrainedQ) {
         // Record in session if we have one
         if (sessionId) {
@@ -277,7 +300,11 @@ router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
         ].filter(Boolean).join('\n');
 
         const ai = await generateOptional(userId, groqPrompt);
-        const text = ai.body?.generated ? ai.body.text : `Here's a ${subjectLabel} question for you. Read carefully and choose the best option.`;
+        let text = ai.body?.generated ? ai.body.text : `Here's a ${subjectLabel} question for you. Read carefully and choose the best option.`;
+        if (ai.body?.generated && text) {
+          text = sanitizeTeacherResponse(text);
+          if (!text) text = `Here's a ${subjectLabel} question for you. Read carefully and choose the best option.`;
+        }
 
         const { correctOption, ...safeQ } = constrainedQ;
         return res.status(200).json({
@@ -299,13 +326,21 @@ router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
         // Subject matched but no questions available
         const unavailablePrompt = `The student asked: "${message}". The topic "${resolved.matchedName}" exists but has no available practice questions right now. Tell the student naturally and offer to continue with their current adaptive practice instead.`;
         const ai = await generateOptional(userId, unavailablePrompt);
-        const text = ai.body?.generated ? ai.body.text : `I don't have any "${resolved.matchedName}" questions available right now. Would you like to continue with your current practice instead?`;
+        let text = ai.body?.generated ? ai.body.text : `I don't have any "${resolved.matchedName}" questions available right now. Would you like to continue with your current practice instead?`;
+        if (ai.body?.generated && text) {
+          text = sanitizeTeacherResponse(text);
+          if (!text) text = `I don't have any "${resolved.matchedName}" questions available right now. Would you like to continue with your current practice instead?`;
+        }
         return res.status(200).json({ generated: ai.body?.generated ?? false, text, requestedSubjectUnavailable: true });
       }
     } else if (resolved.type === 'unresolved') {
       const unavailablePrompt = `The student asked: "${message}". You could not find the subject "${practiceSubjectPhrase}" in the question bank. Tell the student naturally — suggest they try a different subject name or continue with adaptive practice.`;
       const ai = await generateOptional(userId, unavailablePrompt);
-      const text = ai.body?.generated ? ai.body.text : `I couldn't find "${practiceSubjectPhrase}" in the question bank. Try a subject like "English grammar", "Average", or "Polity", or I can pick the next question for you.`;
+      let text = ai.body?.generated ? ai.body.text : `I couldn't find "${practiceSubjectPhrase}" in the question bank. Try a subject like "English grammar", "Average", or "Polity", or I can pick the next question for you.`;
+      if (ai.body?.generated && text) {
+        text = sanitizeTeacherResponse(text);
+        if (!text) text = `I couldn't find "${practiceSubjectPhrase}" in the question bank. Try a subject like "English grammar", "Average", or "Polity", or I can pick the next question for you.`;
+      }
       return res.status(200).json({ generated: ai.body?.generated ?? false, text, requestedSubjectUnavailable: true });
     }
   }
@@ -368,11 +403,28 @@ router.post('/conversation', authenticate, async (req: AuthRequest, res) => {
       update: {},
     });
   }
-  const availableRows = await prisma.question.findMany({
+
+  // For normal conversation flow (no session), we still need to filter blocked questions
+  // Get all question IDs in scope to check for blocked questions
+  const allQuestionIds = await prisma.question.findMany({
     where: {
       isActive: true,
       conceptId: { not: null },
       ...(selectedExamIds.length ? { chapter: { subject: { examId: { in: selectedExamIds } } } } : {}),
+      ...(learnedChapterIdsConv.length ? { chapterId: { in: learnedChapterIdsConv } } : { chapterId: '__none__' }),
+    },
+    select: { id: true },
+  });
+  const blockedIds = await getBlockedQuestionIds(allQuestionIds.map((q) => q.id));
+  const allExcludedIds = [...blockedIds];
+
+  const availableRows = await prisma.question.findMany({
+    where: {
+      isActive: true,
+      conceptId: { not: null },
+      ...(allExcludedIds.length ? { id: { notIn: allExcludedIds } } : {}),
+      ...(selectedExamIds.length ? { chapter: { subject: { examId: { in: selectedExamIds } } } } : {}),
+      ...(learnedChapterIdsConv.length ? { chapterId: { in: learnedChapterIdsConv } } : { chapterId: '__none__' }),
     },
     select: { conceptId: true, difficulty: true },
   });
@@ -422,6 +474,10 @@ const intent = classifyIntent(message, fullHistory);
   const isExamPrep = /how should i prepare|how to prepare|study plan|what should i study/i.test(lowerMessage);
   const referencesCurrentQuestion = /\b(this|that|it|the question|the problem|last step|previous|above|these|those)\b/.test(lowerMessage);
   const isFollowUp = /\b(why|how does that work|explain that again|another example|what happens if|did not understand|didn't understand)\b/.test(lowerMessage) && referencesCurrentQuestion;
+  
+  // Check if this is a performance request
+  const isPerformanceRequest = intent === 'PERFORMANCE_REQUEST' || intent === 'PROGRESS_INQUIRY' || isPerformanceQuestion;
+  
   let contextMode = 'GENERAL_ACADEMIC_HELP';
   if (replyTo) contextMode = 'EXPLICIT_REPLY_FOLLOWUP';
   else if (hasExplicitTopicCorrection) contextMode = 'GENERAL_CONVERSATION';
@@ -431,6 +487,41 @@ const intent = classifyIntent(message, fullHistory);
   else if (isExamPrep) contextMode = 'EXAM_PREPARATION_GUIDANCE';
   else if (isFollowUp) contextMode = 'ACTIVE_QUESTION_HELP';
   else if (referencesCurrentQuestion) contextMode = 'ACTIVE_QUESTION_HELP';
+  // Build performance chart data if needed
+  let performanceData: any = null;
+  if (isPerformanceRequest) {
+    const concepts = profile.academic.concepts || [];
+    const weak = concepts
+      .filter((c: any) => c.attempts >= 3 && c.accuracy !== null && c.accuracy < 60)
+      .sort((a: any, b: any) => (a.accuracy ?? 100) - (b.accuracy ?? 100))
+      .slice(0, 5);
+    const strong = concepts
+      .filter((c: any) => c.attempts >= 3 && c.accuracy !== null && c.accuracy >= 80)
+      .sort((a: any, b: any) => (b.accuracy ?? 0) - (a.accuracy ?? 0))
+      .slice(0, 5);
+    const subjects = profile.academic.subjects || [];
+    const revision = profile.behaviour.revisionSchedule || [];
+    
+    performanceData = {
+      type: 'overview',
+      title: 'Performance Overview',
+      data: {
+        overall: profile.academic.overall,
+        recent20: profile.academic.recent20,
+        historical: profile.academic.historical,
+        subjects: subjects.slice(0, 8),
+        strongConcepts: strong,
+        weakConcepts: weak,
+        revisionSchedule: revision.slice(0, 10),
+      },
+      behaviour: {
+        correctStreak: profile.behaviour.correctStreak,
+        incorrectStreak: profile.behaviour.incorrectStreak,
+        hintDependency: profile.behaviour.hintUsage?.hintDependency,
+      },
+    };
+  }
+  
   const contextQuestion = (contextMode === 'ACTIVE_QUESTION_HELP') ? currentQuestion : null;
   const composed = composeConversationResponse(intent, message, (contextQuestion ? currentQuestion?.text : null) || null, (contextQuestion ? currentQuestion?.explanation : null) || null, (contextQuestion ? currentQuestion?.concept?.nameEnglish : null) || null);
   const selectedHistoryEntries = selectRelevantHistory(intent, fullHistory, contextQuestion, message);
@@ -475,10 +566,13 @@ const intent = classifyIntent(message, fullHistory);
     serializeTeachingContext(teachingContext),
   ].filter(Boolean).join('\n');
   const ai = await generateOptional(userId, prompt);
-  console.log(JSON.stringify({ event: 'conversation_groq', requestId, generated: !!ai.body?.generated, status: ai.status, textLength: ai.body?.text?.length ?? 0 }));
-  const text = ai.body?.generated ? ai.body.text : composed;
-  console.log(JSON.stringify({ event: 'conversation_final', requestId, source: ai.body?.generated ? 'groq' : 'fallback', textLength: text?.length ?? 0 }));
-  return res.status(200).json({ generated: ai.body?.generated ?? false, text, unavailable: !ai.body?.generated });
+  let text = ai.body?.generated ? ai.body.text : composed;
+  if (ai.body?.generated && text) {
+    text = sanitizeTeacherResponse(text);
+    // If sanitization removed everything, fall back to composed response
+    if (!text) text = composed;
+  }
+  return res.status(200).json({ generated: ai.body?.generated ?? false, text, unavailable: !ai.body?.generated, performanceData });
 });
 
 router.post('/lesson-meta', authenticate, async (req: AuthRequest, res) => {
@@ -528,19 +622,40 @@ router.post('/session/start', authenticate, async (req: AuthRequest, res) => {
       select: { examId: true },
     });
     const selectedExamIds = selectedExams.map((item) => item.examId);
-    const eligibleQuestions = selectedExamIds.length
+    
+    // Get all question IDs in scope to check for blocked questions
+    const allQuestionIds = selectedExamIds.length
       ? await prisma.question.findMany({
           where: {
             isActive: true,
             chapter: { subject: { examId: { in: selectedExamIds } } },
             conceptId: { not: null },
           },
-          select: { conceptId: true, difficulty: true },
+          select: { id: true },
         })
       : await prisma.question.findMany({
           where: { isActive: true, conceptId: { not: null } },
+          select: { id: true },
+        });
+
+    const blockedIds = await getBlockedQuestionIds(allQuestionIds.map((q) => q.id));
+    
+    // Build availability map from non-blocked questions
+    const eligibleQuestions = selectedExamIds.length
+      ? await prisma.question.findMany({
+          where: {
+            isActive: true,
+            chapter: { subject: { examId: { in: selectedExamIds } } },
+            conceptId: { not: null },
+            id: { notIn: [...blockedIds] },
+          },
+          select: { conceptId: true, difficulty: true },
+        })
+      : await prisma.question.findMany({
+          where: { isActive: true, conceptId: { not: null }, id: { notIn: [...blockedIds] } },
           select: { conceptId: true, difficulty: true },
         });
+
     const availabilityMap = new Map<number, AvailableConcept>();
     for (const row of eligibleQuestions) {
       if (row.conceptId === null) continue;
@@ -570,19 +685,28 @@ router.post('/session/start', authenticate, async (req: AuthRequest, res) => {
   await prisma.userActivity.create({
     data: { userId, type: 'ADAPTIVE_SESSION_STARTED', metadata: { teacherSessionId: session.id, focusConceptId } },
   });
-  const welcomePrompt = concept?.nameEnglish
+const welcomePrompt = concept?.nameEnglish
     ? `Write one warm, natural opening message from a private tutor to a student. Mention exactly that the next topic is ${concept.nameEnglish}. Do not use generic quiz language or mention that you are an AI.`
     : 'Write one warm, natural opening message from a private tutor beginning a new study conversation. Do not use generic quiz language or mention that you are an AI.';
   const welcomeAi = await generateOptional(userId, welcomePrompt);
+  let welcomeText = welcomeAi.status === 200 && welcomeAi.body.generated
+    ? welcomeAi.body.text
+    : concept?.nameEnglish
+    ? `Hi! We'll work through ${concept.nameEnglish} together. I'll explain the idea, then we'll try one question at a time.`
+    : 'Hi! Let\'s start with a friendly lesson. I\'ll choose a useful topic and guide you one question at a time.';
+  if (welcomeAi.status === 200 && welcomeAi.body.generated && welcomeText) {
+    welcomeText = sanitizeTeacherResponse(welcomeText);
+    if (!welcomeText) {
+      welcomeText = concept?.nameEnglish
+        ? `Hi! We'll work through ${concept.nameEnglish} together. I'll explain the idea, then we'll try one question at a time.`
+        : 'Hi! Let\'s start with a friendly lesson. I\'ll choose a useful topic and guide you one question at a time.';
+    }
+  }
   return res.json({
     id: session.id,
     teacherMode: true,
     focusTopic: concept?.nameEnglish || null,
-    welcome: welcomeAi.status === 200 && welcomeAi.body.generated
-      ? welcomeAi.body.text
-      : concept?.nameEnglish
-      ? `Hi! We’ll work through ${concept.nameEnglish} together. I’ll explain the idea, then we’ll try one question at a time.`
-      : 'Hi! Let’s start with a friendly lesson. I’ll choose a useful topic and guide you one question at a time.',
+    welcome: welcomeText,
   });
 });
 
@@ -619,6 +743,12 @@ router.get('/session/:sessionId/active-question', authenticate, async (req: Auth
   });
   if (!q) return res.json({ activeQuestion: null });
 
+  const { isChapterLearned } = await import('../lib/learningEligibility');
+  const learned = await isChapterLearned(userId, q.chapterId);
+  if (!learned) return res.json({ activeQuestion: null, chapterNoLongerLearned: true });
+
+  const safety = getSafetyRecordSync(q.id);
+
   return res.json({
     activeQuestion: {
       id: q.id,
@@ -627,6 +757,8 @@ router.get('/session/:sessionId/active-question', authenticate, async (req: Auth
       conceptName: q.concept?.nameEnglish || null,
       conceptLevel: q.concept?.level || null,
       text: q.text,
+      safetyStatus: safety?.status || 'UNKNOWN',
+      safetyBlocked: safety && (safety.status === QuestionSafetyStatus.BLOCKED_CONFIRMED || safety.status === QuestionSafetyStatus.REPAIRED_PENDING_VERIFICATION),
     },
   });
 });
@@ -655,6 +787,14 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
   });
   const recentlyAttemptedIds = [...new Set(recentAttempts.map((attempt) => attempt.questionId))];
   const excludedIds = [...new Set([...seenIds, ...recentlyAttemptedIds])];
+  
+  // Fetch blocked question IDs to exclude
+  const blockedIds = await getBlockedQuestionIds(excludedIds);
+  const allExcludedIds = [...excludedIds, ...blockedIds];
+
+  const { getEligibleLearnedChapterIds } = await import('../lib/learningEligibility');
+  const learnedChapterIds = await getEligibleLearnedChapterIds(userId);
+
   const selectedExams = await prisma.userExam.findMany({
     where: { userId },
     select: { examId: true },
@@ -680,10 +820,55 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
       });
     }
     if (resolved.type === 'resolved') {
+      // Enforce learned-chapter restriction for topic changes.
+      if (learnedChapterIds.length === 0) {
+        return res.json({
+          done: true,
+          requestedSubjectUnavailable: true,
+          requestedPhrase: resolved.phrase,
+          message: 'Choose the chapters you have completed studying in My Learning to start practising. Go to /my-learning to mark chapters as Learned.',
+          myLearningLink: '/my-learning',
+        });
+      }
+      if (resolved.kind === 'chapter' && !learnedChapterIds.includes(resolved.chapterId!)) {
+        return res.json({
+          done: true,
+          requestedSubjectUnavailable: true,
+          requestedPhrase: resolved.phrase,
+          message: `I can help you practise "${resolved.matchedName}"! First, please mark the chapter as Learned in My Learning. Once selected, I'll be able to include its questions in your practice. Go to /my-learning.`,
+          myLearningLink: '/my-learning',
+        });
+      }
+      if (resolved.kind === 'subject') {
+        const subjectLearned = await prisma.chapter.count({ where: { subjectId: resolved.subjectId!, id: { in: learnedChapterIds } } });
+        if (subjectLearned === 0) {
+          return res.json({
+            done: true,
+            requestedSubjectUnavailable: true,
+            requestedPhrase: resolved.phrase,
+            message: `I can help you practise "${resolved.matchedName}"! First, please mark a chapter in that subject as Learned in My Learning. Go to /my-learning.`,
+            myLearningLink: '/my-learning',
+          });
+        }
+      }
+      if (resolved.kind === 'concept') {
+        const conceptLearned = await prisma.question.count({ where: { conceptId: resolved.conceptId!, chapterId: { in: learnedChapterIds } } });
+        if (conceptLearned === 0) {
+          return res.json({
+            done: true,
+            requestedSubjectUnavailable: true,
+            requestedPhrase: resolved.phrase,
+            message: `I can help you practise "${resolved.matchedName}"! First, please mark the relevant chapter as Learned in My Learning. Go to /my-learning.`,
+            myLearningLink: '/my-learning',
+          });
+        }
+      }
+
       const constrained = await findConstrainedQuestion({
         resolved,
-        excludedIds,
+        excludedIds: allExcludedIds,
         selectedExamIds,
+        learnedChapterIds,
       });
       if (!constrained) {
         return res.json({
@@ -737,12 +922,17 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
 
   const profile = await getStudentLearningProfile(userId, session.id);
   const diagnostics = diagnoseStudent(profile);
+  if (learnedChapterIds.length === 0) {
+    return res.json({ done: true, message: 'Choose the chapters you have completed studying in My Learning to start practising.', myLearningLink: '/my-learning' });
+  }
+
   const availabilityRows = await prisma.question.findMany({
     where: {
       isActive: true,
       conceptId: { not: null },
-      ...(excludedIds.length ? { id: { notIn: excludedIds } } : {}),
+      ...(allExcludedIds.length ? { id: { notIn: allExcludedIds } } : {}),
       ...(selectedExamIds.length ? { chapter: { subject: { examId: { in: selectedExamIds } } } } : {}),
+      chapterId: { in: learnedChapterIds },
     },
     select: {
       conceptId: true,
@@ -800,7 +990,8 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
         isActive: true,
         conceptId: plan.selectedConceptId!,
         ...(selectedExamIds.length ? { chapter: { subject: { examId: { in: selectedExamIds } } } } : {}),
-        ...(excludedIds.length ? { id: { notIn: excludedIds } } : {}),
+        chapterId: { in: learnedChapterIds },
+        ...(allExcludedIds.length ? { id: { notIn: allExcludedIds } } : {}),
         difficulty: targetDifficulty,
       },
       include: { chapter: { include: { subject: true } }, concept: true },
@@ -813,7 +1004,7 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
           isActive: true,
           conceptId: plan.selectedConceptId!,
           ...(selectedExamIds.length ? { chapter: { subject: { examId: { in: selectedExamIds } } } } : {}),
-          ...(excludedIds.length ? { id: { notIn: excludedIds } } : {}),
+          ...(allExcludedIds.length ? { id: { notIn: allExcludedIds } } : {}),
         },
         include: { chapter: { include: { subject: true } }, concept: true },
         take: 25,
@@ -878,9 +1069,15 @@ router.get('/session/:sessionId/next', authenticate, async (req: AuthRequest, re
   // Use Groq's natural introduction if available; fall back to a template that
   // uses the ACTUAL question's subject — never the session's focusConceptId label.
   const actualConceptName = node?.nameEnglish || question.chapter.name;
-  const teacherMessage = (introductionAi.status === 200 && introductionAi.body?.generated && introductionAi.body?.text)
+  let teacherMessage = (introductionAi.status === 200 && introductionAi.body?.generated && introductionAi.body?.text)
     ? introductionAi.body.text
     : composeQuestionIntroduction(question.text, actualConceptName);
+  if (introductionAi.status === 200 && introductionAi.body?.generated && teacherMessage) {
+    teacherMessage = sanitizeTeacherResponse(teacherMessage);
+    if (!teacherMessage) {
+      teacherMessage = composeQuestionIntroduction(question.text, actualConceptName);
+    }
+  }
 
   return res.json({
     done: false,
@@ -1167,8 +1364,14 @@ async function generateFromConfiguredProvider(prompt: string): Promise<{ ok: boo
       const text = data?.candidates?.[0]?.content?.parts?.map((part: any) => part?.text || '').filter(Boolean).join('\n');
       if (typeof text !== 'string' || text.length === 0) {
         console.error(JSON.stringify({ event: 'ai_provider_empty_response', provider: 'gemini', model, endpoint, durationMs }));
+        return { ok: false, text: null };
       }
-      return { ok: typeof text === 'string' && text.length > 0, text: typeof text === 'string' ? text : null };
+      const cleaned = sanitizeTeacherResponse(text);
+      if (!cleaned) {
+        console.error(JSON.stringify({ event: 'ai_provider_sanitized_empty', provider: 'gemini', model, endpoint, durationMs }));
+        return { ok: false, text: null };
+      }
+      return { ok: true, text: cleaned };
     } catch (error: any) {
       const durationMs = Date.now() - startedAt;
       console.error(JSON.stringify({ event: 'ai_provider_network_error', provider: 'gemini', model, endpoint, durationMs, error: sanitizeNetworkError(error) }));
@@ -1233,13 +1436,23 @@ async function generateOpenAiCompatible(url: string, apiKey: string, model: stri
       return { ok: false, text: null };
     }
 const data = await response.json() as any;
-const rawText = data?.choices?.[0]?.message?.content || data?.choices?.[0]?.message?.reasoning || data?.response || data?.message?.content;
-console.log(JSON.stringify({ event: 'groq_raw', contentLength: rawText?.length ?? 0, preview: String(rawText || '').slice(0,100) }));
-const text = rawText;
-    if (typeof text !== 'string' || text.length === 0) {
-      console.error(JSON.stringify({ event: 'ai_provider_empty_response', provider, model, endpoint, durationMs }));
+    const message = data?.choices?.[0]?.message;
+    const reasoning = message?.reasoning;
+    const content = message?.content;
+    if (reasoning) {
+      console.log(JSON.stringify({ event: 'groq_reasoning_excluded', provider, model, endpoint, durationMs, reasoningLength: typeof reasoning === 'string' ? reasoning.length : 'non-string' }));
     }
-    return { ok: typeof text === 'string' && text.length > 0, text: typeof text === 'string' ? text : null };
+    if (typeof content !== 'string' || content.length === 0) {
+      console.error(JSON.stringify({ event: 'ai_provider_empty_content', provider, model, endpoint, durationMs }));
+      return { ok: false, text: null };
+    }
+    const text = content.trim();
+    const cleaned = sanitizeTeacherResponse(text);
+    if (!cleaned) {
+      console.error(JSON.stringify({ event: 'ai_provider_sanitized_empty', provider, model, endpoint, durationMs }));
+      return { ok: false, text: null };
+    }
+    return { ok: true, text: cleaned };
   } catch (error: any) {
     const durationMs = Date.now() - startedAt;
     console.error(JSON.stringify({ event: 'ai_provider_network_error', provider, model, endpoint, durationMs, error: sanitizeNetworkError(error) }));
@@ -1276,10 +1489,74 @@ function sanitizeNetworkError(error: any): string {
   return String(error?.name || error?.code || 'network_error') + ': ' + String(error?.message || '').slice(0, 200);
 }
 
+/**
+ * Sanitize AI response to remove internal reasoning, planning, and orchestration text.
+ * Only student-facing teaching content should be returned.
+ */
+function sanitizeTeacherResponse(text: string): string {
+  if (!text || typeof text !== 'string') return '';
+
+  let cleaned = text.trim();
+
+  // Remove common reasoning/planning prefixes that indicate internal monologue
+  const reasoningPrefixes = [
+    /^we need to respond to student[:;]?\s*/i,
+    /^the student said[:;]?\s*/i,
+    /^the student (?:is asking|wants to know|asks)[:;]?\s*/i,
+    /^internal (?:analysis|planning|reasoning)[:;]?\s*/i,
+    /^analysis[:;]?\s*/i,
+    /^planning[:;]?\s*/i,
+    /^reasoning[:;]?\s*/i,
+    /^assistant[:;]?\s*/i,
+    /^teacher (?:should|will|must)[:;]?\s*/i,
+    /^we (?:should|will|must)[:;]?\s*/i,
+    /^let me (?:think|analyze|plan)[:;]?\s*/i,
+    /^first,? (?:i|we) (?:need to|should|will)[:;]?\s*/i,
+    /^the (?:user|student) (?:said|asked)[:;]?\s*/i,
+  ];
+
+  for (const prefix of reasoningPrefixes) {
+    cleaned = cleaned.replace(prefix, '');
+  }
+
+  // Remove markdown-like internal annotations
+  cleaned = cleaned.replace(/\[internal[^\]]*\]/gi, '');
+  cleaned = cleaned.replace(/\(internal[^)]*\)/gi, '');
+  cleaned = cleaned.replace(/<internal[^>]*>/gi, '');
+
+  // Remove chain-of-thought / reasoning delimiters and blocks
+  // Pattern: <think>...</think> or </think>...</think>
+  cleaned = cleaned.replace(/<think>[\s\S]*?<\/think>/gi, '');
+  cleaned = cleaned.replace(/<reasoning>[\s\S]*?<\/reasoning>/gi, '');
+  cleaned = cleaned.replace(/【reasoning】[\s\S]*?【\/reasoning】/gi, '');
+  cleaned = cleaned.replace(/\|\|reasoning\|\|[\s\S]*?\|\|\/reasoning\|\|/gi, '');
+  // Pattern: ### Reasoning\n...
+  cleaned = cleaned.replace(/^###\s*Reasoning\s*\n[\s\S]*?(?=\n###|\n##|\n#|$)/gmi, '');
+  // Pattern: Let me think..., Step by step..., First I need to...
+  cleaned = cleaned.replace(/^let me think[^.\n]*[.\n]\s*/gmi, '');
+  cleaned = cleaned.replace(/^step by step[^.\n]*[.\n]\s*/gmi, '');
+  cleaned = cleaned.replace(/^first,?\s*(?:i|we)\s+(?:need to|should|will)[^.\n]*[.\n]\s*/gmi, '');
+  // Pattern: Assistant: ... (when it's internal monologue)
+  cleaned = cleaned.replace(/^assistant:\s*/gmi, '');
+
+  // Remove chains of instruction-following text
+  cleaned = cleaned.replace(/^(?:ok|okay|sure|alright)[,;]?\s*/i, '');
+
+  // If the response starts with quoted internal text, remove it
+  cleaned = cleaned.replace(/^["']?we need to respond to student[^"']*["']?\s*/i, '');
+
+  // Collapse excessive whitespace
+  cleaned = cleaned.replace(/\s+/g, ' ').trim();
+
+  // If after cleaning we have nothing meaningful, return empty
+  if (cleaned.length < 10) return '';
+
+  return cleaned;
+}
+
 router.post('/understand', authenticate, async (req: AuthRequest, res) => {
   const requestId = `req_${Date.now()}_${Math.random().toString(36).slice(2,8)}`;
   const message = String(req.body?.message || '').trim();
-  console.log(JSON.stringify({ event: 'understand_start', requestId, message: message.slice(0,200) }));
   if (!message) return res.status(400).json({ message: 'Message is required' });
   const prompt = `Classify the student message into one intent: CASUAL_CONVERSATION, GREETING, CONCEPT_EXPLANATION, DOUBT_SOLVING, STUDENT_UNCERTAINTY, HINT_REQUEST, PERFORMANCE_REQUEST, PROGRESS_INQUIRY, PRACTICE_REQUEST, ANSWER_SUBMISSION, ALTERNATIVE_EXPLANATION, ENCOURAGEMENT, GENERAL_STUDY_HELP. Return only JSON: {"intent":"...","confidence":0.0}. Message: ${message}`;
   const result = await generateOptional(req.user!.id, prompt);
@@ -1296,7 +1573,6 @@ router.post('/understand', authenticate, async (req: AuthRequest, res) => {
   if (confidence < 0.6) {
     intent = classifyIntent(message);
   }
-  console.log(JSON.stringify({ event: 'understand_result', requestId, intent, confidence, generated: !!result.body?.generated }));
   return res.json({ intent, confidence });
 });
 

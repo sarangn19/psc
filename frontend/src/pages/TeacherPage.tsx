@@ -1,4 +1,5 @@
 ﻿import { useCallback, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSpeechInput } from '../lib/useSpeechInput';
 import { useSpeechOutput } from '../lib/useSpeechOutput';
 import api from '../lib/api';
@@ -7,6 +8,69 @@ import { normalizeRestoredChat } from '../lib/conversationRestoration';
 import { classifyMessageIntent } from '../lib/messageIntent';
 import { RequestLifecycle } from '../lib/requestLifecycle';
 import { classifyTeachingIntent, determineResponseAction, extractSubjectPhrase } from '../lib/responsePolicy';
+import { useAuthStore } from '../store/authStore';
+import ReportIssueModal from '../components/ReportIssueModal';
+
+/**
+ * Client-side sanitization mirroring backend sanitizeTeacherResponse.
+ * Removes reasoning/planning artifacts that might leak from AI responses.
+ */
+function sanitizeTeacherResponseClient(text: string): string {
+  if (!text || typeof text !== 'string') return '';
+
+  let cleaned = text.trim();
+
+  // Remove common reasoning/planning prefixes
+  const reasoningPrefixes = [
+    /^we need to respond to student[:;]?\s*/i,
+    /^the student said[:;]?\s*/i,
+    /^the student (?:is asking|wants to know|asks)[:;]?\s*/i,
+    /^internal (?:analysis|planning|reasoning)[:;]?\s*/i,
+    /^analysis[:;]?\s*/i,
+    /^planning[:;]?\s*/i,
+    /^reasoning[:;]?\s*/i,
+    /^assistant[:;]?\s*/i,
+    /^teacher (?:should|will|must)[:;]?\s*/i,
+    /^we (?:should|will|must)[:;]?\s*/i,
+    /^let me (?:think|analyze|plan)[:;]?\s*/i,
+    /^first,? (?:i|we) (?:need to|should|will)[:;]?\s*/i,
+    /^the (?:user|student) (?:said|asked)[:;]?\s*/i,
+  ];
+
+  for (const prefix of reasoningPrefixes) {
+    cleaned = cleaned.replace(prefix, '');
+  }
+
+  // Remove markdown-like internal annotations
+  cleaned = cleaned.replace(/\[internal[^\]]*\]/gi, '');
+  cleaned = cleaned.replace(/\(internal[^)]*\)/gi, '');
+  cleaned = cleaned.replace(/<internal[^>]*>/gi, '');
+
+  // Remove chain-of-thought / reasoning delimiters and blocks
+  cleaned = cleaned.replace(/<think>[\s\S]*?<\/think>/gi, '');
+  cleaned = cleaned.replace(/<reasoning>[\s\S]*?<\/reasoning>/gi, '');
+  cleaned = cleaned.replace(/【reasoning】[\s\S]*?【\/reasoning】/gi, '');
+  cleaned = cleaned.replace(/\|\|reasoning\|\|[\s\S]*?\|\|\/reasoning\|\|/gi, '');
+  cleaned = cleaned.replace(/^###\s*Reasoning\s*\n[\s\S]*?(?=\n###|\n##|\n#|$)/gmi, '');
+  cleaned = cleaned.replace(/^let me think[^.\n]*[.\n]\s*/gmi, '');
+  cleaned = cleaned.replace(/^step by step[^.\n]*[.\n]\s*/gmi, '');
+  cleaned = cleaned.replace(/^first,?\s*(?:i|we)\s+(?:need to|should|will)[^.\n]*[.\n]\s*/gmi, '');
+  cleaned = cleaned.replace(/^assistant:\s*/gmi, '');
+
+  // Remove chains of instruction-following text
+  cleaned = cleaned.replace(/^(?:ok|okay|sure|alright)[,;]?\s*/i, '');
+
+  // If the response starts with quoted internal text, remove it
+  cleaned = cleaned.replace(/^["']?we need to respond to student[^"']*["']?\s*/i, '');
+
+  // Collapse excessive whitespace
+  cleaned = cleaned.replace(/\s+/g, ' ').trim();
+
+  // If after cleaning we have nothing meaningful, return empty
+  if (cleaned.length < 10) return '';
+
+  return cleaned;
+}
 
 interface Question {
   id: string;
@@ -23,7 +87,7 @@ interface ChatMessage {
   id: string;
   sender: 'teacher' | 'student';
   text: string;
-  kind?: 'text' | 'feedback' | 'hint' | 'question';
+  kind?: 'text' | 'feedback' | 'hint' | 'question' | 'performance';
   correct?: boolean;
   options?: string[];
   selectedOption?: number;
@@ -31,6 +95,7 @@ interface ChatMessage {
   revealed?: boolean;
   questionId?: string;
   replyTo?: { id: string; sender: 'teacher' | 'student'; text: string };
+  performanceData?: PerformanceChartData;
 }
 
 interface StoredChat {
@@ -47,6 +112,168 @@ interface StoredChat {
 
 const CHAT_KEY = 'cognix.aiTeacher.chat';
 const chatDelay = (ms: number) => new Promise((r) => window.setTimeout(r, ms));
+
+interface PerformanceChartData {
+  type: 'overview' | 'subjects' | 'concepts' | 'revision' | 'streaks';
+  title: string;
+  data: any;
+}
+
+function PerformanceChart({ data }: { data: PerformanceChartData }) {
+  const { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, LineChart, Line } = require('recharts');
+  
+  const colors = ['#2A3FC1', '#2E7D32', '#C62828', '#E65100', '#6A1B9A', '#00838F', '#5D4037', '#455A64'];
+  
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white border border-[#DADDE5] rounded-lg shadow-lg p-3">
+          <p className="font-medium text-[#1A1F36]">{label}</p>
+          {payload.map((entry: any, i: number) => (
+            <p key={i} className="text-sm" style={{ color: entry.color }}>
+              {entry.name}: {entry.value}
+            </p>
+          ))}
+        </div>
+      );
+    }
+    return null;
+  };
+
+  const CustomCell = ({ fill, ...props }: any) => (
+    <Cell {...props} fill={fill} />
+  );
+
+  switch (data.type) {
+    case 'overview': {
+      const overviewData = [
+        { name: 'Overall Accuracy', value: data.data.overall?.accuracy || 0 },
+        { name: 'Recent Accuracy', value: data.data.recent20?.accuracy || 0 },
+        { name: 'Historical Accuracy', value: data.data.historical?.accuracy || 0 },
+      ].filter(d => d.value !== null);
+      
+      return (
+        <div className="bg-white border border-[#DADDE5] rounded-xl p-4">
+          <h4 className="text-sm font-semibold text-[#1A1F36] mb-3">{data.title}</h4>
+          <div className="h-48">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={overviewData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#4B5168' }} />
+                <YAxis tick={{ fontSize: 11, fill: '#4B5168' }} domain={[0, 100]} />
+                <Tooltip content={<CustomTooltip />} />
+                <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+                  {overviewData.map((_: any, i: number) => <CustomCell key={`cell-${i}`} fill={colors[i % colors.length]} />)}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      );
+    }
+    case 'subjects': {
+      const subjectData = (data.data.subjects || []).slice(0, 8).map((s: any) => ({
+        name: s.name.length > 15 ? s.name.slice(0, 15) + '…' : s.name,
+        accuracy: s.accuracy || 0,
+        attempts: s.attempts || 0,
+      }));
+      
+      return (
+        <div className="bg-white border border-[#DADDE5] rounded-xl p-4">
+          <h4 className="text-sm font-semibold text-[#1A1F36] mb-3">{data.title}</h4>
+          <div className="h-56">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={subjectData} layout="vertical">
+                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 11, fill: '#4B5168' }} />
+                <YAxis type="category" dataKey="name" width={100} tick={{ fontSize: 11, fill: '#4B5168' }} />
+                <Tooltip content={<CustomTooltip />} formatter={(value: number) => [value + '%', 'Accuracy']} />
+                <Bar dataKey="accuracy" radius={[0, 4, 4, 0]}>
+                  {subjectData.map((_: any, i: number) => <CustomCell key={`cell-${i}`} fill={colors[i % colors.length]} />)}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      );
+    }
+    case 'concepts': {
+      const strong = (data.data.strongConcepts || []).slice(0, 5);
+      const weak = (data.data.weakConcepts || []).slice(0, 5);
+      const conceptData = [
+        ...strong.map((c: any) => ({ name: c.name, accuracy: c.accuracy || 0, type: 'Strong' })),
+        ...weak.map((c: any) => ({ name: c.name, accuracy: c.accuracy || 0, type: 'Needs Work' })),
+      ];
+      
+      return (
+        <div className="bg-white border border-[#DADDE5] rounded-xl p-4">
+          <h4 className="text-sm font-semibold text-[#1A1F36] mb-3">{data.title}</h4>
+          <div className="h-56">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={conceptData} layout="vertical">
+                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 11, fill: '#4B5168' }} />
+                <YAxis type="category" dataKey="name" width={120} tick={{ fontSize: 11, fill: '#4B5168' }} />
+                <Tooltip content={<CustomTooltip />} formatter={(value: number) => [value + '%', 'Accuracy']} />
+                <Bar dataKey="accuracy" stackId="a">
+                  {conceptData.map((_: any, i: number) => <CustomCell key={`cell-${i}`} fill={colors[i % colors.length]} />)}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      );
+    }
+    case 'revision': {
+      const revisionData = (data.data.revisionSchedule || []).slice(0, 10).map((r: any, i: number) => ({
+        name: `Concept ${i + 1}`,
+        daysUntilDue: r.daysUntilDue || 0,
+        mastery: r.masterySnapshot || 0,
+      }));
+      
+      return (
+        <div className="bg-white border border-[#DADDE5] rounded-xl p-4">
+          <h4 className="text-sm font-semibold text-[#1A1F36] mb-3">{data.title}</h4>
+          <div className="h-56">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={revisionData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+                <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#4B5168' }} />
+                <YAxis tick={{ fontSize: 11, fill: '#4B5168' }} />
+                <Tooltip content={<CustomTooltip />} />
+                <Line type="monotone" dataKey="daysUntilDue" stroke="#2A3FC1" strokeWidth={2} dot={{ r: 4 }} name="Days Until Due" />
+                <Line type="monotone" dataKey="mastery" stroke="#2E7D32" strokeWidth={2} dot={{ r: 4 }} name="Mastery %" yAxisId="right" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      );
+    }
+    case 'streaks': {
+      return (
+        <div className="bg-white border border-[#DADDE5] rounded-xl p-4">
+          <h4 className="text-sm font-semibold text-[#1A1F36] mb-3">{data.title}</h4>
+          <div className="flex gap-4">
+            <div className="flex-1 bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+              <p className="text-3xl font-bold text-green-700">{data.data.correctStreak || 0}</p>
+              <p className="text-xs text-green-600 mt-1">Correct Streak</p>
+            </div>
+            <div className="flex-1 bg-red-50 border border-red-200 rounded-lg p-4 text-center">
+              <p className="text-3xl font-bold text-red-700">{data.data.incorrectStreak || 0}</p>
+              <p className="text-xs text-red-600 mt-1">Incorrect Streak</p>
+            </div>
+            <div className="flex-1 bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
+              <p className="text-3xl font-bold text-blue-700">{data.data.hintDependency ? Math.round(data.data.hintDependency * 100) : 0}%</p>
+              <p className="text-xs text-blue-600 mt-1">Hint Dependency</p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    default:
+      return <div className="text-sm text-[#4B5168]">Chart type not supported</div>;
+  }
+}
 
 function TeacherAvatar() {
   return (
@@ -72,6 +299,8 @@ function readStoredChat(): StoredChat {
 }
 
 export default function TeacherPage() {
+  const { logout } = useAuthStore();
+  const navigate = useNavigate();
   const stored = useRef(readStoredChat()).current;
   const [loading, setLoading] = useState(true);
   const [starting, setStarting] = useState(false);
@@ -94,7 +323,9 @@ export default function TeacherPage() {
   const [hintLoading, setHintLoading] = useState(false);
   const [answering, setAnswering] = useState(false);
   const [pendingTopicChange, setPendingTopicChange] = useState(false);
-  const [voiceInterim, setVoiceInterim] = useState('');
+const [voiceInterim, setVoiceInterim] = useState('');
+const [showUserMenu, setShowUserMenu] = useState(false);
+const [showReportModal, setShowReportModal] = useState(false);
 
   const threadEndRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -479,6 +710,32 @@ export default function TeacherPage() {
               </svg>
             )}
           </button>
+          {/* User menu */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setShowUserMenu(!showUserMenu)}
+              aria-expanded={showUserMenu}
+              aria-haspopup="true"
+              className="shrink-0 grid place-items-center w-[36px] h-[36px] rounded-full border border-[#DADDE5] bg-white text-[#4B5168]"
+            >
+              <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </button>
+            {showUserMenu && (
+              <div className="absolute right-0 top-full mt-2 w-40 bg-white border border-[#DADDE5] rounded-lg shadow-lg py-1 z-10">
+                <button
+                  type="button"
+                  onClick={() => { logout(); navigate('/login'); }}
+                  className="w-full px-4 py-2 text-left text-[14px] text-[#1A1F36] hover:bg-[#F3F4F6]"
+                >
+                  Sign out
+                </button>
+              </div>
+            )}
+          </div>
         </header>
 
         {/* Message thread */}
@@ -511,7 +768,12 @@ export default function TeacherPage() {
                         {message.replyTo.sender === 'student' ? 'You' : 'Teacher'}: {message.replyTo.text.slice(0, 60)}
                       </div>
                     )}
-                    <p className="m-0 whitespace-pre-wrap">{message.text}</p>
+                    <p className="m-0 whitespace-pre-wrap">{isTeacher ? sanitizeTeacherResponseClient(message.text) : message.text}</p>
+                    {(message.kind as string) === 'performance' && message.performanceData && (
+                      <div className="mt-2">
+                        <PerformanceChart data={message.performanceData} />
+                      </div>
+                    )}
                     <button type="button" onClick={() => setReplyTo({ id: message.id, sender: message.sender, text: message.text })} className="mt-1 text-xs opacity-70">Reply</button>
                     {(message.kind as string) === 'question' && message.options && (
                       <div className="-mx-4 mt-2 flex flex-col border-t border-[#DADDE5]">
@@ -538,8 +800,22 @@ export default function TeacherPage() {
             <div className="flex items-end gap-2 self-start max-w-[92%] w-[92%] mb-[3px] chat-message-enter">
               <span className="w-7 h-7 shrink-0"><TeacherAvatar /></span>
               <div className="min-w-0 flex-1">
-                <div className="w-full max-w-[380px] box-border rounded-[14px] border border-[#343B4A] bg-[#252D40] px-4 pt-4 pb-0 text-[#F3F4F6] text-[15px] leading-[1.5] font-[600]">
-                  <p className="m-0 mb-2 text-[11px] font-[700] uppercase tracking-[.07em] text-app-accent">Practice question</p>
+                <div className="w-full max-w-full sm:max-w-[380px] box-border rounded-[14px] border border-[#343B4A] bg-[#252D40] px-4 pt-4 pb-0 text-[#F3F4F6] text-[15px] leading-[1.5] font-[600]">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="m-0 text-[11px] font-[700] uppercase tracking-[.07em] text-app-accent">Practice question</p>
+                    <button
+                      type="button"
+                      onClick={() => setShowReportModal(true)}
+                      aria-label="Report an issue with this question"
+                      className="flex-none w-8 h-8 grid place-items-center rounded-full border border-[#41454D] bg-[#25282D] cursor-pointer text-[#6B7186] hover:bg-[#382528] hover:text-app-danger transition-colors"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                        <line x1="12" y1="9" x2="12" y2="13" />
+                        <line x1="12" y1="17" x2="12.01" y2="17" />
+                      </svg>
+                    </button>
+                  </div>
                   <p className="m-0 whitespace-pre-wrap">{question.text}</p>
                   <div className="mt-3 flex flex-col gap-2" role="radiogroup" aria-label="Answer options">
                     {question.options.map((option, index) => {
@@ -660,6 +936,13 @@ export default function TeacherPage() {
           </button>
         </form>
 
+        {/* Report Issue Modal */}
+        <ReportIssueModal
+          isOpen={showReportModal}
+          onClose={() => setShowReportModal(false)}
+          questionId={question?.id || ''}
+          questionText={question?.text || ''}
+        />
       </div>
     </main>
   );

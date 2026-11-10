@@ -13,6 +13,7 @@
 // aliases), scoped to the student's selected exams when those exist.
 import prisma from './prisma';
 import { validatePracticeQuestion } from './teacher';
+import { getBlockedQuestionIds } from './questionSafety';
 
 export type ResolvedSubjectKind = 'subject' | 'chapter' | 'concept';
 
@@ -341,10 +342,17 @@ export async function findConstrainedQuestion(opts: {
   resolved: ResolvedSubject;
   excludedIds: string[];
   selectedExamIds: string[];
+  learnedChapterIds?: string[];
 }) {
   const examFilter = opts.selectedExamIds.length
     ? { chapter: { subject: { examId: { in: opts.selectedExamIds } } } }
     : {};
+
+  if (opts.learnedChapterIds && opts.learnedChapterIds.length === 0) return null;
+
+  // Get blocked question IDs
+  const blockedIds = await getBlockedQuestionIds(opts.excludedIds);
+  const allExcludedIds = [...opts.excludedIds, ...blockedIds];
 
   // Build the candidate list: best match first, then the other ranked matches.
   const candidateConstraints = [
@@ -360,12 +368,20 @@ export async function findConstrainedQuestion(opts: {
           ? { chapterId: match.chapterId! }
           : { chapter: { subjectId: match.subjectId! } };
 
-    const base = {
+    const base: Record<string, unknown> = {
       isActive: true,
       ...subjectWhere,
       ...examFilter,
-      ...(opts.excludedIds.length ? { id: { notIn: opts.excludedIds } } : {}),
+      ...(allExcludedIds.length ? { id: { notIn: allExcludedIds } } : {}),
     };
+    if (opts.learnedChapterIds && opts.learnedChapterIds.length > 0) {
+      // If a specific chapter was requested, it must itself be learned.
+      if (match.kind === 'chapter') {
+        if (!opts.learnedChapterIds.includes(match.chapterId!)) return null;
+      } else {
+        base.chapterId = { in: opts.learnedChapterIds };
+      }
+    }
 
     const candidates = await prisma.question.findMany({
       where: base,

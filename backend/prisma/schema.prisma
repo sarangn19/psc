@@ -47,6 +47,44 @@ enum ActivityType {
   QUESTION_FLAGGED
   NEWS_VIEWED
   USER_FEEDBACK
+  QUESTION_REPORTED
+}
+
+enum LearningStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  LEARNED
+}
+
+enum QuestionReportStatus {
+  SUBMITTED
+  ANALYZING
+  AUTO_CONFIRMED
+  AUTO_REJECTED
+  NEEDS_REVIEW
+  RESOLVED
+  DISMISSED
+}
+
+enum QuestionReportCategory {
+  INCORRECT_ANSWER
+  INCORRECT_QUESTION
+  WRONG_OR_MISSING_OPTIONS
+  DUPLICATE_QUESTION
+  TYPOGRAPHICAL_OR_GRAMMAR_ERROR
+  CONFUSING_EXPLANATION
+  OUTDATED_INFORMATION
+  IRRELEVANT_QUESTION
+  FORMATTING_OR_OCR_PROBLEM
+  PROMOTIONAL_OR_UNWANTED_CONTENT
+  OTHER
+}
+
+enum AISeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
 }
 
 enum LearningFeedbackType {
@@ -194,11 +232,15 @@ model UserExam {
 }
 
 model UserChapter {
-  id        String   @id @default(cuid())
+  id        String         @id @default(cuid())
   userId    String
   chapterId String
-  isLearned Boolean  @default(true)
-  learnedAt DateTime @default(now())
+  status    LearningStatus @default(NOT_STARTED)
+  updatedAt DateTime       @updatedAt @default(now())
+
+  // Legacy columns retained for data preservation / backfill
+  isLearned Boolean?
+  learnedAt DateTime?
 
   user    User    @relation(fields: [userId], references: [id])
   chapter Chapter @relation(fields: [chapterId], references: [id])
@@ -411,18 +453,46 @@ model UserActivity {
 }
 
 model QuestionReport {
-  id         String    @id @default(cuid())
-  userId     String
-  questionId String
-  reason     String
+  id                  String                @id @default(cuid())
+  userId              String
+  questionId          String
+  category            QuestionReportCategory
+  description         String?
+  suggestedCorrection String?
+
+  // Legacy columns retained for data preservation
+  reason     String?
   details    String?
-  isResolved Boolean   @default(false)
-  resolvedAt DateTime?
-  createdAt  DateTime  @default(now())
+  isResolved Boolean?
+  questionSnapshot    Json
+  sessionContext      Json?
+  status              QuestionReportStatus  @default(SUBMITTED)
+  aiStatus            QuestionReportStatus  @default(SUBMITTED)
+  aiClassification    QuestionReportCategory?
+  aiConfidence        Float?
+  aiSeverity          AISeverity?
+  aiSummary           String?
+  aiEvidence          String?
+  aiQuestionProblem   String?
+  aiAnswerKeyProblem  String?
+  aiExplanationProblem String?
+  aiSuggestedCorrection String?
+  aiRequiresHumanReview Boolean?
+  aiRecommendedAction String?
+  aiProcessedAt       DateTime?
+  aiError             String?
+  resolvedAt          DateTime?
+  resolutionNotes     String?
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt @default(now())
 
   user     User     @relation(fields: [userId], references: [id])
   question Question @relation(fields: [questionId], references: [id])
 
+  @@index([userId])
+  @@index([questionId])
+  @@index([status])
+  @@index([aiStatus])
   @@map("question_reports")
 }
 

@@ -476,18 +476,22 @@ export async function getStudentLearningProfile(userId: string, currentSessionId
   }));
 
   const selectedExamIds = selectedExams.map((item) => item.examId);
+  const { getEligibleLearnedChapterIds } = await import('./learningEligibility');
+  const learnedChapterIds = await getEligibleLearnedChapterIds(userId);
+  const learnedFilter = learnedChapterIds.length ? { chapterId: { in: learnedChapterIds } } : { chapterId: '__none__' };
   const eligibleQuestions = selectedExamIds.length
     ? await prisma.question.findMany({
         where: {
           isActive: true,
           conceptId: { not: null },
           chapter: { subject: { examId: { in: selectedExamIds } } },
+          ...learnedFilter,
         },
         select: { conceptId: true },
         distinct: ['conceptId'],
       })
     : await prisma.question.findMany({
-        where: { isActive: true, conceptId: { not: null } },
+        where: { isActive: true, conceptId: { not: null }, ...learnedFilter },
         select: { conceptId: true },
         distinct: ['conceptId'],
       });

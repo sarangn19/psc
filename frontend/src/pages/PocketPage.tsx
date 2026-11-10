@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../lib/api';
+import ReportIssueModal from '../components/ReportIssueModal';
 import {
   deleteSession,
   enqueue,
@@ -55,6 +56,7 @@ export default function PocketPage() {
   const [error, setError] = useState<string | null>(null);
   const [exhausted, setExhausted] = useState(false);
   const [waitingMore, setWaitingMore] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
 
   const questionStartedAt = useRef<number>(Date.now());
   const flushing = useRef(false);
@@ -483,7 +485,21 @@ export default function PocketPage() {
       </div>
 
       <main className="flex-1 flex flex-col px-5 pt-5 pb-[220px] gap-4">
-        <h1 className="text-[21px] leading-[1.35] font-[650] text-app-text m-0">{q.text}</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-[21px] leading-[1.35] font-[650] text-app-text m-0 flex-1">{q.text}</h1>
+          <button
+            type="button"
+            onClick={() => setShowReportModal(true)}
+            aria-label="Report an issue with this question"
+            className="flex-none w-10 h-10 grid place-items-center rounded-full border border-app-border bg-white cursor-pointer text-app-textSecondary hover:bg-app-surface hover:text-app-danger transition-colors"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+          </button>
+        </div>
 
         <div role="group" aria-label="Options" className="flex flex-col gap-[10px]">
           {q.options.map((text, idx) => {
@@ -534,6 +550,14 @@ export default function PocketPage() {
           </button>
         </section>
       )}
+
+      {/* Report Issue Modal */}
+      <ReportIssueModal
+        isOpen={showReportModal}
+        onClose={() => setShowReportModal(false)}
+        questionId={current?.question?.id || ''}
+        questionText={current?.question?.text || ''}
+      />
     </div>
   );
 }

@@ -12,7 +12,7 @@ router.get('/stats', authenticate, async (req: AuthRequest, res: Response) => {
     prisma.questionAttempt.count({ where: { userId } }),
     prisma.questionAttempt.count({ where: { userId, isCorrect: true } }),
     prisma.adaptiveSession.count({ where: { userId } }),
-    prisma.userChapter.count({ where: { userId, isLearned: true } }),
+    prisma.userChapter.count({ where: { userId, OR: [{ status: 'LEARNED' }, { isLearned: true }] } }),
   ]);
 
   const lastSession = await prisma.adaptiveSession.findFirst({

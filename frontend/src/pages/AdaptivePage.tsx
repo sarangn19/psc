@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import api from '../lib/api';
 import SessionSummary from '../components/SessionSummary';
+import ReportIssueModal from '../components/ReportIssueModal';
 
 interface Question {
   id: string;
@@ -146,6 +147,7 @@ export default function AdaptivePage() {
   const [streak, setStreak] = useState(0);
   const [flagged, setFlagged] = useState(false);
   const [showFlagModal, setShowFlagModal] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
   const [flagReason, setFlagReason] = useState('');
   const [flagDetails, setFlagDetails] = useState('');
   const [flagSubmitting, setFlagSubmitting] = useState(false);
@@ -626,6 +628,19 @@ export default function AdaptivePage() {
         </span>
         <button
           type="button"
+          onClick={() => setShowReportModal(true)}
+          aria-label="Report an issue with this question"
+          className="flex-none w-11 h-11 grid place-items-center rounded-full border-0 cursor-pointer text-[12px] font-[600]"
+          style={{ background: 'transparent', color: '#4B5168' }}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+        </button>
+        <button
+          type="button"
           onClick={handleFlag}
           aria-pressed={flagged}
           aria-label="Flag this question for review"
@@ -985,6 +1000,14 @@ export default function AdaptivePage() {
           </div>
         </div>
       )}
+
+      {/* Report Issue Modal */}
+      <ReportIssueModal
+        isOpen={showReportModal}
+        onClose={() => setShowReportModal(false)}
+        questionId={question?.id || ''}
+        questionText={question?.text || ''}
+      />
     </div>
   );
 }
