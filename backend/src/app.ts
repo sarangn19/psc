@@ -54,6 +54,9 @@ export function createApp(): express.Express {
         // No Origin header: curl, server-to-server, and same-origin navigations.
         if (!origin) return callback(null, true);
         if (origins.has(origin)) return callback(null, true);
+        // Allow Vercel preview/production deployment origins for this project.
+        if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(origin)) return callback(null, true);
+        if (/^https:\/\/(www\.)?cognix\.space$/i.test(origin)) return callback(null, true);
         // Throwing here makes the error handler below return a 500, which hides
         // the real cause from the browser. Log it so the origin shows up in the
         // function logs.
