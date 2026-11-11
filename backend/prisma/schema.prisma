@@ -49,6 +49,12 @@ enum ActivityType {
   USER_FEEDBACK
 }
 
+enum LearningStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  LEARNED
+}
+
 enum LearningFeedbackType {
   TOO_HARD
   TOO_EASY
@@ -194,11 +200,15 @@ model UserExam {
 }
 
 model UserChapter {
-  id        String   @id @default(cuid())
+  id        String         @id @default(cuid())
   userId    String
   chapterId String
-  isLearned Boolean  @default(true)
-  learnedAt DateTime @default(now())
+  status    LearningStatus @default(NOT_STARTED)
+  updatedAt DateTime       @updatedAt @default(now())
+
+  // Legacy columns retained for data preservation / backfill
+  isLearned Boolean?
+  learnedAt DateTime?
 
   user    User    @relation(fields: [userId], references: [id])
   chapter Chapter @relation(fields: [chapterId], references: [id])
