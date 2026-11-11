@@ -29,18 +29,72 @@ import prisma from './lib/prisma';
 // Built inside the factory rather than at module scope: callers load dotenv at
 // different points, so a module-scope read would sometimes capture a stale or
 // empty FRONTEND_URL.
-function allowedOrigins(): Set<string> {
-  return new Set(
-    [
-      process.env.FRONTEND_URL,
-      'https://www.cognix.space',
-      'https://cognix.space',
-      'https://psc-frontend-roxc.vercel.app',
-      'https://psc-frontend-two.vercel.app',
-      'http://localhost:5173',
-      'http://localhost:3000',
-    ].filter(Boolean) as string[]
-  );
+//
+// Exported for testing.
+// Testable helper: determines whether a given origin is allowed.
+export function isOriginAllowed(origin: string | undefined, origins: Set<string>): boolean {
+  if (!origin) return true;
+  return origins.has(origin);
+}
+
+export function allowedOrigins(): Set<string> {
+  const origins = new Set<string>();
+
+  // Static production origins + localhost development.
+  const staticOrigins = [
+    process.env.FRONTEND_URL,
+    'https://www.cognix.space',
+    'https://cognix.space',
+    'https://psc-frontend-roxc.vercel.app',
+    'https://psc-frontend-two.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:3000',
+  ].filter(Boolean) as string[];
+  staticOrigins.forEach((o) => origins.add(o));
+
+  // Exact staging Preview origin (current deployment).
+  origins.add('https://psc-frontend-5a2a2eqls-sarangn19-6275s-projects.vercel.app');
+
+  // Vercel Preview deployment origin (auto-injected by the platform).
+  // Only accept if it is a *.vercel.app origin to prevent injection of
+  // arbitrary domains via a compromised or mis-set VERCEL_URL.
+  const vercelUrl = process.env.VERCEL_URL;
+  if (vercelUrl) {
+    try {
+      const vercelOrigin = `https://${vercelUrl}`;
+      const parsed = new URL(vercelOrigin);
+      if (
+        parsed.protocol === 'https:' &&
+        (parsed.hostname.endsWith('.vercel.app') || parsed.hostname === 'vercel.app')
+      ) {
+        origins.add(vercelOrigin);
+      }
+    } catch {
+      // Ignore malformed VERCEL_URL.
+    }
+  }
+
+  // Additional explicitly configured origins (comma-separated).
+  // Only https origins are accepted.
+  const extraOrigins = process.env.ALLOWED_ORIGINS;
+  if (extraOrigins) {
+    extraOrigins
+      .split(',')
+      .map((o) => o.trim())
+      .filter(Boolean)
+      .forEach((o) => {
+        try {
+          const parsed = new URL(o);
+          if (parsed.protocol === 'https:') {
+            origins.add(o);
+          }
+        } catch {
+          // Ignore malformed entries.
+        }
+      });
+  }
+
+  return origins;
 }
 
 export function createApp(): express.Express {
