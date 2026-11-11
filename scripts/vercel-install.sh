@@ -11,9 +11,18 @@
 # exists there.
 set -e
 
+echo "CWD: $(pwd)"
+echo "Schema path check:"
+ls -la backend/prisma/schema.prisma 2>&1 || echo "NOT FOUND at relative path"
+ls -la "$(pwd)/backend/prisma/schema.prisma" 2>&1 || echo "NOT FOUND at absolute path"
+
 npm install
 
-npx --yes prisma@5.22.0 generate --schema=backend/prisma/schema.prisma && exit 0
+# Use absolute path to avoid any cwd ambiguity
+SCHEMA_PATH="$(pwd)/backend/prisma/schema.prisma"
+echo "Running prisma generate with schema: $SCHEMA_PATH"
+
+npx --yes prisma@5.22.0 generate --schema="$SCHEMA_PATH" && exit 0
 
 echo '--- PRISMA GENERATE FAILED: diagnostics ---'
 echo 'node_modules/prisma:';        ls -d node_modules/prisma 2>&1 || true

@@ -1,6 +1,6 @@
 {
   "framework": null,
-  "installCommand": "bash scripts/vercel-install.sh",
+  "installCommand": "npm install && npx --yes prisma@5.22.0 generate --schema=backend/prisma/schema.prisma",
   "buildCommand": "npm install --prefix frontend && cd frontend && npx tsc && npx vite build",
   "outputDirectory": "dist",
   "regions": [
@@ -9,7 +9,7 @@
   "functions": {
     "api/index.ts": {
       "memory": 1024,
-      "maxDuration": 60
+      "maxDuration": 300
     }
   },
   "rewrites": [

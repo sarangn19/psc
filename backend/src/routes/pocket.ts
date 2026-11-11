@@ -4,6 +4,7 @@ import { Prisma, Difficulty, ScratchTier } from '@prisma/client';
 import prisma from '../lib/prisma';
 import { normalizeOptions } from '../lib/options';
 import { authenticate, AuthRequest } from '../middleware/auth';
+import { getBlockedQuestionIds, filterSafeQuestions, getSafetyRecordSync, QuestionSafetyStatus } from '../lib/questionSafety';
 
 const router = Router();
 
@@ -39,7 +40,7 @@ type PoolRow = {
 // learned only > selected exams only > whole bank (fresh account).
 async function resolveScopeChapterIds(userId: string): Promise<string[] | null> {
   const [learnedChapters, selectedExamChapters] = await Promise.all([
-    prisma.userChapter.findMany({ where: { userId, isLearned: true }, select: { chapterId: true } }),
+    prisma.userChapter.findMany({ where: { userId, OR: [{ status: 'LEARNED' }, { isLearned: true }] }, select: { chapterId: true } }),
     prisma.chapter.findMany({
       where: { subject: { exam: { userExams: { some: { userId } } } } },
       select: { id: true },
@@ -47,14 +48,13 @@ async function resolveScopeChapterIds(userId: string): Promise<string[] | null> 
   ]);
   const learnedIds = learnedChapters.map((l) => l.chapterId);
   const selectedIds = selectedExamChapters.map((c) => c.id);
-  if (learnedIds.length > 0 && selectedIds.length > 0) {
+  if (learnedIds.length === 0) return []; // no learned chapters -> no eligible questions
+  if (selectedIds.length > 0) {
     const selectedSet = new Set(selectedIds);
     const intersect = learnedIds.filter((id) => selectedSet.has(id));
-    return intersect.length > 0 ? intersect : selectedIds;
+    return intersect.length > 0 ? intersect : [];
   }
-  if (learnedIds.length > 0) return learnedIds;
-  if (selectedIds.length > 0) return selectedIds;
-  return null;
+  return learnedIds;
 }
 
 async function fetchPool(
@@ -68,14 +68,21 @@ async function fetchPool(
     select: { questionId: true },
     distinct: ['questionId'],
   });
+
+  // Get blocked question IDs to exclude
+  const blockedIds = await getBlockedQuestionIds(excludeIds);
+  const allExcludedIds = [...excludeIds, ...blockedIds];
+
+  if (Array.isArray(scopeChapterIds) && scopeChapterIds.length === 0) return [];
+
   const rows = (await prisma.$queryRaw`
     SELECT q.id, q."conceptId", q."chapterId", q.difficulty, c."scratchTier", q.tags
     FROM questions q
     JOIN chapters c ON c.id = q."chapterId"
     WHERE q."isActive" = true
     ${focusConceptId !== null ? Prisma.sql`AND q."conceptId" = ${focusConceptId}` : Prisma.empty}
-    ${scopeChapterIds ? Prisma.sql`AND q."chapterId" IN (${Prisma.join(scopeChapterIds)})` : Prisma.empty}
-    ${excludeIds.length > 0 ? Prisma.sql`AND NOT (q.id = ANY(${excludeIds}))` : Prisma.empty}
+    ${Array.isArray(scopeChapterIds) && scopeChapterIds.length > 0 ? Prisma.sql`AND q."chapterId" IN (${Prisma.join(scopeChapterIds)})` : Prisma.empty}
+    ${allExcludedIds.length > 0 ? Prisma.sql`AND NOT (q.id = ANY(${allExcludedIds}))` : Prisma.empty}
     ORDER BY random()
     LIMIT ${POOL_SIZE}
   `) as { id: string; conceptId: number | null; chapterId: string; difficulty: Difficulty; scratchTier: ScratchTier; tags: string[] }[];
@@ -133,7 +140,6 @@ router.post('/start', authenticate, async (req: AuthRequest, res: Response) => {
 
   const scopeChapterIds = await resolveScopeChapterIds(userId);
   let source = await fetchPool(userId, scopeChapterIds, focusConceptId);
-  if (source.length === 0) source = await fetchPool(userId, null, focusConceptId);
 
   const { picked, preferred, fallback } = deal(source, batchSize, quota);
   if (picked.length === 0) {
@@ -226,12 +232,7 @@ router.post('/session/:sessionId/refill', authenticate, async (req: AuthRequest,
   // Same scope ladder as /start: learned + selected exams, then widen to the
   // whole bank — but the widened pass still never repeats a dealt question.
   const scopeChapterIds = await resolveScopeChapterIds(userId);
-  let source = scopeChapterIds ? await fetchPool(userId, scopeChapterIds, session.focusConceptId, excludeIds) : [];
-  if (source.length < batchSize) {
-    const wide = await fetchPool(userId, null, session.focusConceptId, excludeIds);
-    const seen = new Set(source.map((r) => r.id));
-    source = source.concat(wide.filter((r) => !seen.has(r.id)));
-  }
+  let source = await fetchPool(userId, scopeChapterIds, session.focusConceptId, excludeIds);
 
   const { picked, preferred, fallback } = deal(source, batchSize, quota);
   if (picked.length === 0) {
@@ -462,6 +463,7 @@ router.get('/session/:sessionId', authenticate, async (req: AuthRequest, res: Re
     session,
     items: items.map((it) => {
       const { correctOption, ...safe } = it.question;
+      const safety = getSafetyRecordSync(it.question.id);
       return {
         id: it.id,
         order: it.order,
@@ -479,6 +481,8 @@ router.get('/session/:sessionId', authenticate, async (req: AuthRequest, res: Re
           tags: safe.tags,
           chapter: { name: safe.chapter.name, subject: safe.chapter.subject.name },
         },
+        safetyStatus: safety?.status || 'UNKNOWN',
+        safetyBlocked: safety && (safety.status === QuestionSafetyStatus.BLOCKED_CONFIRMED || safety.status === QuestionSafetyStatus.REPAIRED_PENDING_VERIFICATION),
       };
     }),
   });

@@ -1,0 +1,1391 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cognix AI Teacher</title>
+
+<style>
+:root {
+  --bg:#111315;
+  --header:#191b1f;
+  --surface:#25282d;
+  --surface2:#2b2e34;
+  --border:rgba(255,255,255,.09);
+  --text:#f5f5f5;
+  --muted:#92969e;
+  --accent:#7062eb;
+  --accent-light:#aaa0ff;
+  --user:#344d91;
+}
+
+* {box-sizing:border-box;margin:0;padding:0}
+
+body {
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow:hidden;
+}
+
+button,input,select {font:inherit}
+button {cursor:pointer}
+
+/* APP */
+
+.app {
+  width:100%;
+  height:100dvh;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  position:relative;
+}
+
+/* HEADER */
+
+.header {
+  height:72px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  background:var(--header);
+  border-bottom:1px solid var(--border);
+  z-index:10;
+}
+
+.icon-btn {
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:0;
+  border-radius:50%;
+  background:transparent;
+  color:#ddd;
+  font-size:21px;
+}
+
+.icon-btn:hover {background:rgba(255,255,255,.08)}
+
+.bot-profile {
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:7px 15px 7px 8px;
+  background:#25282d;
+  border:1px solid var(--border);
+  border-radius:50px;
+}
+
+.bot-avatar {
+  width:37px;
+  height:37px;
+  border-radius:50%;
+  background:linear-gradient(140deg,#7967ff,#29206f);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:19px;
+}
+
+.profile-name {font-size:14px;font-weight:650}
+.profile-subtitle {font-size:11px;color:var(--muted);margin-top:3px}
+
+.header-menu {
+  position:absolute;
+  top:65px;
+  right:15px;
+  width:195px;
+  background:#282b30;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:6px;
+  display:none;
+  z-index:30;
+}
+
+.header-menu.open {display:block}
+
+.header-menu button {
+  width:100%;
+  text-align:left;
+  padding:12px;
+  border:0;
+  border-radius:8px;
+  background:transparent;
+  color:#eee;
+  font-size:13px;
+}
+
+.header-menu button:hover {background:rgba(255,255,255,.08)}
+
+/* CHAT */
+
+.chat-area {
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  padding:25px 18px;
+  scroll-behavior:smooth;
+}
+
+.chat-content {
+  max-width:760px;
+  width:100%;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.date-divider {text-align:center;margin-bottom:4px}
+
+.date-divider span {
+  display:inline-block;
+  padding:6px 13px;
+  border-radius:30px;
+  background:rgba(255,255,255,.04);
+  font-size:11px;
+  color:var(--muted);
+}
+
+.message-row {display:flex;width:100%}
+.message-row.ai {justify-content:flex-start}
+.message-row.user {justify-content:flex-end}
+
+.message {
+  max-width:85%;
+  min-width:100px;
+  padding:12px 14px;
+  border-radius:17px;
+  font-size:14px;
+  line-height:1.65;
+  overflow-wrap:anywhere;
+  position:relative;
+}
+
+.message.ai {
+  background:var(--surface);
+  border-bottom-left-radius:5px;
+}
+
+.message.user {
+  background:var(--user);
+  border-bottom-right-radius:5px;
+}
+
+.message.highlight {
+  outline:2px solid var(--accent-light);
+  box-shadow:0 0 20px rgba(112,98,235,.25);
+}
+
+.message-author {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:8px;
+  font-size:12px;
+  font-weight:650;
+  color:var(--accent-light);
+}
+
+.message-avatar {
+  width:23px;
+  height:23px;
+  border-radius:50%;
+  background:var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.message-time {
+  display:block;
+  text-align:right;
+  margin-top:7px;
+  font-size:10px;
+  color:rgba(255,255,255,.5);
+}
+
+/* QUOTED MESSAGE */
+
+.quoted-message {
+  display:block;
+  width:100%;
+  text-align:left;
+  border:0;
+  border-left:3px solid #a99cff;
+  border-radius:5px;
+  background:rgba(0,0,0,.17);
+  padding:8px 10px;
+  margin-bottom:9px;
+  color:#ddd;
+  overflow:hidden;
+}
+
+.quoted-message:hover {background:rgba(0,0,0,.25)}
+
+.quoted-sender {
+  display:block;
+  color:#c0b6ff;
+  font-size:11px;
+  font-weight:700;
+  margin-bottom:3px;
+}
+
+.quoted-text {
+  display:block;
+  font-size:12px;
+  line-height:1.4;
+  color:#d1d1d1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.message-actions {
+  display:flex;
+  justify-content:flex-end;
+  margin-top:5px;
+}
+
+.reply-action {
+  border:0;
+  background:transparent;
+  color:#aeb1bb;
+  font-size:11px;
+  padding:3px 5px;
+}
+
+.reply-action:hover {color:white}
+
+/* BOTTOM SECTION */
+
+.bottom-section {
+  flex-shrink:0;
+  background:var(--header);
+  border-top:1px solid var(--border);
+  padding:12px 14px max(12px,env(safe-area-inset-bottom));
+}
+
+.bottom-content {
+  max-width:760px;
+  width:100%;
+  margin:auto;
+}
+
+/* QUESTION */
+
+.question-card {
+  background:#222a36;
+  border:1px solid rgba(130,130,255,.23);
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:11px;
+}
+
+.question-card.hidden {display:none}
+
+.question-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+.question-meta {
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.question-number {
+  font-size:10px;
+  font-weight:750;
+  color:var(--accent-light);
+}
+
+.question-subject {color:var(--muted);font-size:10px}
+
+.question-text {
+  font-size:15px;
+  font-weight:650;
+  line-height:1.55;
+  margin-bottom:13px;
+}
+
+.options-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+}
+
+.option {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  min-width:0;
+  text-align:left;
+  padding:10px 12px;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:11px;
+  background:rgba(255,255,255,.025);
+  color:#ddd;
+  font-size:13px;
+}
+
+.option:hover:not(:disabled) {background:rgba(255,255,255,.07)}
+
+.option.selected {
+  border-color:var(--accent-light);
+  background:rgba(112,98,235,.17);
+  color:white;
+}
+
+.option.correct {
+  border-color:#36b879;
+  background:rgba(54,184,121,.12);
+}
+
+.option.wrong {
+  border-color:#e36b6b;
+  background:rgba(227,107,107,.12);
+}
+
+.option:disabled {cursor:default}
+
+.option-letter {
+  width:25px;
+  height:25px;
+  flex-shrink:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.09);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  font-weight:700;
+}
+
+.question-footer {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:13px;
+}
+
+.question-hint {font-size:10px;line-height:1.4;color:var(--muted)}
+
+.submit-answer {
+  padding:9px 14px;
+  border:0;
+  border-radius:9px;
+  background:var(--accent);
+  color:white;
+  font-size:11px;
+  font-weight:650;
+  white-space:nowrap;
+}
+
+.submit-answer:disabled {
+  background:#41434b;
+  color:#898b91;
+  cursor:not-allowed;
+}
+
+/* REPLY COMPOSER */
+
+.reply-preview {
+  display:none;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  background:#25282e;
+  border:1px solid var(--border);
+  border-left:3px solid var(--accent-light);
+  border-radius:11px;
+  padding:9px 11px;
+  margin-bottom:9px;
+}
+
+.reply-preview.visible {display:flex}
+
+.reply-preview-content {min-width:0;flex:1}
+
+.reply-preview-title {
+  color:#b4aaff;
+  font-size:11px;
+  font-weight:700;
+  margin-bottom:3px;
+}
+
+.reply-preview-text {
+  color:#c3c5cc;
+  font-size:12px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+
+.cancel-reply {
+  flex-shrink:0;
+  width:28px;
+  height:28px;
+  border:0;
+  border-radius:50%;
+  background:transparent;
+  color:#aaa;
+  font-size:19px;
+}
+
+.cancel-reply:hover {background:rgba(255,255,255,.08);color:white}
+
+/* INPUT */
+
+.input-bar {
+  display:flex;
+  align-items:center;
+  gap:9px;
+  border:1px solid var(--border);
+  border-radius:50px;
+  background:#292c31;
+  padding:6px 8px;
+}
+
+.input-action {
+  width:39px;
+  height:39px;
+  flex-shrink:0;
+  border:0;
+  border-radius:50%;
+  background:#393d45;
+  color:#ddd;
+  font-size:22px;
+}
+
+.message-input {
+  flex:1;
+  min-width:0;
+  height:38px;
+  background:transparent;
+  border:0;
+  outline:none;
+  color:white;
+  font-size:14px;
+}
+
+.message-input::placeholder {color:#777d88}
+
+.send-btn,.mic-btn {
+  width:39px;
+  height:39px;
+  flex-shrink:0;
+  border:0;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.send-btn {
+  background:var(--accent);
+  color:white;
+  display:none;
+}
+
+.send-btn.visible {display:flex}
+
+.mic-btn {background:transparent;color:#aaa}
+
+/* ONBOARDING */
+
+.onboarding {
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:#111315;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+}
+
+.onboarding.show {display:flex}
+
+.onboarding-card {
+  width:100%;
+  max-width:440px;
+  padding:32px;
+  background:#202328;
+  border:1px solid var(--border);
+  border-radius:22px;
+}
+
+.onboarding-brand {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:30px;
+}
+
+.onboarding-logo {
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  background:var(--accent);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.onboarding-step {
+  font-size:10px;
+  color:var(--accent-light);
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+.onboarding-card h1 {font-size:27px;margin-bottom:12px}
+
+.onboarding-description {
+  font-size:13px;
+  color:#a5a8b0;
+  line-height:1.7;
+  margin-bottom:25px;
+}
+
+.onboarding-label {
+  display:block;
+  font-size:12px;
+  margin-bottom:10px;
+  font-weight:600;
+}
+
+.onboarding-select {
+  width:100%;
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#30343a;
+  color:white;
+}
+
+.onboarding-continue {
+  width:100%;
+  margin-top:24px;
+  padding:14px;
+  background:var(--accent);
+  border:0;
+  border-radius:12px;
+  color:white;
+  font-weight:650;
+}
+
+.onboarding-footer {
+  font-size:11px;
+  color:#81858e;
+  line-height:1.6;
+  margin-top:17px;
+  text-align:center;
+}
+
+/* TOAST */
+
+.toast {
+  position:fixed;
+  left:50%;
+  bottom:160px;
+  transform:translate(-50%,15px);
+  background:#343840;
+  color:white;
+  padding:11px 16px;
+  border-radius:10px;
+  font-size:12px;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  z-index:150;
+}
+
+.toast.show {
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+@media(max-width:600px) {
+  .header {height:68px;padding:0 9px}
+  .bot-profile {gap:8px;padding:6px 11px 6px 7px}
+  .bot-avatar {width:34px;height:34px}
+  .profile-name {font-size:13px}
+  .profile-subtitle {font-size:10px}
+  .chat-area {padding:18px 12px}
+  .message {max-width:91%;font-size:13px}
+  .bottom-section {padding:10px 9px max(12px,env(safe-area-inset-bottom))}
+  .question-card {padding:11px}
+  .question-text {font-size:14px}
+  .option {padding:9px;gap:7px;font-size:12px}
+  .onboarding-card {padding:25px 21px}
+  .onboarding-card h1 {font-size:24px}
+}
+
+@media(max-width:360px) {
+  .question-subject {display:none}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <header class="header">
+    <button class="icon-btn" id="backButton" aria-label="Back">←</button>
+
+    <div class="bot-profile">
+      <div class="bot-avatar">✿</div>
+      <div class="profile-info">
+        <div class="profile-name">Cognix Teacher</div>
+        <div class="profile-subtitle">Your personal learning companion</div>
+      </div>
+    </div>
+
+    <button class="icon-btn" id="headerMenuButton" aria-label="More">⋮</button>
+
+    <div class="header-menu" id="headerMenu">
+      <button id="newChatButton">＋ New conversation</button>
+      <button id="clearChatButton">Clear conversation</button>
+    </div>
+  </header>
+
+  <main class="chat-area" id="chatArea">
+    <div class="chat-content" id="chatContent">
+      <div class="date-divider"><span>Today</span></div>
+    </div>
+  </main>
+
+  <footer class="bottom-section">
+    <div class="bottom-content">
+
+      <div class="question-card hidden" id="questionCard">
+        <div class="question-header">
+          <div class="question-meta">
+            <span>📌</span>
+            <span class="question-number" id="questionNumber"></span>
+            <span class="question-subject" id="questionSubject"></span>
+          </div>
+        </div>
+
+        <div class="question-text" id="questionText"></div>
+        <div class="options-grid" id="optionsGrid"></div>
+
+        <div class="question-footer">
+          <span class="question-hint" id="questionHint">
+            Select an option or ask your teacher for a hint.
+          </span>
+          <button class="submit-answer" id="submitAnswer" disabled>
+            Submit answer
+          </button>
+        </div>
+      </div>
+
+      <div class="reply-preview" id="replyPreview">
+        <div class="reply-preview-content">
+          <div class="reply-preview-title" id="replyPreviewTitle"></div>
+          <div class="reply-preview-text" id="replyPreviewText"></div>
+        </div>
+        <button class="cancel-reply" id="cancelReply" aria-label="Cancel reply">×</button>
+      </div>
+
+      <form class="input-bar" id="messageForm">
+        <button type="button" class="input-action" id="attachButton">+</button>
+        <input type="file" id="fileInput" hidden>
+
+        <input
+          type="text"
+          class="message-input"
+          id="messageInput"
+          placeholder="Ask your teacher anything..."
+          autocomplete="off"
+        >
+
+        <button type="button" class="mic-btn" id="micButton">🎙</button>
+        <button type="submit" class="send-btn" id="sendButton">➤</button>
+      </form>
+
+    </div>
+  </footer>
+</div>
+
+<!-- ONBOARDING -->
+
+<div class="onboarding" id="onboarding">
+  <div class="onboarding-card">
+    <div class="onboarding-brand">
+      <div class="onboarding-logo">✿</div>
+      <strong>Cognix</strong>
+    </div>
+
+    <div class="onboarding-step">STEP 01 · PERSONALISE YOUR LEARNING</div>
+    <h1>Let's prepare for your exam.</h1>
+
+    <p class="onboarding-description">
+      We'll start from the absolute basics and gradually build
+      your understanding, at your own pace.
+    </p>
+
+    <label class="onboarding-label" for="onboardingExam">
+      Which exam are you preparing for?
+    </label>
+
+    <select class="onboarding-select" id="onboardingExam">
+      <option value="">Select your exam</option>
+      <option>IBPS PO</option>
+      <option>IBPS Clerk</option>
+      <option>SBI PO</option>
+      <option>SBI Clerk</option>
+      <option>IBPS RRB PO</option>
+      <option>IBPS RRB Clerk</option>
+      <option>SSC CGL</option>
+      <option>SSC CHSL</option>
+      <option>SSC MTS</option>
+      <option>SSC GD</option>
+    </select>
+
+    <button class="onboarding-continue" id="onboardingContinue">
+      Start learning →
+    </button>
+
+    <p class="onboarding-footer">
+      No prior knowledge required. Your AI Teacher will guide you
+      from the beginning and adapt as you progress.
+    </p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =================================
+   STATE
+================================= */
+
+const STORAGE = {
+  completed:"cognix_onboarding_completed",
+  exam:"cognix_selected_exam"
+};
+
+const state = {
+  exam:localStorage.getItem(STORAGE.exam) || "",
+  completed:localStorage.getItem(STORAGE.completed) === "true",
+  messages:[],
+  replyTo:null,
+  selectedOption:null,
+  answerSubmitted:false,
+  currentQuestion:null
+};
+
+const $ = id => document.getElementById(id);
+
+let nextMessageId = 1;
+let toastTimer;
+
+
+/* =================================
+   DEMO QUESTION
+================================= */
+
+const demoQuestion = {
+  number:"QUESTION 01",
+  subject:"Quantitative Aptitude · Basics",
+  text:"What is 10% of 100?",
+  options:[
+    {id:"A",text:"5"},
+    {id:"B",text:"10"},
+    {id:"C",text:"20"},
+    {id:"D",text:"50"}
+  ],
+  answer:"B",
+  explanation:"10% means 10 out of 100. So 10% of 100 is 10."
+};
+
+
+/* =================================
+   TOAST
+================================= */
+
+function toast(message) {
+  $("toast").textContent = message;
+  $("toast").classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(() => {
+    $("toast").classList.remove("show");
+  },2300);
+}
+
+
+/* =================================
+   ONBOARDING
+================================= */
+
+function startApp() {
+  if (!state.completed) {
+    $("onboarding").classList.add("show");
+  } else {
+    $("onboarding").classList.remove("show");
+    startBeginnerLesson();
+  }
+}
+
+$("onboardingContinue").addEventListener("click",() => {
+  const exam = $("onboardingExam").value;
+
+  if (!exam) {
+    toast("Please select your exam.");
+    return;
+  }
+
+  state.exam = exam;
+  state.completed = true;
+
+  localStorage.setItem(STORAGE.exam,exam);
+  localStorage.setItem(STORAGE.completed,"true");
+
+  $("onboarding").classList.remove("show");
+  startBeginnerLesson();
+});
+
+
+/* =================================
+   MESSAGE MODEL
+================================= */
+
+function createMessage(role,text,replyToId=null) {
+  const message = {
+    id:"msg-" + nextMessageId++,
+    role,
+    text,
+    time:new Date().toLocaleTimeString([],{
+      hour:"2-digit",
+      minute:"2-digit"
+    }),
+    replyToId
+  };
+
+  state.messages.push(message);
+  return message;
+}
+
+
+/* =================================
+   MESSAGE RENDERING
+================================= */
+
+function renderMessage(message) {
+  const row = document.createElement("div");
+  row.className = "message-row " + message.role;
+  row.dataset.messageId = message.id;
+
+  const bubble = document.createElement("div");
+  bubble.className = "message " + message.role;
+  bubble.id = message.id;
+
+  if (message.role === "ai") {
+    const author = document.createElement("div");
+    author.className = "message-author";
+
+    const avatar = document.createElement("span");
+    avatar.className = "message-avatar";
+    avatar.textContent = "✿";
+
+    author.appendChild(avatar);
+    author.appendChild(document.createTextNode("Cognix Teacher"));
+    bubble.appendChild(author);
+  }
+
+  if (message.replyToId) {
+    const original = state.messages.find(
+      item => item.id === message.replyToId
+    );
+
+    if (original) {
+      const quote = document.createElement("button");
+      quote.type = "button";
+      quote.className = "quoted-message";
+
+      const sender = document.createElement("span");
+      sender.className = "quoted-sender";
+      sender.textContent =
+        original.role === "ai" ? "Cognix Teacher" : "You";
+
+      const preview = document.createElement("span");
+      preview.className = "quoted-text";
+      preview.textContent = original.text;
+
+      quote.appendChild(sender);
+      quote.appendChild(preview);
+
+      quote.addEventListener("click",() => {
+        navigateToMessage(original.id);
+      });
+
+      bubble.appendChild(quote);
+    }
+  }
+
+  const text = document.createElement("div");
+  text.className = "message-content";
+  text.textContent = message.text;
+  bubble.appendChild(text);
+
+  const time = document.createElement("span");
+  time.className = "message-time";
+  time.textContent = message.time;
+  bubble.appendChild(time);
+
+  const actions = document.createElement("div");
+  actions.className = "message-actions";
+
+  const replyButton = document.createElement("button");
+  replyButton.type = "button";
+  replyButton.className = "reply-action";
+  replyButton.textContent = "↩ Reply";
+
+  replyButton.addEventListener("click",() => {
+    setReplyTarget(message.id);
+  });
+
+  actions.appendChild(replyButton);
+  bubble.appendChild(actions);
+
+  row.appendChild(bubble);
+  $("chatContent").appendChild(row);
+
+  return row;
+}
+
+
+/* =================================
+   ADD MESSAGE
+
+   IMPORTANT:
+   Always use this argument order:
+   addMessage("ai", "Message text")
+   addMessage("user", "Message text")
+================================= */
+
+function addMessage(role,text,replyToId=null) {
+  if (!["ai","user"].includes(role)) {
+    console.error("Invalid message role:",role);
+    return null;
+  }
+
+  if (typeof text !== "string" || !text.trim()) {
+    console.error("Message text must be a non-empty string.");
+    return null;
+  }
+
+  const message = createMessage(role,text,replyToId);
+  renderMessage(message);
+  scrollToBottom();
+
+  return message;
+}
+
+
+/* =================================
+   TWO-WAY REPLY
+================================= */
+
+function setReplyTarget(messageId) {
+  const original = state.messages.find(
+    message => message.id === messageId
+  );
+
+  if (!original) return;
+
+  state.replyTo = messageId;
+
+  $("replyPreviewTitle").textContent =
+    original.role === "ai"
+      ? "Replying to Cognix Teacher"
+      : "Replying to You";
+
+  $("replyPreviewText").textContent = original.text;
+  $("replyPreview").classList.add("visible");
+
+  $("messageInput").focus();
+}
+
+function cancelReply() {
+  state.replyTo = null;
+  $("replyPreview").classList.remove("visible");
+  $("replyPreviewText").textContent = "";
+}
+
+$("cancelReply").addEventListener("click",cancelReply);
+
+
+function navigateToMessage(messageId) {
+  const element = document.getElementById(messageId);
+
+  if (!element) {
+    toast("Original message is no longer available.");
+    return;
+  }
+
+  element.scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
+
+  element.classList.add("highlight");
+
+  setTimeout(() => {
+    element.classList.remove("highlight");
+  },1800);
+}
+
+
+/* =================================
+   BEGINNER-FIRST INTRODUCTION
+
+   FIXED: role comes first, text second.
+================================= */
+
+function startBeginnerLesson() {
+  if (state.messages.length > 0) return;
+
+  addMessage(
+    "ai",
+    "Hey! Welcome to Cognix. I'm your personal AI Teacher. I'll guide you through " +
+    state.exam + " preparation."
+  );
+
+  addMessage(
+    "ai",
+    "We'll start from the absolute basics. I'll explain concepts step by step, " +
+    "even if you've never studied them before."
+  );
+
+  addMessage(
+    "ai",
+    "If you already know certain topics, just tell me. I'll adapt to your existing knowledge instead of making you repeat everything."
+  );
+}
+
+
+/* =================================
+   DEMO AI RESPONSE
+================================= */
+
+function generateDemoResponse(userText) {
+  const lower = userText.toLowerCase();
+
+  if (
+    lower.includes("i know") ||
+    lower.includes("already studied") ||
+    lower.includes("i have studied")
+  ) {
+    return "Got it! I'll take your existing knowledge into account. Let's check your understanding before deciding where to continue.";
+  }
+
+  if (
+    lower.includes("beginner") ||
+    lower.includes("from zero") ||
+    lower.includes("from scratch")
+  ) {
+    return "Absolutely. We'll start from the very beginning, with simple explanations and everyday examples. There is no need to know anything in advance.";
+  }
+
+  if (
+    lower.includes("hint") ||
+    lower.includes("help me")
+  ) {
+    return "Let's break this down into smaller steps. First, identify what information the question gives you and what it asks you to find.";
+  }
+
+  if (
+    lower.includes("explain") ||
+    lower.includes("why") ||
+    lower.includes("how")
+  ) {
+    return "Let's understand that step by step. I'll start with the basic idea, then give you a simple example.";
+  }
+
+  return "I understand. Let's work through that together. What part would you like me to explain first?";
+}
+
+
+/* =================================
+   SEND MESSAGE
+
+   Student replies quote the exact selected message.
+   Demo AI response references the student message.
+================================= */
+
+$("messageForm").addEventListener("submit",event => {
+  event.preventDefault();
+
+  const text = $("messageInput").value.trim();
+  if (!text) return;
+
+  const replyTargetId = state.replyTo;
+
+  const userMessage = addMessage(
+    "user",
+    text,
+    replyTargetId
+  );
+
+  if (!userMessage) return;
+
+  $("messageInput").value = "";
+  cancelReply();
+  updateInputControls();
+
+  setTimeout(() => {
+    const response = generateDemoResponse(text);
+
+    addMessage(
+      "ai",
+      response,
+      userMessage.id
+    );
+  },650);
+});
+
+
+/* =================================
+   INPUT CONTROLS
+================================= */
+
+function updateInputControls() {
+  const hasText = $("messageInput").value.trim().length > 0;
+
+  $("sendButton").classList.toggle("visible",hasText);
+  $("micButton").style.display = hasText ? "none" : "flex";
+}
+
+$("messageInput").addEventListener("input",updateInputControls);
+
+
+/* =================================
+   QUESTION RENDERING
+================================= */
+
+function renderQuestion(question) {
+  state.currentQuestion = question;
+  state.selectedOption = null;
+  state.answerSubmitted = false;
+
+  $("questionCard").classList.remove("hidden");
+  $("questionNumber").textContent = question.number;
+  $("questionSubject").textContent = question.subject;
+  $("questionText").textContent = question.text;
+  $("questionHint").textContent =
+    "Select an option or ask your teacher for a hint.";
+
+  $("submitAnswer").disabled = true;
+  $("submitAnswer").textContent = "Submit answer";
+
+  const grid = $("optionsGrid");
+  grid.innerHTML = "";
+
+  question.options.forEach(option => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option";
+
+    const letter = document.createElement("span");
+    letter.className = "option-letter";
+    letter.textContent = option.id;
+
+    const label = document.createElement("span");
+    label.textContent = option.text;
+
+    button.appendChild(letter);
+    button.appendChild(label);
+
+    button.addEventListener("click",() => {
+      if (state.answerSubmitted) return;
+
+      state.selectedOption = option.id;
+
+      document.querySelectorAll(".option").forEach(item => {
+        item.classList.toggle(
+          "selected",
+          item.querySelector(".option-letter").textContent === option.id
+        );
+      });
+
+      $("submitAnswer").disabled = false;
+      $("questionHint").textContent = "Option " + option.id + " selected.";
+    });
+
+    grid.appendChild(button);
+  });
+}
+
+
+/* =================================
+   SUBMIT ANSWER
+================================= */
+
+$("submitAnswer").addEventListener("click",() => {
+  if (!state.selectedOption || state.answerSubmitted) return;
+
+  const question = state.currentQuestion;
+  const correct = state.selectedOption === question.answer;
+
+  state.answerSubmitted = true;
+
+  document.querySelectorAll(".option").forEach(button => {
+    const id = button.querySelector(".option-letter").textContent;
+    button.disabled = true;
+
+    if (id === question.answer) button.classList.add("correct");
+    if (id === state.selectedOption && !correct) button.classList.add("wrong");
+  });
+
+  $("questionHint").textContent = correct
+    ? "Correct answer! Well done."
+    : "Incorrect. Correct answer: " + question.answer;
+
+  $("submitAnswer").textContent = "Submitted";
+
+  addMessage(
+    "ai",
+    "The correct explanation: " + question.explanation
+  );
+});
+
+
+/* =================================
+   FILE ATTACHMENT
+================================= */
+
+$("attachButton").addEventListener("click",() => {
+  $("fileInput").click();
+});
+
+$("fileInput").addEventListener("change",event => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  addMessage("user","I attached a file: " + file.name);
+  toast("File selected. Upload is not connected in this demo.");
+
+  event.target.value = "";
+});
+
+
+/* =================================
+   MICROPHONE
+================================= */
+
+$("micButton").addEventListener("click",() => {
+  const Recognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  if (!Recognition) {
+    toast("Voice input is not supported in this browser.");
+    return;
+  }
+
+  const recognition = new Recognition();
+  recognition.lang = "en-IN";
+  recognition.interimResults = false;
+
+  recognition.onstart = () => toast("Listening...");
+
+  recognition.onresult = event => {
+    $("messageInput").value = event.results[0][0].transcript;
+    updateInputControls();
+    $("messageInput").focus();
+  };
+
+  recognition.onerror = () => toast("Could not recognise speech.");
+
+  recognition.start();
+});
+
+
+/* =================================
+   HEADER MENU
+================================= */
+
+$("headerMenuButton").addEventListener("click",() => {
+  $("headerMenu").classList.toggle("open");
+});
+
+function clearConversation() {
+  $("chatContent").innerHTML =
+    '<div class="date-divider"><span>Today</span></div>';
+
+  state.messages = [];
+  nextMessageId = 1;
+
+  cancelReply();
+  startBeginnerLesson();
+}
+
+$("newChatButton").addEventListener("click",() => {
+  clearConversation();
+  $("headerMenu").classList.remove("open");
+  toast("New conversation started.");
+});
+
+$("clearChatButton").addEventListener("click",() => {
+  if (confirm("Clear this conversation?")) {
+    clearConversation();
+    toast("Conversation cleared.");
+  }
+
+  $("headerMenu").classList.remove("open");
+});
+
+
+/* =================================
+   BACK BUTTON
+================================= */
+
+$("backButton").addEventListener("click",() => {
+  if (window.history.length > 1) {
+    window.history.back();
+  } else {
+    toast("You're already at the start.");
+  }
+});
+
+
+/* =================================
+   SCROLL
+================================= */
+
+function scrollToBottom() {
+  requestAnimationFrame(() => {
+    $("chatArea").scrollTop = $("chatArea").scrollHeight;
+  });
+}
+
+
+/* =================================
+   INITIALISE
+================================= */
+
+startApp();
+renderQuestion(demoQuestion);
+
+</script>
+</body>
+</html>

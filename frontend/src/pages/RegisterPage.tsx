@@ -18,7 +18,7 @@ export default function RegisterPage() {
     setLoading(true);
     try {
       await register(name, email, password);
-      navigate('/onboarding');
+      navigate('/teacher');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Registration failed');
     } finally {

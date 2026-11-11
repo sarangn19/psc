@@ -19,7 +19,7 @@ export default function LoginPage() {
       await login(email, password);
       setTimeout(() => {
         const u = useAuthStore.getState().user;
-        navigate(u?.role === 'ADMIN' ? '/admin' : '/adaptive');
+        navigate(u?.role === 'ADMIN' ? '/admin' : '/teacher');
       }, 100);
     } catch (err: any) {
       setError(err.response?.data?.message || 'Login failed');

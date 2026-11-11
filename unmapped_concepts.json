@@ -1,0 +1,7202 @@
+[
+  {
+    "conceptId": 147,
+    "node": "International Relations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10468,
+    "node": "Kerala Social Welfare Department",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10272,
+    "node": "Defence Research and Development Organisation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10475,
+    "node": "Kerala Arts and Science Colleges",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10221,
+    "node": "IPL",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9271,
+    "node": "WHO",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12690,
+    "node": "Fundamental Duties and National Integration",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 69,
+    "node": "National Movement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5603,
+    "node": "India Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 620,
+    "node": "Union and State List",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9072,
+    "node": "Festival Significance",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4140,
+    "node": "Work Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10351,
+    "node": "BIMSTEC",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 137,
+    "node": "Election Commission",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9369,
+    "node": "Satellites",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9261,
+    "node": "Famous Books",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3648,
+    "node": "Social in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2944,
+    "node": "Culture in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10334,
+    "node": "India-Japan Summit",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 82,
+    "node": "American Revolution",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 150,
+    "node": "International Financial Institutions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10586,
+    "node": "Addition Rule",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6193,
+    "node": "World Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11183,
+    "node": "Essential Knowledge: World Rivers",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10458,
+    "node": "Kerala Traditional Medicine",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9243,
+    "node": "International Awards",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10413,
+    "node": "Indian National Congress Kerala",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 595,
+    "node": "Temple Architecture",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10265,
+    "node": "Kerala State Awards",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4028,
+    "node": "Part2 in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8933,
+    "node": "Wildlife Conservation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10329,
+    "node": "BIMSTEC Summit",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2383,
+    "node": "India in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4763,
+    "node": "Figures Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8705,
+    "node": "UPI",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9103,
+    "node": "Kathakali Training",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8731,
+    "node": "Aadhaar Enabled Services",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 14,
+    "node": "Science and Technology",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6933,
+    "node": "Government Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6953,
+    "node": "State Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9255,
+    "node": "Swimming",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9250,
+    "node": "Badminton",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 104,
+    "node": "Agricultural Regions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8853,
+    "node": "Licensed Certifying Authorities",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10343,
+    "node": "International Monetary Fund",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10205,
+    "node": "Tiger Reserve",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 669,
+    "node": "Percentage in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10405,
+    "node": "Kerala Legislative Assembly",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 56,
+    "node": "Harsha Empire",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 118,
+    "node": "Major Countries",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2560,
+    "node": "Biodiversity Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 67,
+    "node": "Freedom Movement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3142,
+    "node": "Science in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10511,
+    "node": "Kerala Startup Policy",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10217,
+    "node": "Commonwealth Games",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10418,
+    "node": "Kerala Local Self Government",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8203,
+    "node": "May",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8928,
+    "node": "Wildlife Sanctuaries",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10398,
+    "node": "National Security Guard",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10380,
+    "node": "India-Bangladesh Border",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10357,
+    "node": "UNDP",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 630,
+    "node": "Cultural and Educational Rights",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10445,
+    "node": "Kerala Smart City",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9254,
+    "node": "Athletics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10143,
+    "node": "Indian Political System",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8775,
+    "node": "E-District",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10484,
+    "node": "Kerala Education Policy",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10471,
+    "node": "Kerala School Education",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10316,
+    "node": "Disaster Management Kerala",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8927,
+    "node": "National Parks",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8834,
+    "node": "Cyber Appellate Tribunal",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 636,
+    "node": "Council of Ministers",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10189,
+    "node": "Machine Learning",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7203,
+    "node": "Average in Education",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10447,
+    "node": "Kerala Housing Projects",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 651,
+    "node": "Independent Judiciary",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 632,
+    "node": "Union Government",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6093,
+    "node": "Indian Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10290,
+    "node": "India Pakistan Border",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10187,
+    "node": "PSLV",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3835,
+    "node": "Union in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9378,
+    "node": "Space Technology in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 653,
+    "node": "Centre-State Relations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10497,
+    "node": "Kerala Disease Control",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3471,
+    "node": "Test in History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9092,
+    "node": "Official Languages",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10368,
+    "node": "START Treaty",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 218,
+    "node": "Telescope",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10453,
+    "node": "Kerala Literacy",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10129,
+    "node": "Disaster Risk Reduction",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 615,
+    "node": "Constitutional Framework",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 634,
+    "node": "Vice President",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9331,
+    "node": "Indian Prime Ministers",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9303,
+    "node": "Famous Places in World",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10263,
+    "node": "Abel Prize",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2922,
+    "node": "Indian in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7680,
+    "node": "Category Analogy",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9066,
+    "node": "National Festivals",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8756,
+    "node": "Angel Investors",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8691,
+    "node": "BHIM",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8704,
+    "node": "Digital Payment Methods",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10350,
+    "node": "SCO",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8849,
+    "node": "Digital Signature Certificate",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 656,
+    "node": "Financial Relations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3027,
+    "node": "World in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6090,
+    "node": "Indian Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8769,
+    "node": "E-Government Services",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8726,
+    "node": "UIDAI",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6239,
+    "node": "People Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10184,
+    "node": "Chandrayaan",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7626,
+    "node": "Alphabet Series",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 71,
+    "node": "Post-Independence India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8892,
+    "node": "Air Pollution",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 180,
+    "node": "IMF",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8750,
+    "node": "Startup India Scheme",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 644,
+    "node": "High Court",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7559,
+    "node": "Building Problems",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10322,
+    "node": "World Economic Forum",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9021,
+    "node": "Temple Construction",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6593,
+    "node": "Test Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12722,
+    "node": "Emergency and Executive",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 511,
+    "node": "Social Research",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10396,
+    "node": "Assam Rifles",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10284,
+    "node": "Military Aircraft",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9079,
+    "node": "Buddhism",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 553,
+    "node": "Child Development",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 590,
+    "node": "Municipal Administration",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6296,
+    "node": "Space Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10395,
+    "node": "BSF",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8755,
+    "node": "MSME",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10373,
+    "node": "Tashkent Declaration",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10435,
+    "node": "Kerala Railways",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9188,
+    "node": "Indian Textiles",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10268,
+    "node": "National Film Awards",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2366,
+    "node": "Digital in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8886,
+    "node": "Endangered Species",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 0,
+    "node": null,
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4041,
+    "node": "Percentage Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6280,
+    "node": "Recent Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9223,
+    "node": "Important Dates in Indian History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4429,
+    "node": "Number Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1122,
+    "node": "Word in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9788,
+    "node": "Union Government in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 931,
+    "node": "Series in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2378,
+    "node": "India in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10176,
+    "node": "Kerala Industries",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2917,
+    "node": "Indian in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9912,
+    "node": "GDP",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8375,
+    "node": "RAM",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7184,
+    "node": "Compound Interest in Insurance",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8710,
+    "node": "QR Code Payments",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9946,
+    "node": "General Science in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8712,
+    "node": "Payment Gateway",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8613,
+    "node": "Web Technologies",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10240,
+    "node": "Mirabai Chanu",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9633,
+    "node": "Education",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8906,
+    "node": "Carbon Footprint",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9118,
+    "node": "Bharatanatyam Technique",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10339,
+    "node": "India-Saudi Arabia Summit",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3840,
+    "node": "Government in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6656,
+    "node": "American Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8693,
+    "node": "Digital India in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 17,
+    "node": "Space Technology",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10384,
+    "node": "India-Afghanistan Border",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8830,
+    "node": "Amendments",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8826,
+    "node": "Data Security Measures",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10279,
+    "node": "BrahMos Missile",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6913,
+    "node": "Rights Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12192,
+    "node": "Core Concepts of Prejudice and Discrimination",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3275,
+    "node": "Standard Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9270,
+    "node": "United Nations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9717,
+    "node": "Public Administration Basics in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8720,
+    "node": "Digital Payments in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11859,
+    "node": "Key Definitions in Social Research",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6303,
+    "node": "Space Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10845,
+    "node": "Important Points: National Movement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7148,
+    "node": "Simple Interest in Investment",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9422,
+    "node": "Standard Deviation in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10379,
+    "node": "India Border Security",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10327,
+    "node": "SCO Summit",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10812,
+    "node": "Core Concepts of European Influence",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9324,
+    "node": "Famous People in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7173,
+    "node": "Compound Interest in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2483,
+    "node": "Protection Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12718,
+    "node": "National Emergency Provisions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6931,
+    "node": "Government Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2371,
+    "node": "Digital in History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9792,
+    "node": "Union Government in Economics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6923,
+    "node": "Union Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7174,
+    "node": "Compound Interest in Investments",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10337,
+    "node": "India-Germany Summit",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6283,
+    "node": "Recent Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 712,
+    "node": "Interest in History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12639,
+    "node": "Key Definitions in Financial Relations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4083,
+    "node": "Interest Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10161,
+    "node": "President of India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6748,
+    "node": "Social Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8708,
+    "node": "Debit Cards",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11421,
+    "node": "Fundamental Principles of International Financial Institutions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6534,
+    "node": "Testing Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9799,
+    "node": "State Government in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9627,
+    "node": "Social Stratification in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10843,
+    "node": "Essential Knowledge: National Movement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9370,
+    "node": "Space Missions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9626,
+    "node": "Social Stratification in History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8740,
+    "node": "Digital India Initiatives in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7145,
+    "node": "Profit and Loss in Deposits",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9760,
+    "node": "Union and State List",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5769,
+    "node": "Biodiversity Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8746,
+    "node": "Digital India Initiatives in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 707,
+    "node": "Interest in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9428,
+    "node": "Standard Deviation in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10223,
+    "node": "Indian Hockey Team",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9295,
+    "node": "Indian Army",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2916,
+    "node": "Indian in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10863,
+    "node": "Essential Knowledge: Post-Independence India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5383,
+    "node": "Devices Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9798,
+    "node": "State Government in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10259,
+    "node": "Academy Awards",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8686,
+    "node": "Digital Infrastructure",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3477,
+    "node": "T in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6873,
+    "node": "Administration Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4103,
+    "node": "Average Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 798,
+    "node": "Distance in History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10330,
+    "node": "India-US Summit",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9232,
+    "node": "Important Dates in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11317,
+    "node": "Introduction to Election Commission",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9088,
+    "node": "Indian Languages",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9879,
+    "node": "Climate",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11347,
+    "node": "Introduction to Finance Commission",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5613,
+    "node": "Payments Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11907,
+    "node": "Introduction to Social Mobility",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9790,
+    "node": "Union Government in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12490,
+    "node": "Important Terms in Prime Minister",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8724,
+    "node": "Digital Payments Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10449,
+    "node": "Kerala Infrastructure Development",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9224,
+    "node": "Important Dates in World History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4078,
+    "node": "Interest Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 762,
+    "node": "Time in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6660,
+    "node": "American Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8715,
+    "node": "Digital Payments in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8819,
+    "node": "Data Protection in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1091,
+    "node": "Number in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9280,
+    "node": "World Organizations in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6184,
+    "node": "World Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8699,
+    "node": "Digital India in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3125,
+    "node": "Recent in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8749,
+    "node": "Startup Ecosystem",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3032,
+    "node": "World in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 462,
+    "node": "Digital India Initiatives",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1233,
+    "node": "Directions in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8902,
+    "node": "Pollution Control Measures",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 778,
+    "node": "Work in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9789,
+    "node": "Union Government in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10297,
+    "node": "National Disaster Response Force",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9290,
+    "node": "World Heritage Sites",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2454,
+    "node": "Governance in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1332,
+    "node": "Non in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8701,
+    "node": "Digital India Vision",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 593,
+    "node": "Classical Dance",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7664,
+    "node": "Pattern Recognition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9643,
+    "node": "Social Institutions in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12608,
+    "node": "Basic Concepts of Independent Judiciary",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10220,
+    "node": "T20 World Cup",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10506,
+    "node": "Kerala Startups",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6929,
+    "node": "Government Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4143,
+    "node": "Work Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1486,
+    "node": "Completion in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12367,
+    "node": "Introduction to State Public Service Commission",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4163,
+    "node": "Distance Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11419,
+    "node": "Key Definitions in International Financial Institutions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 706,
+    "node": "Interest in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7179,
+    "node": "Compound Interest in Deposits",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4076,
+    "node": "Interest Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2103,
+    "node": "System in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10521,
+    "node": "Kerala Technology Sector",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1492,
+    "node": "Completion in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10256,
+    "node": "Magsaysay Award Winners",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 526,
+    "node": "Economy",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8759,
+    "node": "Startup India in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12640,
+    "node": "Important Terms in Financial Relations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10352,
+    "node": "Indian Ocean Rim Association",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7843,
+    "node": "Distance Formula in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9713,
+    "node": "Public Administration Basics in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9795,
+    "node": "Union Government in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11420,
+    "node": "Important Terms in International Financial Institutions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11346,
+    "node": "Basic Understanding of Union Public Service Commission",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6753,
+    "node": "Social Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10226,
+    "node": "Indian Wrestling",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8965,
+    "node": "Environmental Policies in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6932,
+    "node": "Government MCQs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5193,
+    "node": "Literature Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4646,
+    "node": "Non Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7159,
+    "node": "Simple Interest in Shares",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9365,
+    "node": "Recent Science Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7152,
+    "node": "Simple Interest in Commission",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7178,
+    "node": "Compound Interest in Loans",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 703,
+    "node": "Interest Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7185,
+    "node": "Compound Interest in Business",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6893,
+    "node": "Framework Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 15,
+    "node": "Scientific Instruments",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11338,
+    "node": "Basic Concepts of Union Public Service Commission",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11857,
+    "node": "Introduction to Social Research",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10144,
+    "node": "Lok Sabha Elections",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8714,
+    "node": "Digital Payments in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12647,
+    "node": "Introduction to Inter-State Council",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11340,
+    "node": "Important Terms in Union Public Service Commission",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8795,
+    "node": "Cyber Terrorism",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7196,
+    "node": "Half Yearly CI",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12417,
+    "node": "Introduction to Right to Equality",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10394,
+    "node": "Border Security Force",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10465,
+    "node": "Kerala Tribal Welfare",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8828,
+    "node": "Data Protection Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 578,
+    "node": "Matrix Organization",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5184,
+    "node": "Literature Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2087,
+    "node": "Operating Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12644,
+    "node": "Key Facts: Financial Relations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9372,
+    "node": "Space Technology in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3191,
+    "node": "Central in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8722,
+    "node": "Digital Transactions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4133,
+    "node": "Time Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7631,
+    "node": "Number Series Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10152,
+    "node": "Election Commission of India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3122,
+    "node": "Recent Formula",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 680,
+    "node": "Profit in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4653,
+    "node": "Non Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11277,
+    "node": "Introduction to Union Government",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2575,
+    "node": "Pollution in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8910,
+    "node": "Climate Adaptation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2384,
+    "node": "Payments Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2102,
+    "node": "System in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10862,
+    "node": "Core Concepts of Post-Independence India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4063,
+    "node": "Loss Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7033,
+    "node": "Economy Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5594,
+    "node": "India Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7220,
+    "node": "Ratio in Investment",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11407,
+    "node": "Introduction to World Trade Organization",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10295,
+    "node": "Disaster Management in India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8757,
+    "node": "Venture Capital",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4433,
+    "node": "Number Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3665,
+    "node": "Institutions in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9762,
+    "node": "Constitutional Framework in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9402,
+    "node": "Central Tendency in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7142,
+    "node": "Profit and Loss in Investment",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9637,
+    "node": "Social Institutions in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12645,
+    "node": "Important Points: Financial Relations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6768,
+    "node": "Institutions Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7668,
+    "node": "Wrong Number Series in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12544,
+    "node": "Key Facts: Chief Minister",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6420,
+    "node": "Standard Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8711,
+    "node": "Contactless Payments",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 702,
+    "node": "Simple in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8706,
+    "node": "Net Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4543,
+    "node": "Indirect Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 746,
+    "node": "Ratio in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4762,
+    "node": "Figures MCQs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7193,
+    "node": "Compound Interest in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6553,
+    "node": "Confidence Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6764,
+    "node": "Institutions Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4053,
+    "node": "Profit Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8687,
+    "node": "Digital Identity",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11423,
+    "node": "Essential Knowledge: International Financial Institutions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8606,
+    "node": "Web Browser",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11392,
+    "node": "Core Concepts of Right to Information",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9672,
+    "node": "Language",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4634,
+    "node": "Statements Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4096,
+    "node": "Average Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7830,
+    "node": "Direction Sense",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4496,
+    "node": "Numerical Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11387,
+    "node": "Introduction to Right to Information",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4456,
+    "node": "Word Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1536,
+    "node": "Reasoning in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10196,
+    "node": "IoT",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9031,
+    "node": "Temple Architecture Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8035,
+    "node": "Advanced Synonyms",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12357,
+    "node": "Introduction to Conflict Resolution",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8611,
+    "node": "Internet Services",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7076,
+    "node": "Logical Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9478,
+    "node": "Bar Graph in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8604,
+    "node": "Internet Protocol",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8543,
+    "node": "Presentation Layer",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8605,
+    "node": "World Wide Web",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8378,
+    "node": "Motherboard",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8617,
+    "node": "SMTP",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7351,
+    "node": "Standard Form",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 440,
+    "node": "Networking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8245,
+    "node": "Personal Pronouns",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12541,
+    "node": "Fundamental Principles of Chief Minister",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12537,
+    "node": "Introduction to Chief Minister",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7677,
+    "node": "Word Relationship",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3328,
+    "node": "Distribution in History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11877,
+    "node": "Introduction to Social Institutions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4463,
+    "node": "Word Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7207,
+    "node": "Average of Consecutive Numbers",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1409,
+    "node": "Water in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8881,
+    "node": "Ecosystem Services",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4793,
+    "node": "Completion Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2553,
+    "node": "Ecosystem in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9193,
+    "node": "Indian Art and Culture in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8713,
+    "node": "Digital Payments in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9278,
+    "node": "World Organizations in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8929,
+    "node": "Biosphere Reserves",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10276,
+    "node": "Missile Programme India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10372,
+    "node": "Simla Agreement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8980,
+    "node": "Classical Dance Features",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7757,
+    "node": "Position Coding",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8403,
+    "node": "Operating System in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4027,
+    "node": "Part2 in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 64,
+    "node": "Modern India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11858,
+    "node": "Basic Concepts of Social Research",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9645,
+    "node": "Social Institutions Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 772,
+    "node": "Work in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 674,
+    "node": "Profit in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9237,
+    "node": "Key Dates in Indian Economy",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 685,
+    "node": "Loss in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1651,
+    "node": "Para in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3026,
+    "node": "World in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8739,
+    "node": "Digital India Initiatives in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8727,
+    "node": "Biometric Authentication",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9553,
+    "node": "American Revolution in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1236,
+    "node": "Directions in Economics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9023,
+    "node": "Temple Architecture in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5593,
+    "node": "Digital Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10391,
+    "node": "Border Roads Organisation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 925,
+    "node": "Series in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 740,
+    "node": "Ratio in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9761,
+    "node": "Basic Structure Doctrine",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3169,
+    "node": "Nuclear in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10817,
+    "node": "Introduction to Freedom Movement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 958,
+    "node": "Lines in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12487,
+    "node": "Introduction to Prime Minister",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9791,
+    "node": "Union Government in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7428,
+    "node": "Triangle Properties",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3114,
+    "node": "Instruments in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12151,
+    "node": "Fundamental Principles of Child Development",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3147,
+    "node": "Space in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10298,
+    "node": "State Disaster Response Force",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10229,
+    "node": "Indian Athletics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1101,
+    "node": "Letter in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9182,
+    "node": "Indian Cultural Heritage",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4759,
+    "node": "Figures Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12698,
+    "node": "Union List Subjects",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11457,
+    "node": "Introduction to Theory of Production",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9357,
+    "node": "Recent Science in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10342,
+    "node": "World Health Organization",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9189,
+    "node": "Indian Crafts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 589,
+    "node": "Panchayati Raj",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4706,
+    "node": "Image Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5664,
+    "node": "Governance Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9344,
+    "node": "Scientific Instruments in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 600,
+    "node": "Festivals",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9719,
+    "node": "Public Administration Basics Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1420,
+    "node": "Paper in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9385,
+    "node": "Nuclear Science in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8833,
+    "node": "Electronic Records",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5760,
+    "node": "Ecosystem Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11863,
+    "node": "Essential Knowledge: Social Research",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 804,
+    "node": "Boats in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7528,
+    "node": "Sec",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1266,
+    "node": "Circular in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 46,
+    "node": "Sarvashrestha Bala Puraskar",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9492,
+    "node": "Hypothesis Testing in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7305,
+    "node": "Clock Problems in Economics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 577,
+    "node": "Line and Staff Authority",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2377,
+    "node": "India in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3285,
+    "node": "Standard in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7110,
+    "node": "Percentage in Commission",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2921,
+    "node": "Indian in History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2938,
+    "node": "Culture in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8991,
+    "node": "Indian Classical Dance",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 765,
+    "node": "Time in Economics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9068,
+    "node": "Cultural Festivals",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9382,
+    "node": "Nuclear Weapons",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1211,
+    "node": "Indirect in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 607,
+    "node": "Bharatanatyam",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 783,
+    "node": "Speed in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9621,
+    "node": "Social Stratification in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1123,
+    "node": "Word in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12356,
+    "node": "Basic Understanding of Decision Making in Administration",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9242,
+    "node": "Indian Awards",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7534,
+    "node": "Pythagorean Identity",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7755,
+    "node": "Alphabet Shift",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8346,
+    "node": "Linguistic Analysis",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7580,
+    "node": "Arithmetic Operations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4101,
+    "node": "Average Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12457,
+    "node": "Introduction to Cultural and Educational Rights",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2971,
+    "node": "Awards in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12694,
+    "node": "State List",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6293,
+    "node": "Science Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10897,
+    "node": "Introduction to Malayali Memorial",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10438,
+    "node": "Kerala Power Projects",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6059,
+    "node": "Kerala Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7526,
+    "node": "Tan",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9984,
+    "node": "Non-Verbal Reasoning in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 625,
+    "node": "Citizenship",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9445,
+    "node": "Frequency Distribution in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 513,
+    "node": "Social Institutions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10333,
+    "node": "India-France Summit",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2042,
+    "node": "Historical in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8778,
+    "node": "e-Governance in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9245,
+    "node": "Sports Awards",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12755,
+    "node": "Republic as Basic Structure",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7210,
+    "node": "Replacement Problems",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 666,
+    "node": "Percentage in Economics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3192,
+    "node": "Central in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8890,
+    "node": "Biodiversity Conservation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4664,
+    "node": "Statement Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10341,
+    "node": "UN Security Council",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7103,
+    "node": "Part2 Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9273,
+    "node": "SAARC",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4558,
+    "node": "Directions Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 870,
+    "node": "Linear in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10185,
+    "node": "Gaganyaan",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9323,
+    "node": "Famous People in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4306,
+    "node": "Lines Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 13013,
+    "node": "Expected Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10163,
+    "node": "Prime Minister of India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 66,
+    "node": "European Influence",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9342,
+    "node": "Measurement Instruments",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4098,
+    "node": "Average Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5280,
+    "node": "Features Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8348,
+    "node": "Linguistic Features in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9770,
+    "node": "Constitutional Framework Formula",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8703,
+    "node": "Digital India Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8835,
+    "node": "Offenses and Penalties",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11037,
+    "node": "Introduction to Natural Resources",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8958,
+    "node": "National Environment Policy",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9226,
+    "node": "Important Dates in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11866,
+    "node": "Basic Understanding of Social Research",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11667,
+    "node": "Introduction to Annual Economic Report",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9540,
+    "node": "French Revolution in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5699,
+    "node": "Protection Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3082,
+    "node": "People in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10522,
+    "node": "Kerala IT Investment",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7217,
+    "node": "Ratio in Business",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10439,
+    "node": "Kerala Energy",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 793,
+    "node": "Distance in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11067,
+    "node": "Introduction to Agricultural Regions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9055,
+    "node": "Sangeet Natak Akademi",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8817,
+    "node": "Data Protection in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8790,
+    "node": "Identity Theft",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10865,
+    "node": "Important Points: Post-Independence India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7186,
+    "node": "Compound Interest in Industry",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9375,
+    "node": "Space Technology in Economics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 928,
+    "node": "Series in Economics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1321,
+    "node": "Statements in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11136,
+    "node": "Basic Understanding of Agricultural Practices",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9434,
+    "node": "Data Representation in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9986,
+    "node": "Non-Verbal Reasoning Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11675,
+    "node": "Important Points: Annual Economic Report",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8547,
+    "node": "OSI Model in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11607,
+    "node": "Introduction to Land Reforms",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9257,
+    "node": "Indian Sports",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6343,
+    "node": "Central Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10860,
+    "node": "Important Terms in Post-Independence India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9763,
+    "node": "Constitutional Framework in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11597,
+    "node": "Introduction to Poverty and Employment",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3149,
+    "node": "Space in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8586,
+    "node": "Hub",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10275,
+    "node": "Nuclear Weapons India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5634,
+    "node": "Initiatives Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9504,
+    "node": "Confidence Interval in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12555,
+    "node": "Important Points: State Legislature",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6123,
+    "node": "Important Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10898,
+    "node": "Basic Concepts of Malayali Memorial",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7619,
+    "node": "Number Series in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9291,
+    "node": "Cultural Heritage",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6241,
+    "node": "People Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2450,
+    "node": "Governance Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2460,
+    "node": "Governance in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8818,
+    "node": "Data Protection in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12642,
+    "node": "Core Concepts of Financial Relations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7149,
+    "node": "Simple Interest in Partnership",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8031,
+    "node": "Vocabulary Building",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7181,
+    "node": "Compound Interest in Schemes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1408,
+    "node": "Water in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1090,
+    "node": "Number in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4043,
+    "node": "Percentage Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 718,
+    "node": "Compound in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6928,
+    "node": "Government Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9307,
+    "node": "Famous Places in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11350,
+    "node": "Important Terms in Finance Commission",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 696,
+    "node": "Simple in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4593,
+    "node": "Circular Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 298,
+    "node": "Health and Diseases",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7187,
+    "node": "Compound Interest in Agriculture",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7197,
+    "node": "Quarterly CI",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10344,
+    "node": "World Trade Organization",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1255,
+    "node": "Arrangement in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8394,
+    "node": "Windows",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10516,
+    "node": "Kerala IT Training",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8006,
+    "node": "Dice Opposite Faces",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1475,
+    "node": "Pattern in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2091,
+    "node": "Operating in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12347,
+    "node": "Introduction to Decision Making in Administration",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4036,
+    "node": "Percentage Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9751,
+    "node": "Indian Administration in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12553,
+    "node": "Essential Knowledge: State Legislature",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9332,
+    "node": "Nobel Laureates",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11904,
+    "node": "Key Facts: Class System",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9162,
+    "node": "Kerala Mural in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8836,
+    "node": "Intermediary Guidelines",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8940,
+    "node": "Forest Conservation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8084,
+    "node": "Sentence Structure",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8732,
+    "node": "Aadhaar Authentication",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9736,
+    "node": "Decision Making in Administration",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 761,
+    "node": "Time in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11322,
+    "node": "Core Concepts of Election Commission",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 128,
+    "node": "Union and State List",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10269,
+    "node": "International Film Awards",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4933,
+    "node": "Correction Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1398,
+    "node": "Image in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5703,
+    "node": "Protection Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7667,
+    "node": "Wrong Number Series in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 786,
+    "node": "Speed in Economics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12416,
+    "node": "Basic Understanding of Directive Principles",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12680,
+    "node": "Right to Education",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4038,
+    "node": "Percentage Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10442,
+    "node": "Kerala Hydroelectric Power",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9093,
+    "node": "Language Policy",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9041,
+    "node": "Miniature Painting",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12227,
+    "node": "Introduction to Nature and Significance",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10107,
+    "node": "Disaster Response",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9211,
+    "node": "Kerala Performing Arts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1354,
+    "node": "Statement in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8694,
+    "node": "Digital India in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6460,
+    "node": "Distribution Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6113,
+    "node": "Culture Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8888,
+    "node": "Biodiversity in India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11321,
+    "node": "Fundamental Principles of Election Commission",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9779,
+    "node": "Citizenship and Rights in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9748,
+    "node": "State Public Service Commission",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11422,
+    "node": "Core Concepts of International Financial Institutions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12317,
+    "node": "Introduction to Matrix Organization",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10810,
+    "node": "Important Terms in European Influence",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12707,
+    "node": "State Assembly Legislation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10495,
+    "node": "Kerala Medical University",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9233,
+    "node": "Key Dates in Indian Freedom Movement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9371,
+    "node": "Space Technology in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7096,
+    "node": "Part2 Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12047,
+    "node": "Introduction to Biological Basis of Behavior",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11883,
+    "node": "Essential Knowledge: Social Institutions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7868,
+    "node": "Multiple Floors",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11279,
+    "node": "Key Definitions in Union Government",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10478,
+    "node": "Kerala Skill Development",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 528,
+    "node": "Social Change",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5443,
+    "node": "Data Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7938,
+    "node": "Left-Right Reversal",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9624,
+    "node": "Social Stratification in Economics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10397,
+    "node": "Sashastra Seema Bal",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12704,
+    "node": "State Legislation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8689,
+    "node": "DigiLocker",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7201,
+    "node": "Average in Business",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10114,
+    "node": "Disaster Communication",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11168,
+    "node": "Basic Concepts of Major Countries",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10281,
+    "node": "NAG Missile",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9263,
+    "node": "Indian Authors",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6243,
+    "node": "People Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1453,
+    "node": "Figures in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9383,
+    "node": "Nuclear Power Plants",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9044,
+    "node": "Madhubani Painting",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9806,
+    "node": "State Government Formula",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7826,
+    "node": "Northeast",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12313,
+    "node": "Essential Knowledge: Line and Staff Authority",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1680,
+    "node": "Improvement Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8936,
+    "node": "Project Tiger",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3180,
+    "node": "Computing in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7432,
+    "node": "Arc",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10859,
+    "node": "Key Definitions in Post-Independence India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10289,
+    "node": "India China Border",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10493,
+    "node": "Kerala Community Health Centres",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7180,
+    "node": "Compound Interest in Savings",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9735,
+    "node": "Communication",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9360,
+    "node": "Recent Science in Economics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6291,
+    "node": "Science Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7851,
+    "node": "Position in Row",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9287,
+    "node": "Indian Art",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10437,
+    "node": "Kerala Waterways",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 767,
+    "node": "Time in History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10186,
+    "node": "NavIC",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12577,
+    "node": "Introduction to Judicial Review",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7125,
+    "node": "Profit and Loss in Tax",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9629,
+    "node": "Social Stratification Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3031,
+    "node": "World in History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7457,
+    "node": "Alternate Angles",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9776,
+    "node": "Cultural and Educational Rights",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11186,
+    "node": "Basic Understanding of World Rivers",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9747,
+    "node": "Indian Administrative Service",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 980,
+    "node": "Coordinate in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10489,
+    "node": "Kerala Health System",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7247,
+    "node": "Speed in Transportation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12726,
+    "node": "Emergency and India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2564,
+    "node": "Biodiversity in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5353,
+    "node": "System Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6773,
+    "node": "Institutions Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1318,
+    "node": "Statements Formula",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9419,
+    "node": "Standard Deviation Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2487,
+    "node": "Protection in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6423,
+    "node": "Standard Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4563,
+    "node": "Directions Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12676,
+    "node": "Fundamental Rights during Emergency",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12556,
+    "node": "Basic Understanding of State Legislature",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12548,
+    "node": "Basic Concepts of State Legislature",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2388,
+    "node": "Payments in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1437,
+    "node": "Cutting in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9622,
+    "node": "Social Stratification in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4513,
+    "node": "Direct Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3908,
+    "node": "Physical in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1459,
+    "node": "Figures in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9638,
+    "node": "Social Institutions in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10858,
+    "node": "Basic Concepts of Post-Independence India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3664,
+    "node": "Institutions in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9284,
+    "node": "World Organizations in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7293,
+    "node": "Leakage Problems Formula",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10509,
+    "node": "Kerala Software Companies",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9408,
+    "node": "Central Tendency in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8695,
+    "node": "Digital India in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9289,
+    "node": "Indian Heritage",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10277,
+    "node": "Agni Missile",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2571,
+    "node": "Pollution Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6463,
+    "node": "Distribution Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11077,
+    "node": "Introduction to Industrial Regions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10431,
+    "node": "Kerala Highways",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8409,
+    "node": "Operating System in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9374,
+    "node": "Space Technology in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6319,
+    "node": "Nuclear Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2559,
+    "node": "Ecosystem in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2441,
+    "node": "E Problems",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4276,
+    "node": "Series Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7219,
+    "node": "Ratio in Education",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 514,
+    "node": "Social Processes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10454,
+    "node": "Kerala Healthcare",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8692,
+    "node": "Digital India in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10460,
+    "node": "Kerala Social Justice",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4637,
+    "node": "Statements Concepts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9813,
+    "node": "Ancient India in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5773,
+    "node": "Biodiversity Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1431,
+    "node": "Cutting in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 517,
+    "node": "Class System",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6993,
+    "node": "Physical Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8771,
+    "node": "Citizen Services",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 759,
+    "node": "Time Formula",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11418,
+    "node": "Basic Concepts of International Financial Institutions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12653,
+    "node": "Essential Knowledge: Inter-State Council",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9177,
+    "node": "Onam Festival",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 659,
+    "node": "Percentage Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11886,
+    "node": "Basic Understanding of Social Institutions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 70,
+    "node": "Independence Movement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9653,
+    "node": "Social Change in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9757,
+    "node": "Indian Administration in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7134,
+    "node": "Profit and Loss in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4123,
+    "node": "Proportion Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4113,
+    "node": "Ratio Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12500,
+    "node": "Important Terms in Council of Ministers",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9634,
+    "node": "Economy",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8963,
+    "node": "Sustainable Development Goals",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7224,
+    "node": "Continued Proportion",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7165,
+    "node": "Simple Interest in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10091,
+    "node": "Days Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11860,
+    "node": "Important Terms in Social Research",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10846,
+    "node": "Basic Understanding of National Movement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6269,
+    "node": "Instruments Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7147,
+    "node": "Simple Interest in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9805,
+    "node": "State Government in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9259,
+    "node": "Sports Events",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12586,
+    "node": "Basic Understanding of Judicial Review",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8437,
+    "node": "C Language Basics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3081,
+    "node": "People in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2552,
+    "node": "Ecosystem in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10376,
+    "node": "SAARC Framework Agreement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11150,
+    "node": "Important Terms in Coconut Palm Distribution",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12549,
+    "node": "Key Definitions in State Legislature",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12652,
+    "node": "Core Concepts of Inter-State Council",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 608,
+    "node": "Mohiniyattam",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7301,
+    "node": "Clock Problems in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9967,
+    "node": "Verbal Ability in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9623,
+    "node": "Social Stratification in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8349,
+    "node": "Linguistic Features in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4666,
+    "node": "Statement Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 757,
+    "node": "Proportion in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1112,
+    "node": "Mixed in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9836,
+    "node": "Modern India in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1118,
+    "node": "Mixed in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10294,
+    "node": "Defence Exports",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10434,
+    "node": "Kerala Airports",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8738,
+    "node": "BharatNet",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4283,
+    "node": "Series Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9121,
+    "node": "Bharatanatyam Performance",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11893,
+    "node": "Essential Knowledge: Social Processes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12629,
+    "node": "Key Definitions in Administrative Relations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1222,
+    "node": "Cardinal in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10216,
+    "node": "Asian Games",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 768,
+    "node": "Time in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10473,
+    "node": "Kerala Universities",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10499,
+    "node": "Kerala COVID-19 Response",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9711,
+    "node": "Public Administration Basics in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7114,
+    "node": "Successive Percentage Change",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5673,
+    "node": "Governance Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 662,
+    "node": "Percentage in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7113,
+    "node": "Percentage Decrease Formula",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10408,
+    "node": "Kerala Council of Ministers",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11889,
+    "node": "Key Definitions in Social Processes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4539,
+    "node": "Indirect Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6143,
+    "node": "Awards Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9515,
+    "node": "Chi-Square Test in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12649,
+    "node": "Key Definitions in Inter-State Council",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9630,
+    "node": "Family",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8264,
+    "node": "Ancient Literature in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6414,
+    "node": "Standard Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9956,
+    "node": "Logical Reasoning in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8263,
+    "node": "Ancient Literature in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10122,
+    "node": "Kerala Disaster Response",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4723,
+    "node": "Water Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 18,
+    "node": "Nuclear Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10422,
+    "node": "Kerala District Panchayats",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1096,
+    "node": "Number in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1024,
+    "node": "Ratios in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7471,
+    "node": "Straight Angle",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12489,
+    "node": "Key Definitions in Prime Minister",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 601,
+    "node": "Religions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9199,
+    "node": "Indian Art and Culture in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7374,
+    "node": "Inequality Problems in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11843,
+    "node": "Essential Knowledge: Scope of Sociology",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12384,
+    "node": "Key Facts: District Administration",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8733,
+    "node": "Smart City",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8798,
+    "node": "Cyber Crimes in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7739,
+    "node": "Number Category",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5696,
+    "node": "Protection Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11339,
+    "node": "Key Definitions in Union Public Service Commission",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12488,
+    "node": "Basic Concepts of Prime Minister",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12706,
+    "node": "Parliamentary Legislation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1360,
+    "node": "Statement in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8920,
+    "node": "Climate Change in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12650,
+    "node": "Important Terms in Inter-State Council",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5763,
+    "node": "Ecosystem Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10807,
+    "node": "Introduction to European Influence",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4787,
+    "node": "Completion Concepts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10162,
+    "node": "Vice President of India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9559,
+    "node": "American Revolution in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11980,
+    "node": "Important Terms in Political System",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9431,
+    "node": "Data Representation Methods",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 586,
+    "node": "Indian Administrative Service",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8898,
+    "node": "Light Pollution",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11653,
+    "node": "Essential Knowledge: Union Budget",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5694,
+    "node": "Protection Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12712,
+    "node": "National Emergency",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 19,
+    "node": "IT and Computing",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7896,
+    "node": "Non-Verbal Statements in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8021,
+    "node": "Critical Reasoning",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2455,
+    "node": "Governance in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9520,
+    "node": "Chi-Square Test in History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2380,
+    "node": "India in Economics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7326,
+    "node": "Days in a Month",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8815,
+    "node": "Personal Data",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8020,
+    "node": "Logical Analysis",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10837,
+    "node": "Introduction to National Movement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9647,
+    "node": "Social Change in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10332,
+    "node": "India-Russia Summit",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9058,
+    "node": "Indian Literature",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6329,
+    "node": "Computing Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11527,
+    "node": "Introduction to Monetary Policy",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6643,
+    "node": "French Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9712,
+    "node": "Public Administration Basics in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7682,
+    "node": "Cause-Effect Analogy",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9302,
+    "node": "Famous Places in India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6454,
+    "node": "Distribution Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5693,
+    "node": "Crimes Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9301,
+    "node": "Military Operations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12445,
+    "node": "Important Points: Right against Exploitation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12617,
+    "node": "Introduction to Legislative Relations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12234,
+    "node": "Key Facts: Nature and Significance",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6946,
+    "node": "State Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10840,
+    "node": "Important Terms in National Movement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11203,
+    "node": "Essential Knowledge: World Climate Regions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3028,
+    "node": "World in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1240,
+    "node": "Formula Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9286,
+    "node": "World Organizations Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11173,
+    "node": "Essential Knowledge: Major Countries",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9244,
+    "node": "Literature Awards",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10383,
+    "node": "India-Bhutan Border",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1387,
+    "node": "Mirror in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7666,
+    "node": "Wrong Number Series in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2367,
+    "node": "Digital in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9631,
+    "node": "Marriage",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 930,
+    "node": "Series in History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9774,
+    "node": "Right against Exploitation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1607,
+    "node": "Sentence in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9065,
+    "node": "Indian Festivals",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10426,
+    "node": "Kerala Lok Sabha Elections",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9075,
+    "node": "Festival Celebrations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8998,
+    "node": "Indian Folk Dances",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4731,
+    "node": "Paper Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4461,
+    "node": "Word Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10181,
+    "node": "ISRO Achievements",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5698,
+    "node": "Protection Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10244,
+    "node": "Kerala Hockey",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12637,
+    "node": "Introduction to Financial Relations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10210,
+    "node": "Kerala Wildlife",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4736,
+    "node": "Cutting Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4886,
+    "node": "Substitution Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9468,
+    "node": "Pie Chart in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2372,
+    "node": "Digital in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10756,
+    "node": "Basic Understanding of Harsha Empire",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1530,
+    "node": "Reasoning in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8893,
+    "node": "Water Pollution",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 498,
+    "node": "Sampling",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1519,
+    "node": "Analytical in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12373,
+    "node": "Essential Knowledge: State Public Service Commission",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5852,
+    "node": "Policies MCQs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10203,
+    "node": "Montreal Protocol",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4153,
+    "node": "Speed Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10947,
+    "node": "Introduction to Renaissance and Reformation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8362,
+    "node": "Historical Development in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7364,
+    "node": "Completing the Square",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1442,
+    "node": "Counting in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11386,
+    "node": "Basic Understanding of NGOs and Civil Society",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9356,
+    "node": "Recent Science in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9814,
+    "node": "Ancient India in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10222,
+    "node": "Indian Cricket Team",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10178,
+    "node": "Kerala Infrastructure",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 240,
+    "node": "Balancing Chemical Equations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1239,
+    "node": "Directions in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7818,
+    "node": "Indirect Blood Relations in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7204,
+    "node": "Average in Politics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8941,
+    "node": "Wildlife Protection",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8884,
+    "node": "Ecosystem Diversity",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11870,
+    "node": "Important Terms in Social Structure",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 326,
+    "node": "Circular Arrangement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10224,
+    "node": "Indian Badminton",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11264,
+    "node": "Key Facts: Amendment Process",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12609,
+    "node": "Key Definitions in Independent Judiciary",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12685,
+    "node": "Fundamental Duties of Indian Citizens",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10338,
+    "node": "India-UAE Summit",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10286,
+    "node": "Border Security",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5,
+    "node": "Awards and Honors",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12643,
+    "node": "Essential Knowledge: Financial Relations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11862,
+    "node": "Core Concepts of Social Research",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9546,
+    "node": "French Revolution in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10816,
+    "node": "Basic Understanding of European Influence",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8748,
+    "node": "Digital India Initiatives Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11456,
+    "node": "Basic Understanding of Consumer Behaviour",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8523,
+    "node": "Algorithm Basics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12760,
+    "node": "Harmony between Fundamental Rights and DPSP",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10199,
+    "node": "Research Institutes India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 518,
+    "node": "Social Mobility",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6122,
+    "node": "Important MCQs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4124,
+    "node": "Time Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8845,
+    "node": "IT Act Sections",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9446,
+    "node": "Frequency Distribution in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2554,
+    "node": "Ecosystem in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10429,
+    "node": "Kerala Infrastructure Projects",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7221,
+    "node": "Ratio in Partnership",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10482,
+    "node": "Kerala State Education Board",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7206,
+    "node": "Weighted Average Formula",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11417,
+    "node": "Introduction to International Financial Institutions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11520,
+    "node": "Important Terms in Fiscal Policy",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10698,
+    "node": "Basic Concepts of Vedic Period",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12360,
+    "node": "Important Terms in Conflict Resolution",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4973,
+    "node": "Improvement Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2207,
+    "node": "Data in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8814,
+    "node": "Data Recovery",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11200,
+    "node": "Important Terms in World Climate Regions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9102,
+    "node": "Kathakali Performance",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5589,
+    "node": "Digital Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8741,
+    "node": "Digital India Initiatives in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12471,
+    "node": "Fundamental Principles of Right to Constitutional Remedies",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12651,
+    "node": "Fundamental Principles of Inter-State Council",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4126,
+    "node": "Time Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6153,
+    "node": "Sports Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11425,
+    "node": "Important Points: International Financial Institutions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10496,
+    "node": "Kerala Health Insurance",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2439,
+    "node": "E Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5734,
+    "node": "Signature Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4781,
+    "node": "Pattern Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6888,
+    "node": "Framework Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12740,
+    "node": "Latest Amendment",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 622,
+    "node": "Amendment Process",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9109,
+    "node": "Koodiyattam Tradition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10520,
+    "node": "Kerala Research Institutes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9968,
+    "node": "Verbal Ability in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1272,
+    "node": "Circular in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11413,
+    "node": "Essential Knowledge: World Trade Organization",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 371,
+    "node": "Quadratic Equations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8729,
+    "node": "Aadhaar Card",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9380,
+    "node": "Space Technology Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 792,
+    "node": "Distance in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8964,
+    "node": "Environmental Impact Assessment",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12377,
+    "node": "Introduction to District Administration",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6925,
+    "node": "Government Examples",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10243,
+    "node": "Kerala Cricket",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11240,
+    "node": "Important Terms in Union and State List",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10283,
+    "node": "Tanks and Armoured Vehicles",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9096,
+    "node": "Language Families",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9708,
+    "node": "Public Administration Theories",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10474,
+    "node": "Kerala Engineering Colleges",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1027,
+    "node": "Ratios in Economics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2976,
+    "node": "Awards in History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8578,
+    "node": "Routing",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11865,
+    "node": "Important Points: Social Research",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5608,
+    "node": "Payments Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8831,
+    "node": "Cyber Crime Provisions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6188,
+    "node": "World Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8811,
+    "node": "IT Act",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11167,
+    "node": "Introduction to Major Countries",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12359,
+    "node": "Key Definitions in Conflict Resolution",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9443,
+    "node": "Frequency Distribution Table",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 101,
+    "node": "Natural Resources",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9510,
+    "node": "Confidence Interval in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5697,
+    "node": "Protection Concepts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1042,
+    "node": "Distances Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9652,
+    "node": "Social Change in History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12437,
+    "node": "Introduction to Right against Exploitation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12781,
+    "node": "Disaster Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12619,
+    "node": "Key Definitions in Legislative Relations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4752,
+    "node": "Counting MCQs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6592,
+    "node": "Test MCQs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5602,
+    "node": "India MCQs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5352,
+    "node": "System MCQs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 185,
+    "node": "Budget Highlights",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6950,
+    "node": "State Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9501,
+    "node": "Confidence Interval Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12724,
+    "node": "Emergency and Federal Structure",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12601,
+    "node": "Fundamental Principles of Public Interest Litigation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11602,
+    "node": "Core Concepts of Poverty and Employment",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3638,
+    "node": "Social Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 643,
+    "node": "State Legislature",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 650,
+    "node": "Public Interest Litigation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 657,
+    "node": "Inter-State Council",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12717,
+    "node": "Financial Emergency",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 708,
+    "node": "Interest in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 401,
+    "node": "Linguistic Features",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3282,
+    "node": "Standard in Economics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1232,
+    "node": "Directions in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7616,
+    "node": "Wrong Number Series",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7617,
+    "node": "Missing Number Series",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4559,
+    "node": "Directions Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6591,
+    "node": "Test Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4281,
+    "node": "Series Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4903,
+    "node": "Sentence Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9646,
+    "node": "Social Change in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1606,
+    "node": "Sentence in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7618,
+    "node": "Number Series in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4673,
+    "node": "Statement Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8065,
+    "node": "Sentence Completion in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11985,
+    "node": "Important Points: Political System",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1529,
+    "node": "Reasoning in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9780,
+    "node": "Citizenship and Rights in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8085,
+    "node": "Sentence Correction in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7827,
+    "node": "Northwest",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 532,
+    "node": "Social Movements",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11923,
+    "node": "Essential Knowledge: Social Inequality",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9636,
+    "node": "Social Institutions in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1617,
+    "node": "Error in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4081,
+    "node": "Interest Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7895,
+    "node": "Non-Verbal Statements in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11963,
+    "node": "Essential Knowledge: Education",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8063,
+    "node": "Contextual Meaning",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4581,
+    "node": "Arrangement Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 312,
+    "node": "Number Series",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11861,
+    "node": "Fundamental Principles of Social Research",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5600,
+    "node": "India Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4650,
+    "node": "Non Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11885,
+    "node": "Important Points: Social Institutions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7438,
+    "node": "Central Angle",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4121,
+    "node": "Proportion Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7424,
+    "node": "Isosceles Triangle",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 352,
+    "node": "Error Spotting",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7254,
+    "node": "Speed of Boat",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4561,
+    "node": "Directions Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7740,
+    "node": "Odd Number",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 763,
+    "node": "Time in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11903,
+    "node": "Essential Knowledge: Class System",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11169,
+    "node": "Key Definitions in Major Countries",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11579,
+    "node": "Key Definitions in Foreign Trade",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12824,
+    "node": "Conditional Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8072,
+    "node": "Spelling Errors",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8388,
+    "node": "Utility Software",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6745,
+    "node": "Social Examples",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10819,
+    "node": "Key Definitions in Freedom Movement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12627,
+    "node": "Introduction to Administrative Relations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3148,
+    "node": "Space in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9373,
+    "node": "Space Technology in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 131,
+    "node": "Basic Structure Doctrine",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11267,
+    "node": "Introduction to Basic Structure Doctrine",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5894,
+    "node": "Architecture Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10124,
+    "node": "Kerala Disaster Recovery",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10753,
+    "node": "Essential Knowledge: Harsha Empire",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8628,
+    "node": "Primary Key",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12323,
+    "node": "Essential Knowledge: Matrix Organization",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11393,
+    "node": "Essential Knowledge: Right to Information",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9728,
+    "node": "Organizational Theory in Geography",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8385,
+    "node": "Peripheral Devices",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11900,
+    "node": "Important Terms in Class System",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7817,
+    "node": "Indirect Blood Relations in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6444,
+    "node": "Frequency Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3313,
+    "node": "Frequency in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 443,
+    "node": "LAN",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8374,
+    "node": "CPU",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8538,
+    "node": "Physical Layer",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7536,
+    "node": "Quotient Identities",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9964,
+    "node": "Logical Reasoning Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4728,
+    "node": "Paper Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8565,
+    "node": "FTP",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4427,
+    "node": "Number Concepts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8464,
+    "node": "Templates",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3187,
+    "node": "Central Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6121,
+    "node": "Important Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2648,
+    "node": "Policies Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4941,
+    "node": "Para Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10198,
+    "node": "Science Policy India",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6663,
+    "node": "American Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12460,
+    "node": "Important Terms in Cultural and Educational Rights",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7101,
+    "node": "Part2 Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3279,
+    "node": "Standard in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10135,
+    "node": "Disaster Risk Financing",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4099,
+    "node": "Average Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9320,
+    "node": "Famous Scientists",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4431,
+    "node": "Number Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4397,
+    "node": "Arithmetic Concepts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 923,
+    "node": "Series Problems",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4780,
+    "node": "Pattern Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8078,
+    "node": "Common Errors",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1608,
+    "node": "Sentence in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4589,
+    "node": "Circular Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10157,
+    "node": "Question Hour",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7115,
+    "node": "Percentage of a Quantity",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7255,
+    "node": "Speed of Stream",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 324,
+    "node": "Seating Arrangement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7571,
+    "node": "Composite Numbers",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11873,
+    "node": "Essential Knowledge: Social Structure",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7576,
+    "node": "Square Numbers",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8087,
+    "node": "Sentence Correction in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7314,
+    "node": "Leap Year",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6421,
+    "node": "Standard Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12463,
+    "node": "Essential Knowledge: Cultural and Educational Rights",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4753,
+    "node": "Counting Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7372,
+    "node": "Inequality Problems",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 353,
+    "node": "Sentence Correction",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4639,
+    "node": "Statements Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1319,
+    "node": "Statements Problems",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1055,
+    "node": "Arithmetic Problems",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4654,
+    "node": "Two Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4684,
+    "node": "Three Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7397,
+    "node": "Series Problems in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7610,
+    "node": "Number Pattern",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4560,
+    "node": "Directions Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7831,
+    "node": "Cardinal Directions in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7456,
+    "node": "Corresponding Angles",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7841,
+    "node": "Direction and Distance",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6583,
+    "node": "Square Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1089,
+    "node": "Number in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1353,
+    "node": "Statement in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1357,
+    "node": "Statement in Economics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7813,
+    "node": "Brother-in-law",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11871,
+    "node": "Fundamental Principles of Social Structure",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4893,
+    "node": "Substitution Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4483,
+    "node": "Classification Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11982,
+    "node": "Core Concepts of Political System",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4234,
+    "node": "Equations Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10005,
+    "node": "Wrong Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1262,
+    "node": "Circular Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7538,
+    "node": "Sum and Difference Identities",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4554,
+    "node": "Directions Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4583,
+    "node": "Arrangement Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4111,
+    "node": "Ratio Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4426,
+    "node": "Number Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7296,
+    "node": "Minute Hand",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1092,
+    "node": "Number in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6238,
+    "node": "People Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7838,
+    "node": "Distance Calculation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6751,
+    "node": "Social Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7885,
+    "node": "Verbal Reasoning",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9325,
+    "node": "Famous People in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7669,
+    "node": "Wrong Number Series in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9465,
+    "node": "Pie Chart Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7875,
+    "node": "Table Arrangement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9426,
+    "node": "Standard Deviation in Geography",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9305,
+    "node": "Tourist Places",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7849,
+    "node": "Row Arrangement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7857,
+    "node": "Circular Seating",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4833,
+    "node": "Reasoning Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9983,
+    "node": "Non-Verbal Reasoning in History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10809,
+    "node": "Key Definitions in European Influence",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9733,
+    "node": "Leadership",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2390,
+    "node": "Payments in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7333,
+    "node": "Linear Equation in Two Variables",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7250,
+    "node": "Boat and Stream",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1350,
+    "node": "Statement Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7743,
+    "node": "Composite Number",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4503,
+    "node": "Numerical Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7188,
+    "node": "Compound Interest in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 413,
+    "node": "Rearrangement of Sentences",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11875,
+    "node": "Important Points: Social Structure",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 618,
+    "node": "Fundamental Duties",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7325,
+    "node": "Calendar Problems in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6133,
+    "node": "Dates Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4671,
+    "node": "Statement Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4161,
+    "node": "Distance Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 726,
+    "node": "Average Formula",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7809,
+    "node": "Father-in-law",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8376,
+    "node": "ROM",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7108,
+    "node": "Percentage in Discount",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9411,
+    "node": "Arithmetic Mean",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7537,
+    "node": "Co-function Identities",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8463,
+    "node": "Abstraction",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8560,
+    "node": "Subnet Mask",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8539,
+    "node": "Data Link Layer",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7774,
+    "node": "Numerical Pattern",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7329,
+    "node": "Odd Days Calculation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8609,
+    "node": "Domain Name",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11898,
+    "node": "Basic Concepts of Class System",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 784,
+    "node": "Speed in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7519,
+    "node": "Prism",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1124,
+    "node": "Word in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9423,
+    "node": "Standard Deviation in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1619,
+    "node": "Error in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2708,
+    "node": "Architecture in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8382,
+    "node": "Output Devices",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 959,
+    "node": "Lines in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 773,
+    "node": "Work in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1179,
+    "node": "Direct in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 343,
+    "node": "Mirror Image",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1256,
+    "node": "Arrangement in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7620,
+    "node": "Number Series in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3280,
+    "node": "Standard in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9493,
+    "node": "Hypothesis Testing in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1399,
+    "node": "Image in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 926,
+    "node": "Series in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8856,
+    "node": "Digital Signature in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1267,
+    "node": "Circular in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7346,
+    "node": "Cross Multiplication",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 454,
+    "node": "Firewalls",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9725,
+    "node": "Organizational Theory in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9439,
+    "node": "Data Representation in History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6451,
+    "node": "Frequency Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12563,
+    "node": "Essential Knowledge: High Court",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6540,
+    "node": "Testing Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3676,
+    "node": "Domain in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8700,
+    "node": "Digital India Programs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9957,
+    "node": "Logical Reasoning in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1520,
+    "node": "Analytical in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7140,
+    "node": "True Discount",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8426,
+    "node": "Microphone",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9648,
+    "node": "Social Change in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2532,
+    "node": "Signature in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2362,
+    "node": "Digital Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4486,
+    "node": "Coding Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7124,
+    "node": "Profit and Loss in Discount",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1168,
+    "node": "Numerical in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1157,
+    "node": "Coding in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1129,
+    "node": "Word in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7767,
+    "node": "Decoding",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7302,
+    "node": "Clock Problems in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9436,
+    "node": "Data Representation in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8440,
+    "node": "Control Structures",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4454,
+    "node": "Word Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3181,
+    "node": "Computing in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8400,
+    "node": "Memory Management",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1487,
+    "node": "Completion in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 441,
+    "node": "OSI Model",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5798,
+    "node": "Change Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1102,
+    "node": "Letter in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8090,
+    "node": "Paragraph Jumbling",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4460,
+    "node": "Word Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12419,
+    "node": "Key Definitions in Right to Equality",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9878,
+    "node": "Location and Extent",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12299,
+    "node": "Key Definitions in Span of Control",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1421,
+    "node": "Paper in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8664,
+    "node": "Document Databases",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8865,
+    "node": "Password Authentication",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6044,
+    "node": "Characters Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8659,
+    "node": "SQL Commands",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1333,
+    "node": "Non in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1254,
+    "node": "Arrangement in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7796,
+    "node": "Grandson",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8975,
+    "node": "Kuchipudi",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7622,
+    "node": "Number Series in Economics",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7869,
+    "node": "Flat Numbers",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7814,
+    "node": "Sister-in-law",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4643,
+    "node": "Statements Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8887,
+    "node": "IUCN Red List",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7932,
+    "node": "Calendar Odd Days",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4131,
+    "node": "Time Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1165,
+    "node": "Numerical Problems",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7175,
+    "node": "Compound Interest in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4915,
+    "node": "Spotting Examples",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4831,
+    "node": "Reasoning Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11326,
+    "node": "Basic Understanding of Election Commission",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11575,
+    "node": "Important Points: Public Sector Undertakings",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1603,
+    "node": "Sentence Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8215,
+    "node": "Main Clause",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12353,
+    "node": "Essential Knowledge: Decision Making in Administration",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8042,
+    "node": "Idioms",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7883,
+    "node": "Statement Analysis",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4091,
+    "node": "Compound Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 527,
+    "node": "Political System",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8057,
+    "node": "One Word Substitution in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12543,
+    "node": "Essential Knowledge: Chief Minister",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11867,
+    "node": "Introduction to Social Structure",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8880,
+    "node": "Ecological Balance",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4901,
+    "node": "Sentence Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4821,
+    "node": "Analytical Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11979,
+    "node": "Key Definitions in Political System",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8086,
+    "node": "Sentence Correction in Banking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4501,
+    "node": "Numerical Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12611,
+    "node": "Fundamental Principles of Independent Judiciary",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6881,
+    "node": "Constitutional Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4541,
+    "node": "Indirect Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8091,
+    "node": "Coherent Paragraph",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6891,
+    "node": "Framework Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8873,
+    "node": "Producers",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11880,
+    "node": "Important Terms in Social Institutions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8909,
+    "node": "Extreme Weather",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1261,
+    "node": "Arrangement in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4555,
+    "node": "Directions Examples",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8878,
+    "node": "Energy Flow",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8056,
+    "node": "Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7828,
+    "node": "Southeast",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9800,
+    "node": "State Government in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1517,
+    "node": "Analytical Problems",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12581,
+    "node": "Fundamental Principles of Judicial Review",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4823,
+    "node": "Analytical Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12427,
+    "node": "Introduction to Right to Freedom",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8082,
+    "node": "Grammar Correction",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4894,
+    "node": "Sentence Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6441,
+    "node": "Representation Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4331,
+    "node": "Coordinate Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7304,
+    "node": "Clock Problems in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1234,
+    "node": "Directions in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4819,
+    "node": "Analytical Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7884,
+    "node": "Logical Statement",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5655,
+    "node": "E Examples",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12461,
+    "node": "Fundamental Principles of Cultural and Educational Rights",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 646,
+    "node": "Judiciary",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4817,
+    "node": "Analytical Concepts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11879,
+    "node": "Key Definitions in Social Institutions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8883,
+    "node": "Genetic Diversity",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8889,
+    "node": "Biodiversity Loss",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1613,
+    "node": "Sentence in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8089,
+    "node": "Sentence Correction Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11197,
+    "node": "Introduction to World Climate Regions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5273,
+    "node": "Linguistic Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4900,
+    "node": "Sentence Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 90,
+    "node": "Climatology",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10670,
+    "node": "Important Terms in Rajiv Gandhi Khel Ratna",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4899,
+    "node": "Sentence Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1317,
+    "node": "Statements Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11737,
+    "node": "Introduction to Conditional Sentences",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8135,
+    "node": "Inference",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12625,
+    "node": "Important Points: Legislative Relations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 341,
+    "node": "Sentence Completion",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9350,
+    "node": "Scientific Instruments in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8019,
+    "node": "Analytical Thinking",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1238,
+    "node": "Directions in History",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8220,
+    "node": "Relative Clause",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8899,
+    "node": "Causes of Pollution",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11133,
+    "node": "Essential Knowledge: Agricultural Practices",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4048,
+    "node": "Profit Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9644,
+    "node": "Social Institutions Formula",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4843,
+    "node": "Synonyms Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4771,
+    "node": "Embedded Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 117,
+    "node": "Time Zones",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1231,
+    "node": "Directions Problems",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4080,
+    "node": "Interest Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9955,
+    "node": "Logical Reasoning in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4832,
+    "node": "Reasoning MCQs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8009,
+    "node": "Cube Rotation",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7627,
+    "node": "Mixed Number Series",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1364,
+    "node": "Syllogism in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4828,
+    "node": "Reasoning Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7380,
+    "node": "Inequality Problems in Current Affairs",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 2573,
+    "node": "Pollution Problems",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 12,
+    "node": "Famous People",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7930,
+    "node": "Number of Odd Days",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4670,
+    "node": "Statement Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1235,
+    "node": "Directions in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7635,
+    "node": "Mixed Letter Series",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3278,
+    "node": "Standard in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7093,
+    "node": "Ability Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4601,
+    "node": "Floor Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 989,
+    "node": "Geometry Problems",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4403,
+    "node": "Arithmetic Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7332,
+    "node": "Linear Equation in One Variable",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4401,
+    "node": "Arithmetic Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7629,
+    "node": "Combination Series",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4580,
+    "node": "Arrangement Study Notes",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4591,
+    "node": "Circular Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1127,
+    "node": "Word in Geography",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4441,
+    "node": "Letter Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4681,
+    "node": "Syllogism Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6581,
+    "node": "Square Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4683,
+    "node": "Syllogism Previous Year Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4751,
+    "node": "Counting Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 5891,
+    "node": "Temple Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4721,
+    "node": "Water Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10089,
+    "node": "Days Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6091,
+    "node": "Indian Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 790,
+    "node": "Distance Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 667,
+    "node": "Percentage in Geography",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7399,
+    "node": "Series Problems in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3640,
+    "node": "Social Problems",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4824,
+    "node": "Reasoning Types",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4829,
+    "node": "Reasoning Important Facts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 449,
+    "node": "SQL",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8559,
+    "node": "IP Address",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8608,
+    "node": "URL",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 107,
+    "node": "Location and Extent",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7228,
+    "node": "Dividing in Ratio",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 224,
+    "node": "Magnetic Effects of Current",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 10202,
+    "node": "Kyoto Protocol",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8397,
+    "node": "Mobile OS",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8592,
+    "node": "Network Devices",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 9140,
+    "node": "Character Makeup",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 3473,
+    "node": "T Definition",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7229,
+    "node": "Work in Days",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7334,
+    "node": "Solving Equations",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7230,
+    "node": "Work in Hours",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7994,
+    "node": "Series Completion",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1422,
+    "node": "Paper in Science",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8808,
+    "node": "Privacy",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11983,
+    "node": "Essential Knowledge: Political System",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 8882,
+    "node": "Species Diversity",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4658,
+    "node": "Two Key Points",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11201,
+    "node": "Fundamental Principles of World Climate Regions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4841,
+    "node": "Synonyms Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11910,
+    "node": "Important Terms in Social Mobility",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 11981,
+    "node": "Fundamental Principles of Political System",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7889,
+    "node": "Verbal Statements in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 362,
+    "node": "Ratio and Proportion",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7907,
+    "node": "Two Statement Syllogism in Competitive Exams",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4827,
+    "node": "Reasoning Concepts",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4381,
+    "node": "Heights Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 363,
+    "node": "Time and Work",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7588,
+    "node": "Surds and Indices",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 314,
+    "node": "Mixed Series",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 1531,
+    "node": "Reasoning in Daily Life",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7453,
+    "node": "Vertically Opposite Angles",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 6461,
+    "node": "Distribution Practice Questions",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 4686,
+    "node": "Three Applications",
+    "reason": "no existing question relationship"
+  },
+  {
+    "conceptId": 7398,
+    "node": "Series Problems in Daily Life",
+    "reason": "no existing question relationship"
+  }
+]

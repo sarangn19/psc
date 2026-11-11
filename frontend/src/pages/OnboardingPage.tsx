@@ -38,7 +38,7 @@ export default function OnboardingPage() {
         await api.post('/exams/chapters/mark-batch', { chapterIds: selectedChapters, isLearned: true });
       }
       await fetchMe();
-      navigate('/adaptive');
+      navigate('/teacher');
     } catch {
       alert('Something went wrong. Please try again.');
     } finally {

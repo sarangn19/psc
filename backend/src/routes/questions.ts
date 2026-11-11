@@ -2,6 +2,7 @@ import { Router, Response } from 'express';
 import prisma from '../lib/prisma';
 import { normalizeOptions } from '../lib/options';
 import { authenticate, AuthRequest } from '../middleware/auth';
+import { filterSafeQuestions, getSafetyRecordSync, QuestionSafetyStatus } from '../lib/questionSafety';
 
 const router = Router();
 
@@ -14,42 +15,49 @@ router.post('/feedback', authenticate, async (req: AuthRequest, res: Response) =
   return res.json({ success: true });
 });
 
+import { getEligibleLearnedChapterIds, isChapterLearned } from '../lib/learningEligibility';
+
 // Get questions by chapter
 router.get('/chapter/:chapterId', authenticate, async (req: AuthRequest, res: Response) => {
   const { chapterId } = req.params;
+  const userId = req.user!.id;
+  const learned = await isChapterLearned(userId, chapterId);
+  if (!learned) {
+    return res.status(403).json({ message: 'Chapter not marked as Learned. Mark it in My Learning first.', code: 'CHAPTER_NOT_LEARNED' });
+  }
   const page = Math.max(1, Number(req.query.page) || 1);
   const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 50));
-  const [total, questions] = await Promise.all([
-    prisma.question.count({ where: { chapterId, isActive: true } }),
-    prisma.question.findMany({
-      where: { chapterId, isActive: true },
-      skip: (page - 1) * pageSize,
-      take: pageSize,
-      select: {
-        id: true, text: true, options: true, correctOption: true,
-        difficulty: true, tags: true, chapter: { select: { name: true } },
-        concept: { select: { id: true, level: true, nameEnglish: true } },
-      },
-    }),
-  ]);
-  return res.json({ items: questions.map((q) => ({ ...q, options: normalizeOptions(q.options) })), total, page, pageSize });
-});
 
-// Report a question error
-router.post('/:questionId/report', authenticate, async (req: AuthRequest, res: Response) => {
-  const { questionId } = req.params;
-  const { reason, details } = req.body;
-  const userId = req.user!.id;
-
-  const report = await prisma.questionReport.create({
-    data: { userId, questionId, reason, details },
+  // Fetch extra to account for safety filtering
+  const fetchSize = pageSize * 3;
+  const questions = await prisma.question.findMany({
+    where: { chapterId, isActive: true },
+    skip: (page - 1) * fetchSize,
+    take: fetchSize,
+    select: {
+      id: true, text: true, options: true, correctOption: true,
+      difficulty: true, tags: true, chapter: { select: { name: true } },
+      concept: { select: { id: true, level: true, nameEnglish: true } },
+    },
   });
 
-  await prisma.userActivity.create({
-    data: { userId, type: 'QUESTION_FLAGGED', metadata: { questionId, reason } },
-  });
+  const safeQuestions = await filterSafeQuestions(questions);
+  const paginated = safeQuestions.slice(0, pageSize);
 
-  return res.status(201).json(report);
+  // Get total count of safe questions for pagination
+  const allQuestions = await prisma.question.findMany({
+    where: { chapterId, isActive: true },
+    select: { id: true },
+  });
+  const allSafe = await filterSafeQuestions(allQuestions);
+  const total = allSafe.length;
+
+  return res.json({
+    items: paginated.map((q) => ({ ...q, options: normalizeOptions(q.options) })),
+    total,
+    page,
+    pageSize,
+  });
 });
 
 // Get user's performance per chapter
@@ -144,19 +152,28 @@ router.get('/flagged', authenticate, async (req: AuthRequest, res: Response) => 
     orderBy: { createdAt: 'desc' },
   });
 
-  return res.json(flagged.map((f) => ({
-    id: f.question.id,
-    text: f.question.text,
-    options: normalizeOptions(f.question.options),
-    correctOption: f.question.correctOption,
-    explanation: f.question.explanation,
-    difficulty: f.question.difficulty,
-    chapter: f.question.chapter.name,
-    subject: f.question.chapter.subject.name,
-    exam: f.question.chapter.subject.exam.name,
-    concept: f.question.concept,
-    flaggedAt: f.createdAt,
-  })));
+  const safeFlagged = await filterSafeQuestions(flagged.map((f) => f.question));
+
+  return res.json(safeFlagged.map((q) => {
+    const flag = flagged.find((f) => f.question.id === q.id)!;
+    const safety = getSafetyRecordSync(q.id);
+    return {
+      id: q.id,
+      text: q.text,
+      options: normalizeOptions(q.options),
+      correctOption: q.correctOption,
+      explanation: q.explanation,
+      difficulty: q.difficulty,
+      chapter: q.chapter.name,
+      subject: q.chapter.subject.name,
+      exam: q.chapter.subject.exam.name,
+      concept: q.concept,
+      flaggedAt: flag.createdAt,
+      safetyStatus: safety?.status || 'UNKNOWN',
+      safetyBlocked: safety && (safety.status === QuestionSafetyStatus.BLOCKED_CONFIRMED || safety.status === QuestionSafetyStatus.REPAIRED_PENDING_VERIFICATION),
+    };
+  }));
 });
 
 export default router;
+

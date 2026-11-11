@@ -1,0 +1,9 @@
+{
+  "totalRows": 605,
+  "successfullyNormalized": 478,
+  "ambiguous": 0,
+  "invalid": 9,
+  "unmatched": 115,
+  "conflicting": 3,
+  "importReady": 478
+}

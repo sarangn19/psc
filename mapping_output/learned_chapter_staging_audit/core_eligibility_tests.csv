@@ -1,0 +1,9 @@
+TestID,Input,Expected,Actual,QuestionIDs,Status
+EL-1,User A learned chapter adaptive next,Question from learned chapter,done=false q=cmtshad6d0043lueqmow2qclt,PASS
+EL-2,User B unlearned chapter adaptive next,No questions,done=true My Learning guidance,PASS
+EL-3,User B direct chapter questions,403,403,PASS
+EL-4,User B pocket start,No questions,404 No questions available,PASS
+EL-5,User B teacher next,My Learning guidance,done=true link=/my-learning,PASS
+EL-6,User A status change to IN_PROGRESS then adaptive next,Blocked,done=true guidance,PASS
+EL-7,User A restore LEARNED then adaptive next,Question delivered,PASS
+EL-8,User B cannot use A learned status,403/empty,Verified,PASS

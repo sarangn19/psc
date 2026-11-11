@@ -4,6 +4,7 @@ import { normalizeOptions } from '../lib/options';
 import { authenticate, AuthRequest } from '../middleware/auth';
 import { Difficulty, NodeLevel, Prisma } from '@prisma/client';
 import { getCachedNodePath, getCachedNodePaths, warmTaxonomyCache } from '../lib/taxonomyCache';
+import { getBlockedQuestionIds, filterSafeQuestions, getSafetyRecordSync, QuestionSafetyStatus } from '../lib/questionSafety';
 
 const router = Router();
 
@@ -128,6 +129,7 @@ async function findAdjacentQuestions(
 async function findAdjacentQuestionIds(
   masteredConceptIds: number[],
   seenIds: Set<string>,
+  learnedChapterIds: string[] = [],
 ): Promise<{ id: string; conceptId: number | null; chapterId: string; difficulty: Difficulty }[]> {
   if (masteredConceptIds.length === 0) return [];
 
@@ -145,10 +147,15 @@ async function findAdjacentQuestionIds(
   });
   if (siblings.length === 0) return [];
 
-  return fetchCandidateIds({
+  const candidateIds = await fetchCandidateIds({
     conceptId: { in: siblings.map((s) => s.id) },
     isActive: true,
+    ...(learnedChapterIds.length ? { chapterId: { in: learnedChapterIds } } : { chapterId: '__none__' }),
   });
+
+  // Filter out already seen and blocked questions
+  const blockedIds = await getBlockedQuestionIds(candidateIds.map((c) => c.id));
+  return candidateIds.filter((q) => !seenIds.has(q.id) && !blockedIds.has(q.id));
 }
 
 function zoneFor(accuracy: number, total: number): string {
@@ -285,7 +292,7 @@ async function fetchNextQuestion(
       where: { sessionId },
       select: { questionId: true },
     }),
-    prisma.userChapter.findMany({ where: { userId, isLearned: true }, select: { chapterId: true } }),
+    prisma.userChapter.findMany({ where: { userId, OR: [{ status: 'LEARNED' }, { isLearned: true }] }, select: { chapterId: true } }),
     prisma.chapter.findMany({
       where: { subject: { exam: { userExams: { some: { userId } } } } },
       select: { id: true },
@@ -293,6 +300,11 @@ async function fetchNextQuestion(
   ]);
   const seenIds = new Set(seenItems.map((si) => si.questionId));
   const seenIdList = [...seenIds];
+  
+  // Fetch blocked question IDs to exclude from selection
+  const blockedIds = await getBlockedQuestionIds([...seenIdList]); // Will be expanded with candidates
+  const blockedIdList = [...blockedIds];
+  
   // Chapter scope: respect the user's selected exams AND learned chapters so
   // practice never leaks into other exams' syllabi.
   // - selected exams + learned chapters -> learned chapters within selected exams
@@ -301,18 +313,27 @@ async function fetchNextQuestion(
   // - neither                           -> whole active bank (fresh account; onboarding first)
   const learnedChapterIds = learnedChapters.map((l) => l.chapterId);
   const selectedChapterIds = selectedExamChapters.map((c) => c.id);
+
+  // If the student has no learned chapters, block delivery (no fallback).
+  if (learnedChapterIds.length === 0) {
+    return { done: true, message: 'Choose the chapters you have completed studying in My Learning to start practising.' };
+  }
+
   let scopeChapterIds: string[] | null = null;
-  // Priority: learned chapters within selected exams > learned chapters only > selected exams only > whole bank
   if (learnedChapterIds.length > 0 && selectedChapterIds.length > 0) {
     const selectedSet = new Set(selectedChapterIds);
     const intersect = learnedChapterIds.filter((id) => selectedSet.has(id));
-    scopeChapterIds = intersect.length > 0 ? intersect : selectedChapterIds;
+    // Only learned chapters are eligible; do not fall back to unlearned selected chapters.
+    scopeChapterIds = intersect.length > 0 ? intersect : [];
   } else if (learnedChapterIds.length > 0) {
     scopeChapterIds = learnedChapterIds;
-  } else if (selectedChapterIds.length > 0) {
-    scopeChapterIds = selectedChapterIds;
   }
+  // If scopeChapterIds is an empty array, no eligible questions.
   const restrictToScope = !isFocused && scopeChapterIds !== null;
+
+  if (!isFocused && Array.isArray(scopeChapterIds) && scopeChapterIds.length === 0) {
+    return { done: true, message: 'You have no eligible learned chapters in your selected exams. Mark chapters as Learned in My Learning.' };
+  }
   const doneMessage = isFocused
     ? 'Focused practice complete!'
     : restrictToScope
@@ -324,6 +345,7 @@ async function fetchNextQuestion(
   // Instead we pick a random starting offset client-side and fetch the next 60 rows.
   // If the tail is short we also fetch from offset 0 to pad up.
   const randomOffset = Math.floor(Math.random() * 800); // spread across first ~800 rows in index order
+  const allExcludedIds = [...seenIdList, ...blockedIdList];
   const [conceptStats, candidatesRaw] = await Promise.all([
     prisma.userConceptStat.findMany({
       where: { userId },
@@ -335,11 +357,11 @@ async function fetchNextQuestion(
       FROM questions q
       WHERE q."isActive" = true
       ${isFocused
-        ? Prisma.sql`AND q."conceptId" = ${session.focusConceptId}`
+        ? Prisma.sql`AND q."conceptId" = ${session.focusConceptId} AND q."chapterId" IN (${Prisma.join(learnedChapterIds)})`
         : restrictToScope
           ? Prisma.sql`AND q."chapterId" IN (${Prisma.join(scopeChapterIds!)})`
           : Prisma.empty}
-      ${seenIdList.length > 0 ? Prisma.sql`AND q."id" NOT IN (${Prisma.join(seenIdList)})` : Prisma.empty}
+      ${allExcludedIds.length > 0 ? Prisma.sql`AND q."id" NOT IN (${Prisma.join(allExcludedIds)})` : Prisma.empty}
       LIMIT 60 OFFSET ${randomOffset}
     ` as Promise<{ id: string; conceptId: number | null; chapterId: string; difficulty: Difficulty }[]>,
   ]);
@@ -353,15 +375,15 @@ async function fetchNextQuestion(
       FROM questions q
       WHERE q."isActive" = true
       ${restrictToScope ? Prisma.sql`AND q."chapterId" IN (${Prisma.join(scopeChapterIds!)})` : Prisma.empty}
-      ${seenIdList.length > 0 ? Prisma.sql`AND q."id" NOT IN (${Prisma.join(seenIdList)})` : Prisma.empty}
+      ${allExcludedIds.length > 0 ? Prisma.sql`AND q."id" NOT IN (${Prisma.join(allExcludedIds)})` : Prisma.empty}
       LIMIT 60
     ` as typeof candidatesRaw;
     candidateIds = fallback.filter((q) => !seenIds.has(q.id));
   }
 
   if (candidateIds.length === 0 && isFocused) {
-    const adjacent = await findAdjacentQuestionIds([session.focusConceptId!], seenIds);
-    candidateIds = adjacent.filter((q) => !seenIds.has(q.id));
+    const adjacent = await findAdjacentQuestionIds([session.focusConceptId!], seenIds, learnedChapterIds);
+    candidateIds = adjacent.filter((q) => !seenIds.has(q.id) && !blockedIdList.includes(q.id));
   }
 
   if (candidateIds.length === 0) {
@@ -383,7 +405,7 @@ async function fetchNextQuestion(
   let adaptation: Adaptation | undefined;
   if (ranked.length > 0 && ranked.every((g) => g.mastery)) {
     const masteredConceptIds = [...new Set(ranked.flatMap((g) => g.questions).map((q) => q.conceptId).filter((id): id is number => id !== null))];
-    const adjacent = await findAdjacentQuestionIds(masteredConceptIds, seenIds);
+    const adjacent = await findAdjacentQuestionIds(masteredConceptIds, seenIds, learnedChapterIds);
     if (adjacent.length > 0) {
       const filteredAdjacent = adjacent.filter((q) => !seenIds.has(q.id));
       const adjacentRanked = rankGroups(filteredAdjacent, stats);
@@ -537,12 +559,17 @@ router.get('/session/:sessionId/history', authenticate, async (req: AuthRequest,
 
   const attemptMap = new Map(attempts.map((a) => [a.questionId, a]));
 
-  const history = items.map((item) => ({
-    ...item.question,
-    options: normalizeOptions(item.question.options),
-    attempt: attemptMap.get(item.questionId) || null,
-    order: item.order,
-  }));
+  const history = items.map((item) => {
+    const safety = getSafetyRecordSync(item.question.id);
+    return {
+      ...item.question,
+      options: normalizeOptions(item.question.options),
+      attempt: attemptMap.get(item.questionId) || null,
+      order: item.order,
+      safetyStatus: safety?.status || 'UNKNOWN',
+      safetyBlocked: safety && (safety.status === QuestionSafetyStatus.BLOCKED_CONFIRMED || safety.status === QuestionSafetyStatus.REPAIRED_PENDING_VERIFICATION),
+    };
+  });
 
   return res.json(history);
 });

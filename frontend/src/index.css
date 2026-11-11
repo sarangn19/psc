@@ -4,6 +4,56 @@
 @tailwind components;
 @tailwind utilities;
 
+/* AI Teacher overrides (scoped) */
+main.h-\[calc\(100vh-76px\)\] {
+  height: 100vh !important;
+  background: #17191D;
+  color: #F3F4F6;
+}
+
+main.h-\[calc\(100vh-76px\)\] header {
+  height: 72px;
+  background: #17191D;
+  border-bottom: 1px solid #343941;
+  color: #F3F4F6;
+}
+
+main.h-\[calc\(100vh-76px\)\] .bg-white {
+  background: #202329 !important;
+  color: #F3F4F6;
+  border: 1px solid #343941;
+}
+
+main.h-\[calc\(100vh-76px\)\] .text-\[\#1A1F36\] {
+  color: #F3F4F6 !important;
+}
+
+main.h-\[calc\(100vh-76px\)\] .text-app-textMuted,
+main.h-\[calc\(100vh-76px\)\] .text-app-textSecondary {
+  color: #A1A7B3 !important;
+}
+
+main.h-\[calc\(100vh-76px\)\] button[role="radio"] {
+  background: #25282D !important;
+  color: #E5E7EB !important;
+  border: 1px solid #41454D !important;
+}
+
+main.h-\[calc\(100vh-76px\)\] button[role="radio"]:hover {
+  background: #2E3238 !important;
+}
+
+main.h-\[calc\(100vh-76px\)\] textarea,
+main.h-\[calc\(100vh-76px\)\] input {
+  background: #202329 !important;
+  border: 1px solid #555D6B !important;
+  color: #F3F4F6 !important;
+}
+
+main.h-\[calc\(100vh-76px\)\] textarea::placeholder {
+  color: #A1A7B3 !important;
+}
+
 @layer base {
   body {
     @apply bg-app-bg text-app-text font-sans antialiased;
@@ -135,3 +185,47 @@
 /* Reduced to 10 particles at tier 4 for 60fps on low-end Android */
 
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition:none!important}}
+
+/* AI Teacher color overrides (scoped) */
+main.h-\[calc\(100vh-76px\)\] { background: #111315 !important; color: #f1f1f1 !important; }
+main.h-\[calc\(100vh-76px\)\] .bg-\[\#F3F4F6\], main.h-\[calc\(100vh-76px\)\] .bg-white { background: #191b1f !important; }
+main.h-\[calc\(100vh-76px\)\] .text-\[\#1A1F36\] { color: #f1f1f1 !important; }
+main.h-\[calc\(100vh-76px\)\] .text-app-textSecondary, main.h-\[calc\(100vh-76px\)\] .text-app-textMuted { color: #92969e !important; }
+main.h-\[calc\(100vh-76px\)\] .bg-app-accent { background: #344d91 !important; color: #ffffff !important; }
+
+/* AI Teacher quoted reply overrides (scoped) */
+main.h-\[calc\(100vh-76px\)\] .quoted-message { background: #25282d !important; color: #d5d7de !important; border-left: 3px solid #aaa0ff !important; border: none !important; }
+main.h-\[calc\(100vh-76px\)\] .quoted-sender { color: #aaa0ff !important; }
+main.h-\[calc\(100vh-76px\)\] .quoted-text { color: #d5d7de !important; }
+main.h-\[calc\(100vh-76px\)\] .reply-action { color: #92969e !important; }
+main.h-\[calc\(100vh-76px\)\] .message-time { color: #92969e !important; }
+
+/* AI Teacher typography overrides (scoped) */
+main.h-\[calc\(100vh-76px\)\] { font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+main.h-\[calc\(100vh-76px\)\] .text-\[16px\] { font-size: 14px !important; font-weight: 400 !important; line-height: 1.65 !important; }
+main.h-\[calc\(100vh-76px\)\] .quoted-text { font-size: 12px !important; font-weight: 400 !important; line-height: 1.45 !important; }
+main.h-\[calc\(100vh-76px\)\] .quoted-sender { font-size: 11px !important; font-weight: 600 !important; line-height: 1.4 !important; }
+main.h-\[calc\(100vh-76px\)\] .reply-action { font-size: 11px !important; font-weight: 500 !important; line-height: 1.4 !important; }
+main.h-\[calc\(100vh-76px\)\] .message-time { font-size: 10px !important; font-weight: 400 !important; line-height: 1.4 !important; }
+
+/* AI Teacher contrast overrides (scoped) */
+main.h-\[calc\(100vh-76px\)\] .border-green-200 { background: #173a2b !important; color: #b9f6d0 !important; border-color: #286347 !important; }
+main.h-\[calc\(100vh-76px\)\] .bg-green-100 { background: #d9fbe8 !important; color: #14532d !important; }
+main.h-\[calc\(100vh-76px\)\] .bg-green-100 .option-letter { color: #166534 !important; }
+
+/* AI Teacher incorrect state overrides (scoped) */
+main.h-\[calc\(100vh-76px\)\] .bg-orange-100 { background: #422b1d !important; color: #ffd6a5 !important; border-color: #a66b35 !important; }
+main.h-\[calc\(100vh-76px\)\] .bg-orange-100 .option-letter { color: #ffd6a5 !important; }
+main.h-\[calc\(100vh-76px\)\] .border-orange-300 { background: #3a2024 !important; color: #ffd7da !important; border-color: #754047 !important; }
+
+/* AI Teacher MCQ option overrides (scoped to radio buttons) */
+main.h-\[calc\(100vh-76px\)\] button[role="radio"] { background: #25282d !important; color: #e5e7eb !important; border-color: #41454d !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"] span:first-child { color: #aaa0ff !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"]:hover:not(:disabled) { background: #2b2e34 !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"][aria-checked="true"] { background: #34305c !important; color: #ffffff !important; border-color: #8b7cf6 !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"][aria-checked="true"] span:first-child { color: #c4b5fd !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"].correct { background: #173a2b !important; color: #b9f6d0 !important; border-color: #286347 !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"].correct span:first-child { color: #b9f6d0 !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"].wrong { background: #3a2024 !important; color: #ffd7da !important; border-color: #754047 !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"].wrong span:first-child { color: #ffd7da !important; }
+main.h-\[calc\(100vh-76px\)\] button[role="radio"]:disabled { color: #92969e !important; }
