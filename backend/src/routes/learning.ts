@@ -37,22 +37,53 @@ router.get('/', authenticate, async (req: AuthRequest, res: Response) => {
     statusMap.set(uc.chapterId, resolved as any);
   }
 
-  const exams = allExams.map((exam: any) => ({
-    id: exam.id,
-    name: exam.name,
-    category: exam.category,
-    subjects: exam.subjects.map((subject: any) => ({
-      id: subject.id,
-      name: subject.name,
-      order: subject.order,
-      chapters: subject.chapters.map((chapter: any) => ({
+  // Build exams with subject/exam completion percentages
+  const exams = allExams.map((exam: any) => {
+    const subjects = exam.subjects.map((subject: any) => {
+      const chapters = subject.chapters.map((chapter: any) => ({
         id: chapter.id,
         name: chapter.name,
         order: chapter.order,
         status: statusMap.get(chapter.id) || 'NOT_STARTED',
-      })),
-    })),
-  }));
+      }));
+
+      const subjectTotal = chapters.length;
+      const subjectLearned = chapters.filter((c: any) => c.status === 'LEARNED').length;
+      const subjectInProgress = chapters.filter((c: any) => c.status === 'IN_PROGRESS').length;
+
+      return {
+        id: subject.id,
+        name: subject.name,
+        order: subject.order,
+        chapters,
+        summary: {
+          totalChapters: subjectTotal,
+          learnedCount: subjectLearned,
+          inProgressCount: subjectInProgress,
+          notStartedCount: subjectTotal - subjectLearned - subjectInProgress,
+          completionPercent: subjectTotal > 0 ? Math.round((subjectLearned / subjectTotal) * 100) : 0,
+        },
+      };
+    });
+
+    const examTotal = subjects.reduce((sum: number, s: any) => sum + s.summary.totalChapters, 0);
+    const examLearned = subjects.reduce((sum: number, s: any) => sum + s.summary.learnedCount, 0);
+    const examInProgress = subjects.reduce((sum: number, s: any) => sum + s.summary.inProgressCount, 0);
+
+    return {
+      id: exam.id,
+      name: exam.name,
+      category: exam.category,
+      subjects,
+      summary: {
+        totalChapters: examTotal,
+        learnedCount: examLearned,
+        inProgressCount: examInProgress,
+        notStartedCount: examTotal - examLearned - examInProgress,
+        completionPercent: examTotal > 0 ? Math.round((examLearned / examTotal) * 100) : 0,
+      },
+    };
+  });
 
   const learnedCount = userChapters.filter((c: any) => c.status === 'LEARNED' || c.isLearned).length;
   const inProgressCount = userChapters.filter((c: any) => c.status === 'IN_PROGRESS').length;
